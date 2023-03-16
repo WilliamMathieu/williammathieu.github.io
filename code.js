@@ -1,7 +1,7 @@
 const btn= document.getElementById("btn");
 
 btn.addEventListener('click', function(){
-  var num1 = document.getElementById("num1").value;
-  var num2 = document.getElementById("num2").value;
-  document.getElementById("result").innerHTML = "Result = "+ num1*num2;
+  var f = document.getElementById("f").value;
+  var L = document.getElementById("L").value;
+  document.getElementById("C").innerHTML = "Result = "+ (1/(4*(Math.PI**2)*(f**2)*L)) +"F";
 });
