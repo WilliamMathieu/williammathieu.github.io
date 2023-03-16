@@ -5,17 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+    MathJax = {
+    tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 
 <body>
-    <h3>Multiply Two Numbers</h3>
-    <input type="text" id="num1" placeholder="Enter Number">
-    x
-    <input type="text" id="num2" placeholder="Enter Number">
-    <button id="btn">Multiply</button>
+    <h3>Calculate Capacitance In LC Circuit</h3>
+    Frequency, f: <input type="text" id="f" placeholder="Enter Number"> Hz<br>
+    Inductance, L: <input type="text" id="L" placeholder="Enter Number"> H<br>
+    <button id="btn">Calculate</button>
     <script src="code.js"></script>
+    <p>
+    \begin{align}
+    C &amp; = \frac{1}{4\pi^2f^2L} \\
+    \end{align}
+    </p>
 </body>
 
 <br><br>
-<body><span id="result"></span></body>
+<body><span id="C"></span></body>
 </html>
