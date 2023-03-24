@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RF Calculators</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+    MathJax = {
+        tex: {
+          inlineMath: [
+            ['$', '$'],
+            ['\\(', '\\)']
+          ]
+        },
+        chtml: {
+          displayAlign: 'center'
+        },
+        startup: {
+          pageReady: function() {
+            //  Do the usual startup (which does a typeset).
+            //  When that is all done, un-hide the page.
+            return MathJax.startup.defaultPageReady().then(function() {
+              document.getElementById("hidden").disabled = true;
+            });
+          }
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
+    <script> 
+    $(function(){
+      $("#includeIndex").load("index_list.html"); 
+    });
+    </script> 
+		<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h2>RF Calculators</h2>
+</header>
+
+<section>
+	<nav>
+			<h3>Index</h3>
+			<div id="includeIndex"></div>
+	</nav>
+  
+	<article>
+		<h3>Circular Loop Inductance</h3>
+		Wire Diameter, d: <input type="text" id="d" placeholder="Enter Number"> mm
+			<br>
+		Loop Diameter, D: <input type="text" id="D" placeholder="Enter Number"> mm
+			<br><br>
+		<button id="btn">Calculate</button>
+		<script src="CLI.js"></script>
+				<p>
+						\begin{align}
+						L &amp; = \mu_0\mu_r\left(\frac{D}{2}\right)\left[\ln\left(\frac{8 D}{d}\right) - 2 \right]\\
+						\end{align}		
+				</p>
+		<body><span id="L"></span></body>
+	</article>
+</section>
+		
+<footer>
+  <p>WM</p>
+</footer>
+	
+</body>
+</html>
