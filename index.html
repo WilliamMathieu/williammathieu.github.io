@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'G-6R4JGG0586');
-	</script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RF Calculators</title>
-	<meta name="Description" content="Helpful calculators for RF design.">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script>
+		<script>
     MathJax = {
         tex: {
           inlineMath: [
@@ -39,13 +29,13 @@
     };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
     <script> 
     $(function(){
       $("#includeIndex").load("index_list.html"); 
     });
     </script> 
-    <link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -56,24 +46,24 @@
 
 <section>
 	<nav>
-		<h3>Index</h3>
-		<div id="includeIndex"></div>
+			<h3>Index</h3>
+			<div id="includeIndex"></div>
 	</nav>
   
 	<article>
-		<h3>Calculate Capacitance In LC Circuit</h3>
-		Frequency, f: <input type="text" id="f" placeholder="Enter Number"> Hz
-		<br>
+		<h3>Resonant Frequency of LC Circuit</h3>
 		Inductance, L: <input type="text" id="L" placeholder="Enter Number"> H
-		<br><br>
+			<br>
+		Capacitance, C: <input type="text" id="C" placeholder="Enter Number"> F
+			<br><br>
 		<button id="btn">Calculate</button>
-		<script src="CLC.js"></script>
-			<p>
-				\begin{align}
-				C &amp; = \frac{1}{4\pi^2f^2L} \\
-				\end{align}		
-			</p>
-		<body><span id="C"></span></body>
+		<script src="LC.js"></script>
+				<p>
+						\begin{align}
+						f &amp; = \frac{1}{2\pi\sqrt{LC}} \\
+						\end{align}		
+				</p>
+		<body><span id="f"></span></body>
 	</article>
 </section>
 		
