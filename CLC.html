@@ -29,7 +29,8 @@
     };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script> 
     $(function(){
       $("#includeIndex").load("index_list.html"); 
@@ -52,9 +53,20 @@
   
 	<article>
 		<h3>Calculate Capacitance In LC Circuit</h3>
-		Frequency, f: <input type="text" id="f" placeholder="Enter Number"> Hz
+		Frequency, f: <input type="text" id="f" placeholder="Enter Frequency">
+			<select id="f_dropdown">
+				<option value="0">kHz</option>
+  			<option value="1" selected="selected">MHz</option>
+  			<option value="2">GHz</option>
+  			<option value="3">THz</option>
+			</select>
 			<br>
-		Inductance, L: <input type="text" id="L" placeholder="Enter Number"> H
+		Inductance, L: <input type="text" id="L" placeholder="Enter Inductance">
+			<select id="L_dropdown">
+  			<option value="10">uH</option>
+  			<option value="20" selected="selected">nH</option>
+  			<option value="30">pH</option>
+			</select>
 			<br><br>
 		<button id="btn">Calculate</button>
 		<script src="CLC.js"></script>
