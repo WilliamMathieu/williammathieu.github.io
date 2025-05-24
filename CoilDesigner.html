@@ -29,7 +29,7 @@
     });
   </script> 
 	<!-- Style -->
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style_long.css">
 </head>
 	
 <body>
@@ -41,21 +41,32 @@
 				<h3>Index</h3>
 				<div id="includeIndex"></div>
 		</nav>
+		
 		<article>
-			<h3>Circular Loop Inductance</h3>
+			<h2>RF Coil Designer</h2>
+			<h3>Loop Description</h3>
 			Wire Diameter, d: <input type="text" id="d" placeholder="Enter Number"> mm
 				<br>
 			Loop Diameter, D: <input type="text" id="D" placeholder="Enter Number"> mm
 				<br><br>
+			<h3>Field Parameters</h3>
+			Larmor Frequency, f: <input type="text" id="f" placeholder="Enter Frequency">
+				<select id="f_dropdown">
+					<option value="0">kHz</option>
+					<option value="1" selected="selected">MHz</option>
+					<option value="2">GHz</option>
+					<option value="3">THz</option>
+				</select>
+				<br><br>
 			<button id="btn">Calculate</button>
 			<script src="CLI.js"></script>
-					<p>
-							\begin{align}
-							L &amp; = \mu_0\mu_r\left(\frac{D}{2}\right)\left[\ln\left(\frac{8 D}{d}\right) - 2 \right]\\
-							\end{align}		
-					</p>
+			<p>
+					\begin{align}
+					L &amp; = \mu_0\mu_r\left(\frac{D}{2}\right)\left[\ln\left(\frac{8 D}{d}\right) - 2 \right]\\
+					\end{align}		
+			</p>
 			<body><span id="L"></span></body>
-		</article>
+		</article>		
 	</section>
 	<footer>
 		<p>WM</p>
