@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
@@ -9,91 +10,68 @@
 	  gtag('js', new Date());
 	  gtag('config', 'G-6R4JGG0586');
 	</script>
-    <meta charset="UTF-8">
-	<!-- Google tag (gtag.js) -->
-    
+  <meta charset="UTF-8">
+  <!-- Metas -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RF Calculators</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script>
-    MathJax = {
-        tex: {
-          inlineMath: [
-            ['$', '$'],
-            ['\\(', '\\)']
-          ]
-        },
-        chtml: {
-          displayAlign: 'center'
-     		},
-        startup: {
-          pageReady: function() {
-            //  Do the usual startup (which does a typeset).
-            //  When that is all done, un-hide the page.
-            return MathJax.startup.defaultPageReady().then(function() {
-              document.getElementById("hidden").disabled = true;
-            });
-          }
-        }
-    };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-		<script src='https://cdn.jsdelivr.net/npm/bignumber.js@9.1.2/bignumber.min.js'></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
-    <script> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Page Title -->
+	<title>RF Calculators</title>
+	<!-- Scripts -->
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src='https://cdn.jsdelivr.net/npm/bignumber.js@9.1.2/bignumber.min.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
+	<script> 
     $(function(){
       $("#includeIndex").load("index_list.html"); 
     });
-    </script> 
-		<link rel="stylesheet" href="style.css">
+  </script> 
+	<!-- Style -->
+	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-<header>
-  <h2>RF Calculators</h2>
-</header>
-
-<section>
-	<nav>
-			<h3>Index</h3>
-			<div id="includeIndex"></div>
-	</nav>
-  
-<!--
-	<article>
-		<h3>Resonant Frequency of LC Circuit</h3>
-		Inductance, L: <input type="text" id="L" placeholder="Enter Number">
-			<select id="H_dropdown">
-  			<option value="1">uH</option>
-  			<option value="2" selected="selected">nH</option>
-  			<option value="3">pH</option>
-			</select>
-			<br>
-		Capacitance, C: <input type="text" id="C" placeholder="Enter Number">
-			<select id="F_dropdown">
-  			<option value="10">uF</option>
-  			<option value="20">nF</option>
-  			<option value="30" selected="selected">pF</option>
-			</select>
-			<br><br>
-		<button id="btn">Calculate</button>
-		<script src="LC.js"></script>
-				<p>
-						\begin{align}
-						f &amp; = \frac{1}{2\pi\sqrt{LC}} \\
-						\end{align}		
-				</p>
-		<body><span id="f"></span></body>
-	</article>
--->
-</section>
-		
-<footer>
-  <p>WM</p>
-</footer>
-		
+	<header>
+		<h2>RF Calculators</h2>
+	</header>
+	<section>
+		<nav>
+				<h3>Index</h3>
+				<div id="includeIndex"></div>
+		</nav>
+	<!--
+		<article>
+			<h3>Resonant Frequency of LC Circuit</h3>
+			Inductance, L: <input type="text" id="L" placeholder="Enter Number">
+				<select id="H_dropdown">
+					<option value="1">uH</option>
+					<option value="2" selected="selected">nH</option>
+					<option value="3">pH</option>
+				</select>
+				<br>
+			Capacitance, C: <input type="text" id="C" placeholder="Enter Number">
+				<select id="F_dropdown">
+					<option value="10">uF</option>
+					<option value="20">nF</option>
+					<option value="30" selected="selected">pF</option>
+				</select>
+				<br><br>
+			<button id="btn">Calculate</button>
+			<script src="LC.js"></script>
+					<p>
+							\begin{align}
+							f &amp; = \frac{1}{2\pi\sqrt{LC}} \\
+							\end{align}		
+					</p>
+			<body><span id="f"></span></body>
+		</article>
+	-->
+	</section>
+	<footer>
+		<p>WM</p>
+	</footer>
 </body>
+	
 </html>
