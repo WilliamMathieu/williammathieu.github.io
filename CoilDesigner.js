@@ -36,7 +36,7 @@ btn.addEventListener('click', function(){
     }
 
     Lresult = math.format(Lresult, {notation: 'engineering'});
-    document.getElementById("L").innerHTML = "L = "+ Lresult +" H";
+    document.getElementById("L").innerHTML = Lresult +" H";
 	Cresult = math.format(Cresult, {notation: 'engineering'});
-	document.getElementById("C").innerHTML = "C = "+ Cresult +" F";
+	document.getElementById("C").innerHTML = Cresult +" F";
 });
