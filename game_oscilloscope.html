@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Oscilloscope Draw | RF Toolbox</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.game-wrap{text-align:center;padding:20px;}
+		canvas{border:2px solid #AA77FF;background:#000;display:block;margin:8px auto;cursor:crosshair;}
+		.msg{font-family:monospace;font-size:13px;color:#AA77FF;min-height:18px;margin:6px 0;}
+		.score-bar{font-family:monospace;font-size:13px;margin-bottom:4px;}
+		.lb-wrap{max-width:500px;margin:12px auto 0;text-align:left;}
+		.lb-title{font-family:monospace;font-size:13px;color:#AA77FF;margin-bottom:4px;}
+		button{margin:4px;}
+	</style>
+</head>
+<body>
+	<header><h2>RF Toolbox</h2></header>
+	<section>
+		<nav><h3>Tools</h3><ul><li><a href="games.html">&#8592; Game Zone</a></li></ul></nav>
+		<article>
+			<div class="game-wrap">
+				<h3>Oscilloscope Draw</h3>
+				<div class="score-bar">Round: <span id="round">1</span>/5 &nbsp; Score: <span id="score">0</span></div>
+				<p style="font-family:monospace;font-size:12px;margin:0 0 4px;">Target (purple) — draw yours (green) by clicking and dragging.</p>
+				<canvas id="c" width="500" height="200"></canvas>
+				<div class="msg" id="msg">Click Start to begin</div>
+				<div id="score-entry"></div>
+				<button onclick="startGame()">Start</button>
+				<button onclick="submitRound()">Submit</button>
+				<button onclick="clearDraw()">Clear</button>
+				<div class="lb-wrap">
+					<div class="lb-title">&#127942; Leaderboard</div>
+					<div id="lb"></div>
+				</div>
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="games.html">Game Zone</a></p></footer>
+	<script src="scores.js"></script>
+	<script>
+	var canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+	var W=500,H=200,MID=H/2;
+	var drawing=false,userPoints=[],targetFn,round=1,totalScore=0,gameActive=false;
+	var waveforms=[
+		{name:'sine',fn:function(x){return Math.sin(x*Math.PI*4/W);}},
+		{name:'square',fn:function(x){return Math.sign(Math.sin(x*Math.PI*4/W));}},
+		{name:'triangle',fn:function(x){return 2/Math.PI*Math.asin(Math.sin(x*Math.PI*4/W));}},
+		{name:'sawtooth',fn:function(x){return 2*(x*4/W%1)-1;}},
+		{name:'double sine',fn:function(x){return Math.sin(x*Math.PI*8/W)*0.6+Math.sin(x*Math.PI*2/W)*0.4;}},
+	];
+
+	function startGame(){
+		round=1;totalScore=0;gameActive=true;
+		document.getElementById('score').textContent=0;
+		document.getElementById('round').textContent=1;
+		document.getElementById('score-entry').innerHTML='';
+		newRound();
+	}
+
+	function newRound(){
+		userPoints=new Array(W).fill(null);
+		var wf=waveforms[(round-1)%waveforms.length];
+		targetFn=wf.fn;
+		document.getElementById('msg').textContent='Round '+round+': Draw the '+wf.name+' wave!';
+		document.getElementById('round').textContent=round;
+		drawScene();
+	}
+
+	function clearDraw(){userPoints=new Array(W).fill(null);drawScene();}
+
+	function drawScene(){
+		ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+		ctx.strokeStyle='#1a1a1a';ctx.lineWidth=1;
+		for(var x=0;x<W;x+=50){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+		for(var y=0;y<H;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+		ctx.strokeStyle='#333';ctx.beginPath();ctx.moveTo(0,MID);ctx.lineTo(W,MID);ctx.stroke();
+		if(!targetFn)return;
+		ctx.strokeStyle='#AA77FF';ctx.lineWidth=2;ctx.beginPath();
+		for(var i=0;i<W;i++){var ty=MID-targetFn(i)*(MID-10);if(i===0)ctx.moveTo(i,ty);else ctx.lineTo(i,ty);}ctx.stroke();
+		ctx.strokeStyle='#00ff88';ctx.lineWidth=2;ctx.beginPath();var started=false;
+		for(var j=0;j<W;j++){if(userPoints[j]!==null){if(!started){ctx.moveTo(j,userPoints[j]);started=true;}else ctx.lineTo(j,userPoints[j]);}}ctx.stroke();
+	}
+
+	function submitRound(){
+		if(!gameActive)return;
+		var covered=0,totalErr=0,count=0;
+		for(var i=0;i<W;i++){if(userPoints[i]!==null){covered++;var ty=MID-targetFn(i)*(MID-10);totalErr+=Math.abs(userPoints[i]-ty);count++;}}
+		var rs=Math.round((covered/W)*Math.max(0,1-(count>0?totalErr/count:999)/60)*1000);
+		totalScore+=rs;document.getElementById('score').textContent=totalScore;
+		if(round>=5){
+			gameActive=false;
+			document.getElementById('msg').textContent='Game over! Final score: '+totalScore+'/5000';
+			showScoreEntry('score-entry','oscilloscope',totalScore,function(){renderLeaderboard('oscilloscope','lb');});
+		}else{
+			document.getElementById('msg').textContent='Round score: '+rs+' — next round loading...';
+			round++;setTimeout(newRound,1200);
+		}
+	}
+
+	canvas.addEventListener('mousedown',function(){drawing=true;});
+	canvas.addEventListener('mouseup',function(){drawing=false;});
+	canvas.addEventListener('mouseleave',function(){drawing=false;});
+	canvas.addEventListener('mousemove',function(e){
+		if(!drawing||!gameActive)return;
+		var rect=canvas.getBoundingClientRect();
+		var x=Math.round(e.clientX-rect.left),y=e.clientY-rect.top;
+		if(x>=0&&x<W)userPoints[x]=y;drawScene();
+	});
+
+	ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+	renderLeaderboard('oscilloscope','lb');
+	</script>
+</body>
+</html>

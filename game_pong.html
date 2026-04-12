@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pong | RF Toolbox</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.game-wrap { text-align: center; padding: 20px; }
+		canvas { border: 2px solid #AA77FF; background: #000; display: block; margin: 12px auto; }
+		.msg { font-family: monospace; font-size: 13px; color: #AA77FF; min-height: 18px; }
+		.lb-wrap { max-width: 400px; margin: 12px auto 0; text-align: left; }
+		.lb-title { font-family: monospace; font-size: 13px; color: #AA77FF; margin-bottom: 4px; }
+		button { margin-top: 8px; }
+	</style>
+</head>
+<body>
+	<header><h2>RF Toolbox</h2></header>
+	<section>
+		<nav><h3>Tools</h3><ul><li><a href="games.html">&#8592; Game Zone</a></li></ul></nav>
+		<article>
+			<div class="game-wrap">
+				<h3>Pong</h3>
+				<canvas id="c" width="500" height="350"></canvas>
+				<div class="msg" id="msg">Press Space or click Start</div>
+				<div id="score-entry"></div>
+				<button onclick="startGame()">Start</button>
+				<p style="font-family:monospace;font-size:12px;margin-top:8px;">W/S — your paddle (left). CPU controls right. First to 7 wins.</p>
+				<div class="lb-wrap">
+					<div class="lb-title">&#127942; Leaderboard — Wins</div>
+					<div id="lb"></div>
+				</div>
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="games.html">Game Zone</a></p></footer>
+	<script src="scores.js"></script>
+	<script>
+		var canvas = document.getElementById('c');
+		var ctx = canvas.getContext('2d');
+		var W=500,H=350,PW=10,PH=70,BALL=8;
+		var p1,p2,ball,scores,loop,running=false;
+		var keys={};
+
+		function startGame(){
+			p1={y:H/2-PH/2}; p2={y:H/2-PH/2};
+			ball={x:W/2,y:H/2,dx:3*(Math.random()>0.5?1:-1),dy:2*(Math.random()>0.5?1:-1)};
+			scores={p1:0,p2:0};
+			document.getElementById('score-entry').innerHTML = '';
+			running=true; clearInterval(loop); loop=setInterval(tick,16);
+			document.getElementById('msg').textContent='';
+		}
+
+		function tick(){
+			if(keys['KeyW']||keys['ArrowUp'])   p1.y=Math.max(0,p1.y-5);
+			if(keys['KeyS']||keys['ArrowDown'])  p1.y=Math.min(H-PH,p1.y+5);
+			var cpuC=p2.y+PH/2;
+			if(cpuC<ball.y-4) p2.y=Math.min(H-PH,p2.y+3.5);
+			else if(cpuC>ball.y+4) p2.y=Math.max(0,p2.y-3.5);
+			ball.x+=ball.dx; ball.y+=ball.dy;
+			if(ball.y<=0){ball.y=0;ball.dy*=-1;}
+			if(ball.y>=H-BALL){ball.y=H-BALL;ball.dy*=-1;}
+			if(ball.x<=20+PW && ball.y+BALL>=p1.y && ball.y<=p1.y+PH){
+				ball.x=20+PW; ball.dx=Math.abs(ball.dx)*1.05;
+				ball.dy+=((ball.y+BALL/2)-(p1.y+PH/2))*0.1;
+			}
+			if(ball.x>=W-20-PW-BALL && ball.y+BALL>=p2.y && ball.y<=p2.y+PH){
+				ball.x=W-20-PW-BALL; ball.dx=-Math.abs(ball.dx)*1.05;
+				ball.dy+=((ball.y+BALL/2)-(p2.y+PH/2))*0.1;
+			}
+			ball.dx=Math.max(-8,Math.min(8,ball.dx));
+			ball.dy=Math.max(-8,Math.min(8,ball.dy));
+			if(ball.x<0){scores.p2++;reset();}
+			if(ball.x>W){scores.p1++;reset();}
+			if(scores.p1>=7||scores.p2>=7){
+				clearInterval(loop); running=false;
+				var won = scores.p1>=7;
+				document.getElementById('msg').textContent = won ? 'You win! 7 points scored.' : 'CPU wins!';
+				if (won) {
+					showScoreEntry('score-entry', 'pong', scores.p1, function(){ renderLeaderboard('pong','lb'); });
+				}
+			}
+			draw();
+		}
+
+		function reset(){
+			ball={x:W/2,y:H/2,dx:3*(Math.random()>0.5?1:-1),dy:2*(Math.random()>0.5?1:-1)};
+		}
+
+		function draw(){
+			ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+			ctx.setLineDash([6,6]);ctx.strokeStyle='#333';ctx.beginPath();ctx.moveTo(W/2,0);ctx.lineTo(W/2,H);ctx.stroke();ctx.setLineDash([]);
+			ctx.fillStyle='#AA77FF';
+			ctx.fillRect(20,p1.y,PW,PH);
+			ctx.fillRect(W-20-PW,p2.y,PW,PH);
+			ctx.fillStyle='#fff';ctx.fillRect(ball.x,ball.y,BALL,BALL);
+			ctx.fillStyle='#AA77FF';ctx.font='bold 28px monospace';ctx.textAlign='center';
+			ctx.fillText(scores.p1,W/2-60,36);ctx.fillText(scores.p2,W/2+60,36);
+		}
+
+		document.addEventListener('keydown',function(e){
+			keys[e.code]=true;
+			if(e.code==='Space'&&!running){startGame();}
+			if(['ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();
+		});
+		document.addEventListener('keyup',function(e){keys[e.code]=false;});
+		ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+		renderLeaderboard('pong','lb');
+	</script>
+</body>
+</html>

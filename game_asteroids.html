@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Asteroids | RF Toolbox</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.game-wrap{text-align:center;padding:20px;}
+		canvas{border:2px solid #AA77FF;background:#000;display:block;margin:12px auto;}
+		.msg{font-family:monospace;font-size:13px;color:#AA77FF;min-height:18px;}
+		.hud{font-family:monospace;font-size:13px;margin-bottom:4px;}
+		.lb-wrap{max-width:400px;margin:12px auto 0;text-align:left;}
+		.lb-title{font-family:monospace;font-size:13px;color:#AA77FF;margin-bottom:4px;}
+		button{margin-top:8px;}
+	</style>
+</head>
+<body>
+	<header><h2>RF Toolbox</h2></header>
+	<section>
+		<nav><h3>Tools</h3><ul><li><a href="games.html">&#8592; Game Zone</a></li></ul></nav>
+		<article>
+			<div class="game-wrap">
+				<h3>Asteroids</h3>
+				<div class="hud">Score: <span id="score">0</span> &nbsp; Lives: <span id="lives">3</span></div>
+				<canvas id="c" width="500" height="450"></canvas>
+				<div class="msg" id="msg">Press Space or click Start</div>
+				<div id="score-entry"></div>
+				<button onclick="startGame()">Start</button>
+				<p style="font-family:monospace;font-size:12px;margin-top:8px;">Arrow keys to rotate/thrust &nbsp;|&nbsp; Space to shoot</p>
+				<div class="lb-wrap">
+					<div class="lb-title">&#127942; Leaderboard</div>
+					<div id="lb"></div>
+				</div>
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="games.html">Game Zone</a></p></footer>
+	<script src="scores.js"></script>
+	<script>
+	var canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+	var W=500,H=450;
+	var ship,bullets,asteroids,score,lives,running=false,loop,keys={},invincible=0;
+
+	function startGame(){
+		ship={x:W/2,y:H/2,angle:0,dx:0,dy:0};
+		bullets=[];asteroids=[];score=0;lives=3;
+		document.getElementById('score-entry').innerHTML='';
+		spawnAsteroids(5,80);
+		running=true;invincible=120;
+		document.getElementById('msg').textContent='';
+		clearInterval(loop);loop=setInterval(tick,16);
+		updateHUD();
+	}
+
+	function spawnAsteroids(n,size){
+		for(var i=0;i<n;i++){
+			var x,y;
+			do{x=Math.random()*W;y=Math.random()*H;}
+			while(dist(x,y,ship.x,ship.y)<120);
+			var angle=Math.random()*Math.PI*2,speed=0.8+Math.random()*1.2;
+			asteroids.push({x:x,y:y,dx:Math.cos(angle)*speed,dy:Math.sin(angle)*speed,r:size,angle:Math.random()*Math.PI*2,spin:(Math.random()-0.5)*0.04,pts:polyPoints(size)});
+		}
+	}
+
+	function polyPoints(r){
+		var pts=[];var n=8+Math.floor(Math.random()*4);
+		for(var i=0;i<n;i++){var a=(i/n)*Math.PI*2,j=r*0.25;pts.push({x:Math.cos(a)*(r+Math.random()*j-j/2),y:Math.sin(a)*(r+Math.random()*j-j/2)});}
+		return pts;
+	}
+
+	function dist(ax,ay,bx,by){return Math.sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by));}
+	function wrap(v,max){return((v%max)+max)%max;}
+	function updateHUD(){document.getElementById('score').textContent=score;document.getElementById('lives').textContent=lives;}
+
+	function tick(){
+		if(keys['ArrowLeft']||keys['KeyA'])ship.angle-=0.05;
+		if(keys['ArrowRight']||keys['KeyD'])ship.angle+=0.05;
+		if(keys['ArrowUp']||keys['KeyW']){ship.dx+=Math.sin(ship.angle)*0.2;ship.dy-=Math.cos(ship.angle)*0.2;}
+		ship.dx*=0.99;ship.dy*=0.99;
+		ship.x=wrap(ship.x+ship.dx,W);ship.y=wrap(ship.y+ship.dy,H);
+		if(invincible>0)invincible--;
+		bullets=bullets.filter(function(b){b.x+=b.dx;b.y+=b.dy;b.life--;return b.life>0;});
+		asteroids.forEach(function(a){a.x=wrap(a.x+a.dx,W);a.y=wrap(a.y+a.dy,H);a.angle+=a.spin;});
+		var newA=[];
+		asteroids.forEach(function(a){
+			var hit=false;
+			bullets=bullets.filter(function(b){if(!hit&&dist(b.x,b.y,a.x,a.y)<a.r){hit=true;return false;}return true;});
+			if(hit){
+				score+=(a.r>50?20:a.r>25?50:100);updateHUD();
+				if(a.r>25){for(var i=0;i<2;i++){var ang=Math.random()*Math.PI*2,sp=1+Math.random()*1.5;newA.push({x:a.x,y:a.y,dx:Math.cos(ang)*sp,dy:Math.sin(ang)*sp,r:a.r/2,angle:0,spin:(Math.random()-0.5)*0.06,pts:polyPoints(a.r/2)});}}
+			}else newA.push(a);
+		});
+		asteroids=newA;
+		if(invincible<=0){
+			asteroids.forEach(function(a){
+				if(dist(ship.x,ship.y,a.x,a.y)<a.r-4){
+					lives--;updateHUD();invincible=180;
+					ship.dx=0;ship.dy=0;ship.x=W/2;ship.y=H/2;
+					if(lives<=0){
+						clearInterval(loop);running=false;
+						document.getElementById('msg').textContent='Game over! Score: '+score;
+						showScoreEntry('score-entry','asteroids',score,function(){renderLeaderboard('asteroids','lb');});
+					}
+				}
+			});
+		}
+		if(asteroids.length===0&&running)spawnAsteroids(5+Math.floor(score/300),80);
+		draw();
+	}
+
+	function draw(){
+		ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+		ctx.strokeStyle='#aaa';ctx.lineWidth=1.5;
+		asteroids.forEach(function(a){ctx.save();ctx.translate(a.x,a.y);ctx.rotate(a.angle);ctx.beginPath();ctx.moveTo(a.pts[0].x,a.pts[0].y);for(var i=1;i<a.pts.length;i++)ctx.lineTo(a.pts[i].x,a.pts[i].y);ctx.closePath();ctx.stroke();ctx.restore();});
+		ctx.fillStyle='#00ffcc';
+		bullets.forEach(function(b){ctx.fillRect(b.x-2,b.y-2,4,4);});
+		if(invincible%10<5||invincible===0){
+			ctx.save();ctx.translate(ship.x,ship.y);ctx.rotate(ship.angle);
+			ctx.strokeStyle='#AA77FF';ctx.lineWidth=2;
+			ctx.beginPath();ctx.moveTo(0,-14);ctx.lineTo(9,10);ctx.lineTo(0,6);ctx.lineTo(-9,10);ctx.closePath();ctx.stroke();
+			if(keys['ArrowUp']||keys['KeyW']){ctx.strokeStyle='#ff8800';ctx.beginPath();ctx.moveTo(-4,6);ctx.lineTo(0,16);ctx.lineTo(4,6);ctx.stroke();}
+			ctx.restore();
+		}
+	}
+
+	document.addEventListener('keydown',function(e){
+		keys[e.code]=true;
+		if(e.code==='Space'){
+			if(!running){startGame();return;}
+			bullets.push({x:ship.x+Math.sin(ship.angle)*16,y:ship.y-Math.cos(ship.angle)*16,dx:Math.sin(ship.angle)*7,dy:-Math.cos(ship.angle)*7,life:60});
+		}
+		if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();
+	});
+	document.addEventListener('keyup',function(e){keys[e.code]=false;});
+	ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+	renderLeaderboard('asteroids','lb');
+	</script>
+</body>
+</html>

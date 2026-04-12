@@ -16,13 +16,18 @@ header {
   color: white;
 }
 
-/* Create two columns/boxes that floats next to each other */
+/* Two-column layout using flexbox so nav always matches article height */
+section {
+  display: flex;
+  align-items: stretch;
+}
+
 nav {
-  float: left;
   width: 25%;
-  height: 300px; /* only for demonstration, should be removed */
+  min-height: 300px;
   background: #C9EEFF;
   padding: 20px;
+  flex-shrink: 0;
 }
 
 /* Style the list inside the menu */
@@ -32,18 +37,10 @@ nav ul {
 }
 
 article {
-  float: left;
+  flex: 1;
   padding: 20px;
-  width: 75%;
+  min-height: 300px;
   background-color: #ffffff;
-  height: 300px; /* only for demonstration, should be removed */
-}
-
-/* Clear floats after the columns */
-section::after {
-  content: "";
-  display: table;
-  clear: both;
 }
 
 /* Style the footer */
@@ -64,8 +61,11 @@ input {
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 @media (max-width: 600px) {
+  section {
+    flex-direction: column;
+  }
   nav, article {
     width: 100%;
-    height: auto;
+    min-height: unset;
   }
 }

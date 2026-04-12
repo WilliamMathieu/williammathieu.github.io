@@ -9,7 +9,6 @@ function buildInputs() {
   numCapacitors = n;
   clearError();
   document.getElementById('C_out').textContent = '';
-  //document.getElementById('res-formula').textContent = '';
   var defUnit = document.getElementById('defaultUnit').value;
 
   var html = '';
@@ -64,12 +63,11 @@ function calculate() {
   }
   clearError();
 
-  var totalF, formula;
+  var totalF;
 
   if (mode === 'parallel') {
     totalF = 0;
     for (var j = 0; j < vals.length; j++) totalF += vals[j];
-    formula = 'C_total = ' + labels.join(' + ');
   } else {
     for (var k = 0; k < vals.length; k++) {
       if (vals[k] === 0) { showError('Series capacitance with a 0 F capacitor is undefined.'); return; }
@@ -77,15 +75,11 @@ function calculate() {
     var sumRecip = 0;
     for (var m = 0; m < vals.length; m++) sumRecip += 1 / vals[m];
     totalF = 1 / sumRecip;
-    var recipLabels = labels.map(function(l) { return '1/(' + l + ')'; });
-    formula = '1/C_total = ' + recipLabels.join(' + ');
   }
 
   var fmt = formatF(totalF);
-  formula += '\nC_total = ' + prettyNum(fmt.val) + ' ' + fmt.label;
-
   document.getElementById('C_out').textContent = prettyNum(fmt.val) + ' ' + fmt.label;
-  //document.getElementById('res-formula').textContent = formula;
+  
 }
 
 function showError(msg) {

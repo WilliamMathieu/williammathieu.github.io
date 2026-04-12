@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Snake | RF Toolbox</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.game-wrap { text-align: center; padding: 20px; }
+		canvas { border: 2px solid #AA77FF; background: #000; display: block; margin: 12px auto; }
+		.score { font-family: monospace; font-size: 15px; margin-bottom: 6px; }
+		.msg { font-family: monospace; font-size: 13px; color: #AA77FF; min-height: 18px; }
+		.lb-wrap { max-width: 400px; margin: 12px auto 0; text-align: left; }
+		.lb-title { font-family: monospace; font-size: 13px; color: #AA77FF; margin-bottom: 4px; }
+		button { margin-top: 8px; }
+	</style>
+</head>
+<body>
+	<header><h2>RF Toolbox</h2></header>
+	<section>
+		<nav><h3>Tools</h3><ul><li><a href="games.html">&#8592; Game Zone</a></li></ul></nav>
+		<article>
+			<div class="game-wrap">
+				<h3>Snake</h3>
+				<div class="score">Score: <span id="score">0</span> &nbsp; High Score: <span id="hi">0</span></div>
+				<canvas id="c" width="400" height="400"></canvas>
+				<div class="msg" id="msg">Press Space or click Start to play</div>
+				<div id="score-entry"></div>
+				<button onclick="startGame()">Start</button>
+				<div class="lb-wrap">
+					<div class="lb-title">&#127942; Leaderboard</div>
+					<div id="lb"></div>
+				</div>
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="games.html">Game Zone</a></p></footer>
+	<script src="scores.js"></script>
+	<script>
+		var canvas = document.getElementById('c');
+		var ctx = canvas.getContext('2d');
+		var GRID = 20, COLS = 20, ROWS = 20;
+		var snake, dir, nextDir, food, score, hiScore = 0, loop, running = false;
+
+		function startGame() {
+			snake = [{x:10,y:10},{x:9,y:10},{x:8,y:10}];
+			dir = {x:1,y:0}; nextDir = {x:1,y:0};
+			placeFood(); score = 0;
+			document.getElementById('score').textContent = 0;
+			document.getElementById('msg').textContent = 'Use arrow keys or WASD';
+			document.getElementById('score-entry').innerHTML = '';
+			running = true;
+			clearInterval(loop);
+			loop = setInterval(tick, 120);
+		}
+
+		function placeFood() {
+			var empty = false;
+			while (!empty) {
+				food = {x: Math.floor(Math.random()*COLS), y: Math.floor(Math.random()*ROWS)};
+				empty = !snake.some(function(s){ return s.x===food.x && s.y===food.y; });
+			}
+		}
+
+		function tick() {
+			dir = nextDir;
+			var head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+			if (head.x<0||head.x>=COLS||head.y<0||head.y>=ROWS||snake.some(function(s){return s.x===head.x&&s.y===head.y;})) {
+				clearInterval(loop); running = false;
+				if (score > hiScore) { hiScore = score; document.getElementById('hi').textContent = hiScore; }
+				document.getElementById('msg').textContent = 'Game over! Score: ' + score;
+				showScoreEntry('score-entry', 'snake', score, function(){ renderLeaderboard('snake', 'lb'); });
+				return;
+			}
+			snake.unshift(head);
+			if (head.x===food.x && head.y===food.y) {
+				score++; document.getElementById('score').textContent = score; placeFood();
+			} else { snake.pop(); }
+			draw();
+		}
+
+		function draw() {
+			ctx.fillStyle = '#000'; ctx.fillRect(0,0,400,400);
+			ctx.fillStyle = '#AA77FF';
+			snake.forEach(function(s){ ctx.fillRect(s.x*GRID+1, s.y*GRID+1, GRID-2, GRID-2); });
+			ctx.fillStyle = '#00ffcc';
+			ctx.fillRect(food.x*GRID+2, food.y*GRID+2, GRID-4, GRID-4);
+		}
+
+		document.addEventListener('keydown', function(e) {
+			if (e.code==='Space' && !running) { startGame(); return; }
+			if (e.code==='ArrowUp'    ||e.code==='KeyW') { if(dir.y!==1)  nextDir={x:0,y:-1}; }
+			if (e.code==='ArrowDown'  ||e.code==='KeyS') { if(dir.y!==-1) nextDir={x:0,y:1};  }
+			if (e.code==='ArrowLeft'  ||e.code==='KeyA') { if(dir.x!==1)  nextDir={x:-1,y:0}; }
+			if (e.code==='ArrowRight' ||e.code==='KeyD') { if(dir.x!==-1) nextDir={x:1,y:0};  }
+			if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code)) e.preventDefault();
+		});
+
+		ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400);
+		renderLeaderboard('snake', 'lb');
+	</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>??? | RF Toolbox</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.game-zone {
+			text-align: center;
+			padding: 40px 20px;
+		}
+		.game-zone h2 {
+			font-family: monospace;
+			color: #AA77FF;
+			font-size: 28px;
+			margin-bottom: 8px;
+		}
+		.game-zone p {
+			font-family: monospace;
+			color: #555;
+			margin-bottom: 32px;
+		}
+		.game-grid {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 16px;
+			max-width: 700px;
+			margin: 0 auto;
+		}
+		.game-card {
+			background: #C9EEFF;
+			border: 1px solid #AA77FF;
+			border-radius: 8px;
+			padding: 24px 20px;
+			width: 180px;
+			text-decoration: none;
+			color: #1a1a1a;
+			font-family: monospace;
+			transition: background 0.15s, transform 0.1s;
+		}
+		.game-card:hover {
+			background: #AA77FF;
+			color: white;
+			transform: scale(1.04);
+		}
+		.game-card .icon {
+			font-size: 32px;
+			margin-bottom: 10px;
+		}
+		.game-card .name {
+			font-size: 15px;
+			font-weight: bold;
+		}
+		.game-card .desc {
+			font-size: 11px;
+			margin-top: 6px;
+			opacity: 0.75;
+		}
+		.back {
+			font-family: monospace;
+			margin-top: 40px;
+			font-size: 13px;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h2>RF Toolbox</h2>
+	</header>
+	<section>
+		<nav>
+			<h3>Tools</h3>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+			</ul>
+		</nav>
+		<article>
+			<div class="game-zone">
+				<h2>// SECRET GAME ZONE //</h2>
+				<p>You found it. Don't tell anyone.</p>
+				<div class="game-grid">
+					<a class="game-card" href="game_snake.html">
+						<div class="icon">&#9650;</div>
+						<div class="name">Snake</div>
+						<div class="desc">Classic. Don't bite yourself.</div>
+					</a>
+					<a class="game-card" href="game_pong.html">
+						<div class="icon">&#9646;</div>
+						<div class="name">Pong</div>
+						<div class="desc">You vs the machine.</div>
+					</a>
+					<a class="game-card" href="game_asteroids.html">
+						<div class="icon">&#10022;</div>
+						<div class="name">Asteroids</div>
+						<div class="desc">Shoot rocks in space.</div>
+					</a>
+					<a class="game-card" href="game_oscilloscope.html">
+						<div class="icon">&#9767;</div>
+						<div class="name">Oscilloscope Draw</div>
+						<div class="desc">Match the waveform.</div>
+					</a>
+					<a class="game-card" href="game_frequency.html">
+						<div class="icon">&#9835;</div>
+						<div class="name">Frequency Guess</div>
+						<div class="desc">Hear it. Name it.</div>
+					</a>
+					<a class="game-card" href="game_resistor.html">
+						<div class="icon">&#9107;</div>
+						<div class="name">Resistor Quiz</div>
+						<div class="desc">Read the colour bands.</div>
+					</a>
+					<a class="game-card" href="game_leaderboard.html">
+						<div class="icon">&#127942;</div>
+						<div class="name">Leaderboard</div>
+						<div class="desc">All-time high scores.</div>
+					</a>
+					<a class="game-card" href="breakout.html">
+						<div class="icon">&#9632;</div>
+						<div class="name">Breakout</div>
+						<div class="desc">The original secret game.</div>
+					</a>
+				</div>
+				<p class="back"><a href="index.html">&#8592; back to the toolbox</a></p>
+			</div>
+		</article>
+	</section>
+	<footer>
+		<p><a href="index.html">Home</a></p>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Resistor Quiz | RF Toolbox</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.game-wrap{text-align:center;padding:20px;}
+		.msg{font-family:monospace;font-size:13px;color:#AA77FF;min-height:18px;margin:8px 0;}
+		.hud{font-family:monospace;font-size:13px;margin-bottom:6px;}
+		canvas{display:block;margin:12px auto;}
+		.options{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:12px auto;max-width:500px;}
+		.opt-btn{font-family:monospace;font-size:12px;padding:7px 12px;border:1px solid #AA77FF;border-radius:6px;background:#fff;cursor:pointer;min-width:100px;}
+		.opt-btn:hover{background:#C9EEFF;}
+		.opt-btn.correct{background:#00cc77;color:#fff;border-color:#00cc77;}
+		.opt-btn.wrong{background:#cc3333;color:#fff;border-color:#cc3333;}
+		.lb-wrap{max-width:400px;margin:12px auto 0;text-align:left;}
+		.lb-title{font-family:monospace;font-size:13px;color:#AA77FF;margin-bottom:4px;}
+		button{margin:6px;}
+	</style>
+</head>
+<body>
+	<header><h2>RF Toolbox</h2></header>
+	<section>
+		<nav><h3>Tools</h3><ul><li><a href="games.html">&#8592; Game Zone</a></li></ul></nav>
+		<article>
+			<div class="game-wrap">
+				<h3>Resistor Colour Code Quiz</h3>
+				<p style="font-family:monospace;font-size:12px;">Read the 4-band resistor and pick the correct value.</p>
+				<div class="hud">Round: <span id="round">0</span>/10 &nbsp; Score: <span id="score">0</span></div>
+				<canvas id="c" width="360" height="100"></canvas>
+				<div class="msg" id="msg">Click Start to begin</div>
+				<div class="options" id="options"></div>
+				<div id="score-entry"></div>
+				<button onclick="startGame()">Start</button>
+				<div class="lb-wrap">
+					<div class="lb-title">&#127942; Leaderboard</div>
+					<div id="lb"></div>
+				</div>
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="games.html">Game Zone</a></p></footer>
+	<script src="scores.js"></script>
+	<script>
+	var canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+	var BANDS=[
+		{name:'black', hex:'#1a1a1a',digit:0,mult:1},
+		{name:'brown', hex:'#7B3F00',digit:1,mult:10},
+		{name:'red',   hex:'#DD0000',digit:2,mult:100},
+		{name:'orange',hex:'#FF8800',digit:3,mult:1000},
+		{name:'yellow',hex:'#FFD700',digit:4,mult:10000},
+		{name:'green', hex:'#00AA44',digit:5,mult:100000},
+		{name:'blue',  hex:'#0055DD',digit:6,mult:1000000},
+		{name:'violet',hex:'#8800CC',digit:7},
+		{name:'grey',  hex:'#888888',digit:8},
+		{name:'white', hex:'#eeeeee',digit:9},
+	];
+	var TOLERANCE=[{name:'gold',hex:'#CFB53B',tol:'5%'},{name:'silver',hex:'#C0C0C0',tol:'10%'}];
+	var round,score,targetVal,answered;
+
+	function formatVal(v){if(v>=1000000)return(v/1000000)+'M\u03A9';if(v>=1000)return(v/1000)+'k\u03A9';return v+'\u03A9';}
+
+	function drawResistor(b1,b2,b3,tol){
+		ctx.clearRect(0,0,360,100);
+		ctx.fillStyle='#d4a84b';ctx.beginPath();if(ctx.roundRect)ctx.roundRect(60,30,240,40,8);else ctx.rect(60,30,240,40);ctx.fill();
+		ctx.strokeStyle='#b8922a';ctx.lineWidth=1.5;ctx.stroke();
+		ctx.strokeStyle='#888';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,50);ctx.lineTo(62,50);ctx.stroke();ctx.beginPath();ctx.moveTo(298,50);ctx.lineTo(360,50);ctx.stroke();
+		var positions=[90,120,150,230],colors=[b1.hex,b2.hex,b3.hex,tol.hex];
+		for(var i=0;i<4;i++){ctx.fillStyle=colors[i];ctx.fillRect(positions[i],30,18,40);if(colors[i]==='#eeeeee'){ctx.strokeStyle='#ccc';ctx.lineWidth=1;ctx.strokeRect(positions[i],30,18,40);}}
+	}
+
+	function startGame(){
+		round=0;score=0;document.getElementById('score').textContent=0;
+		document.getElementById('score-entry').innerHTML='';
+		nextRound();
+	}
+
+	function nextRound(){
+		round++;answered=false;document.getElementById('round').textContent=round;
+		var b1=BANDS[1+Math.floor(Math.random()*9)],b2=BANDS[Math.floor(Math.random()*10)],b3=BANDS[Math.floor(Math.random()*6)],tol=TOLERANCE[Math.floor(Math.random()*2)];
+		targetVal=(b1.digit*10+b2.digit)*b3.mult;
+		drawResistor(b1,b2,b3,tol);
+		var opts=new Set([targetVal]);
+		while(opts.size<4){var rb1=BANDS[1+Math.floor(Math.random()*9)],rb2=BANDS[Math.floor(Math.random()*10)],rb3=BANDS[Math.floor(Math.random()*6)];opts.add((rb1.digit*10+rb2.digit)*rb3.mult);}
+		opts=Array.from(opts).sort(function(a,b){return a-b;});
+		var html='';
+		opts.forEach(function(v){html+='<button class="opt-btn" data-val="'+v+'" onclick="guess('+v+',this)">'+formatVal(v)+'</button>';});
+		document.getElementById('options').innerHTML=html;
+		document.getElementById('msg').textContent='What is the resistance?';
+	}
+
+	function guess(v,btn){
+		if(answered)return;answered=true;
+		document.querySelectorAll('.opt-btn').forEach(function(b){b.disabled=true;});
+		if(v===targetVal){
+			btn.classList.add('correct');score+=100;document.getElementById('score').textContent=score;
+			document.getElementById('msg').textContent='Correct! '+formatVal(targetVal);
+		}else{
+			btn.classList.add('wrong');
+			document.querySelectorAll('.opt-btn').forEach(function(b){if(parseInt(b.dataset.val)===targetVal)b.classList.add('correct');});
+			document.getElementById('msg').textContent='Wrong! It was '+formatVal(targetVal);
+		}
+		if(round>=10){
+			setTimeout(function(){
+				document.getElementById('msg').textContent='Game over! Score: '+score+'/1000';
+				document.getElementById('options').innerHTML='';
+				showScoreEntry('score-entry','resistor',score,function(){renderLeaderboard('resistor','lb');});
+			},1400);
+		}else{setTimeout(nextRound,1400);}
+	}
+
+	ctx.fillStyle='#f4f4f0';ctx.fillRect(0,0,360,100);
+	renderLeaderboard('resistor','lb');
+	</script>
+</body>
+</html>

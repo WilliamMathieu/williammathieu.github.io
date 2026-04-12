@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Leaderboard | RF Toolbox</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.lb-page { padding: 20px; max-width: 800px; margin: 0 auto; }
+		.lb-page h2 { font-family: monospace; color: #AA77FF; font-size: 22px; margin-bottom: 6px; }
+		.lb-page p { font-family: monospace; font-size: 12px; color: #555; margin-bottom: 24px; }
+		.lb-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+		.lb-card {
+			background: #f8f8ff; border: 1px solid #ddd; border-radius: 8px;
+			padding: 14px 16px; flex: 1; min-width: 220px;
+		}
+		.lb-card h3 { font-family: monospace; font-size: 14px; color: #AA77FF; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 6px; }
+		.clear-btn { font-family: monospace; font-size: 11px; padding: 3px 8px; border: 1px solid #ccc; border-radius: 4px; background: #fff; cursor: pointer; float: right; color: #999; margin-top: -2px; }
+		.clear-btn:hover { color: #cc3333; border-color: #cc3333; }
+	</style>
+</head>
+<body>
+	<header><h2>RF Toolbox</h2></header>
+	<section>
+		<nav><h3>Tools</h3><ul><li><a href="games.html">&#8592; Game Zone</a></li><li><a href="index.html">Home</a></li></ul></nav>
+		<article>
+			<div class="lb-page">
+				<h2>&#127942; Leaderboard</h2>
+				<p>Top 10 scores per game, saved in your browser.</p>
+				<div class="lb-grid">
+					<div class="lb-card">
+						<h3>Breakout <button class="clear-btn" onclick="clearGame('breakout')">clear</button></h3>
+						<div id="lb-breakout"></div>
+					</div>
+					<div class="lb-card">
+						<h3>Snake <button class="clear-btn" onclick="clearGame('snake')">clear</button></h3>
+						<div id="lb-snake"></div>
+					</div>
+					<div class="lb-card">
+						<h3>Pong <button class="clear-btn" onclick="clearGame('pong')">clear</button></h3>
+						<div id="lb-pong"></div>
+					</div>
+					<div class="lb-card">
+						<h3>Asteroids <button class="clear-btn" onclick="clearGame('asteroids')">clear</button></h3>
+						<div id="lb-asteroids"></div>
+					</div>
+					<div class="lb-card">
+						<h3>Oscilloscope Draw <button class="clear-btn" onclick="clearGame('oscilloscope')">clear</button></h3>
+						<div id="lb-oscilloscope"></div>
+					</div>
+					<div class="lb-card">
+						<h3>Frequency Guess <button class="clear-btn" onclick="clearGame('frequency')">clear</button></h3>
+						<div id="lb-frequency"></div>
+					</div>
+					<div class="lb-card">
+						<h3>Resistor Quiz <button class="clear-btn" onclick="clearGame('resistor')">clear</button></h3>
+						<div id="lb-resistor"></div>
+					</div>
+				</div>
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="games.html">Game Zone</a></p></footer>
+	<script src="scores.js"></script>
+	<script>
+		var GAMES = ['breakout','snake','pong','asteroids','oscilloscope','frequency','resistor'];
+		function loadAll() {
+			GAMES.forEach(function(g){ renderLeaderboard(g, 'lb-'+g); });
+		}
+		function clearGame(g) {
+			if (confirm('Clear all scores for ' + g + '?')) {
+				clearScores(g);
+				renderLeaderboard(g, 'lb-'+g);
+			}
+		}
+		loadAll();
+	</script>
+</body>
+</html>
