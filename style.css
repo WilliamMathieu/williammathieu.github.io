@@ -16,10 +16,12 @@ header {
   color: white;
 }
 
-/* Two-column layout using flexbox so nav always matches article height */
+/* Two-column layout — section is a flex row, nav background
+   extends to full height via the section's own background colour */
 section {
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
+  background: #C9EEFF; /* nav colour bleeds behind nav column */
 }
 
 nav {
@@ -30,10 +32,43 @@ nav {
   flex-shrink: 0;
 }
 
-/* Style the list inside the menu */
+/* Nav list */
+nav h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5533aa;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #a0c8ee;
+}
+
 nav ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  border-bottom: 1px solid #a0c8ee;
+}
+
+nav ul li:first-child {
+  border-top: 1px solid #a0c8ee;
+}
+
+nav ul li a {
+  display: block;
+  padding: 7px 6px;
+  color: #1a1a4a;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+nav ul li a:hover {
+  background: #b0d8f8;
+  color: #330099;
 }
 
 article {
