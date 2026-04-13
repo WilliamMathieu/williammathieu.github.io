@@ -97,3 +97,9 @@ input {
     min-height: unset;
   }
 }
+/* Nav category headings */
+nav ul li[style*="font-size:11px"] {
+  pointer-events: none;
+  margin-top: 4px;
+}
+nav ul li[style*="font-size:11px"] a { display: none; }

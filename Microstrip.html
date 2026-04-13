@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-6R4JGG0586');
+	</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<h3>Microstrip Calculator</h3>
+
+			<p style="font-size:13px;">Calculate characteristic impedance from geometry, or geometry from target impedance.</p>
+			<br>
+			<b>Geometry → Impedance</b><br><br>
+			Substrate height, h: <input type="text" id="ms-h" placeholder="mm"> mm<br>
+			Trace width, w: <input type="text" id="ms-w" placeholder="mm"> mm<br>
+			Trace thickness, t: <input type="text" id="ms-t" placeholder="mm" value="0.035"> mm<br>
+			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="ms-er" placeholder="e.g. 4.4"><br><br>
+			<button id="ms-btn1">Calculate Z₀</button>
+			<p><span id="ms-out1"></span></p>
+			<br>
+			<b>Target Impedance → Width</b><br><br>
+			Target Z₀: <input type="text" id="ms-z0" placeholder="Ω" value="50"> Ω<br>
+			Substrate height, h: <input type="text" id="ms-h2" placeholder="mm"> mm<br>
+			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="ms-er2" placeholder="e.g. 4.4"><br><br>
+			<button id="ms-btn2">Calculate Width</button>
+			<p><span id="ms-out2"></span></p>
+
+			<script src="Microstrip.js"></script>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a></p></footer>
+</body>
+</html>

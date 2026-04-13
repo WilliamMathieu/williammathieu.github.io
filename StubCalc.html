@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
@@ -17,35 +16,34 @@
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src='https://cdn.jsdelivr.net/npm/bignumber.js@9.1.2/bignumber.min.js'></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>
-    $(function(){
-      $("#includeIndex").load("index_list.html");
-    });
-  </script>
+	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
 	<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-	<header>
-		<h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2>
-	</header>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 	<section>
-		<nav>
-			<h3>Tools</h3>
-			<div id="includeIndex"></div>
-		</nav>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
-			<h3>Welcome to the RF Toolbox.</h3>
-			<p>A collection of RF and microwave engineering calculators. Use the navigation panel to browse tools by category.</p>
-			<p style="margin-top:10px;color:#888;font-size:12px;">Last updated: April 2026</p>
+			<h3>Transmission Line Stub Calculator</h3>
+
+			<p style="font-size:13px;">Calculate stub length for a target susceptance at a given frequency.</p><br>
+			Frequency, f: <input type="text" id="st-f" placeholder="value">
+			<select id="st-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
+			Line impedance, Z₀: <input type="text" id="st-z0" placeholder="Ω" value="50"> Ω<br>
+			Target susceptance, B: <input type="text" id="st-B" placeholder="mS"> mS<br>
+			Stub type:
+			<select id="st-type">
+				<option value="short">Short circuit</option>
+				<option value="open">Open circuit</option>
+			</select><br><br>
+			<button id="st-btn">Calculate</button>
+			<p><span id="st-out"></span></p>
+
+			<script src="StubCalc.js"></script>
 		</article>
 	</section>
-	<footer>
-		<p><a href="index.html">Home</a> . <a href="games.html">Games</a></p>
-	</footer>
+	<footer><p><a href="index.html">Home</a></p></footer>
 </body>
-
 </html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-6R4JGG0586');
+	</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — S-Parameter Plotter</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>
+    $(function(){ $("#includeIndex").load("index_list.html"); });
+  </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.sp-controls {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			align-items: center;
+			margin-bottom: 12px;
+		}
+		.sp-controls label { font-size: 13px; }
+		.sp-controls select, .sp-controls input[type=file] {
+			font-family: monospace;
+			font-size: 13px;
+			padding: 4px 8px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+		.sp-param-checks {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-bottom: 12px;
+			font-size: 13px;
+		}
+		.sp-param-checks label {
+			display: flex;
+			align-items: center;
+			gap: 4px;
+			padding: 3px 8px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			cursor: pointer;
+			user-select: none;
+		}
+		.sp-param-checks label:hover { background: #eef; }
+		.chart-wrap {
+			position: relative;
+			width: 100%;
+			margin-bottom: 20px;
+		}
+		.chart-title {
+			font-family: monospace;
+			font-size: 13px;
+			font-weight: bold;
+			color: #5533aa;
+			margin-bottom: 4px;
+		}
+		.sp-info {
+			font-family: monospace;
+			font-size: 12px;
+			color: #555;
+			margin-bottom: 12px;
+			padding: 8px 10px;
+			background: #f4f4f0;
+			border-left: 3px solid #AA77FF;
+			border-radius: 0 4px 4px 0;
+		}
+		.sp-error {
+			color: #c0392b;
+			font-size: 13px;
+			margin: 8px 0;
+		}
+		.drop-zone {
+			border: 2px dashed #AA77FF;
+			border-radius: 8px;
+			padding: 24px;
+			text-align: center;
+			font-family: monospace;
+			font-size: 13px;
+			color: #777;
+			cursor: pointer;
+			margin-bottom: 14px;
+			transition: background 0.15s;
+		}
+		.drop-zone:hover, .drop-zone.drag-over { background: #f0eeff; color: #5533aa; }
+		.drop-zone input[type=file] { display: none; }
+	</style>
+</head>
+
+<body>
+	<header>
+		<h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2>
+	</header>
+	<section>
+		<nav>
+			<h3>Tools</h3>
+			<div id="includeIndex"></div>
+		</nav>
+		<article>
+			<h3>S-Parameter Plotter</h3>
+			<p style="font-size:13px;margin-bottom:14px;">Supports Touchstone files: .s1p, .s2p, .s3p, .s4p</p>
+
+			<div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
+				&#128194; Click to select a Touchstone file, or drag and drop it here
+				<input type="file" id="file-input" accept=".s1p,.s2p,.s3p,.s4p,.s5p,.snp">
+			</div>
+
+			<div class="sp-info" id="file-info" style="display:none;"></div>
+			<div class="sp-error" id="sp-error"></div>
+
+			<div id="controls-wrap" style="display:none;">
+				<div class="sp-controls">
+					<label>Plot:
+						<select id="plot-type">
+							<option value="mag">Magnitude (dB)</option>
+							<option value="phase">Phase (deg)</option>
+							<option value="both">Magnitude + Phase</option>
+							<option value="vswr">VSWR</option>
+							<option value="ri">Real / Imaginary</option>
+						</select>
+					</label>
+					<label>Frequency axis:
+						<select id="freq-scale">
+							<option value="lin">Linear</option>
+							<option value="log">Logarithmic</option>
+						</select>
+					</label>
+				</div>
+
+				<div style="font-family:monospace;font-size:12px;color:#555;margin-bottom:6px;">Select parameters to display:</div>
+				<div class="sp-param-checks" id="param-checks"></div>
+
+				<button onclick="renderCharts()" style="margin-bottom:16px;">Plot</button>
+			</div>
+
+			<div id="charts-wrap"></div>
+		</article>
+	</section>
+	<footer>
+		<p><a href="index.html">Home</a></p>
+	</footer>
+
+	<script src="SParamPlotter.js"></script>
+</body>
+</html>
