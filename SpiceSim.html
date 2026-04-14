@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — SPICE Simulator</title>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.spice-layout { display: flex; gap: 14px; flex-wrap: wrap; }
+		.spice-left  { flex: 1; min-width: 260px; }
+		.spice-right { flex: 2; min-width: 320px; }
+		#netlist-editor {
+			width: 100%; height: 300px; font-family: 'Courier New', monospace;
+			font-size: 13px; border: 1px solid #ccc; border-radius: 4px;
+			padding: 8px; resize: vertical; background: #1e1e2e; color: #cdd6f4;
+			line-height: 1.5;
+		}
+		.preset-list { list-style: none; padding: 0; margin: 0; }
+		.preset-list li { margin-bottom: 4px; }
+		.preset-list button {
+			font-family: monospace; font-size: 12px; padding: 4px 10px;
+			border: 1px solid #ccc; border-radius: 4px; background: #fff;
+			cursor: pointer; width: 100%; text-align: left;
+		}
+		.preset-list button:hover { background: #f0eeff; border-color: #AA77FF; }
+		.sim-btn {
+			font-family: monospace; font-size: 14px; padding: 7px 20px;
+			border: 1px solid #AA77FF; border-radius: 4px; background: #AA77FF;
+			color: white; cursor: pointer; margin-top: 8px; width: 100%;
+		}
+		.sim-btn:hover { background: #8855dd; }
+		.log-box {
+			font-family: 'Courier New', monospace; font-size: 11px;
+			background: #1e1e2e; color: #a6e3a1; padding: 8px;
+			border-radius: 4px; min-height: 60px; max-height: 120px;
+			overflow-y: auto; margin-top: 8px; white-space: pre-wrap;
+		}
+		.log-box .log-err  { color: #f38ba8; }
+		.log-box .log-warn { color: #fab387; }
+		.log-box .log-info { color: #89dceb; }
+		.section-hdr {
+			font-family: monospace; font-size: 11px; color: #5533aa;
+			font-weight: bold; letter-spacing: 0.06em; margin: 10px 0 4px;
+		}
+		.plot-controls { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; align-items: center; font-size: 12px; font-family: monospace; }
+		.plot-controls select { font-family: monospace; font-size: 12px; padding: 3px 6px; border: 1px solid #ccc; border-radius: 4px; }
+		.trace-check label { font-size: 12px; font-family: monospace; padding: 2px 6px; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; display: inline-block; margin: 2px; }
+		.trace-check label:hover { background: #f0eeff; }
+		.trace-check input { margin-right: 3px; }
+		.op-table { font-family: monospace; font-size: 12px; border-collapse: collapse; width: 100%; }
+		.op-table td, .op-table th { padding: 3px 10px; border-bottom: 1px solid #eee; }
+		.op-table th { color: #5533aa; text-align: left; }
+		.spice-help { font-family: monospace; font-size: 11px; color: #666; background: #fafafa; border: 1px solid #eee; border-radius: 4px; padding: 8px; margin-top: 8px; line-height: 1.7; }
+	</style>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>SPICE Simulator</h3>
+<p style="font-size:13px;margin-bottom:12px;">Browser-based SPICE using Modified Nodal Analysis. Supports R, L, C, V, I elements with .AC, .DC, .OP, and .TRAN analyses.</p>
+
+<div class="spice-layout">
+
+<!-- ── Left: editor + presets ── -->
+<div class="spice-left">
+	<div class="section-hdr">NETLIST EDITOR</div>
+	<textarea id="netlist-editor" spellcheck="false"></textarea>
+	<button class="sim-btn" onclick="runSpice()">&#9654; Run Simulation</button>
+	<div class="log-box" id="spice-log">Ready. Load a preset or enter a netlist above.</div>
+
+	<div class="section-hdr" style="margin-top:12px;">PRESET CIRCUITS</div>
+	<ul class="preset-list">
+		<li><button onclick="loadPreset('rc_lpf')">RC Low-Pass Filter (.AC)</button></li>
+		<li><button onclick="loadPreset('rlc_series')">Series RLC (.AC)</button></li>
+		<li><button onclick="loadPreset('lc_tank')">LC Tank / Bandpass (.AC)</button></li>
+		<li><button onclick="loadPreset('rl_lpf')">RL Low-Pass Filter (.AC)</button></li>
+		<li><button onclick="loadPreset('pi_filter')">Pi Low-Pass Filter (.AC)</button></li>
+		<li><button onclick="loadPreset('tline_match')">Ladder Match Network (.AC)</button></li>
+		<li><button onclick="loadPreset('dc_divider')">Voltage Divider (.DC)</button></li>
+		<li><button onclick="loadPreset('rc_tran')">RC Charge/Discharge (.TRAN)</button></li>
+		<li><button onclick="loadPreset('rlc_tran')">RLC Step Response (.TRAN)</button></li>
+	</ul>
+
+	<div class="spice-help">
+<b>Netlist syntax:</b><br>
+* comment line<br>
+Rname n+ n- value<br>
+Lname n+ n- value[H]<br>
+Cname n+ n- value[F]<br>
+Vname n+ n- DC val | AC ampl<br>
+Iname n+ n- DC val | AC ampl<br>
+.AC DEC pts fstart fstop<br>
+.AC LIN pts fstart fstop<br>
+.DC Vsrc start stop step<br>
+.TRAN tstep tstop<br>
+.OP<br>
+.END<br><br>
+Node 0 = ground. Frequencies in Hz.<br>
+Suffix: k=1e3 meg=1e6 g=1e9<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m=1e-3 u=1e-6 n=1e-9 p=1e-12 f=1e-15
+	</div>
+</div>
+
+<!-- ── Right: plots ── -->
+<div class="spice-right">
+	<div id="op-panel" style="display:none">
+		<div class="section-hdr">DC OPERATING POINT</div>
+		<table class="op-table" id="op-table"></table>
+	</div>
+
+	<div id="plot-panel" style="display:none">
+		<div class="section-hdr">PLOT</div>
+		<div class="plot-controls">
+			Y-axis:
+			<select id="plot-ytype">
+				<option value="mag_db">Magnitude (dB)</option>
+				<option value="mag_lin">Magnitude (linear)</option>
+				<option value="phase">Phase (deg)</option>
+				<option value="real">Real part</option>
+				<option value="imag">Imaginary part</option>
+			</select>
+			X-axis: <select id="plot-xscale">
+				<option value="log">Log</option>
+				<option value="lin">Linear</option>
+			</select>
+			<button onclick="replot()" style="font-family:monospace;font-size:12px;padding:3px 10px;border:1px solid #ccc;border-radius:4px;background:#fff;cursor:pointer;">Replot</button>
+		</div>
+		<div class="trace-check" id="trace-checks"></div>
+		<canvas id="spice-chart" style="max-height:340px;margin-top:8px;"></canvas>
+	</div>
+
+	<div id="tran-panel" style="display:none">
+		<div class="section-hdr">TRANSIENT WAVEFORMS</div>
+		<div class="trace-check" id="tran-checks"></div>
+		<canvas id="tran-chart" style="max-height:340px;margin-top:8px;"></canvas>
+	</div>
+
+	<div id="dc-panel" style="display:none">
+		<div class="section-hdr">DC SWEEP</div>
+		<div class="trace-check" id="dc-checks"></div>
+		<canvas id="dc-chart" style="max-height:340px;margin-top:8px;"></canvas>
+	</div>
+</div>
+
+</div><!-- /spice-layout -->
+</article>
+</section>
+<footer><p><a href="index.html">Home</a></p></footer>
+<script src="SpiceSim.js"></script>
+</body>
+</html>
