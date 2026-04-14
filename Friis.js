@@ -13,8 +13,8 @@ document.getElementById('fr-btn').addEventListener('click', function() {
     var FSPL_dB = 20*Math.log10(4*Math.PI*d/lam); // free space path loss
     var Pr_dBm  = Pt + Gt + Gr - FSPL_dB;
     var Pr_W    = 1e-3 * Math.pow(10, Pr_dBm/10);
-    var out = 'Free-space path loss = ' + FSPL_dB.toFixed(3) + ' dB<br>'
-            + 'P<sub>r</sub> = ' + Pr_dBm.toFixed(3) + ' dBm<br>'
+    var out = '<p>Free-space path loss = ' + FSPL_dB.toFixed(3) + ' dB</p><p>'
+            + 'P<sub>r</sub> = ' + Pr_dBm.toFixed(3) + ' dBm</p><p>'
             + 'P<sub>r</sub> = ' + math.format(Pr_W,{notation:'engineering',precision:4}) + ' W';
-    document.getElementById('fr-out').innerHTML = out;
+    document.getElementById('fr-out').innerHTML = out + '</p>';
 });

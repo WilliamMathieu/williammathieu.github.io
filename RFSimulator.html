@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — RF Circuit Simulator</title>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.rfs-section { margin-bottom: 16px; }
+		.rfs-label { font-family: monospace; font-size: 12px; color: #5533aa; font-weight: bold; letter-spacing: 0.05em; margin-bottom: 6px; }
+		.rfs-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; font-size: 13px; font-family: monospace; }
+		.rfs-row input, .rfs-row select { font-family: monospace; font-size: 13px; padding: 4px 6px; border: 1px solid #ccc; border-radius: 4px; }
+		.rfs-row input[type=number], .rfs-row input[type=text] { width: 80px; }
+		.comp-list { font-family: monospace; font-size: 13px; }
+		.comp-item {
+			display: flex; align-items: center; gap: 8px;
+			padding: 5px 8px; border-bottom: 1px solid #eee;
+			background: #fafaf8;
+		}
+		.comp-item:nth-child(even) { background: #f4f0ff; }
+		.comp-badge {
+			display: inline-block; padding: 2px 7px; border-radius: 3px;
+			font-size: 11px; font-weight: bold; min-width: 28px; text-align: center;
+		}
+		.badge-R  { background: #ffd0b0; color: #7a3000; }
+		.badge-L  { background: #c8e8ff; color: #003060; }
+		.badge-C  { background: #c8ffd8; color: #005020; }
+		.badge-TL { background: #ffe8c8; color: #604000; }
+		.badge-S  { background: #f0c8ff; color: #400060; }
+		.badge-P  { background: #fff0c8; color: #604000; }
+		.comp-mode { font-size: 11px; color: #888; }
+		.comp-del { margin-left: auto; cursor: pointer; color: #cc3333; font-size: 14px; border: none; background: none; }
+		.comp-del:hover { color: #ff0000; }
+		.comp-move { cursor: pointer; color: #999; font-size: 13px; border: none; background: none; }
+		.comp-move:hover { color: #5533aa; }
+		.schematic-wrap { margin: 10px 0; overflow-x: auto; }
+		svg#schematic { display: block; font-family: monospace; }
+		.chart-wrap { position: relative; margin-top: 12px; }
+		.chart-tabs { display: flex; gap: 4px; margin-bottom: 8px; }
+		.chart-tab { font-family: monospace; font-size: 12px; padding: 4px 12px; border: 1px solid #ccc; border-radius: 4px 4px 0 0; background: #fff; cursor: pointer; }
+		.chart-tab.active { background: #f0eeff; border-color: #AA77FF; border-bottom-color: #f0eeff; color: #5533aa; font-weight: bold; }
+		.chart-panel { display: none; }
+		.chart-panel.active { display: block; }
+		.sim-preset { font-family: monospace; font-size: 12px; padding: 4px 10px; border: 1px solid #ccc; border-radius: 4px; background: #fff; cursor: pointer; }
+		.sim-preset:hover { background: #f0eeff; border-color: #AA77FF; }
+		hr.rfs-div { border: none; border-top: 1px solid #ddd; margin: 12px 0; }
+		.result-summary { font-family: monospace; font-size: 12px; background: #f0eeff; border-left: 3px solid #AA77FF; padding: 8px 12px; border-radius: 0 4px 4px 0; margin-top: 8px; }
+	</style>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>RF Circuit Simulator</h3>
+<p style="font-size:13px;margin-bottom:12px;">Build ladder networks from R, L, C, and transmission line elements. Simulates S-parameters, impedance, and group delay vs frequency using ABCD matrix analysis.</p>
+
+<!-- ── Frequency sweep ── -->
+<div class="rfs-section">
+<div class="rfs-label">FREQUENCY SWEEP</div>
+<div class="rfs-row">
+	From: <input type="text" id="f-start" value="1"> 
+	<select id="f-start-u"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select>
+	&nbsp;To: <input type="text" id="f-stop" value="1000">
+	<select id="f-stop-u"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select>
+	&nbsp;Points: <input type="text" id="f-pts" value="500" style="width:60px">
+	&nbsp;Scale: <select id="f-scale"><option value="log">Log</option><option value="lin">Linear</option></select>
+</div>
+<div class="rfs-row">
+	Port impedance Z&#8320;: <input type="text" id="sim-z0" value="50"> &#937;
+</div>
+</div>
+
+<hr class="rfs-div">
+
+<!-- ── Add component ── -->
+<div class="rfs-section">
+<div class="rfs-label">ADD COMPONENT</div>
+<div class="rfs-row">
+	Type:
+	<select id="comp-type" onchange="compTypeChange()">
+		<option value="R">R — Resistor</option>
+		<option value="L">L — Inductor</option>
+		<option value="C">C — Capacitor</option>
+		<option value="TL">TL — Transmission Line</option>
+		<option value="S">S — Series port (source)</option>
+	</select>
+	Topology:
+	<select id="comp-topo">
+		<option value="series">Series</option>
+		<option value="shunt">Shunt</option>
+	</select>
+</div>
+<div class="rfs-row" id="comp-val-row">
+	Value: <input type="text" id="comp-val" value="50">
+	<select id="comp-unit">
+		<option value="1">&#937;</option>
+	</select>
+</div>
+<div class="rfs-row" id="comp-tl-row" style="display:none">
+	Z&#8320;: <input type="text" id="tl-z0" value="50"> &#937; &nbsp;
+	Length: <input type="text" id="tl-len" value="90"> &deg; at
+	<input type="text" id="tl-f0" value="100"> 
+	<select id="tl-f0-u"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select>
+</div>
+<button onclick="addComponent()" style="margin-top:4px;">Add</button>
+</div>
+
+<hr class="rfs-div">
+
+<!-- ── Presets ── -->
+<div class="rfs-section">
+<div class="rfs-label">PRESETS</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px;">
+	<button class="sim-preset" onclick="loadPreset('lpf3')">3rd Order LPF</button>
+	<button class="sim-preset" onclick="loadPreset('hpf3')">3rd Order HPF</button>
+	<button class="sim-preset" onclick="loadPreset('bpf')">Band-Pass</button>
+	<button class="sim-preset" onclick="loadPreset('lmatch')">L-Match 50→200&#937;</button>
+	<button class="sim-preset" onclick="loadPreset('qw')">&#955;/4 Transformer</button>
+	<button class="sim-preset" onclick="loadPreset('stub')">Shunt Stub</button>
+	<button class="sim-preset" onclick="loadPreset('blank')">Clear All</button>
+</div>
+</div>
+
+<hr class="rfs-div">
+
+<!-- ── Component list ── -->
+<div class="rfs-section">
+<div class="rfs-label">CIRCUIT — Input Port → (elements below) → Output Port</div>
+<div class="comp-list" id="comp-list"></div>
+</div>
+
+<!-- ── Schematic ── -->
+<div class="schematic-wrap">
+	<svg id="schematic" width="600" height="100"></svg>
+</div>
+
+<!-- ── Simulate ── -->
+<button onclick="simulate()" style="margin:8px 0;">&#9654; Simulate</button>
+
+<!-- ── Results summary ── -->
+<div class="result-summary" id="sim-summary" style="display:none"></div>
+
+<!-- ── Charts ── -->
+<div class="chart-wrap" id="charts-wrap" style="display:none">
+	<div class="chart-tabs">
+		<button class="chart-tab active" onclick="switchTab('s-params')">S-Parameters</button>
+		<button class="chart-tab" onclick="switchTab('impedance')">Impedance</button>
+		<button class="chart-tab" onclick="switchTab('phase')">Phase</button>
+		<button class="chart-tab" onclick="switchTab('gdelay')">Group Delay</button>
+		<button class="chart-tab" onclick="switchTab('vswr')">VSWR</button>
+	</div>
+	<div class="chart-panel active" id="panel-s-params"><canvas id="chart-s" style="max-height:320px"></canvas></div>
+	<div class="chart-panel" id="panel-impedance"><canvas id="chart-z" style="max-height:320px"></canvas></div>
+	<div class="chart-panel" id="panel-phase"><canvas id="chart-ph" style="max-height:320px"></canvas></div>
+	<div class="chart-panel" id="panel-gdelay"><canvas id="chart-gd" style="max-height:320px"></canvas></div>
+	<div class="chart-panel" id="panel-vswr"><canvas id="chart-vswr" style="max-height:320px"></canvas></div>
+</div>
+
+</article>
+</section>
+<footer><p><a href="index.html">Home</a></p></footer>
+<script src="RFSimulator.js"></script>
+</body>
+</html>

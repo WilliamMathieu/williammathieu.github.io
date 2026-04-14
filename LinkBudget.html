@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-6R4JGG0586');
-	</script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +12,7 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,7 +22,7 @@
 		<article>
 			<h3>Link Budget Calculator</h3>
 
-			<p style="font-size:13px;">Systematic TX → RX link budget with margin and SNR.</p><br>
+			<p style="font-size:13px;">Systematic TX &rarr; RX link budget with margin and SNR.</p><br>
 			<b>Transmitter</b><br>
 			TX power: <input type="text" id="lb-pt" value="20"> dBm &nbsp;
 			TX line loss: <input type="text" id="lb-ltx" value="0.5"> dB &nbsp;
@@ -37,7 +31,7 @@
 			Frequency: <input type="text" id="lb-f" value="2.4">
 			<select id="lb-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select> &nbsp;
 			Distance: <input type="text" id="lb-d" value="1000"> m<br>
-			Additional losses (rain, foliage, etc.): <input type="text" id="lb-lmisc" value="0"> dB<br><br>
+			Additional losses: <input type="text" id="lb-lmisc" value="0"> dB<br><br>
 			<b>Receiver</b><br>
 			RX antenna gain: <input type="text" id="lb-gr" value="2"> dBi &nbsp;
 			RX line loss: <input type="text" id="lb-lrx" value="0.5"> dB<br>
@@ -46,7 +40,13 @@
 			<select id="lb-bwu"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option></select><br>
 			Required SNR: <input type="text" id="lb-snr" value="10"> dB<br><br>
 			<button id="lb-btn">Calculate</button>
-			<p><span id="lb-out"></span></p>
+			<p>
+				\begin{align}
+				FSPL &= 20\log_{10}\!\left(\frac{4\pi d}{\lambda}\right) \\
+				P_r &= P_t - L_{tx} + G_t - FSPL - L_{misc} + G_r - L_{rx}
+				\end{align}
+			</p>
+			<div class="result-box" id="lb-out"><p>Link margin = —</p></div>
 
 			<script src="LinkBudget.js"></script>
 		</article>

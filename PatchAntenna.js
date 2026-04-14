@@ -17,9 +17,9 @@ document.getElementById('pa-btn').addEventListener('click', function() {
     // Patch length L
     var Leff = c / (2*f*Math.sqrt(erEff));
     var L = Leff - 2*dL;
-    var out = 'Patch width W = ' + (W*1000).toFixed(3) + ' mm<br>'
-            + 'Patch length L = ' + (L*1000).toFixed(3) + ' mm<br>'
-            + '\u03b5<sub>reff</sub> = ' + erEff.toFixed(4) + '<br>'
+    var out = '<p>Patch width W = ' + (W*1000).toFixed(3) + ' mm</p><p>'
+            + 'Patch length L = ' + (L*1000).toFixed(3) + ' mm</p><p>'
+            + '\u03b5<sub>reff</sub> = ' + erEff.toFixed(4) + '</p><p>'
             + '\u0394L (end extension) = ' + (dL*1000).toFixed(4) + ' mm';
-    document.getElementById('pa-out').innerHTML = out;
+    document.getElementById('pa-out').innerHTML = out + '</p>';
 });

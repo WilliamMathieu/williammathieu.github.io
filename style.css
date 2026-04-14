@@ -103,3 +103,17 @@ nav ul li[style*="font-size:11px"] {
   margin-top: 4px;
 }
 nav ul li[style*="font-size:11px"] a { display: none; }
+
+/* Result box — always visible, filled by JS */
+.result-box {
+  background: #f0eeff;
+  border-left: 3px solid #AA77FF;
+  border-radius: 0 6px 6px 0;
+  padding: 10px 14px;
+  margin-top: 12px;
+  font-family: monospace;
+  font-size: 13px;
+  min-height: 38px;
+  color: #1a1a1a;
+}
+.result-box p { margin: 3px 0; }

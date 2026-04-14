@@ -31,7 +31,7 @@ function nfCalc() {
     var NF_dB   = 10*Math.log10(F_total);
     var Gtot_dB = 10*Math.log10(G_cum);
     document.getElementById('nf-out').innerHTML =
-        'Cascaded NF = ' + NF_dB.toFixed(4) + ' dB<br>'
-      + 'Total gain = ' + Gtot_dB.toFixed(4) + ' dB';
+        '<p>Cascaded NF = ' + NF_dB.toFixed(4) + ' dB</p>'
+      + '<p>Total gain = ' + Gtot_dB.toFixed(4) + ' dB</p>';
 }
 nfBuild();

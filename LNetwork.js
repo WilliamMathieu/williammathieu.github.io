@@ -21,13 +21,13 @@ document.getElementById('ln-btn').addEventListener('click', function() {
     var L_shunt  = Xshunt/w;
     var label = Rs > RL ? '(shunt across source, series toward load)'
                         : '(shunt across load, series toward source)';
-    var out = '<b>Q = ' + Q.toFixed(4) + '</b><br><br>'
-        + '<b>Solution 1 — Low-pass L-network</b> ' + label + ':<br>'
-        + 'Shunt C = ' + fmtE(C_shunt) + 'F<br>'
-        + 'Series L = ' + fmtE(L_series) + 'H<br><br>'
-        + '<b>Solution 2 — High-pass L-network</b>:<br>'
-        + 'Series C = ' + fmtE(C_series) + 'F<br>'
-        + 'Shunt L = ' + fmtE(L_shunt) + 'H';
+    var out = '<p><b>Q = ' + Q.toFixed(4) + '</b></p>'
+        + '<p><b>Solution 1 — Low-pass</b> ' + label + ':</p>'
+        + '<p>Shunt C = ' + fmtE(C_shunt) + 'F</p>'
+        + '<p>Series L = ' + fmtE(L_series) + 'H</p>'
+        + '<p><b>Solution 2 — High-pass:</b></p>'
+        + '<p>Series C = ' + fmtE(C_series) + 'F</p>'
+        + '<p>Shunt L = ' + fmtE(L_shunt) + 'H</p>';
     document.getElementById('ln-out').innerHTML = out;
 });
 function fmtE(v) {

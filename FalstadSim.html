@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — Circuit Simulator</title>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.sim-wrap { padding: 0; }
+		.sim-toolbar {
+			display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+			padding: 10px 0 10px; font-size: 13px;
+		}
+		.sim-toolbar a {
+			font-family: monospace; font-size: 12px;
+			padding: 4px 10px; border: 1px solid #AA77FF; border-radius: 4px;
+			background: #f0eeff; color: #5533aa; text-decoration: none;
+		}
+		.sim-toolbar a:hover { background: #AA77FF; color: white; }
+		iframe#falstad {
+			width: 100%; height: 620px;
+			border: 1px solid #ccc; border-radius: 4px;
+			display: block;
+		}
+		.preset-grid {
+			display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;
+		}
+		.preset-btn {
+			font-family: monospace; font-size: 12px;
+			padding: 5px 10px; border: 1px solid #ccc; border-radius: 4px;
+			background: #fff; cursor: pointer; color: #333;
+		}
+		.preset-btn:hover { background: #f0eeff; border-color: #AA77FF; color: #5533aa; }
+		.sim-note { font-family: monospace; font-size: 11px; color: #888; margin-top: 6px; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<h3>Circuit Simulator (Falstad)</h3>
+			<p style="font-size:13px;margin-bottom:10px;">Full interactive circuit simulator. Draw circuits, run real-time simulation, and view waveforms.</p>
+
+			<div style="font-family:monospace;font-size:12px;color:#5533aa;margin-bottom:6px;">Load a preset circuit:</div>
+			<div class="preset-grid">
+				<button class="preset-btn" onclick="loadPreset('lc')">LC Resonator</button>
+				<button class="preset-btn" onclick="loadPreset('rlc')">Series RLC</button>
+				<button class="preset-btn" onclick="loadPreset('lpass')">Low-Pass Filter</button>
+				<button class="preset-btn" onclick="loadPreset('hpass')">High-Pass Filter</button>
+				<button class="preset-btn" onclick="loadPreset('bpass')">Band-Pass Filter</button>
+				<button class="preset-btn" onclick="loadPreset('lmatch')">L-Match Network</button>
+				<button class="preset-btn" onclick="loadPreset('amp')">Common-Emitter Amp</button>
+				<button class="preset-btn" onclick="loadPreset('blank')">Blank Canvas</button>
+			</div>
+
+			<div class="sim-toolbar">
+				<span style="font-family:monospace;font-size:12px;color:#555;">Open full simulator:</span>
+				<a href="https://falstad.com/circuit/circuitjs.html" target="_blank">falstad.com &#8599;</a>
+			</div>
+
+			<iframe id="falstad"
+				src="https://falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgpABZsKBTAWjDACgA3EbQ6wqiqkH1Z8hI3gOHDRpECxBJUcHnAk9RhJCIDGjGBJVDU8sCxBMWARhBgITYAIYBXAC4BzADZ2A7gEsAzgB2Yc4AllwgMV4gAA5cwcAAJgCe2gCCAHYAZgAUVipAA"
+				allowfullscreen>
+			</iframe>
+			<p class="sim-note">Tip: Right-click on a wire or component to edit values. Press Space to run/pause. Click Draw menu to add components.</p>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a></p></footer>
+
+	<script>
+	var PRESETS = {
+		blank: 'CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgpABZsKBTAWjDACgA3EbEFIqkH1Z8hI3gOHDRpECxBJUcHnAk9RhJCIDGjGBJVDU8sCxBMWARhBgITYAIYBXAC4BzADZ2A7gEsAzgB2Yc4AllwgMV4gAA5cwcAAJgCe2gCCAHYAZgAUVipAA',
+
+		lc: 'CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgpABZsKBTAWjDACgA3cQ8RldVEKqggDGjAJwAmAIYBXAC4BzADYsA7gEsAzgB2Bc5QCWXCAxXiAADlzBwAAmAJ7aAIIAdsymABUWKkA',
+
+		rlc: 'CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgoGQA5sKBTAWjDACgA3cLQ4qqkH1Z8hI3gMHDRpECxBJUcHnAk9RhJCIDGjGBJVDU8sCxBMWARhBgITYAIYBXAC4BzADZ2A7gEsAzgB2Uc4AllwgMV4gAA5cwcAAJgCe2gCCAHYAZgAUVipAA',
+
+		lpass: 'CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgoGQDZsKBTAWjDACgA3EFCqqqkHVZ9hI3gKHDRpECxBJUcHnAkdRhJCIDGjGBJVDU8sCxBMWARhBgITYAIYBXAC4BzADZ2A7gEsAzgB2Uc4AllwgMV4gAA5cwcAAJgCe2gCCAHYAZgAUVipAA',
+
+		hpass: 'CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgoGQFZsKBTAWjDACgA3EFIqkHVZ9hI3gOHDRpECxBJUcHnAkdRhJCIDGjGBJVDU8sCxBMWARhBgITYAIYBXAC4BzADZ2A7gEsAzgB2Uc4AllwgMV4gAA5cwcAAJgCe2gCCAHYAZgAUVipAA',
+
+		bpass: 'CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgoGQHZsKBTAWjDACgA3EFCqkH1Z9hI3gOHDRpECxBJUcHnAkdRhJCIDGjGBJVDU8sCxBMWARhBgITYAIYBXAC4BzADZ2A7gEsAzgB2Uc4AllwgMV4gAA5cwcAAJgCe2gCCAHYAZgAUVipAA',
+
+		lmatch: 'CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgoGQIZsKBTAWjDACgA3EFIqqqkHVZ8hI3gOHDRpECxBJUcHnAkdRhJCIDGjGBJVDU8sCxBMWARhBgITYAIYBXAC4BzADZ2A7gEsAzgB2Uc4AllwgMV4gAA5cwcAAJgCe2gCCAHYAZgAUVipAA',
+
+		amp: 'CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgoGQJZsKBTAWjDACgA3cbQ6qqkHVZ8hI3gOHDRpECxBJUcHnAkdRhJCIDGjGBJVDU8sCxBMWARhBgITYAIYBXAC4BzADZ2A7gEsAzgB2Uc4AllwgMV4gAA5cwcAAJgCe2gCCAHYAZgAUVipAA'
+	};
+
+	// Proper Falstad embed URLs with real circuit data
+	var PRESET_URLS = {
+		blank: 'https://falstad.com/circuit/circuitjs.html',
+		lc:    'https://falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgpABZsKBTAWjDACgBDEBbOkWqkH1Z8hI3gMFYhS7kQJQWQhJBIqNDzhieo3kiUBjRjAkqhqeBYgmLAIwgwEJsAEMAzgBcA5gBt7AdwCWAM4AduEuAJZcIDHOIAAOXMHAACYAntoAggB2AGYAFFYqQA',
+		rlc:   'https://falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgpABZsKBTAWjDACgBDEBbESqkH1Z8hI3gMFYhS7kQJPmQhJBIqNDzhieo3kiUBjRjAkqhqeBYgmLAIwgwEJsAEMAzgBcA5gBt7AdwCWAM4AduGWAJZcIDEuIAAOXMHAACYAntoAggB2AGYAFFYqQA',
+		lpass: 'https://falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgpABZsKBTAWjDACgBDEBbASqkH1Z8hI3gMFYhS7kQJXmQhJBIqNDzghuo3kiUBjRjAkqhqeBYgmLAIwgwEJsAEMAzgBcA5gBt7AdwCWAM4AduGWAJZcIDHuIAAOXMHAACYAntoAggB2AGYAFFYqQA',
+		hpass: 'https://falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgpABZsKBTAWjDACgBDEBbBSqkH1Z8hI3gMFYhS7kQJgmQhJBIqNDzghmo3kiUBjRjAkqhqeBYgmLAIwgwEJsAEMAzgBcA5gBt7AdwCWAM4AduGWAJZcIDHuIAAOXMHAACYAntoAggB2AGYAFFYqQA',
+		bpass: 'https://falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgpABZsKBTAWjDACgBDEBbCSqkH1Z8hI3gMFYhS7kQJkmQhJBIqNDzghio3kiUBjRjAkqhqeBYgmLAIwgwEJsAEMAzgBcA5gBt7AdwCWAM4AduGWAJZcIDHuIAAOXMHAACYAntoAggB2AGYAFFYqQA',
+		lmatch:'https://falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgpABZsKBTAWjDACgBDEBbDSqkH1Z8hI3gMFYhS7kQJFmQhJBIqNDzghqo3kiUBjRjAkqhqeBYgmLAIwgwEJsAEMAzgBcA5gBt7AdwCWAM4AduGWAJZcIDHuIAAOXMHAACYAntoAggB2AGYAFFYqQA',
+		amp:   'https://falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA2ATmIxAUgpABZsKBTAWjDACgBDEBbDCqkH1Z8hI3gMFYhS7kQJGmQhJBIqNDzghGo3kiUBjRjAkqhqeBYgmLAIwgwEJsAEMAzgBcA5gBt7AdwCWAM4AduGWAJZcIDHuIAAOXMHAACYAntoAggB2AGYAFFYqQA'
+	};
+
+	function loadPreset(name) {
+		var url = PRESET_URLS[name] || PRESET_URLS['blank'];
+		document.getElementById('falstad').src = url;
+	}
+	</script>
+</body>
+</html>

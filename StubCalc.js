@@ -24,8 +24,8 @@ document.getElementById('st-btn').addEventListener('click', function() {
     var l_elec = betaL; // radians
     var l_m    = l_elec / (2*Math.PI) * lam;
     var l_deg  = l_elec * 180 / Math.PI;
-    var out = 'Electrical length = ' + l_deg.toFixed(3) + '\u00b0<br>'
-            + 'Physical length = ' + (l_m*1000).toFixed(4) + ' mm (free space)<br>'
+    var out = '<p>Electrical length = ' + l_deg.toFixed(3) + '\u00b0</p><p>'
+            + 'Physical length = ' + (l_m*1000).toFixed(4) + ' mm (free space)</p><p>'
             + '(\u03bb/4 = ' + (lam/4*1000).toFixed(4) + ' mm)';
-    document.getElementById('st-out').innerHTML = out;
+    document.getElementById('st-out').innerHTML = out + '</p>';
 });

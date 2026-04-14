@@ -12,10 +12,10 @@ document.getElementById('cx-btn').addEventListener('click', function() {
     var L  = 4*Math.PI*1e-7 / (2*Math.PI) * Math.log(ratio); // H/m
     var vp = 3e8 / Math.sqrt(er);
     var fc = 1e-9 * vp / (Math.PI * (D+d)/2 * 1e-3); // TM11 cutoff GHz
-    var out = 'Z\u2080 = ' + Z0.toFixed(3) + ' \u03A9<br>'
-            + 'C = ' + (C*1e12).toFixed(4) + ' pF/m<br>'
-            + 'L = ' + (L*1e9).toFixed(4) + ' nH/m<br>'
-            + 'v<sub>p</sub> = ' + (vp/1e8).toFixed(4) + ' \u00d7 10\u2078 m/s<br>'
+    var out = '<p>Z\u2080 = ' + Z0.toFixed(3) + ' \u03A9</p><p>'
+            + 'C = ' + (C*1e12).toFixed(4) + ' pF/m</p><p>'
+            + 'L = ' + (L*1e9).toFixed(4) + ' nH/m</p><p>'
+            + 'v<sub>p</sub> = ' + (vp/1e8).toFixed(4) + ' \u00d7 10\u2078 m/s</p><p>'
             + 'Cutoff (TM\u2081\u2081) \u2248 ' + fc.toFixed(4) + ' GHz';
-    document.getElementById('cx-out').innerHTML = out;
+    document.getElementById('cx-out').innerHTML = out + '</p>';
 });

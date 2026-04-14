@@ -21,10 +21,10 @@ document.getElementById('bp-btn').addEventListener('click', function() {
     }
     var BW_Hz = BW/(2*Math.PI);
     var f_low = f0 - BW_Hz/2, f_high = f0 + BW_Hz/2;
-    var out = 'f\u2080 = ' + math.format(f0,{notation:'engineering',precision:5}) + ' Hz<br>'
-            + 'BW = '  + math.format(BW_Hz,{notation:'engineering',precision:4}) + ' Hz<br>'
-            + 'Q = '   + Q.toFixed(4) + '<br>'
-            + 'f\u2081 = ' + math.format(f_low,{notation:'engineering',precision:5}) + ' Hz<br>'
-            + 'f\u2082 = ' + math.format(f_high,{notation:'engineering',precision:5}) + ' Hz';
+    var out = '<p>f\u2080 = ' + math.format(f0,{notation:'engineering',precision:5}) + ' Hz</p>'
+            + '<p>BW = ' + math.format(BW_Hz,{notation:'engineering',precision:4}) + ' Hz</p>'
+            + '<p>Q = ' + Q.toFixed(4) + '</p>'
+            + '<p>f\u2081 = ' + math.format(f_low,{notation:'engineering',precision:5}) + ' Hz</p>'
+            + '<p>f\u2082 = ' + math.format(f_high,{notation:'engineering',precision:5}) + ' Hz</p>';
     document.getElementById('bp-out').innerHTML = out;
 });

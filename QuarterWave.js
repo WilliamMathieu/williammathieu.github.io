@@ -11,8 +11,8 @@ document.getElementById('qw-btn').addEventListener('click', function() {
     var Zt  = Math.sqrt(Z1*Z2);
     var lam = 3e8 / (f * Math.sqrt(er));
     var l   = lam / 4;
-    var out = 'Z<sub>transformer</sub> = ' + Zt.toFixed(4) + ' \u03A9<br>'
-            + 'Physical length = ' + (l*1000).toFixed(4) + ' mm<br>'
+    var out = '<p>Z<sub>transformer</sub> = ' + Zt.toFixed(4) + ' \u03A9</p><p>'
+            + 'Physical length = ' + (l*1000).toFixed(4) + ' mm</p><p>'
             + '(\u03bb/4 in medium with \u03b5<sub>r</sub> = ' + er + ')';
-    document.getElementById('qw-out').innerHTML = out;
+    document.getElementById('qw-out').innerHTML = out + '</p>';
 });

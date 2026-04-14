@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-6R4JGG0586');
-	</script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +12,7 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,13 +22,19 @@
 		<article>
 			<h3>L-Network Impedance Matcher</h3>
 
-			<p style="font-size:13px;">Calculate L and C values to match a source impedance to a load impedance.</p><br>
+			<p style="font-size:13px;">Calculate L and C values to match R<sub>s</sub> to R<sub>L</sub>.</p><br>
 			Frequency, f: <input type="text" id="ln-f" placeholder="value">
 			<select id="ln-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
-			Source resistance, R<sub>s</sub>: <input type="text" id="ln-rs" placeholder="Ω" value="50"> Ω<br>
-			Load resistance, R<sub>L</sub>: <input type="text" id="ln-rl" placeholder="Ω"> Ω<br><br>
+			Source resistance, R<sub>s</sub>: <input type="text" id="ln-rs" placeholder="&#937;" value="50"> &#937;<br>
+			Load resistance, R<sub>L</sub>: <input type="text" id="ln-rl" placeholder="&#937;"> &#937;<br><br>
 			<button id="ln-btn">Calculate</button>
-			<p><span id="ln-out"></span></p>
+			<p>
+				\begin{align}
+				Q &= \sqrt{\frac{R_{high}}{R_{low}}-1} \\
+				X_{series} &= Q \cdot R_{low} \quad X_{shunt} = \frac{R_{high}}{Q}
+				\end{align}
+			</p>
+			<div class="result-box" id="ln-out"><p>Q = —</p></div>
 
 			<script src="LNetwork.js"></script>
 		</article>

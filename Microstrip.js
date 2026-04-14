@@ -33,9 +33,9 @@ document.getElementById('ms-btn1').addEventListener('click', function() {
         Z0 = (120*Math.PI / (Math.sqrt(eEff) * (u + 1.393 + 0.667*Math.log(u+1.444))));
     }
     var vp = 3e8 / Math.sqrt(eEff);
-    var out = 'Z\u2080 = ' + Z0.toFixed(3) + ' \u03A9<br>'
-            + '\u03b5<sub>eff</sub> = ' + eEff.toFixed(4) + '<br>'
-            + 'v<sub>p</sub> = ' + (vp/1e8).toFixed(4) + ' \u00d7 10\u2078 m/s';
+    var out = '<p>Z\u2080 = ' + Z0.toFixed(3) + ' \u03A9</p>'
+            + '<p>\u03b5<sub>eff</sub> = ' + eEff.toFixed(4) + '</p>'
+            + '<p>v<sub>p</sub> = ' + (vp/1e8).toFixed(4) + ' \u00d7 10\u2078 m/s</p>';
     document.getElementById('ms-out1').innerHTML = out;
 });
 
@@ -51,5 +51,5 @@ document.getElementById('ms-btn2').addEventListener('click', function() {
     var w1 = 8*Math.exp(A) / (Math.exp(2*A) - 2); // narrow case
     var w2 = 2/Math.PI*(B-1-Math.log(2*B-1)+(er-1)/(2*er)*(Math.log(B-1)+0.39-0.61/er)); // wide case
     var w = (w1 < 2) ? w1 * h : w2 * h;
-    document.getElementById('ms-out2').innerHTML = 'w = ' + (w).toFixed(4) + ' mm';
+    document.getElementById('ms-out2').innerHTML = '<p>w = ' + (w).toFixed(4) + ' mm</p>';
 });

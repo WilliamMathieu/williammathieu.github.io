@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-6R4JGG0586');
-	</script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +12,7 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -31,10 +25,15 @@
 			<p style="font-size:13px;">Plot the radiation pattern of a uniform linear array (ULA).</p><br>
 			Number of elements, N: <input type="number" id="af-n" min="2" max="32" value="4" style="width:60px"><br>
 			Element spacing, d: <input type="text" id="af-d" value="0.5"> &lambda;<br>
-			Steering angle, &theta;₀: <input type="text" id="af-theta" value="0"> deg<br><br>
-			<button id="af-btn">Plot Pattern</button><br><br>
-			<canvas id="af-canvas" width="480" height="480" style="border:1px solid #ccc;display:block;"></canvas>
-			<p style="font-size:12px;margin-top:6px;">Polar plot — 0° is broadside (top). Colour scale: blue (min) → red (max).</p>
+			Steering angle, &theta;&#8320;: <input type="text" id="af-theta" value="0"> deg<br><br>
+			<button id="af-btn">Plot Pattern</button>
+			<p>
+				\begin{align}
+				AF(\theta) &= \frac{\sin(N\psi/2)}{\sin(\psi/2)}, \quad \psi = 2\pi d(\sin\theta - \sin\theta_0)
+				\end{align}
+			</p>
+			<canvas id="af-canvas" width="480" height="480" style="border:1px solid #ccc;display:block;margin-top:8px;"></canvas>
+			<p style="font-size:12px;margin-top:6px;">Polar plot — 0&deg; is broadside (top).</p>
 
 			<script src="ArrayFactor.js"></script>
 		</article>

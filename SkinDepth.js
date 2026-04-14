@@ -14,8 +14,8 @@ document.getElementById('sd-btn').addEventListener('click', function() {
     }
     var mu  = 4*Math.PI*1e-7;
     var delta = Math.sqrt(2 / (2*Math.PI*f * mu * sig));
-    var out = '\u03b4 = ' + math.format(delta, {notation:'engineering', precision:5}) + ' m<br>'
-            + '\u03b4 = ' + (delta*1e6).toFixed(4) + ' \u03bcm<br>'
+    var out = '<p>\u03b4 = ' + math.format(delta, {notation:'engineering', precision:5}) + ' m</p><p>'
+            + '\u03b4 = ' + (delta*1e6).toFixed(4) + ' \u03bcm</p><p>'
             + 'Resistance ratio R<sub>AC</sub>/R<sub>DC</sub> \u2248 r/(2\u03b4) for wire radius r';
-    document.getElementById('sd-out').innerHTML = out;
+    document.getElementById('sd-out').innerHTML = out + '</p>';
 });
