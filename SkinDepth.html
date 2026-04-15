@@ -40,7 +40,8 @@
 			Conductivity (if custom): <input type="text" id="sd-sigma" placeholder="S/m" disabled><br><br>
 			<button id="sd-btn">Calculate</button>
 			<p>\begin{align} \delta &= \sqrt{\frac{2}{\omega\mu\sigma}} \end{align}</p>
-			<div class="result-box" id="sd-out"><p>&#948; = —</p></div>
+			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<div class="result-box" id="sd-out"><p>δ = <span id="sd-m">—</span> m</p><p>δ = <span id="sd-um">—</span> μm</p></div>
 
 			<script src="SkinDepth.js"></script>
 		</article>

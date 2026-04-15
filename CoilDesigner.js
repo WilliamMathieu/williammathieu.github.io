@@ -1,42 +1,28 @@
-/* global document, math */
-
+/* RF Coil Designer */
 var btn = document.getElementById("btn");
-
-
-
-btn.addEventListener('click', function(){
-    var d = document.getElementById("d").value;
-    var D = document.getElementById("D").value;
-	var Lresult = (1.25663706*Math.pow(10,-6))*(1.0)*((D*Math.pow(10,-3))/2.0)*((Math.log(8.0*(D*Math.pow(10,-3))/(d*Math.pow(10,-3))))-2.0);
-
-    
-    
-    var f = document.getElementById("f").value;
-    //var L = document.getElementById("L").value;
-	
-	var fmag = document.getElementById("f_dropdown");
-	var f_dropdown = fmag.value;
-	//var Lmag = document.getElementById("L_dropdown");
-	//var L_dropvalue = Lmag.value;
-	var Cresult;
-
-
-    switch(f_dropdown){
-        case "0":
-            Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,3),2))*(Lresult)));
-            break;
-        case "1":
-            Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,6),2))*(Lresult)));
-            break;
-        case "2":
-            Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,9),2))*(Lresult)));
-            break;
-        case "3":
-            Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,12),2))*(Lresult)));
-    }
-
-    Lresult = math.format(Lresult, {notation: 'engineering'});
-    document.getElementById("L").innerHTML = Lresult +" H";
-	Cresult = math.format(Cresult, {notation: 'engineering'});
-	document.getElementById("C").innerHTML = Cresult +" F";
+btn.addEventListener('click', function() {
+  var d = parseFloat(document.getElementById("d").value);
+  var D = parseFloat(document.getElementById("D").value);
+  var f = parseFloat(document.getElementById("f").value);
+  var fu = document.getElementById("f_dropdown").value;
+  if (isNaN(d) || isNaN(D) || d <= 0 || D <= 0) { showError('Please enter valid values for wire diameter d and loop diameter D.'); return; }
+  if (d >= D) { showError('Wire diameter d must be smaller than loop diameter D.'); return; }
+  if (isNaN(f) || f <= 0) { showError('Please enter a valid Larmor frequency.'); return; }
+  clearError();
+  var dSI = d*1e-3, DSI = D*1e-3;
+  var L = 1.25663706e-6 * (DSI/2) * (Math.log(8*DSI/dSI) - 2);
+  var fmul = {'0':1e3,'1':1e6,'2':1e9,'3':1e12}[fu];
+  var fHz = f * fmul;
+  var C = 1 / (4 * Math.PI * Math.PI * fHz * fHz * L);
+  document.getElementById("L").textContent = math.format(L, {notation:'engineering'}) + ' H';
+  document.getElementById("C").textContent = math.format(C, {notation:'engineering'}) + ' F';
 });
+
+function showError(msg) {
+  var el = document.getElementById('error');
+  if (el) el.textContent = msg;
+}
+function clearError() {
+  var el = document.getElementById('error');
+  if (el) el.textContent = '';
+}

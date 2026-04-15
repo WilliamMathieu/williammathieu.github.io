@@ -35,7 +35,8 @@
 			Resistance, R: <input type="text" id="bp-R" placeholder="&#937;"> &#937;<br><br>
 			<button id="bp-btn">Calculate</button>
 			<p>\begin{align} f_0 &= \frac{1}{2\pi\sqrt{LC}} \quad Q = \frac{\omega_0 L}{R} \end{align}</p>
-			<div class="result-box" id="bp-out"><p>f&#8320; = —</p></div>
+			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<div class="result-box" id="bp-out"><p>f₀ = <span id="bp-f0">—</span></p><p>BW = <span id="bp-bw">—</span></p><p>Q = <span id="bp-Q">—</span></p><p>f₁ = <span id="bp-f1">—</span></p><p>f₂ = <span id="bp-f2">—</span></p></div>
 
 			<script src="BandpassCalc.js"></script>
 		</article>

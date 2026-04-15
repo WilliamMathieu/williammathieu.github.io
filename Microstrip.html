@@ -30,19 +30,21 @@
 			Trace thickness, t: <input type="text" id="ms-t" placeholder="mm" value="0.035"> mm<br>
 			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="ms-er" placeholder="e.g. 4.4"><br><br>
 			<button id="ms-btn1">Calculate Z&#8320;</button>
+			<div id="ms-err1" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>
 				\begin{align}
 				Z_0 &= \frac{120\pi}{\sqrt{\varepsilon_{eff}}\left[\frac{w}{h}+1.393+0.667\ln\!\left(\frac{w}{h}+1.444\right)\right]}
 				\end{align}
 			</p>
-			<div class="result-box" id="ms-out1"><p>Z&#8320; = —</p></div>
+			<div class="result-box" id="ms-out1"><p>Z&#8320; = <span id="ms-z0-out">—</span></p><p>ε<sub>eff</sub> = <span id="ms-eeff-out">—</span></p><p>v<sub>p</sub> = <span id="ms-vp-out">—</span></p></div>
 			<br>
 			<b>Target Impedance &rarr; Width</b><br><br>
 			Target Z&#8320;: <input type="text" id="ms-z0" placeholder="&#937;" value="50"> &#937;<br>
 			Substrate height, h: <input type="text" id="ms-h2" placeholder="mm"> mm<br>
 			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="ms-er2" placeholder="e.g. 4.4"><br><br>
 			<button id="ms-btn2">Calculate Width</button>
-			<div class="result-box" id="ms-out2"><p>w = —</p></div>
+			<div id="ms-err2" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<div class="result-box" id="ms-out2"><p>w = <span id="ms-w-out">—</span></p></div>
 
 			<script src="Microstrip.js"></script>
 		</article>

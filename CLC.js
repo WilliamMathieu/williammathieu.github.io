@@ -1,69 +1,25 @@
-/* global document, math */
-
+/* Capacitance in LC */
 var btn = document.getElementById("btn");
-
-btn.addEventListener('click', function(){
-  var f = document.getElementById("f").value;
-  var L = document.getElementById("L").value;
-	
-	var fmag = document.getElementById("f_dropdown");
-	var f_dropdown = fmag.value;
-	var Lmag = document.getElementById("L_dropdown");
-	var L_dropvalue = Lmag.value;
-	var Cresult;
-	switch(f_dropdown){
-		case "0":
-			switch(L_dropvalue){
-				case "10":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,3),2))*(L*Math.pow(10,-6))));
-					break;
-				case "20":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,3),2))*(L*Math.pow(10,-9))));
-					break;
-				case "30":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,3),2))*(L*Math.pow(10,-12))));
-			}
-			break;
-		case "1":
-			switch(L_dropvalue){
-				case "10":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,6),2))*(L*Math.pow(10,-6))));
-					break;
-				case "20":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,6),2))*(L*Math.pow(10,-9))));
-					break;
-				case "30":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,6),2))*(L*Math.pow(10,-12))));
-			}
-			break;
-		case "2":
-			switch(L_dropvalue){
-				case "10":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,9),2))*(L*Math.pow(10,-6))));
-					break;
-				case "20":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,9),2))*(L*Math.pow(10,-9))));
-					break;
-				case "30":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,9),2))*(L*Math.pow(10,-12))));
-			}
-			break;
-		case "3":
-			switch(L_dropvalue){
-				case "10":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,12),2))*(L*Math.pow(10,-6))));
-					break;
-				case "20":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,12),2))*(L*Math.pow(10,-9))));
-					break;
-				case "30":
-					Cresult = (1/(4*(Math.pow(Math.PI,2))*(Math.pow(f*Math.pow(10,12),2))*(L*Math.pow(10,-12))));
-			}
-			break;
-		default:
-			Cresult = "ERROR";
-	}
-	
-	Cresult = math.format(Cresult, {notation: 'engineering'});
-	document.getElementById("C").innerHTML = "C = "+ Cresult +" F";
+btn.addEventListener('click', function() {
+  var f = parseFloat(document.getElementById("f").value);
+  var L = parseFloat(document.getElementById("L").value);
+  var fu = document.getElementById("f_dropdown").value;
+  var Lu = document.getElementById("L_dropdown").value;
+  if (isNaN(f) || isNaN(L) || f <= 0 || L <= 0) { showError('Please enter valid positive values.'); return; }
+  clearError();
+  var fmul = {'0':1e3,'1':1e6,'2':1e9,'3':1e12}[fu];
+  var Lmul = {'10':1e-6,'20':1e-9,'30':1e-12}[Lu];
+  var fHz = f * fmul;
+  var Lval = L * Lmul;
+  var C = 1 / (4 * Math.PI * Math.PI * fHz * fHz * Lval);
+  document.getElementById("C").textContent = math.format(C, {notation:'engineering'}) + ' F';
 });
+
+function showError(msg) {
+  var el = document.getElementById('error');
+  if (el) el.textContent = msg;
+}
+function clearError() {
+  var el = document.getElementById('error');
+  if (el) el.textContent = '';
+}

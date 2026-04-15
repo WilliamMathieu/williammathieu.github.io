@@ -3,8 +3,7 @@
 var btn = document.getElementById('btn');
 
 btn.addEventListener('click', function () {
-    var errorEl = document.getElementById('error');
-    errorEl.innerHTML = '';
+    clearError();
 
     var d_mm = parseFloat(document.getElementById('d').value);
     var D_mm = parseFloat(document.getElementById('D').value);
@@ -14,15 +13,15 @@ btn.addEventListener('click', function () {
     var f_dropdown = document.getElementById('f_dropdown').value;
 
     if (isNaN(d_mm) || isNaN(D_mm) || isNaN(l_mm) || isNaN(N) || isNaN(f)) {
-        errorEl.innerHTML = 'Please fill in all fields with valid numbers.';
+        showError('Please fill in all fields with valid numbers.');
         return;
     }
     if (d_mm <= 0 || D_mm <= 0 || l_mm <= 0 || N <= 0 || f <= 0) {
-        errorEl.innerHTML = 'All values must be positive.';
+        showError('All values must be positive.');
         return;
     }
     if (d_mm >= D_mm) {
-        errorEl.innerHTML = 'Wire diameter must be smaller than coil diameter.';
+        showError('Wire diameter must be smaller than coil diameter.');
         return;
     }
 
@@ -62,9 +61,18 @@ btn.addEventListener('click', function () {
     // Q factor: Q = (1/R) * sqrt(L/C)
     var Q = (1.0 / R) * Math.sqrt(L / C);
 
-    document.getElementById('L_out').innerHTML    = math.format(L,      { notation: 'engineering' }) + ' H';
-    document.getElementById('C_out').innerHTML    = math.format(C,      { notation: 'engineering' }) + ' F';
-    document.getElementById('R_out').innerHTML    = math.format(R,      { notation: 'engineering' }) + ' \u03A9';
-    document.getElementById('Lwire_out').innerHTML = math.format(l_wire, { notation: 'engineering' }) + ' m';
-    document.getElementById('Q_out').innerHTML    = math.format(Q,      { notation: 'engineering' });
+    document.getElementById('L_out').textContent = math.format(L, {notation:'engineering'}) + ' H';
+    document.getElementById('C_out').textContent = math.format(C, {notation:'engineering'}) + ' F';
+    document.getElementById('R_out').textContent = math.format(R, {notation:'engineering'}) + ' Ω';
+    document.getElementById('Lwire_out').textContent = math.format(l_wire, {notation:'engineering'}) + ' m';
+    document.getElementById('Q_out').textContent = math.format(Q, {notation:'engineering'});
 });
+
+function showError(msg) {
+  var el = document.getElementById('error');
+  if (el) el.textContent = msg;
+}
+function clearError() {
+  var el = document.getElementById('error');
+  if (el) el.textContent = '';
+}

@@ -1,21 +1,24 @@
-
+/* Skin Depth Calculator */
 document.getElementById('sd-mat').addEventListener('change', function() {
     document.getElementById('sd-sigma').disabled = this.value !== 'custom';
 });
 document.getElementById('sd-btn').addEventListener('click', function() {
-    var f   = parseFloat(document.getElementById('sd-f').value)
-            * parseFloat(document.getElementById('sd-fu').value);
-    var mat = document.getElementById('sd-mat').value;
-    var sig = mat === 'custom'
-            ? parseFloat(document.getElementById('sd-sigma').value)
-            : parseFloat(mat);
-    if (isNaN(f) || f<=0 || isNaN(sig) || sig<=0) {
-        document.getElementById('sd-out').innerHTML = 'Enter valid values.'; return;
-    }
-    var mu  = 4*Math.PI*1e-7;
-    var delta = Math.sqrt(2 / (2*Math.PI*f * mu * sig));
-    var out = '<p>\u03b4 = ' + math.format(delta, {notation:'engineering', precision:5}) + ' m</p><p>'
-            + '\u03b4 = ' + (delta*1e6).toFixed(4) + ' \u03bcm</p><p>'
-            + 'Resistance ratio R<sub>AC</sub>/R<sub>DC</sub> \u2248 r/(2\u03b4) for wire radius r';
-    document.getElementById('sd-out').innerHTML = out + '</p>';
+    var f  = parseFloat(document.getElementById('sd-f').value)*parseFloat(document.getElementById('sd-fu').value);
+    var mat= document.getElementById('sd-mat').value;
+    var sig= mat==='custom' ? parseFloat(document.getElementById('sd-sigma').value) : parseFloat(mat);
+    clearError();
+    if (isNaN(f)||f<=0) { showError('Please enter a valid positive frequency.'); return; }
+    if (isNaN(sig)||sig<=0) { showError('Please enter a valid positive conductivity.'); return; }
+    var delta=Math.sqrt(2/(2*Math.PI*f*4*Math.PI*1e-7*sig));
+    document.getElementById('sd-m').textContent  = math.format(delta,{notation:'engineering',precision:5});
+    document.getElementById('sd-um').textContent = (delta*1e6).toFixed(4);
 });
+
+function showError(msg) {
+  var el = document.getElementById('error');
+  if (el) el.textContent = msg;
+}
+function clearError() {
+  var el = document.getElementById('error');
+  if (el) el.textContent = '';
+}

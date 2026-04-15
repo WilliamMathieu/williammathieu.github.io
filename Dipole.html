@@ -27,7 +27,8 @@
 			Velocity factor, k: <input type="text" id="dp-k" value="0.95"><br><br>
 			<button id="dp-btn">Calculate</button>
 			<p>\begin{align} L_{half} &= \frac{k \cdot c}{2f} \end{align}</p>
-			<div class="result-box" id="dp-out"><p>Half-wave dipole length = —</p></div>
+			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<div class="result-box" id="dp-out"><p>Full wavelength λ = <span id="dp-lam">—</span></p><p>Half-wave dipole total length = <span id="dp-half">—</span></p><p>Each arm length = <span id="dp-arm">—</span></p><p>Quarter-wave monopole = <span id="dp-mono">—</span></p></div>
 
 			<script src="Dipole.js"></script>
 		</article>

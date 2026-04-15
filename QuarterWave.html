@@ -29,7 +29,8 @@
 			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="qw-er" placeholder="1 for air" value="1"><br><br>
 			<button id="qw-btn">Calculate</button>
 			<p>\begin{align} Z_{transformer} &= \sqrt{Z_1 Z_2} \end{align}</p>
-			<div class="result-box" id="qw-out"><p>Z<sub>transformer</sub> = —</p></div>
+			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<div class="result-box" id="qw-out"><p>Z<sub>transformer</sub> = <span id="qw-zt">—</span></p><p>Physical length = <span id="qw-len">—</span></p></div>
 
 			<script src="QuarterWave.js"></script>
 		</article>

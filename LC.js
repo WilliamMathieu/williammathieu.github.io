@@ -1,59 +1,23 @@
-/* global document, math */
-
+/* LC Resonant Frequency */
 var btn = document.getElementById("btn");
 btn.addEventListener('click', function() {
-  var C = document.getElementById("C").value;
-  var L = document.getElementById("L").value;
-	
-	var e = document.getElementById("H_dropdown");
-	var H_dropvalue = e.value;
-	var f = document.getElementById("F_dropdown");
-	var F_dropvalue = f.value;
-	var f_result;
-	switch(H_dropvalue){
-		case "1":
-			switch(F_dropvalue){
-				case "10":
-					f_result = (1/(2*Math.PI*(Math.pow((L*Math.pow(10,-6)*C*Math.pow(10,-6)),0.5))));
-					break;
-				case "20":
-					f_result = (1/(2*Math.PI*(Math.pow((L*Math.pow(10,-6)*C*Math.pow(10,-9)),0.5))));
-					break;
-				case "30":
-					f_result = (1/(2*Math.PI*(Math.pow((L*Math.pow(10,-6)*C*Math.pow(10,-12)),0.5))));
-			}
-			break;
-		case "2":
-			switch(F_dropvalue){
-				case "10":
-					f_result = (1/(2*Math.PI*(Math.pow((L*Math.pow(10,-9)*C*Math.pow(10,-6)),0.5))));
-					break;
-				case "20":
-					f_result = (1/(2*Math.PI*(Math.pow((L*Math.pow(10,-9)*C*Math.pow(10,-9)),0.5))));
-					break;
-				case "30":
-					f_result = (1/(2*Math.PI*(Math.pow((L*Math.pow(10,-9)*C*Math.pow(10,-12)),0.5))));
-			}
-			break;
-		case "3":
-			switch(F_dropvalue){
-				case "10":
-					f_result = (1/(2*Math.PI*(Math.pow((L*Math.pow(10,-12)*C*Math.pow(10,-6)),0.5))));
-					break;
-				case "20":
-					f_result = (1/(2*Math.PI*(Math.pow((L*Math.pow(10,-12)*C*Math.pow(10,-9)),0.5))));
-					break;
-				case "30":
-					f_result = (1/(2*Math.PI*(Math.pow((L*Math.pow(10,-12)*C*Math.pow(10,-12)),0.5))));
-			}
-			break;
-		default:
-			f_result = "ERROR";
-	}
-	//let x = new BigNumber(f_result);
-	//BigNumber.config({ ENGINEERING: true });
-	//x.toExponential();
-	//f_result = Number.parseFloat(f_result).toExponential(5);
-	f_result = math.format(f_result, {notation: 'engineering'});
-	document.getElementById("f").innerHTML = "f = "+ f_result +" Hz";
+  var L = parseFloat(document.getElementById("L").value);
+  var C = parseFloat(document.getElementById("C").value);
+  var Hu = document.getElementById("H_dropdown").value;
+  var Fu = document.getElementById("F_dropdown").value;
+  if (isNaN(L) || isNaN(C) || L <= 0 || C <= 0) { showError('Please enter valid positive values for L and C.'); return; }
+  clearError();
+  var Lmul = {'1':1e-6,'2':1e-9,'3':1e-12}[Hu];
+  var Cmul = {'10':1e-6,'20':1e-9,'30':1e-12}[Fu];
+  var f = 1 / (2 * Math.PI * Math.sqrt(L * Lmul * C * Cmul));
+  document.getElementById("f").textContent = math.format(f, {notation:'engineering'}) + ' Hz';
 });
+
+function showError(msg) {
+  var el = document.getElementById('error');
+  if (el) el.textContent = msg;
+}
+function clearError() {
+  var el = document.getElementById('error');
+  if (el) el.textContent = '';
+}

@@ -25,14 +25,40 @@
 			<b>dBm &rarr; Watts</b><br><br>
 			Power: <input type="text" id="db-dbm" placeholder="dBm"> dBm<br><br>
 			<button id="db-btn1">Convert</button>
+			<div id="db-err1" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} P_W &= 10^{(P_{dBm}-30)/10} \end{align}</p>
-			<div class="result-box" id="db-out1"><p>— W</p></div>
+			<div class="result-box" id="db-out1"><p><span id="db-W">—</span> W &nbsp; <span id="db-mW">—</span> mW &nbsp; <span id="db-uW">—</span> μW</p></div>
 			<br>
 			<b>Watts &rarr; dBm</b><br><br>
 			Power: <input type="text" id="db-w" placeholder="W"> W<br><br>
 			<button id="db-btn2">Convert</button>
+			<div id="db-err2" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} P_{dBm} &= 10\log_{10}\!\left(\frac{P_W}{1\,\text{mW}}\right) \end{align}</p>
-			<div class="result-box" id="db-out2"><p>— dBm</p></div>
+			<div class="result-box" id="db-out2"><p><span id="db-dbm-out">—</span> dBm</p></div>
+
+
+			<br>
+			<b>dB &rarr; Linear ratio</b><br><br>
+			Value: <input type="text" id="db-db" placeholder="dB"> dB &nbsp;
+			Type: <select id="db-db-type">
+				<option value="power">Power (20&#10799;log)</option>
+				<option value="voltage">Voltage/Field (20&#10799;log)</option>
+			</select><br><br>
+			<button id="db-btn3">Convert</button>
+			<div id="db-err3" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<p>\begin{align} x &= 10^{dB/20} \end{align}</p>
+			<div class="result-box" id="db-out3"><p>Linear ratio = <span id="db-lin">—</span></p></div>
+			<br>
+			<b>Linear ratio &rarr; dB</b><br><br>
+			Ratio: <input type="text" id="db-ratio" placeholder="linear"> &nbsp;
+			Type: <select id="db-ratio-type">
+				<option value="power">Power (10&#10799;log)</option>
+				<option value="voltage">Voltage/Field (20&#10799;log)</option>
+			</select><br><br>
+			<button id="db-btn4">Convert</button>
+			<div id="db-err4" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<p>\begin{align} dB &= 20\log_{10}(x) \end{align}</p>
+			<div class="result-box" id="db-out4"><p><span id="db-db-out">—</span> dB</p></div>
 
 			<script src="dBmConverter.js"></script>
 		</article>

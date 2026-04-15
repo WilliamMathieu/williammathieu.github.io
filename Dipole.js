@@ -1,15 +1,22 @@
-
+/* Dipole Antenna */
 document.getElementById('dp-btn').addEventListener('click', function() {
-    var f = parseFloat(document.getElementById('dp-f').value)
-          * parseFloat(document.getElementById('dp-fu').value);
-    var k = parseFloat(document.getElementById('dp-k').value) || 0.95;
-    if (isNaN(f) || f<=0) { document.getElementById('dp-out').innerHTML = 'Please enter a valid frequency.'; return; }
-    var lam    = 3e8/f;
-    var L_full = k*lam/2;
-    var L_half_arm = L_full/2;
-    var out = '<p>Full wavelength \u03bb = ' + (lam*1000).toFixed(2) + ' mm</p><p>'
-            + 'Half-wave dipole total length = ' + (L_full*1000).toFixed(2) + ' mm</p><p>'
-            + 'Each arm length = ' + (L_half_arm*1000).toFixed(2) + ' mm</p><p>'
-            + 'Quarter-wave monopole = ' + (L_half_arm*1000).toFixed(2) + ' mm';
-    document.getElementById('dp-out').innerHTML = out + '</p>';
+    var f = parseFloat(document.getElementById('dp-f').value)*parseFloat(document.getElementById('dp-fu').value);
+    var k = parseFloat(document.getElementById('dp-k').value)||0.95;
+    clearError();
+    if (isNaN(f)||f<=0) { showError('Please enter a valid positive frequency.'); return; }
+    if (k<=0||k>1) { showError('Velocity factor k must be between 0 and 1.'); return; }
+    var lam=3e8/f, L_full=k*lam/2, arm=L_full/2;
+    document.getElementById('dp-lam').textContent  = (lam*1000).toFixed(2) + ' mm';
+    document.getElementById('dp-half').textContent = (L_full*1000).toFixed(2) + ' mm';
+    document.getElementById('dp-arm').textContent  = (arm*1000).toFixed(2) + ' mm';
+    document.getElementById('dp-mono').textContent = (arm*1000).toFixed(2) + ' mm';
 });
+
+function showError(msg) {
+  var el = document.getElementById('error');
+  if (el) el.textContent = msg;
+}
+function clearError() {
+  var el = document.getElementById('error');
+  if (el) el.textContent = '';
+}

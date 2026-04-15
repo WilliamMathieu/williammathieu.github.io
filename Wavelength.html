@@ -31,7 +31,8 @@
 			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="wl-er" value="1"><br><br>
 			<button id="wl-btn">Calculate</button>
 			<p>\begin{align} \lambda &= \frac{c}{f\sqrt{\varepsilon_r}} \end{align}</p>
-			<div class="result-box" id="wl-out"><p>&#955; = —</p></div>
+			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<div class="result-box" id="wl-out"><p>λ = <span id="wl-lam">—</span></p><p>λ/2 = <span id="wl-half">—</span></p><p>λ/4 = <span id="wl-qtr">—</span></p></div>
 
 			<script src="Wavelength.js"></script>
 		</article>

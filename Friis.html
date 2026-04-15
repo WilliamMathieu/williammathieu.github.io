@@ -30,7 +30,8 @@
 			<select id="fr-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br><br>
 			<button id="fr-btn">Calculate</button>
 			<p>\begin{align} P_r &= P_t G_t G_r \left(\frac{\lambda}{4\pi d}\right)^2 \end{align}</p>
-			<div class="result-box" id="fr-out"><p>P<sub>r</sub> = —</p></div>
+			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<div class="result-box" id="fr-out"><p>Free-space path loss = <span id="fr-fspl">—</span></p><p>P<sub>r</sub> = <span id="fr-pr-dbm">—</span></p><p>P<sub>r</sub> = <span id="fr-pr-w">—</span></p></div>
 
 			<script src="Friis.js"></script>
 		</article>
