@@ -4,9 +4,9 @@ document.getElementById('db-btn1').addEventListener('click', function() {
     document.getElementById('db-err1').textContent = '';
     if (isNaN(dbm)) { document.getElementById('db-err1').textContent = 'Please enter a valid dBm value.'; return; }
     var W = 1e-3*Math.pow(10,dbm/10);
-    document.getElementById('db-W').textContent  = math.format(W,    {notation:'engineering',precision:5});
-    document.getElementById('db-mW').textContent = math.format(W*1e3,{notation:'engineering',precision:5});
-    document.getElementById('db-uW').textContent = math.format(W*1e6,{notation:'engineering',precision:5});
+    document.getElementById('db-W').textContent  = math.format(W,    {notation:'engineering',precision:5}) + ' W';
+    document.getElementById('db-mW').textContent = math.format(W*1e3,{notation:'engineering',precision:5}) + ' mW';
+    document.getElementById('db-uW').textContent = math.format(W*1e6,{notation:'engineering',precision:5}) + ' μW';
 });
 document.getElementById('db-btn2').addEventListener('click', function() {
     var W = parseFloat(document.getElementById('db-w').value);
