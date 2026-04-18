@@ -21,6 +21,12 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Rectangular Patch Antenna Designer</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">A microstrip patch antenna is a flat resonator etched on a PCB substrate. It is popular in wireless products due to its low profile, ease of fabrication, and compatibility with PCB manufacturing. The width W controls input impedance and efficiency; the length L sets the resonant frequency. The effective dielectric constant εreff is lower than the substrate εr because the fringing fields extend partly into air.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Target resonant frequency.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Substrate dielectric constant. FR4 ≈ 4.4, Rogers 4003 ≈ 3.55.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">h</td><td style="padding:3px 0;">Substrate thickness (mm). Thicker substrates give higher bandwidth and efficiency but larger patch size.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">W</td><td style="padding:3px 0;">Patch width (mm) — sets input impedance and efficiency.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Patch length (mm) — sets resonant frequency.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">εreff</td><td style="padding:3px 0;">Effective dielectric constant accounting for fringing fields.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">ΔL</td><td style="padding:3px 0;">End-effect extension — the patch electrically appears slightly longer than its physical length.</td></tr>
+				</table>
+			</div>
 
 			Frequency, f: <input type="text" id="pa-f" placeholder="value">
 			<select id="pa-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>

@@ -21,6 +21,12 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Microstrip Calculator</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">Microstrip is the most common planar transmission line in RF and microwave PCBs — a conductor trace on top of a dielectric substrate with a ground plane below. The characteristic impedance depends on the ratio of trace width to substrate height and the dielectric constant. This tool implements the Hammerstad-Jensen closed-form equations, which are accurate to better than 0.5% for most practical geometries.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">h</td><td style="padding:3px 0;">Substrate height (mm) — distance from trace to ground plane.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">w</td><td style="padding:3px 0;">Trace width (mm).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">t</td><td style="padding:3px 0;">Trace thickness (mm). Typical PCB copper is 35 µm (1 oz) or 70 µm (2 oz). Affects effective width slightly.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Dielectric constant of the substrate. FR4 ≈ 4.4, Rogers 4003C ≈ 3.55, PTFE ≈ 2.1.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Characteristic impedance (Ω). Standard values: 50 Ω for RF, 75 Ω for video/cable TV.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">εeff</td><td style="padding:3px 0;">Effective dielectric constant — the field is partly in the substrate, partly in air above the trace.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">vp</td><td style="padding:3px 0;">Phase velocity = c/√εeff. Determines physical wavelength in the medium.</td></tr>
+				</table>
+			</div>
 
 			<p style="font-size:13px;">Calculate characteristic impedance from geometry, or trace width from a target impedance.</p>
 			<br>

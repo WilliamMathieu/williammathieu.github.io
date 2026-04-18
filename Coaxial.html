@@ -21,6 +21,12 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Coaxial Line Calculator</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">Coaxial cable is a shielded transmission line where a central conductor is surrounded by a dielectric and an outer conductor. The impedance is set by the ratio of outer to inner diameter. Standard impedances are 50 Ω (RF/microwave) and 75 Ω (video/CATV). The TM₁₁ cutoff frequency sets the upper frequency limit beyond which higher-order modes can propagate and signal integrity is lost.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Inner conductor diameter (mm).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Outer conductor inner diameter (mm).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Dielectric constant of the insulating material. Air/foam = ~1.0, solid PTFE = 2.07, solid PE = 2.26.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Characteristic impedance (Ω).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Capacitance per unit length (pF/m).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Inductance per unit length (nH/m).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">vp</td><td style="padding:3px 0;">Phase velocity.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Cutoff (TM₁₁)</td><td style="padding:3px 0;">Frequency above which the coax supports higher-order modes. Keep operating frequency well below this.</td></tr>
+				</table>
+			</div>
 
 			Inner conductor diameter, d: <input type="text" id="cx-d" placeholder="mm"> mm<br>
 			Outer conductor inner diameter, D: <input type="text" id="cx-D" placeholder="mm"> mm<br>

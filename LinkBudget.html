@@ -21,6 +21,12 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Link Budget Calculator</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">A link budget accounts for all gains and losses in a communication link to determine whether adequate signal-to-noise ratio (SNR) is achieved at the receiver. The link margin is the difference between achieved SNR and the minimum required SNR — a positive margin means the link closes; negative means it does not. Typical design margins are 3–10 dB to account for fading and other impairments.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">TX power</td><td style="padding:3px 0;">Transmitter output power (dBm).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">TX line loss</td><td style="padding:3px 0;">Cable/connector losses between transmitter and antenna (dB).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">TX antenna gain</td><td style="padding:3px 0;">Transmit antenna gain (dBi).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">EIRP</td><td style="padding:3px 0;">Effective Isotropic Radiated Power = Pt − Ltx + Gt (dBm).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">FSPL</td><td style="padding:3px 0;">Free-space path loss.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Noise floor</td><td style="padding:3px 0;">kTB + NF, where kT = −174 dBm/Hz at 290 K, B is bandwidth.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Link margin</td><td style="padding:3px 0;">Achieved SNR − Required SNR (dB). Must be positive for the link to work.</td></tr>
+				</table>
+			</div>
 
 			<p style="font-size:13px;">Systematic TX &rarr; RX link budget with margin and SNR.</p><br>
 			<b>Transmitter</b><br>

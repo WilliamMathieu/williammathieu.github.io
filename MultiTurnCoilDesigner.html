@@ -39,6 +39,12 @@
 	<section>
 		<nav>
 			<h3>Tools</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">Extends the single-turn coil designer to helical solenoid coils with N turns. Uses the Wheeler short-solenoid formula for inductance, which is accurate to within ~1% for practical coil geometries. Also computes the wire resistance (copper assumed) and quality factor Q, which is a critical figure of merit for receive coils in MRI — higher Q means less thermal noise.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Wire diameter (mm).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Coil diameter (mm) — the winding diameter.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">l</td><td style="padding:3px 0;">Coil length (mm) — the axial length of the winding.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Number of turns.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Larmor frequency for tuning.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Inductance (Wheeler formula).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">C_tune</td><td style="padding:3px 0;">Tuning capacitor for resonance at f.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">R_wire</td><td style="padding:3px 0;">DC resistance of the wire (copper, ρ = 1.68×10⁻⁸ Ω·m). Actual RF resistance will be higher due to skin effect.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Q</td><td style="padding:3px 0;">Quality factor = (1/R)·√(L/C). Higher Q = lower noise = better SNR.</td></tr>
+				</table>
+			</div>
 			<div id="includeIndex"></div>
 		</nav>
 

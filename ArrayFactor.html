@@ -18,7 +18,13 @@
 <body>
 	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<nav><h3>Tools</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">When multiple antenna elements are combined in a phased array, their signals add constructively in some directions and destructively in others, forming a radiation pattern with a main beam and sidelobes. The array factor (AF) describes this directivity pattern independent of the element type. By adjusting the steering angle θ₀, the main beam can be electronically steered without physically moving the antenna.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Number of elements in the linear array.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Element spacing in wavelengths. λ/2 spacing (d=0.5) is standard — avoids grating lobes.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">θ₀</td><td style="padding:3px 0;">Steering angle (degrees). 0° = broadside (perpendicular to array axis).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">AF(θ)</td><td style="padding:3px 0;">Array factor vs angle. The pattern shows the main beam, sidelobes, and nulls.</td></tr>
+				</table>
+			</div><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Antenna Array Factor</h3>
 

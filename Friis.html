@@ -21,6 +21,12 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Friis Transmission Equation</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">The Friis equation gives the received power in a radio link as a function of transmitted power, antenna gains, distance, and wavelength. It assumes free-space propagation (line-of-sight, no reflections or atmospheric effects) and far-field conditions. It is the starting point for any link budget calculation.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Pt</td><td style="padding:3px 0;">Transmit power (dBm).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Gt</td><td style="padding:3px 0;">Transmit antenna gain (dBi) — gain relative to an isotropic radiator.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Gr</td><td style="padding:3px 0;">Receive antenna gain (dBi).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Distance between antennas (m).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Carrier frequency. Determines wavelength λ = c/f.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">FSPL</td><td style="padding:3px 0;">Free-space path loss (dB) = 20·log₁₀(4πd/λ). Increases with distance² and frequency².</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Pr</td><td style="padding:3px 0;">Received power (dBm and W).</td></tr>
+				</table>
+			</div>
 
 			Transmit power, P<sub>t</sub>: <input type="text" id="fr-pt" value="20"> dBm<br>
 			Transmit antenna gain, G<sub>t</sub>: <input type="text" id="fr-gt" value="2"> dBi<br>

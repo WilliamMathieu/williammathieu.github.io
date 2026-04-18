@@ -21,6 +21,12 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Quarter-Wave Transformer</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">A transmission line of length λ/4 transforms an impedance by the relation Z_in = Z₀²/Z_L. By choosing a section with Z₀ = √(Z₁·Z₂), a perfect match is achieved between Z₁ and Z₂ at the design frequency. Quarter-wave transformers are used extensively in microwave circuits and antenna feed networks. The match is exact at f₀ and degrades at other frequencies.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Z₁</td><td style="padding:3px 0;">Source impedance (Ω).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Z₂</td><td style="padding:3px 0;">Load impedance (Ω).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Design frequency — the transformer is λ/4 long at this frequency.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Dielectric constant of the medium. Affects physical length but not impedance.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Z_transformer</td><td style="padding:3px 0;">Required characteristic impedance of the λ/4 section = √(Z₁·Z₂).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Physical length</td><td style="padding:3px 0;">Length of the transformer section in the given medium.</td></tr>
+				</table>
+			</div>
 
 			Source impedance, Z<sub>1</sub>: <input type="text" id="qw-z1" placeholder="&#937;" value="50"> &#937;<br>
 			Load impedance, Z<sub>2</sub>: <input type="text" id="qw-z2" placeholder="&#937;"> &#937;<br>

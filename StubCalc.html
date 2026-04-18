@@ -21,6 +21,12 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Transmission Line Stub Calculator</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">A stub is a short section of transmission line connected in shunt (parallel) with the main line. By choosing its length and termination (short or open circuit), the stub presents a specific susceptance at the connection point, which can be used to cancel the susceptance of a load — achieving impedance matching. This is single-stub matching.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Operating frequency.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Characteristic impedance of the stub line (Ω).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">B</td><td style="padding:3px 0;">Target shunt susceptance in millisiemens (mS). This is the imaginary part of the admittance you want the stub to present. Positive B = inductive load cancellation, negative = capacitive.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Stub type</td><td style="padding:3px 0;">Short-circuit stubs have lower loss; open-circuit stubs are easier to implement on PCBs.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Electrical length</td><td style="padding:3px 0;">Stub length in degrees at frequency f.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Physical length</td><td style="padding:3px 0;">Stub length in mm (free-space). Multiply by √εeff for microstrip.</td></tr>
+				</table>
+			</div>
 
 			<p style="font-size:13px;">Calculate stub length for a target shunt susceptance.</p><br>
 			Frequency, f: <input type="text" id="st-f" placeholder="value">

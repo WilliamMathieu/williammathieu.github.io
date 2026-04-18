@@ -21,6 +21,12 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Skin Depth Calculator</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">At RF and microwave frequencies, current in a conductor does not flow uniformly — it is concentrated near the surface in a layer whose thickness (skin depth δ) decreases with frequency. This increases the effective resistance of conductors at RF compared to DC. For good design, conductor thickness should be at least 3–5 skin depths to minimise resistive loss. Skin depth also determines the frequency above which magnetic shielding becomes effective.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Frequency.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Material</td><td style="padding:3px 0;">Conductivity σ determines skin depth. Copper (5.8×10⁷ S/m) is most common in PCBs; silver is slightly better; aluminium is lighter but less conductive.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">δ</td><td style="padding:3px 0;">Skin depth = √(2/ωμσ). Current density falls to 1/e ≈ 37% of its surface value at depth δ.</td></tr>
+				</table>
+			</div>
 
 			Frequency, f: <input type="text" id="sd-f" placeholder="value">
 			<select id="sd-fu">

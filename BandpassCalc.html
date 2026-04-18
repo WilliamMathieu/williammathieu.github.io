@@ -21,6 +21,12 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Bandpass Filter Calculator</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">A series or parallel RLC circuit forms a second-order bandpass filter. The series RLC passes maximum current at resonance; the parallel RLC presents maximum impedance. Q (quality factor) describes the sharpness of the resonance — higher Q means narrower bandwidth. The bandwidth is defined as the frequency range between the −3 dB points (half-power points).</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Configuration</td><td style="padding:3px 0;">Series RLC: minimum impedance at f₀, used as a series bandpass element. Parallel RLC: maximum impedance at f₀, used as a shunt bandstop or tank circuit.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Inductance.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Capacitance.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">R</td><td style="padding:3px 0;">Resistance. Determines Q and bandwidth. In real circuits, this includes winding resistance and radiation resistance.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">f₀</td><td style="padding:3px 0;">Centre (resonant) frequency = 1/(2π√LC).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">BW</td><td style="padding:3px 0;">3 dB bandwidth = f₀/Q.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Q</td><td style="padding:3px 0;">Quality factor = f₀/BW. For series: Q = ω₀L/R. For parallel: Q = R/(ω₀L).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">f₁, f₂</td><td style="padding:3px 0;">Lower and upper −3 dB frequencies.</td></tr>
+				</table>
+			</div>
 
 			<p style="font-size:13px;">Calculate centre frequency, bandwidth, and Q from component values.</p><br>
 			Configuration:
