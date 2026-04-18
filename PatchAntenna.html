@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-6R4JGG0586');
-	</script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +12,7 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,16 +22,30 @@
 		<article>
 			<h3>Rectangular Patch Antenna Designer</h3>
 
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">A microstrip patch antenna is a flat resonator on a PCB substrate. Width W controls impedance; length L sets the resonant frequency.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Target resonant frequency.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">εᵣ</td><td style="padding:3px 0;">Substrate dielectric constant.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">h</td><td style="padding:3px 0;">Substrate thickness (mm).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">W</td><td style="padding:3px 0;">Patch width (mm).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">L</td><td style="padding:3px 0;">Patch length (mm).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">εreff</td><td style="padding:3px 0;">Effective dielectric constant.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">ΔL</td><td style="padding:3px 0;">End-effect extension.</td></tr>
+				</table>
+			</div>
 			Frequency, f: <input type="text" id="pa-f" placeholder="value">
 			<select id="pa-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
 			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="pa-er" placeholder="e.g. 4.4"><br>
 			Substrate height, h: <input type="text" id="pa-h" placeholder="mm"> mm<br><br>
 			<button id="pa-btn">Calculate</button>
-			<p><span id="pa-out"></span></p>
+			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<p>\begin{align} W &= \frac{c}{2f}\sqrt{\frac{2}{\varepsilon_r+1}} \end{align}</p>
+			<div class="result-box"><p>W = <span id="pa-W">—</span></p><p>L = <span id="pa-L">—</span></p><p>&epsilon;<sub>reff</sub> = <span id="pa-eeff">—</span></p><p>&Delta;L = <span id="pa-dL">—</span></p></div>
 
 			<script src="PatchAntenna.js"></script>
 		</article>
 	</section>
-	<footer><p><a href="index.html">Home</a></p></footer>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
 </body>
 </html>

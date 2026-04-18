@@ -1,47 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-6R4JGG0586');
-	</script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — dB Converter</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<link rel="stylesheet" href="style.css">
+	<style>
+		.unified-calc{background:#fff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-bottom:16px;}
+		.unified-calc input[type="text"]{font-family:monospace;font-size:14px;padding:6px 10px;border:1px solid #ccc;border-radius:4px;width:140px;}
+		.unified-calc select{font-family:monospace;font-size:13px;padding:5px 8px;border:1px solid #ccc;border-radius:4px;background:#fff;}
+		.unified-calc label{font-family:monospace;font-size:13px;color:#333;margin-right:6px;}
+		.conv-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:10px;}
+		.arrow{font-size:18px;color:#AA77FF;margin:0 4px;}
+		.live-out{font-family:monospace;font-size:13px;background:#f0eeff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-top:10px;}
+		.live-out p{margin:3px 0;}
+		.mode-tabs{display:flex;gap:4px;margin-bottom:14px;border-bottom:2px solid #e8e0ff;}
+		.mode-tab{font-family:monospace;font-size:12px;padding:8px 14px;border:1px solid #d0c8f0;border-bottom:none;border-radius:4px 4px 0 0;background:#fafaff;cursor:pointer;color:#666;font-weight:bold;letter-spacing:0.04em;}
+		.mode-tab.active{background:#AA77FF;color:#fff;border-color:#AA77FF;}
+		.mode-tab:hover:not(.active){background:#f0eeff;color:#5533aa;}
+		.mode-panel{display:none;}
+		.mode-panel.active{display:block;}
+		.hint{font-family:monospace;font-size:11px;color:#888;margin-top:6px;font-style:italic;}
+	</style>
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>dBm ↔ Watts Converter</h3>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+	<h3>dB / dBm Converter</h3>
 
-			<b>dBm → Watts</b><br><br>
-			Power: <input type="text" id="db-dbm" placeholder="dBm"> dBm<br><br>
-			<button id="db-btn1">Convert</button>
-			<p><span id="db-out1"></span></p>
-			<br>
-			<b>Watts → dBm</b><br><br>
-			Power: <input type="text" id="db-w" placeholder="W"> W<br><br>
-			<button id="db-btn2">Convert</button>
-			<p><span id="db-out2"></span></p>
-			<p>\begin{align} P_{dBm} &= 10\log_{10}\left(\frac{P_W}{1\,\text{mW}}\right) \end{align}</p>
+	<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+		<p style="margin-bottom:8px;"><b>dBm</b> is an absolute power unit referenced to 1 mW — used for RF power levels. <b>dB</b> is a dimensionless ratio — used for gain, loss, and power ratios. Two variants exist because power ∝ voltage²:</p>
+		<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+			<tr><td style="padding:3px 12px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">dBm</td><td style="padding:3px 0;">10·log₁₀(P / 1 mW). 0 dBm = 1 mW, +30 dBm = 1 W, −30 dBm = 1 µW.</td></tr>
+			<tr><td style="padding:3px 12px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">dB (power)</td><td style="padding:3px 0;">10·log₁₀(P₂/P₁). A 3 dB gain = ×2 power, 10 dB = ×10 power.</td></tr>
+			<tr><td style="padding:3px 12px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">dB (amplitude)</td><td style="padding:3px 0;">20·log₁₀(V₂/V₁). A 6 dB gain = ×2 voltage. Use for S-parameters, field ratios, volume.</td></tr>
+		</table>
+	</div>
 
-			<script src="dBmConverter.js"></script>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a></p></footer>
+	<div class="mode-tabs">
+		<button class="mode-tab active" onclick="switchMode('dbm')">dBm ↔ Power</button>
+		<button class="mode-tab" onclick="switchMode('dbpow')">dB ↔ Power Ratio</button>
+		<button class="mode-tab" onclick="switchMode('dbamp')">dB ↔ Amplitude Ratio</button>
+	</div>
+
+	<!-- ═══════ dBm ↔ Power ═══════ -->
+	<div class="mode-panel active" id="panel-dbm">
+		<div class="unified-calc">
+			<div class="conv-row">
+				<input type="text" id="v-dbm" placeholder="enter dBm" oninput="updateDbm('dbm')">
+				<label>dBm</label>
+				<span class="arrow">↔</span>
+				<input type="text" id="v-watt" placeholder="enter watts" oninput="updateDbm('watt')">
+				<select id="v-wattu" onchange="updateDbm('watt')">
+					<option value="1">W</option>
+					<option value="1e-3">mW</option>
+					<option value="1e-6">µW</option>
+					<option value="1e-9">nW</option>
+					<option value="1e3">kW</option>
+				</select>
+			</div>
+			<p class="hint">Type in either field — the other updates automatically.</p>
+			<div class="live-out">
+				<p>Watts: <span id="out-w">—</span></p>
+				<p>Milliwatts: <span id="out-mw">—</span></p>
+				<p>Microwatts: <span id="out-uw">—</span></p>
+				<p>dBm: <span id="out-dbm">—</span></p>
+				<p>dBW: <span id="out-dbw">—</span></p>
+			</div>
+			<p>\begin{align} P_{dBm} &= 10\log_{10}\!\left(\frac{P_W}{1\,\text{mW}}\right) \end{align}</p>
+		</div>
+	</div>
+
+	<!-- ═══════ dB ↔ Power Ratio ═══════ -->
+	<div class="mode-panel" id="panel-dbpow">
+		<div class="unified-calc">
+			<div class="conv-row">
+				<input type="text" id="v-dbpow" placeholder="enter dB" oninput="updatePow('db')">
+				<label>dB (power)</label>
+				<span class="arrow">↔</span>
+				<input type="text" id="v-ratiopow" placeholder="enter ratio" oninput="updatePow('ratio')">
+				<label>linear ratio</label>
+			</div>
+			<p class="hint">For power ratios — use this for insertion loss, antenna gain, noise figure, cascaded gain.</p>
+			<div class="live-out">
+				<p>Linear power ratio: <span id="out-pow-lin">—</span></p>
+				<p>dB: <span id="out-pow-db">—</span></p>
+			</div>
+			<p>\begin{align} \text{dB}_{pow} &= 10\log_{10}\!\left(\frac{P_2}{P_1}\right) \quad\Longleftrightarrow\quad \text{ratio} = 10^{dB/10} \end{align}</p>
+		</div>
+	</div>
+
+	<!-- ═══════ dB ↔ Amplitude Ratio ═══════ -->
+	<div class="mode-panel" id="panel-dbamp">
+		<div class="unified-calc">
+			<div class="conv-row">
+				<input type="text" id="v-dbamp" placeholder="enter dB" oninput="updateAmp('db')">
+				<label>dB (amplitude)</label>
+				<span class="arrow">↔</span>
+				<input type="text" id="v-ratioamp" placeholder="enter ratio" oninput="updateAmp('ratio')">
+				<label>linear ratio</label>
+			</div>
+			<p class="hint">For voltage, current, field, or any amplitude ratio — use this for S-parameters, audio volume, voltage gain.</p>
+			<div class="live-out">
+				<p>Linear amplitude ratio: <span id="out-amp-lin">—</span></p>
+				<p>dB: <span id="out-amp-db">—</span></p>
+			</div>
+			<p>\begin{align} \text{dB}_{amp} &= 20\log_{10}\!\left(\frac{V_2}{V_1}\right) \quad\Longleftrightarrow\quad \text{ratio} = 10^{dB/20} \end{align}</p>
+		</div>
+	</div>
+
+	<script src="dBmConverter.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
 </body>
 </html>

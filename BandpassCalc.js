@@ -1,30 +1,21 @@
 
 document.getElementById('bp-btn').addEventListener('click', function() {
-    var L   = parseFloat(document.getElementById('bp-L').value)
-            * parseFloat(document.getElementById('bp-Lu').value);
-    var C   = parseFloat(document.getElementById('bp-C').value)
-            * parseFloat(document.getElementById('bp-Cu').value);
-    var R   = parseFloat(document.getElementById('bp-R').value);
-    var cfg = document.getElementById('bp-config').value;
-    if ([L,C,R].some(isNaN)||L<=0||C<=0||R<=0) {
-        document.getElementById('bp-out').innerHTML='Enter valid positive values.'; return;
-    }
-    var f0  = 1/(2*Math.PI*Math.sqrt(L*C));
-    var w0  = 2*Math.PI*f0;
-    var BW, Q;
-    if (cfg === 'series') {
-        BW = R/L; // rad/s
-        Q  = w0*L/R;
-    } else {
-        BW = 1/(R*C); // rad/s
-        Q  = R/(w0*L);
-    }
-    var BW_Hz = BW/(2*Math.PI);
-    var f_low = f0 - BW_Hz/2, f_high = f0 + BW_Hz/2;
-    var out = 'f\u2080 = ' + math.format(f0,{notation:'engineering',precision:5}) + ' Hz<br>'
-            + 'BW = '  + math.format(BW_Hz,{notation:'engineering',precision:4}) + ' Hz<br>'
-            + 'Q = '   + Q.toFixed(4) + '<br>'
-            + 'f\u2081 = ' + math.format(f_low,{notation:'engineering',precision:5}) + ' Hz<br>'
-            + 'f\u2082 = ' + math.format(f_high,{notation:'engineering',precision:5}) + ' Hz';
-    document.getElementById('bp-out').innerHTML = out;
+    var L=parseFloat(document.getElementById('bp-L').value)*parseFloat(document.getElementById('bp-Lu').value);
+    var C=parseFloat(document.getElementById('bp-C').value)*parseFloat(document.getElementById('bp-Cu').value);
+    var R=parseFloat(document.getElementById('bp-R').value);
+    var cfg=document.getElementById('bp-config').value;
+    clearError();
+    if(isNaN(L)||isNaN(C)||isNaN(R)||L<=0||C<=0||R<=0){showError('Enter valid positive values for L, C, R.');return;}
+    var f0=1/(2*Math.PI*Math.sqrt(L*C)), w0=2*Math.PI*f0;
+    var BW_Hz, Q;
+    if(cfg==='series'){BW_Hz=R/(2*Math.PI*L); Q=w0*L/R;}
+    else {BW_Hz=1/(2*Math.PI*R*C); Q=R/(w0*L);}
+    document.getElementById('bp-f0').textContent=math.format(f0,{notation:'engineering',precision:5})+' Hz';
+    document.getElementById('bp-bw').textContent=math.format(BW_Hz,{notation:'engineering',precision:4})+' Hz';
+    document.getElementById('bp-Q').textContent=Q.toFixed(4);
+    document.getElementById('bp-f1').textContent=math.format(f0-BW_Hz/2,{notation:'engineering',precision:5})+' Hz';
+    document.getElementById('bp-f2').textContent=math.format(f0+BW_Hz/2,{notation:'engineering',precision:5})+' Hz';
 });
+
+function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}
+function clearError(){var el=document.getElementById('error');if(el)el.textContent='';}

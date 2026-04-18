@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-6R4JGG0586');
-	</script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +12,7 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,28 +22,31 @@
 		<article>
 			<h3>LC Filter Designer (Butterworth / Chebyshev)</h3>
 
-			<p style="font-size:13px;">Generates normalized LC ladder prototype component values.</p><br>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">LC ladder filters with alternating series inductors and shunt capacitors. Butterworth = flattest passband. Chebyshev = steeper roll-off but with passband ripple.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">n</td><td style="padding:3px 0;">Filter order. Higher = steeper roll-off.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">fc</td><td style="padding:3px 0;">Cutoff frequency.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">R₀</td><td style="padding:3px 0;">Source/load impedance.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Ripple</td><td style="padding:3px 0;">Chebyshev only: passband ripple (dB).</td></tr>
+				</table>
+			</div>
 			Filter type:
-			<select id="fd-type">
-				<option value="butter">Butterworth (maximally flat)</option>
-				<option value="cheby">Chebyshev (equal-ripple)</option>
-			</select><br>
+			<select id="fd-type"><option value="butter">Butterworth</option><option value="cheby">Chebyshev</option></select><br>
 			Response:
-			<select id="fd-resp">
-				<option value="lp">Low-pass</option>
-				<option value="hp">High-pass</option>
-			</select><br>
+			<select id="fd-resp"><option value="lp">Low-pass</option><option value="hp">High-pass</option></select><br>
 			Order, n: <input type="number" id="fd-n" min="1" max="9" value="3" style="width:50px"><br>
 			Cutoff frequency, f<sub>c</sub>: <input type="text" id="fd-fc" placeholder="value">
 			<select id="fd-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
-			Source impedance, R₀: <input type="text" id="fd-r0" value="50"> Ω<br>
+			Source impedance, R&#8320;: <input type="text" id="fd-r0" value="50"> &#937;<br>
 			Ripple (Chebyshev only): <input type="text" id="fd-ripple" value="0.5"> dB<br><br>
 			<button id="fd-btn">Design Filter</button>
-			<p><span id="fd-out"></span></p>
+			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<div class="result-box" id="fd-out"><p>Component values will appear here after design.</p></div>
 
 			<script src="FilterDesign.js"></script>
 		</article>
 	</section>
-	<footer><p><a href="index.html">Home</a></p></footer>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
 </body>
 </html>

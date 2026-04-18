@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-6R4JGG0586');
-	</script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +12,7 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,18 +22,30 @@
 		<article>
 			<h3>Quarter-Wave Transformer</h3>
 
-			Source impedance, Z<sub>1</sub>: <input type="text" id="qw-z1" placeholder="Ω" value="50"> Ω<br>
-			Load impedance, Z<sub>2</sub>: <input type="text" id="qw-z2" placeholder="Ω"> Ω<br>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">A λ/4 transmission line section transforms impedance as Zin = Z₀²/ZL. Choosing Z₀ = √(Z₁·Z₂) gives a perfect match at the design frequency.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Z₁</td><td style="padding:3px 0;">Source impedance (Ω).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Z₂</td><td style="padding:3px 0;">Load impedance (Ω).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Design frequency.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">εᵣ</td><td style="padding:3px 0;">Dielectric constant.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Z_transformer</td><td style="padding:3px 0;">Required characteristic impedance.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Physical length</td><td style="padding:3px 0;">Length of the λ/4 section.</td></tr>
+				</table>
+			</div>
+			Source impedance, Z<sub>1</sub>: <input type="text" id="qw-z1" value="50"> &#937;<br>
+			Load impedance, Z<sub>2</sub>: <input type="text" id="qw-z2" placeholder="&#937;"> &#937;<br>
 			Frequency, f: <input type="text" id="qw-f" placeholder="value">
 			<select id="qw-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
-			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="qw-er" placeholder="1 for air" value="1"><br><br>
+			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="qw-er" value="1"><br><br>
 			<button id="qw-btn">Calculate</button>
-			<p><span id="qw-out"></span></p>
+			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} Z_{transformer} &= \sqrt{Z_1 Z_2} \end{align}</p>
+			<div class="result-box"><p>Z<sub>transformer</sub> = <span id="qw-zt">—</span></p><p>Physical length = <span id="qw-len">—</span></p></div>
 
 			<script src="QuarterWave.js"></script>
 		</article>
 	</section>
-	<footer><p><a href="index.html">Home</a></p></footer>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
 </body>
 </html>
