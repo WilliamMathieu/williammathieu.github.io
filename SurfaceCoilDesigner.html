@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Surface Receive Coil Designer</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .inp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+    @media(max-width:640px){.inp-grid{grid-template-columns:1fr;}}
+    .inp-row{display:flex;flex-direction:column;gap:3px;}
+    .inp-row label{font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.04em;text-transform:uppercase;}
+    .inp-row input,.inp-row select{font-family:monospace;font-size:13px;padding:5px 8px;border:1px solid #ccc;border-radius:4px;background:#fff;}
+    .inp-row input:focus,.inp-row select:focus{outline:none;border-color:#AA77FF;box-shadow:0 0 0 2px rgba(170,119,255,0.15);}
+    .inp-hint{font-size:10px;color:#999;margin-top:1px;}
+    .inp-units{font-size:12px;color:#888;white-space:nowrap;}
+    .inp-inline{display:flex;gap:6px;align-items:center;}
+
+    .calc-btn{font-family:monospace;font-size:14px;font-weight:bold;padding:8px 22px;background:#AA77FF;color:white;border:none;border-radius:4px;cursor:pointer;margin-top:2px;transition:background 0.1s;}
+    .calc-btn:hover{background:#8855dd;}
+    .calc-btn:active{background:#6633bb;}
+
+    .sec-lbl{font-family:monospace;font-size:10px;color:#5533aa;font-weight:bold;letter-spacing:0.1em;text-transform:uppercase;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e0d8ff;}
+
+    .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+    @media(max-width:640px){.res-grid{grid-template-columns:1fr;}}
+    .res-card{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:5px;padding:11px 13px;}
+    .res-card h4{font-family:monospace;font-size:10px;color:#5533aa;font-weight:bold;letter-spacing:0.07em;text-transform:uppercase;margin:0 0 9px;padding-bottom:4px;border-bottom:1px solid #e0d8ff;}
+    .res-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px dotted #e8e0ff;font-size:12px;gap:8px;}
+    .res-row:last-child{border-bottom:none;}
+    .res-lbl{color:#555;flex-shrink:0;}
+    .res-val{font-weight:bold;font-size:13px;color:#1a1a1a;text-align:right;}
+    .res-val.good{color:#1a8a1a;}
+    .res-val.warn{color:#aa6600;}
+    .res-val.bad{color:#cc2222;}
+
+    .comp-tbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px;}
+    .comp-tbl th{font-family:monospace;font-size:10px;color:#5533aa;text-align:left;padding:4px 8px;border-bottom:2px solid #d0c8f0;text-transform:uppercase;letter-spacing:0.05em;background:#f0eeff;}
+    .comp-tbl td{padding:6px 8px;border-bottom:1px solid #eee;font-family:monospace;vertical-align:top;line-height:1.5;}
+    .comp-tbl tr:last-child td{border-bottom:none;}
+    .comp-tbl td:nth-child(2){font-weight:bold;color:#AA77FF;font-size:13.5px;white-space:nowrap;}
+    .comp-tbl td:nth-child(3){color:#5533aa;font-size:11px;white-space:nowrap;}
+    .comp-tbl td:nth-child(4){color:#555;font-size:11px;}
+
+    .note-warn{background:#fff8e6;border-left:3px solid #ffaa00;border-radius:0 4px 4px 0;padding:8px 12px;font-size:11px;margin-top:8px;line-height:1.65;color:#444;}
+    .note-info{background:#e8f4ff;border-left:3px solid #4499cc;border-radius:0 4px 4px 0;padding:8px 12px;font-size:11px;margin-top:8px;line-height:1.65;color:#444;}
+    .note-warn b{color:#aa7700;}
+    .note-info b{color:#1166aa;}
+
+    .breaks-row{background:#f0eeff;border:1px solid #d0c8f0;border-radius:5px;padding:12px 14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:8px;}
+    .breaks-badge{display:inline-block;background:#AA77FF;color:white;font-family:monospace;font-size:22px;font-weight:bold;min-width:40px;text-align:center;padding:6px 14px;border-radius:5px;}
+    .breaks-note{font-size:12px;color:#444;flex:1;min-width:180px;line-height:1.6;}
+
+    .schematic-box{background:#faf9ff;border:1px solid #d0c8f0;border-radius:5px;padding:10px;text-align:center;overflow-x:auto;}
+
+    .eq-box{background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:8px 14px;margin:8px 0;font-size:12px;line-height:1.7;}
+
+    #err-msg{background:#fff0f0;border-left:3px solid #cc4444;border-radius:0 4px 4px 0;padding:8px 12px;font-size:12px;margin-top:8px;display:none;color:#cc0000;}
+
+    #results{display:none;}
+    .tissue-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:5px;font-size:12px;}
+    .tissue-chip{background:#e8e0ff;border:1px solid #c0b0f0;border-radius:3px;padding:2px 8px;color:#5533aa;font-family:monospace;font-size:11px;}
+  </style>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+
+<h2>Surface RF Receive Coil Designer</h2>
+
+<!-- Description -->
+<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;line-height:1.7;">
+  <p style="margin-bottom:8px;">Full circuit design for a <strong>single-turn surface receive coil</strong> for MRI or NMR. Enter the loop geometry, Larmor frequency, and sample properties to get every component value needed to build the coil: distributed tuning capacitors, the impedance-matching network, the preamplifier decoupling inductor, and the required λ/4 cable length — plus the minimum number of capacitor breaks to suppress standing-wave artefacts.</p>
+  <table style="font-family:monospace;font-size:12px;border-collapse:collapse;line-height:1.8;">
+    <tr><td style="padding:2px 12px 2px 0;font-weight:bold;color:#5533aa;vertical-align:top;">D</td><td>Loop diameter (mm). Outer dimension of the single-turn conducting loop.</td></tr>
+    <tr><td style="padding:2px 12px 2px 0;font-weight:bold;color:#5533aa;vertical-align:top;">d</td><td>Conductor outer diameter (mm). Use outer diameter for both round wire and copper tubing.</td></tr>
+    <tr><td style="padding:2px 12px 2px 0;font-weight:bold;color:#5533aa;vertical-align:top;">f₀</td><td>Larmor frequency (MHz). The resonant frequency of the target nucleus in your static field.</td></tr>
+    <tr><td style="padding:2px 12px 2px 0;font-weight:bold;color:#5533aa;vertical-align:top;">h</td><td>Sample distance (mm). Distance from the coil plane to the nearest surface of the sample.</td></tr>
+    <tr><td style="padding:2px 12px 2px 0;font-weight:bold;color:#5533aa;vertical-align:top;">Sample</td><td>Tissue type or phantom. Sets conductivity σ and permittivity ε<sub>r</sub> via interpolated dielectric data (Gabriel et al. 1996 / IT'IS database).</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════════ INPUTS ══════════════════ -->
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+
+  <div class="inp-row">
+    <label>D — Loop diameter</label>
+    <div class="inp-inline">
+      <input type="number" id="D" value="100" min="5" max="600" step="1" style="flex:1;">
+      <span class="inp-units">mm</span>
+    </div>
+    <div class="inp-hint">5 – 600 mm (outer loop dimension)</div>
+  </div>
+
+  <div class="inp-row">
+    <label>d — Conductor diameter</label>
+    <select id="wire_preset" onchange="applyWire()" style="font-family:monospace;font-size:12px;padding:4px 6px;border:1px solid #ccc;border-radius:4px;margin-bottom:4px;">
+      <option value="">— Select preset or enter below —</option>
+      <optgroup label="Round wire (AWG)">
+        <option value="2.588">AWG 10 · 2.588 mm OD</option>
+        <option value="2.053">AWG 12 · 2.053 mm OD</option>
+        <option value="1.628">AWG 14 · 1.628 mm OD</option>
+        <option value="1.291">AWG 16 · 1.291 mm OD</option>
+        <option value="1.024">AWG 18 · 1.024 mm OD</option>
+        <option value="0.812">AWG 20 · 0.812 mm OD</option>
+      </optgroup>
+      <optgroup label="Copper tubing (OD)">
+        <option value="6.35">¼″ tubing · 6.35 mm OD</option>
+        <option value="4.76">³⁄₁₆″ tubing · 4.76 mm OD</option>
+        <option value="3.175">⅛″ tubing · 3.175 mm OD</option>
+        <option value="6.0">6 mm tubing · 6.0 mm OD</option>
+        <option value="5.0">5 mm tubing · 5.0 mm OD</option>
+        <option value="4.0">4 mm tubing · 4.0 mm OD</option>
+      </optgroup>
+    </select>
+    <div class="inp-inline">
+      <input type="number" id="d" value="4.0" min="0.1" max="50" step="0.1" style="flex:1;">
+      <span class="inp-units">mm OD</span>
+    </div>
+    <div class="inp-hint">Outer diameter (skin effect uses outer surface)</div>
+  </div>
+
+  <div class="inp-row">
+    <label>f₀ — Larmor frequency</label>
+    <select id="freq_preset" onchange="applyFreq()" style="font-family:monospace;font-size:12px;padding:4px 6px;border:1px solid #ccc;border-radius:4px;margin-bottom:4px;">
+      <option value="">— Select preset or enter below —</option>
+      <optgroup label="¹H Proton (MRI)">
+        <option value="63.87">¹H @ 1.5 T → 63.87 MHz</option>
+        <option value="127.74">¹H @ 3.0 T → 127.74 MHz</option>
+        <option value="297.2">¹H @ 7.0 T → 297.2 MHz</option>
+        <option value="400.0">¹H @ 9.4 T → 400.0 MHz</option>
+        <option value="446.8">¹H @ 10.5 T → 446.8 MHz</option>
+        <option value="500.0">¹H @ 11.75 T → 500.0 MHz</option>
+      </optgroup>
+      <optgroup label="Other nuclei @ 3 T">
+        <option value="50.69">³¹P @ 3 T → 50.69 MHz</option>
+        <option value="32.13">¹³C @ 3 T → 32.13 MHz</option>
+        <option value="19.56">²³Na @ 3 T → 19.56 MHz</option>
+        <option value="46.78">²H (lock) @ 7 T → 46.78 MHz</option>
+      </optgroup>
+    </select>
+    <div class="inp-inline">
+      <input type="number" id="f" value="127.74" min="0.1" max="2000" step="0.01" style="flex:1;">
+      <span class="inp-units">MHz</span>
+    </div>
+  </div>
+
+  <div class="inp-row">
+    <label>h — Sample distance</label>
+    <div class="inp-inline">
+      <input type="number" id="h" value="10" min="0" max="300" step="1" style="flex:1;">
+      <span class="inp-units">mm</span>
+    </div>
+    <div class="inp-hint">Distance from coil plane to nearest sample surface</div>
+  </div>
+
+  <div class="inp-row" style="grid-column:1/-1;">
+    <label>Sample type</label>
+    <select id="sample" onchange="onSampleChange()" style="font-family:monospace;font-size:13px;padding:5px 8px;border:1px solid #ccc;border-radius:4px;">
+      <optgroup label="Biological tissue">
+        <option value="muscle" selected>Muscle (generic soft tissue)</option>
+        <option value="gm">Brain — Gray matter</option>
+        <option value="wm">Brain — White matter</option>
+        <option value="liver">Liver</option>
+        <option value="fat">Fat / adipose tissue</option>
+        <option value="blood">Blood</option>
+        <option value="bone_cortical">Cortical bone</option>
+      </optgroup>
+      <optgroup label="Phantoms">
+        <option value="saline">Body phantom (saline, σ ≈ 0.7 S/m)</option>
+        <option value="water">Distilled water</option>
+      </optgroup>
+      <option value="custom">Custom — enter σ and ε_r below</option>
+    </select>
+    <div id="custom_row" style="display:none;margin-top:6px;background:#f0eeff;padding:8px 10px;border-radius:4px;">
+      <div style="font-size:11px;color:#5533aa;font-weight:bold;margin-bottom:5px;">Custom dielectric properties</div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+        <div class="inp-inline"><span style="font-size:12px;color:#5533aa;">σ =</span> <input type="number" id="sigma_c" value="0.70" min="0.001" max="20" step="0.01" style="width:70px;"> <span class="inp-units">S/m</span></div>
+        <div class="inp-inline"><span style="font-size:12px;color:#5533aa;">ε_r =</span> <input type="number" id="er_c" value="78" min="1" max="200" step="1" style="width:55px;"></div>
+      </div>
+    </div>
+    <div id="tissue_props" class="tissue-row"></div>
+  </div>
+
+</div>
+
+<button class="calc-btn" onclick="calculate()">⟳ &nbsp;Calculate</button>
+<div id="err-msg"></div>
+
+<!-- ══════════════════ RESULTS ══════════════════ -->
+<div id="results">
+
+  <div class="sec-lbl" style="margin-top:18px;">Circuit Schematic</div>
+  <div class="schematic-box">
+    <div id="schematic"></div>
+    <div style="font-size:10px;color:#999;margin-top:5px;font-family:monospace;">Feed gap at bottom · ⊣⊢ symbols are capacitor breaks · all values labelled in the component table below</div>
+  </div>
+
+  <div class="sec-lbl">Coil Parameters</div>
+  <div class="res-grid">
+    <div class="res-card">
+      <h4>Electromagnetic</h4>
+      <div class="res-row"><span class="res-lbl">Inductance L</span><span class="res-val" id="r_L">—</span></div>
+      <div class="res-row"><span class="res-lbl">Skin depth δ (Cu)</span><span class="res-val" id="r_delta">—</span></div>
+      <div class="res-row"><span class="res-lbl">Wire resistance R<sub>wire</sub></span><span class="res-val" id="r_Rw">—</span></div>
+      <div class="res-row"><span class="res-lbl">Sample loading R<sub>s</sub></span><span class="res-val" id="r_Rs">—</span></div>
+      <div class="res-row"><span class="res-lbl">Total loss R<sub>total</sub></span><span class="res-val" id="r_Rt">—</span></div>
+    </div>
+    <div class="res-card">
+      <h4>Quality Factor</h4>
+      <div class="res-row"><span class="res-lbl">Unloaded Q<sub>u</sub></span><span class="res-val" id="r_Qu">—</span></div>
+      <div class="res-row"><span class="res-lbl">Loaded Q<sub>L</sub></span><span class="res-val" id="r_Ql">—</span></div>
+      <div class="res-row"><span class="res-lbl">Q ratio Q<sub>u</sub>/Q<sub>L</sub></span><span class="res-val" id="r_Qr">—</span></div>
+      <div class="res-row"><span class="res-lbl">Sample limited?</span><span class="res-val" id="r_dom">—</span></div>
+      <div class="res-row"><span class="res-lbl">Parallel R<sub>p</sub></span><span class="res-val" id="r_Rp">—</span></div>
+    </div>
+  </div>
+  <div class="note-info" style="margin-top:0;"><b>ℹ Q ratio:</b> A ratio Q<sub>u</sub>/Q<sub>L</sub> &gt; 5 indicates the coil is sample-noise dominated — the dominant noise source is thermal noise in the tissue, not the wire. This is the desirable regime for high-SNR receive coils. If Q<sub>u</sub>/Q<sub>L</sub> &lt; 2, the coil conductor is contributing significantly to noise and conductor quality should be improved (larger wire, better material, silver plating).</div>
+
+  <div class="sec-lbl">Capacitor Breaks</div>
+  <div class="breaks-row">
+    <div>
+      <div style="font-size:10px;color:#5533aa;font-weight:bold;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;">Recommended</div>
+      <div class="breaks-badge" id="r_Nb">—</div>
+    </div>
+    <div class="breaks-note" id="r_break_note"></div>
+  </div>
+  <div class="note-warn"><b>⚠ Standing-wave rule:</b> Each wire segment between capacitors should subtend less than λ/10 of the free-space wavelength to prevent standing-wave resonances that distort the current distribution and degrade field homogeneity. The formula used is N<sub>breaks</sub> = max(4, ⌈10f₀πD/c⌉). A minimum of 4 is enforced: 1 for the output port + matching, and at least 3 for distributed tuning. If a PIN diode active-detuning trap is also required, add one more break.
+  </div>
+
+  <div class="sec-lbl">Component Values</div>
+  <table class="comp-tbl">
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Value</th>
+        <th>Qty</th>
+        <th>Function</th>
+      </tr>
+    </thead>
+    <tbody id="comp_body"></tbody>
+  </table>
+
+  <div class="sec-lbl">Preamplifier Decoupling</div>
+  <div class="res-grid">
+    <div class="res-card">
+      <h4>Decoupling Parameters</h4>
+      <div class="res-row"><span class="res-lbl">Series inductor L<sub>m</sub></span><span class="res-val" id="r_Lm">—</span></div>
+      <div class="res-row"><span class="res-lbl">Shunt capacitor C<sub>m</sub></span><span class="res-val" id="r_Cm">—</span></div>
+      <div class="res-row"><span class="res-lbl">λ/4 cable length</span><span class="res-val" id="r_cable">—</span></div>
+      <div class="res-row"><span class="res-lbl">Required Z<sub>preamp</sub></span><span class="res-val" id="r_Zp">≤ 5 Ω</span></div>
+      <div class="res-row"><span class="res-lbl">Estimated decoupling</span><span class="res-val" id="r_dec">—</span></div>
+    </div>
+    <div class="res-card">
+      <h4>Matching Network Q</h4>
+      <div class="res-row"><span class="res-lbl">Match Q<sub>m</sub></span><span class="res-val" id="r_Qm">—</span></div>
+      <div class="res-row"><span class="res-lbl">Reactive impedance ωL<sub>m</sub></span><span class="res-val" id="r_XLm">—</span></div>
+      <div class="res-row"><span class="res-lbl">Z<sub>high</sub> via λ/4 (2 Ω preamp)</span><span class="res-val">1250 Ω</span></div>
+      <div class="res-row"><span class="res-lbl">Bandwidth (−3 dB)</span><span class="res-val" id="r_bw">—</span></div>
+      <div class="res-row"><span class="res-lbl">Cable type (suggested)</span><span class="res-val" id="r_cabletype">—</span></div>
+    </div>
+  </div>
+  <div class="note-info"><b>ℹ Preamplifier decoupling principle:</b> The series inductor L<sub>m</sub> and shunt capacitor C<sub>m</sub> form an L-network that simultaneously achieves two goals: (1) it transforms the coil's high parallel resistance R<sub>p</sub> down to 50 Ω for efficient signal transfer to the coaxial line, and (2) it creates the correct reactance environment for preamplifier decoupling. The low-input-impedance preamplifier (Z<sub>in</sub> ≈ 1–4 Ω), connected via a λ/4 cable, presents a transformed high impedance Z<sub>high</sub> = Z₀²/Z<sub>in</sub> ≈ 600–2500 Ω in series with the coil loop. This suppresses currents induced by neighbouring coils or the transmit pulse without attenuating the receive signal, since the series LC resonates at ω₀ and is transparent. This is the Roemer–Reykowski preamplifier decoupling technique used in all modern phased-array MRI receivers.</div>
+
+  <!-- Design equations (MathJax) -->
+  <div class="sec-lbl">Design Equations</div>
+  <div style="font-size:13px;line-height:1.9;">
+    <p><b>Loop inductance</b> (Neumann formula, single circular turn, round conductor, r = loop radius, a = wire radius):</p>
+    <div class="eq-box">\( L = \mu_0 \, r \!\left[\ln\!\left(\dfrac{8r}{a}\right) - 2\right] \)</div>
+
+    <p><b>Wire AC resistance</b> (skin effect in copper, ρ<sub>Cu</sub> = 1.72 × 10⁻⁸ Ω·m):</p>
+    <div class="eq-box">\( \delta = \sqrt{\dfrac{2\rho_{\rm Cu}}{\omega\mu_0}}, \qquad R_{\rm wire} = \dfrac{\rho_{\rm Cu}}{\delta}\cdot\dfrac{r}{a} \)</div>
+
+    <p><b>Sample loading resistance</b> (quasi-static, conducting half-space, h = coil-to-surface distance):</p>
+    <div class="eq-box">\( R_s \approx \dfrac{\pi}{6}\,\mu_0^2\,\omega^2\,\sigma\,\dfrac{r^6}{(r+h)^3} \)</div>
+    <p style="font-size:11px;color:#666;">Valid in the quasi-static limit (wavelength in tissue ≫ loop diameter). At 7 T+ with large coils, waveguide effects and dielectric resonances become significant and this formula underestimates the true loading. Always trim on the bench.</p>
+
+    <p><b>L-network matching</b> (shunt C<sub>m</sub> at coil, series L<sub>m</sub> at output; R<sub>p</sub> = ω²L²/R<sub>total</sub>):</p>
+    <div class="eq-box">\( Q_m = \sqrt{\dfrac{R_p}{Z_0}-1},\qquad C_m = \dfrac{Q_m}{\omega R_p},\qquad L_m = \dfrac{Q_m\,Z_0}{\omega} \)</div>
+
+    <p><b>Distributed tuning capacitors</b> (N<sub>d</sub> = N<sub>breaks</sub> − 1 identical caps in series giving C<sub>total</sub> = 1/ω²L):</p>
+    <div class="eq-box">\( C_{\rm dist} = N_d \cdot C_{\rm total} = \dfrac{N_d}{\omega^2 L} \)</div>
+
+    <p><b>Capacitor break count</b> (λ/10 standing-wave criterion):</p>
+    <div class="eq-box">\( N_{\rm breaks} = \max\!\left(4,\;\left\lceil\dfrac{10\,f_0\,\pi D}{c}\right\rceil\right) \)</div>
+
+    <p><b>λ/4 cable length</b> (v<sub>f</sub> = cable velocity factor, typically 0.66–0.84):</p>
+    <div class="eq-box">\( \ell = \dfrac{v_f\,c}{4f_0} \)</div>
+  </div>
+
+</div><!-- /results -->
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════
+// Surface Receive Coil Designer — Physics Engine
+// ═══════════════════════════════════════════════════════════════════════════
+
+const MU0    = 4 * Math.PI * 1e-7;   // H/m
+const C_LIGHT = 2.998e8;              // m/s
+const RHO_CU  = 1.72e-8;             // Ω·m (copper resistivity at 20 °C)
+const Z0      = 50;                   // Ω
+
+// ── Tissue dielectric data ────────────────────────────────────────────────
+// Format: [freq_MHz, sigma_S/m, eps_r]
+// Sources: Gabriel et al. 1996 (Phys. Med. Biol. 41), IT'IS Foundation v4.1
+const TD = {
+  muscle:       { name:'Muscle',               pts:[[1,0.36,186],[10,0.51,134],[64,0.62,80],[128,0.69,72],[298,0.80,57],[447,0.88,54],[1000,0.98,46]] },
+  gm:           { name:'Brain — gray matter',  pts:[[1,0.10,400],[10,0.28,150],[64,0.52,75],[128,0.59,65],[298,0.71,52],[447,0.80,48],[1000,0.95,42]] },
+  wm:           { name:'Brain — white matter', pts:[[1,0.06,120],[10,0.15,60],[64,0.22,46],[128,0.28,41],[298,0.37,36],[447,0.43,34],[1000,0.50,32]] },
+  liver:        { name:'Liver',                pts:[[1,0.14,280],[10,0.32,110],[64,0.42,76],[128,0.49,65],[298,0.61,49],[447,0.71,44],[1000,0.85,40]] },
+  fat:          { name:'Fat / adipose',        pts:[[1,0.011,25],[10,0.022,14],[64,0.028,12],[128,0.033,11],[298,0.044,10.5],[447,0.055,10],[1000,0.07,9.5]] },
+  blood:        { name:'Blood',                pts:[[1,0.70,800],[10,0.80,250],[64,0.94,90],[128,1.24,77],[298,1.37,69],[447,1.52,65],[1000,1.68,60]] },
+  bone_cortical:{ name:'Cortical bone',        pts:[[1,0.020,40],[10,0.030,23],[64,0.055,15],[128,0.080,13],[298,0.120,11],[447,0.155,10],[1000,0.20,9]] },
+  saline:       { name:'Body phantom (saline)',pts:[[1,0.70,80],[1000,0.70,78]] },
+  water:        { name:'Distilled water',      pts:[[1,0.001,80],[1000,0.001,78]] }
+};
+
+function getTissue(key, fMHz) {
+  if (key === 'custom') {
+    return { sigma: +document.getElementById('sigma_c').value,
+             eps_r: +document.getElementById('er_c').value,
+             name: 'Custom' };
+  }
+  const td = TD[key]; if (!td) return { sigma:0.7, eps_r:78, name:'Unknown' };
+  const pts = td.pts, f = fMHz;
+  if (f <= pts[0][0]) return { sigma:pts[0][1], eps_r:pts[0][2], name:td.name };
+  if (f >= pts[pts.length-1][0]) { const p=pts[pts.length-1]; return { sigma:p[1], eps_r:p[2], name:td.name }; }
+  for (let i=0;i<pts.length-1;i++) {
+    if (f>=pts[i][0] && f<=pts[i+1][0]) {
+      // log-log interpolation for sigma, log-linear for eps_r
+      const t = (Math.log(f)-Math.log(pts[i][0])) / (Math.log(pts[i+1][0])-Math.log(pts[i][0]));
+      const sigma = Math.exp(Math.log(pts[i][1]) + t*(Math.log(pts[i+1][1])-Math.log(pts[i][1])));
+      const eps_r = pts[i][2] + t*(pts[i+1][2]-pts[i][2]);
+      return { sigma, eps_r, name:td.name };
+    }
+  }
+  return { sigma:0.7, eps_r:78, name:td.name };
+}
+
+// ── Engineering-notation formatter ───────────────────────────────────────
+function eng(val, unit) {
+  if (!isFinite(val)||isNaN(val)) return '—';
+  if (val===0) return `0 ${unit}`;
+  const abs=Math.abs(val);
+  const e=Math.floor(Math.log10(abs)/3)*3;
+  const pfx={15:'P',12:'T',9:'G',6:'M',3:'k',0:'','-3':'m','-6':'μ','-9':'n','-12':'p','-15':'f'};
+  const p=pfx[String(e)]??'';
+  const s=val/Math.pow(10,e);
+  const d=Math.abs(s)>=100?1:Math.abs(s)>=10?2:3;
+  return `${s.toFixed(d)} ${p}${unit}`;
+}
+function fmt2(v){ return isFinite(v)&&!isNaN(v)?v.toFixed(2):'—'; }
+function fmt1(v){ return isFinite(v)&&!isNaN(v)?v.toFixed(1):'—'; }
+function fmt0(v){ return isFinite(v)&&!isNaN(v)?Math.round(v).toString():'—'; }
+
+// ── UI helpers ────────────────────────────────────────────────────────────
+function applyWire(){ const v=document.getElementById('wire_preset').value; if(v) document.getElementById('d').value=v; }
+function applyFreq(){ const v=document.getElementById('freq_preset').value; if(v) document.getElementById('f').value=v; }
+function onSampleChange(){
+  const s=document.getElementById('sample').value;
+  document.getElementById('custom_row').style.display = s==='custom'?'block':'none';
+  if (s!=='custom') showTissueChip(s, +document.getElementById('f').value);
+  else document.getElementById('tissue_props').innerHTML='';
+}
+function showTissueChip(key, fMHz) {
+  const t=getTissue(key,fMHz);
+  const el=document.getElementById('tissue_props');
+  el.innerHTML=`<span class="tissue-chip">σ = ${t.sigma.toFixed(3)} S/m</span><span class="tissue-chip">ε<sub>r</sub> = ${t.eps_r.toFixed(1)}</span><span style="font-size:10px;color:#888;">@ ${fMHz.toFixed(2)} MHz</span>`;
+}
+function showErr(m){const e=document.getElementById('err-msg');e.textContent=m;e.style.display='block';}
+function clearErr(){const e=document.getElementById('err-msg');e.textContent='';e.style.display='none';}
+function setTxt(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function setHtml(id,v){const e=document.getElementById(id);if(e)e.innerHTML=v;}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// MAIN CALCULATION
+// ═══════════════════════════════════════════════════════════════════════════
+function calculate() {
+  clearErr();
+  const D_mm  = +document.getElementById('D').value;
+  const d_mm  = +document.getElementById('d').value;
+  const f_MHz = +document.getElementById('f').value;
+  const h_mm  = +document.getElementById('h').value;
+  const skey  = document.getElementById('sample').value;
+
+  if (!isFinite(D_mm)||D_mm<=0)        { showErr('Loop diameter D must be a positive number.'); return; }
+  if (!isFinite(d_mm)||d_mm<=0)        { showErr('Conductor diameter d must be a positive number.'); return; }
+  if (d_mm >= D_mm)                    { showErr('Conductor diameter d must be smaller than loop diameter D.'); return; }
+  if (!isFinite(f_MHz)||f_MHz<=0)      { showErr('Larmor frequency must be positive.'); return; }
+  if (!isFinite(h_mm)||h_mm<0)         { showErr('Sample distance h must be ≥ 0.'); return; }
+  if (d_mm > D_mm*0.25)                { showErr('Warning: conductor is very thick relative to loop. Results may be less accurate.'); }
+
+  // SI conversion
+  const r  = D_mm*0.5e-3;      // loop radius (m)
+  const a  = d_mm*0.5e-3;      // wire radius (m)
+  const f0 = f_MHz*1e6;         // Hz
+  const w  = 2*Math.PI*f0;      // angular frequency
+  const h  = h_mm*1e-3;         // m
+
+  const tissue = getTissue(skey, f_MHz);
+  const sigma  = tissue.sigma;
+  showTissueChip(skey, f_MHz);
+
+  // ── 1. Loop inductance (Neumann / Rosa formula) ────────────────────────
+  const L = MU0 * r * (Math.log(8*r/a) - 2);
+  if (L <= 0) { showErr('Inductance is non-positive — the wire radius may be too large relative to the loop.'); return; }
+
+  // ── 2. Skin depth and wire resistance ─────────────────────────────────
+  const delta = Math.sqrt(2*RHO_CU / (w*MU0));            // m
+  const R_wire = (RHO_CU/delta) * (r/a);                   // Ω
+  // Derivation: R = ρ·l/A = ρ·(2πr)/(2πa·δ) = (ρ/δ)·(r/a)
+
+  // ── 3. Sample noise resistance (quasi-static half-space model) ─────────
+  // Derived from integrating the dissipated power in a conducting half-space
+  // due to the vector potential of the circular loop current (Hoult/Foster approach)
+  const R_s = (Math.PI/6) * MU0*MU0 * w*w * sigma * Math.pow(r,6) / Math.pow(r+h,3);
+
+  // ── 4. Quality factors ─────────────────────────────────────────────────
+  const R_total = R_wire + R_s;
+  const wL      = w*L;                        // ω·L = coil reactance (Ω)
+  const Q_u     = wL / R_wire;
+  const Q_L     = wL / R_total;
+  const Q_ratio = Q_u / Q_L;
+
+  // ── 5. Resonance tuning ────────────────────────────────────────────────
+  const C_total = 1/(w*w*L);                  // total series capacitance (F)
+
+  // ── 6. Capacitor breaks ────────────────────────────────────────────────
+  const lambda   = C_LIGHT/f0;
+  const circ     = 2*Math.PI*r;
+  const N_sw     = Math.ceil(10*f0*circ/C_LIGHT);
+  const N_breaks = Math.max(4, N_sw);
+  const N_dist   = N_breaks - 1;              // distributed caps (series in loop)
+  const C_dist   = C_total * N_dist;          // value of each distributed cap (F)
+
+  // ── 7. L-network matching: C_m shunt + L_m series ─────────────────────
+  // Coil at resonance → parallel resistance R_p = (ω·L)² / R_total
+  const R_p = wL*wL / R_total;
+  let Q_m, C_m, L_m;
+  if (R_p > Z0) {
+    // Standard case: step down from R_p → 50 Ω
+    Q_m = Math.sqrt(R_p/Z0 - 1);
+    C_m = Q_m / (w * R_p);                    // shunt cap at coil feed (F)
+    L_m = Q_m * Z0 / w;                       // series inductor at output (H)
+  } else {
+    // Unusual (very lossy coil): step up from R_p → 50 Ω
+    Q_m = Math.sqrt(Z0/R_p - 1);
+    C_m = 1 / (w * Z0 * Q_m);
+    L_m = Q_m * R_p / w;
+  }
+
+  // ── 8. λ/4 cable ──────────────────────────────────────────────────────
+  // Standard MRI coax: RG-174 / RG-316 (foam, VF ≈ 0.82), or UT-85 (solid, VF ≈ 0.66)
+  const VF   = f_MHz >= 200 ? 0.695 : 0.820; // UT-85 at high freq, RG-174 at low freq
+  const L_cable = VF*C_LIGHT/(4*f0);          // m
+
+  // ── 9. Decoupling estimates ────────────────────────────────────────────
+  const Z_preamp = 2;                          // Ω (typical LNA input impedance)
+  const Z_high   = Z0*Z0 / Z_preamp;          // Ω (λ/4 transformation)
+  const decouple_dB = 20*Math.log10(1 + Z_high/wL);
+  const BW_Hz    = f0 / Q_L;                  // matched coil bandwidth (Hz)
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // POPULATE RESULTS
+  // ═══════════════════════════════════════════════════════════════════════
+
+  // Coil params
+  setTxt('r_L',     eng(L,'H'));
+  setTxt('r_delta', eng(delta,'m'));
+  setTxt('r_Rw',    eng(R_wire,'Ω'));
+  setTxt('r_Rs',    eng(R_s,'Ω'));
+  setTxt('r_Rt',    eng(R_total,'Ω'));
+  setTxt('r_Rp',    eng(R_p,'Ω'));
+
+  const qu=document.getElementById('r_Qu'); qu.textContent=fmt0(Q_u);
+  qu.className='res-val '+(Q_u>200?'good':Q_u>80?'':'warn');
+
+  const ql=document.getElementById('r_Ql'); ql.textContent=fmt1(Q_L);
+  ql.className='res-val '+(Q_L>=20?'good':Q_L>=8?'':'warn');
+
+  const qr=document.getElementById('r_Qr'); qr.textContent=fmt1(Q_ratio)+'×';
+  qr.className='res-val '+(Q_ratio>=5?'good':Q_ratio>=2?'':'warn');
+
+  const dom=document.getElementById('r_dom');
+  if(Q_ratio>=5)      { dom.textContent='Yes ✓ (sample limited)'; dom.className='res-val good'; }
+  else if(Q_ratio>=2) { dom.textContent='Partially (~'+fmt1(100*R_s/R_total)+'% sample)'; dom.className='res-val warn'; }
+  else                { dom.textContent='No — coil noise dominates'; dom.className='res-val bad'; }
+
+  // Breaks
+  setTxt('r_Nb', N_breaks);
+  const elec_pct = (circ/lambda*100).toFixed(1);
+  const seg_pct  = (circ/N_breaks/lambda*100).toFixed(1);
+  const reason = N_sw<=3
+    ? `Loop is only ${elec_pct}% of λ (electrically small). Minimum 4 breaks enforced: 1× feed/output, ${N_dist}× distributed tuning.`
+    : `Loop circumference = ${(circ*100).toFixed(1)} cm = λ/${(lambda/circ).toFixed(1)}. Each segment = ${seg_pct}% λ (≤ λ/10 rule satisfied with ${N_breaks} breaks).`;
+  setTxt('r_break_note', reason);
+
+  // Component table
+  const tbody = document.getElementById('comp_body');
+  tbody.innerHTML='';
+  const rows = [
+    ['C<sub>dist</sub>',  eng(C_dist,'F'),   `${N_dist}×`,
+     `Distributed tuning capacitors — placed evenly around the loop at the ${N_dist} non-feed break positions. Connected in series (each is a physical gap in the conductor). Their series combination equals the total tuning capacitance C<sub>total</sub> = 1/(ω²L) = ${eng(C_total,'F')}.`],
+    ['C<sub>m</sub>',     eng(C_m,'F'),      '1×',
+     `Matching capacitor — shunt (parallel) across the feed gap. Transforms the coil's high parallel resistance R<sub>p</sub> = ${eng(R_p,'Ω')} down toward 50 Ω. Forms the L-network with L<sub>m</sub>.`],
+    ['L<sub>m</sub>',     eng(L_m,'H'),      '1×',
+     `Series matching inductor — in series between the feed gap and the coaxial output connector. Completes the L-network impedance transformation (matching Q<sub>m</sub> = ${fmt1(Q_m)}). Also the key component for preamplifier decoupling: when the low-Z preamp is connected via λ/4 cable, the reflected high impedance Z<sub>high</sub> ≈ ${fmt0(Z_high)} Ω appears in series with the coil loop, suppressing induced currents.`],
+    ['Coax',             `${(L_cable*100).toFixed(1)} cm`, '1×',
+     `λ/4 cable to the preamplifier (velocity factor VF = ${VF}). Electrically transforms the preamp input impedance Z<sub>preamp</sub> ≈ ${Z_preamp} Ω to Z<sub>high</sub> = Z₀²/Z<sub>preamp</sub> = ${fmt0(Z_high)} Ω, which appears as a high series impedance in the coil loop for decoupling. Suggested type: ${VF>0.8?'RG-174 or RG-316 (foam, VF ≈ 0.82)':'UT-85 semi-rigid (solid, VF ≈ 0.695)'}. Cut to exact length on the bench using a VNA.`],
+  ];
+  rows.forEach(([comp,val,qty,fn])=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="font-family:monospace;font-weight:bold;color:#5533aa;">${comp}</td><td>${val}</td><td>${qty}</td><td>${fn}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  // Preamp decoupling panel
+  setTxt('r_Lm',    eng(L_m,'H'));
+  setTxt('r_Cm',    eng(C_m,'F'));
+  setTxt('r_cable', `${(L_cable*100).toFixed(1)} cm (VF = ${VF})`);
+  setTxt('r_Zp',    `≤ 5 Ω (ideal: 1–2 Ω)`);
+  const dec=document.getElementById('r_dec');
+  dec.textContent=`≈ ${fmt1(decouple_dB)} dB`;
+  dec.className='res-val '+(decouple_dB>=20?'good':decouple_dB>=12?'warn':'bad');
+  setTxt('r_Qm',  fmt1(Q_m));
+  setTxt('r_XLm', eng(w*L_m,'Ω'));
+  setTxt('r_bw',  eng(BW_Hz,'Hz'));
+  setTxt('r_cabletype', VF>0.8?'RG-174 / RG-316 (foam coax)':'UT-85 semi-rigid (solid PE)');
+
+  // Draw schematic
+  drawSchematic(N_breaks, N_dist, {
+    L:eng(L,'H'), C_dist:eng(C_dist,'F'), C_m:eng(C_m,'F'),
+    L_m:eng(L_m,'H'), cable:((L_cable*100).toFixed(1))+'cm'
+  });
+
+  document.getElementById('results').style.display='block';
+  if(window.MathJax) MathJax.typeset();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SVG SCHEMATIC
+// ═══════════════════════════════════════════════════════════════════════════
+function drawSchematic(N_breaks, N_dist, vals) {
+  const W=560, H=370;
+  const cx=W/2, cy=138, R=98;
+  const GAP_HALF=0.048; // radians, half-angle of each cap gap in the loop
+
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;font-family:monospace;">`;
+
+  // Definitions
+  s+=`<defs>
+    <marker id="ah" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+      <path d="M1,1 L1,6 L6,3.5 z" fill="#5533aa"/>
+    </marker>
+    <marker id="ahp" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+      <path d="M1,1 L1,6 L6,3.5 z" fill="#AA77FF"/>
+    </marker>
+  </defs>`;
+
+  // Background
+  s+=`<rect width="${W}" height="${H}" fill="#faf9ff" rx="5"/>`;
+
+  // Title
+  s+=`<text x="${W/2}" y="16" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Single-Turn Surface Receive Coil — ${N_breaks} Capacitor Breaks</text>`;
+
+  // ── Draw loop wire segments and capacitor symbols ─────────────────────
+  for(let i=0;i<N_breaks;i++){
+    const tc = (i/N_breaks)*2*Math.PI + Math.PI/2; // i=0 at bottom (SVG y-down)
+    const as = tc + GAP_HALF;                        // arc start (after cap)
+    const ae = ((i+1)/N_breaks)*2*Math.PI + Math.PI/2 - GAP_HALF; // arc end (before next cap)
+
+    // Wire arc for this segment
+    const x1=cx+R*Math.cos(as), y1=cy+R*Math.sin(as);
+    const x2=cx+R*Math.cos(ae), y2=cy+R*Math.sin(ae);
+    // Large arc flag: segment spans 2π/N_breaks - 2*GAP_HALF; for N_breaks≥3 always < π
+    s+=`<path d="M${x1.toFixed(2)},${y1.toFixed(2)} A${R},${R} 0 0,1 ${x2.toFixed(2)},${y2.toFixed(2)}" fill="none" stroke="#AA77FF" stroke-width="2.8"/>`;
+
+    const xc=cx+R*Math.cos(tc), yc=cy+R*Math.sin(tc);
+
+    if(i===0){
+      // ── Feed gap: draw distinctive symbol ─────────────────────────────
+      s+=`<rect x="${(xc-9).toFixed(1)}" y="${(yc-9).toFixed(1)}" width="18" height="18" fill="#AA77FF" rx="3"/>`;
+      s+=`<text x="${xc.toFixed(1)}" y="${(yc+4).toFixed(1)}" text-anchor="middle" font-size="7.5" fill="white" font-weight="bold">FEED</text>`;
+    } else {
+      // ── Distributed tuning cap symbol ─────────────────────────────────
+      // Two plates perpendicular to the radial direction
+      const rd=tc; // radial angle
+      const tx=-Math.sin(rd), ty=Math.cos(rd); // tangential direction
+      const pl=8, pg=3.2; // plate half-length, gap half-width
+      // Inner plate
+      s+=`<line x1="${(xc-pg*Math.cos(rd)+pl*tx).toFixed(2)}" y1="${(yc-pg*Math.sin(rd)+pl*ty).toFixed(2)}"
+                x2="${(xc-pg*Math.cos(rd)-pl*tx).toFixed(2)}" y2="${(yc-pg*Math.sin(rd)-pl*ty).toFixed(2)}" stroke="#5533aa" stroke-width="2.3"/>`;
+      // Outer plate
+      s+=`<line x1="${(xc+pg*Math.cos(rd)+pl*tx).toFixed(2)}" y1="${(yc+pg*Math.sin(rd)+pl*ty).toFixed(2)}"
+                x2="${(xc+pg*Math.cos(rd)-pl*tx).toFixed(2)}" y2="${(yc+pg*Math.sin(rd)-pl*ty).toFixed(2)}" stroke="#5533aa" stroke-width="2.3"/>`;
+      // Label (show on 1st, 2nd, and last, or midpoint for larger arrays)
+      const showLabel = (i===1)||(i===2&&N_breaks<=6)||(i===N_dist&&N_dist>2);
+      if(showLabel){
+        const lx=(xc+Math.cos(rd)*22).toFixed(1), ly=(yc+Math.sin(rd)*22+3).toFixed(1);
+        s+=`<text x="${lx}" y="${ly}" text-anchor="middle" font-size="9" fill="#5533aa">C_d</text>`;
+      }
+      // Ellipsis indicator if many caps
+      if(i===3&&N_breaks>6){
+        const lx=(xc+Math.cos(rd)*22).toFixed(1), ly=(yc+Math.sin(rd)*22+3).toFixed(1);
+        s+=`<text x="${lx}" y="${ly}" text-anchor="middle" font-size="9" fill="#999">···</text>`;
+      }
+    }
+  }
+
+  // ── Inductance label on loop ───────────────────────────────────────────
+  s+=`<text x="${cx}" y="${cy-R-12}" text-anchor="middle" font-size="9.5" fill="#AA77FF">L = ${vals.L}</text>`;
+
+  // ── Feed-gap sub-circuit (below loop) ─────────────────────────────────
+  // Feed gap is at bottom: (cx, cy+R)
+  const fy = cy+R;   // top of subcircuit
+  const fTop = fy+9; // below the FEED box
+  const jY  = fTop+14; // junction node Y
+  const gndY = jY+52;  // ground rail Y
+
+  // Vertical stubs down from feed gap
+  // Left terminal (A - hot side)
+  const xA = cx-18;
+  s+=`<line x1="${xA}" y1="${fTop}" x2="${xA}" y2="${jY}" stroke="#5533aa" stroke-width="1.5"/>`;
+
+  // Junction node dot
+  s+=`<circle cx="${xA}" cy="${jY}" r="3" fill="#5533aa"/>`;
+
+  // Right terminal (B - cold/GND) — direct to ground
+  const xB = cx+18;
+  s+=`<line x1="${xB}" y1="${fTop}" x2="${xB}" y2="${gndY}" stroke="#5533aa" stroke-width="1.5"/>`;
+
+  // ── C_m: shunt capacitor from node A down ──────────────────────────────
+  const cmX=xA, cmY1=jY+2, cmY2=jY+18, cmY3=gndY;
+  // wire to top plate
+  s+=`<line x1="${cmX}" y1="${cmY1}" x2="${cmX}" y2="${cmY2}" stroke="#5533aa" stroke-width="1.5"/>`;
+  // top plate
+  s+=`<line x1="${cmX-10}" y1="${cmY2}" x2="${cmX+10}" y2="${cmY2}" stroke="#5533aa" stroke-width="2.5"/>`;
+  // bottom plate
+  s+=`<line x1="${cmX-10}" y1="${cmY2+6}" x2="${cmX+10}" y2="${cmY2+6}" stroke="#5533aa" stroke-width="2.5"/>`;
+  // wire from bottom plate to GND rail
+  s+=`<line x1="${cmX}" y1="${cmY2+6}" x2="${cmX}" y2="${cmY3}" stroke="#5533aa" stroke-width="1.5"/>`;
+  // C_m label
+  s+=`<text x="${cmX-14}" y="${cmY2+12}" text-anchor="end" font-size="9.5" fill="#5533aa">C_m</text>`;
+  s+=`<text x="${cmX-14}" y="${cmY2+22}" text-anchor="end" font-size="8" fill="#888">${vals.C_m}</text>`;
+
+  // ── L_m: series inductor from node A to right ──────────────────────────
+  const lmStartX=xA, lmY=jY, lmEndX=cx+95;
+  // horizontal wire from A to inductor
+  s+=`<line x1="${lmStartX}" y1="${lmY}" x2="${lmStartX+22}" y2="${lmY}" stroke="#5533aa" stroke-width="1.5"/>`;
+  // Draw inductor coil symbol (3 bumps)
+  const lm0=lmStartX+22, lm1=lm0+50;
+  const bumps=4, bw=50/bumps;
+  let lmPath=`M${lm0},${lmY}`;
+  for(let b=0;b<bumps;b++){
+    const bx=lm0+b*bw+bw/2;
+    lmPath+=` A${bw/2},${bw/2} 0 0,1 ${lm0+(b+1)*bw},${lmY}`;
+  }
+  s+=`<path d="${lmPath}" fill="none" stroke="#5533aa" stroke-width="2"/>`;
+  // wire to right
+  s+=`<line x1="${lm1}" y1="${lmY}" x2="${lmEndX-8}" y2="${lmY}" stroke="#5533aa" stroke-width="1.5"/>`;
+  // L_m label
+  s+=`<text x="${lm0+(lm1-lm0)/2}" y="${lmY-8}" text-anchor="middle" font-size="9.5" fill="#5533aa">L_m</text>`;
+  s+=`<text x="${lm0+(lm1-lm0)/2}" y="${lmY+17}" text-anchor="middle" font-size="8" fill="#888">${vals.L_m}</text>`;
+
+  // ── SMA connector symbol ───────────────────────────────────────────────
+  const smaX=lmEndX, smaY=lmY;
+  s+=`<rect x="${smaX-8}" y="${smaY-8}" width="16" height="16" fill="#f0eeff" stroke="#AA77FF" stroke-width="2" rx="3"/>`;
+  s+=`<text x="${smaX}" y="${smaY+4}" text-anchor="middle" font-size="7.5" fill="#5533aa" font-weight="bold">SMA</text>`;
+
+  // ── λ/4 cable arrow and preamp ────────────────────────────────────────
+  const cableStartX=smaX+8, cableEndX=smaX+75, preampX=cableEndX+8;
+  s+=`<line x1="${cableStartX}" y1="${lmY}" x2="${cableEndX}" y2="${lmY}" stroke="#AA77FF" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ahp)"/>`;
+  s+=`<text x="${(cableStartX+cableEndX)/2}" y="${lmY-7}" text-anchor="middle" font-size="9" fill="#AA77FF">λ/4 coax</text>`;
+  s+=`<text x="${(cableStartX+cableEndX)/2}" y="${lmY+13}" text-anchor="middle" font-size="8" fill="#999">${vals.cable}, VF</text>`;
+
+  // Preamp block
+  s+=`<rect x="${preampX}" y="${lmY-12}" width="48" height="24" fill="#e8f0ff" stroke="#4477cc" stroke-width="1.5" rx="3"/>`;
+  s+=`<text x="${preampX+24}" y="${lmY-1}" text-anchor="middle" font-size="9" fill="#4477cc" font-weight="bold">LNA</text>`;
+  s+=`<text x="${preampX+24}" y="${lmY+9}" text-anchor="middle" font-size="8" fill="#4477cc">Z_in ≤ 5Ω</text>`;
+
+  // ── Ground rail ────────────────────────────────────────────────────────
+  const grailX1=xA-15, grailX2=xB+15;
+  s+=`<line x1="${grailX1}" y1="${gndY}" x2="${grailX2}" y2="${gndY}" stroke="#333" stroke-width="2"/>`;
+  // GND symbol
+  for(let g=0;g<3;g++){
+    const gw=10-g*3, gx=cx;
+    s+=`<line x1="${gx-gw}" y1="${gndY+g*4+2}" x2="${gx+gw}" y2="${gndY+g*4+2}" stroke="#333" stroke-width="${1.8-g*0.4}"/>`;
+  }
+
+  // ── Legend box ─────────────────────────────────────────────────────────
+  const lx=10, lbot=H-8, ltop=H-68;
+  s+=`<rect x="${lx}" y="${ltop}" width="210" height="60" fill="white" stroke="#d0c8f0" rx="4"/>`;
+  s+=`<text x="${lx+8}" y="${ltop+13}" font-size="9.5" fill="#5533aa" font-weight="bold">LEGEND</text>`;
+  // Cap symbol in legend
+  s+=`<line x1="${lx+8}" y1="${ltop+24}" x2="${lx+8}" y2="${ltop+34}" stroke="#5533aa" stroke-width="2.3"/>`;
+  s+=`<line x1="${lx+15}" y1="${ltop+24}" x2="${lx+15}" y2="${ltop+34}" stroke="#5533aa" stroke-width="2.3"/>`;
+  s+=`<text x="${lx+22}" y="${ltop+32}" font-size="9" fill="#333">C_dist — distributed tuning cap (×${N_dist})</text>`;
+  // Feed symbol
+  s+=`<rect x="${lx+8}" y="${ltop+41}" width="11" height="11" fill="#AA77FF" rx="2"/>`;
+  s+=`<text x="${lx+22}" y="${ltop+51}" font-size="9" fill="#333">Feed gap — C_m (shunt) + L_m (series)</text>`;
+
+  s+=`</svg>`;
+  document.getElementById('schematic').innerHTML=s;
+}
+
+// ── Run on load with default values ───────────────────────────────────────
+window.addEventListener('load', ()=>{
+  showTissueChip('muscle', 127.74);
+  calculate();
+});
+</script>
+</body>
+</html>
