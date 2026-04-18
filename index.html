@@ -1,51 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-6R4JGG0586');
-	</script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src='https://cdn.jsdelivr.net/npm/bignumber.js@9.1.2/bignumber.min.js'></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<title>RF Toolbox — RF & Microwave Engineering Tools</title>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>
-    $(function(){
-      $("#includeIndex").load("index_list.html");
-    });
-  </script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<link rel="stylesheet" href="style.css">
+	<style>
+		/* ── Hero ────────────────────────────────────────────────────────── */
+		.hero{
+			background:linear-gradient(135deg,#AA77FF 0%,#5533aa 100%);
+			color:#fff;padding:28px 24px 24px;border-radius:8px;margin-bottom:22px;
+			position:relative;overflow:hidden;
+		}
+		.hero::before{
+			content:"";position:absolute;right:-40px;top:-40px;width:240px;height:240px;
+			background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 70%);
+			border-radius:50%;
+		}
+		.hero h2{font-family:monospace;font-size:26px;margin-bottom:6px;font-weight:bold;letter-spacing:-0.01em;position:relative;}
+		.hero p.tag{font-family:monospace;font-size:13px;opacity:0.92;margin-bottom:16px;max-width:640px;line-height:1.6;position:relative;}
+		.hero-stats{display:flex;gap:24px;flex-wrap:wrap;position:relative;margin-bottom:18px;}
+		.hero-stat{font-family:monospace;}
+		.hero-stat .num{font-size:22px;font-weight:bold;display:block;}
+		.hero-stat .lbl{font-size:11px;opacity:0.85;text-transform:uppercase;letter-spacing:0.08em;}
+		.hero-cta{display:flex;flex-wrap:wrap;gap:8px;position:relative;}
+		.hero-btn{
+			font-family:monospace;font-size:13px;font-weight:bold;
+			padding:9px 16px;border-radius:5px;text-decoration:none;
+			background:#fff;color:#5533aa;transition:all 0.12s;display:inline-block;
+		}
+		.hero-btn:hover{background:#f0eeff;transform:translateY(-1px);}
+		.hero-btn.alt{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.6);}
+		.hero-btn.alt:hover{background:rgba(255,255,255,0.15);border-color:#fff;}
+		/* ── Section headers ─────────────────────────────────────────────── */
+		.sec-hdr{
+			font-family:monospace;font-size:12px;color:#5533aa;font-weight:bold;
+			letter-spacing:0.1em;text-transform:uppercase;margin:22px 0 10px;
+			border-bottom:1px solid #e0d8ff;padding-bottom:5px;
+		}
+		/* ── Feature cards grid (categories) ─────────────────────────────── */
+		.cat-grid{
+			display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+			gap:12px;margin-bottom:14px;
+		}
+		.cat-card{
+			background:#fafaff;border:1px solid #d0c8f0;border-radius:6px;
+			padding:14px;text-decoration:none;color:#1a1a1a;
+			transition:all 0.12s;display:block;
+		}
+		.cat-card:hover{background:#f0eeff;border-color:#AA77FF;transform:translateY(-2px);box-shadow:0 4px 12px rgba(170,119,255,0.15);}
+		.cat-card .cat-icon{margin-bottom:8px;line-height:0;}
+		.cat-card .cat-title{font-family:monospace;font-weight:bold;font-size:13px;color:#5533aa;margin-bottom:3px;}
+		.cat-card .cat-desc{font-family:monospace;font-size:11px;color:#666;line-height:1.5;}
+		.cat-card .cat-count{font-family:monospace;font-size:10px;color:#AA77FF;margin-top:6px;text-transform:uppercase;letter-spacing:0.06em;}
+		/* ── Featured tools ──────────────────────────────────────────────── */
+		.feat-grid{
+			display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+			gap:12px;margin-bottom:14px;
+		}
+		.feat-card{
+			background:#fff;border:1px solid #d0c8f0;border-radius:6px;overflow:hidden;
+			text-decoration:none;color:#1a1a1a;transition:all 0.12s;display:flex;flex-direction:column;
+		}
+		.feat-card:hover{border-color:#AA77FF;box-shadow:0 4px 14px rgba(170,119,255,0.15);transform:translateY(-2px);}
+		.feat-preview{background:#f8f6ff;padding:12px;border-bottom:1px solid #e8e0ff;height:130px;display:flex;align-items:center;justify-content:center;}
+		.feat-preview svg{max-width:100%;max-height:110px;}
+		.feat-body{padding:12px 14px;flex:1;display:flex;flex-direction:column;}
+		.feat-title{font-family:monospace;font-weight:bold;font-size:13px;color:#5533aa;margin-bottom:4px;}
+		.feat-desc{font-family:monospace;font-size:11px;color:#666;line-height:1.5;flex:1;}
+		/* ── Inline wiki snippet ──────────────────────────────────────────── */
+		.wiki-showcase{
+			background:#fafaff;border:1px solid #d0c8f0;border-radius:6px;padding:16px;
+			margin-bottom:14px;
+		}
+		.wiki-items{display:flex;flex-wrap:wrap;gap:6px;}
+		.wiki-item{
+			font-family:monospace;font-size:11px;padding:4px 10px;
+			background:#fff;border:1px solid #d0c8f0;border-radius:3px;
+			text-decoration:none;color:#5533aa;transition:all 0.12s;
+		}
+		.wiki-item:hover{background:#AA77FF;color:#fff;border-color:#AA77FF;}
+		/* ── Final section ──────────────────────────────────────────────── */
+		.updates{font-family:monospace;font-size:11px;color:#888;margin-top:18px;padding-top:10px;border-top:1px solid #eee;}
+		@media(max-width:600px){.hero h2{font-size:20px;}.hero-stats{gap:14px;}}
+	</style>
 </head>
-
 <body>
-	<header>
-		<h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2>
-	</header>
-	<section>
-		<nav>
-			<h3>Tools</h3>
-			<div id="includeIndex"></div>
-		</nav>
-		<article>
-			<h3>Welcome to the RF Toolbox.</h3>
-			<p>A collection of RF and microwave engineering calculators and reference articles. Use the navigation panel to browse tools by category, or visit the <a href="wiki.html">Wiki</a> for background theory.</p>
-			<p style="margin-top:10px;color:#888;font-size:12px;">Last updated: April 2026</p>
-		</article>
-	</section>
-	<footer>
-		<p><a href="index.html">Home</a> . <a href="games.html">Games</a></p>
-	</footer>
-</body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
 
+	<!-- ══════════════════ HERO ══════════════════ -->
+	<div class="hero">
+		<h2>📡 RF Toolbox</h2>
+		<p class="tag">A growing collection of calculators, simulators, and reference articles for RF, microwave, and MRI coil engineering — all running in your browser, no installs required.</p>
+		<div class="hero-stats">
+			<div class="hero-stat"><span class="num">30+</span><span class="lbl">Calculators</span></div>
+			<div class="hero-stat"><span class="num">3</span><span class="lbl">Simulators</span></div>
+			<div class="hero-stat"><span class="num">35</span><span class="lbl">Wiki Articles</span></div>
+			<div class="hero-stat"><span class="num">7</span><span class="lbl">Games</span></div>
+		</div>
+		<div class="hero-cta">
+			<a class="hero-btn" href="#categories">Browse Tools</a>
+			<a class="hero-btn alt" href="wiki.html">📖 Visit the Wiki</a>
+			<a class="hero-btn alt" href="RFSimulator.html">🔬 Try the Simulator</a>
+		</div>
+	</div>
+
+	<!-- ══════════════════ TOOL CATEGORIES ══════════════════ -->
+	<div id="categories" class="sec-hdr">Explore by Category</div>
+	<div class="cat-grid">
+
+		<a class="cat-card" href="CoilDesigner.html">
+			<div class="cat-icon">
+<svg viewBox="0 0 200 50" width="200" height="50" style="max-width:100%;"><path d="M10,25 q5,-15 15,0 q5,15 15,0 q5,-15 15,0 q5,15 15,0 q5,-15 15,0 q5,15 15,0 q5,-15 15,0 q5,15 15,0 q5,-15 15,0 q5,15 15,0 q5,-15 15,0 q5,15 15,0" stroke="#AA77FF" stroke-width="2.5" fill="none"/></svg>
+			</div>
+			<div class="cat-title">Coils & Resonance</div>
+			<div class="cat-desc">Loop inductance, tuning capacitors, LC resonance, and multi-turn coil design for NMR/MRI.</div>
+			<div class="cat-count">5 tools</div>
+		</a>
+
+		<a class="cat-card" href="Microstrip.html">
+			<div class="cat-icon">
+<svg viewBox="0 0 200 50" width="200" height="50"><rect x="10" y="10" width="180" height="8" fill="#b8922a" stroke="#7a5000"/><rect x="10" y="18" width="180" height="16" fill="#d4ecca" stroke="#5a9020"/><rect x="10" y="34" width="180" height="8" fill="#b8922a" stroke="#7a5000"/><path d="M30,18 Q50,34 70,18" fill="none" stroke="#0055DD" stroke-width="1.2" stroke-dasharray="2 2"/><path d="M100,18 Q120,34 140,18" fill="none" stroke="#0055DD" stroke-width="1.2" stroke-dasharray="2 2"/></svg>
+			</div>
+			<div class="cat-title">Transmission Lines</div>
+			<div class="cat-desc">Microstrip, coax, stubs, and quarter-wave transformers with closed-form equations.</div>
+			<div class="cat-count">4 tools</div>
+		</a>
+
+		<a class="cat-card" href="SmithChart.html">
+			<div class="cat-icon">
+<svg viewBox="0 0 100 50" width="100" height="50"><circle cx="50" cy="25" r="22" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="64" cy="25" r="8" fill="none" stroke="#AA77FF" stroke-width="1"/><circle cx="57" cy="25" r="15" fill="none" stroke="#AA77FF" stroke-width="1"/><line x1="28" y1="25" x2="72" y2="25" stroke="#888" stroke-width="0.7"/><circle cx="60" cy="15" r="3" fill="#ff6644"/></svg>
+			</div>
+			<div class="cat-title">Impedance Matching</div>
+			<div class="cat-desc">Interactive Smith Chart, L-networks, LC BALUNs, and capacitor combinations.</div>
+			<div class="cat-count">4 tools</div>
+		</a>
+
+		<a class="cat-card" href="FilterDesign.html">
+			<div class="cat-icon">
+<svg viewBox="0 0 200 50" width="200" height="50"><path d="M10,40 C60,40 90,40 100,25 C110,10 140,10 190,10" stroke="#AA77FF" stroke-width="2.5" fill="none"/><line x1="10" y1="45" x2="190" y2="45" stroke="#ccc" stroke-width="1"/><line x1="100" y1="10" x2="100" y2="45" stroke="#888" stroke-width="0.8" stroke-dasharray="2 2"/></svg>
+			</div>
+			<div class="cat-title">Filters</div>
+			<div class="cat-desc">Butterworth, Chebyshev LC ladders; series/parallel bandpass RLC analysis.</div>
+			<div class="cat-count">2 tools</div>
+		</a>
+
+		<a class="cat-card" href="Dipole.html">
+			<div class="cat-icon">
+<svg viewBox="0 0 100 50" width="100" height="50"><line x1="50" y1="5" x2="50" y2="45" stroke="#AA77FF" stroke-width="3.5"/><path d="M50,25 Q15,25 25,10 Q50,0 50,25 Q50,0 75,10 Q85,25 50,25 Q85,25 75,40 Q50,50 50,25 Q50,50 25,40 Q15,25 50,25" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.5" opacity="0.8"/></svg>
+			</div>
+			<div class="cat-title">Antennas</div>
+			<div class="cat-desc">Dipole sizing, patch antenna design, and phased array factor plots.</div>
+			<div class="cat-count">3 tools</div>
+		</a>
+
+		<a class="cat-card" href="LinkBudget.html">
+			<div class="cat-icon">
+<svg viewBox="0 0 200 50" width="200" height="50"><circle cx="25" cy="25" r="6" fill="#AA77FF"/><circle cx="175" cy="25" r="6" fill="#AA77FF"/><path d="M25,25 Q100,5 175,25" stroke="#AA77FF" stroke-width="2" fill="none" stroke-dasharray="4 3"/><text x="100" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#5533aa">FSPL</text><path d="M35,30 l-3,-3 l-3,3 z" fill="#AA77FF"/></svg>
+			</div>
+			<div class="cat-title">Link & Noise</div>
+			<div class="cat-desc">Friis equation, cascaded noise figure, and systematic link budget calculations.</div>
+			<div class="cat-count">3 tools</div>
+		</a>
+
+		<a class="cat-card" href="SpiceSim.html">
+			<div class="cat-icon">
+<svg viewBox="0 0 200 50" width="200" height="50"><rect x="10" y="10" width="50" height="30" fill="#1e1e2e" stroke="#AA77FF" stroke-width="1" rx="3"/><text x="35" y="29" text-anchor="middle" font-family="monospace" font-size="10" fill="#a6e3a1">.SPICE</text><path d="M70,25 L190,25" stroke="#AA77FF" stroke-width="1.5"/><path d="M75,25 L80,15 L90,35 L100,10 L110,40 L120,15 L130,35 L140,20 L150,30 L160,22 L170,28 L180,25" stroke="#00ccff" stroke-width="1.5" fill="none"/></svg>
+			</div>
+			<div class="cat-title">Simulators</div>
+			<div class="cat-desc">RF circuit simulator (ABCD), SPICE engine (MNA), and embedded Falstad circuit simulator.</div>
+			<div class="cat-count">3 simulators</div>
+		</a>
+
+		<a class="cat-card" href="wiki.html">
+			<div class="cat-icon">
+<svg viewBox="0 0 200 50" width="200" height="50"><rect x="10" y="12" width="180" height="26" fill="#f0eeff" stroke="#AA77FF" stroke-width="1" rx="3"/><line x1="20" y1="20" x2="150" y2="20" stroke="#AA77FF" stroke-width="1.5"/><line x1="20" y1="25" x2="170" y2="25" stroke="#888" stroke-width="1"/><line x1="20" y1="30" x2="140" y2="30" stroke="#888" stroke-width="1"/></svg>
+			</div>
+			<div class="cat-title">Wiki</div>
+			<div class="cat-desc">35 articles on EM theory, RF engineering, microwave design, and MRI physics.</div>
+			<div class="cat-count">5 categories</div>
+		</a>
+
+		<a class="cat-card" href="games.html">
+			<div class="cat-icon">
+<svg viewBox="0 0 200 50" width="200" height="50"><circle cx="35" cy="25" r="11" fill="#AA77FF"/><circle cx="100" cy="25" r="11" fill="#00ccff"/><circle cx="165" cy="25" r="11" fill="#ff8800"/><rect x="25" y="40" width="20" height="3" fill="#333"/></svg>
+			</div>
+			<div class="cat-title">Games</div>
+			<div class="cat-desc">Take a break — Snake, Pong, Asteroids, resistor colour code trainer, and more.</div>
+			<div class="cat-count">7 games</div>
+		</a>
+
+	</div>
+
+	<!-- ══════════════════ FEATURED TOOLS ══════════════════ -->
+	<div class="sec-hdr">Featured Tools</div>
+	<div class="feat-grid">
+
+		<a class="feat-card" href="SmithChart.html">
+			<div class="feat-preview">
+<svg viewBox="0 0 240 120"><circle cx="120" cy="60" r="52" fill="#fafeff" stroke="#333" stroke-width="1.5"/><circle cx="148" cy="60" r="17" fill="none" stroke="#AA77FF" stroke-width="0.9"/><circle cx="134" cy="60" r="31" fill="none" stroke="#AA77FF" stroke-width="0.9"/><circle cx="172" cy="40" r="26" fill="none" stroke="#00aacc" stroke-width="0.9" opacity="0.6"/><circle cx="172" cy="80" r="26" fill="none" stroke="#00aacc" stroke-width="0.9" opacity="0.6"/><line x1="68" y1="60" x2="172" y2="60" stroke="#aaa" stroke-width="0.8"/><circle cx="148" cy="42" r="5" fill="#ff6644"/><circle cx="100" cy="70" r="5" fill="#00ccff"/></svg>
+			</div>
+			<div class="feat-body">
+				<div class="feat-title">Interactive Smith Chart</div>
+				<div class="feat-desc">Click anywhere on the chart to read off impedance, return loss, and VSWR. Plot multiple impedance points and visualise them against a full resistance/reactance grid.</div>
+			</div>
+		</a>
+
+		<a class="feat-card" href="SpiceSim.html">
+			<div class="feat-preview">
+<svg viewBox="0 0 240 120"><rect x="8" y="8" width="224" height="40" fill="#1e1e2e" rx="3"/><text x="18" y="22" font-family="monospace" font-size="8" fill="#cdd6f4">R1 in out 1k</text><text x="18" y="33" font-family="monospace" font-size="8" fill="#cdd6f4">C1 out 0 1n</text><text x="18" y="44" font-family="monospace" font-size="8" fill="#a6e3a1">.AC DEC 50 1k 1g</text><line x1="18" y1="105" x2="230" y2="105" stroke="#888"/><line x1="18" y1="55" x2="18" y2="105" stroke="#888"/><path d="M18,60 Q50,60 80,62 Q110,70 130,85 Q160,100 230,104" stroke="#AA77FF" stroke-width="2" fill="none"/><text x="200" y="70" font-family="monospace" font-size="9" fill="#AA77FF">S21</text></svg>
+			</div>
+			<div class="feat-body">
+				<div class="feat-title">SPICE Simulator</div>
+				<div class="feat-desc">Real SPICE engine in your browser using Modified Nodal Analysis. Run .AC, .DC, .OP, and .TRAN analyses with R, L, C, V, and I elements — no installs required.</div>
+			</div>
+		</a>
+
+		<a class="feat-card" href="RFSimulator.html">
+			<div class="feat-preview">
+<svg viewBox="0 0 240 120"><rect x="10" y="50" width="18" height="18" fill="#ffd0b0" stroke="#777" rx="2"/><text x="19" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#333">R</text><line x1="28" y1="59" x2="48" y2="59" stroke="#333"/><rect x="48" y="50" width="18" height="18" fill="#c8e8ff" stroke="#777" rx="2"/><text x="57" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#333">L</text><line x1="66" y1="59" x2="86" y2="59" stroke="#333"/><rect x="86" y="50" width="18" height="18" fill="#c8ffd8" stroke="#777" rx="2"/><text x="95" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#333">C</text><line x1="104" y1="59" x2="120" y2="59" stroke="#333"/><circle cx="124" cy="59" r="4" fill="#00ccff"/><path d="M140,100 Q160,50 180,40 Q200,35 230,30" stroke="#AA77FF" stroke-width="2" fill="none"/><text x="220" y="25" font-family="monospace" font-size="9" fill="#AA77FF">S21</text></svg>
+			</div>
+			<div class="feat-body">
+				<div class="feat-title">RF Circuit Simulator</div>
+				<div class="feat-desc">Build ladder networks from R, L, C, and transmission line elements. Computes S-parameters, impedance, phase, group delay, and VSWR vs frequency using ABCD matrix analysis.</div>
+			</div>
+		</a>
+
+		<a class="feat-card" href="LinkBudget.html">
+			<div class="feat-preview">
+<svg viewBox="0 0 240 120"><rect x="8" y="20" width="60" height="30" fill="#f0eeff" stroke="#AA77FF" rx="3"/><text x="38" y="40" text-anchor="middle" font-family="monospace" font-size="10" fill="#5533aa" font-weight="bold">TX</text><path d="M68,35 Q120,8 172,35" stroke="#AA77FF" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><text x="120" y="22" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">FSPL</text><rect x="172" y="20" width="60" height="30" fill="#f0eeff" stroke="#AA77FF" rx="3"/><text x="202" y="40" text-anchor="middle" font-family="monospace" font-size="10" fill="#5533aa" font-weight="bold">RX</text><rect x="8" y="65" width="224" height="45" fill="#fafafa" stroke="#ddd" rx="3"/><text x="20" y="80" font-family="monospace" font-size="9" fill="#333">EIRP:    +22 dBm</text><text x="20" y="92" font-family="monospace" font-size="9" fill="#333">FSPL:    −100 dB</text><text x="20" y="104" font-family="monospace" font-size="9" fill="#007700" font-weight="bold">Margin: +12 dB ✓</text></svg>
+			</div>
+			<div class="feat-body">
+				<div class="feat-title">Link Budget Calculator</div>
+				<div class="feat-desc">End-to-end RF link analysis: TX power, path loss, noise floor, and SNR margin with colour-coded pass/fail output.</div>
+			</div>
+		</a>
+
+		<a class="feat-card" href="MultiTurnCoilDesigner.html">
+			<div class="feat-preview">
+<svg viewBox="0 0 240 120"><ellipse cx="120" cy="60" rx="70" ry="18" fill="none" stroke="#AA77FF" stroke-width="2"/><ellipse cx="120" cy="60" rx="70" ry="18" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(-20,0)"/><ellipse cx="120" cy="60" rx="70" ry="18" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(-40,0)"/><ellipse cx="120" cy="60" rx="70" ry="18" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(20,0)"/><ellipse cx="120" cy="60" rx="70" ry="18" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(40,0)"/><text x="120" y="105" text-anchor="middle" font-family="monospace" font-size="10" fill="#5533aa">N-turn solenoid coil</text></svg>
+			</div>
+			<div class="feat-body">
+				<div class="feat-title">Multi-Turn Coil Designer</div>
+				<div class="feat-desc">Wheeler formula inductance, tuning capacitor, wire resistance, and Q factor for helical RF coils — designed especially for MRI tuning.</div>
+			</div>
+		</a>
+
+		<a class="feat-card" href="FilterDesign.html">
+			<div class="feat-preview">
+<svg viewBox="0 0 240 120"><line x1="12" y1="100" x2="228" y2="100" stroke="#aaa" stroke-width="1"/><line x1="12" y1="12" x2="12" y2="100" stroke="#aaa" stroke-width="1"/><path d="M12,15 L110,15 Q135,15 140,50 Q145,95 228,95" stroke="#AA77FF" stroke-width="2" fill="none"/><path d="M12,22 Q70,22 90,25 Q115,50 135,80 Q155,95 228,97" stroke="#ff6644" stroke-width="2" fill="none"/><text x="40" y="35" font-family="monospace" font-size="10" fill="#AA77FF">Butterworth</text><text x="165" y="75" font-family="monospace" font-size="10" fill="#ff6644">Chebyshev</text><line x1="135" y1="12" x2="135" y2="100" stroke="#888" stroke-width="0.8" stroke-dasharray="2 2"/><text x="135" y="115" text-anchor="middle" font-family="monospace" font-size="9" fill="#888">fc</text></svg>
+			</div>
+			<div class="feat-body">
+				<div class="feat-title">LC Filter Designer</div>
+				<div class="feat-desc">Generate Butterworth or Chebyshev LC ladder component values up to 9th order. Low-pass or high-pass, with full bill of materials.</div>
+			</div>
+		</a>
+
+	</div>
+
+	<!-- ══════════════════ FROM THE WIKI ══════════════════ -->
+	<div class="sec-hdr">From the Wiki</div>
+	<div class="wiki-showcase">
+		<p style="font-family:monospace;font-size:12px;color:#555;margin-bottom:10px;">35 reference articles covering theory behind the tools. Each article is concise, equation-focused, and includes original diagrams.</p>
+		<div class="wiki-items">
+			<a class="wiki-item" href="wiki_maxwells.html">Maxwell's Equations</a>
+			<a class="wiki-item" href="wiki_sparam.html">S-Parameters</a>
+			<a class="wiki-item" href="wiki_impedance_matching.html">Impedance Matching</a>
+			<a class="wiki-item" href="wiki_noise.html">Noise in RF Systems</a>
+			<a class="wiki-item" href="wiki_filters.html">RF Filters</a>
+			<a class="wiki-item" href="wiki_antennas.html">Antenna Fundamentals</a>
+			<a class="wiki-item" href="wiki_transmission_lines.html">Transmission Lines</a>
+			<a class="wiki-item" href="wiki_waveguide.html">Waveguides</a>
+			<a class="wiki-item" href="wiki_nmr_basics.html">NMR Basics</a>
+			<a class="wiki-item" href="wiki_birdcage.html">Birdcage Coil</a>
+			<a class="wiki-item" href="wiki_parallel_imaging.html">Parallel Imaging</a>
+			<a class="wiki-item" href="wiki_mri_sequences.html">MRI Pulse Sequences</a>
+			<a class="wiki-item" href="wiki_oscillators.html">Oscillators &amp; PLLs</a>
+			<a class="wiki-item" href="wiki_radar.html">Radar Fundamentals</a>
+			<a class="wiki-item" href="wiki_mixers.html">Mixers</a>
+			<a class="wiki-item" href="wiki_modulation.html">Modulation Schemes</a>
+			<a class="wiki-item" href="wiki.html" style="background:#AA77FF;color:#fff;">Browse all 35 articles →</a>
+		</div>
+	</div>
+
+	<p class="updates">Site last updated: April 2026 &nbsp; · &nbsp; All tools run client-side in your browser &nbsp; · &nbsp; Built with ♡ for RF engineers and MRI physicists</p>
+
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a> . <a href="games.html">Games</a></p></footer>
+</body>
 </html>
