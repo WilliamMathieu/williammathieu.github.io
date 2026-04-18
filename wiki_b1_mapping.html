@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox Wiki — B1 Field Mapping</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wa .infobox{float:right;clear:right;margin:0 0 12px 16px;background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 12px;font-size:12px;font-family:monospace;min-width:180px;max-width:240px;}
+		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
+		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
+		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
+		.toc ol{margin:0;padding-left:18px;}
+		.toc li{margin-bottom:3px;}
+		.toc a{color:#5533aa;text-decoration:none;}
+		.toc a:hover{text-decoration:underline;}
+		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>B1 Field Mapping</h3>
+			<div class="wa">
+
+				<p>B1 mapping refers to measuring the spatial distribution of the RF transmit field (B1⁺) inside the subject. At 3 T and above, wavelength effects cause significant B1⁺ inhomogeneity, which manifests as flip angle variations across the image. B1 maps are used for quantitative MRI, SAR estimation, and parallel transmit calibration.</p>
+				<h4>Why B1 Mapping Matters at High Field</h4>
+				<p>At 3 T (128 MHz), the wavelength in tissue (~25 cm) becomes comparable to body dimensions, causing constructive and destructive interference of the RF field. A nominal 90° pulse may deliver 70° in some regions and 110° in others. Quantitative MRI techniques (T1 mapping, T2 mapping, MR spectroscopy) require accurate flip angles for valid results.</p>
+				<h4>Double Angle Method (DAM)</h4>
+				<p>Two spin-echo images are acquired with the same TR but with nominal flip angles α and 2α. The signal ratio gives: \(|S(2\alpha)/S(\alpha)| = 2\cos(\alpha_{actual})\), from which the actual flip angle can be calculated pixel-by-pixel. Simple but slow (requires long TR for T1 recovery).</p>
+				<h4>Actual Flip Angle Imaging (AFI)</h4>
+				<p>Two interleaved acquisitions with different TRs (TR1 ≪ TR2) but the same flip angle. The signal ratio depends only on flip angle and the TR ratio (not T1 for reasonable conditions), allowing fast B1 mapping.</p>
+				<h4>Parallel Transmit (pTx)</h4>
+				<p>At 7 T, multiple transmit channels (typically 8) each drive a separate coil element. By controlling the amplitude and phase of each channel, the B1⁺ distribution can be shaped (RF shimming) to improve uniformity or focus power. B1 maps for each channel are a prerequisite for pTx calibration.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+</body>
+</html>

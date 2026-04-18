@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox Wiki — Dielectrics and Permittivity</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wa .infobox{float:right;clear:right;margin:0 0 12px 16px;background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 12px;font-size:12px;font-family:monospace;min-width:180px;max-width:240px;}
+		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
+		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
+		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
+		.toc ol{margin:0;padding-left:18px;}
+		.toc li{margin-bottom:3px;}
+		.toc a{color:#5533aa;text-decoration:none;}
+		.toc a:hover{text-decoration:underline;}
+		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Dielectrics and Permittivity</h3>
+			<div class="wa">
+
+				<p>A dielectric is an insulating material that, when placed in an electric field, stores energy by polarising its molecules. The key RF properties of a dielectric are its relative permittivity (dielectric constant) and loss tangent.</p>
+				<h4>Relative Permittivity (\(\varepsilon_r\))</h4>
+				<p>The dielectric constant \(\varepsilon_r\) relates the permittivity of the material to that of free space: \(\varepsilon = \varepsilon_r\varepsilon_0\). It determines how much wavelengths are shortened in the material: \(\lambda = \lambda_0/\sqrt{\varepsilon_r}\).</p>
+				<h4>Loss Tangent (\(\tan\delta\))</h4>
+				<p>A real dielectric also dissipates energy. The loss tangent represents the ratio of the imaginary to real part of the complex permittivity:</p>
+				<div class="eq">\(\tan\delta = \dfrac{\varepsilon_r''}{\varepsilon_r'}\)</div>
+				<p>Lower \(\tan\delta\) means lower dielectric loss. Attenuation in a transmission line increases with loss tangent and frequency.</p>
+				<h4>Common PCB Substrate Materials</h4>
+				<ul>
+					<li><span class="key">FR4</span> — \(\varepsilon_r \approx 4.4\), \(\tan\delta \approx 0.02\). Standard PCB material, adequate to ~5 GHz.</li>
+					<li><span class="key">Rogers 4003C</span> — \(\varepsilon_r = 3.55\), \(\tan\delta = 0.0027\). Low loss, stable with temperature, suitable to 77 GHz.</li>
+					<li><span class="key">PTFE (Teflon)</span> — \(\varepsilon_r \approx 2.1\), \(\tan\delta < 0.001\). Excellent high-frequency performance, used in coaxial cable dielectrics.</li>
+					<li><span class="key">Alumina (Al₂O₃)</span> — \(\varepsilon_r \approx 9.8\), \(\tan\delta \approx 0.001\). Used in MMIC substrates.</li>
+				</ul>
+				<h4>Frequency Dependence</h4>
+				<p>Both \(\varepsilon_r\) and \(\tan\delta\) vary with frequency. For PCB design above 1 GHz, always use substrate data measured at the operating frequency rather than the low-frequency value printed on datasheets.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+</body>
+</html>

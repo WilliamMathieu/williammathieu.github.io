@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox Wiki — RF Amplifiers</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wa .infobox{float:right;clear:right;margin:0 0 12px 16px;background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 12px;font-size:12px;font-family:monospace;min-width:180px;max-width:240px;}
+		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
+		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
+		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
+		.toc ol{margin:0;padding-left:18px;}
+		.toc li{margin-bottom:3px;}
+		.toc a{color:#5533aa;text-decoration:none;}
+		.toc a:hover{text-decoration:underline;}
+		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>RF Amplifiers</h3>
+			<div class="wa">
+
+				<p>RF amplifiers increase signal power. Key specifications include gain, noise figure, output power, linearity, and stability. Different applications demand very different tradeoffs: a receiver LNA optimises noise figure; a transmit PA optimises efficiency and output power.</p>
+				<h4>Low-Noise Amplifier (LNA)</h4>
+				<p>The first active stage in a receiver chain. Its noise figure dominates the overall system NF (Friis formula), so minimising LNA NF is critical. The input matching network is designed for noise match rather than power match. Typical specifications: NF = 0.3–1.5 dB, gain = 15–25 dB.</p>
+				<h4>Power Amplifier (PA)</h4>
+				<p>The final stage of a transmitter. PA efficiency (PAE — power added efficiency) is critical for battery life in mobile devices. Class A amplifiers have low distortion but poor efficiency (~25–30%). Class B/AB amplifiers improve efficiency (~50–60%). Class E/F switching amplifiers can achieve theoretical efficiencies above 90%.</p>
+				<h4>Gain and Stability</h4>
+				<p>Transistor amplifiers are potentially unstable at certain frequencies due to internal feedback. The Rollett stability factor \(K > 1\) (and \(|\Delta| < 1\)) is the condition for unconditional stability. Amplifiers are often stabilised using resistive loading or feedback networks.</p>
+				<h4>Linearity: P1dB and IP3</h4>
+				<p>The 1 dB compression point (P1dB) is the input power at which the gain has dropped by 1 dB from its small-signal value. The third-order intercept point (IP3) characterises intermodulation distortion — the spurious mixing products generated when two closely spaced signals both enter the amplifier. As a rule of thumb, \(IIP3 \approx P1dB + 10\) dBm.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+</body>
+</html>

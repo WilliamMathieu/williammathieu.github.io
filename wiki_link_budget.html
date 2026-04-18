@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox Wiki — Link Budgets</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wa .infobox{float:right;clear:right;margin:0 0 12px 16px;background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 12px;font-size:12px;font-family:monospace;min-width:180px;max-width:240px;}
+		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
+		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
+		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
+		.toc ol{margin:0;padding-left:18px;}
+		.toc li{margin-bottom:3px;}
+		.toc a{color:#5533aa;text-decoration:none;}
+		.toc a:hover{text-decoration:underline;}
+		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Link Budgets</h3>
+			<div class="wa">
+
+				<p>A link budget is a systematic accounting of all gains and losses in a communication system from transmitter to receiver. It determines whether a link will achieve adequate signal-to-noise ratio under specified conditions, and by how much margin.</p>
+				<h4>Link Budget Equation</h4>
+				<div class="eq">\(P_r = P_t + G_t - L_{tx} - FSPL - L_{misc} + G_r - L_{rx}\) &nbsp; (dBm)</div>
+				<p>Then compare received power to the minimum detectable signal (MDS):</p>
+				<div class="eq">\(MDS = kTB + NF + SNR_{min}\) &nbsp; (dBm)</div>
+				<p>Link margin = \(P_r - MDS\). A positive margin means the link works; typical design margins are 3–20 dB depending on the fade margin required.</p>
+				<h4>Free-Space Path Loss</h4>
+				<div class="eq">\(FSPL = 20\log_{10}(d) + 20\log_{10}(f) + 20\log_{10}\!\left(\dfrac{4\pi}{c}\right)\)</div>
+				<p>At 2.4 GHz, FSPL over 100 m ≈ 80 dB. FSPL grows with distance² and frequency² — doubling distance adds 6 dB; doubling frequency adds 6 dB.</p>
+				<h4>Additional Loss Mechanisms</h4>
+				<ul>
+					<li><b>Multipath fading</b> — reflections cause constructive/destructive interference. Fast fading margin: 20–30 dB for 99.9% link reliability.</li>
+					<li><b>Rain attenuation</b> — significant above 10 GHz; up to several dB/km in heavy rain.</li>
+					<li><b>Atmospheric absorption</b> — oxygen absorption peak at 60 GHz (15 dB/km) limits this band to short-range applications.</li>
+					<li><b>Polarisation mismatch</b> — misaligned transmit/receive polarisations cause 0–∞ dB loss.</li>
+				</ul>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+</body>
+</html>

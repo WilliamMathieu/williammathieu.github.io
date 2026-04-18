@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox Wiki — Magnetic Materials</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wa .infobox{float:right;clear:right;margin:0 0 12px 16px;background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 12px;font-size:12px;font-family:monospace;min-width:180px;max-width:240px;}
+		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
+		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
+		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
+		.toc ol{margin:0;padding-left:18px;}
+		.toc li{margin-bottom:3px;}
+		.toc a{color:#5533aa;text-decoration:none;}
+		.toc a:hover{text-decoration:underline;}
+		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Magnetic Materials</h3>
+			<div class="wa">
+
+				<p>Magnetic materials are used in RF and power electronics to make inductors, transformers, ferrite beads, and circulators. Understanding their properties is essential for choosing the right core material.</p>
+				<h4>Relative Permeability (\(\mu_r\))</h4>
+				<p>Permeability \(\mu_r\) relates the magnetic flux density to the applied field: \(B = \mu_r\mu_0 H\). High \(\mu_r\) increases inductance but also limits useful frequency range (permeability drops at high frequencies).</p>
+				<h4>Ferrites</h4>
+				<p>Ferrites are ceramic magnetic materials with high resistivity (minimising eddy current losses at RF). They are used in:</p>
+				<ul>
+					<li><b>Ferrite beads</b> — suppress high-frequency noise on power lines and signal traces by presenting high impedance above a target frequency.</li>
+					<li><b>Ferrite cores</b> — increase inductance of RF chokes and RF transformers, particularly below 50 MHz.</li>
+					<li><b>Circulators and isolators</b> — exploit the non-reciprocal properties of magnetised ferrite (Faraday rotation) to route signals directionally.</li>
+				</ul>
+				<h4>Core Saturation</h4>
+				<p>At high flux densities, magnetic cores saturate — \(\mu_r\) collapses, inducing harmonics and power loss. Always verify that peak flux density is below the saturation flux density \(B_{sat}\) of the chosen material under worst-case conditions.</p>
+				<h4>Core Loss</h4>
+				<p>Core loss (hysteresis + eddy current losses) is characterised by the complex permeability \(\mu = \mu' - j\mu''\). The loss factor \(\mu''/\mu'\) (analogous to \(\tan\delta\)) increases with frequency. Ferrite materials are categorised by their intended frequency range (e.g. MnZn ferrites for &lt;5 MHz, NiZn for 1–100 MHz).</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+</body>
+</html>

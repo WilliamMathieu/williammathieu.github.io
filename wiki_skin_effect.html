@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox Wiki — Skin Effect</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wa .infobox{float:right;clear:right;margin:0 0 12px 16px;background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 12px;font-size:12px;font-family:monospace;min-width:180px;max-width:240px;}
+		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
+		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
+		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
+		.toc ol{margin:0;padding-left:18px;}
+		.toc li{margin-bottom:3px;}
+		.toc a{color:#5533aa;text-decoration:none;}
+		.toc a:hover{text-decoration:underline;}
+		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Skin Effect</h3>
+			<div class="wa">
+
+				<p>The skin effect is the tendency of alternating electric current to flow primarily near the surface of a conductor. At higher frequencies, the current density decreases exponentially with depth from the surface, concentrating in a thin layer called the skin depth.</p>
+				<h4>Skin Depth Formula</h4>
+				<div class="eq">\(\delta = \sqrt{\dfrac{2}{\omega\mu\sigma}} = \sqrt{\dfrac{1}{\pi f\mu\sigma}}\)</div>
+				<p>where \(\omega = 2\pi f\) is angular frequency, \(\mu\) is permeability, and \(\sigma\) is conductivity. Current density falls to \(1/e \approx 37\%\) of its surface value at depth \(\delta\).</p>
+				<h4>Values for Common Conductors at 100 MHz</h4>
+				<ul>
+					<li>Copper (\(\sigma = 5.8\times10^7\) S/m): \(\delta \approx 6.6\) µm</li>
+					<li>Aluminium (\(\sigma = 3.8\times10^7\) S/m): \(\delta \approx 8.2\) µm</li>
+					<li>Silver (\(\sigma = 6.3\times10^7\) S/m): \(\delta \approx 6.3\) µm</li>
+				</ul>
+				<h4>Impact on RF Resistance</h4>
+				<p>Because current only flows in a thin annulus near the surface, the effective cross-sectional area of the conductor is reduced, increasing resistance compared to DC. The AC resistance of a round wire of radius \(r \gg \delta\) is approximately:</p>
+				<div class="eq">\(R_{AC} \approx R_{DC}\cdot\dfrac{r}{2\delta}\)</div>
+				<p>For a 1 mm diameter copper wire at 100 MHz, \(R_{AC}/R_{DC} \approx 38\). This is why multi-strand (Litz) wire is used in high-Q inductors at lower RF frequencies — many thin strands, each smaller than the skin depth, provide more effective conductor area.</p>
+				<h4>Design Implications</h4>
+				<ul>
+					<li>Conductor thickness in PCBs should be at least 3–5 skin depths to minimise resistive loss.</li>
+					<li>Silver plating adds only marginal benefit over copper above ~100 MHz (skin depth ~6 µm) as long as the copper is thicker than a few skin depths.</li>
+					<li>In MRI coils at 128 MHz (3 T), copper tubing (thick wall) is preferred over solid wire for high-Q resonators.</li>
+				</ul>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+</body>
+</html>

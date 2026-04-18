@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox Wiki — Modulation Schemes</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wa .infobox{float:right;clear:right;margin:0 0 12px 16px;background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 12px;font-size:12px;font-family:monospace;min-width:180px;max-width:240px;}
+		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
+		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
+		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
+		.toc ol{margin:0;padding-left:18px;}
+		.toc li{margin-bottom:3px;}
+		.toc a{color:#5533aa;text-decoration:none;}
+		.toc a:hover{text-decoration:underline;}
+		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Modulation Schemes</h3>
+			<div class="wa">
+
+				<p>Modulation encodes information onto a carrier wave by varying its amplitude, frequency, or phase. The choice of modulation scheme involves tradeoffs between spectral efficiency (bits/Hz), power efficiency (Eb/N0 required), and robustness to noise and interference.</p>
+				<h4>Amplitude Modulation (AM)</h4>
+				<p>The carrier amplitude varies with the message signal. Simple to demodulate but spectrally inefficient and susceptible to amplitude noise. Double-sideband suppressed carrier (DSB-SC) removes the carrier for power efficiency; single-sideband (SSB) halves the bandwidth.</p>
+				<h4>Frequency Modulation (FM)</h4>
+				<p>The carrier frequency varies with the message. Provides noise immunity above the FM threshold but requires wider bandwidth than AM. Used in broadcast radio (±75 kHz deviation) and VHF voice communications.</p>
+				<h4>Phase-Shift Keying (PSK)</h4>
+				<p>Digital data is encoded as discrete phase shifts. BPSK (2 phases, 1 bit/symbol) is robust; QPSK (4 phases, 2 bits/symbol) doubles spectral efficiency. Higher orders (8-PSK, 16-PSK) pack more bits per symbol but require higher SNR.</p>
+				<h4>Quadrature Amplitude Modulation (QAM)</h4>
+				<p>Combines amplitude and phase modulation. 16-QAM carries 4 bits/symbol; 64-QAM carries 6 bits/symbol; 256-QAM carries 8 bits/symbol. Used extensively in LTE, 5G, WiFi (802.11ax uses 1024-QAM), and cable TV. Higher QAM orders require much higher SNR and are sensitive to phase noise and nonlinearity.</p>
+				<h4>OFDM</h4>
+				<p>Orthogonal Frequency Division Multiplexing splits the channel into many narrow subcarriers, each modulated with QAM. The cyclic prefix guards against multipath inter-symbol interference. OFDM is the basis of WiFi (802.11a/g/n/ac/ax), LTE, 5G NR, and digital broadcast (DVB-T, DAB).</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+</body>
+</html>

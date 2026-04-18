@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox Wiki — Mixers and Frequency Conversion</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wa .infobox{float:right;clear:right;margin:0 0 12px 16px;background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 12px;font-size:12px;font-family:monospace;min-width:180px;max-width:240px;}
+		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
+		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
+		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
+		.toc ol{margin:0;padding-left:18px;}
+		.toc li{margin-bottom:3px;}
+		.toc a{color:#5533aa;text-decoration:none;}
+		.toc a:hover{text-decoration:underline;}
+		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Mixers and Frequency Conversion</h3>
+			<div class="wa">
+
+				<p>A mixer multiplies two signals in the time domain, producing sum and difference frequency components. This allows frequency conversion — moving signals from one frequency band to another. Mixers are at the heart of every superheterodyne radio, radar, and wireless communication system.</p>
+				<h4>Basic Operation</h4>
+				<p>An ideal mixer with RF input at \(f_{RF}\) and local oscillator (LO) at \(f_{LO}\) produces output at \(f_{IF} = f_{RF} \pm f_{LO}\). The desired sideband is selected by the IF filter; the unwanted image frequency falls at \(f_{LO} - f_{IF}\) (for a low-side LO) and must be rejected.</p>
+				<h4>Conversion Loss and Noise Figure</h4>
+				<p>Passive mixers (using diodes or FETs) have conversion loss — the IF output is weaker than the RF input. Typical conversion loss: 5–8 dB for a diode ring mixer. The NF of a passive mixer equals approximately its conversion loss. Active mixers provide conversion gain (0–15 dB) at the cost of higher DC power and potentially more distortion.</p>
+				<h4>Image Rejection Mixer (IQ Mixer)</h4>
+				<p>An IQ (in-phase/quadrature) mixer uses two mixers with LO signals 90° apart, producing in-phase (I) and quadrature (Q) baseband outputs. When the outputs are combined correctly, the image frequency is cancelled. Image rejection of 30–40 dB is achievable in practice; better rejection requires careful amplitude and phase balance.</p>
+				<h4>Spurs and Isolation</h4>
+				<p>Real mixers generate mixing products at \(mf_{LO} \pm nf_{RF}\) (spurious responses or "spurs"). Mixer datasheets specify LO-to-RF, LO-to-IF, and RF-to-IF isolation to characterise feedthrough. Double-balanced mixers provide better isolation and spur rejection than single-ended designs.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+</body>
+</html>

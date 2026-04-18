@@ -18,7 +18,9 @@
 <body>
 	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 	<section>
-		<nav><h3>Tools</h3>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<h3>dBm ↔ Watts / dB Converter</h3>
 			<p>\begin{align} P_W &= 10^{(P_{dBm}-30)/10} \end{align}</p>
 			<div class="result-box" id="db-out1"><p>W = <span id="db-W">—</span></p><p>mW = <span id="db-mW">—</span></p><p>μW = <span id="db-uW">—</span></p></div>
 			<br>
@@ -56,6 +58,6 @@
 			<script src="dBmConverter.js"></script>
 		</article>
 	</section>
-	<footer><p><a href="index.html">Home</a></p></footer>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
 </body>
 </html>

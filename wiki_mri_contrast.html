@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox Wiki — MRI Contrast and Relaxation</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wa .infobox{float:right;clear:right;margin:0 0 12px 16px;background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 12px;font-size:12px;font-family:monospace;min-width:180px;max-width:240px;}
+		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
+		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
+		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
+		.toc ol{margin:0;padding-left:18px;}
+		.toc li{margin-bottom:3px;}
+		.toc a{color:#5533aa;text-decoration:none;}
+		.toc a:hover{text-decoration:underline;}
+		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>MRI Contrast and Relaxation</h3>
+			<div class="wa">
+
+				<p>MRI contrast arises from differences in tissue relaxation times T1 and T2, proton density (PD), and flow. By choosing appropriate pulse sequence parameters, specific tissue properties are emphasized, allowing discrimination of normal from pathological tissue.</p>
+				<h4>T1 Relaxation (Spin-Lattice)</h4>
+				<p>T1 is the time constant for recovery of longitudinal magnetisation after excitation. Energy is transferred from the spin system to the surrounding lattice (molecular framework). T1 reflects molecular mobility: water in CSF has long T1 (~4 s at 3 T); fat has short T1 (~260 ms) due to efficient energy transfer at the Larmor frequency. Short TR → T1-weighted image.</p>
+				<h4>T2 Relaxation (Spin-Spin)</h4>
+				<p>T2 is the time constant for decay of transverse magnetisation. Local field inhomogeneities from neighbouring spins cause dephasing. T2 is always ≤ T1. Fluids have long T2 (~2 s for CSF) appearing bright on T2-weighted images; solid tissues have short T2. Long TE → T2-weighted image.</p>
+				<h4>T2* and Susceptibility</h4>
+				<p>T2* includes additional dephasing from macroscopic B0 field inhomogeneities (susceptibility differences, main magnet imperfections). T2* &lt; T2. Gradient echo sequences are T2*-weighted. Susceptibility-weighted imaging (SWI) exploits T2* to visualise iron deposits, venous blood, and calcifications.</p>
+				<h4>Contrast Agents</h4>
+				<p>Gadolinium-based contrast agents (GBCAs) shorten T1 in their vicinity, making enhancing tissue appear bright on T1-weighted images. Used to detect blood-brain barrier breakdown, tumour vascularity, and inflammation. Iron oxide nanoparticles shorten T2/T2*, creating signal voids.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+</body>
+</html>

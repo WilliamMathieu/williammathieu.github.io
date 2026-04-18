@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox Wiki — Preamplifier Decoupling</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wa .infobox{float:right;clear:right;margin:0 0 12px 16px;background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 12px;font-size:12px;font-family:monospace;min-width:180px;max-width:240px;}
+		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
+		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
+		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
+		.toc ol{margin:0;padding-left:18px;}
+		.toc li{margin-bottom:3px;}
+		.toc a{color:#5533aa;text-decoration:none;}
+		.toc a:hover{text-decoration:underline;}
+		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Preamplifier Decoupling</h3>
+			<div class="wa">
+
+				<p>In phased array receive coils, adjacent elements must be isolated from each other to prevent mutual inductive coupling from increasing correlated noise and degrading combined SNR. Preamplifier decoupling is the most effective and widely used technique for achieving this isolation.</p>
+				<h4>The Problem: Mutual Inductance</h4>
+				<p>Two adjacent coil loops have mutual inductance M. If one coil carries current (as part of a resonant circuit), it induces a voltage in its neighbour. This reduces the SNR of both coils and is equivalent to adding correlated noise between array channels.</p>
+				<h4>The Technique</h4>
+				<p>A low-input-impedance preamplifier, together with a series inductor \(L_{add}\) at the coil port, presents a very high impedance to current flowing in the coil loop at the resonant frequency. This "preamplifier decoupling" suppresses the induced current in each coil, effectively eliminating mutual coupling without requiring geometric overlap or additional decoupling networks.</p>
+				<div class="eq">\(Z_{preamplifier\ decoupling} = \dfrac{(\omega L_{add})^2}{Z_{in,preamp}}\)</div>
+				<p>If \(Z_{in,preamp}\) is very low (~2–5 Ω) and \(L_{add}\) is chosen such that \(\omega L_{add} = 1/(\omega C_m)\) (resonates with the matching capacitor), the impedance presented to coil current becomes very high (&gt;1000 Ω), suppressing currents and hence coupling.</p>
+				<h4>Geometric Overlap Decoupling</h4>
+				<p>An alternative for nearest-neighbour elements is to physically overlap adjacent loops until their mutual inductance is zero (the induced flux from one loop through the other sums to zero due to partial cancellation). About 15–20% overlap is typical. Used in combination with preamplifier decoupling for arrays with many elements.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+</body>
+</html>

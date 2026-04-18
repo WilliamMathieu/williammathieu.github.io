@@ -11,14 +11,14 @@
 	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<link rel="stylesheet" href="style.css">
 	<style>
-		iframe#falstad { width:100%; height:640px; border:1px solid #ccc; border-radius:4px; display:block; }
-		.preset-grid { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
-		.preset-btn { font-family:monospace; font-size:12px; padding:5px 10px; border:1px solid #ccc; border-radius:4px; background:#fff; cursor:pointer; color:#333; }
-		.preset-btn:hover { background:#f0eeff; border-color:#AA77FF; color:#5533aa; }
-		.sim-note { font-family:monospace; font-size:11px; color:#888; margin-top:6px; }
-		.ext-link { font-family:monospace; font-size:12px; padding:4px 10px; border:1px solid #AA77FF; border-radius:4px; background:#f0eeff; color:#5533aa; text-decoration:none; }
-		.ext-link:hover { background:#AA77FF; color:white; }
-		#load-status { font-family:monospace; font-size:12px; color:#AA77FF; margin-bottom:6px; min-height:16px; }
+		iframe#falstad{width:100%;height:640px;border:1px solid #ccc;border-radius:4px;display:block;}
+		.preset-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
+		.preset-btn{font-family:monospace;font-size:12px;padding:5px 10px;border:1px solid #ccc;border-radius:4px;background:#fff;cursor:pointer;color:#333;}
+		.preset-btn:hover{background:#f0eeff;border-color:#AA77FF;color:#5533aa;}
+		.preset-btn.active{background:#AA77FF;color:#fff;border-color:#AA77FF;}
+		.ext-link{font-family:monospace;font-size:12px;padding:4px 10px;border:1px solid #AA77FF;border-radius:4px;background:#f0eeff;color:#5533aa;text-decoration:none;}
+		.ext-link:hover{background:#AA77FF;color:white;}
+		.sim-note{font-family:monospace;font-size:11px;color:#888;margin-top:6px;}
 	</style>
 </head>
 <body>
@@ -28,163 +28,45 @@
 		<article>
 			<h3>Circuit Simulator (Falstad)</h3>
 			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p>Full interactive circuit simulator with real-time animated current flow and oscilloscope probes. Built by Paul Falstad, running entirely in your browser. Use the <b>Draw</b> menu to add components, right-click to edit values, and press <b>Space</b> to run or pause simulation.</p>
+				<p>Full interactive circuit simulator by Paul Falstad, running entirely in your browser. Animated current flow and built-in oscilloscope. Use the <b>Draw</b> menu to add components, right-click to edit values, and press <b>Space</b> to run or pause.</p>
 			</div>
-
-			<div style="font-family:monospace;font-size:12px;color:#5533aa;margin-bottom:6px;">Load a preset circuit:</div>
+			<div style="font-family:monospace;font-size:12px;color:#5533aa;margin-bottom:6px;">Preset circuits:</div>
 			<div class="preset-grid">
-				<button class="preset-btn" onclick="loadPreset('rc_lpf')">RC Low-Pass</button>
-				<button class="preset-btn" onclick="loadPreset('rc_hpf')">RC High-Pass</button>
-				<button class="preset-btn" onclick="loadPreset('lc_res')">LC Resonator</button>
-				<button class="preset-btn" onclick="loadPreset('rlc')">Series RLC</button>
-				<button class="preset-btn" onclick="loadPreset('lc_bp')">LC Band-Pass</button>
-				<button class="preset-btn" onclick="loadPreset('lmatch')">L-Match Network</button>
-				<button class="preset-btn" onclick="loadPreset('ce_amp')">Common-Emitter Amp</button>
-				<button class="preset-btn" onclick="loadPreset('blank')">Blank Canvas</button>
+				<button class="preset-btn active" id="btn-rc_lpf"  onclick="load('rc_lpf')">RC Low-Pass</button>
+				<button class="preset-btn"         id="btn-rc_hpf"  onclick="load('rc_hpf')">RC High-Pass</button>
+				<button class="preset-btn"         id="btn-lc_res"  onclick="load('lc_res')">LC Resonator</button>
+				<button class="preset-btn"         id="btn-rlc"     onclick="load('rlc')">Series RLC</button>
+				<button class="preset-btn"         id="btn-lc_bp"   onclick="load('lc_bp')">LC Band-Pass</button>
+				<button class="preset-btn"         id="btn-lmatch"  onclick="load('lmatch')">L-Match Network</button>
+				<button class="preset-btn"         id="btn-ce_amp"  onclick="load('ce_amp')">Common-Emitter Amp</button>
+				<button class="preset-btn"         id="btn-blank"   onclick="load('blank')">Blank Canvas</button>
 			</div>
-			<div id="load-status"></div>
 			<div style="margin-bottom:8px;">
-				<a class="ext-link" href="https://falstad.com/circuit/circuitjs.html" target="_blank">Open full simulator &#8599;</a>
+				<a class="ext-link" href="https://falstad.com/circuit/circuitjs.html" target="_blank">Open in new tab &#8599;</a>
 			</div>
-
-			<iframe id="falstad"
-				src="https://falstad.com/circuit/circuitjs.html"
-				allowfullscreen></iframe>
-			<p class="sim-note">Tip: After clicking a preset, wait a moment for the simulator to load, then click the button again if the circuit does not appear. Scope probes show waveforms — right-click a wire and select "View in scope".</p>
+			<iframe id="falstad" src="https://falstad.com/circuit/circuitjs.html?ctz=ZY47EoIhDIR7TpHCVmaTECDncaydsdDru_kLGinIkG8f3EQFHXVCFN0AW8uxbWYuCUhc1_Ou2j6iaeJ7XFMnBLRrmSmrF3q096EeR0VJe5xFzYoh6JEaI4cjdWc4m7agfU_V0baXmMwyDWQykm38PJcMJPR_qIRO-AM" allowfullscreen></iframe>
+			<p class="sim-note">Tip: Scope probes show waveforms — right-click a wire and select "View in scope". Click a preset above to reload with a new circuit.</p>
 		</article>
 	</section>
-	<footer><p><a href="index.html">Home</a></p></footer>
-
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
 <script>
-// Falstad circuit text for each preset
-// Format follows the CircuitJS1 native export format
-var CIRCUITS = {
-
-blank:
-'$ 1 0.000005 10.20027730826997 50 5 50 5e-11\n',
-
-rc_lpf:
-'$ 1 0.000005 10.20027730826997 50 5 50 5e-11\n' +
-'v 192 384 192 160 0 1 10000 5 0 0 0.5\n' +
-'r 192 160 352 160 0 1000\n' +
-'c 352 160 352 384 0 1.5915494309189535e-8 0\n' +
-'w 192 384 352 384 0\n' +
-'o 2 64 0 4099 10 0.1 0 2 0 3\n' +
-'o 3 64 0 4099 10 0.1 1 2 3 3\n' +
-'38 2 0\n',
-
-rc_hpf:
-'$ 1 0.000005 10.20027730826997 50 5 50 5e-11\n' +
-'v 192 384 192 160 0 1 10000 5 0 0 0.5\n' +
-'c 192 160 352 160 0 1.5915494309189535e-8 0\n' +
-'r 352 160 352 384 0 1000\n' +
-'w 192 384 352 384 0\n' +
-'o 3 64 0 4099 10 0.1 0 2 0 3\n' +
-'38 2 0\n',
-
-lc_res:
-'$ 1 5e-9 10.20027730826997 50 5 50 5e-11\n' +
-'v 192 400 192 160 0 1 159154943.09189534 1 0 0 0.5\n' +
-'r 192 160 320 160 0 50\n' +
-'l 416 160 416 304 0 1e-7 3.2893706205689707e-12\n' +
-'c 416 304 416 400 0 1e-11 4.99983611938555\n' +
-'w 320 160 416 160 0\n' +
-'w 192 400 416 400 0\n' +
-'o 4 64 0 4099 5 0.05 0 2 0 3\n' +
-'o 3 64 0 4099 5 0.05 1 2 3 3\n',
-
-rlc:
-'$ 1 5e-9 10.20027730826997 50 5 50 5e-11\n' +
-'v 160 384 160 160 0 1 100000000 1 0 0 0.5\n' +
-'r 160 160 272 160 0 50\n' +
-'l 272 160 384 160 0 7.957747154594767e-8 0\n' +
-'c 384 160 384 384 0 3.183098861837907e-11 0\n' +
-'r 384 160 496 160 0 50\n' +
-'w 160 384 496 384 0\n' +
-'g 496 384 496 432 0 0\n' +
-'o 5 64 0 4099 5 0.05 0 2 0 3\n',
-
-lc_bp:
-'$ 1 5e-9 10.20027730826997 50 5 50 5e-11\n' +
-'v 160 400 160 160 0 1 159154943.09189534 1 0 0 0.5\n' +
-'r 160 160 256 160 0 50\n' +
-'l 256 160 368 160 0 1e-7 0\n' +
-'c 368 160 368 400 0 1e-11 0\n' +
-'r 368 160 480 160 0 50\n' +
-'w 160 400 480 400 0\n' +
-'g 480 400 480 448 0 0\n' +
-'o 4 64 0 4099 5 0.05 0 2 0 3\n',
-
-lmatch:
-'$ 1 5e-9 10.20027730826997 50 5 50 5e-11\n' +
-'v 160 384 160 160 0 1 100000000 1 0 0 0.5\n' +
-'r 160 160 256 160 0 50\n' +
-'l 256 160 384 160 0 6.366197723675814e-8 0\n' +
-'c 384 160 384 384 0 3.1830988618379067e-10 0\n' +
-'r 384 160 496 160 0 200\n' +
-'w 160 384 496 384 0\n' +
-'g 496 384 496 432 0 0\n' +
-'o 4 64 0 4099 5 0.05 0 2 0 3\n',
-
-ce_amp:
-'$ 1 5e-9 10.20027730826997 50 5 50 5e-11\n' +
-'v 160 528 160 160 0 0 40 12 0 0 0.5\n' +
-'r 352 160 352 272 0 47000\n' +
-'r 352 272 352 528 0 10000\n' +
-'r 352 160 496 160 0 0\n' +
-'w 496 160 592 160 0\n' +
-'r 592 160 592 384 0 2200\n' +
-'t 528 272 592 272 0 1 -0.6079686462552595 0.6490634862040773 100\n' +
-'r 352 272 528 272 0 0\n' +
-'c 256 272 352 272 0 0.000010 10\n' +
-'v 256 528 256 272 0 1 1000 0.1 0 0 0.5\n' +
-'r 592 384 592 528 0 470\n' +
-'c 592 384 752 384 0 0.0001 0\n' +
-'r 752 384 752 528 0 1000\n' +
-'g 752 528 752 576 0 0\n' +
-'w 160 528 752 528 0\n' +
-'o 10 64 0 4099 10 0.1 0 2 0 3\n' +
-'o 12 64 0 4099 10 0.1 1 2 12 3\n'
+var URLS = {
+	'blank':  'https://falstad.com/circuit/circuitjs.html?ctz=U1EwVDDQMwABUwVDAz0jAwMjc3NjAwsjM0tLcwVTAwVTMJGqa2jIBQA',
+	'rc_lpf': 'https://falstad.com/circuit/circuitjs.html?ctz=ZY47EoIhDIR7TpHCVmaTECDncaydsdDru_kLGinIkG8f3EQFHXVCFN0AW8uxbWYuCUhc1_Ou2j6iaeJ7XFMnBLRrmSmrF3q096EeR0VJe5xFzYoh6JEaI4cjdWc4m7agfU_V0baXmMwyDWQykm38PJcMJPR_qIRO-AM',
+	'rc_hpf': 'https://falstad.com/circuit/circuitjs.html?ctz=PY4xDkMxCEN3TuGhayMTQn44z1fnSh3a6xcyBAkQ4tnwgIKNFQ5l62S_LuPqM-KCE77L66kqX2h02Bq76ySYci1xYjWxudxna36o5qE-YhhDV7il4QLlc5jq5cztJ79z6izkDcMsYjAisbyWz6NnmvwB',
+	'lc_res': 'https://falstad.com/circuit/circuitjs.html?ctz=PU67DgIwCNz7FQyubQ4KrXyP6WZi4qC_L1TtAHfc8boQk63qxGgCyJwdVxnukwxkO63KXF7ELqTARh6gYMTmbOrag6eCZuV5Orrg12ko71Mqj69c7ocndmguXXWGdTtSYt7dFsedWPX_5XjlQUoj5xXu8TgaIpFE9PIB',
+	'rlc':    'https://falstad.com/circuit/circuitjs.html?ctz=RU_LDgMhCLzzFRx6XTMqiHxPs-mlSZM9tL9f2GytCTMjDg9vXFn3zbmiNKCZdcw23I0VrCfsW6305jrAfcrJGYFRdZ3QmUFROpajWbucCnqu668J2IqrmVhVURcbtm-TQfdlSc4IVers8DlHsDkstwrvsbzi4z_ts8ozfbagx9LJ0lsuTK_45cgJAvfQKAjgfOz0BQ',
+	'lc_bp':  'https://falstad.com/circuit/circuitjs.html?ctz=RU8xDgMxCNt5BUPXO5kEkvCe06lLpUod2u8Xol46YBObOOTGwnZuzoK9AKX3ilGae2cD24RzE6E3SwMrMDkrkMVcTF1r9KlgN3qtiWLtN2mgxzrWNq6Ac-sMOpaUnG9MSyIz0i5PB_5pn7VOyvMK3Vc_WUcuRE9WbsppuMePsCOAS1SlLw',
+	'lmatch': 'https://falstad.com/circuit/circuitjs.html?ctz=PU-7DsMwCNz5CoauscA2r--Joi6VKnVof78QJbZk7ozO3PFARjm2QKbWibrZIO8aYSiEcpZjY4YvshIOnyfWzZq_rpO8OtQEPkvRRS-lELzWc6hfbW1DlcOsDzVxnsfmSLAvSWF5Jmvsg8JdEy1ILWPljLS7xdPvYLkJ_Fbg6p9D4Ll44Ry9IsMbJ2p5TIrInamR1JByhT8',
+	'ce_amp': 'https://falstad.com/circuit/circuitjs.html?ctz=ZVFBDsMwCLvnFRx2bQWkSZr3TNWOk6pp-_4wLdGqqUpBNjiG3EiobFMn4VmZtbXMq9beGxWm4r9tEklvkmq5rh5x8C2Wqmc8l7RTLuocojYwS2PmkwGCCBVrZDCfoRe9wCIvPbB95Ih5XUxBzXF6uRykQRyXCk08V8KRy-1RCsU7aanD04nOMCXGvp31-rMKsvBsRfIzcthBPAazkU088FbCrouLzxJgu2wjPQbgsVU61hGrH-XpaQ1UF3-Cjtc7XcFmBqv_rBhreE5f'
 };
-
-var iframeReady = false;
-var pendingPreset = null;
-var iframe = document.getElementById('falstad');
-
-iframe.addEventListener('load', function() {
-    iframeReady = true;
-    if (pendingPreset) {
-        setTimeout(function() {
-            sendCircuit(pendingPreset);
-            pendingPreset = null;
-        }, 800);
-    }
-});
-
-function sendCircuit(text) {
-    try {
-        iframe.contentWindow.postMessage({ type: 'importCircuit', circuitText: text }, '*');
-        document.getElementById('load-status').textContent = 'Circuit loaded.';
-        setTimeout(function(){ document.getElementById('load-status').textContent = ''; }, 2000);
-    } catch(e) {
-        document.getElementById('load-status').textContent = 'Could not load — try opening the full simulator link above.';
-    }
+var current = 'rc_lpf';
+function load(name) {
+	document.querySelectorAll('.preset-btn').forEach(function(b){ b.classList.remove('active'); });
+	document.getElementById('btn-'+name).classList.add('active');
+	document.getElementById('falstad').src = URLS[name];
+	current = name;
 }
-
-function loadPreset(name) {
-    var text = CIRCUITS[name];
-    if (!text) return;
-    document.getElementById('load-status').textContent = 'Loading...';
-    if (iframeReady) {
-        setTimeout(function(){ sendCircuit(text); }, 200);
-    } else {
-        pendingPreset = text;
-        iframe.src = 'https://falstad.com/circuit/circuitjs.html';
-    }
-}
-
-// Load RC low-pass by default once iframe is ready
-pendingPreset = CIRCUITS['rc_lpf'];
 </script>
 </body>
 </html>

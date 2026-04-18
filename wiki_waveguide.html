@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox Wiki — Waveguides</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wa .infobox{float:right;clear:right;margin:0 0 12px 16px;background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 12px;font-size:12px;font-family:monospace;min-width:180px;max-width:240px;}
+		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
+		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
+		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
+		.toc ol{margin:0;padding-left:18px;}
+		.toc li{margin-bottom:3px;}
+		.toc a{color:#5533aa;text-decoration:none;}
+		.toc a:hover{text-decoration:underline;}
+		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Waveguides</h3>
+			<div class="wa">
+
+				<p>A waveguide is a hollow metallic tube that confines and guides electromagnetic waves. Unlike coaxial line (which supports TEM mode down to DC), waveguides have a cutoff frequency below which propagation does not occur. Above cutoff, waveguides offer very low loss, making them the preferred transmission medium at millimetre-wave frequencies and for high-power radar systems.</p>
+				<h4>Modes</h4>
+				<p>Rectangular waveguides support TE (transverse electric) and TM (transverse magnetic) modes. The dominant mode TE₁₀ has the lowest cutoff frequency and is used in virtually all single-mode waveguide applications. The cutoff frequency of the TE₁₀ mode in a rectangular waveguide of width \(a\) is:</p>
+				<div class="eq">\(f_c = \dfrac{c}{2a}\)</div>
+				<h4>Standard Waveguide Bands</h4>
+				<ul>
+					<li><span class="key">WR-90</span> X-band: 8.2–12.4 GHz</li>
+					<li><span class="key">WR-42</span> K-band: 18–26.5 GHz</li>
+					<li><span class="key">WR-28</span> Ka-band: 26.5–40 GHz</li>
+					<li><span class="key">WR-10</span> W-band: 75–110 GHz</li>
+				</ul>
+				<h4>Attenuation</h4>
+				<p>Waveguide losses are due to finite conductivity of the walls. Attenuation is minimum at approximately 1.8× the cutoff frequency and rises toward both the cutoff and at very high frequencies. Rectangular waveguide attenuation is typically 0.01–0.5 dB/m, much lower than coax at the same frequency.</p>
+				<h4>Applications</h4>
+				<p>Waveguides are used in high-power radar systems, satellite ground station feeds, millimetre-wave communication links, and as the connecting structure between antenna feeds and LNAs in satellite receivers (where minimum loss before the LNA is critical for noise figure).</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+</body>
+</html>
