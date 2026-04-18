@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — MRI Hardware</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>MRI Hardware</h3>
+			<div class="wiki-article">
+
+				<p>An MRI scanner is a complex system combining superconducting magnet technology, precision gradient electronics, and RF engineering. Each subsystem must work in concert to produce a diagnostic image.</p>
+
+				<h4>Main Magnet</h4>
+				<p>Modern clinical MRI scanners use superconducting solenoid magnets operating at liquid helium temperature (4 K) to achieve field strengths of 1.5–3 T (clinical) or 7–14 T (research). The magnet must have exceptional homogeneity — typically &lt;1 ppm over the imaging volume — achieved by shimming with additional coils or ferromagnetic pieces.</p>
+
+				<h4>Gradient Coils</h4>
+				<p>Three sets of gradient coils (Gx, Gy, Gz) superimpose linear magnetic field gradients on B₀. This makes the Larmor frequency spatially dependent, encoding spatial information. Gradient switching generates the characteristic loud knocking sound during an MRI scan. Gradient amplitude: 20–80 mT/m; slew rate: up to 200 T/m/s.</p>
+
+				<h4>RF Transmit System</h4>
+				<p>A high-power RF amplifier (typically 1–35 kW) drives the body or volume coil to produce the B1 excitation field at the Larmor frequency. The transmitter must deliver precise pulse shapes and calibrate the flip angle across the imaging volume. Frequency: 64 MHz (1.5 T), 128 MHz (3 T), 300 MHz (7 T).</p>
+
+				<h4>RF Receive System</h4>
+				<p>Receive coils (surface coils or phased arrays) detect the tiny precessing magnetisation signal. The signal is typically on the order of microvolts. It passes through a low-noise preamplifier (LNA), is downconverted to baseband, digitised, and reconstructed via Fourier transform into an image.</p>
+
+				<h4>Shielding</h4>
+				<p>The RF system operates inside an RF-shielded room (Faraday cage) to prevent external interference from contaminating the signal. The magnet's fringe field is contained by passive or active shielding to protect nearby equipment and comply with safety zones.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

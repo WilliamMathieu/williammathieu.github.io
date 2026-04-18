@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — Impedance Matching</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Impedance Matching</h3>
+			<div class="wiki-article">
+
+				<p>Maximum power transfer from source to load occurs when the load impedance is the complex conjugate of the source impedance. Impedance matching is the process of inserting a network between source and load to achieve this condition at the desired frequency.</p>
+
+				<h4>Why Matching Matters</h4>
+				<ul>
+					<li>Maximises power transfer to the load</li>
+					<li>Minimises reflections and standing waves</li>
+					<li>Prevents damage from reflected power in high-power systems</li>
+					<li>Optimises noise figure in low-noise amplifiers (noise match ≠ power match)</li>
+				</ul>
+
+				<h4>L-Network</h4>
+				<p>Two reactive elements (one series, one shunt) form the simplest matching network. The Q factor is fixed by the impedance ratio: \(Q = \sqrt{R_{high}/R_{low} - 1}\). Only one frequency can be matched; the fractional bandwidth \(\approx 1/Q\).</p>
+
+				<h4>Pi and T Networks</h4>
+				<p>Three-element networks allow Q to be chosen independently of the impedance ratio. A Pi network has two shunt elements; a T network has two series elements. Higher Q gives better harmonic suppression but narrower bandwidth.</p>
+
+				<h4>Quarter-Wave Transformer</h4>
+				<p>A \(\lambda/4\) transmission line section with \(Z_0 = \sqrt{Z_1 Z_2}\) matches two real impedances at the design frequency. Bandwidth is typically 10–20% for VSWR &lt; 2.</p>
+
+				<h4>Stub Matching</h4>
+				<p>A shorted or open transmission line stub in shunt with the main line presents a pure susceptance. Single-stub matching can match any load, but requires moving the stub to the correct point on the line (found using the Smith Chart).</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

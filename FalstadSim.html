@@ -9,18 +9,16 @@
 	<title>RF Toolbox — Circuit Simulator</title>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<!-- pako for zlib compression (required for Falstad ctz encoding) -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.min.js"></script>
 	<link rel="stylesheet" href="style.css">
 	<style>
-		iframe#falstad { width:100%; height:620px; border:1px solid #ccc; border-radius:4px; display:block; }
+		iframe#falstad { width:100%; height:640px; border:1px solid #ccc; border-radius:4px; display:block; }
 		.preset-grid { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
 		.preset-btn { font-family:monospace; font-size:12px; padding:5px 10px; border:1px solid #ccc; border-radius:4px; background:#fff; cursor:pointer; color:#333; }
 		.preset-btn:hover { background:#f0eeff; border-color:#AA77FF; color:#5533aa; }
 		.sim-note { font-family:monospace; font-size:11px; color:#888; margin-top:6px; }
 		.ext-link { font-family:monospace; font-size:12px; padding:4px 10px; border:1px solid #AA77FF; border-radius:4px; background:#f0eeff; color:#5533aa; text-decoration:none; }
 		.ext-link:hover { background:#AA77FF; color:white; }
-		.desc { font-size:13px; margin-bottom:12px; }
+		#load-status { font-family:monospace; font-size:12px; color:#AA77FF; margin-bottom:6px; min-height:16px; }
 	</style>
 </head>
 <body>
@@ -29,152 +27,164 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Circuit Simulator (Falstad)</h3>
-			<p class="desc">Full interactive circuit simulator with real-time animated current flow and built-in oscilloscope. Draw circuits using the Draw menu, right-click components to edit values, and press Space to run or pause.</p>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p>Full interactive circuit simulator with real-time animated current flow and oscilloscope probes. Built by Paul Falstad, running entirely in your browser. Use the <b>Draw</b> menu to add components, right-click to edit values, and press <b>Space</b> to run or pause simulation.</p>
+			</div>
 
 			<div style="font-family:monospace;font-size:12px;color:#5533aa;margin-bottom:6px;">Load a preset circuit:</div>
 			<div class="preset-grid">
-				<button class="preset-btn" onclick="loadPreset('lc')">LC Resonator</button>
+				<button class="preset-btn" onclick="loadPreset('rc_lpf')">RC Low-Pass</button>
+				<button class="preset-btn" onclick="loadPreset('rc_hpf')">RC High-Pass</button>
+				<button class="preset-btn" onclick="loadPreset('lc_res')">LC Resonator</button>
 				<button class="preset-btn" onclick="loadPreset('rlc')">Series RLC</button>
-				<button class="preset-btn" onclick="loadPreset('lpass')">RC Low-Pass</button>
-				<button class="preset-btn" onclick="loadPreset('hpass')">RC High-Pass</button>
-				<button class="preset-btn" onclick="loadPreset('bpass')">LC Band-Pass</button>
+				<button class="preset-btn" onclick="loadPreset('lc_bp')">LC Band-Pass</button>
 				<button class="preset-btn" onclick="loadPreset('lmatch')">L-Match Network</button>
-				<button class="preset-btn" onclick="loadPreset('amp')">Common-Emitter Amp</button>
+				<button class="preset-btn" onclick="loadPreset('ce_amp')">Common-Emitter Amp</button>
 				<button class="preset-btn" onclick="loadPreset('blank')">Blank Canvas</button>
 			</div>
-
+			<div id="load-status"></div>
 			<div style="margin-bottom:8px;">
 				<a class="ext-link" href="https://falstad.com/circuit/circuitjs.html" target="_blank">Open full simulator &#8599;</a>
 			</div>
 
-			<iframe id="falstad" src="https://falstad.com/circuit/circuitjs.html" allowfullscreen></iframe>
-			<p class="sim-note">Tip: Right-click any component to edit values. Use the Draw menu to add components. Scope probes show waveforms at any node.</p>
+			<iframe id="falstad"
+				src="https://falstad.com/circuit/circuitjs.html"
+				allowfullscreen></iframe>
+			<p class="sim-note">Tip: After clicking a preset, wait a moment for the simulator to load, then click the button again if the circuit does not appear. Scope probes show waveforms — right-click a wire and select "View in scope".</p>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a></p></footer>
 
 <script>
-// Encode a Falstad circuit text string to a ctz URL parameter
-// using pako (deflate raw) + base64url
-function toCtz(circuitText) {
-    var bytes = new TextEncoder().encode(circuitText);
-    var deflated = pako.deflateRaw(bytes);
-    var binary = '';
-    for (var i = 0; i < deflated.length; i++) binary += String.fromCharCode(deflated[i]);
-    var b64 = btoa(binary);
-    return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-}
-
-// Falstad circuit text definitions
-// Format: $ 1 timestep ??? maxtime ??? ??? ???
-// Elements: r=resistor, c=capacitor, l=inductor, v=voltage source,
-//           g=ground, w=wire, t=BJT, o=scope probe
-// Coordinates are on a 16px grid. Waveform: 0=DC,1=AC,2=square
+// Falstad circuit text for each preset
+// Format follows the CircuitJS1 native export format
 var CIRCUITS = {
 
-blank: '$ 1 5e-6 10 50 5 50\n',
+blank:
+'$ 1 0.000005 10.20027730826997 50 5 50 5e-11\n',
 
-lc:
-'$ 1 5e-6 10.20027730826997 50 5 50 5e-11\n' +
-'v 160 352 160 144 0 1 1000000 5 0 0 0.5\n' +
-'r 160 144 320 144 0 50\n' +
-'l 320 144 320 256 0 100e-9 0\n' +
-'c 320 256 320 352 0 253e-12 0\n' +
-'w 160 352 320 352 0\n' +
-'o 2 64 0 4099 20 0.05 0 2 0 3\n' +
-'o 3 64 0 4099 20 0.05 1 2 3 3\n',
+rc_lpf:
+'$ 1 0.000005 10.20027730826997 50 5 50 5e-11\n' +
+'v 192 384 192 160 0 1 10000 5 0 0 0.5\n' +
+'r 192 160 352 160 0 1000\n' +
+'c 352 160 352 384 0 1.5915494309189535e-8 0\n' +
+'w 192 384 352 384 0\n' +
+'o 2 64 0 4099 10 0.1 0 2 0 3\n' +
+'o 3 64 0 4099 10 0.1 1 2 3 3\n' +
+'38 2 0\n',
+
+rc_hpf:
+'$ 1 0.000005 10.20027730826997 50 5 50 5e-11\n' +
+'v 192 384 192 160 0 1 10000 5 0 0 0.5\n' +
+'c 192 160 352 160 0 1.5915494309189535e-8 0\n' +
+'r 352 160 352 384 0 1000\n' +
+'w 192 384 352 384 0\n' +
+'o 3 64 0 4099 10 0.1 0 2 0 3\n' +
+'38 2 0\n',
+
+lc_res:
+'$ 1 5e-9 10.20027730826997 50 5 50 5e-11\n' +
+'v 192 400 192 160 0 1 159154943.09189534 1 0 0 0.5\n' +
+'r 192 160 320 160 0 50\n' +
+'l 416 160 416 304 0 1e-7 3.2893706205689707e-12\n' +
+'c 416 304 416 400 0 1e-11 4.99983611938555\n' +
+'w 320 160 416 160 0\n' +
+'w 192 400 416 400 0\n' +
+'o 4 64 0 4099 5 0.05 0 2 0 3\n' +
+'o 3 64 0 4099 5 0.05 1 2 3 3\n',
 
 rlc:
 '$ 1 5e-9 10.20027730826997 50 5 50 5e-11\n' +
-'v 160 352 160 144 0 1 100e6 1 0 0 0.5\n' +
-'r 160 144 272 144 0 50\n' +
-'l 272 144 384 144 0 80e-9 0\n' +
-'c 384 144 384 352 0 32e-12 0\n' +
-'r 384 144 496 144 0 50\n' +
-'g 496 352 496 400 0 0\n' +
-'w 160 352 496 352 0\n' +
-'o 4 64 0 4099 5 0.05 0 2 0 3\n',
+'v 160 384 160 160 0 1 100000000 1 0 0 0.5\n' +
+'r 160 160 272 160 0 50\n' +
+'l 272 160 384 160 0 7.957747154594767e-8 0\n' +
+'c 384 160 384 384 0 3.183098861837907e-11 0\n' +
+'r 384 160 496 160 0 50\n' +
+'w 160 384 496 384 0\n' +
+'g 496 384 496 432 0 0\n' +
+'o 5 64 0 4099 5 0.05 0 2 0 3\n',
 
-lpass:
-'$ 1 5e-6 10.20027730826997 50 5 50 5e-11\n' +
-'v 160 352 160 144 0 1 10000 5 0 0 0.5\n' +
-'r 160 144 320 144 0 1000\n' +
-'c 320 144 320 352 0 10e-9 0\n' +
-'r 320 144 480 144 0 1000\n' +
-'g 480 352 480 400 0 0\n' +
-'w 160 352 480 352 0\n' +
-'o 2 64 0 4099 10 0.05 0 2 0 3\n' +
-'o 3 64 0 4099 10 0.05 1 2 3 3\n',
-
-hpass:
-'$ 1 5e-6 10.20027730826997 50 5 50 5e-11\n' +
-'v 160 352 160 144 0 1 10000 5 0 0 0.5\n' +
-'c 160 144 320 144 0 10e-9 0\n' +
-'r 320 144 320 352 0 1000\n' +
-'r 320 144 480 144 0 1000\n' +
-'g 480 352 480 400 0 0\n' +
-'w 160 352 480 352 0\n' +
-'o 2 64 0 4099 10 0.05 0 2 0 3\n' +
-'o 3 64 0 4099 10 0.05 1 2 3 3\n',
-
-bpass:
+lc_bp:
 '$ 1 5e-9 10.20027730826997 50 5 50 5e-11\n' +
-'v 160 352 160 144 0 1 159e6 1 0 0 0.5\n' +
-'r 160 144 256 144 0 50\n' +
-'l 256 144 352 144 0 100e-9 0\n' +
-'c 352 144 352 352 0 10e-12 0\n' +
-'r 352 144 480 144 0 50\n' +
-'g 480 352 480 400 0 0\n' +
-'w 160 352 480 352 0\n' +
+'v 160 400 160 160 0 1 159154943.09189534 1 0 0 0.5\n' +
+'r 160 160 256 160 0 50\n' +
+'l 256 160 368 160 0 1e-7 0\n' +
+'c 368 160 368 400 0 1e-11 0\n' +
+'r 368 160 480 160 0 50\n' +
+'w 160 400 480 400 0\n' +
+'g 480 400 480 448 0 0\n' +
 'o 4 64 0 4099 5 0.05 0 2 0 3\n',
 
 lmatch:
 '$ 1 5e-9 10.20027730826997 50 5 50 5e-11\n' +
-'v 160 352 160 144 0 1 100e6 1 0 0 0.5\n' +
-'r 160 144 256 144 0 50\n' +
-'l 256 144 368 144 0 63.7e-9 0\n' +
-'c 368 144 368 352 0 318e-12 0\n' +
-'r 368 144 480 144 0 200\n' +
-'g 480 352 480 400 0 0\n' +
-'w 160 352 480 352 0\n' +
+'v 160 384 160 160 0 1 100000000 1 0 0 0.5\n' +
+'r 160 160 256 160 0 50\n' +
+'l 256 160 384 160 0 6.366197723675814e-8 0\n' +
+'c 384 160 384 384 0 3.1830988618379067e-10 0\n' +
+'r 384 160 496 160 0 200\n' +
+'w 160 384 496 384 0\n' +
+'g 496 384 496 432 0 0\n' +
 'o 4 64 0 4099 5 0.05 0 2 0 3\n',
 
-amp:
+ce_amp:
 '$ 1 5e-9 10.20027730826997 50 5 50 5e-11\n' +
-'v 160 496 160 144 0 0 0 12 0 0 0.5\n' +
-'r 160 144 320 144 0 0\n' +
-'w 320 144 480 144 0\n' +
-'r 480 144 480 256 0 10000\n' +
-'r 480 256 480 496 0 10000\n' +
-'r 480 144 640 144 0 0\n' +
-'w 640 144 640 192 0\n' +
-'r 640 192 640 400 0 2200\n' +
-'t 576 256 640 256 0 1 0.6 5 100\n' +
-'r 480 256 576 256 0 0\n' +
-'c 400 256 480 256 0 10e-6 0\n' +
-'v 400 496 400 256 0 1 1000 0.1 0 0 0.5\n' +
-'r 640 400 640 496 0 470\n' +
-'c 640 400 800 400 0 100e-6 0\n' +
-'r 800 400 800 496 0 1000\n' +
-'g 800 496 800 544 0 0\n' +
-'w 160 496 800 496 0\n' +
-'o 11 64 0 4099 10 0.1 0 2 0 3\n' +
-'o 13 64 0 4099 10 0.1 1 2 13 3\n'
-
+'v 160 528 160 160 0 0 40 12 0 0 0.5\n' +
+'r 352 160 352 272 0 47000\n' +
+'r 352 272 352 528 0 10000\n' +
+'r 352 160 496 160 0 0\n' +
+'w 496 160 592 160 0\n' +
+'r 592 160 592 384 0 2200\n' +
+'t 528 272 592 272 0 1 -0.6079686462552595 0.6490634862040773 100\n' +
+'r 352 272 528 272 0 0\n' +
+'c 256 272 352 272 0 0.000010 10\n' +
+'v 256 528 256 272 0 1 1000 0.1 0 0 0.5\n' +
+'r 592 384 592 528 0 470\n' +
+'c 592 384 752 384 0 0.0001 0\n' +
+'r 752 384 752 528 0 1000\n' +
+'g 752 528 752 576 0 0\n' +
+'w 160 528 752 528 0\n' +
+'o 10 64 0 4099 10 0.1 0 2 0 3\n' +
+'o 12 64 0 4099 10 0.1 1 2 12 3\n'
 };
+
+var iframeReady = false;
+var pendingPreset = null;
+var iframe = document.getElementById('falstad');
+
+iframe.addEventListener('load', function() {
+    iframeReady = true;
+    if (pendingPreset) {
+        setTimeout(function() {
+            sendCircuit(pendingPreset);
+            pendingPreset = null;
+        }, 800);
+    }
+});
+
+function sendCircuit(text) {
+    try {
+        iframe.contentWindow.postMessage({ type: 'importCircuit', circuitText: text }, '*');
+        document.getElementById('load-status').textContent = 'Circuit loaded.';
+        setTimeout(function(){ document.getElementById('load-status').textContent = ''; }, 2000);
+    } catch(e) {
+        document.getElementById('load-status').textContent = 'Could not load — try opening the full simulator link above.';
+    }
+}
 
 function loadPreset(name) {
     var text = CIRCUITS[name];
     if (!text) return;
-    var ctz = toCtz(text);
-    document.getElementById('falstad').src =
-        'https://falstad.com/circuit/circuitjs.html?ctz=' + ctz;
+    document.getElementById('load-status').textContent = 'Loading...';
+    if (iframeReady) {
+        setTimeout(function(){ sendCircuit(text); }, 200);
+    } else {
+        pendingPreset = text;
+        iframe.src = 'https://falstad.com/circuit/circuitjs.html';
+    }
 }
 
-// Load default on page ready
-window.addEventListener('load', function() {
-    loadPreset('lpass');
-});
+// Load RC low-pass by default once iframe is ready
+pendingPreset = CIRCUITS['rc_lpf'];
 </script>
 </body>
 </html>

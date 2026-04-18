@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — MRI Pulse Sequences</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>MRI Pulse Sequences</h3>
+			<div class="wiki-article">
+
+				<p>A pulse sequence is the pattern of RF pulses and gradient waveforms used to acquire MRI data. Different sequences exploit T1, T2, and proton density contrast to highlight different tissue properties.</p>
+
+				<h4>Spin Echo (SE)</h4>
+				<p>A 90° excitation pulse followed by a 180° refocusing pulse after time TE/2 creates an echo at time TE. The 180° pulse reverses static field inhomogeneity dephasing but not true T2 decay, making SE sensitive to tissue T2. Repetition time TR controls T1 weighting. SE is robust to B0 inhomogeneity.</p>
+
+				<h4>Gradient Echo (GRE)</h4>
+				<p>Uses a flip angle &lt; 90° and a gradient reversal (instead of 180° RF pulse) to form the echo. Faster than SE but sensitive to B0 inhomogeneity (T2* rather than T2). Used for fast imaging, functional MRI (BOLD), and angiography.</p>
+
+				<h4>Inversion Recovery (IR)</h4>
+				<p>A 180° inversion pulse followed by a delay TI before a spin-echo acquisition. By choosing TI = T1·ln(2) for a tissue, its signal is nulled. FLAIR (Fluid Attenuated Inversion Recovery) nulls CSF to improve lesion conspicuity. STIR nulls fat.</p>
+
+				<h4>k-Space</h4>
+				<p>MRI data is acquired in the spatial frequency domain (k-space). Each data point corresponds to a different spatial frequency component of the image. The image is reconstructed by a 2D Fourier transform. Low spatial frequencies (near k-space centre) determine image contrast; high frequencies (periphery) determine edge sharpness. Trajectories through k-space define the acquisition strategy: Cartesian, radial, spiral, EPI, etc.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

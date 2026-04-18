@@ -44,9 +44,11 @@
 		<article>
 			<h3>Circular Loop Inductance</h3>
 			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">A single circular loop of wire acts as an inductor. This tool uses the Neumann formula approximation (valid when the wire diameter d is much smaller than the loop diameter D) to calculate the self-inductance of the loop. Commonly used to estimate the inductance of PCB loops, NFC antennas, and single-turn coils.</p>
+				<p style="margin-bottom:8px;">A single circular loop of wire acts as an inductor. Uses the Neumann formula approximation, valid when wire diameter d ≪ loop diameter D. Used for NFC antennas, PCB loops, and single-turn coils.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Diameter of the wire (mm). The conductor itself — not the loop.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Diameter of the loop (mm). The overall circular form.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Self-inductance of the loop (H).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">d</td><td style="padding:3px 0 3px 0;">Wire conductor diameter (mm).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">D</td><td style="padding:3px 0 3px 0;">Loop diameter (mm).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">L</td><td style="padding:3px 0 3px 0;">Self-inductance of the loop (H).</td></tr>
 				</table>
 			</div>
 			Wire Diameter, d: <input type="text" id="d" placeholder="Enter Number"> mm

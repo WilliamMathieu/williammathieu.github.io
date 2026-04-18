@@ -27,6 +27,14 @@
 			</div><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Antenna Array Factor</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">A phased array combines multiple antenna elements whose signals add constructively in the steered direction and destructively elsewhere. The array factor describes this directivity pattern. λ/2 spacing (d = 0.5) is standard to avoid grating lobes.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">N</td><td style="padding:3px 0 3px 0;">Number of array elements.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">d</td><td style="padding:3px 0 3px 0;">Element spacing in wavelengths. d = 0.5 is the standard choice.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">θ₀</td><td style="padding:3px 0 3px 0;">Steering angle (degrees from broadside). 0° = perpendicular to array axis.</td></tr>
+				</table>
+			</div>
 
 			<p style="font-size:13px;">Plot the radiation pattern of a uniform linear array (ULA).</p><br>
 			Number of elements, N: <input type="number" id="af-n" min="2" max="32" value="4" style="width:60px"><br>

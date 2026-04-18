@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — Noise in RF Systems</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Noise in RF Systems</h3>
+			<div class="wiki-article">
+
+				<p>Noise ultimately limits the sensitivity of any RF receiver. Understanding noise sources, how they combine in a cascaded system, and how to minimise their contribution is fundamental to receiver design.</p>
+
+				<h4>Thermal (Johnson-Nyquist) Noise</h4>
+				<p>Any resistor at temperature T generates noise power due to thermal agitation of electrons. The available noise power in bandwidth B is:</p>
+				<div class="eq">\(P_n = kTB\)</div>
+				<p>At room temperature (290 K): \(kT = -174\) dBm/Hz. This is the noise floor of any passive system at room temperature.</p>
+
+				<h4>Noise Figure</h4>
+				<p>Noise Figure (NF) is the degradation of SNR through a component, referenced to a 290 K source:</p>
+				<div class="eq">\(NF = SNR_{in} - SNR_{out}\) (dB)</div>
+				<p>A perfect noiseless amplifier has NF = 0 dB. A 50 Ω resistive attenuator of X dB has NF = X dB.</p>
+
+				<h4>Friis Formula for Cascaded Systems</h4>
+				<div class="eq">\(F_{total} = F_1 + \dfrac{F_2-1}{G_1} + \dfrac{F_3-1}{G_1 G_2} + \cdots\)</div>
+				<p>The first stage dominates. This is why an LNA with low NF and high gain at the front of a receive chain is critical. Lossy elements (cables, switches) before the LNA directly add to system NF.</p>
+
+				<h4>System Noise Temperature</h4>
+				<p>Equivalent noise temperature \(T_e = (F-1) \times 290\) K. Useful for low-noise systems such as radio telescopes and satellite receivers where temperatures of a few kelvin are achieved.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

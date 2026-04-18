@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — SAR and RF Safety in MRI</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>SAR and RF Safety in MRI</h3>
+			<div class="wiki-article">
+
+				<p>The interaction of RF electromagnetic fields with biological tissue at MRI frequencies deposits energy as heat. Safety standards limit this deposition to protect patients from tissue heating. SAR (Specific Absorption Rate) is the primary metric.</p>
+
+				<h4>Specific Absorption Rate (SAR)</h4>
+				<p>SAR is the RF power absorbed per unit mass of tissue:</p>
+				<div class="eq">\(SAR = \dfrac{\sigma |E|^2}{2\rho}\) &nbsp; (W/kg)</div>
+				<p>where \(\sigma\) is tissue conductivity, \(E\) the electric field amplitude, and \(\rho\) tissue density. IEC and FDA limits for clinical MRI:</p>
+				<ul>
+					<li>Whole-body average: 2 W/kg (normal), 4 W/kg (first level)</li>
+					<li>Head: 3.2 W/kg; local (any 10 g): 10 W/kg</li>
+				</ul>
+
+				<h4>B1+ Field</h4>
+				<p>The rotating component of the RF magnetic field that drives spin excitation is B1⁺. At higher field strengths (≥3 T), wavelength effects cause inhomogeneous B1⁺ distribution in the body, leading to non-uniform flip angles. At 7 T (300 MHz), the wavelength in tissue (~12 cm) is comparable to body dimensions, causing significant B1⁺ non-uniformity and hotspots in SAR.</p>
+
+				<h4>Implant Safety</h4>
+				<p>Conductive implants (pacemaker leads, orthopaedic implants, surgical clips) can act as RF antennas, concentrating the induced electric field and causing local tissue heating far exceeding whole-body SAR limits. MRI-conditional implants are tested and labelled with specific conditions (field strength, coil type, SAR limits) under which they are safe.</p>
+
+				<h4>SAR Reduction Strategies</h4>
+				<ul>
+					<li>Reducing flip angle (lower SAR ∝ flip²)</li>
+					<li>Increasing TR to allow pulse duty cycle reduction</li>
+					<li>Parallel transmit (pTx) — using multiple transmit channels to shape B1⁺ and reduce local SAR hotspots</li>
+					<li>Lower field strength systems for implant patients</li>
+				</ul>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

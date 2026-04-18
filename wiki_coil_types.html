@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — MRI Coil Types</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>MRI Coil Types</h3>
+			<div class="wiki-article">
+
+				<p>RF coils are the antennas of the MRI scanner. The receive coil must be placed as close as possible to the anatomy of interest to maximise the filling factor (the fraction of coil inductance filled by the sample) and thus the SNR.</p>
+
+				<h4>Volume Coils</h4>
+				<p>Surround the anatomy completely, providing a uniform B1 field. The birdcage coil is the most common volume coil — a cylindrical structure with rungs and end rings, driven in quadrature to produce circular polarisation (improving SNR by √2). Used for head, knee, and wrist imaging.</p>
+
+				<h4>Surface Coils</h4>
+				<p>A single loop placed directly on the skin surface. Excellent SNR near the coil but very non-uniform sensitivity — SNR drops rapidly with depth. The depth of sensitivity is roughly equal to the coil radius. Ideal for superficial structures: spine, shoulder, temporomandibular joint.</p>
+
+				<h4>Phased Array Coils</h4>
+				<p>Multiple receive elements arranged around the anatomy, each with its own preamplifier and receive channel. Combines the high local SNR of surface coils with wider coverage. Also enables parallel imaging (SENSE, GRAPPA) where k-space undersampling is corrected using the spatial sensitivity profiles of the individual elements, reducing scan time.</p>
+
+				<h4>Birdcage Coil</h4>
+				<p>A cylindrical resonator with multiple rungs connecting two end rings. Driven in two quadrature ports (90° phase offset), it produces a highly uniform rotating B1⁺ field ideal for transmit. Available in low-pass, high-pass, and band-pass configurations. The high-pass birdcage is preferred at high field (&gt;3 T) as its capacitors are on the end rings rather than the rungs.</p>
+
+				<h4>Transceiver vs Separate Tx/Rx</h4>
+				<p>Some coils both transmit and receive (transceiver or T/R coil). Others use a separate body coil for transmit and a surface/array coil for receive. The receive-only configuration allows the receive coil to be optimised purely for sensitivity while the transmit coil provides uniform excitation.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

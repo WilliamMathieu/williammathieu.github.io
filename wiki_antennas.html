@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — Antenna Fundamentals</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Antenna Fundamentals</h3>
+			<div class="wiki-article">
+
+				<p>An antenna is a transducer that converts between guided electromagnetic waves (in a transmission line) and free-space radiation. Every antenna has a reciprocal receive and transmit behaviour described by the same parameters.</p>
+
+				<h4>Key Parameters</h4>
+				<ul>
+					<li><b>Gain (G)</b> — ratio of radiation intensity in the peak direction to that of an isotropic radiator, measured in dBi.</li>
+					<li><b>Directivity (D)</b> — same as gain but ignoring losses. G = η·D where η is radiation efficiency.</li>
+					<li><b>Beamwidth (HPBW)</b> — angular width of the main beam between half-power (−3 dB) points.</li>
+					<li><b>Bandwidth</b> — frequency range over which VSWR &lt; 2 (or another specification).</li>
+					<li><b>Polarisation</b> — orientation of the E-field: linear, circular, or elliptical.</li>
+					<li><b>Radiation resistance</b> — equivalent resistance that would dissipate the same power as is radiated.</li>
+				</ul>
+
+				<h4>Half-Wave Dipole</h4>
+				<p>The reference antenna. Total length ≈ λ/2 (slightly less due to end effects). Gain = 2.15 dBi. Radiation resistance ≈ 73 Ω. Omnidirectional in the plane perpendicular to its axis.</p>
+
+				<h4>Patch (Microstrip) Antenna</h4>
+				<p>A rectangular conductor on a PCB substrate, resonant when the patch length L ≈ λ/(2√εreff). Gain ≈ 5–8 dBi, bandwidth 2–5% (can be increased with thicker substrates). Widely used in GPS, WiFi, and cellular handsets due to its flat, PCB-compatible form factor.</p>
+
+				<h4>Array Factor</h4>
+				<p>When N identical elements are arranged in a line with spacing d and progressive phase shift δ, the combined pattern is the element pattern multiplied by the array factor AF(θ). The main beam can be steered electronically by changing δ without physically moving the array — the principle of phased array radar and 5G beamforming.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<h3>LC BALUN Calculator</h3>
+
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">A BALUN (BALanced-UNbalanced) converts between a single-ended (unbalanced) transmission line and a balanced (differential) connection. An LC BALUN uses a combination of inductors and capacitors to achieve this conversion while simultaneously transforming impedance. It is widely used in RF applications to connect coaxial cables to dipole antennas, differential amplifiers, and balanced mixers.</p>
+				<p style="margin-bottom:8px;">This calculator covers three common LC BALUN topologies:</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;color:#5533aa;vertical-align:top;">Lattice / Bridged-T</td><td style="padding:3px 0;">Uses two inductors and two capacitors in a bridge configuration. Provides 90° phase split between balanced ports. True broadband behaviour.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;color:#5533aa;vertical-align:top;">LC π-BALUN</td><td style="padding:3px 0;">Two shunt capacitors and a series inductor. Low-pass structure. Simple and compact — common in RFIC and board-level designs.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;color:#5533aa;vertical-align:top;">Marchand BALUN</td><td style="padding:3px 0;">Two coupled quarter-wave resonators. True wideband performance. This calculator gives the equivalent lumped-element LC approximation valid near the design frequency.</td></tr>
+				</table>
+			</div>
+
+			Topology:
+			<select id="bl-topo" onchange="topoChange()">
+				<option value="lattice">Lattice / Bridged-T</option>
+				<option value="pi">LC &#960;-BALUN</option>
+				<option value="marchand">Marchand (lumped LC approx)</option>
+			</select><br><br>
+
+			Frequency, f: <input type="text" id="bl-f" placeholder="value">
+			<select id="bl-fu">
+				<option value="1e6">MHz</option>
+				<option value="1e9" selected>GHz</option>
+			</select><br>
+
+			Unbalanced port impedance, Z<sub>unbal</sub>: <input type="text" id="bl-zu" value="50"> &#937;<br>
+			Balanced port impedance, Z<sub>bal</sub>: <input type="text" id="bl-zb" value="100"> &#937;<br><br>
+
+			<div id="bl-note" style="font-family:monospace;font-size:12px;color:#555;margin-bottom:8px;"></div>
+
+			<button id="bl-btn">Calculate</button>
+
+			<!-- Equations updated per topology -->
+			<div id="bl-eq"></div>
+
+			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
+			<div class="result-box" id="bl-out">
+				<p id="bl-r1-p">L₁ = <span id="bl-r1">—</span></p>
+				<p id="bl-r2-p">C₁ = <span id="bl-r2">—</span></p>
+				<p id="bl-r3-p" style="display:none">L₂ = <span id="bl-r3">—</span></p>
+				<p id="bl-r4-p" style="display:none">C₂ = <span id="bl-r4">—</span></p>
+				<p>Impedance ratio = <span id="bl-ratio">—</span></p>
+				<p>Q factor ≈ <span id="bl-Q">—</span></p>
+			</div>
+
+			<script src="LCBalun.js"></script>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a></p></footer>
+</body>
+</html>

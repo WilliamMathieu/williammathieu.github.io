@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — RF Coil Design for MRI</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>RF Coil Design for MRI</h3>
+			<div class="wiki-article">
+
+				<p>Designing an MRI RF coil requires careful attention to resonance, matching, decoupling, and coil Q. The goal is to maximise SNR while maintaining safety and compatibility with the scanner's RF system.</p>
+
+				<h4>Tuning to Resonance</h4>
+				<p>The coil must resonate at the Larmor frequency of the target nucleus. For a single-loop coil of inductance L, a tuning capacitor C_tune = 1/(ω²L) brings the coil to resonance. Fixed or variable capacitors (trimmers) are used. The tuning is sensitive to nearby conductive or dielectric objects (loading), so provision for fine adjustment near the sample is necessary.</p>
+
+				<h4>Matching to 50 Ω</h4>
+				<p>The coil's radiation resistance is much lower than 50 Ω (typically 0.1–10 Ω for small surface coils). A matching network transforms this to 50 Ω to maximise power transfer between the coil and the preamplifier. Common approaches: capacitive tap on the tuning capacitor, additional shunt matching capacitor, or a transformer.</p>
+
+				<h4>Quality Factor Q</h4>
+				<p>The unloaded Q (Q_u) is determined by the coil's own resistance. The loaded Q (Q_L) includes sample losses. For receive coils, SNR is maximised when Q_L is dominated by sample noise (Q_L ≈ Q_u/2), not coil resistance. High-conductivity conductor (copper, silver), thick wire, and minimising resistive losses are key. At 3 T, typical unloaded Q for a 10 cm surface coil: 200–500; loaded Q: 30–80.</p>
+
+				<h4>Decoupling</h4>
+				<p>In phased array coils, adjacent elements must be decoupled to prevent inductive coupling from degrading noise performance. Methods include: overlap decoupling (geometrically overlapping adjacent loops to cancel mutual inductance), capacitive decoupling networks, and preamplifier decoupling (presenting high impedance to the coil current using a low-input-impedance preamp with an additional inductance).</p>
+
+				<h4>Active Detuning</h4>
+				<p>During RF transmission, receive coils must be detuned (switched off) to prevent them from disturbing the transmit field and from experiencing potentially damaging induced voltages. Active detuning circuits use PIN diodes to insert a large inductance or short circuit that shifts the resonant frequency away from f₀ during the transmit phase.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

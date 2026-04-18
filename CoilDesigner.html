@@ -39,17 +39,21 @@
 	<section>
 		<nav>
 				<h3>Tools</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">Designs a single-turn loop coil for use in MRI or NMR systems. Given the physical dimensions of the loop and the Larmor frequency of the target nucleus (determined by field strength), the tool calculates the loop's self-inductance and the tuning capacitor required for resonance at that frequency.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Wire diameter (mm).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Loop diameter (mm).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Larmor frequency — the resonant frequency of the target nucleus in the static magnetic field. For ¹H at 3T, f ≈ 128 MHz.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Self-inductance of the loop.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Required tuning capacitor for resonance at f.</td></tr>
-				</table>
-			</div>
 				<div id="includeIndex"></div>
 		</nav>
 		
 		<article>
 			<h2>RF Coil Designer</h2>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">Designs a single-turn loop coil for MRI or NMR. Given the loop dimensions and Larmor frequency, calculates self-inductance and the tuning capacitor required for resonance.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">d</td><td style="padding:3px 0 3px 0;">Wire diameter (mm).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">D</td><td style="padding:3px 0 3px 0;">Loop diameter (mm).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0 3px 0;">Larmor frequency — the resonant frequency of the target nucleus in the static field. For ¹H at 3 T, f ≈ 128 MHz.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">L</td><td style="padding:3px 0 3px 0;">Self-inductance of the loop.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">C</td><td style="padding:3px 0 3px 0;">Required tuning capacitor for resonance at f.</td></tr>
+				</table>
+			</div>
 			<h3>Loop Description</h3>
 			Wire Diameter, d: <input type="text" id="d" placeholder="Enter Number"> mm
 				<br>

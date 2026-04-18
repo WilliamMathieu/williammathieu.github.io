@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — NMR Basics</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>NMR Basics</h3>
+			<div class="wiki-article">
+
+				<p>Nuclear Magnetic Resonance (NMR) is the physical phenomenon underlying MRI. It exploits the quantum mechanical property of nuclear spin to create detailed maps of atomic nuclei in a sample — in MRI, predominantly the ¹H (proton) nuclei in water and fat.</p>
+
+				<h4>Nuclear Spin</h4>
+				<p>Nuclei with an odd number of protons or neutrons possess a net quantum mechanical spin and an associated magnetic dipole moment \(\boldsymbol{\mu}\). In a static magnetic field \(B_0\), these moments precess around the field axis at the Larmor frequency:</p>
+				<div class="eq">\(f_0 = \dfrac{\gamma B_0}{2\pi}\)</div>
+				<p>where \(\gamma\) is the gyromagnetic ratio (for ¹H: \(\gamma/2\pi = 42.577\) MHz/T). At 3 T, ¹H precesses at ~128 MHz — in the RF range.</p>
+
+				<h4>Equilibrium Magnetisation</h4>
+				<p>In a static field \(B_0\), spins align preferentially along the field, creating a bulk magnetisation \(M_0\) parallel to \(B_0\) (the z-axis). This magnetisation is the signal source in MRI.</p>
+
+				<h4>RF Excitation</h4>
+				<p>A radiofrequency pulse at the Larmor frequency (the B1 field) tips \(M_0\) away from z. A 90° pulse rotates \(M_0\) entirely into the transverse (xy) plane where it precesses and induces a signal in the receive coil. A 180° pulse inverts \(M_0\).</p>
+
+				<h4>Bloch Equations and Relaxation</h4>
+				<p>After excitation, the transverse magnetisation decays (T2 relaxation — spin-spin interactions) while the longitudinal magnetisation recovers (T1 relaxation — spin-lattice interactions). Different tissues have different T1/T2 values, creating the soft-tissue contrast that makes MRI so powerful. Typical values in brain tissue: T1 ≈ 900 ms, T2 ≈ 80 ms at 3 T.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

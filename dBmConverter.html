@@ -19,19 +19,6 @@
 	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 	<section>
 		<nav><h3>Tools</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">dBm is a logarithmic power unit referenced to 1 milliwatt. It is the standard unit for RF power levels because the large dynamic range of RF systems (from picowatts to kilowatts) is unwieldy in linear units. dB (without a reference) expresses a ratio — a gain or loss. Power ratios use 10·log₁₀, while voltage or field amplitude ratios use 20·log₁₀ (because power ∝ voltage²).</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">dBm</td><td style="padding:3px 0;">Power level in dBm = 10·log₁₀(P/1mW). 0 dBm = 1 mW, 30 dBm = 1 W, −30 dBm = 1 µW.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">W / mW / µW</td><td style="padding:3px 0;">Linear power. RF receivers often operate at −90 to −120 dBm; transmitters at +20 to +50 dBm.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">dB (power ratio)</td><td style="padding:3px 0;">Gain or loss in dB = 10·log₁₀(P_out/P_in). 3 dB ≈ factor of 2, 10 dB = factor of 10.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">dB (voltage ratio)</td><td style="padding:3px 0;">Voltage or field amplitude ratio in dB = 20·log₁₀(V_out/V_in). 6 dB ≈ factor of 2.</td></tr>
-				</table>
-			</div><div id="includeIndex"></div></nav>
-		<article>
-			<h3>dBm ↔ Watts Converter</h3>
-
-			<b>dBm &rarr; Watts</b><br><br>
-			Power: <input type="text" id="db-dbm" placeholder="dBm"> dBm<br><br>
-			<button id="db-btn1">Convert</button>
-			<div id="db-err1" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} P_W &= 10^{(P_{dBm}-30)/10} \end{align}</p>
 			<div class="result-box" id="db-out1"><p>W = <span id="db-W">—</span></p><p>mW = <span id="db-mW">—</span></p><p>μW = <span id="db-uW">—</span></p></div>
 			<br>

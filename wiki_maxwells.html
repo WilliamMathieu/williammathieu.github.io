@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — Maxwell's Equations</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Maxwell's Equations</h3>
+			<div class="wiki-article">
+
+				<p>Maxwell's equations are the four partial differential equations that completely describe classical electromagnetism. They were formulated by James Clerk Maxwell in 1865 and unified electricity, magnetism, and optics into a single theoretical framework.</p>
+
+				<h4>The Four Equations</h4>
+				<div class="eq">
+				\(\nabla \cdot \mathbf{E} = \dfrac{\rho}{\varepsilon_0}\) &nbsp; — Gauss's Law: electric field diverges from charges.
+				</div>
+				<div class="eq">
+				\(\nabla \cdot \mathbf{B} = 0\) &nbsp; — Gauss's Law for Magnetism: no magnetic monopoles.
+				</div>
+				<div class="eq">
+				\(\nabla \times \mathbf{E} = -\dfrac{\partial \mathbf{B}}{\partial t}\) &nbsp; — Faraday's Law: a changing magnetic field induces an electric field.
+				</div>
+				<div class="eq">
+				\(\nabla \times \mathbf{B} = \mu_0\mathbf{J} + \mu_0\varepsilon_0\dfrac{\partial \mathbf{E}}{\partial t}\) &nbsp; — Ampère–Maxwell Law: currents and changing electric fields create magnetic fields.
+				</div>
+
+				<h4>Displacement Current</h4>
+				<p>Maxwell's key insight was adding the displacement current term \(\varepsilon_0 \partial\mathbf{E}/\partial t\) to Ampère's law. This predicts that a time-varying electric field produces a magnetic field even in the absence of physical current — allowing electromagnetic waves to propagate through a vacuum.</p>
+
+				<h4>Electromagnetic Wave Speed</h4>
+				<p>Taking the curl of Faraday's law and substituting Ampère–Maxwell gives a wave equation. The wave speed is:</p>
+				<div class="eq">\(c = \dfrac{1}{\sqrt{\mu_0 \varepsilon_0}} \approx 2.998 \times 10^8 \text{ m/s}\)</div>
+				<p>Maxwell recognised this as the speed of light, demonstrating that light is an electromagnetic wave.</p>
+
+				<h4>In Materials</h4>
+				<p>In a dielectric medium with relative permittivity \(\varepsilon_r\) and relative permeability \(\mu_r\), the wave speed becomes \(v = c/\sqrt{\varepsilon_r \mu_r}\). This slowing is why wavelengths in PCB substrates are shorter than in free space.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

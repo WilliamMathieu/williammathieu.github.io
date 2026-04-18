@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — Wiki</title>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-hub { padding: 10px 0; }
+		.wiki-hub h2 { font-family: monospace; color: #AA77FF; font-size: 20px; margin-bottom: 6px; }
+		.wiki-hub p  { font-family: monospace; font-size: 13px; color: #555; margin-bottom: 20px; }
+		.wiki-category { margin-bottom: 24px; }
+		.wiki-category h3 { font-family: monospace; font-size: 14px; color: #5533aa; border-bottom: 1px solid #e0d8ff; padding-bottom: 4px; margin-bottom: 10px; }
+		.wiki-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+		.wiki-card {
+			background: #f8f6ff; border: 1px solid #d0c8f0; border-radius: 6px;
+			padding: 12px 14px; width: 200px; text-decoration: none; color: #1a1a1a;
+			font-family: monospace; font-size: 12px; transition: background 0.12s;
+		}
+		.wiki-card:hover { background: #AA77FF; color: white; border-color: #AA77FF; }
+		.wiki-card .wc-title { font-weight: bold; font-size: 13px; margin-bottom: 4px; }
+		.wiki-card .wc-desc  { font-size: 11px; opacity: 0.75; line-height: 1.4; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-hub">
+				<h2>RF Toolbox Wiki</h2>
+				<p>Reference articles covering the theory behind the tools.</p>
+
+				<div class="wiki-category">
+					<h3>Electromagnetics</h3>
+					<div class="wiki-grid">
+						<a class="wiki-card" href="wiki_maxwells.html"><div class="wc-title">Maxwell's Equations</div><div class="wc-desc">The four fundamental laws governing all classical electromagnetism.</div></a>
+						<a class="wiki-card" href="wiki_em_waves.html"><div class="wc-title">Electromagnetic Waves</div><div class="wc-desc">Wave propagation, polarisation, and the EM spectrum.</div></a>
+						<a class="wiki-card" href="wiki_transmission_lines.html"><div class="wc-title">Transmission Line Theory</div><div class="wc-desc">Telegrapher's equations, reflections, and standing waves.</div></a>
+					</div>
+				</div>
+
+				<div class="wiki-category">
+					<h3>RF Engineering</h3>
+					<div class="wiki-grid">
+						<a class="wiki-card" href="wiki_sparam.html"><div class="wc-title">S-Parameters</div><div class="wc-desc">Scattering parameters, Smith Chart, return loss, and VSWR.</div></a>
+						<a class="wiki-card" href="wiki_impedance_matching.html"><div class="wc-title">Impedance Matching</div><div class="wc-desc">Why matching matters and the main techniques.</div></a>
+						<a class="wiki-card" href="wiki_noise.html"><div class="wc-title">Noise in RF Systems</div><div class="wc-desc">Thermal noise, noise figure, and the Friis formula.</div></a>
+						<a class="wiki-card" href="wiki_filters.html"><div class="wc-title">RF Filters</div><div class="wc-desc">Butterworth, Chebyshev, and LC ladder filter design.</div></a>
+					</div>
+				</div>
+
+				<div class="wiki-category">
+					<h3>Microwave Engineering</h3>
+					<div class="wiki-grid">
+						<a class="wiki-card" href="wiki_microwave_lines.html"><div class="wc-title">Microwave Transmission Lines</div><div class="wc-desc">Microstrip, coplanar waveguide, stripline, and coax.</div></a>
+						<a class="wiki-card" href="wiki_antennas.html"><div class="wc-title">Antenna Fundamentals</div><div class="wc-desc">Gain, directivity, polarisation, and radiation patterns.</div></a>
+						<a class="wiki-card" href="wiki_balun.html"><div class="wc-title">BALUNs and Hybrids</div><div class="wc-desc">Balanced–unbalanced transitions and 90°/180° hybrids.</div></a>
+					</div>
+				</div>
+
+				<div class="wiki-category">
+					<h3>MRI Physics</h3>
+					<div class="wiki-grid">
+						<a class="wiki-card" href="wiki_nmr_basics.html"><div class="wc-title">NMR Basics</div><div class="wc-desc">Nuclear spin, Larmor precession, and the Bloch equations.</div></a>
+						<a class="wiki-card" href="wiki_mri_hardware.html"><div class="wc-title">MRI Hardware</div><div class="wc-desc">Main magnet, gradient coils, and RF system overview.</div></a>
+						<a class="wiki-card" href="wiki_mri_sequences.html"><div class="wc-title">MRI Pulse Sequences</div><div class="wc-desc">Spin echo, gradient echo, and k-space.</div></a>
+					</div>
+				</div>
+
+				<div class="wiki-category">
+					<h3>MRI Coils</h3>
+					<div class="wiki-grid">
+						<a class="wiki-card" href="wiki_coil_types.html"><div class="wc-title">Coil Types</div><div class="wc-desc">Volume coils, surface coils, phased arrays, and birdcages.</div></a>
+						<a class="wiki-card" href="wiki_coil_design.html"><div class="wc-title">RF Coil Design</div><div class="wc-desc">Tuning, matching, decoupling, and coil Q.</div></a>
+						<a class="wiki-card" href="wiki_sar.html"><div class="wc-title">SAR and RF Safety</div><div class="wc-desc">Specific absorption rate, B1+ field, and safety limits.</div></a>
+					</div>
+				</div>
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a></p></footer>
+</body>
+</html>

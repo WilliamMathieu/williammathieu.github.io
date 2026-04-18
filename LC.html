@@ -44,9 +44,11 @@
 		<article>
 			<h3>Resonant Frequency of LC Circuit</h3>
 			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">An LC circuit (also called a tank circuit) stores energy by oscillating between the inductor's magnetic field and the capacitor's electric field. At resonance, reactances cancel and the circuit presents maximum impedance (parallel) or minimum impedance (series). Resonant circuits are fundamental to filters, oscillators, and impedance matching networks.</p>
+				<p style="margin-bottom:8px;">An LC circuit stores energy by oscillating between the inductor's magnetic field and the capacitor's electric field. At resonance the reactances cancel — useful for filters, oscillators, and matching networks.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Inductance of the coil (H). Determines how much energy is stored in the magnetic field.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Capacitance of the capacitor (F). Determines how much energy is stored in the electric field.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">f₀</td><td style="padding:3px 0;">Resonant frequency (Hz). The frequency at which the inductive and capacitive reactances are equal and cancel.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">L</td><td style="padding:3px 0 3px 0;">Inductance (H). Energy stored in the magnetic field.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">C</td><td style="padding:3px 0 3px 0;">Capacitance (F). Energy stored in the electric field.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f₀</td><td style="padding:3px 0 3px 0;">Resonant frequency = 1/(2π√LC). Inductive and capacitive reactances are equal here.</td></tr>
 				</table>
 			</div>
 			Inductance, L: <input type="text" id="L" placeholder="Enter Number">

@@ -22,9 +22,12 @@
 		<article>
 			<h3>Cascaded Noise Figure Calculator</h3>
 			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">In a chain of amplifiers and passive components, noise from early stages dominates because subsequent stages amplify it along with the signal. The Friis formula for noise quantifies this: the first stage's noise figure contributes most, divided by nothing; the second stage's contribution is divided by the first stage gain, and so on. This is why a low-noise amplifier (LNA) at the front of a receiver chain is so critical.</p>
+				<p style="margin-bottom:8px;">In a receiver chain, noise from early stages dominates because later stages amplify it. The Friis noise formula shows the first stage contributes most to total NF — this is why an LNA at the front of a receiver is critical.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Gₙ</td><td style="padding:3px 0;">Gain of stage n (dB). Passive components have negative gain (insertion loss).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Fₙ</td><td style="padding:3px 0;">Noise Figure of stage n (dB). A perfect noiseless component has NF = 0 dB.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Cascaded NF</td><td style="padding:3px 0;">Total system noise figure referred to the input.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Total gain</td><td style="padding:3px 0;">Sum of all stage gains (dB).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Gₙ</td><td style="padding:3px 0 3px 0;">Gain of stage n (dB). Passive components have negative gain (insertion loss).</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Fₙ</td><td style="padding:3px 0 3px 0;">Noise Figure of stage n (dB). A perfect noiseless component has NF = 0 dB.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Cascaded NF</td><td style="padding:3px 0 3px 0;">Total system noise figure referred to the input.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Total gain</td><td style="padding:3px 0 3px 0;">Sum of all stage gains (dB).</td></tr>
 				</table>
 			</div>
 

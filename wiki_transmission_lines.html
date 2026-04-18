@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — Transmission Line Theory</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Transmission Line Theory</h3>
+			<div class="wiki-article">
+
+				<p>A transmission line is a structure that guides electromagnetic waves from one point to another. At RF frequencies, ordinary wire connections behave as transmission lines — understanding this is essential for signal integrity and impedance matching.</p>
+
+				<h4>Telegrapher's Equations</h4>
+				<p>A transmission line is modelled as a ladder network of distributed resistance R, inductance L, capacitance C, and conductance G per unit length. The resulting wave equations are:</p>
+				<div class="eq">\(\dfrac{\partial V}{\partial z} = -(R+j\omega L)I \qquad \dfrac{\partial I}{\partial z} = -(G+j\omega C)V\)</div>
+
+				<h4>Characteristic Impedance</h4>
+				<div class="eq">\(Z_0 = \sqrt{\dfrac{R+j\omega L}{G+j\omega C}} \xrightarrow{\text{lossless}} \sqrt{\dfrac{L}{C}}\)</div>
+				<p>Coax with 50 Ω characteristic impedance: \(Z_0 = (60/\sqrt{\varepsilon_r})\ln(D/d)\).</p>
+
+				<h4>Reflection Coefficient</h4>
+				<p>When a wave hits a load impedance \(Z_L \neq Z_0\), some power is reflected. The voltage reflection coefficient is:</p>
+				<div class="eq">\(\Gamma = \dfrac{Z_L - Z_0}{Z_L + Z_0}\)</div>
+				<p>Return loss \(= -20\log_{10}|\Gamma|\) dB. VSWR \(= (1+|\Gamma|)/(1-|\Gamma|)\).</p>
+
+				<h4>Standing Waves</h4>
+				<p>The superposition of forward and reflected waves creates a standing wave pattern on the line. The voltage varies with position; the ratio of maximum to minimum voltage is the VSWR. A matched load (Γ = 0) has VSWR = 1 and no standing waves.</p>
+
+				<h4>Input Impedance</h4>
+				<p>A transmission line of length \(\ell\) terminated in \(Z_L\) presents input impedance:</p>
+				<div class="eq">\(Z_{in} = Z_0 \dfrac{Z_L + jZ_0\tan(\beta\ell)}{Z_0 + jZ_L\tan(\beta\ell)}\)</div>
+				<p>Special cases: \(\ell = \lambda/4\) → \(Z_{in} = Z_0^2/Z_L\) (quarter-wave transformer); \(\ell = \lambda/2\) → \(Z_{in} = Z_L\) (half-wave section is transparent).</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

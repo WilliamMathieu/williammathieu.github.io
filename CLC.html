@@ -39,16 +39,18 @@
 	<section>
 		<nav>
 				<h3>Tools</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">Given a target resonant frequency and a known inductance, this tool calculates the required capacitance to tune the LC circuit to resonance. Useful when designing matching networks or filters where the inductor is fixed (e.g. a coil you have already wound).</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Target resonant frequency.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Known inductance value.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Required capacitance to achieve resonance at f with the given L.</td></tr>
-				</table>
-			</div>
 				<div id="includeIndex"></div>
 		</nav>
 		<article>
 			<h3>Calculate Capacitance In LC Circuit</h3>
+			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+				<p style="margin-bottom:8px;">Given a known inductance and target resonant frequency, calculates the required capacitance to tune the LC circuit to resonance. Useful when the inductor is fixed.</p>
+				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0 3px 0;">Target resonant frequency.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">L</td><td style="padding:3px 0 3px 0;">Known inductance.</td></tr>
+					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">C</td><td style="padding:3px 0 3px 0;">Required capacitance for resonance at f with the given L.</td></tr>
+				</table>
+			</div>
 			Frequency, f: <input type="text" id="f" placeholder="Enter Frequency">
 				<select id="f_dropdown">
 					<option value="0">kHz</option>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — Electromagnetic Waves</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Electromagnetic Waves</h3>
+			<div class="wiki-article">
+
+				<p>An electromagnetic wave is a self-propagating oscillation of electric and magnetic fields, perpendicular to each other and to the direction of travel. No medium is required — EM waves propagate in vacuum at the speed of light.</p>
+
+				<h4>Wave Properties</h4>
+				<p>A plane wave travelling in the z-direction has:</p>
+				<div class="eq">\(\mathbf{E}(z,t) = E_0 \cos(\omega t - kz)\,\hat{x}\quad\mathbf{B}(z,t) = \frac{E_0}{c}\cos(\omega t - kz)\,\hat{y}\)</div>
+				<p>The wavenumber \(k = 2\pi/\lambda = \omega/c\), angular frequency \(\omega = 2\pi f\), wavelength \(\lambda = c/f\).</p>
+
+				<h4>The EM Spectrum</h4>
+				<ul>
+					<li><span class="key">ELF / VLF</span> &lt; 30 kHz — submarine communications, power lines</li>
+					<li><span class="key">MF / HF</span> 300 kHz–30 MHz — AM radio, shortwave</li>
+					<li><span class="key">VHF / UHF</span> 30 MHz–3 GHz — FM radio, TV, WiFi, cellular</li>
+					<li><span class="key">Microwave</span> 3–300 GHz — radar, satellite, 5G, microwave ovens, MRI</li>
+					<li><span class="key">Infrared / Visible / UV</span> above 300 GHz</li>
+					<li><span class="key">X-ray / Gamma</span> very high frequencies — ionising radiation</li>
+				</ul>
+
+				<h4>Polarisation</h4>
+				<p>The polarisation of an EM wave describes the orientation of the electric field vector. Linear polarisation: E oscillates in one plane. Circular polarisation: E rotates, tracing a helix. In MRI, circular (quadrature) polarisation of the B1 field is used to improve SNR by 40%.</p>
+
+				<h4>Poynting Vector</h4>
+				<p>Power flow per unit area is given by the Poynting vector: \(\mathbf{S} = \mathbf{E} \times \mathbf{H}\) (W/m²). Time-averaged power: \(\langle S \rangle = E_0^2 / (2\eta)\) where \(\eta = \sqrt{\mu/\varepsilon}\) is the wave impedance (377 Ω in free space).</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

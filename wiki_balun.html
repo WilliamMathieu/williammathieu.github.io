@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — BALUNs and Hybrids</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>BALUNs and Hybrids</h3>
+			<div class="wiki-article">
+
+				<p>A BALUN (BALanced-UNbalanced) converts between single-ended (coaxial) and balanced (differential) connections. Hybrids are 4-port networks that split power with a defined phase relationship. Both are critical building blocks in RF systems.</p>
+
+				<h4>Why BALUNs are Needed</h4>
+				<p>A dipole antenna is a balanced structure (symmetric about its feed point). Connecting it directly to coaxial cable (unbalanced) allows current to flow on the cable outer conductor, distorting the radiation pattern and causing interference. A BALUN prevents this by presenting high common-mode impedance.</p>
+
+				<h4>LC BALUN</h4>
+				<p>Uses inductors and capacitors to provide the balanced-to-unbalanced conversion with impedance transformation. The lattice topology uses four elements in a bridge circuit, providing ±45° phase shift on the two balanced outputs and excellent amplitude balance over a moderate bandwidth.</p>
+
+				<h4>Marchand BALUN</h4>
+				<p>Two coupled quarter-wave resonators provide wideband balun action (often 2-3 octaves). The open-circuited stubs resonate at f₀ and present the appropriate impedance transformation. Widely used in wideband power amplifiers, mixers, and antenna feeds.</p>
+
+				<h4>90° Hybrid (Branch-Line)</h4>
+				<p>A 4-port network where power splits equally between two output ports with a 90° phase difference. Used in quadrature modulators, I/Q signal processing, and phased array feed networks. Implemented as a square of four λ/4 transmission line sections.</p>
+
+				<h4>180° Hybrid (Rat-Race / Magic-T)</h4>
+				<p>Splits power equally with 0° or 180° phase shift. Used in balanced amplifiers, mixers, and Butler matrices for phased array beamforming.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

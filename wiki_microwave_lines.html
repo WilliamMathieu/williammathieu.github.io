@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RF Toolbox — Microwave Transmission Lines</title>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wiki-article h4 { font-family:monospace; color:#5533aa; margin:16px 0 6px; font-size:14px; }
+		.wiki-article p  { font-size:13px; line-height:1.7; margin-bottom:10px; }
+		.wiki-article ul { font-size:13px; line-height:1.8; padding-left:20px; margin-bottom:10px; }
+		.wiki-article .eq { background:#f8f6ff; border-left:3px solid #AA77FF; padding:8px 12px; border-radius:0 4px 4px 0; margin:10px 0; font-size:13px; }
+		.wiki-article .key { font-family:monospace; font-size:12px; background:#f0eeff; padding:2px 6px; border-radius:3px; }
+		.wiki-back { font-family:monospace; font-size:12px; margin-bottom:14px; }
+		.wiki-back a { color:#AA77FF; }
+	</style>
+</head>
+<body>
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Microwave Transmission Lines</h3>
+			<div class="wiki-article">
+
+				<p>At microwave frequencies, transmission lines must be treated as distributed elements. Several planar and non-planar structures are used depending on frequency, power, loss, and fabrication constraints.</p>
+
+				<h4>Microstrip</h4>
+				<p>The most common planar line in PCB design. A conductor trace on top of a dielectric substrate with a ground plane below. Fields are partly in the substrate and partly in air, giving an effective dielectric constant \(\varepsilon_{eff} < \varepsilon_r\). Easy to fabricate but has higher radiation loss at millimetre-wave frequencies.</p>
+
+				<h4>Stripline</h4>
+				<p>Conductor buried between two ground planes in a homogeneous dielectric. All fields are in the dielectric so \(\varepsilon_{eff} = \varepsilon_r\) exactly. Lower radiation loss than microstrip but harder to access for shunt connections.</p>
+
+				<h4>Coplanar Waveguide (CPW)</h4>
+				<p>Signal conductor flanked by ground conductors on the same surface. Easy shunt connections (no via needed), suitable for MMIC (monolithic microwave integrated circuit) fabrication. Widely used above 10 GHz.</p>
+
+				<h4>Coaxial Line</h4>
+				<p>TEM mode, no cutoff frequency (down to DC). The dominant transmission medium for test equipment, cables, and connectors. Standard impedances: 50 Ω (minimum attenuation/maximum power tradeoff), 75 Ω (minimum attenuation in air-filled coax).</p>
+
+				<h4>Waveguide</h4>
+				<p>Hollow metallic tube supporting TE and TM modes. Has a cutoff frequency below which propagation does not occur. Very low loss at microwave/millimetre-wave frequencies. Used in high-power radar and satellite systems.</p>
+
+			</div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>
