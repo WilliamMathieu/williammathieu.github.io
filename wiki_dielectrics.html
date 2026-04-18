@@ -31,6 +31,12 @@
 		.toc a{color:#5533aa;text-decoration:none;}
 		.toc a:hover{text-decoration:underline;}
 		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -50,6 +56,8 @@
 				<div class="eq">\(\tan\delta = \dfrac{\varepsilon_r''}{\varepsilon_r'}\)</div>
 				<p>Lower \(\tan\delta\) means lower dielectric loss. Attenuation in a transmission line increases with loss tangent and frequency.</p>
 				<h4>Common PCB Substrate Materials</h4>
+				<figure><svg viewBox="0 0 390 140" width="390" height="140" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect x="10" y="35" width="360" height="18" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="0"/><text x="190" y="47" text-anchor="middle" font-size="9" fill="#fff" font-weight="normal" font-family="monospace">Microstrip trace (copper)</text><rect x="10" y="53" width="360" height="60" fill="#e8f4d4" stroke="#7aaa44" stroke-width="1" rx="0"/><text x="190" y="85" text-anchor="middle" font-size="10" fill="#3a7000" font-weight="bold" font-family="monospace">Dielectric substrate</text><text x="190" y="97" text-anchor="middle" font-size="9" fill="#3a7000" font-weight="normal" font-family="monospace">εᵣ, h, tan δ</text><rect x="10" y="113" width="360" height="18" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="0"/><text x="190" y="125" text-anchor="middle" font-size="9" fill="#fff" font-weight="normal" font-family="monospace">Ground plane</text><path d="M140,53 Q128,83 140,113" stroke="#0055DD" stroke-width="1.2" fill="none"/><path d="M165,53 Q153,83 165,113" stroke="#0055DD" stroke-width="1.2" fill="none"/><path d="M190,53 Q178,83 190,113" stroke="#0055DD" stroke-width="1.2" fill="none"/><path d="M215,53 Q203,83 215,113" stroke="#0055DD" stroke-width="1.2" fill="none"/><path d="M240,53 Q228,83 240,113" stroke="#0055DD" stroke-width="1.2" fill="none"/><text x="375" y="83" text-anchor="start" font-size="9" fill="#0055DD" font-weight="normal" font-family="monospace">E field lines</text><line x1="373" y1="83" x2="375" y2="83" stroke="#0055DD" stroke-width="1"/></svg><figcaption>Microstrip cross-section. Field lines extend partly into air above the trace, giving εeff < εr.</figcaption></figure>
+
 				<ul>
 					<li><span class="key">FR4</span> — \(\varepsilon_r \approx 4.4\), \(\tan\delta \approx 0.02\). Standard PCB material, adequate to ~5 GHz.</li>
 					<li><span class="key">Rogers 4003C</span> — \(\varepsilon_r = 3.55\), \(\tan\delta = 0.0027\). Low loss, stable with temperature, suitable to 77 GHz.</li>

@@ -31,6 +31,12 @@
 		.toc a{color:#5533aa;text-decoration:none;}
 		.toc a:hover{text-decoration:underline;}
 		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -49,6 +55,8 @@
 				<div class="eq">\(MDS = kTB + NF + SNR_{min}\) &nbsp; (dBm)</div>
 				<p>Link margin = \(P_r - MDS\). A positive margin means the link works; typical design margins are 3–20 dB depending on the fade margin required.</p>
 				<h4>Free-Space Path Loss</h4>
+				<figure><svg viewBox="0 0 410 95" width="410" height="95" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><line x1="5" y1="45" x2="40" y2="45" stroke="#333" stroke-width="1.5"/><polygon points="40,45 32.0,49.0 32.0,41.0" fill="#333"/><text x="3" y="41" text-anchor="end" font-size="9" fill="#555" font-weight="normal" font-family="monospace">Pin</text><rect x="40" y="18" width="80" height="35" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.5" rx="5"/><text x="80" y="35" text-anchor="middle" font-size="11" fill="#AA77FF" font-weight="bold" font-family="monospace">LNA</text><text x="80" y="46" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">G₁,NF₁</text><line x1="120" y1="35" x2="160" y2="35" stroke="#333" stroke-width="1.5"/><polygon points="160,35 152.0,39.0 152.0,31.0" fill="#333"/><rect x="160" y="18" width="80" height="35" fill="#f0eeff" stroke="#00ccff" stroke-width="1.5" rx="5"/><text x="200" y="35" text-anchor="middle" font-size="11" fill="#00ccff" font-weight="bold" font-family="monospace">Filter</text><text x="200" y="46" text-anchor="middle" font-size="9" fill="#00ccff" font-weight="normal" font-family="monospace">G₂,NF₂</text><line x1="240" y1="35" x2="280" y2="35" stroke="#333" stroke-width="1.5"/><polygon points="280,35 272.0,39.0 272.0,31.0" fill="#333"/><rect x="280" y="18" width="80" height="35" fill="#f0eeff" stroke="#ff8800" stroke-width="1.5" rx="5"/><text x="320" y="35" text-anchor="middle" font-size="11" fill="#ff8800" font-weight="bold" font-family="monospace">IF Amp</text><text x="320" y="46" text-anchor="middle" font-size="9" fill="#ff8800" font-weight="normal" font-family="monospace">G₃,NF₃</text><line x1="360" y1="35" x2="400" y2="35" stroke="#333" stroke-width="1.5"/><polygon points="400,35 392.0,39.0 392.0,31.0" fill="#333"/><text x="410" y="41" text-anchor="start" font-size="9" fill="#555" font-weight="normal" font-family="monospace">Pout</text><text x="200" y="75" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="normal" font-family="monospace">F_total = F₁ + (F₂−1)/G₁ + (F₃−1)/(G₁G₂) + …</text><text x="200" y="88" text-anchor="middle" font-size="9" fill="#777" font-weight="normal" font-family="monospace">→ First stage dominates. Minimise LNA noise figure!</text></svg><figcaption>Link budget chain: each block contributes gains (antennas) or losses (cables, path loss). The sum determines received power vs noise floor.</figcaption></figure>
+
 				<div class="eq">\(FSPL = 20\log_{10}(d) + 20\log_{10}(f) + 20\log_{10}\!\left(\dfrac{4\pi}{c}\right)\)</div>
 				<p>At 2.4 GHz, FSPL over 100 m ≈ 80 dB. FSPL grows with distance² and frequency² — doubling distance adds 6 dB; doubling frequency adds 6 dB.</p>
 				<h4>Additional Loss Mechanisms</h4>

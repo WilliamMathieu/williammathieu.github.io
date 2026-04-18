@@ -31,6 +31,12 @@
 		.toc a{color:#5533aa;text-decoration:none;}
 		.toc a:hover{text-decoration:underline;}
 		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -44,6 +50,8 @@
 
 				<p>Radar (Radio Detection And Ranging) uses reflected electromagnetic waves to detect objects and measure their range, velocity, and angular position. The radar equation relates transmitted power to received echo power.</p>
 				<h4>Radar Equation</h4>
+				<figure><svg viewBox="0 0 370 148" width="370" height="148" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect x="0" y="0" width="370" height="145" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><line x1="28" y1="120" x2="360" y2="120" stroke="#333" stroke-width="1.5"/><polygon points="360,120 352.0,124.0 352.0,116.0" fill="#333"/><line x1="28" y1="120" x2="28" y2="10" stroke="#333" stroke-width="1.5"/><polygon points="28,10 32.0,18.0 24.0,18.0" fill="#333"/><text x="362" y="122" text-anchor="start" font-size="9" fill="#333" font-weight="normal" font-family="monospace">t</text><text x="23" y="8" text-anchor="end" font-size="9" fill="#333" font-weight="normal" font-family="monospace">Ampl</text><line x1="50" y1="120" x2="50" y2="30" stroke="#AA77FF" stroke-width="3"/><line x1="50" y1="30" x2="88" y2="30" stroke="#AA77FF" stroke-width="3"/><line x1="88" y1="30" x2="88" y2="120" stroke="#AA77FF" stroke-width="3"/><text x="69" y="22" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">Tx (τ)</text><line x1="205" y1="120" x2="205" y2="72" stroke="#ff6644" stroke-width="2"/><line x1="205" y1="72" x2="243" y2="72" stroke="#ff6644" stroke-width="2"/><line x1="243" y1="72" x2="243" y2="120" stroke="#ff6644" stroke-width="2"/><text x="224" y="64" text-anchor="middle" font-size="8" fill="#ff6644" font-weight="normal" font-family="monospace">Echo</text><line x1="69" y1="108" x2="224" y2="108" stroke="#00aacc" stroke-width="1.5"/><polygon points="224,108 216,104 216,112" fill="#00aacc"/><polygon points="69,108 77,104 77,112" fill="#00aacc"/><text x="146" y="103" text-anchor="middle" font-size="9" fill="#00aacc" font-weight="normal" font-family="monospace">2R/c</text><text x="185" y="138" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">R = cΔt/2    ΔR = cτ/2    fd = 2v/λ</text></svg><figcaption>Radar timing diagram: transmit pulse (purple, width τ) and echo (orange). Range R = cΔt/2; resolution ΔR = cτ/2.</figcaption></figure>
+
 				<div class="eq">\(P_r = \dfrac{P_t G_t G_r \lambda^2 \sigma}{(4\pi)^3 R^4}\)</div>
 				<p>where \(\sigma\) is the target radar cross section (RCS) in m², and \(R\) is range. Note the \(R^4\) dependence — radar range halves when range doubles require 16× more transmit power.</p>
 				<h4>Range Resolution</h4>

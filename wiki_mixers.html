@@ -31,6 +31,12 @@
 		.toc a{color:#5533aa;text-decoration:none;}
 		.toc a:hover{text-decoration:underline;}
 		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -44,6 +50,8 @@
 
 				<p>A mixer multiplies two signals in the time domain, producing sum and difference frequency components. This allows frequency conversion — moving signals from one frequency band to another. Mixers are at the heart of every superheterodyne radio, radar, and wireless communication system.</p>
 				<h4>Basic Operation</h4>
+				<figure><svg viewBox="0 0 370 140" width="370" height="140" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect x="0" y="0" width="370" height="140" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="65" y="12" text-anchor="middle" font-size="10" fill="#555" font-weight="bold" font-family="monospace">Input</text><line x1="8" y1="85" x2="135" y2="85" stroke="#333" stroke-width="1.5"/><polygon points="135,85 127.0,89.0 127.0,81.0" fill="#333"/><line x1="65" y1="125" x2="65" y2="10" stroke="#333" stroke-width="1.5"/><polygon points="65,10 69.0,18.0 61.0,18.0" fill="#333"/><line x1="98" y1="85" x2="98" y2="48" stroke="#AA77FF" stroke-width="3"/><text x="98" y="42" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">fRF</text><circle cx="190" cy="70" r="20" fill="#f0eeff" stroke="#AA77FF" stroke-width="2"/><text x="190" y="74" text-anchor="middle" font-size="16" fill="#AA77FF" font-weight="bold" font-family="monospace">×</text><line x1="135" y1="70" x2="170" y2="70" stroke="#333" stroke-width="1.5"/><line x1="190" y1="90" x2="190" y2="122" stroke="#333" stroke-width="1.5"/><text x="190" y="130" text-anchor="middle" font-size="9" fill="#00ccff" font-weight="normal" font-family="monospace">fLO</text><text x="300" y="12" text-anchor="middle" font-size="10" fill="#555" font-weight="bold" font-family="monospace">Output</text><line x1="210" y1="85" x2="360" y2="85" stroke="#333" stroke-width="1.5"/><polygon points="360,85 352.0,89.0 352.0,81.0" fill="#333"/><line x1="300" y1="125" x2="300" y2="10" stroke="#333" stroke-width="1.5"/><polygon points="300,10 304.0,18.0 296.0,18.0" fill="#333"/><line x1="210" y1="70" x2="245" y2="70" stroke="#333" stroke-width="1.5"/><line x1="248" y1="85" x2="248" y2="55" stroke="#00ccff" stroke-width="3"/><text x="248" y="48" text-anchor="middle" font-size="8" fill="#00ccff" font-weight="normal" font-family="monospace">fRF−fLO</text><line x1="330" y1="85" x2="330" y2="65" stroke="#ff6644" stroke-width="2"/><text x="330" y="58" text-anchor="middle" font-size="8" fill="#ff6644" font-weight="normal" font-family="monospace">fRF+fLO</text></svg><figcaption>Mixer produces sum (fRF+fLO, orange) and difference (fRF−fLO, blue) frequency components.</figcaption></figure>
+
 				<p>An ideal mixer with RF input at \(f_{RF}\) and local oscillator (LO) at \(f_{LO}\) produces output at \(f_{IF} = f_{RF} \pm f_{LO}\). The desired sideband is selected by the IF filter; the unwanted image frequency falls at \(f_{LO} - f_{IF}\) (for a low-side LO) and must be rejected.</p>
 				<h4>Conversion Loss and Noise Figure</h4>
 				<p>Passive mixers (using diodes or FETs) have conversion loss — the IF output is weaker than the RF input. Typical conversion loss: 5–8 dB for a diode ring mixer. The NF of a passive mixer equals approximately its conversion loss. Active mixers provide conversion gain (0–15 dB) at the cost of higher DC power and potentially more distortion.</p>

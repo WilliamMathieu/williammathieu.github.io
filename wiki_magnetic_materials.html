@@ -31,6 +31,12 @@
 		.toc a{color:#5533aa;text-decoration:none;}
 		.toc a:hover{text-decoration:underline;}
 		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -55,6 +61,8 @@
 				<h4>Core Saturation</h4>
 				<p>At high flux densities, magnetic cores saturate — \(\mu_r\) collapses, inducing harmonics and power loss. Always verify that peak flux density is below the saturation flux density \(B_{sat}\) of the chosen material under worst-case conditions.</p>
 				<h4>Core Loss</h4>
+				<figure><svg viewBox="0 0 280 190" width="280" height="190" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect x="0" y="0" width="280" height="185" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><line x1="140" y1="170" x2="140" y2="10" stroke="#333" stroke-width="1.5"/><polygon points="140,10 144.0,18.0 136.0,18.0" fill="#333"/><line x1="10" y1="95" x2="270" y2="95" stroke="#333" stroke-width="1.5"/><polygon points="270,95 262.0,99.0 262.0,91.0" fill="#333"/><text x="143" y="8" text-anchor="start" font-size="10" fill="#333" font-weight="normal" font-family="monospace">B</text><text x="272" y="98" text-anchor="start" font-size="10" fill="#333" font-weight="normal" font-family="monospace">H</text><polyline points="140.0,122.5 146.9,117.3 153.8,111.8 160.6,105.9 167.4,99.8 174.0,93.6 180.5,87.4 186.8,81.4 193.0,75.7 198.9,70.3 204.7,65.4 210.1,60.9 215.3,56.9 220.2,53.4 224.8,50.4 229.0,47.8 232.9,45.5 236.4,43.6 239.5,42.0 242.3,40.6 244.6,39.5 246.5,38.5 248.1,37.7 249.1,37.1 249.8,36.5 250.0,36.1 249.8,35.8 249.1,35.5 248.1,35.4 246.5,35.3 244.6,35.3 242.3,35.3 239.5,35.4 236.4,35.6 232.9,35.9 229.0,36.3 224.8,36.8 220.2,37.3 215.3,38.1 210.1,38.9 204.7,40.0 198.9,41.2 193.0,42.7 186.8,44.4 180.5,46.5 174.0,48.9 167.4,51.7 160.6,54.9 153.8,58.7 146.9,62.8 140.0,67.5 133.1,72.7 126.2,78.2 119.4,84.1 112.6,90.2 106.0,96.4 99.5,102.6 93.2,108.6 87.0,114.3 81.1,119.7 75.3,124.6 69.9,129.1 64.7,133.1 59.8,136.6 55.2,139.6 51.0,142.2 47.1,144.5 43.6,146.4 40.5,148.0 37.7,149.4 35.4,150.5 33.5,151.5 31.9,152.3 30.9,152.9 30.2,153.5 30.0,153.9 30.2,154.2 30.9,154.5 31.9,154.6 33.5,154.7 35.4,154.7 37.7,154.7 40.5,154.6 43.6,154.4 47.1,154.1 51.0,153.7 55.2,153.2 59.8,152.7 64.7,151.9 69.9,151.1 75.3,150.0 81.1,148.8 87.0,147.3 93.2,145.6 99.5,143.5 106.0,141.1 112.6,138.3 119.4,135.1 126.2,131.3 133.1,127.2 140.0,122.5" fill="none" stroke="#AA77FF" stroke-width="2"/><line x1="20" y1="27" x2="260" y2="27" stroke="#AA77FF" stroke-width="1" stroke-dasharray="4 3"/><text x="140" y="23" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">B_sat</text><text x="140" y="180" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">Hysteresis loop (area = core loss/cycle)</text></svg><figcaption>Hysteresis loop. Area enclosed = energy dissipated as heat per cycle.</figcaption></figure>
+
 				<p>Core loss (hysteresis + eddy current losses) is characterised by the complex permeability \(\mu = \mu' - j\mu''\). The loss factor \(\mu''/\mu'\) (analogous to \(\tan\delta\)) increases with frequency. Ferrite materials are categorised by their intended frequency range (e.g. MnZn ferrites for &lt;5 MHz, NiZn for 1–100 MHz).</p>
 
 			</div>

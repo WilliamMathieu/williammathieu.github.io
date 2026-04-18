@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-6R4JGG0586');
+	</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +18,7 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,20 +27,8 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Bandpass Filter Calculator</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">A series or parallel RLC circuit forms a second-order bandpass filter. Q (quality factor) describes sharpness — higher Q = narrower bandwidth. Bandwidth is defined between the −3 dB (half-power) points.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">L</td><td style="padding:3px 0 3px 0;">Inductance.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">C</td><td style="padding:3px 0 3px 0;">Capacitance.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">R</td><td style="padding:3px 0 3px 0;">Resistance — determines Q and bandwidth.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f₀</td><td style="padding:3px 0 3px 0;">Centre frequency = 1/(2π√LC).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">BW</td><td style="padding:3px 0 3px 0;">3 dB bandwidth = f₀/Q.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Q</td><td style="padding:3px 0 3px 0;">Quality factor. Series: Q = ω₀L/R. Parallel: Q = R/(ω₀L).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f₁, f₂</td><td style="padding:3px 0 3px 0;">Lower and upper −3 dB frequencies.</td></tr>
-				</table>
-			</div>
 
-			<p style="font-size:13px;">Calculate centre frequency, bandwidth, and Q from component values.</p><br>
+			<p style="font-size:13px;">Calculate centre frequency, bandwidth, and Q from a series RLC or parallel RLC bandpass filter.</p><br>
 			Configuration:
 			<select id="bp-config">
 				<option value="series">Series RLC</option>
@@ -44,15 +38,14 @@
 			<select id="bp-Lu"><option value="1e-3">mH</option><option value="1e-6" selected>uH</option><option value="1e-9">nH</option></select><br>
 			Capacitance, C: <input type="text" id="bp-C" placeholder="value">
 			<select id="bp-Cu"><option value="1e-6">uF</option><option value="1e-9">nF</option><option value="1e-12" selected>pF</option></select><br>
-			Resistance, R: <input type="text" id="bp-R" placeholder="&#937;"> &#937;<br><br>
+			Resistance, R: <input type="text" id="bp-R" placeholder="Ω"> Ω<br><br>
 			<button id="bp-btn">Calculate</button>
-			<p>\begin{align} f_0 &= \frac{1}{2\pi\sqrt{LC}} \quad Q = \frac{\omega_0 L}{R} \end{align}</p>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<div class="result-box" id="bp-out"><p>f₀ = <span id="bp-f0">—</span></p><p>BW = <span id="bp-bw">—</span></p><p>Q = <span id="bp-Q">—</span></p><p>f₁ = <span id="bp-f1">—</span></p><p>f₂ = <span id="bp-f2">—</span></p></div>
+			<p><span id="bp-out"></span></p>
+			<p>\begin{align} f_0 &= \frac{1}{2\pi\sqrt{LC}} \end{align}</p>
 
 			<script src="BandpassCalc.js"></script>
 		</article>
 	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<footer><p><a href="index.html">Home</a></p></footer>
 </body>
 </html>

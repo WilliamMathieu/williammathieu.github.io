@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-6R4JGG0586');
+	</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +18,7 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,14 +27,6 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Skin Depth Calculator</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">At RF frequencies, current concentrates near the conductor surface in a layer whose thickness (skin depth δ) decreases with frequency. This raises effective resistance at RF compared to DC. Conductor thickness should be ≥ 3–5 skin depths to minimise resistive loss.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0 3px 0;">Frequency.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">σ (conductivity)</td><td style="padding:3px 0 3px 0;">Copper = 5.8×10⁷ S/m; silver = 6.3×10⁷; aluminium = 3.77×10⁷.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">δ</td><td style="padding:3px 0 3px 0;">Skin depth = √(2/ωμσ). Current falls to 1/e ≈ 37% of surface value at depth δ.</td></tr>
-				</table>
-			</div>
 
 			Frequency, f: <input type="text" id="sd-f" placeholder="value">
 			<select id="sd-fu">
@@ -38,22 +36,21 @@
 			</select><br>
 			Conductor material:
 			<select id="sd-mat">
-				<option value="5.8e7">Copper (5.8 &times; 10&#8311; S/m)</option>
-				<option value="3.77e7">Aluminium (3.77 &times; 10&#8311; S/m)</option>
-				<option value="1.0e7">Steel (~10&#8311; S/m)</option>
-				<option value="6.3e7">Silver (6.3 &times; 10&#8311; S/m)</option>
-				<option value="4.1e7">Gold (4.1 &times; 10&#8311; S/m)</option>
+				<option value="5.8e7">Copper (5.8 × 10⁷ S/m)</option>
+				<option value="3.77e7">Aluminium (3.77 × 10⁷ S/m)</option>
+				<option value="1.0e7">Steel (~10⁷ S/m)</option>
+				<option value="6.3e7">Silver (6.3 × 10⁷ S/m)</option>
+				<option value="4.1e7">Gold (4.1 × 10⁷ S/m)</option>
 				<option value="custom">Custom</option>
 			</select><br>
-			Conductivity (if custom): <input type="text" id="sd-sigma" placeholder="S/m" disabled><br><br>
+			Conductivity (if custom): <input type="text" id="sd-sigma" placeholder="S/m"><br><br>
 			<button id="sd-btn">Calculate</button>
+			<p><span id="sd-out"></span></p>
 			<p>\begin{align} \delta &= \sqrt{\frac{2}{\omega\mu\sigma}} \end{align}</p>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<div class="result-box" id="sd-out"><p>δ = <span id="sd-m">—</span> m</p><p>δ = <span id="sd-um">—</span> μm</p></div>
 
 			<script src="SkinDepth.js"></script>
 		</article>
 	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<footer><p><a href="index.html">Home</a></p></footer>
 </body>
 </html>

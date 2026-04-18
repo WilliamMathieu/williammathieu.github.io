@@ -21,6 +21,12 @@
 		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
 		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
 		.wiki-back a{color:#AA77FF;}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -43,6 +49,8 @@
 				<p>In a static field \(B_0\), spins align preferentially along the field, creating a bulk magnetisation \(M_0\) parallel to \(B_0\) (the z-axis). This magnetisation is the signal source in MRI.</p>
 
 				<h4>RF Excitation</h4>
+				<figure><svg viewBox="0 0 360 165" width="360" height="165" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><line x1="120" y1="150" x2="120" y2="15" stroke="#0055DD" stroke-width="2.5"/><polygon points="120,15 124.0,23.0 116.0,23.0" fill="#0055DD"/><text x="122" y="12" text-anchor="start" font-size="11" fill="#0055DD" font-weight="bold" font-family="monospace">B₀</text><line x1="120" y1="100" x2="185" y2="60" stroke="#AA77FF" stroke-width="3"/><polygon points="185,60 180.3,67.6 176.1,60.8" fill="#AA77FF"/><text x="190" y="57" text-anchor="start" font-size="11" fill="#AA77FF" font-weight="bold" font-family="monospace">M</text><ellipse cx="120" cy="60" rx="65" ry="18" fill="none" stroke="#AA77FF" stroke-width="1.8" stroke-dasharray="5 3" opacity="0.8"/><path d="M120,80 a18,18 0 0,0 13,-13" stroke="#ff8800" stroke-width="1.5" fill="none"/><text x="140" y="75" text-anchor="start" font-size="9" fill="#ff8800" font-weight="normal" font-family="monospace">θ</text><text x="30" y="63" text-anchor="end" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">ω₀=γB₀</text><text x="285" y="15" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">FID signal</text><line x1="230" y1="95" x2="340" y2="95" stroke="#333" stroke-width="1"/><polygon points="340,95 332.0,99.0 332.0,91.0" fill="#333"/><line x1="230" y1="95" x2="230" y2="15" stroke="#333" stroke-width="1"/><polygon points="230,15 234.0,23.0 226.0,23.0" fill="#333"/><polyline points="230.0,53.0 231.8,57.2 233.6,65.1 235.4,75.5 237.2,86.9 239.0,98.1 240.8,107.9 242.6,115.4 244.4,120.0 246.2,121.5 248.0,120.0 249.8,116.0 251.6,110.1 253.4,103.1 255.2,96.0 257.0,89.4 258.8,84.0 260.6,80.4 262.4,78.6 264.2,78.8 266.0,80.7 267.8,83.9 269.6,88.0 271.4,92.5 273.2,96.8 275.0,100.5 276.8,103.3 278.6,104.9 280.4,105.3 282.2,104.6 284.0,102.9 285.8,100.5 287.6,97.7 289.4,95.0 291.2,92.5 293.0,90.5 294.8,89.1 296.6,88.6 298.4,88.7 300.2,89.6 302.0,90.9 303.8,92.5 305.6,94.3 307.4,96.0 309.2,97.4 311.0,98.4 312.8,98.9 314.6,99.0 316.4,98.6 318.2,97.9 320.0,97.0 321.8,95.9 323.6,94.8 325.4,93.9 327.2,93.1 329.0,92.7 330.8,92.5 332.6,92.6 334.4,93.0 336.2,93.5 338.0,94.1" fill="none" stroke="#AA77FF" stroke-width="2"/><text x="285" y="108" text-anchor="middle" font-size="8" fill="#555" font-weight="normal" font-family="monospace">Free Induction Decay</text></svg><figcaption>Left: M precessing around B₀ at ω₀=γB₀. Right: free induction decay (FID) signal after a 90° pulse.</figcaption></figure>
+
 				<p>A radiofrequency pulse at the Larmor frequency (the B1 field) tips \(M_0\) away from z. A 90° pulse rotates \(M_0\) entirely into the transverse (xy) plane where it precesses and induces a signal in the receive coil. A 180° pulse inverts \(M_0\).</p>
 
 				<h4>Bloch Equations and Relaxation</h4>

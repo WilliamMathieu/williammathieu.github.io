@@ -31,6 +31,12 @@
 		.toc a{color:#5533aa;text-decoration:none;}
 		.toc a:hover{text-decoration:underline;}
 		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -44,6 +50,8 @@
 
 				<p>Beyond transmission lines and filters, a range of passive components are essential in microwave systems: couplers, dividers, circulators, and attenuators.</p>
 				<h4>Directional Couplers</h4>
+				<figure><svg viewBox="0 0 395 150" width="395" height="150" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect x="120" y="35" width="140" height="75" fill="#f0eeff" stroke="#AA77FF" stroke-width="2" rx="6"/><text x="190" y="74" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold" font-family="monospace">2-Port</text><text x="190" y="88" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold" font-family="monospace">Network</text><line x1="10" y1="72" x2="120" y2="72" stroke="#333" stroke-width="2"/><text x="5" y="68" text-anchor="end" font-size="11" fill="#CC0000" font-weight="normal" font-family="monospace">a₁→</text><line x1="120" y1="95" x2="10" y2="95" stroke="#333" stroke-width="2"/><text x="5" y="99" text-anchor="end" font-size="11" fill="#0055DD" font-weight="normal" font-family="monospace">←b₁</text><line x1="260" y1="72" x2="380" y2="72" stroke="#333" stroke-width="2"/><text x="385" y="68" text-anchor="start" font-size="11" fill="#0055DD" font-weight="normal" font-family="monospace">b₂→</text><line x1="380" y1="95" x2="260" y2="95" stroke="#333" stroke-width="2"/><text x="385" y="99" text-anchor="start" font-size="11" fill="#CC0000" font-weight="normal" font-family="monospace">←a₂</text><text x="190" y="140" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">S₁₁=b₁/a₁|a₂=0 (reflection)  |  S₂₁=b₂/a₁|a₂=0 (transmission)</text></svg><figcaption>A directional coupler is a 4-port device — extending the 2-port S-matrix concept to include forward and reverse coupled ports.</figcaption></figure>
+
 				<p>A directional coupler samples a fraction of the forward or reverse traveling wave on a transmission line without significantly disturbing it. Key parameters: coupling factor (C, dB), directivity (D, dB), and insertion loss. Used for power monitoring, signal sampling, and reflectometer circuits in VNAs.</p>
 				<h4>Power Dividers / Combiners</h4>
 				<p>A Wilkinson power divider splits input power equally into two output ports (−3 dB each) while maintaining isolation between the two outputs. The isolation resistor absorbs any power imbalance between ports. Used in antenna arrays, balanced amplifiers, and mixer feeds.</p>

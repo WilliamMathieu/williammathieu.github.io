@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-6R4JGG0586');
+	</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +18,7 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,31 +27,16 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Cascaded Noise Figure Calculator</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">In a receiver chain, noise from early stages dominates because later stages amplify it. The Friis noise formula shows the first stage contributes most to total NF — this is why an LNA at the front of a receiver is critical.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Gₙ</td><td style="padding:3px 0 3px 0;">Gain of stage n (dB). Passive components have negative gain (insertion loss).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Fₙ</td><td style="padding:3px 0 3px 0;">Noise Figure of stage n (dB). A perfect noiseless component has NF = 0 dB.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Cascaded NF</td><td style="padding:3px 0 3px 0;">Total system noise figure referred to the input.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Total gain</td><td style="padding:3px 0 3px 0;">Sum of all stage gains (dB).</td></tr>
-				</table>
-			</div>
 
-			<p style="font-size:13px;">Friis formula for cascaded noise figure. Up to 8 stages.</p><br>
+			<p style="font-size:13px;">Enter gain and noise figure for each stage (Friis formula). Up to 8 stages.</p><br>
 			Number of stages: <input type="number" id="nf-n" min="1" max="8" value="3" style="width:50px">
 			<button onclick="nfBuild()">Set stages</button><br><br>
 			<div id="nf-stages"></div>
-			<p>
-				\begin{align}
-				F_{total} &= F_1 + \frac{F_2-1}{G_1} + \frac{F_3-1}{G_1 G_2} + \cdots
-				\end{align}
-			</p>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<div class="result-box" id="nf-out"><p>Cascaded NF = <span id="nf-nf">—</span></p><p>Total gain = <span id="nf-gain">—</span></p></div>
+			<p><span id="nf-out"></span></p>
 
 			<script src="NoiseFigure.js"></script>
 		</article>
 	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<footer><p><a href="index.html">Home</a></p></footer>
 </body>
 </html>

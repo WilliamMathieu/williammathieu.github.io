@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-6R4JGG0586');
+	</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +18,7 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,29 +27,17 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Dipole Antenna Calculator</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">A half-wave dipole is the most fundamental antenna, approximately λ/2 long. In practice, the resonant length is slightly shorter than λ/2 due to finite conductor diameter — captured by the velocity factor k (typically 0.93–0.97). Gain ≈ 2.15 dBi.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0 3px 0;">Resonant frequency.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">k</td><td style="padding:3px 0 3px 0;">Velocity factor (shortening factor) ≈ 0.95 for thin wire.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">λ</td><td style="padding:3px 0 3px 0;">Free-space wavelength = c/f.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Dipole length</td><td style="padding:3px 0 3px 0;">Physical total length ≈ k·λ/2.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Arm length</td><td style="padding:3px 0 3px 0;">Each half ≈ k·λ/4.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Quarter-wave monopole</td><td style="padding:3px 0 3px 0;">Same as one arm — used with a ground plane.</td></tr>
-				</table>
-			</div>
 
 			Frequency, f: <input type="text" id="dp-f" placeholder="value">
 			<select id="dp-fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select><br>
-			Velocity factor, k: <input type="text" id="dp-k" value="0.95"><br><br>
+			Velocity factor, k: <input type="text" id="dp-k" placeholder="0.95 typical" value="0.95"><br><br>
 			<button id="dp-btn">Calculate</button>
+			<p><span id="dp-out"></span></p>
 			<p>\begin{align} L_{half} &= \frac{k \cdot c}{2f} \end{align}</p>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<div class="result-box" id="dp-out"><p>Full wavelength λ = <span id="dp-lam">—</span></p><p>Half-wave dipole total length = <span id="dp-half">—</span></p><p>Each arm length = <span id="dp-arm">—</span></p><p>Quarter-wave monopole = <span id="dp-mono">—</span></p></div>
 
 			<script src="Dipole.js"></script>
 		</article>
 	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<footer><p><a href="index.html">Home</a></p></footer>
 </body>
 </html>

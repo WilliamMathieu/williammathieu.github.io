@@ -21,6 +21,12 @@
 		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
 		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
 		.wiki-back a{color:#AA77FF;}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -38,6 +44,8 @@
 				<p>Surround the anatomy completely, providing a uniform B1 field. The birdcage coil is the most common volume coil — a cylindrical structure with rungs and end rings, driven in quadrature to produce circular polarisation (improving SNR by √2). Used for head, knee, and wrist imaging.</p>
 
 				<h4>Surface Coils</h4>
+				<figure><svg viewBox="0 0 370 158" width="370" height="158" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><text x="75" y="12" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold" font-family="monospace">Surface Coil</text><ellipse cx="75" cy="72" rx="55" ry="14" fill="none" stroke="#AA77FF" stroke-width="3"/><rect x="20" y="86" width="110" height="48" fill="#c8e8ff" stroke="#0066aa" stroke-width="1" rx="4"/><text x="75" y="114" text-anchor="middle" font-size="9" fill="#0066aa" font-weight="normal" font-family="monospace">Sample</text><ellipse cx="75" cy="72" rx="18" ry="4" fill="#AA77FF" fill-opacity="0.45"/><ellipse cx="75" cy="72" rx="32" ry="8" fill="#AA77FF" fill-opacity="0.25"/><ellipse cx="75" cy="72" rx="48" ry="12" fill="#AA77FF" fill-opacity="0.12"/><text x="75" y="148" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">High SNR near surface</text><text x="255" y="12" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold" font-family="monospace">Birdcage Volume Coil</text><ellipse cx="255" cy="42" rx="58" ry="14" fill="none" stroke="#5533aa" stroke-width="2.5"/><ellipse cx="255" cy="122" rx="58" ry="14" fill="none" stroke="#5533aa" stroke-width="2.5"/><line x1="313.0" y1="42.0" x2="313.0" y2="122.0" stroke="#AA77FF" stroke-width="2.5"/><line x1="296.01219330881975" y1="51.89949493661166" x2="296.01219330881975" y2="131.89949493661166" stroke="#AA77FF" stroke-width="2.5"/><line x1="255.0" y1="56.0" x2="255.0" y2="136.0" stroke="#AA77FF" stroke-width="2.5"/><line x1="213.98780669118025" y1="51.89949493661167" x2="213.98780669118025" y2="131.89949493661166" stroke="#AA77FF" stroke-width="2.5"/><line x1="197.0" y1="42.0" x2="197.0" y2="122.0" stroke="#AA77FF" stroke-width="2.5"/><line x1="213.98780669118023" y1="32.10050506338834" x2="213.98780669118023" y2="112.10050506338834" stroke="#AA77FF" stroke-width="2.5"/><line x1="255.0" y1="28.0" x2="255.0" y2="108.0" stroke="#AA77FF" stroke-width="2.5"/><line x1="296.01219330881975" y1="32.10050506338833" x2="296.01219330881975" y2="112.10050506338834" stroke="#AA77FF" stroke-width="2.5"/><text x="255" y="148" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">Uniform B₁ inside volume</text></svg><figcaption>Left: surface coil — high local SNR, non-uniform. Right: birdcage volume coil — uniform B₁ throughout volume.</figcaption></figure>
+
 				<p>A single loop placed directly on the skin surface. Excellent SNR near the coil but very non-uniform sensitivity — SNR drops rapidly with depth. The depth of sensitivity is roughly equal to the coil radius. Ideal for superficial structures: spine, shoulder, temporomandibular joint.</p>
 
 				<h4>Phased Array Coils</h4>

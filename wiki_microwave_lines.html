@@ -21,6 +21,12 @@
 		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
 		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
 		.wiki-back a{color:#AA77FF;}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -35,6 +41,9 @@
 				<p>At microwave frequencies, transmission lines must be treated as distributed elements. Several planar and non-planar structures are used depending on frequency, power, loss, and fabrication constraints.</p>
 
 				<h4>Microstrip</h4>
+				<figure><svg viewBox="0 0 420 120" width="420" height="120" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><text x="50" y="12" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold" font-family="monospace">Microstrip</text><rect x="15" y="35" width="70" height="16" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="0"/><text x="50" y="46" text-anchor="middle" font-size="8" fill="#fff" font-weight="normal" font-family="monospace">trace</text><rect x="15" y="51" width="70" height="45" fill="#d4ecca" stroke="#5a9020" stroke-width="1" rx="0"/><text x="50" y="77" text-anchor="middle" font-size="9" fill="#3a7000" font-weight="normal" font-family="monospace">substrate
+εr</text><rect x="15" y="96" width="70" height="12" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="0"/><text x="50" y="105" text-anchor="middle" font-size="8" fill="#fff" font-weight="normal" font-family="monospace">GND</text><text x="170" y="12" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold" font-family="monospace">Coaxial</text><circle cx="170" cy="75" r="38" fill="#ffe8a0" stroke="#aa8800" stroke-width="1.5"/><circle cx="170" cy="75" r="38" fill="none" stroke="#b8922a" stroke-width="7"/><circle cx="170" cy="75" r="13" fill="#b8922a" stroke="#7a5000" stroke-width="1.5"/><text x="170" y="79" text-anchor="middle" font-size="8" fill="#fff" font-weight="normal" font-family="monospace">d</text><text x="170" y="50" text-anchor="middle" font-size="8" fill="#7a5000" font-weight="normal" font-family="monospace">D</text><text x="290" y="12" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold" font-family="monospace">CPW</text><rect x="240" y="70" width="140" height="28" fill="#f0f4f0" stroke="#aaa" stroke-width="1" rx="0"/><rect x="250" y="47" width="30" height="24" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="0"/><text x="265" y="42" text-anchor="middle" font-size="7" fill="#7a5000" font-weight="normal" font-family="monospace">GND</text><rect x="305" y="47" width="15" height="24" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="0"/><text x="312" y="42" text-anchor="middle" font-size="8" fill="#7a5000" font-weight="normal" font-family="monospace">S</text><rect x="328" y="47" width="30" height="24" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="0"/><text x="343" y="42" text-anchor="middle" font-size="7" fill="#7a5000" font-weight="normal" font-family="monospace">GND</text><text x="310" y="94" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">εr</text></svg><figcaption>Cross-sections: microstrip (left), coaxial cable (centre), coplanar waveguide CPW (right).</figcaption></figure>
+
 				<p>The most common planar line in PCB design. A conductor trace on top of a dielectric substrate with a ground plane below. Fields are partly in the substrate and partly in air, giving an effective dielectric constant \(\varepsilon_{eff} < \varepsilon_r\). Easy to fabricate but has higher radiation loss at millimetre-wave frequencies.</p>
 
 				<h4>Stripline</h4>

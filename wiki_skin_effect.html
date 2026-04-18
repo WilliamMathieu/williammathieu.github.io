@@ -31,6 +31,12 @@
 		.toc a{color:#5533aa;text-decoration:none;}
 		.toc a:hover{text-decoration:underline;}
 		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -47,6 +53,8 @@
 				<div class="eq">\(\delta = \sqrt{\dfrac{2}{\omega\mu\sigma}} = \sqrt{\dfrac{1}{\pi f\mu\sigma}}\)</div>
 				<p>where \(\omega = 2\pi f\) is angular frequency, \(\mu\) is permeability, and \(\sigma\) is conductivity. Current density falls to \(1/e \approx 37\%\) of its surface value at depth \(\delta\).</p>
 				<h4>Values for Common Conductors at 100 MHz</h4>
+				<figure><svg viewBox="0 0 340 158" width="340" height="158" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect x="0" y="0" width="340" height="155" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><line x1="45" y1="130" x2="45" y2="10" stroke="#333" stroke-width="1.5"/><polygon points="45,10 49.0,18.0 41.0,18.0" fill="#333"/><line x1="45" y1="130" x2="320" y2="130" stroke="#333" stroke-width="1.5"/><polygon points="320,130 312.0,134.0 312.0,126.0" fill="#333"/><text x="40" y="8" text-anchor="end" font-size="9" fill="#333" font-weight="normal" font-family="monospace">J/J₀</text><text x="322" y="132" text-anchor="start" font-size="9" fill="#333" font-weight="normal" font-family="monospace">depth d</text><polyline points="45.0,22.0 49.5,27.3 54.0,32.3 58.5,37.0 63.0,41.6 67.5,45.9 72.0,50.0 76.5,53.9 81.0,57.6 85.5,61.1 90.0,64.5 94.5,67.7 99.0,70.7 103.5,73.6 108.0,76.4 112.5,79.0 117.0,81.5 121.5,83.8 126.0,86.1 130.5,88.2 135.0,90.3 139.5,92.2 144.0,94.0 148.5,95.8 153.0,97.5 157.5,99.1 162.0,100.6 166.5,102.0 171.0,103.4 175.5,104.7 180.0,105.9 184.5,107.1 189.0,108.2 193.5,109.3 198.0,110.3 202.5,111.2 207.0,112.1 211.5,113.0 216.0,113.8 220.5,114.6 225.0,115.4 229.5,116.1 234.0,116.8 238.5,117.4 243.0,118.0 247.5,118.6 252.0,119.2 256.5,119.7 261.0,120.2 265.5,120.7 270.0,121.1 274.5,121.6 279.0,122.0 283.5,122.4 288.0,122.7 292.5,123.1 297.0,123.4 301.5,123.8 306.0,124.1 310.5,124.3 315.0,124.6" fill="none" stroke="#AA77FF" stroke-width="2.5"/><line x1="105" y1="130" x2="105" y2="80" stroke="#ff6644" stroke-width="1.5" stroke-dasharray="4 3"/><text x="109" y="90" text-anchor="start" font-size="10" fill="#ff6644" font-weight="normal" font-family="monospace">δ</text><line x1="45" y1="80" x2="105" y2="80" stroke="#ddd" stroke-width="1" stroke-dasharray="2 2"/><text x="42" y="80" text-anchor="end" font-size="9" fill="#888" font-weight="normal" font-family="monospace">1/e</text><text x="45" y="148" text-anchor="middle" font-size="9" fill="#333" font-weight="normal" font-family="monospace">Surface</text><text x="180" y="17" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="normal" font-family="monospace">J(d) = J₀·e⁻ᵈ/δ  (δ = skin depth)</text></svg><figcaption>Current density J vs depth d. At one skin depth δ, J falls to 1/e ≈ 37% of its surface value.</figcaption></figure>
+
 				<ul>
 					<li>Copper (\(\sigma = 5.8\times10^7\) S/m): \(\delta \approx 6.6\) µm</li>
 					<li>Aluminium (\(\sigma = 3.8\times10^7\) S/m): \(\delta \approx 8.2\) µm</li>

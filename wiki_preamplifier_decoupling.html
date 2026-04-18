@@ -31,6 +31,12 @@
 		.toc a{color:#5533aa;text-decoration:none;}
 		.toc a:hover{text-decoration:underline;}
 		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -46,6 +52,9 @@
 				<h4>The Problem: Mutual Inductance</h4>
 				<p>Two adjacent coil loops have mutual inductance M. If one coil carries current (as part of a resonant circuit), it induces a voltage in its neighbour. This reduces the SNR of both coils and is equivalent to adding correlated noise between array channels.</p>
 				<h4>The Technique</h4>
+				<figure><svg viewBox="0 0 390 128" width="390" height="128" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect x="0" y="0" width="390" height="128" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><ellipse cx="60" cy="45" rx="42" ry="13" fill="none" stroke="#AA77FF" stroke-width="2.5"/><text x="60" y="49" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">Coil 1</text><line x1="60" y1="58" x2="60" y2="72" stroke="#333" stroke-width="1.5"/><path d="M60,72 q5,-7 10,0 q5,7 10,0 q5,-7 10,0 q5,7 10,0" stroke="#ff8800" stroke-width="2" fill="none"/><line x1="100" y1="72" x2="118" y2="72" stroke="#333" stroke-width="1.5"/><text x="80" y="66" text-anchor="middle" font-size="8" fill="#ff8800" font-weight="normal" font-family="monospace">L_add</text><rect x="118" y="58" width="60" height="28" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.5" rx="4"/><text x="148" y="75" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">LNA
+Zin≈2Ω</text><line x1="178" y1="72" x2="225" y2="72" stroke="#333" stroke-width="1.5"/><polygon points="225,72 217.0,76.0 217.0,68.0" fill="#333"/><text x="201" y="66" text-anchor="middle" font-size="8" fill="#555" font-weight="normal" font-family="monospace">High-Z</text><text x="201" y="77" text-anchor="middle" font-size="8" fill="#555" font-weight="normal" font-family="monospace">→ no I</text><ellipse cx="295" cy="45" rx="42" ry="13" fill="none" stroke="#00ccff" stroke-width="2.5"/><text x="295" y="49" text-anchor="middle" font-size="9" fill="#00ccff" font-weight="normal" font-family="monospace">Coil 2</text><text x="295" y="80" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">(isolated)</text><text x="195" y="110" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">Preamp decoupling: L_add transforms low Zin → high impedance at coil</text><text x="195" y="120" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">→ coil current suppressed → mutual coupling eliminated</text></svg><figcaption>Preamplifier decoupling: L_add resonates with C_match, transforming the low preamp Zin to high impedance at the coil loop, suppressing inter-coil coupling.</figcaption></figure>
+
 				<p>A low-input-impedance preamplifier, together with a series inductor \(L_{add}\) at the coil port, presents a very high impedance to current flowing in the coil loop at the resonant frequency. This "preamplifier decoupling" suppresses the induced current in each coil, effectively eliminating mutual coupling without requiring geometric overlap or additional decoupling networks.</p>
 				<div class="eq">\(Z_{preamplifier\ decoupling} = \dfrac{(\omega L_{add})^2}{Z_{in,preamp}}\)</div>
 				<p>If \(Z_{in,preamp}\) is very low (~2–5 Ω) and \(L_{add}\) is chosen such that \(\omega L_{add} = 1/(\omega C_m)\) (resonates with the matching capacitor), the impedance presented to coil current becomes very high (&gt;1000 Ω), suppressing currents and hence coupling.</p>

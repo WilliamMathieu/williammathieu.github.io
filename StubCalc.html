@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-6R4JGG0586');
+	</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +18,7 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,22 +27,11 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Transmission Line Stub Calculator</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">A stub is a shunt (parallel) section of transmission line used for impedance matching. By choosing its length and termination (short/open), it presents a target susceptance to cancel the load susceptance — single-stub matching.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0 3px 0;">Operating frequency.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Z₀</td><td style="padding:3px 0 3px 0;">Characteristic impedance of the stub (Ω).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">B</td><td style="padding:3px 0 3px 0;">Target shunt susceptance (mS). Imaginary part of the admittance the stub must present.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Stub type</td><td style="padding:3px 0 3px 0;">Short-circuit: lower loss. Open-circuit: easier on PCBs (no via needed).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Electrical length</td><td style="padding:3px 0 3px 0;">Stub length in degrees at f.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Physical length</td><td style="padding:3px 0 3px 0;">Stub length in mm (free-space). Multiply by √εeff for microstrip.</td></tr>
-				</table>
-			</div>
 
-			<p style="font-size:13px;">Calculate stub length for a target shunt susceptance.</p><br>
+			<p style="font-size:13px;">Calculate stub length for a target susceptance at a given frequency.</p><br>
 			Frequency, f: <input type="text" id="st-f" placeholder="value">
 			<select id="st-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
-			Line impedance, Z&#8320;: <input type="text" id="st-z0" placeholder="&#937;" value="50"> &#937;<br>
+			Line impedance, Z₀: <input type="text" id="st-z0" placeholder="Ω" value="50"> Ω<br>
 			Target susceptance, B: <input type="text" id="st-B" placeholder="mS"> mS<br>
 			Stub type:
 			<select id="st-type">
@@ -44,18 +39,11 @@
 				<option value="open">Open circuit</option>
 			</select><br><br>
 			<button id="st-btn">Calculate</button>
-			<p>
-				\begin{align}
-				\ell_{short} &= \frac{1}{\beta}\arctan\!\left(\frac{Y_0}{B}\right) \\
-				\ell_{open}  &= \frac{-1}{\beta}\arctan\!\left(\frac{B}{Y_0}\right)
-				\end{align}
-			</p>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<div class="result-box" id="st-out"><p>Electrical length = <span id="st-el">—</span></p><p>Physical length = <span id="st-pl">—</span></p><p>λ/4 = <span id="st-lam4">—</span></p></div>
+			<p><span id="st-out"></span></p>
 
 			<script src="StubCalc.js"></script>
 		</article>
 	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<footer><p><a href="index.html">Home</a></p></footer>
 </body>
 </html>

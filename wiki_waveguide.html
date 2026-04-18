@@ -31,6 +31,12 @@
 		.toc a{color:#5533aa;text-decoration:none;}
 		.toc a:hover{text-decoration:underline;}
 		@media(max-width:600px){.wa .infobox{float:none;max-width:100%;margin:0 0 12px 0;}}
+	
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
 <body>
@@ -44,6 +50,8 @@
 
 				<p>A waveguide is a hollow metallic tube that confines and guides electromagnetic waves. Unlike coaxial line (which supports TEM mode down to DC), waveguides have a cutoff frequency below which propagation does not occur. Above cutoff, waveguides offer very low loss, making them the preferred transmission medium at millimetre-wave frequencies and for high-power radar systems.</p>
 				<h4>Modes</h4>
+				<figure><svg viewBox="0 0 360 210" width="360" height="210" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><polygon points="40,20 40,160 300,160 300,20" fill="#c0cce8" stroke="#5566aa" stroke-width="1.5"/><polygon points="40,20 68,2 328,2 300,20" fill="#d8e0f8" stroke="#5566aa" stroke-width="1.5"/><polygon points="300,20 328,2 328,142 300,160" fill="#b0bcdc" stroke="#5566aa" stroke-width="1.5"/><line x1="40" y1="90" x2="300" y2="90" stroke="#8899cc" stroke-width="1" stroke-dasharray="6 4"/><text x="170" y="90" text-anchor="middle" font-size="9" fill="#5566aa" font-weight="normal" font-family="monospace">TE₁₀ E-field lines (sinusoidal)</text><line x1="60" y1="170" x2="250" y2="170" stroke="#555" stroke-width="1.5"/><polygon points="250,170 242.0,174.0 242.0,166.0" fill="#555"/><text x="155" y="184" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">a (determines fc = c/2a)</text><text x="15" y="90" text-anchor="end" font-size="10" fill="#333" font-weight="bold" font-family="monospace">b</text><text x="170" y="200" text-anchor="middle" font-size="9" fill="#555" font-weight="normal" font-family="monospace">Rectangular waveguide in perspective</text></svg><figcaption>Rectangular waveguide. Cutoff frequency fc = c/(2a) for the dominant TE₁₀ mode.</figcaption></figure>
+
 				<p>Rectangular waveguides support TE (transverse electric) and TM (transverse magnetic) modes. The dominant mode TE₁₀ has the lowest cutoff frequency and is used in virtually all single-mode waveguide applications. The cutoff frequency of the TE₁₀ mode in a rectangular waveguide of width \(a\) is:</p>
 				<div class="eq">\(f_c = \dfrac{c}{2a}\)</div>
 				<h4>Standard Waveguide Bands</h4>

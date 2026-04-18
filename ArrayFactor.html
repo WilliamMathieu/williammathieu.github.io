@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-6R4JGG0586');
+	</script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,46 +18,27 @@
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<script>$(function(){ $("#includeIndex").load("index_list.html"); });</script>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 	<section>
-		<nav><h3>Tools</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">When multiple antenna elements are combined in a phased array, their signals add constructively in some directions and destructively in others, forming a radiation pattern with a main beam and sidelobes. The array factor (AF) describes this directivity pattern independent of the element type. By adjusting the steering angle θ₀, the main beam can be electronically steered without physically moving the antenna.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Number of elements in the linear array.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Element spacing in wavelengths. λ/2 spacing (d=0.5) is standard — avoids grating lobes.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">θ₀</td><td style="padding:3px 0;">Steering angle (degrees). 0° = broadside (perpendicular to array axis).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">AF(θ)</td><td style="padding:3px 0;">Array factor vs angle. The pattern shows the main beam, sidelobes, and nulls.</td></tr>
-				</table>
-			</div><div id="includeIndex"></div></nav>
+		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Antenna Array Factor</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
-				<p style="margin-bottom:8px;">A phased array combines multiple antenna elements whose signals add constructively in the steered direction and destructively elsewhere. The array factor describes this directivity pattern. λ/2 spacing (d = 0.5) is standard to avoid grating lobes.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">N</td><td style="padding:3px 0 3px 0;">Number of array elements.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">d</td><td style="padding:3px 0 3px 0;">Element spacing in wavelengths. d = 0.5 is the standard choice.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">θ₀</td><td style="padding:3px 0 3px 0;">Steering angle (degrees from broadside). 0° = perpendicular to array axis.</td></tr>
-				</table>
-			</div>
 
 			<p style="font-size:13px;">Plot the radiation pattern of a uniform linear array (ULA).</p><br>
 			Number of elements, N: <input type="number" id="af-n" min="2" max="32" value="4" style="width:60px"><br>
 			Element spacing, d: <input type="text" id="af-d" value="0.5"> &lambda;<br>
-			Steering angle, &theta;&#8320;: <input type="text" id="af-theta" value="0"> deg<br><br>
-			<button id="af-btn">Plot Pattern</button>
-			<p>
-				\begin{align}
-				AF(\theta) &= \frac{\sin(N\psi/2)}{\sin(\psi/2)}, \quad \psi = 2\pi d(\sin\theta - \sin\theta_0)
-				\end{align}
-			</p>
-			<canvas id="af-canvas" width="480" height="480" style="border:1px solid #ccc;display:block;margin-top:8px;"></canvas>
-			<p style="font-size:12px;margin-top:6px;">Polar plot — 0&deg; is broadside (top).</p>
+			Steering angle, &theta;₀: <input type="text" id="af-theta" value="0"> deg<br><br>
+			<button id="af-btn">Plot Pattern</button><br><br>
+			<canvas id="af-canvas" width="480" height="480" style="border:1px solid #ccc;display:block;"></canvas>
+			<p style="font-size:12px;margin-top:6px;">Polar plot — 0° is broadside (top). Colour scale: blue (min) → red (max).</p>
 
 			<script src="ArrayFactor.js"></script>
 		</article>
 	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<footer><p><a href="index.html">Home</a></p></footer>
 </body>
 </html>
