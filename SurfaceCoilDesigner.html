@@ -28,7 +28,8 @@
     .calc-btn:hover{background:#8855dd;}
     .calc-btn:active{background:#6633bb;}
 
-    .sec-lbl{font-family:monospace;font-size:10px;color:#5533aa;font-weight:bold;letter-spacing:0.1em;text-transform:uppercase;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e0d8ff;}
+    .sec-lbl{font-family:monospace;font-size:13
+      px;color:#5533aa;font-weight:bold;letter-spacing:0.1em;text-transform:uppercase;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e0d8ff;}
 
     .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
     @media(max-width:640px){.res-grid{grid-template-columns:1fr;}}
@@ -68,6 +69,9 @@
     #results{display:none;}
     .tissue-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:5px;font-size:12px;}
     .tissue-chip{background:#e8e0ff;border:1px solid #c0b0f0;border-radius:3px;padding:2px 8px;color:#5533aa;font-family:monospace;font-size:11px;}
+    .lowercase {
+    text-transform: lowercase;
+    }
   </style>
 </head>
 <body>
@@ -104,7 +108,7 @@
   </div>
 
   <div class="inp-row">
-    <label>d — Conductor diameter</label>
+    <label><span class="lowercase">d</span> — Conductor diameter</label>
     <select id="wire_preset" onchange="applyWire()" style="font-family:monospace;font-size:12px;padding:4px 6px;border:1px solid #ccc;border-radius:4px;margin-bottom:4px;">
       <option value="">— Select preset or enter below —</option>
       <optgroup label="Round wire (AWG)">
@@ -132,7 +136,7 @@
   </div>
 
   <div class="inp-row">
-    <label>f₀ — Larmor frequency</label>
+    <label><span class="lowercase">f</span>₀ — Larmor frequency</label>
     <select id="freq_preset" onchange="applyFreq()" style="font-family:monospace;font-size:12px;padding:4px 6px;border:1px solid #ccc;border-radius:4px;margin-bottom:4px;">
       <option value="">— Select preset or enter below —</option>
       <optgroup label="¹H Proton (MRI)">
@@ -157,7 +161,7 @@
   </div>
 
   <div class="inp-row">
-    <label>h — Sample distance</label>
+    <label><span class="lowercase">h</span> — Sample distance</label>
     <div class="inp-inline">
       <input type="number" id="h" value="10" min="0" max="300" step="1" style="flex:1;">
       <span class="inp-units">mm</span>
