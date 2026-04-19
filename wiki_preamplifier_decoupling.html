@@ -6,7 +6,16 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox Wiki — Preamplifier Decoupling</title>
+	<title>Preamplifier Decoupling in MRI — Roemer-Reykowski Technique | RF Toolbox Wiki</title>
+  <meta name="description" content="Preamplifier decoupling for MRI phased arrays: λ/4 coax transformation, low-impedance LNA, and the Roemer-Reykowski method. Explains why Z_preamp must be low.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_preamplifier_decoupling.html">
+  <meta property="og:title" content="Preamplifier Decoupling in MRI — Roemer-Reykowski Technique | RF Toolbox Wiki">
+  <meta property="og:description" content="Preamplifier decoupling for MRI phased arrays: λ/4 coax transformation, low-impedance LNA, and the Roemer-Reykowski method. Explains why Z_preamp must be low.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_preamplifier_decoupling.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -62,6 +71,15 @@ Zin≈2Ω</text><line x1="178" y1="72" x2="225" y2="72" stroke="#333" stroke-wid
 				<p>An alternative for nearest-neighbour elements is to physically overlap adjacent loops until their mutual inductance is zero (the induced flux from one loop through the other sums to zero due to partial cancellation). About 15–20% overlap is typical. Used in combination with preamplifier decoupling for arrays with many elements.</p>
 
 			</div>
+		
+  <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+    <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      <a href="SurfaceCoilDesigner.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Surface Receive Coil Designer →</a>
+      <a href="LNetwork.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">L-Network Matcher →</a>
+      <a href="QuarterWave.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Quarter-Wave Transformer →</a>
+    </div>
+  </div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>

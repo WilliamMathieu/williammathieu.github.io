@@ -6,7 +6,16 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — RF Coil Design for MRI</title>
+	<title>RF Coil Design for MRI — Loop Coils & Tuning | RF Toolbox Wiki</title>
+  <meta name="description" content="RF coil design for MRI: loop inductance, tuning capacitors, Q factor, sample loading, preamplifier decoupling, and capacitor break count. Covers surface and volume coils.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_coil_design.html">
+  <meta property="og:title" content="RF Coil Design for MRI — Loop Coils & Tuning | RF Toolbox Wiki">
+  <meta property="og:description" content="RF coil design for MRI: loop inductance, tuning capacitors, Q factor, sample loading, preamplifier decoupling, and capacitor break count. Covers surface and volume coils.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_coil_design.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -58,6 +67,17 @@
 				<p>During RF transmission, receive coils must be detuned (switched off) to prevent them from disturbing the transmit field and from experiencing potentially damaging induced voltages. Active detuning circuits use PIN diodes to insert a large inductance or short circuit that shifts the resonant frequency away from f₀ during the transmit phase.</p>
 
 			</div>
+		
+  <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+    <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      <a href="SurfaceCoilDesigner.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Surface Receive Coil Designer →</a>
+      <a href="CoilDesigner.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Simple RF Coil Designer →</a>
+      <a href="LC.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">LC Resonance Calculator →</a>
+      <a href="CLI.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Circular Loop Inductance →</a>
+      <a href="CLC.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Tuning Capacitor Calculator →</a>
+    </div>
+  </div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
