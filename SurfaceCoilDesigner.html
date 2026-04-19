@@ -236,7 +236,7 @@
     </div>
     <div class="breaks-note" id="r_break_note"></div>
   </div>
-  <div class="note-warn"><b>⚠ Standing-wave rule:</b> Each wire segment between capacitors should subtend less than λ/10 of the free-space wavelength to prevent standing-wave resonances that distort the current distribution and degrade field homogeneity. The formula used is N<sub>breaks</sub> = max(4, ⌈10f₀πD/c⌉). A minimum of 4 is enforced: 1 for the output port + matching, and at least 3 for distributed tuning. If a PIN diode active-detuning trap is also required, add one more break.
+  <div class="note-warn"><b>⚠ Standing-wave rule:</b> Each wire segment between capacitors should subtend less than λ<sub>eff</sub>/10 to prevent standing-wave resonances that distort the current distribution and degrade field homogeneity. The free-space λ/10 criterion is too lenient in practice because the sample's high dielectric constant shortens the effective wavelength seen by the coil. An eighth-space model is used: ε<sub>r,eff</sub> = (1 + ε<sub>r,tissue</sub>)/8 (capped at 9), giving λ<sub>eff</sub> = λ₀/√ε<sub>r,eff</sub>. The formula is N<sub>breaks</sub> = max(4, ⌈πD / (λ<sub>eff</sub>/10)⌉). A minimum of 4 is enforced: 1 for the output/matching port and at least 3 for distributed tuning. If a PIN diode active-detuning trap is also required, add one more break.
   </div>
 
   <div class="sec-lbl">Component Values</div>
@@ -292,8 +292,9 @@
     <p><b>Distributed tuning capacitors</b> (N<sub>d</sub> = N<sub>breaks</sub> − 1 identical caps in series giving C<sub>total</sub> = 1/ω²L):</p>
     <div class="eq-box">\( C_{\rm dist} = N_d \cdot C_{\rm total} = \dfrac{N_d}{\omega^2 L} \)</div>
 
-    <p><b>Capacitor break count</b> (λ/10 standing-wave criterion):</p>
-    <div class="eq-box">\( N_{\rm breaks} = \max\!\left(4,\;\left\lceil\dfrac{10\,f_0\,\pi D}{c}\right\rceil\right) \)</div>
+    <p><b>Capacitor break count</b> (λ<sub>eff</sub>/10 standing-wave criterion with tissue dielectric loading, N<sub>d</sub> = N<sub>breaks</sub> − 1 distributed caps):</p>
+    <div class="eq-box">\( \varepsilon_{r,\text{eff}} = \min\!\left(9,\;\dfrac{1+\varepsilon_{r,\text{tissue}}}{8}\right),\qquad \lambda_\text{eff} = \dfrac{\lambda_0}{\sqrt{\varepsilon_{r,\text{eff}}}},\qquad N_\text{breaks} = \max\!\left(4,\;\left\lceil\dfrac{\pi D}{\lambda_\text{eff}/10}\right\rceil\right) \)</div>
+    <p style="font-size:11px;color:#666;">The eighth-space model (ε<sub>r,eff</sub> = (1+ε<sub>r</sub>)/8) approximates the partial dielectric loading experienced by a coil lying on the surface of a tissue half-space. The cap of 9 prevents over-counting with high-permittivity tissues (e.g. blood, gray matter) at ultra-high field where the full tissue ε<sub>r</sub> is not fully seen by the loop fields. The free-space λ/10 rule alone is far too lenient at MRI frequencies and would always produce the minimum of 4 for clinically-sized coils.</p>
 
     <p><b>λ/4 cable length</b> (v<sub>f</sub> = cable velocity factor, typically 0.66–0.84):</p>
     <div class="eq-box">\( \ell = \dfrac{v_f\,c}{4f_0} \)</div>
@@ -440,10 +441,17 @@ function calculate() {
   const C_total = 1/(w*w*L);                  // total series capacitance (F)
 
   // ── 6. Capacitor breaks ────────────────────────────────────────────────
-  const lambda   = C_LIGHT/f0;
-  const circ     = 2*Math.PI*r;
-  const N_sw     = Math.ceil(10*f0*circ/C_LIGHT);
-  const N_breaks = Math.max(4, N_sw);
+  // The coil sits on the surface of the sample, so the effective wavelength
+  // is shortened by the tissue dielectric.  We use an eighth-space model:
+  //   ε_r_eff = (1 + ε_r_tissue) / 8   (capped at 9 to avoid over-counting
+  //                                      with very high-ε tissues at 7T+)
+  // This gives λ_eff = λ₀ / √ε_r_eff, and the criterion is segment < λ_eff/10.
+  const lambda     = C_LIGHT/f0;
+  const circ       = 2*Math.PI*r;
+  const eps_r_eff  = Math.min(9, (1 + tissue.eps_r) / 8);
+  const lambda_eff = lambda / Math.sqrt(eps_r_eff);
+  const N_sw       = Math.ceil(circ / (lambda_eff / 10));
+  const N_breaks   = Math.max(4, N_sw);
   const N_dist   = N_breaks - 1;              // distributed caps (series in loop)
   const C_dist   = C_total * N_dist;          // value of each distributed cap (F)
 
@@ -502,11 +510,12 @@ function calculate() {
 
   // Breaks
   setTxt('r_Nb', N_breaks);
-  const elec_pct = (circ/lambda*100).toFixed(1);
-  const seg_pct  = (circ/N_breaks/lambda*100).toFixed(1);
-  const reason = N_sw<=3
-    ? `Loop is only ${elec_pct}% of λ (electrically small). Minimum 4 breaks enforced: 1× feed/output, ${N_dist}× distributed tuning.`
-    : `Loop circumference = ${(circ*100).toFixed(1)} cm = λ/${(lambda/circ).toFixed(1)}. Each segment = ${seg_pct}% λ (≤ λ/10 rule satisfied with ${N_breaks} breaks).`;
+  const seg_cm     = (circ / N_breaks * 100).toFixed(1);
+  const leff_cm    = (lambda_eff * 100).toFixed(1);
+  const leff_over_seg = (lambda_eff / (circ / N_breaks)).toFixed(1);
+  const reason = N_sw <= 3
+    ? `Loop circumference = ${(circ*100).toFixed(1)} cm (electrically small at this frequency/sample). Minimum 4 breaks enforced: 1× feed/output, ${N_dist}× distributed tuning.`
+    : `λ_eff = ${leff_cm} cm (λ₀ reduced by √${eps_r_eff.toFixed(1)} from tissue loading). Each segment = ${seg_cm} cm = λ_eff/${leff_over_seg} — satisfies λ_eff/10 rule.`;
   setTxt('r_break_note', reason);
 
   // Component table
