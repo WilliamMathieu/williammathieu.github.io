@@ -1,55 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — LC Filter Designer</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — LC Filter Designer</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>LC Filter Designer (Butterworth / Chebyshev)</h3>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>LC Filter Designer (Butterworth / Chebyshev)</h3>
+<div class="tool-concept">
+  <p>Generates LC ladder component values for classic filter approximations. Butterworth gives maximally flat passband; Chebyshev trades passband ripple for sharper rolloff. Low-pass or high-pass, up to 9th order.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">n</td><td style="padding:3px 0;">Filter order. Higher order = sharper rolloff but more components.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Type</td><td style="padding:3px 0;">Low-pass (LPF) or High-pass (HPF). Bandpass can be obtained by frequency transformation.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Response</td><td style="padding:3px 0;">Butterworth: flat passband, −3 dB at fc. Chebyshev: equal ripple, faster rolloff.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Ripple</td><td style="padding:3px 0;">Chebyshev passband ripple (dB). 0.1–3 dB typical.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">fc</td><td style="padding:3px 0;">Cutoff (−3 dB or ripple) frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">System impedance (Ω). Typically 50 Ω.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Filter order, n</label><div class="inp-inline"><input type="text" id="fd-n" value="5" ></div><span class="inp-hint">1–9</span></div><div class="inp-row"><label>Filter type</label><select id="fd-type"><option value="lp">Low-pass</option><option value="hp">High-pass</option></select></div><div class="inp-row"><label>Response</label><select id="fd-resp"><option value="butter">Butterworth</option><option value="cheby">Chebyshev</option></select></div><div class="inp-row"><label>Chebyshev ripple</label><div class="inp-inline"><input type="text" id="fd-ripple" value="0.5" ><span class="inp-units">dB</span></div><span class="inp-hint">Ignored for Butterworth</span></div><div class="inp-row"><label>Cutoff frequency, fc</label><div class="inp-inline"><input type="text" id="fd-fc" value="1" ><select id="fd-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>System impedance, Z₀</label><div class="inp-inline"><input type="text" id="fd-r0" value="50" ><span class="inp-units">Ω</span></div></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="fd-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fd-n&quot;: &quot;5&quot;, &quot;fd-type&quot;: &quot;lp&quot;, &quot;fd-resp&quot;: &quot;butter&quot;, &quot;fd-fc&quot;: &quot;1&quot;, &quot;fd-fu&quot;: &quot;1e9&quot;, &quot;fd-r0&quot;: &quot;50&quot;})" title="5-pole Butterworth LPF at 1 GHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Component Values</div>
+<div id="fd-out"></div>
+<div class="wiki-link-hint">📖 <a href="wiki_filters.html">Learn about RF filter design →</a></div>
+<script src="FilterDesign.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">LC ladder filters with alternating series inductors and shunt capacitors. Butterworth = flattest passband. Chebyshev = steeper roll-off but with passband ripple.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">n</td><td style="padding:3px 0;">Filter order. Higher = steeper roll-off.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">fc</td><td style="padding:3px 0;">Cutoff frequency.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">R₀</td><td style="padding:3px 0;">Source/load impedance.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Ripple</td><td style="padding:3px 0;">Chebyshev only: passband ripple (dB).</td></tr>
-				</table>
-			</div>
-			Filter type:
-			<select id="fd-type"><option value="butter">Butterworth</option><option value="cheby">Chebyshev</option></select><br>
-			Response:
-			<select id="fd-resp"><option value="lp">Low-pass</option><option value="hp">High-pass</option></select><br>
-			Order, n: <input type="number" id="fd-n" min="1" max="9" value="3" style="width:50px"><br>
-			Cutoff frequency, f<sub>c</sub>: <input type="text" id="fd-fc" placeholder="value">
-			<select id="fd-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
-			Source impedance, R&#8320;: <input type="text" id="fd-r0" value="50"> &#937;<br>
-			Ripple (Chebyshev only): <input type="text" id="fd-ripple" value="0.5"> dB<br><br>
-			<button id="fd-btn">Design Filter</button>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<div class="result-box" id="fd-out"><p>Component values will appear here after design.</p></div>
-
-			<script src="FilterDesign.js"></script>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_filters.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="tool-enhancements.js"></script>
+<script src="tool-enhancements.js"></script>
 </body>
 </html>

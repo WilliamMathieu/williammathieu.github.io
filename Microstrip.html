@@ -1,63 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — Microstrip Calculator</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Microstrip Calculator</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>Microstrip Calculator</h3>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Microstrip Calculator</h3>
+<div class="tool-concept">
+  <p>Microstrip is the most common planar RF transmission line — a trace on top of a dielectric with a ground plane below. The calculator works in both directions: geometry → impedance, or target impedance → required trace width. Uses Hammerstad-Jensen closed-form equations (accuracy < 0.5%).</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">h</td><td style="padding:3px 0;">Substrate height (mm) — trace to ground plane. FR4 standard: 1.6 mm.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">w</td><td style="padding:3px 0;">Trace width (mm). Wider → lower impedance.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">t</td><td style="padding:3px 0;">Trace thickness (mm). Standard PCB copper: 35 µm (1 oz), 70 µm (2 oz).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Substrate dielectric constant. FR4 ≈ 4.4, Rogers 4003C ≈ 3.55, PTFE ≈ 2.1.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εeff</td><td style="padding:3px 0;">Effective dielectric constant — fields extend partly into air above the trace.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">vₚ</td><td style="padding:3px 0;">Phase velocity = c/√εeff. Sets guide wavelength.</td></tr></table>
+  </details>
+</div>
 
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">Microstrip is the most common planar RF/microwave transmission line — a trace on top of a dielectric with a ground plane below. Uses Hammerstad-Jensen closed-form equations, accurate to &lt;0.5%.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">h</td><td style="padding:3px 0;">Substrate height (mm) — trace to ground plane.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">w</td><td style="padding:3px 0;">Trace width (mm).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">t</td><td style="padding:3px 0;">Trace thickness (mm). Typical PCB copper: 35 µm (1 oz), 70 µm (2 oz).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">εᵣ</td><td style="padding:3px 0;">Substrate dielectric constant. FR4 ≈ 4.4, Rogers 4003C ≈ 3.55, PTFE ≈ 2.1.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Z₀</td><td style="padding:3px 0;">Characteristic impedance (Ω). Standard: 50 Ω RF, 75 Ω video.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">εeff</td><td style="padding:3px 0;">Effective dielectric constant — fringing fields extend partly into air.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">vp</td><td style="padding:3px 0;">Phase velocity = c/√εeff.</td></tr>
-				</table>
-			</div>
-			<b>Geometry &rarr; Impedance</b><br><br>
-			Substrate height, h: <input type="text" id="ms-h" placeholder="mm"> mm<br>
-			Trace width, w: <input type="text" id="ms-w" placeholder="mm"> mm<br>
-			Trace thickness, t: <input type="text" id="ms-t" value="0.035"> mm<br>
-			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="ms-er" placeholder="e.g. 4.4"><br><br>
-			<button id="ms-btn1">Calculate Z&#8320;</button>
-			<div id="ms-err1" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<p>\begin{align} Z_0 &= \frac{120\pi}{\sqrt{\varepsilon_{eff}}[w/h+1.393+0.667\ln(w/h+1.444)]} \end{align}</p>
-			<div class="result-box"><p>Z&#8320; = <span id="ms-z0-out">—</span></p><p>&epsilon;<sub>eff</sub> = <span id="ms-eeff-out">—</span></p><p>v<sub>p</sub> = <span id="ms-vp-out">—</span></p></div>
-			<br>
-			<b>Target Impedance &rarr; Width</b><br><br>
-			Target Z&#8320;: <input type="text" id="ms-z0" value="50"> &#937;<br>
-			Substrate height, h: <input type="text" id="ms-h2" placeholder="mm"> mm<br>
-			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="ms-er2" placeholder="e.g. 4.4"><br><br>
-			<button id="ms-btn2">Calculate Width</button>
-			<div id="ms-err2" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<div class="result-box"><p>w = <span id="ms-w-out">—</span></p></div>
+<div class="sec-lbl">Geometry → Impedance</div>
+<div class="inp-grid"><div class="inp-row"><label>Substrate height, h</label><div class="inp-inline"><input type="text" id="ms-h" placeholder="mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Trace to ground plane</span></div><div class="inp-row"><label>Trace width, w</label><div class="inp-inline"><input type="text" id="ms-w" placeholder="mm" ><span class="inp-units">mm</span></div></div><div class="inp-row"><label>Trace thickness, t</label><div class="inp-inline"><input type="text" id="ms-t" value="0.035" ><span class="inp-units">mm</span></div><span class="inp-hint">35 µm = 1 oz copper</span></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="ms-er" placeholder="e.g. 4.4" ></div></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;">
+  <button class="calc-btn" id="ms-btn1">Calculate Z₀</button>
+  <button class="example-btn" onclick="loadExample({'ms-h':'1.6','ms-w':'3','ms-t':'0.035','ms-er':'4.4'})" title="50Ω trace on FR4">Load Example</button>
+</div>
+<div id="ms-err1" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="res-grid"><div class="res-card"><h4>From Geometry</h4><div class="res-row"><span class="res-lbl">Characteristic impedance, Z₀</span><span class="res-val " id="ms-z0-out">—</span></div><div class="res-row"><span class="res-lbl">Effective εᵣ</span><span class="res-val " id="ms-eeff-out">—</span></div><div class="res-row"><span class="res-lbl">Phase velocity, vₚ</span><span class="res-val " id="ms-vp-out">—</span></div></div></div>
 
-			<script src="Microstrip.js"></script>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_microwave_lines.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="tool-enhancements.js"></script>
+<div class="sec-lbl" style="margin-top:16px;">Target Impedance → Width</div>
+<div class="inp-grid"><div class="inp-row"><label>Target impedance, Z₀</label><div class="inp-inline"><input type="text" id="ms-z0" value="50" ><span class="inp-units">Ω</span></div></div><div class="inp-row"><label>Substrate height, h</label><div class="inp-inline"><input type="text" id="ms-h2" placeholder="mm" ><span class="inp-units">mm</span></div></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="ms-er2" placeholder="e.g. 4.4" ></div></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;">
+  <button class="calc-btn" id="ms-btn2">Calculate Width</button>
+  <button class="example-btn" onclick="loadExample({'ms-z0':'50','ms-h2':'1.6','ms-er2':'4.4'})" title="50Ω trace width on FR4">Load Example</button>
+</div>
+<div id="ms-err2" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="res-grid"><div class="res-card"><h4>From Impedance</h4><div class="res-row"><span class="res-lbl">Required trace width, w</span><span class="res-val " id="ms-w-out">—</span></div></div></div>
+
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0;">\(Z_0 = \dfrac{120\pi}{\sqrt{\varepsilon_{eff}}\!\left[\,w/h + 1.393 + 0.667\ln(w/h+1.444)\right]}\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_microwave_lines.html">Learn the theory behind this tool →</a></div>
+<script src="Microstrip.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
 </body>
 </html>

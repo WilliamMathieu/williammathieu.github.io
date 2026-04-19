@@ -1,54 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — Rectangular Patch Antenna Designer</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Rectangular Patch Antenna Designer</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>Rectangular Patch Antenna Designer</h3>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Rectangular Patch Antenna Designer</h3>
+<div class="tool-concept">
+  <p>A rectangular microstrip patch antenna is a metal rectangle on a dielectric substrate above a ground plane. It resonates when its length ≈ λ/2 in the substrate. Gain ≈ 6–8 dBi, bandwidth ≈ 1–5%. Uses transmission line model (Bahl-Trivedi closed form).</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Design frequency (resonant frequency).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Substrate dielectric constant. FR4 ≈ 4.4, Rogers 4003C ≈ 3.55.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">h</td><td style="padding:3px 0;">Substrate thickness (mm). Thicker → wider bandwidth, larger patch.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">W</td><td style="padding:3px 0;">Patch width (mm) — determines input impedance; set to minimise excitation of higher modes.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Resonant patch length (mm) = λ/(2√εeff) − 2ΔL.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εeff</td><td style="padding:3px 0;">Effective permittivity. Fields extend partly into air above patch.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Design frequency, f</label><div class="inp-inline"><input type="text" id="pa-f" value="2.45" ><select id="pa-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="pa-er" value="4.4" ></div><span class="inp-hint">FR4≈4.4, Rogers4003≈3.55</span></div><div class="inp-row"><label>Substrate thickness, h</label><div class="inp-inline"><input type="text" id="pa-h" value="1.6" ><span class="inp-units">mm</span></div><span class="inp-hint">1.6 mm standard FR4</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="pa-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;pa-f&quot;: &quot;2.45&quot;, &quot;pa-fu&quot;: &quot;1e9&quot;, &quot;pa-er&quot;: &quot;4.4&quot;, &quot;pa-h&quot;: &quot;1.6&quot;})" title="2.45 GHz patch on FR4">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Patch Dimensions</h4><div class="res-row"><span class="res-lbl">Patch width, W</span><span class="res-val " id="pa-W">—</span></div><div class="res-row"><span class="res-lbl">Patch length, L</span><span class="res-val " id="pa-L">—</span></div><div class="res-row"><span class="res-lbl">Length extension, ΔL</span><span class="res-val " id="pa-dL">—</span></div></div><div class="res-card"><h4>Substrate</h4><div class="res-row"><span class="res-lbl">Effective εᵣ</span><span class="res-val " id="pa-eeff">—</span></div></div></div>
+<div class="wiki-link-hint">📖 <a href="wiki_antennas.html">Learn the theory behind this tool →</a></div>
+<script src="PatchAntenna.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">A microstrip patch antenna is a flat resonator on a PCB substrate. Width W controls impedance; length L sets the resonant frequency.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Target resonant frequency.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">εᵣ</td><td style="padding:3px 0;">Substrate dielectric constant.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">h</td><td style="padding:3px 0;">Substrate thickness (mm).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">W</td><td style="padding:3px 0;">Patch width (mm).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">L</td><td style="padding:3px 0;">Patch length (mm).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">εreff</td><td style="padding:3px 0;">Effective dielectric constant.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">ΔL</td><td style="padding:3px 0;">End-effect extension.</td></tr>
-				</table>
-			</div>
-			Frequency, f: <input type="text" id="pa-f" placeholder="value">
-			<select id="pa-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
-			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="pa-er" placeholder="e.g. 4.4"><br>
-			Substrate height, h: <input type="text" id="pa-h" placeholder="mm"> mm<br><br>
-			<button class="calc-btn" id="pa-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;pa-f&quot;: &quot;2.45&quot;, &quot;pa-fu&quot;: &quot;1e9&quot;, &quot;pa-er&quot;: &quot;4.4&quot;, &quot;pa-h&quot;: &quot;1.6&quot;})" title="2.45 GHz patch on FR4: εr = 4.4, substrate h = 1.6 mm">Load Example</button>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<p>\begin{align} W &= \frac{c}{2f}\sqrt{\frac{2}{\varepsilon_r+1}} \end{align}</p>
-			<div class="result-box"><p>W = <span id="pa-W">—</span></p><p>L = <span id="pa-L">—</span></p><p>&epsilon;<sub>reff</sub> = <span id="pa-eeff">—</span></p><p>&Delta;L = <span id="pa-dL">—</span></p></div>
-
-			<script src="PatchAntenna.js"></script>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_antennas.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="tool-enhancements.js"></script>
+<script src="tool-enhancements.js"></script>
 </body>
 </html>

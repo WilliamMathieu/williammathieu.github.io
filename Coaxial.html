@@ -1,53 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — Coaxial Line Calculator</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Coaxial Line Calculator</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>Coaxial Line Calculator</h3>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Coaxial Line Calculator</h3>
+<div class="tool-concept">
+  <p>Coaxial cable has a central conductor surrounded by a tubular outer conductor. Its characteristic impedance depends only on geometry and the dielectric. Uses closed-form equations for Z₀, phase velocity, capacitance, inductance, and cutoff frequency.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Inner conductor diameter (mm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Outer conductor (shield) inner diameter (mm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Dielectric constant of the insulator. PE ≈ 2.25, PTFE ≈ 2.1, foam ≈ 1.5.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Characteristic impedance = (60/√εᵣ)·ln(D/d).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">vₚ</td><td style="padding:3px 0;">Phase velocity = c/√εᵣ. Sets wavelengths inside the cable.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">fₓ</td><td style="padding:3px 0;">Cutoff frequency of TE₁₁ mode — stay well below this.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Inner conductor diameter, d</label><div class="inp-inline"><input type="text" id="cx-d" placeholder="mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Central conductor</span></div><div class="inp-row"><label>Outer conductor diameter, D</label><div class="inp-inline"><input type="text" id="cx-D" placeholder="mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Shield inner diameter</span></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="cx-er" value="2.25" ></div><span class="inp-hint">PE=2.25, PTFE=2.1, foam≈1.5</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="cx-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;cx-d&quot;: &quot;0.9&quot;, &quot;cx-D&quot;: &quot;3.0&quot;, &quot;cx-er&quot;: &quot;2.3&quot;})" title="RG-174 coax (PE dielectric)">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Electrical</h4><div class="res-row"><span class="res-lbl">Characteristic impedance, Z₀</span><span class="res-val " id="cx-z0">—</span></div><div class="res-row"><span class="res-lbl">Phase velocity, vₚ</span><span class="res-val " id="cx-vp">—</span></div><div class="res-row"><span class="res-lbl">Cutoff frequency (TE₁₁)</span><span class="res-val " id="cx-fc">—</span></div></div><div class="res-card"><h4>Per-unit-length</h4><div class="res-row"><span class="res-lbl">Capacitance, C</span><span class="res-val " id="cx-C">—</span></div><div class="res-row"><span class="res-lbl">Inductance, L</span><span class="res-val " id="cx-L">—</span></div></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0;">\(Z_0 = \dfrac{60}{\sqrt{\varepsilon_r}}\ln\!\dfrac{D}{d}\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_microwave_lines.html">Learn the theory behind this tool →</a></div>
+<script src="Coaxial.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">Coaxial cable: a central conductor surrounded by dielectric and outer conductor. Standard impedances: 50 Ω (RF) or 75 Ω (video). Keep operating frequency well below the TM₁₁ cutoff.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">d</td><td style="padding:3px 0;">Inner conductor diameter (mm).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">D</td><td style="padding:3px 0;">Outer conductor inner diameter (mm).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">εᵣ</td><td style="padding:3px 0;">Dielectric constant. Air ≈ 1.0, PTFE = 2.07, PE = 2.26.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Z₀</td><td style="padding:3px 0;">Characteristic impedance (Ω).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">C</td><td style="padding:3px 0;">Capacitance per metre.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">L</td><td style="padding:3px 0;">Inductance per metre.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Cutoff TM₁₁</td><td style="padding:3px 0;">Upper frequency limit.</td></tr>
-				</table>
-			</div>
-			Inner conductor diameter, d: <input type="text" id="cx-d" placeholder="mm"> mm<br>
-			Outer conductor inner diameter, D: <input type="text" id="cx-D" placeholder="mm"> mm<br>
-			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="cx-er" value="2.1"><br><br>
-			<button class="calc-btn" id="cx-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;cx-d&quot;: &quot;0.9&quot;, &quot;cx-D&quot;: &quot;3.0&quot;, &quot;cx-er&quot;: &quot;2.3&quot;})" title="RG-174 coax: 0.9 mm inner, 3.0 mm outer, polyethylene (εr = 2.3)">Load Example</button>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<p>\begin{align} Z_0 &= \frac{60}{\sqrt{\varepsilon_r}}\ln\!\left(\frac{D}{d}\right) \end{align}</p>
-			<div class="result-box"><p>Z&#8320; = <span id="cx-z0">—</span></p><p>C = <span id="cx-C">—</span></p><p>L = <span id="cx-L">—</span></p><p>v<sub>p</sub> = <span id="cx-vp">—</span></p><p>Cutoff (TM&#8321;&#8321;) &asymp; <span id="cx-fc">—</span></p></div>
-
-			<script src="Coaxial.js"></script>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_microwave_lines.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="tool-enhancements.js"></script>
+<script src="tool-enhancements.js"></script>
 </body>
 </html>

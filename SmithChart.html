@@ -1,55 +1,594 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — Interactive Smith Chart</title>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
-	<style>
-		canvas { display:block; margin:0 auto; cursor:crosshair; }
-		.sc-controls { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:10px; font-size:13px; }
-		.sc-controls input { width:80px; }
-		.sc-info { font-family:monospace; font-size:12px; background:#f4f4f0; padding:8px 10px; border-left:3px solid #AA77FF; border-radius:0 4px 4px 0; margin-top:8px; min-height:20px; }
-		.sc-points { font-family:monospace; font-size:12px; margin-top:8px; }
-		.sc-points table { border-collapse:collapse; }
-		.sc-points td, .sc-points th { padding:2px 10px 2px 0; }
-	</style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Interactive Smith Chart</title>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Layout ─────────────────────────────────────────────────── */
+    .sc-wrap       { display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; }
+    .sc-canvas-col { flex-shrink:0; }
+    .sc-panel      { flex:1; min-width:220px; }
+
+    canvas {
+      display:block; cursor:crosshair;
+      border-radius:6px;
+      border:1px solid #d0c8f0;
+    }
+
+    /* ── Live readout ────────────────────────────────────────────── */
+    .sc-readout {
+      background:#f8f6ff; border:1px solid #d0c8f0;
+      border-radius:5px; padding:11px 13px;
+      margin-bottom:10px;
+    }
+    .sc-readout h4 {
+      font-family:monospace; font-size:10px; color:#5533aa;
+      font-weight:bold; letter-spacing:0.07em; text-transform:uppercase;
+      margin:0 0 9px; padding-bottom:4px; border-bottom:1px solid #e0d8ff;
+    }
+    .sc-row {
+      display:flex; justify-content:space-between; align-items:baseline;
+      padding:3px 0; border-bottom:1px dotted #e8e0ff; font-size:12px; gap:8px;
+    }
+    .sc-row:last-child { border-bottom:none; }
+    .sc-lbl { color:#555; flex-shrink:0; }
+    .sc-val { font-weight:bold; font-size:13px; color:#1a1a1a; text-align:right; font-family:monospace; }
+    .sc-val.good { color:#1a8a1a; }
+    .sc-val.warn { color:#aa6600; }
+    .sc-val.bad  { color:#cc2222; }
+
+    /* ── Points table ────────────────────────────────────────────── */
+    .sc-pts-tbl { width:100%; border-collapse:collapse; font-size:11px; margin-top:2px; }
+    .sc-pts-tbl th { font-family:monospace; font-size:10px; color:#5533aa; text-align:left;
+                     padding:4px 8px; border-bottom:2px solid #d0c8f0; text-transform:uppercase;
+                     letter-spacing:0.05em; background:#f0eeff; }
+    .sc-pts-tbl td { padding:5px 8px; border-bottom:1px solid #eee; font-family:monospace; }
+    .sc-pts-tbl tr:last-child td { border-bottom:none; }
+    .swatch { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; vertical-align:middle; }
+
+    /* ── Buttons ─────────────────────────────────────────────────── */
+    .sc-btns { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+
+    /* ── Hover cursor label ──────────────────────────────────────── */
+    .sc-hover-bar {
+      font-family:monospace; font-size:11px; color:#555;
+      background:#f0eeff; border:1px solid #e0d8ff;
+      border-radius:4px; padding:5px 10px; margin-top:6px;
+      min-height:24px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+
+    /* ── TL section ──────────────────────────────────────────────── */
+    .tl-row { display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap; }
+    .tl-row label { font-size:11px; color:#5533aa; font-weight:bold; letter-spacing:0.04em; text-transform:uppercase; white-space:nowrap; }
+    .tl-row input[type="range"] { flex:1; min-width:80px; accent-color:#AA77FF; }
+    .tl-row input[type="text"] { width:60px; }
+
+    @media(max-width:700px) { .sc-wrap { flex-direction:column; } canvas { max-width:100%; height:auto; } }
+  </style>
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>Smith Chart</h3>
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">The Smith Chart is a graphical tool for visualising complex impedances and reflection coefficients. Any point on the chart represents an impedance Z = R + jX, normalised to Z₀. The horizontal axis is the real axis (pure resistance); moving clockwise around the chart corresponds to moving toward the generator along a transmission line. The outer boundary is |Γ| = 1 (total reflection). Points can be plotted by clicking the chart or entering R and X above.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Reference impedance for normalisation (typically 50 Ω).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">R</td><td style="padding:3px 0;">Resistance (Ω) — real part of the impedance.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">X</td><td style="padding:3px 0;">Reactance (Ω) — imaginary part. Positive = inductive, negative = capacitive.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">|Γ|</td><td style="padding:3px 0;">Magnitude of the reflection coefficient. 0 = perfect match, 1 = total reflection.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Return Loss</td><td style="padding:3px 0;">-20·log₁₀(|Γ|) in dB. Higher is better — >10 dB is typically acceptable.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">VSWR</td><td style="padding:3px 0;">Voltage Standing Wave Ratio = (1+|Γ|)/(1−|Γ|). VSWR = 1 is a perfect match.</td></tr>
-				</table>
-			</div>
-			<div class="sc-controls">
-				<label>Z\u2080: <input type="text" id="sc-z0" value="50"> \u03A9</label>
-				<label>R: <input type="text" id="sc-r" placeholder="\u03A9"></label>
-				<label>X: <input type="text" id="sc-x" placeholder="\u03A9 (+ ind, \u2212 cap)"></label>
-				<button onclick="scAddPoint()">Plot point</button>
-				<button onclick="scClear()">Clear</button>
-				<button onclick="scDrawChart()">Redraw</button>
-			</div>
-			<p style="font-size:12px;margin-bottom:6px;">Click anywhere on the chart to read off impedance. Or enter R+jX above to plot a point.</p>
-			<canvas id="sc-canvas" width="480" height="480"></canvas>
-			<div class="sc-info" id="sc-info">Click on the chart to read impedance values.</div>
-			<div class="sc-points" id="sc-points"></div>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="SmithChart.js"></script>
-	<script src="tool-enhancements.js"></script>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+
+  <h3>Interactive Smith Chart</h3>
+
+  <details class="tool-concept" style="margin-bottom:16px;">
+    <summary style="cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+      <span><strong>What is a Smith Chart?</strong> — graphical tool for complex impedance visualisation</span>
+      <span style="font-size:10px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;">SHOW MORE ▸</span>
+    </summary>
+    <div style="margin-top:10px;">
+      <p>The Smith Chart is a polar plot of the complex reflection coefficient Γ, with constant-resistance circles and constant-reactance arcs overlaid. Every point on the chart represents a unique impedance <strong>Z = R + jX</strong>, normalised to a reference impedance Z₀ (usually 50 Ω). The outer boundary is |Γ| = 1 — total reflection. The centre is the perfect match (Z = Z₀, Γ = 0).</p>
+      <p>Moving along a lossless transmission line traces a circle of constant radius (constant |Γ|) clockwise for movement toward the generator, counterclockwise toward the load.</p>
+      <table style="font-size:12px;border-collapse:collapse;margin-top:8px;">
+        <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">Γ</td><td style="padding:3px 0;">Reflection coefficient = (Z−Z₀)/(Z+Z₀). Complex number, magnitude 0–1.</td></tr>
+        <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">|Γ|</td><td style="padding:3px 0;">Magnitude 0 (perfect match) → 1 (total reflection). Controls circle size.</td></tr>
+        <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">RL</td><td style="padding:3px 0;">Return loss = −20 log₁₀|Γ| dB. Higher is better; >10 dB is typical target.</td></tr>
+        <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">VSWR</td><td style="padding:3px 0;">Voltage Standing Wave Ratio = (1+|Γ|)/(1−|Γ|). 1 = perfect, ≤2 = acceptable.</td></tr>
+        <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">Y</td><td style="padding:3px 0;">Admittance = 1/Z = G + jB (Siemens). Useful for shunt elements in matching networks.</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <div class="sc-wrap">
+
+    <!-- ── Canvas column ─────────────────────────────────────────── -->
+    <div class="sc-canvas-col">
+      <canvas id="sc-canvas" width="460" height="460"></canvas>
+      <div class="sc-hover-bar" id="sc-hover">Move the mouse over the chart to read impedance values.</div>
+    </div>
+
+    <!-- ── Controls + Readout column ─────────────────────────────── -->
+    <div class="sc-panel">
+
+      <!-- Inputs -->
+      <div class="sec-lbl">Impedance Entry</div>
+      <div class="inp-grid" style="grid-template-columns:1fr 1fr 1fr;">
+        <div class="inp-row">
+          <label>Z₀ (Ω)</label>
+          <input type="text" id="sc-z0" value="50">
+          <span class="inp-hint">Reference impedance</span>
+        </div>
+        <div class="inp-row">
+          <label>R (Ω)</label>
+          <input type="text" id="sc-r" placeholder="e.g. 75">
+          <span class="inp-hint">Resistance ≥ 0</span>
+        </div>
+        <div class="inp-row">
+          <label>X (Ω)</label>
+          <input type="text" id="sc-x" placeholder="e.g. +42.5">
+          <span class="inp-hint">+ inductive, − cap</span>
+        </div>
+      </div>
+
+      <div class="sc-btns">
+        <button class="calc-btn" id="sc-plot-btn" onclick="scAddPoint()">Pin Point</button>
+        <button class="example-btn" onclick="scLoadExample()">Load Example</button>
+        <button class="example-btn" onclick="scClear()" style="color:#c0392b;border-color:#f5c6c6;">Clear All</button>
+      </div>
+
+      <!-- Live readout -->
+      <div class="sec-lbl">Live Readout</div>
+      <div class="sc-readout">
+        <h4>Impedance</h4>
+        <div class="sc-row"><span class="sc-lbl">Z (Ω)</span><span class="sc-val" id="ro-Z">—</span></div>
+        <div class="sc-row"><span class="sc-lbl">z (normalised)</span><span class="sc-val" id="ro-z">—</span></div>
+        <div class="sc-row"><span class="sc-lbl">Y (mS)</span><span class="sc-val" id="ro-Y">—</span></div>
+      </div>
+      <div class="sc-readout">
+        <h4>Match Quality</h4>
+        <div class="sc-row"><span class="sc-lbl">|Γ|</span><span class="sc-val" id="ro-mag">—</span></div>
+        <div class="sc-row"><span class="sc-lbl">∠Γ (°)</span><span class="sc-val" id="ro-ang">—</span></div>
+        <div class="sc-row"><span class="sc-lbl">Return Loss (dB)</span><span class="sc-val" id="ro-rl">—</span></div>
+        <div class="sc-row"><span class="sc-lbl">VSWR</span><span class="sc-val" id="ro-vswr">—</span></div>
+      </div>
+
+      <!-- Transmission line rotation -->
+      <div class="sec-lbl">Transmission Line (lossless)</div>
+      <div class="note-info" style="margin-bottom:10px;font-size:11px;">
+        Drag the slider to move the impedance point along a λ/4 (90°) transmission line toward the generator. The |Γ| circle radius stays constant — only the angle changes.
+      </div>
+      <div class="tl-row">
+        <label>Length</label>
+        <input type="range" id="tl-slider" min="0" max="180" value="0" step="0.5">
+        <input type="text" id="tl-deg" value="0" style="width:55px;">
+        <span class="inp-units">°</span>
+      </div>
+      <div class="sc-readout" style="margin-top:6px;">
+        <h4>After TL</h4>
+        <div class="sc-row"><span class="sc-lbl">Z (Ω)</span><span class="sc-val" id="ro-tl-Z">—</span></div>
+        <div class="sc-row"><span class="sc-lbl">|Γ|</span><span class="sc-val" id="ro-tl-mag">—</span></div>
+        <div class="sc-row"><span class="sc-lbl">VSWR</span><span class="sc-val" id="ro-tl-vswr">—</span></div>
+      </div>
+
+    </div><!-- end sc-panel -->
+  </div><!-- end sc-wrap -->
+
+  <!-- Pinned points table -->
+  <div id="sc-pts-section" style="display:none; margin-top:16px;">
+    <div class="sec-lbl">Pinned Points</div>
+    <div id="sc-pts-body"></div>
+  </div>
+
+  <div class="wiki-link-hint" style="margin-top:20px;">📖 <a href="wiki_impedance_matching.html">Learn about impedance matching and Smith Charts →</a></div>
+
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+
+<script>
+/* ════════════════════════════════════════════════════════════════════
+   RF Toolbox — Interactive Smith Chart  (self-contained)
+   ════════════════════════════════════════════════════════════════════ */
+
+const SC = {
+  canvas: null, ctx: null,
+  // Logical (CSS) size — actual pixel buffer is 2× for HiDPI
+  W: 460, H: 460,
+  cx: 230, cy: 230, R: 200,
+  z0: 50,
+  points: [],   // pinned
+  liveR: null, liveX: null,   // current typed values
+  hoverG: null,               // gamma from mouse hover
+  tlDeg: 0,
+  colors: ['#AA77FF','#ff6644','#00ccff','#dd44aa','#44ddaa','#ffaa00','#88cc00','#4499ff']
+};
+
+// ── Math helpers ───────────────────────────────────────────────────
+function zToGamma(r, x) {
+  const dr = r + 1, di = x;
+  const nr = r - 1, ni = x;
+  const den = dr*dr + di*di;
+  return { re: (nr*dr + ni*di)/den, im: (ni*dr - nr*di)/den };
+}
+
+function gammaToZ(gRe, gIm) {
+  const den = (1-gRe)*(1-gRe) + gIm*gIm;
+  if (den < 1e-12) return { r: 1e9, x: 0 };
+  return {
+    r: (1 - gRe*gRe - gIm*gIm) / den,
+    x: 2*gIm / den
+  };
+}
+
+function gammaToXY(gRe, gIm) {
+  return { x: SC.cx + SC.R * gRe, y: SC.cy - SC.R * gIm };
+}
+
+function xyToGamma(px, py) {
+  return { re: (px - SC.cx) / SC.R, im: -(py - SC.cy) / SC.R };
+}
+
+function rotatGamma(g, degToGen) {
+  // rotate clockwise (toward generator): subtract phase 2*beta*l = 2*theta_deg
+  const theta = degToGen * Math.PI / 180;
+  const cos2 = Math.cos(2*theta), sin2 = Math.sin(2*theta);
+  return { re: g.re*cos2 + g.im*sin2, im: -g.re*sin2 + g.im*cos2 };
+}
+
+function fmtZ(r, x, z0) {
+  const R = (r*z0).toFixed(2), X = (x*z0);
+  return R + (X >= 0 ? '+' : '') + X.toFixed(2) + 'j Ω';
+}
+
+function fmtEng(v) {
+  if (!isFinite(v)) return '∞';
+  const abs = Math.abs(v);
+  if (abs === 0) return '0';
+  if (abs >= 1e9)  return (v/1e9).toPrecision(4)  + ' G';
+  if (abs >= 1e6)  return (v/1e6).toPrecision(4)  + ' M';
+  if (abs >= 1e3)  return (v/1e3).toPrecision(4)  + ' k';
+  if (abs >= 1)    return v.toPrecision(4);
+  if (abs >= 1e-3) return (v*1e3).toPrecision(4)  + ' m';
+  if (abs >= 1e-6) return (v*1e6).toPrecision(4)  + ' µ';
+  return (v*1e9).toPrecision(4) + ' n';
+}
+
+// ── Canvas setup ───────────────────────────────────────────────────
+function scInit() {
+  SC.canvas = document.getElementById('sc-canvas');
+  SC.ctx    = SC.canvas.getContext('2d');
+
+  // HiDPI
+  const dpr = window.devicePixelRatio || 1;
+  SC.canvas.width  = SC.W * dpr;
+  SC.canvas.height = SC.H * dpr;
+  SC.canvas.style.width  = SC.W + 'px';
+  SC.canvas.style.height = SC.H + 'px';
+  SC.ctx.scale(dpr, dpr);
+
+  SC.canvas.addEventListener('mousemove', scOnMove);
+  SC.canvas.addEventListener('mouseleave', scOnLeave);
+  SC.canvas.addEventListener('click', scOnClick);
+
+  // Live input listeners
+  ['sc-r','sc-x','sc-z0'].forEach(id => {
+    document.getElementById(id).addEventListener('input', scLiveUpdate);
+  });
+
+  // TL slider
+  const slider = document.getElementById('tl-slider');
+  const degInp = document.getElementById('tl-deg');
+  slider.addEventListener('input', () => { degInp.value = slider.value; SC.tlDeg = +slider.value; scDraw(); scUpdateTL(); });
+  degInp.addEventListener('input', () => { slider.value = +degInp.value || 0; SC.tlDeg = +slider.value; scDraw(); scUpdateTL(); });
+
+  scDraw();
+}
+
+// ── Main draw routine ──────────────────────────────────────────────
+function scDraw() {
+  const ctx = SC.ctx;
+  const {W, H, cx, cy, R} = SC;
+  ctx.clearRect(0, 0, W, H);
+
+  // Background
+  ctx.fillStyle = '#faf9ff';
+  ctx.fillRect(0, 0, W, H);
+
+  // Clip to chart circle for arcs
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2*Math.PI); ctx.clip();
+
+  // ── Constant-resistance circles ─────────────────────────────────
+  const rVals = [0, 0.2, 0.5, 1, 2, 5, 10];
+  rVals.forEach(r => {
+    const cr = R / (1 + r);
+    const ccx = cx + R - cr;
+    ctx.strokeStyle = r === 1 ? '#AA77FF' : r === 0 ? '#bbb' : '#d8d0ef';
+    ctx.lineWidth   = r === 1 ? 1.4 : 1;
+    ctx.beginPath(); ctx.arc(ccx, cy, cr, 0, 2*Math.PI); ctx.stroke();
+  });
+
+  // ── Constant-reactance arcs ──────────────────────────────────────
+  const xVals = [0.2, 0.5, 1, 2, 5, 10];
+  xVals.forEach(x => {
+    [x, -x].forEach(xi => {
+      const xr   = R / Math.abs(xi);
+      const xcy  = cy - R / xi;
+      ctx.strokeStyle = Math.abs(xi) === 1 ? '#00aacc' : Math.abs(xi) === 0.5 ? '#b8e8f0' : '#d8edf0';
+      ctx.lineWidth   = Math.abs(xi) === 1 ? 1.2 : 0.85;
+      ctx.beginPath(); ctx.arc(cx + R, xcy, xr, 0, 2*Math.PI); ctx.stroke();
+    });
+  });
+  ctx.restore(); // end clip
+
+  // ── Outer circle ────────────────────────────────────────────────
+  ctx.strokeStyle = '#555'; ctx.lineWidth = 1.8;
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2*Math.PI); ctx.stroke();
+
+  // ── Real axis ───────────────────────────────────────────────────
+  ctx.strokeStyle = '#bbb'; ctx.lineWidth = 0.8;
+  ctx.beginPath(); ctx.moveTo(cx-R, cy); ctx.lineTo(cx+R, cy); ctx.stroke();
+
+  // ── Labels (resistance circles) ─────────────────────────────────
+  ctx.font = '10px monospace'; ctx.fillStyle = '#5533aa'; ctx.textAlign = 'center';
+  rVals.forEach(r => {
+    if (r >= 10) return;
+    const cr = R/(1+r), ccx = cx+R-cr;
+    ctx.fillText(r === 0 ? '0' : r, ccx, cy + cr + 14);
+  });
+  // Reactance labels
+  [0.5, 1, 2].forEach(x => {
+    const g = zToGamma(0, x); const p = gammaToXY(g.re, g.im);
+    ctx.fillStyle = '#0088aa'; ctx.textAlign = 'left'; ctx.font = '9px monospace';
+    if (p.x < cx+R-4 && p.y > cy-R+8) ctx.fillText('+j'+x, p.x+3, p.y-2);
+    const gn = zToGamma(0, -x); const pn = gammaToXY(gn.re, gn.im);
+    if (pn.x < cx+R-4 && pn.y < cy+R-8) ctx.fillText('−j'+x, pn.x+3, pn.y+10);
+  });
+
+  // ── Pinned points ────────────────────────────────────────────────
+  SC.points.forEach((pt, i) => {
+    const z0 = SC.z0;
+    const g = zToGamma(pt.r/z0, pt.x/z0);
+    const p = gammaToXY(g.re, g.im);
+    const col = SC.colors[i % SC.colors.length];
+    ctx.fillStyle = col;
+    ctx.beginPath(); ctx.arc(p.x, p.y, 6, 0, 2*Math.PI); ctx.fill();
+    // Label
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 9px monospace'; ctx.textAlign = 'center';
+    ctx.fillText(i+1, p.x, p.y + 3.5);
+  });
+
+  // ── TL arc (if tlDeg > 0 and live point exists) ──────────────────
+  if (SC.tlDeg > 0 && SC.liveR !== null) {
+    const z0 = SC.z0;
+    const g0 = zToGamma(SC.liveR/z0, SC.liveX/z0);
+    const mag = Math.sqrt(g0.re*g0.re + g0.im*g0.im);
+    if (mag < 1) {
+      const gEnd = rotatGamma(g0, SC.tlDeg);
+      const p0 = gammaToXY(g0.re, g0.im);
+      const pEnd = gammaToXY(gEnd.re, gEnd.im);
+      // Draw arc from p0 to pEnd along the |Γ| circle
+      const angStart = Math.atan2(-(p0.y - cy), p0.x - cx);
+      const angEnd   = Math.atan2(-(pEnd.y - cy), pEnd.x - cx);
+      const arcR = mag * R;
+      ctx.strokeStyle = '#ff6644'; ctx.lineWidth = 2; ctx.setLineDash([4,3]);
+      ctx.beginPath();
+      ctx.arc(cx, cy, arcR, -angStart, -angEnd, true);
+      ctx.stroke(); ctx.setLineDash([]);
+      // End point
+      ctx.fillStyle = '#ff6644';
+      ctx.beginPath(); ctx.arc(pEnd.x, pEnd.y, 5, 0, 2*Math.PI); ctx.fill();
+    }
+  }
+
+  // ── Live input point ─────────────────────────────────────────────
+  if (SC.liveR !== null) {
+    const z0 = SC.z0;
+    const g = zToGamma(SC.liveR/z0, SC.liveX/z0);
+    const mag = Math.sqrt(g.re*g.re + g.im*g.im);
+    if (mag <= 1) {
+      const p = gammaToXY(g.re, g.im);
+      // |Γ| circle
+      ctx.strokeStyle = 'rgba(170,119,255,0.35)'; ctx.lineWidth = 1.5; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.arc(cx, cy, mag*R, 0, 2*Math.PI); ctx.stroke();
+      ctx.setLineDash([]);
+      // Crosshair
+      ctx.strokeStyle = '#5533aa'; ctx.lineWidth = 0.8;
+      ctx.beginPath(); ctx.moveTo(p.x-14, p.y); ctx.lineTo(p.x+14, p.y); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(p.x, p.y-14); ctx.lineTo(p.x, p.y+14); ctx.stroke();
+      // Dot
+      ctx.fillStyle = '#AA77FF';
+      ctx.beginPath(); ctx.arc(p.x, p.y, 7, 0, 2*Math.PI); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 9px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('●', p.x, p.y + 3);
+    }
+  }
+
+  // ── Hover cursor ─────────────────────────────────────────────────
+  if (SC.hoverG) {
+    const {re, im} = SC.hoverG;
+    const mag = Math.sqrt(re*re + im*im);
+    if (mag <= 1) {
+      const p = gammaToXY(re, im);
+      ctx.strokeStyle = 'rgba(100,100,100,0.45)'; ctx.lineWidth = 0.8; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(cx-R, p.y); ctx.lineTo(cx+R, p.y); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(p.x, cy-R); ctx.lineTo(p.x, cy+R); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(80,50,150,0.18)';
+      ctx.beginPath(); ctx.arc(p.x, p.y, 5, 0, 2*Math.PI); ctx.fill();
+    }
+  }
+}
+
+// ── Live update from input fields ─────────────────────────────────
+function scLiveUpdate() {
+  SC.z0   = parseFloat(document.getElementById('sc-z0').value) || 50;
+  const R = parseFloat(document.getElementById('sc-r').value);
+  const X = parseFloat(document.getElementById('sc-x').value) || 0;
+
+  if (!isNaN(R) && R >= 0) {
+    SC.liveR = R; SC.liveX = X;
+    updateReadout(R/SC.z0, X/SC.z0);
+    scUpdateTL();
+  } else {
+    SC.liveR = null; SC.liveX = null;
+    clearReadout();
+  }
+  scDraw();
+}
+
+function updateReadout(r, x) {
+  const z0 = SC.z0;
+  const g   = zToGamma(r, x);
+  const mag = Math.sqrt(g.re*g.re + g.im*g.im);
+  const ang = Math.atan2(g.im, g.re) * 180 / Math.PI;
+  const rl  = mag > 0 ? -20*Math.log10(mag) : Infinity;
+  const vswr= mag < 1 ? (1+mag)/(1-mag) : Infinity;
+  // Admittance Y = 1/Z
+  const Zr = r*z0, Zx = x*z0;
+  const Yden = Zr*Zr + Zx*Zx;
+  const Yg = Yden > 0 ? Zr/Yden*1000 : 0;   // mS
+  const Yb = Yden > 0 ? -Zx/Yden*1000 : 0;  // mS
+
+  setText('ro-Z', Zr.toFixed(2) + (Zx>=0?'+':'') + Zx.toFixed(2) + 'j Ω');
+  setText('ro-z', r.toFixed(3)  + (x>=0?'+':'')  + x.toFixed(3)  + 'j');
+  setText('ro-Y', Yg.toFixed(2) + (Yb>=0?'+':'') + Yb.toFixed(2) + 'j mS');
+  setText('ro-mag', mag.toFixed(4));
+  setText('ro-ang', ang.toFixed(1) + '°');
+
+  const rlEl = document.getElementById('ro-rl');
+  rlEl.textContent = isFinite(rl) ? rl.toFixed(2) + ' dB' : '∞ dB';
+  rlEl.className = 'sc-val ' + (rl > 20 ? 'good' : rl > 10 ? 'warn' : 'bad');
+
+  const vsEl = document.getElementById('ro-vswr');
+  vsEl.textContent = isFinite(vswr) ? vswr.toFixed(3) : '∞';
+  vsEl.className = 'sc-val ' + (vswr < 1.5 ? 'good' : vswr < 2 ? 'warn' : 'bad');
+}
+
+function scUpdateTL() {
+  if (SC.liveR === null) return;
+  const z0 = SC.z0;
+  const g0 = zToGamma(SC.liveR/z0, SC.liveX/z0);
+  const gEnd = rotatGamma(g0, SC.tlDeg);
+  const zEnd = gammaToZ(gEnd.re, gEnd.im);
+  const mag  = Math.sqrt(gEnd.re*gEnd.re + gEnd.im*gEnd.im);
+  const vswr = mag < 1 ? (1+mag)/(1-mag) : Infinity;
+  const Zr = zEnd.r*z0, Zx = zEnd.x*z0;
+  setText('ro-tl-Z',    Zr.toFixed(2)+(Zx>=0?'+':'')+Zx.toFixed(2)+'j Ω');
+  setText('ro-tl-mag',  mag.toFixed(4));
+  setText('ro-tl-vswr', isFinite(vswr) ? vswr.toFixed(3) : '∞');
+}
+
+function clearReadout() {
+  ['ro-Z','ro-z','ro-Y','ro-mag','ro-ang','ro-rl','ro-vswr','ro-tl-Z','ro-tl-mag','ro-tl-vswr'].forEach(id => setText(id, '—'));
+}
+
+function setText(id, txt) {
+  const el = document.getElementById(id); if (el) el.textContent = txt;
+}
+
+// ── Mouse handlers ────────────────────────────────────────────────
+function scOnMove(e) {
+  const rect = SC.canvas.getBoundingClientRect();
+  const px = (e.clientX - rect.left) * (SC.W / rect.width);
+  const py = (e.clientY - rect.top)  * (SC.H / rect.height);
+  const g  = xyToGamma(px, py);
+  const mag = Math.sqrt(g.re*g.re + g.im*g.im);
+  if (mag > 1.01) {
+    SC.hoverG = null;
+    document.getElementById('sc-hover').textContent = 'Outside chart boundary.';
+  } else {
+    SC.hoverG = g;
+    const z = gammaToZ(g.re, g.im);
+    const z0 = SC.z0;
+    const Zr = z.r*z0, Zx = z.x*z0;
+    const rl = mag > 0 ? -20*Math.log10(mag) : Infinity;
+    const vswr = mag < 1 ? (1+mag)/(1-mag) : Infinity;
+    document.getElementById('sc-hover').textContent =
+      'Z = ' + Zr.toFixed(1) + (Zx>=0?'+':'') + Zx.toFixed(1) + 'j Ω'
+      + '  |  |Γ| = ' + mag.toFixed(3)
+      + '  |  RL = ' + (isFinite(rl) ? rl.toFixed(1) + ' dB' : '∞')
+      + '  |  VSWR = ' + (isFinite(vswr) ? vswr.toFixed(2) : '∞');
+  }
+  scDraw();
+}
+
+function scOnLeave() {
+  SC.hoverG = null;
+  document.getElementById('sc-hover').textContent = 'Move the mouse over the chart to read impedance values.';
+  scDraw();
+}
+
+function scOnClick(e) {
+  const rect = SC.canvas.getBoundingClientRect();
+  const px = (e.clientX - rect.left) * (SC.W / rect.width);
+  const py = (e.clientY - rect.top)  * (SC.H / rect.height);
+  const g  = xyToGamma(px, py);
+  if (Math.sqrt(g.re*g.re + g.im*g.im) > 1.01) return;
+  const z = gammaToZ(g.re, g.im);
+  const z0 = SC.z0;
+  document.getElementById('sc-r').value = (z.r*z0).toFixed(2);
+  document.getElementById('sc-x').value = (z.x*z0).toFixed(2);
+  scLiveUpdate();
+}
+
+// ── Pin / Clear ───────────────────────────────────────────────────
+function scAddPoint() {
+  if (SC.liveR === null) return;
+  SC.points.push({ r: SC.liveR, x: SC.liveX });
+  scUpdateTable();
+  scDraw();
+}
+
+function scClear() {
+  SC.points = [];
+  SC.liveR  = null; SC.liveX = null;
+  document.getElementById('sc-r').value = '';
+  document.getElementById('sc-x').value = '';
+  document.getElementById('tl-slider').value = 0;
+  document.getElementById('tl-deg').value   = 0;
+  SC.tlDeg = 0;
+  clearReadout(); scUpdateTable(); scDraw();
+}
+
+function scLoadExample() {
+  document.getElementById('sc-z0').value = '50';
+  document.getElementById('sc-r').value  = '73';
+  document.getElementById('sc-x').value  = '42.5';
+  scLiveUpdate();
+}
+
+// ── Pinned points table ───────────────────────────────────────────
+function scUpdateTable() {
+  const sec = document.getElementById('sc-pts-section');
+  if (SC.points.length === 0) { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  const z0 = SC.z0;
+  let html = '<table class="sc-pts-tbl"><thead><tr>'
+    + '<th>#</th><th>R (Ω)</th><th>X (Ω)</th><th>|Γ|</th><th>∠Γ (°)</th><th>RL (dB)</th><th>VSWR</th>'
+    + '</tr></thead><tbody>';
+  SC.points.forEach((pt, i) => {
+    const g   = zToGamma(pt.r/z0, pt.x/z0);
+    const mag = Math.sqrt(g.re*g.re + g.im*g.im);
+    const ang = Math.atan2(g.im, g.re)*180/Math.PI;
+    const rl  = mag > 0 ? -20*Math.log10(mag) : Infinity;
+    const vswr= mag < 1 ? (1+mag)/(1-mag) : Infinity;
+    const col = SC.colors[i % SC.colors.length];
+    html += `<tr>
+      <td><span class="swatch" style="background:${col}"></span>${i+1}</td>
+      <td>${pt.r.toFixed(2)}</td>
+      <td>${(pt.x>=0?'+':'')}${pt.x.toFixed(2)}</td>
+      <td>${mag.toFixed(4)}</td>
+      <td>${ang.toFixed(1)}°</td>
+      <td>${isFinite(rl)?rl.toFixed(2):'∞'}</td>
+      <td>${isFinite(vswr)?vswr.toFixed(3):'∞'}</td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+  document.getElementById('sc-pts-body').innerHTML = html;
+}
+
+window.addEventListener('load', scInit);
+</script>
 </body>
 </html>

@@ -1,55 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — Transmission Line Stub Calculator</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Transmission Line Stub Calculator</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>Transmission Line Stub Calculator</h3>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Transmission Line Stub Calculator</h3>
+<div class="tool-concept">
+  <p>A stub is a shunt (parallel) section of terminated transmission line used for impedance matching or filtering. Its length is chosen so that it presents a target susceptance — cancelling an unwanted reactance. Short-circuit stubs are lower loss; open-circuit stubs avoid vias on PCBs.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Operating frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Stub characteristic impedance (Ω). Typically 50 Ω.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B</td><td style="padding:3px 0;">Target shunt susceptance (mS). Positive = capacitive, negative = inductive.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Type</td><td style="padding:3px 0;">Short-circuit: lower loss, needs via. Open-circuit: no via, slightly higher loss.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="st-f" placeholder="value" ><select id="st-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Line impedance, Z₀</label><div class="inp-inline"><input type="text" id="st-z0" value="50" ><span class="inp-units">Ω</span></div><span class="inp-hint">Stub characteristic impedance</span></div><div class="inp-row"><label>Target susceptance, B</label><div class="inp-inline"><input type="text" id="st-B" placeholder="mS" ><span class="inp-units">mS</span></div><span class="inp-hint">+ve = capacitive load</span></div><div class="inp-row"><label>Stub termination</label><select id="st-type"><option value="short">Short circuit</option><option value="open">Open circuit</option></select></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="st-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;st-f&quot;: &quot;2.45&quot;, &quot;st-fu&quot;: &quot;1e9&quot;, &quot;st-z0&quot;: &quot;50&quot;, &quot;st-B&quot;: &quot;20&quot;, &quot;st-type&quot;: &quot;short&quot;})" title="Cancel +j50Ω reactance at 2.45 GHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Stub Length</h4><div class="res-row"><span class="res-lbl">Electrical length (°)</span><span class="res-val " id="st-el">—</span></div><div class="res-row"><span class="res-lbl">Physical length</span><span class="res-val " id="st-pl">—</span></div><div class="res-row"><span class="res-lbl">λ/4 reference</span><span class="res-val " id="st-lam4">—</span></div></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0;">\(\ell_{SC} = \tfrac{1}{\beta}\arctan\!\left(\tfrac{Y_0}{B}\right)\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_transmission_lines.html">Learn the theory behind this tool →</a></div>
+<script src="StubCalc.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">A stub is a shunt (parallel) section of transmission line used for impedance matching. By choosing its length and termination, it presents a target susceptance to cancel the load susceptance.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Operating frequency.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Z₀</td><td style="padding:3px 0;">Characteristic impedance of the stub (Ω).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">B</td><td style="padding:3px 0;">Target shunt susceptance (mS).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Stub type</td><td style="padding:3px 0;">Short-circuit: lower loss. Open-circuit: no via needed on PCBs.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Electrical length</td><td style="padding:3px 0;">Stub length in degrees at f.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Physical length</td><td style="padding:3px 0;">Stub length in mm (free-space).</td></tr>
-				</table>
-			</div>
-			Frequency, f: <input type="text" id="st-f" placeholder="value">
-			<select id="st-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
-			Line impedance, Z&#8320;: <input type="text" id="st-z0" value="50"> &#937;<br>
-			Target susceptance, B: <input type="text" id="st-B" placeholder="mS"> mS<br>
-			Stub type:
-			<select id="st-type"><option value="short">Short circuit</option><option value="open">Open circuit</option></select><br><br>
-			<button class="calc-btn" id="st-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;st-f&quot;: &quot;2.45&quot;, &quot;st-fu&quot;: &quot;1e9&quot;, &quot;st-z0&quot;: &quot;50&quot;, &quot;st-B&quot;: &quot;20&quot;, &quot;st-type&quot;: &quot;short&quot;})" title="Cancel +j50 Ω reactance at 2.45 GHz with a 50 Ω short-circuit stub">Load Example</button>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<p>\begin{align} \ell_{short} &= \frac{1}{\beta}\arctan\!\left(\frac{Y_0}{B}\right) \end{align}</p>
-			<div class="result-box"><p>Electrical length = <span id="st-el">—</span></p><p>Physical length = <span id="st-pl">—</span></p><p>&lambda;/4 = <span id="st-lam4">—</span></p></div>
-
-			<script src="StubCalc.js"></script>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_transmission_lines.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="tool-enhancements.js"></script>
+<script src="tool-enhancements.js"></script>
 </body>
 </html>

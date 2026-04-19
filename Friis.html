@@ -1,55 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — Friis Transmission Equation</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Friis Transmission Equation</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>Friis Transmission Equation</h3>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Friis Transmission Equation</h3>
+<div class="tool-concept">
+  <p>The Friis equation gives the power received in a free-space radio link given transmit power, antenna gains, distance, and frequency. It assumes far-field, line-of-sight propagation with no atmospheric loss.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pₜ</td><td style="padding:3px 0;">Transmit power (dBm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Gₜ, Gᵣ</td><td style="padding:3px 0;">Transmit and receive antenna gains (dBi). A half-wave dipole has 2.15 dBi.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Link distance (m).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Carrier frequency. Longer wavelengths have less free-space path loss.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">FSPL</td><td style="padding:3px 0;">Free-space path loss = 20·log₁₀(4πd/λ) dB.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pᵣ</td><td style="padding:3px 0;">Received power = Pₜ + Gₜ + Gᵣ − FSPL (in dB arithmetic).</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Transmit power, Pₜ</label><div class="inp-inline"><input type="text" id="fr-pt" value="20" ><span class="inp-units">dBm</span></div><span class="inp-hint">Typical WiFi: 20 dBm = 100 mW</span></div><div class="inp-row"><label>TX antenna gain, Gₜ</label><div class="inp-inline"><input type="text" id="fr-gt" value="2" ><span class="inp-units">dBi</span></div><span class="inp-hint">Isotropic = 0, dipole ≈ 2.15</span></div><div class="inp-row"><label>RX antenna gain, Gᵣ</label><div class="inp-inline"><input type="text" id="fr-gr" value="2" ><span class="inp-units">dBi</span></div></div><div class="inp-row"><label>Distance, d</label><div class="inp-inline"><input type="text" id="fr-d" placeholder="m" ><span class="inp-units">m</span></div><span class="inp-hint">Straight-line distance</span></div><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="fr-f" placeholder="value" ><select id="fr-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="fr-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fr-pt&quot;: &quot;20&quot;, &quot;fr-gt&quot;: &quot;2&quot;, &quot;fr-gr&quot;: &quot;2&quot;, &quot;fr-d&quot;: &quot;50&quot;, &quot;fr-f&quot;: &quot;2.4&quot;, &quot;fr-fu&quot;: &quot;1e9&quot;})" title="2.4 GHz Wi-Fi at 50 m, 20 dBm TX">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Path</h4><div class="res-row"><span class="res-lbl">Free-space path loss (FSPL)</span><span class="res-val " id="fr-fspl">—</span></div></div><div class="res-card"><h4>Received Power</h4><div class="res-row"><span class="res-lbl">Pᵣ (dBm)</span><span class="res-val " id="fr-pr-dbm">—</span></div><div class="res-row"><span class="res-lbl">Pᵣ (watts)</span><span class="res-val " id="fr-pr-w">—</span></div></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0;">\(P_r = P_t G_t G_r \!\left(\dfrac{\lambda}{4\pi d}\right)^{\!2}\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_link_budget.html">Learn about link budgets and the Friis equation →</a></div>
+<script src="Friis.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">The Friis equation gives received power in a free-space radio link. Assumes far-field line-of-sight propagation.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Pt</td><td style="padding:3px 0;">Transmit power (dBm).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Gt, Gr</td><td style="padding:3px 0;">Antenna gains (dBi).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">d</td><td style="padding:3px 0;">Distance (m).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Frequency. Sets λ = c/f.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">FSPL</td><td style="padding:3px 0;">Free-space path loss = 20·log₁₀(4πd/λ).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Pr</td><td style="padding:3px 0;">Received power.</td></tr>
-				</table>
-			</div>
-			Transmit power, P<sub>t</sub>: <input type="text" id="fr-pt" value="20"> dBm<br>
-			TX antenna gain, G<sub>t</sub>: <input type="text" id="fr-gt" value="2"> dBi<br>
-			RX antenna gain, G<sub>r</sub>: <input type="text" id="fr-gr" value="2"> dBi<br>
-			Distance, d: <input type="text" id="fr-d" placeholder="m"> m<br>
-			Frequency, f: <input type="text" id="fr-f" placeholder="value">
-			<select id="fr-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br><br>
-			<button class="calc-btn" id="fr-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fr-pt&quot;: &quot;20&quot;, &quot;fr-gt&quot;: &quot;2&quot;, &quot;fr-gr&quot;: &quot;2&quot;, &quot;fr-d&quot;: &quot;50&quot;, &quot;fr-f&quot;: &quot;2.4&quot;, &quot;fr-fu&quot;: &quot;1e9&quot;})" title="2.4 GHz Wi-Fi: 20 dBm TX, 2 dBi antennas, 50 m range">Load Example</button>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<p>\begin{align} P_r &= P_t G_t G_r \left(\frac{\lambda}{4\pi d}\right)^2 \end{align}</p>
-			<div class="result-box"><p>FSPL = <span id="fr-fspl">—</span></p><p>P<sub>r</sub> = <span id="fr-pr-dbm">—</span></p><p>P<sub>r</sub> = <span id="fr-pr-w">—</span></p></div>
-
-			<script src="Friis.js"></script>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_link_budget.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="tool-enhancements.js"></script>
+<script src="tool-enhancements.js"></script>
 </body>
 </html>

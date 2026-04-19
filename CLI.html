@@ -1,77 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-6R4JGG0586');
-	</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
   <meta charset="UTF-8">
-  <!-- Metas -->
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Page Title -->
-	<title>RF Toolbox — Circular Loop Inductance</title>
-	<!-- Scripts -->
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Circular Loop Inductance</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src='https://cdn.jsdelivr.net/npm/bignumber.js@9.1.2/bignumber.min.js'></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
-	<script> 
-    $(function(){
-      $("#includeIndex").load("index_list.html"); 
-    });
-  </script> 
-	<!-- Style -->
-	<link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
-	
 <body>
-	<header>
-		<h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2>
-	</header>
-	<section>
-		<nav>
-				<h3>Tools</h3>
-				<div id="includeIndex"></div>
-		</nav>
-		<article>
-			<h3>Circular Loop Inductance</h3>
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">A single circular loop of wire acts as an inductor. Uses the Neumann formula approximation, valid when wire diameter d ≪ loop diameter D. Used for NFC antennas, PCB loops, and single-turn coils.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">d</td><td style="padding:3px 0 3px 0;">Wire conductor diameter (mm).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">D</td><td style="padding:3px 0 3px 0;">Loop diameter (mm).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">L</td><td style="padding:3px 0 3px 0;">Self-inductance of the loop (H).</td></tr>
-				</table>
-			</div>
-			Wire Diameter, d: <input type="text" id="d" placeholder="Enter Number"> mm
-				<br>
-			Loop Diameter, D: <input type="text" id="D" placeholder="Enter Number"> mm
-				<br><br>
-			<button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;D&quot;: &quot;100&quot;, &quot;d&quot;: &quot;1.5&quot;})" title="100 mm diameter copper loop, 1.5 mm wire — MRI surface coil">Load Example</button>
-			<script src="CLI.js"></script>
-					<p>
-							\begin{align}
-							L &amp; = \mu_0\mu_r\left(\frac{D}{2}\right)\left[\ln\left(\frac{8 D}{d}\right) - 2 \right]\\
-							\end{align}		
-					</p>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<div class="result-box"><p>L = <span id="L">—</span></p></div>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_coil_design.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer>
-		<p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p>
-	</footer>
-	<script src="tool-enhancements.js"></script>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Circular Loop Inductance</h3>
+<div class="tool-concept">
+  <p>Calculates the self-inductance of a single-turn circular conductor loop using the Rosa/Neumann formula. This is the starting point for MRI surface coil design, tuning capacitor calculation, and any loop antenna.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Loop diameter (mm) — centre-to-centre of wire.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Wire (or tube) diameter (mm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Self-inductance. Increases with loop size; decreases with thicker wire.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Loop diameter, D</label><div class="inp-inline"><input type="text" id="D" placeholder="Enter mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Centre-to-centre of conductor</span></div><div class="inp-row"><label>Wire diameter, d</label><div class="inp-inline"><input type="text" id="d" placeholder="Enter mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Conductor diameter (not radius)</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;D&quot;: &quot;100&quot;, &quot;d&quot;: &quot;1.5&quot;})" title="100 mm loop, 1.5 mm wire">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Inductance</h4><div class="res-row"><span class="res-lbl">Self-inductance, L</span><span class="res-val " id="L">—</span></div></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0;">\(L = \mu_0 r \!\left[\ln\!\left(\tfrac{8r}{a}\right) - 2\right]\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_coil_design.html">Learn the theory behind this tool →</a></div>
+<script src="CLI.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
 </body>
-	
 </html>

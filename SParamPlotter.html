@@ -1,166 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-6R4JGG0586');
-	</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — S-Parameter Plotter</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>
-    $(function(){ $("#includeIndex").load("index_list.html"); });
-  </script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-	<link rel="stylesheet" href="style.css">
-	<style>
-		.sp-controls {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 10px;
-			align-items: center;
-			margin-bottom: 12px;
-		}
-		.sp-controls label { font-size: 13px; }
-		.sp-controls select, .sp-controls input[type=file] {
-			font-family: monospace;
-			font-size: 13px;
-			padding: 4px 8px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-		}
-		.sp-param-checks {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 8px;
-			margin-bottom: 12px;
-			font-size: 13px;
-		}
-		.sp-param-checks label {
-			display: flex;
-			align-items: center;
-			gap: 4px;
-			padding: 3px 8px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			cursor: pointer;
-			user-select: none;
-		}
-		.sp-param-checks label:hover { background: #eef; }
-		.chart-wrap {
-			position: relative;
-			width: 100%;
-			margin-bottom: 20px;
-		}
-		.chart-title {
-			font-family: monospace;
-			font-size: 13px;
-			font-weight: bold;
-			color: #5533aa;
-			margin-bottom: 4px;
-		}
-		.sp-info {
-			font-family: monospace;
-			font-size: 12px;
-			color: #555;
-			margin-bottom: 12px;
-			padding: 8px 10px;
-			background: #f4f4f0;
-			border-left: 3px solid #AA77FF;
-			border-radius: 0 4px 4px 0;
-		}
-		.sp-error {
-			color: #c0392b;
-			font-size: 13px;
-			margin: 8px 0;
-		}
-		.drop-zone {
-			border: 2px dashed #AA77FF;
-			border-radius: 8px;
-			padding: 24px;
-			text-align: center;
-			font-family: monospace;
-			font-size: 13px;
-			color: #777;
-			cursor: pointer;
-			margin-bottom: 14px;
-			transition: background 0.15s;
-		}
-		.drop-zone:hover, .drop-zone.drag-over { background: #f0eeff; color: #5533aa; }
-		.drop-zone input[type=file] { display: none; }
-	</style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — S-Parameter Plotter</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+  
 </head>
-
 <body>
-	<header>
-		<h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2>
-	</header>
-	<section>
-		<nav>
-			<h3>Tools</h3>
-			<div id="includeIndex"></div>
-		</nav>
-		<article>
-			<h3>S-Parameter Plotter</h3>
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">S-parameters (scattering parameters) describe how RF signals scatter at the ports of a network. S11 is the input reflection coefficient (return loss); S21 is the forward transmission (gain or insertion loss); S12 is reverse transmission; S22 is output reflection. They are measured at each frequency point with all other ports terminated in Z₀. Touchstone (.s1p, .s2p, etc.) is the standard file format exported by VNAs (vector network analysers).</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">S11</td><td style="padding:3px 0;">Input reflection coefficient. |S11|² = fraction of input power reflected. -10 dB S11 means 10% of power is reflected.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">S21</td><td style="padding:3px 0;">Forward transmission. For a filter: passband loss and stopband rejection. For an amplifier: gain.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">S12</td><td style="padding:3px 0;">Reverse isolation. How much signal leaks backward through the device.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">S22</td><td style="padding:3px 0;">Output reflection coefficient — same as S11 but at the output port.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">VSWR</td><td style="padding:3px 0;">Voltage Standing Wave Ratio derived from |S11|. VSWR = (1+|S11|)/(1−|S11|).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Return Loss</td><td style="padding:3px 0;">−20·log₁₀(|S11|) in dB. Larger (more negative) is better.</td></tr>
-				</table>
-			</div>
-			<p style="font-size:13px;margin-bottom:14px;">Supports Touchstone files: .s1p, .s2p, .s3p, .s4p</p>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>S-Parameter Plotter</h3>
+<div class="tool-concept">
+  <p>Plots S-parameters from Touchstone files (.s1p–.s4p). Supports magnitude, phase, real/imaginary, and dB formats. Automatically detects file format (MA, DB, RI). Useful for visualising VNA measurement data.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">.s1p</td><td style="padding:3px 0;">1-port network: S11 only.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">.s2p</td><td style="padding:3px 0;">2-port: S11, S21, S12, S22. Most common for amplifiers and filters.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">.s3p/.s4p</td><td style="padding:3px 0;">3 and 4-port networks (e.g. directional couplers, power dividers).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Format</td><td style="padding:3px 0;">MA = magnitude/angle, DB = dB/angle, RI = real/imaginary. Auto-detected.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">File Upload</div>
+<div style="margin-bottom:12px;">
+  <input type="file" id="sp-file" accept=".s1p,.s2p,.s3p,.s4p,.ts" style="font-family:monospace;font-size:13px;">
+</div>
+<div id="sp-plot-area"></div>
+<div class="wiki-link-hint">📖 <a href="wiki_sparam.html">Learn about S-parameters →</a></div>
+<script src="SParamPlotter.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
-			<div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
-				&#128194; Click to select a Touchstone file, or drag and drop it here
-				<input type="file" id="file-input" accept=".s1p,.s2p,.s3p,.s4p,.s5p,.snp">
-			</div>
-
-			<div class="sp-info" id="file-info" style="display:none;"></div>
-			<div class="sp-error" id="sp-error"></div>
-
-			<div id="controls-wrap" style="display:none;">
-				<div class="sp-controls">
-					<label>Plot:
-						<select id="plot-type">
-							<option value="mag">Magnitude (dB)</option>
-							<option value="phase">Phase (deg)</option>
-							<option value="both">Magnitude + Phase</option>
-							<option value="vswr">VSWR</option>
-							<option value="ri">Real / Imaginary</option>
-						</select>
-					</label>
-					<label>Frequency axis:
-						<select id="freq-scale">
-							<option value="lin">Linear</option>
-							<option value="log">Logarithmic</option>
-						</select>
-					</label>
-				</div>
-
-				<div style="font-family:monospace;font-size:12px;color:#555;margin-bottom:6px;">Select parameters to display:</div>
-				<div class="sp-param-checks" id="param-checks"></div>
-
-				<button onclick="renderCharts()" style="margin-bottom:16px;">Plot</button>
-			</div>
-
-			<div id="charts-wrap"></div>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_sparam.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer>
-		<p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p>
-	</footer>
-
-	<script src="SParamPlotter.js"></script>
-	<script src="tool-enhancements.js"></script>
+<script src="tool-enhancements.js"></script>
 </body>
 </html>

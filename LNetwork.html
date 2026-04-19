@@ -1,53 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — L-Network Impedance Matcher</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — L-Network Impedance Matcher</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>L-Network Impedance Matcher</h3>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>L-Network Impedance Matcher</h3>
+<div class="tool-concept">
+  <p>An L-network uses one series and one shunt reactive element to match two different real impedances at a single frequency. The shunt element always connects at the high-impedance port. Two complementary solutions exist: low-pass (shunt C, series L) and high-pass (series C, shunt L).</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Matching frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Rₛ</td><td style="padding:3px 0;">Source resistance (Ω). The port with higher impedance gets the shunt element.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R_L</td><td style="padding:3px 0;">Load resistance (Ω).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Q</td><td style="padding:3px 0;">Network Q = √(R_high/R_low − 1). Also sets bandwidth: BW = f/Q.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Solution 1</td><td style="padding:3px 0;">Low-pass: shunt C at high-Z port, series L toward low-Z port. Passes DC.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Solution 2</td><td style="padding:3px 0;">High-pass: series C, shunt L. Blocks DC, better harmonic rejection.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="ln-f" placeholder="value" ><select id="ln-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Source resistance, Rₛ</label><div class="inp-inline"><input type="text" id="ln-rs" value="50" ><span class="inp-units">Ω</span></div></div><div class="inp-row"><label>Load resistance, R_L</label><div class="inp-inline"><input type="text" id="ln-rl" placeholder="Ω" ><span class="inp-units">Ω</span></div><span class="inp-hint">Must differ from Rₛ</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="ln-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;ln-f&quot;: &quot;2.45&quot;, &quot;ln-fu&quot;: &quot;1e9&quot;, &quot;ln-rs&quot;: &quot;200&quot;, &quot;ln-rl&quot;: &quot;50&quot;})" title="Match 200Ω PA to 50Ω at 2.45 GHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Network Q</h4><div class="res-row"><span class="res-lbl">Q factor</span><span class="res-val " id="ln-Q">—</span></div></div><div class="res-card"><h4>Solution 1 — Low-pass</h4><div class="res-row"><span class="res-lbl">Shunt capacitor, C</span><span class="res-val " id="ln-C1">—</span></div><div class="res-row"><span class="res-lbl">Series inductor, L</span><span class="res-val " id="ln-L1">—</span></div></div><div class="res-card"><h4>Solution 2 — High-pass</h4><div class="res-row"><span class="res-lbl">Series capacitor, C</span><span class="res-val " id="ln-C2">—</span></div><div class="res-row"><span class="res-lbl">Shunt inductor, L</span><span class="res-val " id="ln-L2">—</span></div></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0;">\(Q = \sqrt{\dfrac{R_{high}}{R_{low}}-1}\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn the theory behind this tool →</a></div>
+<script src="LNetwork.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">An L-network uses one series and one shunt reactive element to match two different real impedances at a single frequency. The shunt element always goes on the high-impedance side.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Operating frequency.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Rs</td><td style="padding:3px 0;">Source resistance (Ω).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">RL</td><td style="padding:3px 0;">Load resistance (Ω).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Q</td><td style="padding:3px 0;">Network Q = √(Rhigh/Rlow − 1).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Solution 1</td><td style="padding:3px 0;">Low-pass: shunt C across high-Z port, series L toward low-Z port.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Solution 2</td><td style="padding:3px 0;">High-pass: series C, shunt L — passes high frequencies, blocks DC.</td></tr>
-				</table>
-			</div>
-			Frequency, f: <input type="text" id="ln-f" placeholder="value">
-			<select id="ln-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
-			Source resistance, R<sub>s</sub>: <input type="text" id="ln-rs" value="50"> &#937;<br>
-			Load resistance, R<sub>L</sub>: <input type="text" id="ln-rl" placeholder="&#937;"> &#937;<br><br>
-			<button class="calc-btn" id="ln-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;ln-f&quot;: &quot;2.45&quot;, &quot;ln-fu&quot;: &quot;1e9&quot;, &quot;ln-rs&quot;: &quot;200&quot;, &quot;ln-rl&quot;: &quot;50&quot;})" title="Match 200 Ω PA output to 50 Ω coax at 2.45 GHz">Load Example</button>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<p>\begin{align} Q &= \sqrt{\frac{R_{high}}{R_{low}}-1} \end{align}</p>
-			<div class="result-box"><p>Q = <span id="ln-Q">—</span></p><p><strong>Solution 1 — Low-pass:</strong></p><p>Shunt C = <span id="ln-C1">—</span></p><p>Series L = <span id="ln-L1">—</span></p><p><strong>Solution 2 — High-pass:</strong></p><p>Series C = <span id="ln-C2">—</span></p><p>Shunt L = <span id="ln-L2">—</span></p></div>
-
-			<script src="LNetwork.js"></script>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="tool-enhancements.js"></script>
+<script src="tool-enhancements.js"></script>
 </body>
 </html>

@@ -1,57 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — Bandpass Filter Calculator</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Bandpass Filter Calculator</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>Bandpass Filter Calculator</h3>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Bandpass Filter Calculator</h3>
+<div class="tool-concept">
+  <p>Computes L and C values for a series or parallel RLC bandpass resonator given centre frequency and bandwidth (or Q). Useful for IF filter design and narrowband matching.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f₀</td><td style="padding:3px 0;">Centre frequency of the passband.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">BW</td><td style="padding:3px 0;">−3 dB bandwidth. Q = f₀/BW.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R</td><td style="padding:3px 0;">Termination resistance (Ω). Sets component values.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Q</td><td style="padding:3px 0;">Quality factor = f₀/BW. Higher Q → narrower, more selective filter.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Series</td><td style="padding:3px 0;">Resonant at f₀; presents low impedance in the passband.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Parallel</td><td style="padding:3px 0;">Resonant at f₀; presents high impedance in the passband.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Centre frequency, f₀</label><div class="inp-inline"><input type="text" id="bp-f0" value="100" ><select id="bp-Cu"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Bandwidth, BW</label><div class="inp-inline"><input type="text" id="bp-bw" value="10" ><select id="bp-Lu"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Resistance, R</label><div class="inp-inline"><input type="text" id="bp-R" value="50" ><span class="inp-units">Ω</span></div></div><div class="inp-row"><label>Configuration</label><select id="bp-config"><option value="series">Series RLC</option><option value="parallel">Parallel RLC</option></select></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="bp-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;bp-f0&quot;: &quot;100&quot;, &quot;bp-Cu&quot;: &quot;1e6&quot;, &quot;bp-bw&quot;: &quot;10&quot;, &quot;bp-Lu&quot;: &quot;1e6&quot;, &quot;bp-R&quot;: &quot;50&quot;, &quot;bp-config&quot;: &quot;series&quot;})" title="100 MHz series bandpass, Q=10">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Components</h4><div class="res-row"><span class="res-lbl">Inductance, L</span><span class="res-val " id="bp-L">—</span></div><div class="res-row"><span class="res-lbl">Capacitance, C</span><span class="res-val " id="bp-C">—</span></div></div><div class="res-card"><h4>Performance</h4><div class="res-row"><span class="res-lbl">Q factor</span><span class="res-val " id="bp-Q">—</span></div><div class="res-row"><span class="res-lbl">−3 dB bandwidth</span><span class="res-val " id="bp-Q">—</span></div><div class="res-row"><span class="res-lbl">f₁, f₂</span><span class="res-val " id="bp-f1">—</span></div></div></div>
+<div class="wiki-link-hint">📖 <a href="wiki_filters.html">Learn the theory behind this tool →</a></div>
+<script src="BandpassCalc.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">A series or parallel RLC circuit forms a second-order bandpass filter. Higher Q = narrower bandwidth.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">L</td><td style="padding:3px 0;">Inductance.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">C</td><td style="padding:3px 0;">Capacitance.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">R</td><td style="padding:3px 0;">Resistance.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f₀</td><td style="padding:3px 0;">Centre frequency = 1/(2π√LC).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">BW</td><td style="padding:3px 0;">3 dB bandwidth = f₀/Q.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Q</td><td style="padding:3px 0;">Quality factor.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f₁, f₂</td><td style="padding:3px 0;">Lower and upper −3 dB frequencies.</td></tr>
-				</table>
-			</div>
-			Configuration:
-			<select id="bp-config"><option value="series">Series RLC</option><option value="parallel">Parallel RLC</option></select><br>
-			Inductance, L: <input type="text" id="bp-L" placeholder="value">
-			<select id="bp-Lu"><option value="1e-3">mH</option><option value="1e-6" selected>µH</option><option value="1e-9">nH</option></select><br>
-			Capacitance, C: <input type="text" id="bp-C" placeholder="value">
-			<select id="bp-Cu"><option value="1e-6">µF</option><option value="1e-9">nF</option><option value="1e-12" selected>pF</option></select><br>
-			Resistance, R: <input type="text" id="bp-R" placeholder="&#937;"> &#937;<br><br>
-			<button class="calc-btn" id="bp-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;bp-f0&quot;: &quot;100&quot;, &quot;bp-bw&quot;: &quot;10&quot;, &quot;bp-R&quot;: &quot;50&quot;})" title="Series RLC bandpass at 100 MHz, Q = 10, R = 50 Ω">Load Example</button>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<p>\begin{align} f_0 &= \frac{1}{2\pi\sqrt{LC}} \end{align}</p>
-			<div class="result-box"><p>f&#8320; = <span id="bp-f0">—</span></p><p>BW = <span id="bp-bw">—</span></p><p>Q = <span id="bp-Q">—</span></p><p>f&#8321; = <span id="bp-f1">—</span></p><p>f&#8322; = <span id="bp-f2">—</span></p></div>
-
-			<script src="BandpassCalc.js"></script>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_filters.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="tool-enhancements.js"></script>
+<script src="tool-enhancements.js"></script>
 </body>
 </html>

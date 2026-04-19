@@ -1,54 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — Quarter-Wave Transformer</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Quarter-Wave Transformer</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>Quarter-Wave Transformer</h3>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Quarter-Wave Transformer</h3>
+<div class="tool-concept">
+  <p>A λ/4 transmission line section transforms impedance: Z_in = Z_t²/Z_L. Choose the transformer impedance Z_t = √(Z₁·Z₂) to match Z₁ to Z₂. Works at one frequency (and odd harmonics) only.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₁</td><td style="padding:3px 0;">Source impedance (Ω) — what you're feeding from.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₂</td><td style="padding:3px 0;">Load impedance (Ω) — what you're matching to.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Matching frequency. Physical length = λ/4 at this frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Substrate dielectric constant. Sets physical length: ℓ = c/(4f√εᵣ).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z_t</td><td style="padding:3px 0;">Transformer characteristic impedance = √(Z₁·Z₂).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ℓ</td><td style="padding:3px 0;">Physical length of the λ/4 section.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Source impedance, Z₁</label><div class="inp-inline"><input type="text" id="qw-z1" value="50" ><span class="inp-units">Ω</span></div><span class="inp-hint">e.g. 50 Ω coax</span></div><div class="inp-row"><label>Load impedance, Z₂</label><div class="inp-inline"><input type="text" id="qw-z2" placeholder="Ω" ><span class="inp-units">Ω</span></div><span class="inp-hint">e.g. 200 Ω antenna</span></div><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="qw-f" placeholder="value" ><select id="qw-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="qw-er" value="1" ></div><span class="inp-hint">1 = air/coax, 4.4 = FR4</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="qw-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;qw-z1&quot;: &quot;50&quot;, &quot;qw-z2&quot;: &quot;200&quot;, &quot;qw-f&quot;: &quot;1&quot;, &quot;qw-fu&quot;: &quot;1e9&quot;, &quot;qw-er&quot;: &quot;1&quot;})" title="Match 200Ω to 50Ω at 1 GHz in air">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Transformer</h4><div class="res-row"><span class="res-lbl">Transformer impedance, Z_t</span><span class="res-val " id="qw-zt">—</span></div><div class="res-row"><span class="res-lbl">Physical length, ℓ</span><span class="res-val " id="qw-len">—</span></div></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0;">\(Z_t = \sqrt{Z_1 Z_2} \qquad \ell = \dfrac{c}{4f\sqrt{\varepsilon_r}}\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_transmission_lines.html">Learn the theory behind this tool →</a></div>
+<script src="QuarterWave.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">A λ/4 transmission line section transforms impedance as Zin = Z₀²/ZL. Choosing Z₀ = √(Z₁·Z₂) gives a perfect match at the design frequency.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Z₁</td><td style="padding:3px 0;">Source impedance (Ω).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Z₂</td><td style="padding:3px 0;">Load impedance (Ω).</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Design frequency.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">εᵣ</td><td style="padding:3px 0;">Dielectric constant.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Z_transformer</td><td style="padding:3px 0;">Required characteristic impedance.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Physical length</td><td style="padding:3px 0;">Length of the λ/4 section.</td></tr>
-				</table>
-			</div>
-			Source impedance, Z<sub>1</sub>: <input type="text" id="qw-z1" value="50"> &#937;<br>
-			Load impedance, Z<sub>2</sub>: <input type="text" id="qw-z2" placeholder="&#937;"> &#937;<br>
-			Frequency, f: <input type="text" id="qw-f" placeholder="value">
-			<select id="qw-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
-			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="qw-er" value="1"><br><br>
-			<button class="calc-btn" id="qw-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;qw-z1&quot;: &quot;50&quot;, &quot;qw-z2&quot;: &quot;200&quot;, &quot;qw-f&quot;: &quot;1&quot;, &quot;qw-fu&quot;: &quot;1e9&quot;, &quot;qw-er&quot;: &quot;1&quot;})" title="Match 200 Ω load to 50 Ω at 1 GHz in air (εr = 1)">Load Example</button>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<p>\begin{align} Z_{transformer} &= \sqrt{Z_1 Z_2} \end{align}</p>
-			<div class="result-box"><p>Z<sub>transformer</sub> = <span id="qw-zt">—</span></p><p>Physical length = <span id="qw-len">—</span></p></div>
-
-			<script src="QuarterWave.js"></script>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_transmission_lines.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="tool-enhancements.js"></script>
+<script src="tool-enhancements.js"></script>
 </body>
 </html>

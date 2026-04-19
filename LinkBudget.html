@@ -1,54 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — Link Budget Calculator</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Link Budget Calculator</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
-	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-		<article>
-			<h3>Link Budget Calculator</h3>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Link Budget Calculator</h3>
+<div class="tool-concept">
+  <p>A link budget tracks signal power from transmitter to receiver, accounting for every gain and loss in the chain. The output is link margin — how much signal headroom exists above the minimum detectable level. Positive margin = link closes; negative = it won't work.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pₜ</td><td style="padding:3px 0;">Transmit power (dBm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Gₜ, Gᵣ</td><td style="padding:3px 0;">Transmit and receive antenna gains (dBi).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Lₜₓ, Lᵣₓ</td><td style="padding:3px 0;">Cable/connector losses at TX and RX (dB, enter as positive loss).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Link distance (m).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">NF</td><td style="padding:3px 0;">Receiver noise figure (dB).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">BW</td><td style="padding:3px 0;">Receiver bandwidth (Hz). Noise floor = −174 + NF + 10·log₁₀(BW) dBm.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">SNR_req</td><td style="padding:3px 0;">Required SNR at receiver for acceptable performance (dB).</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Transmit power, Pₜ</label><div class="inp-inline"><input type="text" id="lb-pt" value="14" ><span class="inp-units">dBm</span></div></div><div class="inp-row"><label>TX antenna gain, Gₜ</label><div class="inp-inline"><input type="text" id="lb-gt" value="2" ><span class="inp-units">dBi</span></div></div><div class="inp-row"><label>RX antenna gain, Gᵣ</label><div class="inp-inline"><input type="text" id="lb-gr" value="2" ><span class="inp-units">dBi</span></div></div><div class="inp-row"><label>TX line loss</label><div class="inp-inline"><input type="text" id="lb-ltx" value="0" ><span class="inp-units">dB</span></div><span class="inp-hint">Cable + connectors at TX</span></div><div class="inp-row"><label>RX line loss</label><div class="inp-inline"><input type="text" id="lb-lrx" value="0" ><span class="inp-units">dB</span></div><span class="inp-hint">Cable + connectors at RX</span></div><div class="inp-row"><label>Misc loss</label><div class="inp-inline"><input type="text" id="lb-lmisc" value="0" ><span class="inp-units">dB</span></div><span class="inp-hint">Pointing, polarisation, etc.</span></div><div class="inp-row"><label>Distance, d</label><div class="inp-inline"><input type="text" id="lb-d" value="1000" ><span class="inp-units">m</span></div></div><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="lb-f" value="915" ><select id="lb-fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Receiver noise figure</label><div class="inp-inline"><input type="text" id="lb-nf" value="6" ><span class="inp-units">dB</span></div></div><div class="inp-row"><label>Required SNR</label><div class="inp-inline"><input type="text" id="lb-snr" value="10" ><span class="inp-units">dB</span></div><span class="inp-hint">Minimum for demodulation</span></div><div class="inp-row"><label>Receiver bandwidth</label><div class="inp-inline"><input type="text" id="lb-bw" value="125" ><select id="lb-bwu"><option value="1">Hz</option><option value="1e3" selected>kHz</option><option value="1e6">MHz</option></select></div></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="lb-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;lb-pt&quot;: &quot;14&quot;, &quot;lb-gt&quot;: &quot;2&quot;, &quot;lb-gr&quot;: &quot;2&quot;, &quot;lb-ltx&quot;: &quot;0&quot;, &quot;lb-lrx&quot;: &quot;0&quot;, &quot;lb-lmisc&quot;: &quot;0&quot;, &quot;lb-f&quot;: &quot;915&quot;, &quot;lb-fu&quot;: &quot;1e6&quot;, &quot;lb-d&quot;: &quot;1000&quot;, &quot;lb-nf&quot;: &quot;6&quot;, &quot;lb-snr&quot;: &quot;10&quot;, &quot;lb-bw&quot;: &quot;125&quot;, &quot;lb-bwu&quot;: &quot;1e3&quot;})" title="LoRa IoT sensor, 915 MHz, 1 km">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="lb-out"></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0;">\(\text{Margin} = P_t + G_t + G_r - L_{total} - \text{FSPL} - N_{floor} - \text{SNR}_{req}\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_link_budget.html">Learn the theory behind this tool →</a></div>
+<script src="LinkBudget.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
-			<div class="tool-concept">
-				<p style="margin-bottom:8px;">A systematic TX → RX accounting of all gains and losses. Link margin = achieved SNR − required SNR. Positive margin means the link closes.</p>
-				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">EIRP</td><td style="padding:3px 0;">Effective Isotropic Radiated Power = Pt − Ltx + Gt.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">FSPL</td><td style="padding:3px 0;">Free-space path loss.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Noise floor</td><td style="padding:3px 0;">kTB + NF where kT = −174 dBm/Hz.</td></tr>
-					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Link margin</td><td style="padding:3px 0;">Must be positive for link to work.</td></tr>
-				</table>
-			</div>
-			<b>Transmitter</b><br>TX power: <input type="text" id="lb-pt" value="20"> dBm &nbsp; TX line loss: <input type="text" id="lb-ltx" value="0.5"> dB &nbsp; TX antenna gain: <input type="text" id="lb-gt" value="2"> dBi<br><br>
-			<b>Path</b><br>Frequency: <input type="text" id="lb-f" value="2.4">
-			<select id="lb-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select> &nbsp; Distance: <input type="text" id="lb-d" value="1000"> m<br>
-			Additional losses: <input type="text" id="lb-lmisc" value="0"> dB<br><br>
-			<b>Receiver</b><br>RX antenna gain: <input type="text" id="lb-gr" value="2"> dBi &nbsp; RX line loss: <input type="text" id="lb-lrx" value="0.5"> dB<br>
-			Noise figure: <input type="text" id="lb-nf" value="5"> dB &nbsp; Bandwidth: <input type="text" id="lb-bw" value="20">
-			<select id="lb-bwu"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option></select><br>
-			Required SNR: <input type="text" id="lb-snr" value="10"> dB<br><br>
-			<button class="calc-btn" id="lb-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;lb-pt&quot;: &quot;14&quot;, &quot;lb-gt&quot;: &quot;2&quot;, &quot;lb-gr&quot;: &quot;2&quot;, &quot;lb-f&quot;: &quot;915&quot;, &quot;lb-fu&quot;: &quot;1e6&quot;, &quot;lb-d&quot;: &quot;1000&quot;, &quot;lb-nf&quot;: &quot;6&quot;, &quot;lb-snr&quot;: &quot;10&quot;, &quot;lb-bw&quot;: &quot;125&quot;, &quot;lb-bwu&quot;: &quot;1e3&quot;})" title="LoRa IoT sensor at 915 MHz, 14 dBm TX, 1 km range, 125 kHz BW">Load Example</button>
-			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
-			<div class="result-box" id="lb-out"><p>Link margin will appear here.</p></div>
-
-			<script src="LinkBudget.js"></script>
-		
-			<div class="wiki-link-hint">📖 <a href="wiki_link_budget.html">Learn the theory behind this tool →</a></div>
-		</article>
-	</section>
-	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="tool-enhancements.js"></script>
+<script src="tool-enhancements.js"></script>
 </body>
 </html>

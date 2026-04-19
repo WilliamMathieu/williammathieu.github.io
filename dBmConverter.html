@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — dB / dBm Converter</title>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script src="MathJax.js"></script>
-	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
-	<style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — dB / dBm Converter</title>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  
+  <link rel="stylesheet" href="style.css">
+  <style>
 		.unified-calc{background:#fff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-bottom:16px;}
 		.unified-calc input[type="text"]{font-family:monospace;font-size:14px;padding:6px 10px;border:1px solid #ccc;border-radius:4px;width:140px;}
 		.unified-calc select{font-family:monospace;font-size:13px;padding:5px 8px;border:1px solid #ccc;border-radius:4px;background:#fff;}
@@ -37,7 +34,7 @@
 <section>
 <nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 <article>
-	<h3>dB / dBm Converter</h3>
+<h3>dB / dBm Converter</h3>
 
 	<div class="tool-concept">
 		<p style="margin-bottom:8px;"><b>dBm</b> is an absolute power unit referenced to 1 mW — used for RF power levels. <b>dB</b> is a dimensionless ratio — used for gain, loss, and power ratios. Two variants exist because power ∝ voltage²:</p>
@@ -55,7 +52,6 @@
 	</div>
 
 	<!-- ═══════ dBm ↔ Power ═══════ -->
-	<div style="margin:6px 0 10px;"><button class="example-btn" onclick="loadExample({&quot;v-dbm&quot;:&quot;0&quot;})" title="0 dBm = 1 mW — the standard RF reference level">Load Example</button></div>
 	<div class="mode-panel active" id="panel-dbm">
 		<div class="unified-calc">
 			<div class="conv-row">
@@ -124,11 +120,11 @@
 	</div>
 
 	<script src="dBmConverter.js"></script>
-
-			<div class="wiki-link-hint">📖 <a href="wiki_noise.html">Learn the theory behind this tool →</a></div>
-		</article>
+<div class="wiki-link-hint">📖 <a href="wiki_noise.html">Learn the theory behind this tool →</a></div>
+</article>
 </section>
-<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
-	<script src="tool-enhancements.js"></script>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
 </body>
 </html>
