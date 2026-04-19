@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Rectangular Patch Antenna Designer</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Rectangular Patch Antenna Designer</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">A microstrip patch antenna is a flat resonator on a PCB substrate. Width W controls impedance; length L sets the resonant frequency.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Target resonant frequency.</td></tr>
@@ -38,14 +38,17 @@
 			<select id="pa-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
 			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="pa-er" placeholder="e.g. 4.4"><br>
 			Substrate height, h: <input type="text" id="pa-h" placeholder="mm"> mm<br><br>
-			<button id="pa-btn">Calculate</button>
+			<button class="calc-btn" id="pa-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;pa-f&quot;: &quot;2.45&quot;, &quot;pa-fu&quot;: &quot;1e9&quot;, &quot;pa-er&quot;: &quot;4.4&quot;, &quot;pa-h&quot;: &quot;1.6&quot;})" title="2.45 GHz patch on FR4: εr = 4.4, substrate h = 1.6 mm">Load Example</button>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} W &= \frac{c}{2f}\sqrt{\frac{2}{\varepsilon_r+1}} \end{align}</p>
 			<div class="result-box"><p>W = <span id="pa-W">—</span></p><p>L = <span id="pa-L">—</span></p><p>&epsilon;<sub>reff</sub> = <span id="pa-eeff">—</span></p><p>&Delta;L = <span id="pa-dL">—</span></p></div>
 
 			<script src="PatchAntenna.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_antennas.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

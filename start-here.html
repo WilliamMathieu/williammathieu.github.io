@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Start Here</title>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+
+  <div class="sh-hero">
+    <h2>🗺 New to RF Engineering? Start Here.</h2>
+    <p>RF engineering can feel overwhelming at first — there are a lot of concepts and they're all connected. This guide gives you a path through the tools and wiki articles in the order that makes the most sense.</p>
+  </div>
+
+  <!-- ── LEARNING PATH ─────────────────────────────────────────────── -->
+  <div class="sh-section-hdr">Suggested Learning Path</div>
+  <div class="sh-path">
+
+    <div class="sh-step">
+      <div class="sh-num">1</div>
+      <div class="sh-step-body">
+        <div class="sh-step-title">Understand waves and wavelength</div>
+        <div class="sh-step-desc">Everything in RF is about waves. Before anything else, build intuition for wavelength — it determines antenna size, transmission line behavior, and whether something is "electrically small" or not. The Wavelength Calculator is the simplest tool on the site: type in a frequency and instantly see how long a wave is at that frequency.</div>
+        <div class="sh-step-links">
+          <a class="sh-link" href="Wavelength.html">🔧 Wavelength Calculator</a>
+          <a class="sh-link" href="wiki_em_waves.html">📖 Electromagnetic Waves</a>
+          <a class="sh-link" href="wiki_transmission_lines.html">📖 Transmission Line Theory</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh-step">
+      <div class="sh-num">2</div>
+      <div class="sh-step-body">
+        <div class="sh-step-title">Learn why 50 Ω matters — impedance and matching</div>
+        <div class="sh-step-desc">Almost every RF connector, cable, and instrument uses 50 Ω. That's not arbitrary — it's a compromise between low loss and high power handling. When impedances don't match, power reflects back. The Smith Chart is the single most important visualization in RF engineering for understanding impedance. Start by plotting a few points; it becomes intuitive quickly.</div>
+        <div class="sh-step-links">
+          <a class="sh-link" href="SmithChart.html">🔧 Interactive Smith Chart</a>
+          <a class="sh-link" href="LNetwork.html">🔧 L-Network Matcher</a>
+          <a class="sh-link" href="wiki_impedance_matching.html">📖 Impedance Matching Theory</a>
+          <a class="sh-link" href="wiki_sparam.html">📖 S-Parameters</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh-step">
+      <div class="sh-num">3</div>
+      <div class="sh-step-body">
+        <div class="sh-step-title">Understand transmission lines — real wires behave differently at RF</div>
+        <div class="sh-step-desc">At low frequencies, a wire is just a wire. At RF, the wire's length relative to wavelength changes its impedance. A 50 Ω coaxial cable transforms impedance as you move along it — this is the basis of stub matching and the quarter-wave transformer. These concepts apply to every PCB trace at GHz frequencies.</div>
+        <div class="sh-step-links">
+          <a class="sh-link" href="Microstrip.html">🔧 Microstrip Calculator</a>
+          <a class="sh-link" href="Coaxial.html">🔧 Coaxial Line Calculator</a>
+          <a class="sh-link" href="QuarterWave.html">🔧 Quarter-Wave Transformer</a>
+          <a class="sh-link" href="StubCalc.html">🔧 Stub Calculator</a>
+          <a class="sh-link" href="wiki_microwave_lines.html">📖 Microwave Transmission Lines</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh-step">
+      <div class="sh-num">4</div>
+      <div class="sh-step-body">
+        <div class="sh-step-title">LC circuits — the heartbeat of RF design</div>
+        <div class="sh-step-desc">Almost every RF circuit contains inductors and capacitors tuned to a specific frequency. The LC resonator is how filters, matching networks, and MRI coils all work. At resonance, the impedance of an LC circuit is purely resistive — this is why "tuning" matters so much. The Q factor tells you how selective (sharp) the resonance is.</div>
+        <div class="sh-step-links">
+          <a class="sh-link" href="LC.html">🔧 LC Resonance Calculator</a>
+          <a class="sh-link" href="CLI.html">🔧 Loop Inductance</a>
+          <a class="sh-link" href="SkinDepth.html">🔧 Skin Depth Calculator</a>
+          <a class="sh-link" href="wiki_coil_design.html">📖 RF Coil Design</a>
+          <a class="sh-link" href="wiki_skin_effect.html">📖 Skin Effect</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh-step">
+      <div class="sh-num">5</div>
+      <div class="sh-step-body">
+        <div class="sh-step-title">RF link budgets — how much signal gets through?</div>
+        <div class="sh-step-desc">A link budget tracks signal power from transmitter to receiver, accounting for antenna gain, path loss, and noise. If you've ever wondered "will this radio work at that distance?" — that's a link budget calculation. The Friis equation is the core formula. Noise figure tells you how much your receiver degrades the signal.</div>
+        <div class="sh-step-links">
+          <a class="sh-link" href="Friis.html">🔧 Friis Equation</a>
+          <a class="sh-link" href="LinkBudget.html">🔧 Link Budget Calculator</a>
+          <a class="sh-link" href="NoiseFigure.html">🔧 Cascaded Noise Figure</a>
+          <a class="sh-link" href="dBmConverter.html">🔧 dBm Converter</a>
+          <a class="sh-link" href="wiki_link_budget.html">📖 Link Budget Theory</a>
+          <a class="sh-link" href="wiki_noise.html">📖 Noise in RF Systems</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh-step">
+      <div class="sh-num">6</div>
+      <div class="sh-step-body">
+        <div class="sh-step-title">Filters — keeping signals clean</div>
+        <div class="sh-step-desc">RF filters block unwanted frequencies and pass the ones you want. Low-pass, high-pass, bandpass, and notch filters are all built from inductors and capacitors. The Filter Designer lets you generate complete Butterworth or Chebyshev ladders — you specify the order, cutoff, and topology, and it gives you every component value.</div>
+        <div class="sh-step-links">
+          <a class="sh-link" href="FilterDesign.html">🔧 LC Filter Designer</a>
+          <a class="sh-link" href="BandpassCalc.html">🔧 Bandpass Filter Calculator</a>
+          <a class="sh-link" href="wiki_filters.html">📖 RF Filters</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh-step">
+      <div class="sh-num">7</div>
+      <div class="sh-step-body">
+        <div class="sh-step-title">Antennas — where the signal leaves the wire</div>
+        <div class="sh-step-desc">An antenna converts guided wave (in a cable) to free-space EM wave. The half-wave dipole is the reference: at resonance it presents 73 Ω impedance and has 2.15 dBi gain. Antenna gain is not amplification — it's directivity. The array factor tool shows you how multiple elements add up to create beam patterns.</div>
+        <div class="sh-step-links">
+          <a class="sh-link" href="Dipole.html">🔧 Dipole Calculator</a>
+          <a class="sh-link" href="PatchAntenna.html">🔧 Patch Antenna Designer</a>
+          <a class="sh-link" href="ArrayFactor.html">🔧 Array Factor Plotter</a>
+          <a class="sh-link" href="wiki_antennas.html">📖 Antenna Fundamentals</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh-step">
+      <div class="sh-num">8</div>
+      <div class="sh-step-body">
+        <div class="sh-step-title">Put it all together — simulate a real circuit</div>
+        <div class="sh-step-desc">Now that you understand the building blocks, try the simulators. The RF Circuit Simulator builds ladder networks and shows you S-parameters vs frequency. The SPICE Simulator runs a real Modified Nodal Analysis engine — type in a netlist and get frequency response, transient, and DC sweeps. These are the same techniques used in professional RF design tools.</div>
+        <div class="sh-step-links">
+          <a class="sh-link" href="RFSimulator.html">🔬 RF Circuit Simulator</a>
+          <a class="sh-link" href="SpiceSim.html">🔬 SPICE Simulator</a>
+          <a class="sh-link" href="SParamPlotter.html">🔧 S-Parameter Plotter</a>
+          <a class="sh-link" href="wiki_sparam.html">📖 S-Parameters</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── SPECIALIZATION PATHS ─────────────────────────────────────── -->
+  <div class="sh-section-hdr">Specialization Paths</div>
+  <div class="sh-cards">
+
+    <a class="sh-card" href="wiki_nmr_basics.html">
+      <div class="sh-card-title">🧲 MRI Coil Engineering</div>
+      <div class="sh-card-desc">NMR basics, surface coil design, phased arrays, preamplifier decoupling, SAR safety. Start with the wiki then use the Surface Coil Designer.</div>
+    </a>
+
+    <a class="sh-card" href="wiki_radar.html">
+      <div class="sh-card-title">📡 Radar & Communications</div>
+      <div class="sh-card-desc">Radar fundamentals, link budgets, modulation schemes, mixers, oscillators. Build on Friis and noise figure foundations.</div>
+    </a>
+
+    <a class="sh-card" href="wiki_microwave_lines.html">
+      <div class="sh-card-title">🔌 Microwave PCB Design</div>
+      <div class="sh-card-desc">Microstrip, coax, waveguides, passive components. Skin effect drives PCB trace sizing at GHz. Start with Microstrip and Skin Depth calculators.</div>
+    </a>
+
+    <a class="sh-card" href="wiki_filters.html">
+      <div class="sh-card-title">🎚 Filter Design</div>
+      <div class="sh-card-desc">LC ladders, Butterworth vs Chebyshev, bandpass topologies. The Filter Designer and RF Simulator complement each other.</div>
+    </a>
+
+  </div>
+
+  <!-- ── COMMON QUESTIONS ─────────────────────────────────────────── -->
+  <div class="sh-section-hdr">Common First Questions</div>
+
+  <div class="tool-concept">
+    <p><strong>What is 50 Ω and why is it everywhere?</strong><br>
+    50 Ω is the industry standard characteristic impedance for RF coaxial cable and most RF equipment. It's a compromise: 30 Ω gives minimum loss in air-filled coax, 77 Ω gives maximum power handling. 50 Ω splits the difference and became the standard through historical convention in military radar work. When all your equipment is 50 Ω, you minimize reflections at every connection.</p>
+
+    <p><strong>What does dBm mean?</strong><br>
+    dBm is power measured in decibels relative to 1 milliwatt. 0 dBm = 1 mW. Every +3 dB doubles power, every −3 dB halves it. Typical RF values: Wi-Fi transmitter ≈ +20 dBm (100 mW), received Wi-Fi signal ≈ −70 dBm (100 picowatts). The dBm scale lets you add gains and losses instead of multiplying ratios. <a href="dBmConverter.html">Try the converter →</a></p>
+
+    <p><strong>What is the Smith Chart?</strong><br>
+    The Smith Chart is a graphical way to plot complex impedance (resistance + reactance) on a single circular diagram. Every point inside the circle corresponds to one impedance value. Moving along transmission lines traces arcs on the chart. Matching networks move points toward the center (50 Ω). It looks intimidating but becomes intuitive with practice. <a href="SmithChart.html">Try the interactive version →</a></p>
+
+    <p><strong>Why does skin depth matter?</strong><br>
+    At RF frequencies, current flows only near the surface of a conductor, not through its full cross-section. The skin depth δ = √(2/ωμσ) is the depth at which current falls to 1/e of its surface value. At 1 GHz in copper, δ ≈ 2 µm. This means your conductor only needs to be a few skin depths thick — but if it's plated or corroded, those surface layers dominate resistance and loss. <a href="SkinDepth.html">Calculate skin depth →</a></p>
+  </div>
+
+  <p style="margin-top:20px;font-size:12px;color:#888;">Have a suggestion for this guide? The site is built for RF engineers and students — feedback is always welcome.</p>
+
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="games.html">Games</a></p></footer>
+</body>
+</html>

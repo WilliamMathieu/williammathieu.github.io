@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Skin Depth Calculator</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Skin Depth Calculator</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">At RF frequencies, current concentrates near the conductor surface in a layer whose thickness (skin depth δ) decreases with frequency. Conductor thickness should be ≥ 3–5 skin depths.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Frequency.</td></tr>
@@ -42,14 +42,17 @@
 				<option value="custom">Custom</option>
 			</select><br>
 			Conductivity (if custom): <input type="text" id="sd-sigma" placeholder="S/m" disabled><br><br>
-			<button id="sd-btn">Calculate</button>
+			<button class="calc-btn" id="sd-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;sd-f&quot;: &quot;100&quot;, &quot;sd-fu&quot;: &quot;1e6&quot;, &quot;sd-mat&quot;: &quot;5.8e7&quot;})" title="Copper at 100 MHz — sets minimum plating thickness for PCBs">Load Example</button>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} \delta &= \sqrt{\frac{2}{\omega\mu\sigma}} \end{align}</p>
 			<div class="result-box"><p>&delta; = <span id="sd-um">—</span> µm</p></div>
 
 			<script src="SkinDepth.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_skin_effect.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

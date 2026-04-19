@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Cascaded Noise Figure Calculator</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Cascaded Noise Figure Calculator</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">The Friis noise formula for cascaded systems. The first stage dominates — this is why the LNA at the front of a receiver is critical.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Gₙ</td><td style="padding:3px 0;">Gain of stage n (dB). Passive components have negative gain.</td></tr>
@@ -32,15 +32,18 @@
 				</table>
 			</div>
 			Number of stages: <input type="number" id="nf-n" min="1" max="8" value="3" style="width:50px">
-			<button onclick="nfBuild()">Set stages</button><br><br>
+			<button class="calc-btn" onclick="nfBuild()">Set stages</button> <button class="example-btn" onclick="loadExample({})" title="Typical receiver: LNA (G=20 dB, NF=1 dB) → Mixer → IF amp">Load Example</button><br><br>
 			<div id="nf-stages"></div>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} F_{total} &= F_1 + \frac{F_2-1}{G_1} + \frac{F_3-1}{G_1 G_2} + \cdots \end{align}</p>
 			<div class="result-box"><p>Cascaded NF = <span id="nf-nf">—</span></p><p>Total gain = <span id="nf-gain">—</span></p></div>
 
 			<script src="NoiseFigure.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_noise.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

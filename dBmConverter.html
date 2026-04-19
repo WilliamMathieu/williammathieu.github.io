@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — dB Converter</title>
+	<title>RF Toolbox — dB / dBm Converter</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -39,7 +39,7 @@
 <article>
 	<h3>dB / dBm Converter</h3>
 
-	<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+	<div class="tool-concept">
 		<p style="margin-bottom:8px;"><b>dBm</b> is an absolute power unit referenced to 1 mW — used for RF power levels. <b>dB</b> is a dimensionless ratio — used for gain, loss, and power ratios. Two variants exist because power ∝ voltage²:</p>
 		<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 			<tr><td style="padding:3px 12px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">dBm</td><td style="padding:3px 0;">10·log₁₀(P / 1 mW). 0 dBm = 1 mW, +30 dBm = 1 W, −30 dBm = 1 µW.</td></tr>
@@ -55,6 +55,7 @@
 	</div>
 
 	<!-- ═══════ dBm ↔ Power ═══════ -->
+	<div style="margin:6px 0 10px;"><button class="example-btn" onclick="loadExample({&quot;v-dbm&quot;:&quot;0&quot;})" title="0 dBm = 1 mW — the standard RF reference level">Load Example</button></div>
 	<div class="mode-panel active" id="panel-dbm">
 		<div class="unified-calc">
 			<div class="conv-row">
@@ -123,8 +124,11 @@
 	</div>
 
 	<script src="dBmConverter.js"></script>
-</article>
+
+			<div class="wiki-link-hint">📖 <a href="wiki_noise.html">Learn the theory behind this tool →</a></div>
+		</article>
 </section>
 <footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

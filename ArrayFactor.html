@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Antenna Array Factor Plotter</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Antenna Array Factor</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">A phased array combines multiple antenna elements whose signals add constructively in the steered direction. λ/2 spacing is standard to avoid grating lobes.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">N</td><td style="padding:3px 0;">Number of elements.</td></tr>
@@ -38,8 +38,11 @@
 			<canvas id="af-canvas" width="480" height="480" style="border:1px solid #ccc;display:block;margin-top:8px;"></canvas>
 
 			<script src="ArrayFactor.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_antennas.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

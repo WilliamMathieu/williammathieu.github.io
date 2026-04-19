@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — LC BALUN Calculator</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>LC BALUN Calculator</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">A BALUN (BALanced-UNbalanced) converts between a single-ended (unbalanced) transmission line and a balanced (differential) connection. An LC BALUN uses a combination of inductors and capacitors to achieve this conversion while simultaneously transforming impedance. It is widely used in RF applications to connect coaxial cables to dipole antennas, differential amplifiers, and balanced mixers.</p>
 				<p style="margin-bottom:8px;">This calculator covers three common LC BALUN topologies:</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
@@ -50,7 +50,7 @@
 
 			<div id="bl-note" style="font-family:monospace;font-size:12px;color:#555;margin-bottom:8px;"></div>
 
-			<button id="bl-btn">Calculate</button>
+			<button class="calc-btn" id="bl-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;bl-f&quot;: &quot;144&quot;, &quot;bl-fu&quot;: &quot;1e6&quot;, &quot;bl-zu&quot;: &quot;50&quot;, &quot;bl-zb&quot;: &quot;200&quot;})" title="VHF BALUN: 50 Ω unbalanced → 200 Ω balanced at 144 MHz">Load Example</button>
 
 			<!-- Equations updated per topology -->
 			<div id="bl-eq"></div>
@@ -66,8 +66,11 @@
 			</div>
 
 			<script src="LCBalun.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_balun.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

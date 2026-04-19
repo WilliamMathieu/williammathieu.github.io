@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Link Budget Calculator</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Link Budget Calculator</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">A systematic TX → RX accounting of all gains and losses. Link margin = achieved SNR − required SNR. Positive margin means the link closes.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">EIRP</td><td style="padding:3px 0;">Effective Isotropic Radiated Power = Pt − Ltx + Gt.</td></tr>
@@ -39,13 +39,16 @@
 			Noise figure: <input type="text" id="lb-nf" value="5"> dB &nbsp; Bandwidth: <input type="text" id="lb-bw" value="20">
 			<select id="lb-bwu"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option></select><br>
 			Required SNR: <input type="text" id="lb-snr" value="10"> dB<br><br>
-			<button id="lb-btn">Calculate</button>
+			<button class="calc-btn" id="lb-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;lb-pt&quot;: &quot;14&quot;, &quot;lb-gt&quot;: &quot;2&quot;, &quot;lb-gr&quot;: &quot;2&quot;, &quot;lb-f&quot;: &quot;915&quot;, &quot;lb-fu&quot;: &quot;1e6&quot;, &quot;lb-d&quot;: &quot;1000&quot;, &quot;lb-nf&quot;: &quot;6&quot;, &quot;lb-snr&quot;: &quot;10&quot;, &quot;lb-bw&quot;: &quot;125&quot;, &quot;lb-bwu&quot;: &quot;1e3&quot;})" title="LoRa IoT sensor at 915 MHz, 14 dBm TX, 1 km range, 125 kHz BW">Load Example</button>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<div class="result-box" id="lb-out"><p>Link margin will appear here.</p></div>
 
 			<script src="LinkBudget.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_link_budget.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

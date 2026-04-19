@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — L-Network Impedance Matcher</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>L-Network Impedance Matcher</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">An L-network uses one series and one shunt reactive element to match two different real impedances at a single frequency. The shunt element always goes on the high-impedance side.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Operating frequency.</td></tr>
@@ -37,14 +37,17 @@
 			<select id="ln-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
 			Source resistance, R<sub>s</sub>: <input type="text" id="ln-rs" value="50"> &#937;<br>
 			Load resistance, R<sub>L</sub>: <input type="text" id="ln-rl" placeholder="&#937;"> &#937;<br><br>
-			<button id="ln-btn">Calculate</button>
+			<button class="calc-btn" id="ln-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;ln-f&quot;: &quot;2.45&quot;, &quot;ln-fu&quot;: &quot;1e9&quot;, &quot;ln-rs&quot;: &quot;200&quot;, &quot;ln-rl&quot;: &quot;50&quot;})" title="Match 200 Ω PA output to 50 Ω coax at 2.45 GHz">Load Example</button>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} Q &= \sqrt{\frac{R_{high}}{R_{low}}-1} \end{align}</p>
 			<div class="result-box"><p>Q = <span id="ln-Q">—</span></p><p><strong>Solution 1 — Low-pass:</strong></p><p>Shunt C = <span id="ln-C1">—</span></p><p>Series L = <span id="ln-L1">—</span></p><p><strong>Solution 2 — High-pass:</strong></p><p>Series C = <span id="ln-C2">—</span></p><p>Shunt L = <span id="ln-L2">—</span></p></div>
 
 			<script src="LNetwork.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

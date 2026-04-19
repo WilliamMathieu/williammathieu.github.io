@@ -13,7 +13,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Total Capacitance Calculator</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -41,7 +41,7 @@
 		</nav>
 		<article>
 			<h3>Total Capacitance</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">Compute the total capacitance of N capacitors in series or parallel. Used for designing resonant circuits and matching networks with available discrete components.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Parallel</td><td style="padding:3px 0;">C_total = C&#8321; + C&#8322; + ... + C_N. Total always larger than any individual.</td></tr>
@@ -73,11 +73,14 @@
 			<script src="CapacitorNetwork.js"></script>
 
 			<div class="result-box"><p>C<sub>total</sub> = <span id="C_out">—</span></p></div>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer>
 		<p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p>
 	</footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 
 </html>

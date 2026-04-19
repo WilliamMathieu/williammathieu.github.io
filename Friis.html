@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Friis Transmission Equation</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Friis Transmission Equation</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">The Friis equation gives received power in a free-space radio link. Assumes far-field line-of-sight propagation.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Pt</td><td style="padding:3px 0;">Transmit power (dBm).</td></tr>
@@ -39,14 +39,17 @@
 			Distance, d: <input type="text" id="fr-d" placeholder="m"> m<br>
 			Frequency, f: <input type="text" id="fr-f" placeholder="value">
 			<select id="fr-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br><br>
-			<button id="fr-btn">Calculate</button>
+			<button class="calc-btn" id="fr-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fr-pt&quot;: &quot;20&quot;, &quot;fr-gt&quot;: &quot;2&quot;, &quot;fr-gr&quot;: &quot;2&quot;, &quot;fr-d&quot;: &quot;50&quot;, &quot;fr-f&quot;: &quot;2.4&quot;, &quot;fr-fu&quot;: &quot;1e9&quot;})" title="2.4 GHz Wi-Fi: 20 dBm TX, 2 dBi antennas, 50 m range">Load Example</button>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} P_r &= P_t G_t G_r \left(\frac{\lambda}{4\pi d}\right)^2 \end{align}</p>
 			<div class="result-box"><p>FSPL = <span id="fr-fspl">—</span></p><p>P<sub>r</sub> = <span id="fr-pr-dbm">—</span></p><p>P<sub>r</sub> = <span id="fr-pr-w">—</span></p></div>
 
 			<script src="Friis.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_link_budget.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

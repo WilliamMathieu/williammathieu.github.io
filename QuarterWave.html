@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Quarter-Wave Transformer</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Quarter-Wave Transformer</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">A λ/4 transmission line section transforms impedance as Zin = Z₀²/ZL. Choosing Z₀ = √(Z₁·Z₂) gives a perfect match at the design frequency.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">Z₁</td><td style="padding:3px 0;">Source impedance (Ω).</td></tr>
@@ -38,14 +38,17 @@
 			Frequency, f: <input type="text" id="qw-f" placeholder="value">
 			<select id="qw-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
 			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="qw-er" value="1"><br><br>
-			<button id="qw-btn">Calculate</button>
+			<button class="calc-btn" id="qw-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;qw-z1&quot;: &quot;50&quot;, &quot;qw-z2&quot;: &quot;200&quot;, &quot;qw-f&quot;: &quot;1&quot;, &quot;qw-fu&quot;: &quot;1e9&quot;, &quot;qw-er&quot;: &quot;1&quot;})" title="Match 200 Ω load to 50 Ω at 1 GHz in air (εr = 1)">Load Example</button>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} Z_{transformer} &= \sqrt{Z_1 Z_2} \end{align}</p>
 			<div class="result-box"><p>Z<sub>transformer</sub> = <span id="qw-zt">—</span></p><p>Physical length = <span id="qw-len">—</span></p></div>
 
 			<script src="QuarterWave.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_transmission_lines.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

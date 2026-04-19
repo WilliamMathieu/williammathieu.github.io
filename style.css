@@ -3,8 +3,7 @@
 }
 
 body {
-  /* font-family: Arial, Helvetica, sans-serif; */
-	font-family: monospace;
+  font-family: monospace;
 }
 
 /* Style the header */
@@ -16,12 +15,11 @@ header {
   color: white;
 }
 
-/* Two-column layout — section is a flex row, nav background
-   extends to full height via the section's own background colour */
+/* Two-column layout */
 section {
   display: flex;
   align-items: flex-start;
-  background: #C9EEFF; /* nav colour bleeds behind nav column */
+  background: #C9EEFF;
 }
 
 nav {
@@ -32,7 +30,6 @@ nav {
   flex-shrink: 0;
 }
 
-/* Nav list */
 nav h3 {
   font-size: 16px;
   text-transform: uppercase;
@@ -71,6 +68,24 @@ article {
   align-self: stretch;
 }
 
+/* Article headings */
+article h2, article h3 {
+  font-family: monospace;
+  color: #2a0a6a;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+}
+article h4 {
+  font-family: monospace;
+  color: #5533aa;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 16px 0 8px;
+}
+
 /* Style the footer */
 footer {
   background-color: #AA77FF;
@@ -79,41 +94,520 @@ footer {
   color: white;
 }
 
+footer a { color: #fff; }
+
 button {
-	font-family: monospace;
+  font-family: monospace;
 }
 
 input {
-	font-family: monospace;
+  font-family: monospace;
 }
 
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  section {
-    flex-direction: column;
-  }
-  nav, article {
-    width: 100%;
-    min-height: unset;
-  }
+/* ══════════════════════════════════════════════════════════════════════════
+   GLOBAL FORM CONTROLS — applies to all tools automatically
+   ══════════════════════════════════════════════════════════════════════════ */
+
+article input[type="text"],
+article input[type="number"] {
+  font-family: monospace;
+  font-size: 13px;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  transition: border-color 0.1s, box-shadow 0.1s;
 }
+article input[type="text"]:focus,
+article input[type="number"]:focus {
+  outline: none;
+  border-color: #AA77FF;
+  box-shadow: 0 0 0 2px rgba(170,119,255,0.15);
+}
+article input[type="text"]:disabled,
+article input[type="number"]:disabled {
+  background: #f5f5f5;
+  color: #aaa;
+}
+
+article select {
+  font-family: monospace;
+  font-size: 13px;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* Global calculate button upgrade */
+article button:not(.example-btn):not(.clear-btn):not(.hero-btn):not(.wiki-item):not([class]) {
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 22px;
+  background: #AA77FF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 2px;
+  transition: background 0.1s;
+}
+article button:not(.example-btn):not(.clear-btn):not(.hero-btn):not(.wiki-item):not([class]):hover {
+  background: #8855dd;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   NAMED BUTTON CLASSES
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.calc-btn {
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 22px;
+  background: #AA77FF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 2px;
+  transition: background 0.1s;
+}
+.calc-btn:hover { background: #8855dd; }
+.calc-btn:active { background: #6633bb; }
+
+.example-btn {
+  font-family: monospace;
+  font-size: 12px;
+  padding: 7px 14px;
+  background: #f0eeff;
+  color: #5533aa;
+  border: 1.5px solid #d0c8f0;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: all 0.1s;
+}
+.example-btn:hover {
+  background: #e0d8ff;
+  border-color: #AA77FF;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   TOOL CONCEPT BOX  (.tool-concept)
+   Replaces the old inline-style description divs on all tools.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.tool-concept {
+  background: #f8f6ff;
+  border-left: 3px solid #AA77FF;
+  border-radius: 0 4px 4px 0;
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.tool-concept p {
+  margin: 0 0 8px;
+  color: #2a2a3a;
+}
+.tool-concept p:last-child { margin-bottom: 0; }
+
+.tool-concept table {
+  font-family: monospace;
+  font-size: 12px;
+  border-collapse: collapse;
+  margin-top: 6px;
+}
+.tool-concept table td {
+  padding: 3px 12px 3px 0;
+  vertical-align: top;
+}
+.tool-concept table td:first-child {
+  font-weight: bold;
+  white-space: nowrap;
+  color: #5533aa;
+  min-width: 60px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESULT BOX — upgraded version of the existing class
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.result-box {
+  background: #f0eeff;
+  border-left: 3px solid #AA77FF;
+  border-radius: 0 6px 6px 0;
+  padding: 12px 16px;
+  margin-top: 14px;
+  font-family: monospace;
+  font-size: 13px;
+  min-height: 38px;
+  color: #1a1a1a;
+  line-height: 1.7;
+}
+.result-box p { margin: 2px 0; }
+.result-box strong { color: #5533aa; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SECTION LABEL — visual separator within tool articles
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.sec-lbl {
+  font-family: monospace;
+  font-size: 10px;
+  color: #5533aa;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 16px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e0d8ff;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INPUT GRID SYSTEM (Surface Coil Designer style, available to all tools)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.inp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+@media(max-width:640px) { .inp-grid { grid-template-columns: 1fr; } }
+
+.inp-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.inp-row label {
+  font-size: 11px;
+  color: #5533aa;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.inp-row input, .inp-row select {
+  font-family: monospace;
+  font-size: 13px;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+}
+.inp-row input:focus, .inp-row select:focus {
+  outline: none;
+  border-color: #AA77FF;
+  box-shadow: 0 0 0 2px rgba(170,119,255,0.15);
+}
+.inp-hint  { font-size: 10px; color: #999; margin-top: 1px; }
+.inp-units { font-size: 12px; color: #888; white-space: nowrap; }
+.inp-inline { display: flex; gap: 6px; align-items: center; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESULTS CARD GRID (Surface Coil Designer style)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.res-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+@media(max-width:640px) { .res-grid { grid-template-columns: 1fr; } }
+
+.res-card {
+  background: #f8f6ff;
+  border: 1px solid #d0c8f0;
+  border-radius: 5px;
+  padding: 11px 13px;
+}
+.res-card h4 {
+  font-family: monospace;
+  font-size: 10px;
+  color: #5533aa;
+  font-weight: bold;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin: 0 0 9px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e0d8ff;
+}
+.res-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 3px 0;
+  border-bottom: 1px dotted #e8e0ff;
+  font-size: 12px;
+  gap: 8px;
+}
+.res-row:last-child { border-bottom: none; }
+.res-lbl { color: #555; flex-shrink: 0; }
+.res-val { font-weight: bold; font-size: 13px; color: #1a1a1a; text-align: right; }
+.res-val.good { color: #1a8a1a; }
+.res-val.warn { color: #aa6600; }
+.res-val.bad  { color: #cc2222; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   COMPONENT TABLE (Surface Coil Designer style)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.comp-tbl { width:100%; border-collapse:collapse; font-size:12px; margin-top:2px; }
+.comp-tbl th {
+  font-family: monospace; font-size: 10px; color: #5533aa;
+  text-align: left; padding: 4px 8px; border-bottom: 2px solid #d0c8f0;
+  text-transform: uppercase; letter-spacing: 0.05em; background: #f0eeff;
+}
+.comp-tbl td {
+  padding: 6px 8px; border-bottom: 1px solid #eee;
+  font-family: monospace; vertical-align: top; line-height: 1.5;
+}
+.comp-tbl tr:last-child td { border-bottom: none; }
+.comp-tbl td:nth-child(2) { font-weight: bold; color: #AA77FF; font-size: 13.5px; white-space: nowrap; }
+.comp-tbl td:nth-child(3) { color: #5533aa; font-size: 11px; white-space: nowrap; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INFO / WARNING NOTES
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.note-info {
+  background: #f0eeff;
+  border-left: 3px solid #AA77FF;
+  border-radius: 0 4px 4px 0;
+  padding: 10px 14px;
+  margin: 12px 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #2a2a3a;
+}
+.note-warn {
+  background: #fffbee;
+  border-left: 3px solid #cc8800;
+  border-radius: 0 4px 4px 0;
+  padding: 10px 14px;
+  margin: 12px 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #3a2a00;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   WIKI LINK HINT (added to bottom of each tool)
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.wiki-link-hint {
+  margin-top: 22px;
+  padding-top: 12px;
+  border-top: 1px solid #e8e0ff;
+  font-size: 12px;
+  color: #888;
+}
+.wiki-link-hint a {
+  color: #5533aa;
+  text-decoration: none;
+  font-weight: bold;
+}
+.wiki-link-hint a:hover { text-decoration: underline; color: #AA77FF; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   TOOLTIP SYSTEM
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.tip-wrap {
+  position: relative;
+  display: inline-block;
+}
+.tip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #d0c8f0;
+  color: #5533aa;
+  font-size: 9px;
+  font-weight: bold;
+  cursor: help;
+  margin-left: 3px;
+  vertical-align: middle;
+  line-height: 1;
+  user-select: none;
+}
+.tip-box {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(100% + 6px);
+  background: #2a1a4a;
+  color: #fff;
+  font-family: monospace;
+  font-size: 11px;
+  padding: 7px 11px;
+  border-radius: 5px;
+  white-space: nowrap;
+  max-width: 260px;
+  white-space: normal;
+  z-index: 100;
+  pointer-events: none;
+  line-height: 1.5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.tip-box::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #2a1a4a;
+}
+.tip-wrap:hover .tip-box { display: block; }
+
+/* Example flash animation */
+@keyframes inputFlash {
+  0%   { background: #e8dcff; }
+  100% { background: #fff; }
+}
+.example-flash {
+  animation: inputFlash 0.8s ease-out forwards;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   START HERE PAGE
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.sh-hero {
+  background: linear-gradient(135deg, #AA77FF 0%, #5533aa 100%);
+  color: #fff;
+  padding: 24px 20px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.sh-hero h2 { font-size: 22px; margin: 0 0 6px; }
+.sh-hero p  { font-size: 13px; opacity: 0.92; margin: 0; line-height: 1.6; max-width: 600px; }
+
+.sh-path {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 12px 0 24px;
+  border-left: 3px solid #AA77FF;
+  padding-left: 0;
+}
+.sh-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0eeff;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.1s;
+  position: relative;
+}
+.sh-step:hover { background: #faf8ff; }
+.sh-step:last-child { border-bottom: none; }
+
+.sh-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #AA77FF;
+  color: #fff;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.sh-step-body { flex: 1; }
+.sh-step-title {
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 14px;
+  color: #5533aa;
+  margin-bottom: 3px;
+}
+.sh-step-desc {
+  font-family: monospace;
+  font-size: 12px;
+  color: #555;
+  line-height: 1.55;
+}
+.sh-step-links {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.sh-link {
+  font-family: monospace;
+  font-size: 11px;
+  padding: 3px 9px;
+  background: #f0eeff;
+  border: 1px solid #d0c8f0;
+  border-radius: 3px;
+  color: #5533aa;
+  text-decoration: none;
+}
+.sh-link:hover { background: #AA77FF; color: #fff; border-color: #AA77FF; }
+
+.sh-section-hdr {
+  font-family: monospace;
+  font-size: 11px;
+  color: #5533aa;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 24px 0 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e0d8ff;
+}
+
+.sh-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.sh-card {
+  background: #fafaff;
+  border: 1px solid #d0c8f0;
+  border-radius: 5px;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.12s;
+}
+.sh-card:hover { background: #f0eeff; border-color: #AA77FF; transform: translateY(-1px); }
+.sh-card-title { font-family: monospace; font-weight: bold; font-size: 12px; color: #5533aa; margin-bottom: 3px; }
+.sh-card-desc  { font-family: monospace; font-size: 11px; color: #666; line-height: 1.4; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+  section { flex-direction: column; }
+  nav, article { width: 100%; min-height: unset; }
+  .res-grid { grid-template-columns: 1fr; }
+  .inp-grid  { grid-template-columns: 1fr; }
+}
+
 /* Nav category headings */
 nav ul li[style*="font-size:11px"] {
   pointer-events: none;
   margin-top: 4px;
 }
 nav ul li[style*="font-size:11px"] a { display: none; }
-
-/* Result box — always visible, filled by JS */
-.result-box {
-  background: #f0eeff;
-  border-left: 3px solid #AA77FF;
-  border-radius: 0 6px 6px 0;
-  padding: 10px 14px;
-  margin-top: 12px;
-  font-family: monospace;
-  font-size: 13px;
-  min-height: 38px;
-  color: #1a1a1a;
-}
-.result-box p { margin: 3px 0; }

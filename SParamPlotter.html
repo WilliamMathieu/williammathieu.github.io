@@ -110,7 +110,7 @@
 		</nav>
 		<article>
 			<h3>S-Parameter Plotter</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">S-parameters (scattering parameters) describe how RF signals scatter at the ports of a network. S11 is the input reflection coefficient (return loss); S21 is the forward transmission (gain or insertion loss); S12 is reverse transmission; S22 is output reflection. They are measured at each frequency point with all other ports terminated in Z₀. Touchstone (.s1p, .s2p, etc.) is the standard file format exported by VNAs (vector network analysers).</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">S11</td><td style="padding:3px 0;">Input reflection coefficient. |S11|² = fraction of input power reflected. -10 dB S11 means 10% of power is reflected.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">S21</td><td style="padding:3px 0;">Forward transmission. For a filter: passband loss and stopband rejection. For an amplifier: gain.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">S12</td><td style="padding:3px 0;">Reverse isolation. How much signal leaks backward through the device.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">S22</td><td style="padding:3px 0;">Output reflection coefficient — same as S11 but at the output port.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">VSWR</td><td style="padding:3px 0;">Voltage Standing Wave Ratio derived from |S11|. VSWR = (1+|S11|)/(1−|S11|).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Return Loss</td><td style="padding:3px 0;">−20·log₁₀(|S11|) in dB. Larger (more negative) is better.</td></tr>
@@ -152,6 +152,8 @@
 			</div>
 
 			<div id="charts-wrap"></div>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_sparam.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer>
@@ -159,5 +161,6 @@
 	</footer>
 
 	<script src="SParamPlotter.js"></script>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

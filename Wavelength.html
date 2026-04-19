@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Wavelength Calculator</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Wavelength Calculator</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">Wavelength is the spatial period of a wave. In a medium with dielectric constant εᵣ the wavelength is shorter by a factor of 1/√εᵣ.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Frequency.</td></tr>
@@ -35,14 +35,17 @@
 			Frequency, f: <input type="text" id="wl-f" placeholder="value">
 			<select id="wl-fu"><option value="1e3">kHz</option><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select><br>
 			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="wl-er" value="1"><br><br>
-			<button id="wl-btn">Calculate</button>
+			<button class="calc-btn" id="wl-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;wl-f&quot;: &quot;2.45&quot;, &quot;wl-fu&quot;: &quot;1e9&quot;, &quot;wl-er&quot;: &quot;4.4&quot;})" title="2.45 GHz signal in FR4 PCB (εr ≈ 4.4) — microstrip design">Load Example</button>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} \lambda &= \frac{c}{f\sqrt{\varepsilon_r}} \end{align}</p>
 			<div class="result-box"><p>&lambda; = <span id="wl-lam">—</span></p><p>&lambda;/2 = <span id="wl-half">—</span></p><p>&lambda;/4 = <span id="wl-qtr">—</span></p></div>
 
 			<script src="Wavelength.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_transmission_lines.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

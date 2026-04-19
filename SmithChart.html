@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — Smith Chart</title>
+	<title>RF Toolbox — Interactive Smith Chart</title>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<link rel="stylesheet" href="style.css">
@@ -26,7 +26,7 @@
 		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
 		<article>
 			<h3>Smith Chart</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">The Smith Chart is a graphical tool for visualising complex impedances and reflection coefficients. Any point on the chart represents an impedance Z = R + jX, normalised to Z₀. The horizontal axis is the real axis (pure resistance); moving clockwise around the chart corresponds to moving toward the generator along a transmission line. The outer boundary is |Γ| = 1 (total reflection). Points can be plotted by clicking the chart or entering R and X above.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 				<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Reference impedance for normalisation (typically 50 Ω).</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">R</td><td style="padding:3px 0;">Resistance (Ω) — real part of the impedance.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">X</td><td style="padding:3px 0;">Reactance (Ω) — imaginary part. Positive = inductive, negative = capacitive.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">|Γ|</td><td style="padding:3px 0;">Magnitude of the reflection coefficient. 0 = perfect match, 1 = total reflection.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">Return Loss</td><td style="padding:3px 0;">-20·log₁₀(|Γ|) in dB. Higher is better — >10 dB is typically acceptable.</td></tr><tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;">VSWR</td><td style="padding:3px 0;">Voltage Standing Wave Ratio = (1+|Γ|)/(1−|Γ|). VSWR = 1 is a perfect match.</td></tr>
@@ -44,9 +44,12 @@
 			<canvas id="sc-canvas" width="480" height="480"></canvas>
 			<div class="sc-info" id="sc-info">Click on the chart to read impedance values.</div>
 			<div class="sc-points" id="sc-points"></div>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
 	<script src="SmithChart.js"></script>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Coaxial Line Calculator</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Coaxial Line Calculator</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">Coaxial cable: a central conductor surrounded by dielectric and outer conductor. Standard impedances: 50 Ω (RF) or 75 Ω (video). Keep operating frequency well below the TM₁₁ cutoff.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">d</td><td style="padding:3px 0;">Inner conductor diameter (mm).</td></tr>
@@ -37,14 +37,17 @@
 			Inner conductor diameter, d: <input type="text" id="cx-d" placeholder="mm"> mm<br>
 			Outer conductor inner diameter, D: <input type="text" id="cx-D" placeholder="mm"> mm<br>
 			Dielectric constant, &epsilon;<sub>r</sub>: <input type="text" id="cx-er" value="2.1"><br><br>
-			<button id="cx-btn">Calculate</button>
+			<button class="calc-btn" id="cx-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;cx-d&quot;: &quot;0.9&quot;, &quot;cx-D&quot;: &quot;3.0&quot;, &quot;cx-er&quot;: &quot;2.3&quot;})" title="RG-174 coax: 0.9 mm inner, 3.0 mm outer, polyethylene (εr = 2.3)">Load Example</button>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} Z_0 &= \frac{60}{\sqrt{\varepsilon_r}}\ln\!\left(\frac{D}{d}\right) \end{align}</p>
 			<div class="result-box"><p>Z&#8320; = <span id="cx-z0">—</span></p><p>C = <span id="cx-C">—</span></p><p>L = <span id="cx-L">—</span></p><p>v<sub>p</sub> = <span id="cx-vp">—</span></p><p>Cutoff (TM&#8321;&#8321;) &asymp; <span id="cx-fc">—</span></p></div>
 
 			<script src="Coaxial.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_microwave_lines.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

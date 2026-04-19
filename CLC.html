@@ -15,7 +15,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Page Title -->
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Capacitance in LC Circuit</title>
 	<!-- Scripts -->
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
@@ -43,7 +43,7 @@
 		</nav>
 		<article>
 			<h3>Calculate Capacitance In LC Circuit</h3>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">Given a known inductance and target resonant frequency, calculates the required capacitance to tune the LC circuit to resonance. Useful when the inductor is fixed.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0 3px 0;">Target resonant frequency.</td></tr>
@@ -66,7 +66,7 @@
 					<option value="30">pH</option>
 				</select>
 				<br><br>
-			<button id="btn">Calculate</button>
+			<button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;L&quot;: &quot;10&quot;, &quot;L_dropdown&quot;: &quot;20&quot;, &quot;f&quot;: &quot;2450&quot;, &quot;f_dropdown&quot;: &quot;1&quot;})" title="10 nH inductor resonating at 2.45 GHz (Bluetooth/Wi-Fi)">Load Example</button>
 			<script src="CLC.js"></script>
 					<p>
 							\begin{align}
@@ -75,11 +75,14 @@
 					</p>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<div class="result-box"><p>C = <span id="C">—</span></p></div>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_coil_design.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer>
 		<p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p>
 	</footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 	
 </html>

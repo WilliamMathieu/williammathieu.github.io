@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Dipole Antenna Calculator</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Dipole Antenna Calculator</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">A half-wave dipole is the most fundamental antenna. In practice, the resonant length is slightly shorter than λ/2 due to finite conductor diameter (captured by velocity factor k). Gain ≈ 2.15 dBi.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Resonant frequency.</td></tr>
@@ -36,14 +36,17 @@
 			Frequency, f: <input type="text" id="dp-f" placeholder="value">
 			<select id="dp-fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select><br>
 			Velocity factor, k: <input type="text" id="dp-k" value="0.95"><br><br>
-			<button id="dp-btn">Calculate</button>
+			<button class="calc-btn" id="dp-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;dp-f&quot;: &quot;433&quot;, &quot;dp-fu&quot;: &quot;1e6&quot;})" title="Half-wave dipole for 433 MHz ISM band (total length ≈ 34.6 cm)">Load Example</button>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} L_{half} &= \frac{k \cdot c}{2f} \end{align}</p>
 			<div class="result-box"><p>&lambda; = <span id="dp-lam">—</span></p><p>Dipole total length = <span id="dp-half">—</span></p><p>Each arm = <span id="dp-arm">—</span></p><p>Quarter-wave monopole = <span id="dp-mono">—</span></p></div>
 
 			<script src="Dipole.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_antennas.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

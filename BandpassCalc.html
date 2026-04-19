@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Bandpass Filter Calculator</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Bandpass Filter Calculator</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">A series or parallel RLC circuit forms a second-order bandpass filter. Higher Q = narrower bandwidth.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">L</td><td style="padding:3px 0;">Inductance.</td></tr>
@@ -41,14 +41,17 @@
 			Capacitance, C: <input type="text" id="bp-C" placeholder="value">
 			<select id="bp-Cu"><option value="1e-6">µF</option><option value="1e-9">nF</option><option value="1e-12" selected>pF</option></select><br>
 			Resistance, R: <input type="text" id="bp-R" placeholder="&#937;"> &#937;<br><br>
-			<button id="bp-btn">Calculate</button>
+			<button class="calc-btn" id="bp-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;bp-f0&quot;: &quot;100&quot;, &quot;bp-bw&quot;: &quot;10&quot;, &quot;bp-R&quot;: &quot;50&quot;})" title="Series RLC bandpass at 100 MHz, Q = 10, R = 50 Ω">Load Example</button>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} f_0 &= \frac{1}{2\pi\sqrt{LC}} \end{align}</p>
 			<div class="result-box"><p>f&#8320; = <span id="bp-f0">—</span></p><p>BW = <span id="bp-bw">—</span></p><p>Q = <span id="bp-Q">—</span></p><p>f&#8321; = <span id="bp-f1">—</span></p><p>f&#8322; = <span id="bp-f2">—</span></p></div>
 
 			<script src="BandpassCalc.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_filters.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

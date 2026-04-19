@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox</title>
+	<title>RF Toolbox — Transmission Line Stub Calculator</title>
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -22,7 +22,7 @@
 		<article>
 			<h3>Transmission Line Stub Calculator</h3>
 
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">A stub is a shunt (parallel) section of transmission line used for impedance matching. By choosing its length and termination, it presents a target susceptance to cancel the load susceptance.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">f</td><td style="padding:3px 0;">Operating frequency.</td></tr>
@@ -39,14 +39,17 @@
 			Target susceptance, B: <input type="text" id="st-B" placeholder="mS"> mS<br>
 			Stub type:
 			<select id="st-type"><option value="short">Short circuit</option><option value="open">Open circuit</option></select><br><br>
-			<button id="st-btn">Calculate</button>
+			<button class="calc-btn" id="st-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;st-f&quot;: &quot;2.45&quot;, &quot;st-fu&quot;: &quot;1e9&quot;, &quot;st-z0&quot;: &quot;50&quot;, &quot;st-B&quot;: &quot;20&quot;, &quot;st-type&quot;: &quot;short&quot;})" title="Cancel +j50 Ω reactance at 2.45 GHz with a 50 Ω short-circuit stub">Load Example</button>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<p>\begin{align} \ell_{short} &= \frac{1}{\beta}\arctan\!\left(\frac{Y_0}{B}\right) \end{align}</p>
 			<div class="result-box"><p>Electrical length = <span id="st-el">—</span></p><p>Physical length = <span id="st-pl">—</span></p><p>&lambda;/4 = <span id="st-lam4">—</span></p></div>
 
 			<script src="StubCalc.js"></script>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_transmission_lines.html">Learn the theory behind this tool →</a></div>
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 </html>

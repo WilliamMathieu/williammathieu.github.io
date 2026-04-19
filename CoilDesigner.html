@@ -15,7 +15,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Page Title -->
-	<title>Simple RF Coil Designer</title>
+	<title>RF Toolbox — Simple RF Coil Designer</title>
 	<!-- Scripts -->
 	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 	<script src="MathJax.js"></script>
@@ -44,7 +44,7 @@
 		
 		<article>
 			<h2>Simple RF Coil Designer</h2>
-			<div style="background:#f8f6ff;border-left:3px solid #AA77FF;border-radius:0 4px 4px 0;padding:10px 14px;margin-bottom:14px;font-size:13px;">
+			<div class="tool-concept">
 				<p style="margin-bottom:8px;">Designs a single-turn loop coil for MRI or NMR. Given the loop dimensions and Larmor frequency, calculates self-inductance and the tuning capacitor required for resonance.</p>
 				<table style="font-family:monospace;font-size:12px;border-collapse:collapse;">
 					<tr><td style="padding:3px 12px 3px 0;font-weight:bold;white-space:nowrap;vertical-align:top;color:#5533aa;">d</td><td style="padding:3px 0 3px 0;">Wire diameter (mm).</td></tr>
@@ -68,7 +68,7 @@
 					<option value="3">THz</option>
 				</select>
 				<br><br>
-			<button id="btn">Calculate</button>
+			<button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;d&quot;: &quot;1.5&quot;, &quot;D&quot;: &quot;80&quot;, &quot;f&quot;: &quot;128&quot;, &quot;f_dropdown&quot;: &quot;1&quot;})" title="3T MRI ¹H surface coil — 80 mm loop, 1.5 mm wire, 128 MHz">Load Example</button>
 			<br><br>
 			<script src="CoilDesigner.js"></script>
 			<p>
@@ -79,11 +79,14 @@
 			</p>
 			<div id="error" style="color:#c0392b;font-size:13px;margin-top:6px;"></div>
 			<div class="result-box"><p>L<sub>total</sub> = <span id="L">—</span></p><p>C<sub>total</sub> = <span id="C">—</span></p></div>
+		
+			<div class="wiki-link-hint">📖 <a href="wiki_coil_design.html">Learn the theory behind this tool →</a></div>
 		</article>		
 	</section>
 	<footer>
 		<p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p>
 	</footer>
+	<script src="tool-enhancements.js"></script>
 </body>
 	
 </html>
