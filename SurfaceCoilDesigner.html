@@ -28,8 +28,7 @@
     .calc-btn:hover{background:#8855dd;}
     .calc-btn:active{background:#6633bb;}
 
-    .sec-lbl{font-family:monospace;font-size:13
-      px;color:#5533aa;font-weight:bold;letter-spacing:0.1em;text-transform:uppercase;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e0d8ff;}
+    .sec-lbl{font-family:monospace;font-size:13px;color:#5533aa;font-weight:bold;letter-spacing:0.1em;text-transform:uppercase;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid #e0d8ff;}
 
     .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
     @media(max-width:640px){.res-grid{grid-template-columns:1fr;}}
@@ -69,9 +68,7 @@
     #results{display:none;}
     .tissue-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:5px;font-size:12px;}
     .tissue-chip{background:#e8e0ff;border:1px solid #c0b0f0;border-radius:3px;padding:2px 8px;color:#5533aa;font-family:monospace;font-size:11px;}
-    .lowercase {
-    text-transform: lowercase;
-    }
+    .lowercase {text-transform: lowercase;}
   </style>
 </head>
 <body>
@@ -567,167 +564,167 @@ function calculate() {
 // ═══════════════════════════════════════════════════════════════════════════
 // SVG SCHEMATIC
 // ═══════════════════════════════════════════════════════════════════════════
+// Layout: loop on the left with feed on its right side, then matching network,
+// coax, and LNA flowing left-to-right (signal-flow direction). Feed terminals
+// A (top) and B (bottom, grounded) emerge from the feed gap. C_m shunts from
+// the junction to ground; L_m is in series from the junction to the SMA.
 function drawSchematic(N_breaks, N_dist, vals) {
-  const W=560, H=370;
-  const cx=W/2, cy=138, R=98;
-  const GAP_HALF=0.048; // radians, half-angle of each cap gap in the loop
+  const W = 620, H = 330;
 
-  let s=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;font-family:monospace;">`;
+  // Loop
+  const cx = 155, cy = 142, R = 92;
+  const GAP = 0.12;                  // half-angle of each cap gap in the loop
+  const fDX = R * Math.cos(GAP);     // horizontal offset of feed terminals
+  const fDY = R * Math.sin(GAP);     // vertical offset of feed terminals
 
-  // Definitions
-  s+=`<defs>
-    <marker id="ah" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
-      <path d="M1,1 L1,6 L6,3.5 z" fill="#5533aa"/>
-    </marker>
-    <marker id="ahp" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
-      <path d="M1,1 L1,6 L6,3.5 z" fill="#AA77FF"/>
-    </marker>
-  </defs>`;
+  // Feed terminals
+  const aX = cx + fDX, aY = cy - fDY;   // A (top) — hot
+  const bX = cx + fDX, bY = cy + fDY;   // B (bottom) — ground side
+
+  // Feed wire routing — A diagonals DOWN to the loop's centerline so the whole
+  // signal chain runs horizontally through y = cy (visually balanced).
+  const aBendX    = aX + 14;            // A continues horizontal this far
+  const convergeX = aX + 30;            // A reaches centerline here
+
+  // Matching network layout — all on centerline (y = cy) past convergence
+  const bDropX  = aX + 58;              // B drops to GND here (past convergence)
+  const jX      = aX + 92;              // junction J on centerline
+  const cmTopY  = cy + 20;              // top plate of C_m
+  const cmBotY  = cmTopY + 8;           // bottom plate of C_m
+  const gndY    = 262;                  // ground rail y
+
+  const lmStart = jX + 28;              // inductor bumps start
+  const lmEnd   = lmStart + 60;         // inductor bumps end
+  const smaX    = lmEnd + 25;           // SMA connector centre
+  const coaxA   = smaX + 9;             // coax start
+  const coaxB   = coaxA + 85;           // coax end
+  const lnaX    = coaxB + 4;            // LNA triangle left edge
+  const lnaSz   = 16;                   // LNA triangle half-height
+  const lnaTipX = lnaX + lnaSz * 1.5;
+
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;font-family:monospace;">`;
 
   // Background
-  s+=`<rect width="${W}" height="${H}" fill="#faf9ff" rx="5"/>`;
+  s += `<rect width="${W}" height="${H}" fill="#faf9ff" rx="5"/>`;
 
   // Title
-  s+=`<text x="${W/2}" y="16" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Single-Turn Surface Receive Coil — ${N_breaks} Capacitor Breaks</text>`;
+  s += `<text x="${W/2}" y="18" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Single-Turn Surface Receive Coil · ${N_breaks} Capacitor Breaks</text>`;
 
-  // ── Draw loop wire segments and capacitor symbols ─────────────────────
-  for(let i=0;i<N_breaks;i++){
-    const tc = (i/N_breaks)*2*Math.PI + Math.PI/2; // i=0 at bottom (SVG y-down)
-    const as = tc + GAP_HALF;                        // arc start (after cap)
-    const ae = ((i+1)/N_breaks)*2*Math.PI + Math.PI/2 - GAP_HALF; // arc end (before next cap)
-
-    // Wire arc for this segment
-    const x1=cx+R*Math.cos(as), y1=cy+R*Math.sin(as);
-    const x2=cx+R*Math.cos(ae), y2=cy+R*Math.sin(ae);
-    // Large arc flag: segment spans 2π/N_breaks - 2*GAP_HALF; for N_breaks≥3 always < π
-    s+=`<path d="M${x1.toFixed(2)},${y1.toFixed(2)} A${R},${R} 0 0,1 ${x2.toFixed(2)},${y2.toFixed(2)}" fill="none" stroke="#AA77FF" stroke-width="2.8"/>`;
-
-    const xc=cx+R*Math.cos(tc), yc=cy+R*Math.sin(tc);
-
-    if(i===0){
-      // ── Feed gap: draw distinctive symbol ─────────────────────────────
-      s+=`<rect x="${(xc-9).toFixed(1)}" y="${(yc-9).toFixed(1)}" width="18" height="18" fill="#AA77FF" rx="3"/>`;
-      s+=`<text x="${xc.toFixed(1)}" y="${(yc+4).toFixed(1)}" text-anchor="middle" font-size="7.5" fill="white" font-weight="bold">FEED</text>`;
-    } else {
-      // ── Distributed tuning cap symbol ─────────────────────────────────
-      // Two plates perpendicular to the radial direction
-      const rd=tc; // radial angle
-      const tx=-Math.sin(rd), ty=Math.cos(rd); // tangential direction
-      const pl=8, pg=3.2; // plate half-length, gap half-width
-      // Inner plate
-      s+=`<line x1="${(xc-pg*Math.cos(rd)+pl*tx).toFixed(2)}" y1="${(yc-pg*Math.sin(rd)+pl*ty).toFixed(2)}"
-                x2="${(xc-pg*Math.cos(rd)-pl*tx).toFixed(2)}" y2="${(yc-pg*Math.sin(rd)-pl*ty).toFixed(2)}" stroke="#5533aa" stroke-width="2.3"/>`;
-      // Outer plate
-      s+=`<line x1="${(xc+pg*Math.cos(rd)+pl*tx).toFixed(2)}" y1="${(yc+pg*Math.sin(rd)+pl*ty).toFixed(2)}"
-                x2="${(xc+pg*Math.cos(rd)-pl*tx).toFixed(2)}" y2="${(yc+pg*Math.sin(rd)-pl*ty).toFixed(2)}" stroke="#5533aa" stroke-width="2.3"/>`;
-      // Label (show on 1st, 2nd, and last, or midpoint for larger arrays)
-      const showLabel = (i===1)||(i===2&&N_breaks<=6)||(i===N_dist&&N_dist>2);
-      if(showLabel){
-        const lx=(xc+Math.cos(rd)*22).toFixed(1), ly=(yc+Math.sin(rd)*22+3).toFixed(1);
-        s+=`<text x="${lx}" y="${ly}" text-anchor="middle" font-size="9" fill="#5533aa">C_d</text>`;
-      }
-      // Ellipsis indicator if many caps
-      if(i===3&&N_breaks>6){
-        const lx=(xc+Math.cos(rd)*22).toFixed(1), ly=(yc+Math.sin(rd)*22+3).toFixed(1);
-        s+=`<text x="${lx}" y="${ly}" text-anchor="middle" font-size="9" fill="#999">···</text>`;
-      }
-    }
+  // ── Loop arcs (feed at angle 0 = right side) ─────────────────────────────
+  for (let i = 0; i < N_breaks; i++) {
+    const tc = (i / N_breaks) * 2 * Math.PI;
+    const as = tc + GAP;
+    const ae = ((i + 1) / N_breaks) * 2 * Math.PI - GAP;
+    const x1 = cx + R * Math.cos(as), y1 = cy + R * Math.sin(as);
+    const x2 = cx + R * Math.cos(ae), y2 = cy + R * Math.sin(ae);
+    s += `<path d="M${x1.toFixed(2)},${y1.toFixed(2)} A${R},${R} 0 0,1 ${x2.toFixed(2)},${y2.toFixed(2)}" fill="none" stroke="#5533aa" stroke-width="2.6" stroke-linecap="round"/>`;
   }
 
-  // ── Inductance label on loop ───────────────────────────────────────────
-  s+=`<text x="${cx}" y="${cy-R-12}" text-anchor="middle" font-size="9.5" fill="#AA77FF">L = ${vals.L}</text>`;
-
-  // ── Feed-gap sub-circuit (below loop) ─────────────────────────────────
-  // Feed gap is at bottom: (cx, cy+R)
-  const fy = cy+R;   // top of subcircuit
-  const fTop = fy+9; // below the FEED box
-  const jY  = fTop+14; // junction node Y
-  const gndY = jY+52;  // ground rail Y
-
-  // Vertical stubs down from feed gap
-  // Left terminal (A - hot side)
-  const xA = cx-18;
-  s+=`<line x1="${xA}" y1="${fTop}" x2="${xA}" y2="${jY}" stroke="#5533aa" stroke-width="1.5"/>`;
-
-  // Junction node dot
-  s+=`<circle cx="${xA}" cy="${jY}" r="3" fill="#5533aa"/>`;
-
-  // Right terminal (B - cold/GND) — direct to ground
-  const xB = cx+18;
-  s+=`<line x1="${xB}" y1="${fTop}" x2="${xB}" y2="${gndY}" stroke="#5533aa" stroke-width="1.5"/>`;
-
-  // ── C_m: shunt capacitor from node A down ──────────────────────────────
-  const cmX=xA, cmY1=jY+2, cmY2=jY+18, cmY3=gndY;
-  // wire to top plate
-  s+=`<line x1="${cmX}" y1="${cmY1}" x2="${cmX}" y2="${cmY2}" stroke="#5533aa" stroke-width="1.5"/>`;
-  // top plate
-  s+=`<line x1="${cmX-10}" y1="${cmY2}" x2="${cmX+10}" y2="${cmY2}" stroke="#5533aa" stroke-width="2.5"/>`;
-  // bottom plate
-  s+=`<line x1="${cmX-10}" y1="${cmY2+6}" x2="${cmX+10}" y2="${cmY2+6}" stroke="#5533aa" stroke-width="2.5"/>`;
-  // wire from bottom plate to GND rail
-  s+=`<line x1="${cmX}" y1="${cmY2+6}" x2="${cmX}" y2="${cmY3}" stroke="#5533aa" stroke-width="1.5"/>`;
-  // C_m label
-  s+=`<text x="${cmX-14}" y="${cmY2+12}" text-anchor="end" font-size="9.5" fill="#5533aa">C_m</text>`;
-  s+=`<text x="${cmX-14}" y="${cmY2+22}" text-anchor="end" font-size="8" fill="#888">${vals.C_m}</text>`;
-
-  // ── L_m: series inductor from node A to right ──────────────────────────
-  const lmStartX=xA, lmY=jY, lmEndX=cx+95;
-  // horizontal wire from A to inductor
-  s+=`<line x1="${lmStartX}" y1="${lmY}" x2="${lmStartX+22}" y2="${lmY}" stroke="#5533aa" stroke-width="1.5"/>`;
-  // Draw inductor coil symbol (3 bumps)
-  const lm0=lmStartX+22, lm1=lm0+50;
-  const bumps=4, bw=50/bumps;
-  let lmPath=`M${lm0},${lmY}`;
-  for(let b=0;b<bumps;b++){
-    const bx=lm0+b*bw+bw/2;
-    lmPath+=` A${bw/2},${bw/2} 0 0,1 ${lm0+(b+1)*bw},${lmY}`;
-  }
-  s+=`<path d="${lmPath}" fill="none" stroke="#5533aa" stroke-width="2"/>`;
-  // wire to right
-  s+=`<line x1="${lm1}" y1="${lmY}" x2="${lmEndX-8}" y2="${lmY}" stroke="#5533aa" stroke-width="1.5"/>`;
-  // L_m label
-  s+=`<text x="${lm0+(lm1-lm0)/2}" y="${lmY-8}" text-anchor="middle" font-size="9.5" fill="#5533aa">L_m</text>`;
-  s+=`<text x="${lm0+(lm1-lm0)/2}" y="${lmY+17}" text-anchor="middle" font-size="8" fill="#888">${vals.L_m}</text>`;
-
-  // ── SMA connector symbol ───────────────────────────────────────────────
-  const smaX=lmEndX, smaY=lmY;
-  s+=`<rect x="${smaX-8}" y="${smaY-8}" width="16" height="16" fill="#f0eeff" stroke="#AA77FF" stroke-width="2" rx="3"/>`;
-  s+=`<text x="${smaX}" y="${smaY+4}" text-anchor="middle" font-size="7.5" fill="#5533aa" font-weight="bold">SMA</text>`;
-
-  // ── λ/4 cable arrow and preamp ────────────────────────────────────────
-  const cableStartX=smaX+8, cableEndX=smaX+75, preampX=cableEndX+8;
-  s+=`<line x1="${cableStartX}" y1="${lmY}" x2="${cableEndX}" y2="${lmY}" stroke="#AA77FF" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ahp)"/>`;
-  s+=`<text x="${(cableStartX+cableEndX)/2}" y="${lmY-7}" text-anchor="middle" font-size="9" fill="#AA77FF">λ/4 coax</text>`;
-  s+=`<text x="${(cableStartX+cableEndX)/2}" y="${lmY+13}" text-anchor="middle" font-size="8" fill="#999">${vals.cable}, VF</text>`;
-
-  // Preamp block
-  s+=`<rect x="${preampX}" y="${lmY-12}" width="48" height="24" fill="#e8f0ff" stroke="#4477cc" stroke-width="1.5" rx="3"/>`;
-  s+=`<text x="${preampX+24}" y="${lmY-1}" text-anchor="middle" font-size="9" fill="#4477cc" font-weight="bold">LNA</text>`;
-  s+=`<text x="${preampX+24}" y="${lmY+9}" text-anchor="middle" font-size="8" fill="#4477cc">Z_in ≤ 5Ω</text>`;
-
-  // ── Ground rail ────────────────────────────────────────────────────────
-  const grailX1=xA-15, grailX2=xB+15;
-  s+=`<line x1="${grailX1}" y1="${gndY}" x2="${grailX2}" y2="${gndY}" stroke="#333" stroke-width="2"/>`;
-  // GND symbol
-  for(let g=0;g<3;g++){
-    const gw=10-g*3, gx=cx;
-    s+=`<line x1="${gx-gw}" y1="${gndY+g*4+2}" x2="${gx+gw}" y2="${gndY+g*4+2}" stroke="#333" stroke-width="${1.8-g*0.4}"/>`;
+  // ── Distributed-tuning cap symbols (skip i=0 which is the feed) ──────────
+  for (let i = 1; i < N_breaks; i++) {
+    const tc = (i / N_breaks) * 2 * Math.PI;
+    const xc = cx + R * Math.cos(tc);
+    const yc = cy + R * Math.sin(tc);
+    const rdX = Math.cos(tc), rdY = Math.sin(tc);         // radial direction
+    const tgX = -rdY,         tgY = rdX;                   // tangential direction
+    const pl = 6.5, pg = 2.8;                              // plate half-length, half-gap
+    // Inner plate
+    s += `<line x1="${(xc-pg*rdX+pl*tgX).toFixed(2)}" y1="${(yc-pg*rdY+pl*tgY).toFixed(2)}" x2="${(xc-pg*rdX-pl*tgX).toFixed(2)}" y2="${(yc-pg*rdY-pl*tgY).toFixed(2)}" stroke="#5533aa" stroke-width="2.4" stroke-linecap="round"/>`;
+    // Outer plate
+    s += `<line x1="${(xc+pg*rdX+pl*tgX).toFixed(2)}" y1="${(yc+pg*rdY+pl*tgY).toFixed(2)}" x2="${(xc+pg*rdX-pl*tgX).toFixed(2)}" y2="${(yc+pg*rdY-pl*tgY).toFixed(2)}" stroke="#5533aa" stroke-width="2.4" stroke-linecap="round"/>`;
   }
 
-  // ── Legend box ─────────────────────────────────────────────────────────
-  const lx=10, lbot=H-8, ltop=H-68;
-  s+=`<rect x="${lx}" y="${ltop}" width="210" height="60" fill="white" stroke="#d0c8f0" rx="4"/>`;
-  s+=`<text x="${lx+8}" y="${ltop+13}" font-size="9.5" fill="#5533aa" font-weight="bold">LEGEND</text>`;
-  // Cap symbol in legend
-  s+=`<line x1="${lx+8}" y1="${ltop+24}" x2="${lx+8}" y2="${ltop+34}" stroke="#5533aa" stroke-width="2.3"/>`;
-  s+=`<line x1="${lx+15}" y1="${ltop+24}" x2="${lx+15}" y2="${ltop+34}" stroke="#5533aa" stroke-width="2.3"/>`;
-  s+=`<text x="${lx+22}" y="${ltop+32}" font-size="9" fill="#333">C_dist — distributed tuning cap (×${N_dist})</text>`;
-  // Feed symbol
-  s+=`<rect x="${lx+8}" y="${ltop+41}" width="11" height="11" fill="#AA77FF" rx="2"/>`;
-  s+=`<text x="${lx+22}" y="${ltop+51}" font-size="9" fill="#333">Feed gap — C_m (shunt) + L_m (series)</text>`;
+  // Inductance label (centre of loop)
+  s += `<text x="${cx}" y="${cy-2}" text-anchor="middle" font-size="15" fill="#AA77FF" font-weight="bold" font-style="italic">L</text>`;
+  s += `<text x="${cx}" y="${cy+13}" text-anchor="middle" font-size="9" fill="#888">${vals.L}</text>`;
 
-  s+=`</svg>`;
-  document.getElementById('schematic').innerHTML=s;
+  // Label one distributed cap (the one on the left side of the loop for clarity)
+  if (N_dist >= 1) {
+    const bestI = Math.round(N_breaks / 2);
+    const tc = (bestI / N_breaks) * 2 * Math.PI;
+    const labX = cx + (R + 22) * Math.cos(tc);
+    const labY = cy + (R + 22) * Math.sin(tc);
+    s += `<text x="${labX.toFixed(1)}" y="${(labY+3).toFixed(1)}" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">C<tspan font-size="8" dy="2">d</tspan></text>`;
+    s += `<text x="${labX.toFixed(1)}" y="${(labY+15).toFixed(1)}" text-anchor="middle" font-size="8" fill="#888">${vals.C_dist}</text>`;
+  }
+
+  // ── Feed wires ──────────────────────────────────────────────────────────
+  // A: horizontal stub → diagonal down to centerline → horizontal to J
+  s += `<line x1="${aX.toFixed(2)}" y1="${aY.toFixed(2)}" x2="${aBendX}" y2="${aY.toFixed(2)}" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>`;
+  s += `<line x1="${aBendX}" y1="${aY.toFixed(2)}" x2="${convergeX}" y2="${cy}" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>`;
+  s += `<line x1="${convergeX}" y1="${cy}" x2="${jX}" y2="${cy}" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>`;
+  // B: horizontal stub → drop to GND
+  s += `<line x1="${bX.toFixed(2)}" y1="${bY.toFixed(2)}" x2="${bDropX}" y2="${bY.toFixed(2)}" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>`;
+  s += `<line x1="${bDropX}" y1="${bY.toFixed(2)}" x2="${bDropX}" y2="${gndY}" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>`;
+
+  // Terminal labels (small italic A, B)
+  s += `<text x="${(aX+4).toFixed(1)}" y="${(aY-4).toFixed(1)}" font-size="9" fill="#999" font-style="italic">A</text>`;
+  s += `<text x="${(bX+4).toFixed(1)}" y="${(bY+11).toFixed(1)}" font-size="9" fill="#999" font-style="italic">B</text>`;
+
+  // ── Junction J on centerline — node dot ─────────────────────────────────
+  s += `<circle cx="${jX}" cy="${cy}" r="3" fill="#5533aa"/>`;
+
+  // ── C_m (shunt) from J → GND ─────────────────────────────────────────────
+  s += `<line x1="${jX}" y1="${cy}" x2="${jX}" y2="${cmTopY.toFixed(2)}" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>`;
+  s += `<line x1="${jX-10}" y1="${cmTopY.toFixed(2)}" x2="${jX+10}" y2="${cmTopY.toFixed(2)}" stroke="#5533aa" stroke-width="2.6" stroke-linecap="round"/>`;
+  s += `<line x1="${jX-10}" y1="${cmBotY.toFixed(2)}" x2="${jX+10}" y2="${cmBotY.toFixed(2)}" stroke="#5533aa" stroke-width="2.6" stroke-linecap="round"/>`;
+  s += `<line x1="${jX}" y1="${cmBotY.toFixed(2)}" x2="${jX}" y2="${gndY}" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>`;
+  s += `<text x="${jX+15}" y="${((cmTopY+cmBotY)/2+2).toFixed(1)}" font-size="11" fill="#5533aa" font-weight="bold">C<tspan font-size="8" dy="2">m</tspan></text>`;
+  s += `<text x="${jX+15}" y="${((cmTopY+cmBotY)/2+14).toFixed(1)}" font-size="8" fill="#888">${vals.C_m}</text>`;
+
+  // ── L_m (series) from J → SMA — all on centerline ───────────────────────
+  s += `<line x1="${jX}" y1="${cy}" x2="${lmStart}" y2="${cy}" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>`;
+  const bumps = 4;
+  const bw = (lmEnd - lmStart) / bumps;
+  let lmPath = `M${lmStart},${cy}`;
+  for (let k = 0; k < bumps; k++) {
+    lmPath += ` A${(bw/2).toFixed(2)},${(bw/2).toFixed(2)} 0 0,1 ${(lmStart+(k+1)*bw).toFixed(2)},${cy}`;
+  }
+  s += `<path d="${lmPath}" fill="none" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>`;
+  s += `<line x1="${lmEnd}" y1="${cy}" x2="${smaX-7}" y2="${cy}" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>`;
+  const lmLabX = (lmStart + lmEnd) / 2;
+  s += `<text x="${lmLabX}" y="${(cy-11).toFixed(1)}" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">L<tspan font-size="8" dy="2">m</tspan></text>`;
+  s += `<text x="${lmLabX}" y="${(cy+22).toFixed(1)}" text-anchor="middle" font-size="8" fill="#888">${vals.L_m}</text>`;
+
+  // ── SMA connector (circle with centre pin) ──────────────────────────────
+  s += `<circle cx="${smaX}" cy="${cy}" r="7" fill="white" stroke="#5533aa" stroke-width="1.8"/>`;
+  s += `<circle cx="${smaX}" cy="${cy}" r="2.2" fill="#5533aa"/>`;
+  s += `<text x="${smaX}" y="${(cy+23).toFixed(1)}" text-anchor="middle" font-size="8" fill="#888">SMA</text>`;
+
+  // ── λ/4 coax (dashed) ──────────────────────────────────────────────────
+  s += `<line x1="${coaxA}" y1="${cy}" x2="${coaxB}" y2="${cy}" stroke="#AA77FF" stroke-width="2.2" stroke-dasharray="6,3" stroke-linecap="round"/>`;
+  const coaxLabX = (coaxA + coaxB) / 2;
+  s += `<text x="${coaxLabX}" y="${(cy-11).toFixed(1)}" text-anchor="middle" font-size="11" fill="#AA77FF" font-weight="bold">λ/4 coax</text>`;
+  s += `<text x="${coaxLabX}" y="${(cy+22).toFixed(1)}" text-anchor="middle" font-size="8" fill="#888">${vals.cable}</text>`;
+
+  // ── LNA (amplifier triangle pointing right) ────────────────────────────
+  s += `<path d="M${lnaX},${(cy-lnaSz).toFixed(2)} L${lnaTipX.toFixed(2)},${cy} L${lnaX},${(cy+lnaSz).toFixed(2)} Z" fill="white" stroke="#4477cc" stroke-width="2" stroke-linejoin="round"/>`;
+  s += `<text x="${(lnaX+lnaSz*0.6).toFixed(1)}" y="${(cy-lnaSz-4).toFixed(1)}" text-anchor="middle" font-size="10" fill="#4477cc" font-weight="bold">LNA</text>`;
+  s += `<text x="${(lnaX+lnaSz*0.75).toFixed(1)}" y="${(cy+lnaSz+12).toFixed(1)}" text-anchor="middle" font-size="8" fill="#888">Z<tspan baseline-shift="sub" font-size="6.5">in</tspan> ≤ 5Ω</text>`;
+
+  // LNA output to RX
+  s += `<line x1="${lnaTipX}" y1="${cy}" x2="${(lnaTipX+18).toFixed(2)}" y2="${cy}" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>`;
+  s += `<text x="${(lnaTipX+22).toFixed(1)}" y="${(cy+4).toFixed(1)}" font-size="9" fill="#5533aa" font-weight="bold">RX</text>`;
+
+  // LNA ground (short drop from bottom-centre of triangle to GND rail)
+  const lnaGndX = lnaX + lnaSz * 0.75;
+  s += `<line x1="${lnaGndX.toFixed(1)}" y1="${(cy+lnaSz).toFixed(1)}" x2="${lnaGndX.toFixed(1)}" y2="${gndY}" stroke="#5533aa" stroke-width="1.6" stroke-linecap="round"/>`;
+
+  // ── Ground rail ─────────────────────────────────────────────────────────
+  const gndX1 = bDropX - 32;
+  const gndX2 = lnaGndX + 12;
+  s += `<line x1="${gndX1}" y1="${gndY}" x2="${gndX2}" y2="${gndY}" stroke="#444" stroke-width="2" stroke-linecap="round"/>`;
+  // Standard ground symbol at centre of C_m drop
+  const gsX = jX;
+  s += `<line x1="${gsX-11}" y1="${gndY+5}" x2="${gsX+11}" y2="${gndY+5}" stroke="#444" stroke-width="1.9" stroke-linecap="round"/>`;
+  s += `<line x1="${gsX-7}"  y1="${gndY+9}" x2="${gsX+7}"  y2="${gndY+9}" stroke="#444" stroke-width="1.5" stroke-linecap="round"/>`;
+  s += `<line x1="${gsX-3}"  y1="${gndY+13}" x2="${gsX+3}" y2="${gndY+13}" stroke="#444" stroke-width="1.1" stroke-linecap="round"/>`;
+
+  // Caption
+  s += `<text x="${W/2}" y="${H-10}" text-anchor="middle" font-size="9" fill="#888" font-style="italic">L-match (C<tspan baseline-shift="sub" font-size="7">m</tspan> shunt + L<tspan baseline-shift="sub" font-size="7">m</tspan> series) → 50 Ω · low-Z LNA via λ/4 coax provides preamp decoupling</text>`;
+
+  s += `</svg>`;
+  document.getElementById('schematic').innerHTML = s;
 }
 
 // ── Run on load with default values ───────────────────────────────────────
