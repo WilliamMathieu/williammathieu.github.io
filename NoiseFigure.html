@@ -77,13 +77,19 @@ function nfLoadExample() {
   document.getElementById('nf-n').value = 3;
   nfBuild();
   setTimeout(() => {
-    // Stage 1: LNA G=20, NF=1
-    const g = document.querySelectorAll('.nf-g'); const f = document.querySelectorAll('.nf-f');
-    if(g[0]) g[0].value='20'; if(f[0]) f[0].value='1';
-    if(g[1]) g[1].value='-8'; if(f[1]) f[1].value='10';
-    if(g[2]) g[2].value='15'; if(f[2]) f[2].value='3';
-    document.querySelector('#nf-stages button') && document.querySelector('.calc-btn').click();
-  }, 100);
+    // Stage 1: LNA (G=20 dB, NF=1 dB)
+    const g1 = document.getElementById('nf-g1');
+    const f1 = document.getElementById('nf-f1');
+    const g2 = document.getElementById('nf-g2');
+    const f2 = document.getElementById('nf-f2');
+    const g3 = document.getElementById('nf-g3');
+    const f3 = document.getElementById('nf-f3');
+    if(g1) g1.value='20'; if(f1) f1.value='1';   // LNA
+    if(g2) g2.value='-8'; if(f2) f2.value='10';  // Mixer
+    if(g3) g3.value='15'; if(f3) f3.value='3';   // IF amp
+    // Call nfCalc directly (the Calculate button inside nf-stages)
+    if(typeof nfCalc === 'function') nfCalc();
+  }, 150);
 }
 </script>
 </article>
