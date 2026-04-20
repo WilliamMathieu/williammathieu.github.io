@@ -35,16 +35,16 @@ function topoChange() {
     document.getElementById('bl-r4-p').style.display = hasFour ? '' : 'none';
     // Update labels
     if (topo === 'lattice') {
-        document.getElementById('bl-r1-p').firstChild.textContent = 'L\u2081 = ';
-        document.getElementById('bl-r2-p').firstChild.textContent = 'C\u2081 = ';
-        document.getElementById('bl-r3-p').firstChild.textContent = 'L\u2082 = ';
-        document.getElementById('bl-r4-p').firstChild.textContent = 'C\u2082 = ';
+        document.querySelector('#bl-r1-p .res-lbl').textContent = 'L\u2081 = ';
+        document.querySelector('#bl-r2-p .res-lbl').textContent = 'C\u2081 = ';
+        document.querySelector('#bl-r3-p .res-lbl').textContent = 'L\u2082 = ';
+        document.querySelector('#bl-r4-p .res-lbl').textContent = 'C\u2082 = ';
     } else if (topo === 'pi') {
-        document.getElementById('bl-r1-p').firstChild.textContent = 'L (series) = ';
-        document.getElementById('bl-r2-p').firstChild.textContent = 'C (each shunt) = ';
+        document.querySelector('#bl-r1-p .res-lbl').textContent = 'L (series) = ';
+        document.querySelector('#bl-r2-p .res-lbl').textContent = 'C (each shunt) = ';
     } else {
-        document.getElementById('bl-r1-p').firstChild.textContent = 'L\u209b (series) = ';
-        document.getElementById('bl-r2-p').firstChild.textContent = 'C\u209a (shunt) = ';
+        document.querySelector('#bl-r1-p .res-lbl').textContent = 'L\u209b (series) = ';
+        document.querySelector('#bl-r2-p .res-lbl').textContent = 'C\u209a (shunt) = ';
     }
     document.getElementById('bl-r1').textContent = '\u2014';
     document.getElementById('bl-r2').textContent = '\u2014';
@@ -69,7 +69,6 @@ document.getElementById('bl-btn').addEventListener('click', function() {
     var w  = 2 * Math.PI * f;
     var Zm = Math.sqrt(Zu * Zb);   // geometric mean impedance
     var ratio = Zb / Zu;
-    var fmt = function(v) { return math.format(v, {notation:'engineering', precision:4}); };
 
     if (topo === 'lattice') {
         // Lattice BALUN: L = Zm/w, C = 1/(w*Zm) for each arm
@@ -77,18 +76,18 @@ document.getElementById('bl-btn').addEventListener('click', function() {
         var C = 1 / (w * Zm);
         // Q ≈ Zm / (series resistance) — ideal here so just show bandwidth estimate
         var Q = Math.sqrt(ratio) * 0.5 * (1 / Math.sqrt(ratio - 1 + 1e-9));
-        document.getElementById('bl-r1').textContent = fmt(L) + ' H';
-        document.getElementById('bl-r2').textContent = fmt(C) + ' F';
-        document.getElementById('bl-r3').textContent = fmt(L) + ' H';
-        document.getElementById('bl-r4').textContent = fmt(C) + ' F';
+        document.getElementById('bl-r1').textContent = engFmt(L,'H');
+        document.getElementById('bl-r2').textContent = engFmt(C,'F');
+        document.getElementById('bl-r3').textContent = engFmt(L,'H');
+        document.getElementById('bl-r4').textContent = engFmt(C,'F');
         document.getElementById('bl-Q').textContent  = (ratio >= 1.01 ? Math.sqrt(ratio / (ratio - 1)).toFixed(3) : 'N/A (1:1 ratio)');
     } else if (topo === 'pi') {
         // Pi BALUN: series L = Zm/w, shunt C = 1/(w*Zm) on each side
         var Lpi  = Zm / w;
         var Cpi  = 1 / (w * Zm);
         var Qpi  = Zm / Math.sqrt(Zu * Zb);
-        document.getElementById('bl-r1').textContent = fmt(Lpi) + ' H';
-        document.getElementById('bl-r2').textContent = fmt(Cpi) + ' F';
+        document.getElementById('bl-r1').textContent = engFmt(Lpi,'H');
+        document.getElementById('bl-r2').textContent = engFmt(Cpi,'F');
         document.getElementById('bl-Q').textContent  = Qpi.toFixed(3);
     } else {
         // Marchand lumped approximation: Ls = Z0/w, Cp = 1/(w*Z0)
@@ -96,8 +95,8 @@ document.getElementById('bl-btn').addEventListener('click', function() {
         var Lm   = Z0m / w;
         var Cm   = 1 / (w * Z0m);
         var Qm   = Math.PI / 2;   // inherent Q of Marchand structure
-        document.getElementById('bl-r1').textContent = fmt(Lm) + ' H';
-        document.getElementById('bl-r2').textContent = fmt(Cm) + ' F';
+        document.getElementById('bl-r1').textContent = engFmt(Lm,'H');
+        document.getElementById('bl-r2').textContent = engFmt(Cm,'F');
         document.getElementById('bl-Q').textContent  = Qm.toFixed(3) + ' (inherent \u03bb/4 resonator Q)';
     }
 

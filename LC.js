@@ -10,7 +10,7 @@ btn.addEventListener('click', function() {
   var Lmul = {'1':1e-6,'2':1e-9,'3':1e-12}[Hu];
   var Cmul = {'10':1e-6,'20':1e-9,'30':1e-12}[Fu];
   var f = 1 / (2 * Math.PI * Math.sqrt(L * Lmul * C * Cmul));
-  document.getElementById("f").textContent = math.format(f, {notation:'engineering'}) + ' Hz';
+  document.getElementById("f").textContent = engFmt(f,'Hz');
 });
 
 function showError(msg) {

@@ -14,8 +14,8 @@ btn.addEventListener('click', function() {
   var fmul = {'0':1e3,'1':1e6,'2':1e9,'3':1e12}[fu];
   var fHz = f * fmul;
   var C = 1 / (4 * Math.PI * Math.PI * fHz * fHz * L);
-  document.getElementById("L").textContent = math.format(L, {notation:'engineering'}) + ' H';
-  document.getElementById("C").textContent = math.format(C, {notation:'engineering'}) + ' F';
+  document.getElementById("L").textContent = engFmt(L,'H');
+  document.getElementById("C").textContent = engFmt(C,'F');
 });
 
 function showError(msg) {

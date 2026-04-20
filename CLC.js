@@ -12,7 +12,7 @@ btn.addEventListener('click', function() {
   var fHz = f * fmul;
   var Lval = L * Lmul;
   var C = 1 / (4 * Math.PI * Math.PI * fHz * fHz * Lval);
-  document.getElementById("C").textContent = math.format(C, {notation:'engineering'}) + ' F';
+  document.getElementById("C").textContent = engFmt(C,'F');
 });
 
 function showError(msg) {

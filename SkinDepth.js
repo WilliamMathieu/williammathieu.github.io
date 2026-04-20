@@ -10,8 +10,8 @@ document.getElementById('sd-btn').addEventListener('click', function() {
     if(isNaN(f)||f<=0){showError('Enter a valid positive frequency.');return;}
     if(isNaN(sig)||sig<=0){showError('Enter a valid positive conductivity.');return;}
     var delta=Math.sqrt(2/(2*Math.PI*f*4*Math.PI*1e-7*sig));
-    document.getElementById('sd-m').textContent=math.format(delta,{notation:'engineering',precision:5});
-    document.getElementById('sd-um').textContent=(delta*1e6).toFixed(4);
+    document.getElementById('sd-m').textContent=engFmt(delta,'m');
+    document.getElementById('sd-um').textContent=(delta*1e6).toFixed(3)+' µm';
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

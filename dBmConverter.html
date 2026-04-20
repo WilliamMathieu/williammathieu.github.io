@@ -94,14 +94,18 @@
 				</select>
 			</div>
 			<p class="hint">Type in either field — the other updates automatically.</p>
-			<div class="live-out">
-				<p>Watts: <span id="out-w">—</span></p>
-				<!--<p>Milliwatts: <span id="out-mw">—</span></p>-->
-				<!--
-				<p>Microwatts: <span id="out-uw">—</span></p>
-				<p>dBm: <span id="out-dbm">—</span></p>
-				<p>dBW: <span id="out-dbw">—</span></p>
-				-->
+			<div class="res-grid" style="margin-top:10px;">
+				<div class="res-card">
+					<h4>Power</h4>
+					<div class="res-row"><span class="res-lbl">Watts</span><span class="res-val" id="out-w">—</span></div>
+					<div class="res-row"><span class="res-lbl">mW</span><span class="res-val" id="out-mw">—</span></div>
+					<div class="res-row"><span class="res-lbl">µW</span><span class="res-val" id="out-uw">—</span></div>
+				</div>
+				<div class="res-card">
+					<h4>Decibels</h4>
+					<div class="res-row"><span class="res-lbl">dBm</span><span class="res-val" id="out-dbm">—</span></div>
+					<div class="res-row"><span class="res-lbl">dBW</span><span class="res-val" id="out-dbw">—</span></div>
+				</div>
 			</div>
 			<p>\begin{align} P_{dBm} &= 10\log_{10}\!\left(\frac{P_W}{1\,\text{mW}}\right) \end{align}</p>
 		</div>

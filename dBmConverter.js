@@ -7,7 +7,7 @@ function switchMode(m) {
     document.getElementById('panel-'+m).classList.add('active');
 }
 
-var ENG = function(v) { return math.format(v, {notation:'engineering', precision:5}); };
+var ENG = function(v, unit) { return engFmt(v, unit || ''); };
 
 // ── dBm ↔ Power ───────────────────────────────────────────────────────────────
 function updateDbm(src) {
@@ -32,9 +32,9 @@ function updateDbm(src) {
         dbmEl.value = parseFloat(dBm.toPrecision(6));
     }
 
-    document.getElementById('out-w').textContent   = ENG(W) + ' W';
-    document.getElementById('out-mw').textContent  = ENG(W*1e3) + ' mW';
-    document.getElementById('out-uw').textContent  = ENG(W*1e6) + ' µW';
+    document.getElementById('out-w').textContent   = engFmt(W, 'W');
+    document.getElementById('out-mw').textContent  = (W*1e3).toPrecision(5) + ' mW';
+    document.getElementById('out-uw').textContent  = (W*1e6).toPrecision(5) + ' µW';
     document.getElementById('out-dbm').textContent = dBm.toFixed(4) + ' dBm';
     document.getElementById('out-dbw').textContent = (dBm - 30).toFixed(4) + ' dBW';
 }

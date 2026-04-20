@@ -27,11 +27,11 @@ document.getElementById('fd-btn').addEventListener('click', function() {
     for(var el=1;el<=n;el++){
         var isL=(el%2===1), val, etype;
         if(resp==='lp'){
-            if(isL){val=g[el]*R0/wc; etype='Series L = '+math.format(val,{notation:'engineering',precision:4})+' H';}
-            else{val=g[el]/(wc*R0); etype='Shunt C = '+math.format(val,{notation:'engineering',precision:4})+' F';}
+            if(isL){val=g[el]*R0/wc; etype='Series L = '+engFmt(val,'H');}
+            else{val=g[el]/(wc*R0); etype='Shunt C = '+engFmt(val,'F');}
         } else {
-            if(isL){val=1/(g[el]*wc*R0); etype='Series C = '+math.format(val,{notation:'engineering',precision:4})+' F';}
-            else{val=R0/(g[el]*wc); etype='Shunt L = '+math.format(val,{notation:'engineering',precision:4})+' H';}
+            if(isL){val=1/(g[el]*wc*R0); etype='Series C = '+engFmt(val,'F');}
+            else{val=R0/(g[el]*wc); etype='Shunt L = '+engFmt(val,'H');}
         }
         html+='<tr><td style="padding:2px 12px;">'+el+'</td><td colspan="2" style="padding:2px 12px;">'+etype+'</td></tr>';
     }

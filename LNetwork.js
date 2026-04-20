@@ -11,10 +11,10 @@ document.getElementById('ln-btn').addEventListener('click', function() {
     var Q=Math.sqrt(Rhigh/Rlow-1);
     var Xshunt=Rhigh/Q, Xseries=Q*Rlow;
     document.getElementById('ln-Q').textContent=Q.toFixed(4);
-    document.getElementById('ln-C1').textContent=math.format(1/(w*Xshunt),{notation:'engineering',precision:4})+' F';
-    document.getElementById('ln-L1').textContent=math.format(Xseries/w,{notation:'engineering',precision:4})+' H';
-    document.getElementById('ln-C2').textContent=math.format(1/(w*Xseries),{notation:'engineering',precision:4})+' F';
-    document.getElementById('ln-L2').textContent=math.format(Xshunt/w,{notation:'engineering',precision:4})+' H';
+    document.getElementById('ln-C1').textContent=engFmt(1/(w*Xshunt),'F');
+    document.getElementById('ln-L1').textContent=engFmt(Xseries/w,'H');
+    document.getElementById('ln-C2').textContent=engFmt(1/(w*Xseries),'F');
+    document.getElementById('ln-L2').textContent=engFmt(Xshunt/w,'H');
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

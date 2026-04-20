@@ -13,7 +13,7 @@ document.getElementById('fr-btn').addEventListener('click', function() {
     var PrW=1e-3*Math.pow(10,Pr/10);
     document.getElementById('fr-fspl').textContent=FSPL.toFixed(3)+' dB';
     document.getElementById('fr-pr-dbm').textContent=Pr.toFixed(3)+' dBm';
-    document.getElementById('fr-pr-w').textContent=math.format(PrW,{notation:'engineering',precision:4})+' W';
+    document.getElementById('fr-pr-w').textContent=engFmt(PrW,'W');
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

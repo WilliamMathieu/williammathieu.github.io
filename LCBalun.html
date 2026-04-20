@@ -58,8 +58,23 @@
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="bl-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;bl-f&quot;: &quot;144&quot;, &quot;bl-fu&quot;: &quot;1e6&quot;, &quot;bl-zu&quot;: &quot;50&quot;, &quot;bl-zb&quot;: &quot;200&quot;})" title="VHF BALUN: 50Ω → 200Ω at 144 MHz">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Component Values</div>
-<div id="bl-out"></div>
-<div class="note-info" style="margin-top:8px;" id="bl-note"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card">
+    <h4>Component Values</h4>
+    <div class="res-row" id="bl-r1-p"><span class="res-lbl">L₁ = </span><span class="res-val" id="bl-r1">—</span></div>
+    <div class="res-row" id="bl-r2-p"><span class="res-lbl">C₁ = </span><span class="res-val" id="bl-r2">—</span></div>
+    <div class="res-row" id="bl-r3-p"><span class="res-lbl">L₂ = </span><span class="res-val" id="bl-r3">—</span></div>
+    <div class="res-row" id="bl-r4-p"><span class="res-lbl">C₂ = </span><span class="res-val" id="bl-r4">—</span></div>
+  </div>
+  <div class="res-card">
+    <h4>Network Performance</h4>
+    <div class="res-row"><span class="res-lbl">Impedance ratio</span><span class="res-val" id="bl-ratio">—</span></div>
+    <div class="res-row"><span class="res-lbl">Q / bandwidth</span><span class="res-val" id="bl-Q">—</span></div>
+  </div>
+</div>
+<div id="bl-eq" style="margin:10px 0;font-size:13px;"></div>
+<div class="note-info" id="bl-note" style="margin-top:8px;"></div>
 <div class="wiki-link-hint">📖 <a href="wiki_balun.html">Learn about BALUNs →</a></div>
 <script src="LCBalun.js"></script>
 </article>
