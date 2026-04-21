@@ -54,11 +54,56 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Design frequency, f</label><div class="inp-inline"><input type="text" id="pa-f" value="2.45" ><select id="pa-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="pa-er" value="4.4" ></div><span class="inp-hint">FR4≈4.4, Rogers4003≈3.55</span></div><div class="inp-row"><label>Substrate thickness, h</label><div class="inp-inline"><input type="text" id="pa-h" value="1.6" ><span class="inp-units">mm</span></div><span class="inp-hint">1.6 mm standard FR4</span></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Design frequency, f</label><div class="inp-inline"><input type="text" id="pa-f" value="2.45"  data-tip="Design frequency. The patch resonates at this frequency."><select id="pa-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="pa-er" value="4.4"  data-tip="Substrate dielectric constant. FR4 ≈ 4.4, Rogers 4003C ≈ 3.55. Higher εᵣ → smaller patch."></div><span class="inp-hint">FR4≈4.4, Rogers4003≈3.55</span></div><div class="inp-row"><label>Substrate thickness, h</label><div class="inp-inline"><input type="text" id="pa-h" value="1.6"  data-tip="Substrate thickness in mm. Thicker substrate → wider bandwidth but larger patch."><span class="inp-units">mm</span></div><span class="inp-hint">1.6 mm standard FR4</span></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="pa-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;pa-f&quot;: &quot;2.45&quot;, &quot;pa-fu&quot;: &quot;1e9&quot;, &quot;pa-er&quot;: &quot;4.4&quot;, &quot;pa-h&quot;: &quot;1.6&quot;})" title="2.45 GHz patch on FR4">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
 <div class="res-grid"><div class="res-card"><h4>Patch Dimensions</h4><div class="res-row"><span class="res-lbl">Patch width, W</span><span class="res-val " id="pa-W">—</span></div><div class="res-row"><span class="res-lbl">Patch length, L</span><span class="res-val " id="pa-L">—</span></div><div class="res-row"><span class="res-lbl">Length extension, ΔL</span><span class="res-val " id="pa-dL">—</span></div></div><div class="res-card"><h4>Substrate</h4><div class="res-row"><span class="res-lbl">Effective εᵣ</span><span class="res-val " id="pa-eeff">—</span></div></div></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var Wv = document.getElementById('pa-W') ? document.getElementById('pa-W').textContent : '—';
+  var Lv = document.getElementById('pa-L') ? document.getElementById('pa-L').textContent : '—';
+  var hv = parseFloat(document.getElementById('pa-h')&&document.getElementById('pa-h').value)||1.6;
+  var W=560,H=170,cx=W/2,cy=76;
+  // Scale patch: typical patch is wider than it is long
+  var pW=180,pL=130;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  var px=cx-pW/2, py=cy-pL/2;
+  // Ground plane (background)
+  s+='<rect x="'+(px-25)+'" y="'+(py-20)+'" width="'+(pW+50)+'" height="'+(pL+50)+'" fill="#ddeedd" stroke="#5a9020" stroke-width="1" rx="2"/>';
+  s+='<text x="'+(px+pW/2)+'" y="'+(py+pL+44)+'" text-anchor="middle" font-size="9" fill="#5a9020">Ground plane (substrate h = '+hv+' mm)</text>';
+  // Patch
+  s+='<rect x="'+px+'" y="'+py+'" width="'+pW+'" height="'+pL+'" fill="#b8922a" stroke="#7a5000" stroke-width="1.8" rx="2"/>';
+  // Patch label
+  s+='<text x="'+cx+'" y="'+cy+'" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Patch</text>';
+  // Radiating edges marker
+  s+='<rect x="'+(px-3)+'" y="'+py+'" width="6" height="'+pL+'" fill="#AA77FF" opacity="0.6" rx="1"/>';
+  s+='<rect x="'+(px+pW-3)+'" y="'+py+'" width="6" height="'+pL+'" fill="#AA77FF" opacity="0.6" rx="1"/>';
+  s+='<text x="'+(px-18)+'" y="'+(cy+4)+'" text-anchor="end" font-size="9" fill="#5533aa">rad.</text>';
+  // Feed point
+  s+='<circle cx="'+cx+'" cy="'+(py+pL)+'" r="5" fill="#AA77FF" stroke="white" stroke-width="1.5"/>';
+  s+='<line x1="'+cx+'" y1="'+(py+pL)+'" x2="'+cx+'" y2="'+(py+pL+16)+'" stroke="#AA77FF" stroke-width="1.8"/>';
+  s+='<text x="'+(cx+10)+'" y="'+(py+pL+14)+'" font-size="9" fill="#5533aa">feed</text>';
+  // W arrow (horizontal)
+  s+='<line x1="'+px+'" y1="'+(py-12)+'" x2="'+(px+pW)+'" y2="'+(py-12)+'" stroke="#888" stroke-width="1" stroke-dasharray="2,3"/>';
+  s+='<line x1="'+px+'" y1="'+(py-16)+'" x2="'+px+'" y2="'+(py-8)+'" stroke="#888" stroke-width="1.2"/>';
+  s+='<line x1="'+(px+pW)+'" y1="'+(py-16)+'" x2="'+(px+pW)+'" y2="'+(py-8)+'" stroke="#888" stroke-width="1.2"/>';
+  s+='<text x="'+cx+'" y="'+(py-16)+'" text-anchor="middle" font-size="10" fill="#888">W = '+Wv+'</text>';
+  // L arrow (vertical)
+  s+='<line x1="'+(px+pW+16)+'" y1="'+py+'" x2="'+(px+pW+16)+'" y2="'+(py+pL)+'" stroke="#888" stroke-width="1" stroke-dasharray="2,3"/>';
+  s+='<line x1="'+(px+pW+10)+'" y1="'+py+'" x2="'+(px+pW+22)+'" y2="'+py+'" stroke="#888" stroke-width="1.2"/>';
+  s+='<line x1="'+(px+pW+10)+'" y1="'+(py+pL)+'" x2="'+(px+pW+22)+'" y2="'+(py+pL)+'" stroke="#888" stroke-width="1.2"/>';
+  s+='<text x="'+(px+pW+30)+'" y="'+(cy+4)+'" font-size="10" fill="#888">L = '+Lv+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_antennas.html">Learn the theory behind this tool →</a></div>
 <script src="PatchAntenna.js"></script>
 </article>

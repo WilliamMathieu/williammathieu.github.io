@@ -37,6 +37,7 @@ document.getElementById('fd-btn').addEventListener('click', function() {
     }
     html+='</table><p style="margin-top:6px;">Termination: '+R0+' \u03a9 \u2192 '+(g[n+1]*R0).toFixed(3)+' \u03a9</p>';
     document.getElementById('fd-out').innerHTML=html;
+    if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

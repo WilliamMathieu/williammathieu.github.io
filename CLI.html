@@ -54,7 +54,7 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Loop diameter, D</label><div class="inp-inline"><input type="text" id="D" placeholder="Enter mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Centre-to-centre of conductor</span></div><div class="inp-row"><label>Wire diameter, d</label><div class="inp-inline"><input type="text" id="d" placeholder="Enter mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Conductor diameter (not radius)</span></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Loop diameter, D</label><div class="inp-inline"><input type="text" id="D" placeholder="Enter mm"  data-tip="Loop diameter, measured centre-to-centre of the conductor. Larger D → more inductance."><span class="inp-units">mm</span></div><span class="inp-hint">Centre-to-centre of conductor</span></div><div class="inp-row"><label>Wire diameter, d</label><div class="inp-inline"><input type="text" id="d" placeholder="Enter mm"  data-tip="Conductor (wire or tube) diameter. Thicker wire lowers resistance and raises Q."><span class="inp-units">mm</span></div><span class="inp-hint">Conductor diameter (not radius)</span></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;D&quot;: &quot;100&quot;, &quot;d&quot;: &quot;1.5&quot;})" title="100 mm loop, 1.5 mm wire">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
@@ -63,6 +63,43 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(L = \mu_0 r \!\left[\ln\!\left(\tfrac{8r}{a}\right) - 2\right]\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var Lv = document.getElementById('L') ? document.getElementById('L').textContent : '—';
+  var Dv = document.getElementById('D') ? (parseFloat(document.getElementById('D').value)||0) : 0;
+  var dv = document.getElementById('d') ? (parseFloat(document.getElementById('d').value)||0) : 0;
+  var W=560,H=170,cx=W/2,cy=85,R=62;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Loop (thicker = wire diameter visualised)
+  var wireR=Math.max(3,Math.min(10, dv*1.5));
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#AA77FF" stroke-width="'+(wireR*2)+'" opacity="0.25"/>';
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#5533aa" stroke-width="'+Math.max(2,wireR)+'" stroke-linecap="round"/>';
+  // Feed gap at right
+  s+='<circle cx="'+(cx+R)+'" cy="'+cy+'" r="5" fill="white" stroke="#AA77FF" stroke-width="2"/>';
+  s+='<circle cx="'+(cx+R)+'" cy="'+cy+'" r="1.5" fill="#AA77FF"/>';
+  // Diameter arrow
+  s+='<line x1="'+(cx-R)+'" y1="'+cy+'" x2="'+(cx+R-8)+'" y2="'+cy+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<polygon points="'+(cx-R)+','+cy+' '+(cx-R+7)+','+(cy-3)+' '+(cx-R+7)+','+(cy+3)+'" fill="#888"/>';
+  s+='<polygon points="'+(cx+R-2)+','+cy+' '+(cx+R-9)+','+(cy-3)+' '+(cx+R-9)+','+(cy+3)+'" fill="#888"/>';
+  s+='<text x="'+cx+'" y="'+(cy-8)+'" text-anchor="middle" font-size="10.5" fill="#888">D'+(Dv?' = '+Dv+' mm':'')+'</text>';
+  // Wire diameter callout
+  if(dv>0){
+    var xc2=cx-R*0.7, yc2=cy-R*0.7;
+    s+='<circle cx="'+xc2+'" cy="'+yc2+'" r="'+(wireR)+'" fill="none" stroke="#AA77FF" stroke-width="1.2" stroke-dasharray="2,2"/>';
+    s+='<text x="'+(xc2-wireR-4)+'" y="'+(yc2+4)+'" text-anchor="end" font-size="9" fill="#888">d = '+dv+' mm</text>';
+  }
+  // Result
+  s+='<text x="'+cx+'" y="'+(cy+R+22)+'" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">L = '+Lv+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_coil_design.html">Learn the theory behind this tool →</a></div>
 <script src="CLI.js"></script>
 </article>

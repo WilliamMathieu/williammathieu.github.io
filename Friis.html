@@ -67,7 +67,7 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Transmit power, Pₜ</label><div class="inp-inline"><input type="text" id="fr-pt" value="20" ><span class="inp-units">dBm</span></div><span class="inp-hint">Typical WiFi: 20 dBm = 100 mW</span></div><div class="inp-row"><label>TX antenna gain, Gₜ</label><div class="inp-inline"><input type="text" id="fr-gt" value="2" ><span class="inp-units">dBi</span></div><span class="inp-hint">Isotropic = 0, dipole ≈ 2.15</span></div><div class="inp-row"><label>RX antenna gain, Gᵣ</label><div class="inp-inline"><input type="text" id="fr-gr" value="2" ><span class="inp-units">dBi</span></div></div><div class="inp-row"><label>Distance, d</label><div class="inp-inline"><input type="text" id="fr-d" placeholder="m" ><span class="inp-units">m</span></div><span class="inp-hint">Straight-line distance</span></div><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="fr-f" placeholder="value" ><select id="fr-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Transmit power, Pₜ</label><div class="inp-inline"><input type="text" id="fr-pt" value="20"  data-tip="Transmit power in dBm. 0 dBm = 1 mW, 20 dBm = 100 mW, 30 dBm = 1 W."><span class="inp-units">dBm</span></div><span class="inp-hint">Typical WiFi: 20 dBm = 100 mW</span></div><div class="inp-row"><label>TX antenna gain, Gₜ</label><div class="inp-inline"><input type="text" id="fr-gt" value="2"  data-tip="TX antenna gain in dBi relative to an isotropic radiator. Half-wave dipole = 2.15 dBi."><span class="inp-units">dBi</span></div><span class="inp-hint">Isotropic = 0, dipole ≈ 2.15</span></div><div class="inp-row"><label>RX antenna gain, Gᵣ</label><div class="inp-inline"><input type="text" id="fr-gr" value="2"  data-tip="RX antenna gain in dBi. Same reference as Gₜ."><span class="inp-units">dBi</span></div></div><div class="inp-row"><label>Distance, d</label><div class="inp-inline"><input type="text" id="fr-d" placeholder="m"  data-tip="Free-space distance between antennas in metres. FSPL increases 6 dB per doubling."><span class="inp-units">m</span></div><span class="inp-hint">Straight-line distance</span></div><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="fr-f" placeholder="value"  data-tip="Carrier frequency. Higher frequency → shorter wavelength → higher path loss."><select id="fr-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="fr-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fr-pt&quot;: &quot;20&quot;, &quot;fr-gt&quot;: &quot;2&quot;, &quot;fr-gr&quot;: &quot;2&quot;, &quot;fr-d&quot;: &quot;50&quot;, &quot;fr-f&quot;: &quot;2.4&quot;, &quot;fr-fu&quot;: &quot;1e9&quot;})" title="2.4 GHz Wi-Fi at 50 m, 20 dBm TX">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
@@ -76,6 +76,45 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(P_r = P_t G_t G_r \!\left(\dfrac{\lambda}{4\pi d}\right)^{\!2}\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var fspl = document.getElementById('fr-fspl') ? document.getElementById('fr-fspl').textContent : '—';
+  var pr   = document.getElementById('fr-pr-dbm') ? document.getElementById('fr-pr-dbm').textContent : '—';
+  var pt   = parseFloat(document.getElementById('fr-pt')&&document.getElementById('fr-pt').value)||20;
+  var gt   = parseFloat(document.getElementById('fr-gt')&&document.getElementById('fr-gt').value)||2;
+  var gr   = parseFloat(document.getElementById('fr-gr')&&document.getElementById('fr-gr').value)||2;
+  var W=560,H=130,wy=65;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // TX block
+  s+='<rect x="20" y="'+(wy-22)+'" width="90" height="44" fill="#f0eeff" stroke="#5533aa" stroke-width="2" rx="4"/>';
+  s+='<text x="65" y="'+(wy-5)+'" text-anchor="middle" font-size="12" font-weight="bold" fill="#5533aa">TX</text>';
+  s+='<text x="65" y="'+(wy+11)+'" text-anchor="middle" font-size="10" fill="#888">'+pt+' dBm</text>';
+  s+='<text x="65" y="'+(wy-18)+'" text-anchor="middle" font-size="9" fill="#888">Gₜ = '+gt+' dBi</text>';
+  // Dashed path
+  var pathX1=110, pathX2=370;
+  s+='<line x1="'+pathX1+'" y1="'+wy+'" x2="'+pathX2+'" y2="'+wy+'" stroke="#AA77FF" stroke-width="2" stroke-dasharray="6,4"/>';
+  // Arrows on path
+  s+='<polygon points="'+(pathX1+30)+','+wy+' '+(pathX1+22)+','+(wy-4)+' '+(pathX1+22)+','+(wy+4)+'" fill="#AA77FF"/>';
+  s+='<polygon points="'+(pathX2-2)+','+wy+' '+(pathX2-10)+','+(wy-4)+' '+(pathX2-10)+','+(wy+4)+'" fill="#AA77FF"/>';
+  // FSPL label
+  s+='<rect x="'+(pathX1+70)+'" y="'+(wy-16)+'" width="120" height="32" fill="#fffbee" stroke="#cc8800" stroke-width="1.2" rx="3"/>';
+  s+='<text x="'+(pathX1+130)+'" y="'+(wy-3)+'" text-anchor="middle" font-size="10" font-weight="bold" fill="#cc8800">FSPL</text>';
+  s+='<text x="'+(pathX1+130)+'" y="'+(wy+12)+'" text-anchor="middle" font-size="10" fill="#aa6600">'+fspl+'</text>';
+  // RX block
+  s+='<rect x="'+pathX2+'" y="'+(wy-22)+'" width="90" height="44" fill="#eeffee" stroke="#228844" stroke-width="2" rx="4"/>';
+  s+='<text x="'+(pathX2+45)+'" y="'+(wy-5)+'" text-anchor="middle" font-size="12" font-weight="bold" fill="#228844">RX</text>';
+  s+='<text x="'+(pathX2+45)+'" y="'+(wy+11)+'" text-anchor="middle" font-size="10" fill="#228844">'+pr+'</text>';
+  s+='<text x="'+(pathX2+45)+'" y="'+(wy-18)+'" text-anchor="middle" font-size="9" fill="#888">Gᵣ = '+gr+' dBi</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_link_budget.html">Learn about link budgets and the Friis equation →</a></div>
 <script src="Friis.js"></script>
 </article>

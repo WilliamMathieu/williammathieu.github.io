@@ -54,7 +54,7 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="wl-f" placeholder="value" ><select id="wl-fu"><option value="1e3">kHz</option><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div><span class="inp-hint">Carrier or signal frequency</span></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="wl-er" value="1" ></div><span class="inp-hint">1 for air, ≈4.4 for FR4, ≈2.1 for PTFE</span></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="wl-f" placeholder="value"  data-tip="The signal frequency. Higher frequency → shorter wavelength."><select id="wl-fu"><option value="1e3">kHz</option><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div><span class="inp-hint">Carrier or signal frequency</span></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="wl-er" value="1"  data-tip="Relative permittivity of the medium. Air/vacuum = 1, FR4 PCB ≈ 4.4, PTFE ≈ 2.1, water ≈ 80."></div><span class="inp-hint">1 for air, ≈4.4 for FR4, ≈2.1 for PTFE</span></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="wl-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;wl-f&quot;: &quot;2.45&quot;, &quot;wl-fu&quot;: &quot;1e9&quot;, &quot;wl-er&quot;: &quot;4.4&quot;})" title="2.45 GHz in FR4 PCB">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
@@ -63,6 +63,56 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(\lambda = \dfrac{c}{f\sqrt{\varepsilon_r}}\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var lamEl = document.getElementById('wl-lam');
+  var halfEl = document.getElementById('wl-half');
+  var qtrEl  = document.getElementById('wl-qtr');
+  var lam  = lamEl  ? lamEl.textContent  : '—';
+  var half = halfEl ? halfEl.textContent : '—';
+  var qtr  = qtrEl  ? qtrEl.textContent  : '—';
+
+  var W=560,H=160,pad=40,wy=90,amp=38;
+  var pts=[];
+  for(var i=0;i<=200;i++){
+    var x=pad+i*(W-2*pad)/200;
+    var y=wy - amp*Math.sin(i/200*2*Math.PI);
+    pts.push(x+','+y);
+  }
+  var wavePath='<path d="M'+pts.join(' L')+'" fill="none" stroke="#AA77FF" stroke-width="2.5" stroke-linecap="round"/>';
+
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Axis
+  s+='<line x1="'+pad+'" y1="'+wy+'" x2="'+(W-pad)+'" y2="'+wy+'" stroke="#ddd" stroke-width="1"/>';
+  s+=wavePath;
+  // λ arrow (full wave)
+  var x1=pad,x2=W-pad;
+  s+='<line x1="'+x1+'" y1="135" x2="'+x2+'" y2="135" stroke="#5533aa" stroke-width="1.5" stroke-dasharray="4,3"/>';
+  s+='<line x1="'+x1+'" y1="130" x2="'+x1+'" y2="140" stroke="#5533aa" stroke-width="1.5"/>';
+  s+='<line x1="'+x2+'" y1="130" x2="'+x2+'" y2="140" stroke="#5533aa" stroke-width="1.5"/>';
+  s+='<text x="'+(W/2)+'" y="150" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">λ = '+lam+'</text>';
+  // λ/2 arrow (half wave)
+  var xmid=pad+(W-2*pad)/2;
+  s+='<line x1="'+pad+'" y1="20" x2="'+xmid+'" y2="20" stroke="#AA77FF" stroke-width="1.2" stroke-dasharray="3,3"/>';
+  s+='<line x1="'+pad+'" y1="16" x2="'+pad+'" y2="24" stroke="#AA77FF" stroke-width="1.2"/>';
+  s+='<line x1="'+xmid+'" y1="16" x2="'+xmid+'" y2="24" stroke="#AA77FF" stroke-width="1.2"/>';
+  s+='<text x="'+(pad+(xmid-pad)/2)+'" y="14" text-anchor="middle" font-size="10" fill="#AA77FF">λ/2 = '+half+'</text>';
+  // λ/4 arrow
+  var xq=pad+(W-2*pad)/4;
+  s+='<line x1="'+pad+'" y1="32" x2="'+xq+'" y2="32" stroke="#888" stroke-width="1" stroke-dasharray="2,3"/>';
+  s+='<line x1="'+pad+'" y1="28" x2="'+pad+'" y2="36" stroke="#888" stroke-width="1"/>';
+  s+='<line x1="'+xq+'" y1="28" x2="'+xq+'" y2="36" stroke="#888" stroke-width="1"/>';
+  s+='<text x="'+(pad+(xq-pad)/2)+'" y="47" text-anchor="middle" font-size="9.5" fill="#888">λ/4 = '+qtr+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_transmission_lines.html">Learn the theory behind this tool →</a></div>
 <script src="Wavelength.js"></script>
 </article>

@@ -79,6 +79,7 @@ function calculate() {
 
   var fmt = formatF(totalF);
   document.getElementById('C_out').textContent = prettyNum(fmt.val) + ' ' + fmt.label;
+  if(window.drawDiagram) window.drawDiagram();
   
 }
 

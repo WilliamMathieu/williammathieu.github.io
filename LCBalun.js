@@ -51,6 +51,7 @@ function topoChange() {
     document.getElementById('bl-r3').textContent = '\u2014';
     document.getElementById('bl-r4').textContent = '\u2014';
     document.getElementById('bl-ratio').textContent = '\u2014';
+    if(window.drawDiagram) window.drawDiagram();
     document.getElementById('bl-Q').textContent = '\u2014';
     clearError();
 }

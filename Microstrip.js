@@ -34,4 +34,5 @@ document.getElementById('ms-btn2').addEventListener('click', function() {
     var w2=2/Math.PI*(B-1-Math.log(2*B-1)+(er-1)/(2*er)*(Math.log(B-1)+0.39-0.61/er));
     var w=(w1<2?w1:w2)*h;
     document.getElementById('ms-w-out').textContent=w.toFixed(4)+' mm';
+    if(window.drawDiagram) window.drawDiagram();
 });

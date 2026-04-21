@@ -15,6 +15,7 @@ document.getElementById('bp-btn').addEventListener('click', function() {
     document.getElementById('bp-Q').textContent=Q.toFixed(4);
     document.getElementById('bp-f1').textContent=engFmt(f0-BW_Hz/2,'Hz');
     document.getElementById('bp-f2').textContent=engFmt(f0+BW_Hz/2,'Hz');
+    if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

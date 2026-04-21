@@ -54,7 +54,7 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Inductance, L</label><div class="inp-inline"><input type="text" id="L" placeholder="value" ><select id="H_dropdown"><option value="1">µH</option><option value="2" selected>nH</option><option value="3">pH</option></select></div></div><div class="inp-row"><label>Capacitance, C</label><div class="inp-inline"><input type="text" id="C" placeholder="value" ><select id="F_dropdown"><option value="10">µF</option><option value="20">nF</option><option value="30" selected>pF</option></select></div></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Inductance, L</label><div class="inp-inline"><input type="text" id="L" placeholder="value"  data-tip="Inductance of the coil or inductor element."><select id="H_dropdown"><option value="1">µH</option><option value="2" selected>nH</option><option value="3">pH</option></select></div></div><div class="inp-row"><label>Capacitance, C</label><div class="inp-inline"><input type="text" id="C" placeholder="value"  data-tip="Capacitance. Leave blank to calculate the required C for a given L and f."><select id="F_dropdown"><option value="10">µF</option><option value="20">nF</option><option value="30" selected>pF</option></select></div></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;L&quot;: &quot;50&quot;, &quot;H_dropdown&quot;: &quot;2&quot;, &quot;C&quot;: &quot;22&quot;, &quot;F_dropdown&quot;: &quot;30&quot;})" title="50 nH + 22 pF ≈ 152 MHz">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
@@ -63,6 +63,64 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(f_0 = \dfrac{1}{2\pi\sqrt{LC}}\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var fEl = document.getElementById('f');
+  var fv  = fEl ? fEl.textContent : '—';
+  var W=560,H=160;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Parallel LC circuit centred
+  var cx=W/2, cy=75, lx=cx-80, rx=cx+80, ty=30, by=120;
+  // Top and bottom rails
+  s+='<line x1="'+lx+'" y1="'+ty+'" x2="'+rx+'" y2="'+ty+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<line x1="'+lx+'" y1="'+by+'" x2="'+rx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  // Left terminal
+  s+='<line x1="'+(lx-30)+'" y1="'+cy+'" x2="'+lx+'" y2="'+cy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<line x1="'+lx+'" y1="'+ty+'" x2="'+lx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  // Right terminal
+  s+='<line x1="'+rx+'" y1="'+cy+'" x2="'+(rx+30)+'" y2="'+cy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<line x1="'+rx+'" y1="'+ty+'" x2="'+rx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  // Inductor branch (left side between rails)
+  var lbx=cx-40, lby_top=ty, lby_bot=by, lby_mid=(ty+by)/2;
+  s+='<line x1="'+lbx+'" y1="'+lby_top+'" x2="'+lbx+'" y2="'+(lby_mid-20)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  // 3 inductor bumps upward
+  var bh=13,bw2=13;
+  for(var k=0;k<3;k++){
+    var yc=lby_mid-7-k*bh;
+    s+='<path d="M'+(lbx-bw2/2)+','+(yc+bh/2)+' A'+(bw2/2)+','+(bw2/2)+' 0 0,1 '+(lbx+bw2/2)+','+(yc+bh/2)+'" fill="none" stroke="#AA77FF" stroke-width="2.2" stroke-linecap="round"/>';
+  }
+  s+='<line x1="'+lbx+'" y1="'+(lby_mid-20)+'" x2="'+lbx+'" y2="'+lby_top+'" stroke="#5533aa" stroke-width="0" />';
+  // Actually draw vertical inductor properly
+  var ind_top=ty+8, ind_bot=by-8, ind_cy=(ind_top+ind_bot)/2;
+  s+='<line x1="'+lbx+'" y1="'+ty+'" x2="'+lbx+'" y2="'+ind_top+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  // Vertical inductor bumps
+  var nbumps=4, bsize=(ind_bot-ind_top)/nbumps;
+  var indPath='M'+lbx+','+ind_top;
+  for(var k=0;k<nbumps;k++){
+    indPath+=' A'+(bsize/2)+','+(bsize/2)+' 0 0,0 '+lbx+','+(ind_top+(k+1)*bsize);
+  }
+  s+='<path d="'+indPath+'" fill="none" stroke="#AA77FF" stroke-width="2.2" stroke-linecap="round"/>';
+  s+='<line x1="'+lbx+'" y1="'+ind_bot+'" x2="'+lbx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<text x="'+(lbx-18)+'" y="'+(cy+4)+'" text-anchor="middle" font-size="11" fill="#AA77FF" font-weight="bold">L</text>';
+  // Capacitor branch (right side)
+  var cbx=cx+40;
+  s+='<line x1="'+cbx+'" y1="'+ty+'" x2="'+cbx+'" y2="'+(cy-8)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<line x1="'+(cbx-12)+'" y1="'+(cy-8)+'" x2="'+(cbx+12)+'" y2="'+(cy-8)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+  s+='<line x1="'+(cbx-12)+'" y1="'+(cy+2)+'" x2="'+(cbx+12)+'" y2="'+(cy+2)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+  s+='<line x1="'+cbx+'" y1="'+(cy+2)+'" x2="'+cbx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<text x="'+(cbx+18)+'" y="'+(cy+4)+'" text-anchor="start" font-size="11" fill="#5533aa" font-weight="bold">C</text>';
+  // Result
+  s+='<text x="'+cx+'" y="155" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">f₀ = '+fv+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_coil_design.html">Learn the theory behind this tool →</a></div>
 <script src="LC.js"></script>
 </article>

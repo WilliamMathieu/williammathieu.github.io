@@ -67,11 +67,108 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Filter order, n</label><div class="inp-inline"><input type="text" id="fd-n" value="5" ></div><span class="inp-hint">1–9</span></div><div class="inp-row"><label>Filter type</label><select id="fd-type"><option value="lp">Low-pass</option><option value="hp">High-pass</option></select></div><div class="inp-row"><label>Response</label><select id="fd-resp"><option value="butter">Butterworth</option><option value="cheby">Chebyshev</option></select></div><div class="inp-row"><label>Chebyshev ripple</label><div class="inp-inline"><input type="text" id="fd-ripple" value="0.5" ><span class="inp-units">dB</span></div><span class="inp-hint">Ignored for Butterworth</span></div><div class="inp-row"><label>Cutoff frequency, fc</label><div class="inp-inline"><input type="text" id="fd-fc" value="1" ><select id="fd-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>System impedance, Z₀</label><div class="inp-inline"><input type="text" id="fd-r0" value="50" ><span class="inp-units">Ω</span></div></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Filter order, n</label><div class="inp-inline"><input type="text" id="fd-n" value="5"  data-tip="Filter order. Each order adds one L or C. Higher order = sharper rolloff."></div><span class="inp-hint">1–9</span></div><div class="inp-row"><label>Filter type</label><select id="fd-type"><option value="lp">Low-pass</option><option value="hp">High-pass</option></select></div><div class="inp-row"><label>Response</label><select id="fd-resp"><option value="butter">Butterworth</option><option value="cheby">Chebyshev</option></select></div><div class="inp-row"><label>Chebyshev ripple</label><div class="inp-inline"><input type="text" id="fd-ripple" value="0.5"  data-tip="Passband ripple in dB for Chebyshev response. 0.1–0.5 dB is typical."><span class="inp-units">dB</span></div><span class="inp-hint">Ignored for Butterworth</span></div><div class="inp-row"><label>Cutoff frequency, fc</label><div class="inp-inline"><input type="text" id="fd-fc" value="1"  data-tip="Cutoff (−3 dB) frequency. Components are scaled to this frequency."><select id="fd-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>System impedance, Z₀</label><div class="inp-inline"><input type="text" id="fd-r0" value="50"  data-tip="System termination impedance. Typically 50 Ω for RF, 75 Ω for video."><span class="inp-units">Ω</span></div></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="fd-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fd-n&quot;: &quot;5&quot;, &quot;fd-type&quot;: &quot;lp&quot;, &quot;fd-resp&quot;: &quot;butter&quot;, &quot;fd-fc&quot;: &quot;1&quot;, &quot;fd-fu&quot;: &quot;1e9&quot;, &quot;fd-r0&quot;: &quot;50&quot;})" title="5-pole Butterworth LPF at 1 GHz">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Component Values</div>
 <div id="fd-out"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var typ  = document.getElementById('fd-type')  ? document.getElementById('fd-type').value  : 'lp';
+  var resp = document.getElementById('fd-resp')  ? document.getElementById('fd-resp').value  : 'butter';
+  var n    = parseInt(document.getElementById('fd-n')  &&document.getElementById('fd-n').value)  ||5;
+  var fc   = parseFloat(document.getElementById('fd-fc')&&document.getElementById('fd-fc').value)||1;
+  var fu   = parseFloat(document.getElementById('fd-fu')&&document.getElementById('fd-fu').value)||1e9;
+  n = Math.min(n, 7);
+  var W=560, H=170, wy=78, gndY=140;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Parse component list from fd-out
+  var fdout = document.getElementById('fd-out');
+  var items = []; // {type:'L'|'C', pos:'series'|'shunt', label:string}
+  if(fdout) {
+    var rows = fdout.querySelectorAll('tr');
+    rows.forEach(function(row){
+      var td = row.querySelector('td[colspan="2"]');
+      if(!td) return;
+      var t = td.textContent;
+      if(t.indexOf('Series L')>=0)      items.push({type:'L',pos:'series',label:t.replace('Series L = ','')});
+      else if(t.indexOf('Series C')>=0) items.push({type:'C',pos:'series',label:t.replace('Series C = ','')});
+      else if(t.indexOf('Shunt C')>=0)  items.push({type:'C',pos:'shunt', label:t.replace('Shunt C = ','')});
+      else if(t.indexOf('Shunt L')>=0)  items.push({type:'L',pos:'shunt', label:t.replace('Shunt L = ','')});
+    });
+  }
+  if(items.length === 0) {
+    // Show placeholder ladder matching filter type
+    var isLP = typ==='lp';
+    for(var ii=0;ii<n;ii++) {
+      items.push(ii%2===0
+        ? {type:isLP?'L':'C', pos:'series', label:'—'}
+        : {type:isLP?'C':'L', pos:'shunt',  label:'—'});
+    }
+  }
+  // Draw ladder
+  var totalSlots = items.length, slotW = (W-80)/(totalSlots+0.5), x=40;
+  s+='<line x1="'+x+'" y1="'+wy+'" x2="'+(x+8)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  items.forEach(function(item, idx) {
+    var slotX = x + 8 + idx*slotW;
+    if(item.pos==='series') {
+      if(item.type==='L') {
+        var ibw=9, iN=4, iEnd=slotX+ibw*iN;
+        var ip='M'+slotX+','+wy;
+        for(var k=0;k<iN;k++) ip+=' A'+(ibw/2)+','+(ibw/2)+' 0 0,1 '+(slotX+(k+1)*ibw)+','+wy;
+        s+='<path d="'+ip+'" fill="none" stroke="#AA77FF" stroke-width="2.2" stroke-linecap="round"/>';
+        s+='<line x1="'+iEnd+'" y1="'+wy+'" x2="'+(iEnd+slotW-ibw*iN)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+        s+='<text x="'+(slotX+ibw*iN/2)+'" y="'+(wy-13)+'" text-anchor="middle" font-size="8.5" fill="#AA77FF">'+item.label+'</text>';
+      } else {
+        var cw=7, cx2=slotX+slotW/2-cw;
+        s+='<line x1="'+slotX+'" y1="'+wy+'" x2="'+cx2+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+        s+='<line x1="'+cx2+'" y1="'+(wy-11)+'" x2="'+cx2+'" y2="'+(wy+11)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+        s+='<line x1="'+(cx2+cw*2)+'" y1="'+(wy-11)+'" x2="'+(cx2+cw*2)+'" y2="'+(wy+11)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+        s+='<line x1="'+(cx2+cw*2)+'" y1="'+wy+'" x2="'+(slotX+slotW)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+        s+='<text x="'+(cx2+cw)+'" y="'+(wy+26)+'" text-anchor="middle" font-size="8.5" fill="#5533aa">'+item.label+'</text>';
+      }
+    } else {
+      // Shunt element
+      s+='<line x1="'+(slotX+slotW/2)+'" y1="'+wy+'" x2="'+(slotX+slotW/2)+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+      s+='<circle cx="'+(slotX+slotW/2)+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
+      if(item.type==='C') {
+        s+='<line x1="'+(slotX+slotW/2-10)+'" y1="'+(wy+18)+'" x2="'+(slotX+slotW/2+10)+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+        s+='<line x1="'+(slotX+slotW/2-10)+'" y1="'+(wy+27)+'" x2="'+(slotX+slotW/2+10)+'" y2="'+(wy+27)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+        s+='<line x1="'+(slotX+slotW/2)+'" y1="'+(wy+27)+'" x2="'+(slotX+slotW/2)+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+      } else {
+        var ibw2=9, iN2=3, iPath='M'+(slotX+slotW/2)+','+(wy+18);
+        for(var k2=0;k2<iN2;k2++) iPath+=' A'+(ibw2/2)+','+(ibw2/2)+' 0 0,0 '+(slotX+slotW/2)+','+(wy+18+(k2+1)*ibw2);
+        s+='<path d="'+iPath+'" fill="none" stroke="#AA77FF" stroke-width="2.2" stroke-linecap="round"/>';
+        s+='<line x1="'+(slotX+slotW/2)+'" y1="'+(wy+18+iN2*ibw2)+'" x2="'+(slotX+slotW/2)+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+      }
+      s+='<text x="'+(slotX+slotW/2+14)+'" y="'+(wy+28)+'" font-size="8.5" fill="#5533aa">'+item.label+'</text>';
+      // Ground symbol
+      s+='<line x1="'+(slotX+slotW/2-8)+'" y1="'+gndY+'" x2="'+(slotX+slotW/2+8)+'" y2="'+gndY+'" stroke="#444" stroke-width="1.8" stroke-linecap="round"/>';
+      s+='<line x1="'+(slotX+slotW/2-5)+'" y1="'+(gndY+4)+'" x2="'+(slotX+slotW/2+5)+'" y2="'+(gndY+4)+'" stroke="#444" stroke-width="1.3" stroke-linecap="round"/>';
+    }
+    // Wire after last element
+    if(idx===items.length-1) {
+      var lastX = item.pos==='shunt' ? slotX+slotW : slotX+slotW;
+      s+='<line x1="'+lastX+'" y1="'+wy+'" x2="'+(W-16)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    }
+  });
+  // Port circles
+  s+='<circle cx="40" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+  s+='<circle cx="'+(W-16)+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+  // Title
+  var respLabel = resp==='butter'?'Butterworth':'Chebyshev';
+  var typLabel  = typ==='lp'?'Low-pass':'High-pass';
+  s+='<text x="'+W/2+'" y="162" text-anchor="middle" font-size="10.5" fill="#5533aa" font-weight="bold">'+n+'-pole '+respLabel+' '+typLabel+'  |  50 Ω</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_filters.html">Learn about RF filter design →</a></div>
 <script src="FilterDesign.js"></script>
 </article>

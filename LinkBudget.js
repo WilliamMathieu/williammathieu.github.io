@@ -23,6 +23,7 @@ document.getElementById('lb-btn').addEventListener('click', function() {
     var color=margin>=0?'#007700':'#cc0000';
     function row(l,v,u){return '<tr><td style="padding:2px 12px 2px 0;">'+l+'</td><td style="text-align:right;padding:2px 6px;">'+v.toFixed(2)+'</td><td>'+u+'</td></tr>';}
     document.getElementById('lb-out').innerHTML='<table style="font-family:monospace;font-size:13px;">'
+    if(window.drawDiagram) window.drawDiagram();
         +row('EIRP',EIRP,'dBm')+row('FSPL',FSPL,'dB')+row('Add. losses',Lmisc,'dB')
         +row('Received power',Pr,'dBm')+row('Noise floor',N_dBm,'dBm')
         +row('Achieved SNR',SNR,'dB')+row('Required SNR',SNR_req,'dB')

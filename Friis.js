@@ -14,6 +14,7 @@ document.getElementById('fr-btn').addEventListener('click', function() {
     document.getElementById('fr-fspl').textContent=FSPL.toFixed(3)+' dB';
     document.getElementById('fr-pr-dbm').textContent=Pr.toFixed(3)+' dBm';
     document.getElementById('fr-pr-w').textContent=engFmt(PrW,'W');
+    if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

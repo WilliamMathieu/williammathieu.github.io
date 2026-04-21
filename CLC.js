@@ -13,6 +13,7 @@ btn.addEventListener('click', function() {
   var Lval = L * Lmul;
   var C = 1 / (4 * Math.PI * Math.PI * fHz * fHz * Lval);
   document.getElementById("C").textContent = engFmt(C,'F');
+  if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg) {

@@ -15,6 +15,7 @@ document.getElementById('st-btn').addEventListener('click', function() {
     document.getElementById('st-el').textContent=l_deg.toFixed(3)+'\u00b0';
     document.getElementById('st-pl').textContent=(l_m*1000).toFixed(4)+' mm (free space)';
     document.getElementById('st-lam4').textContent=(lam/4*1000).toFixed(4)+' mm';
+    if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

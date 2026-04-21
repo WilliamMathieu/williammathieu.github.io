@@ -9,6 +9,7 @@ document.getElementById('wl-btn').addEventListener('click', function() {
     document.getElementById('wl-lam').textContent=engFmt(lam,'m');
     document.getElementById('wl-half').textContent=engFmt(lam/2,'m');
     document.getElementById('wl-qtr').textContent=engFmt(lam/4,'m');
+    if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}
