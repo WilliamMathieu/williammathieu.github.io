@@ -1,13 +1,11 @@
 /**
  * tool-enhancements.js
- * Shared enhancements for all RF Toolbox tool pages.
- * - engFmt(value, unit)      — format a number with proper metric prefix (nH, pF, MHz, etc.)
- * - loadExample(idValueMap)  — fill inputs from a worked example
+ * - engFmt(value, unit)   metric prefix formatter
+ * - loadExample(map)      fill inputs from example
+ * - DOMContentLoaded:     auto-draw diagram + tooltips next to labels
  */
 
-// ── Engineering / metric-prefix formatter ─────────────────────────────────
-// engFmt(1.5e-9, 'H')  →  '1.500 nH'
-// engFmt(2.45e9, 'Hz') →  '2.450 GHz'
+// ── Metric prefix formatter ───────────────────────────────────────────────
 function engFmt(value, unit) {
   if (!isFinite(value)) return '∞ ' + (unit || '');
   if (value === 0)      return '0 ' + (unit || '');
@@ -49,13 +47,28 @@ function loadExample(idValueMap) {
   }, 80);
 }
 
-// ── Tooltips for [data-tip] elements ─────────────────────────────────────
+// ── DOMContentLoaded: tooltips + auto-draw ────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+
+  // 1. Tooltips — attach to label, not to input
   document.querySelectorAll('[data-tip]').forEach(el => {
-    const t = el.getAttribute('data-tip');
-    if (!t) return;
-    el.insertAdjacentHTML('afterend',
-      `<span class="tip-wrap" style="display:inline-block;vertical-align:middle;">` +
-      `<span class="tip-icon">?</span><span class="tip-box">${t}</span></span>`);
+    const tip = el.getAttribute('data-tip');
+    if (!tip) return;
+    const row = el.closest('.inp-row');
+    const lbl = row ? row.querySelector('label') : null;
+    if (lbl) {
+      // Append tooltip icon inside the label, after the text
+      const wrap = document.createElement('span');
+      wrap.className = 'tip-wrap';
+      wrap.innerHTML =
+        '<span class="tip-icon">?</span>' +
+        '<span class="tip-box">' + tip + '</span>';
+      lbl.appendChild(wrap);
+    }
   });
+
+  // 2. Auto-draw diagram on page load with whatever defaults are present
+  if (typeof drawDiagram === 'function') {
+    try { drawDiagram(); } catch(e) { /* ignore if inputs not yet populated */ }
+  }
 });

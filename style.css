@@ -623,3 +623,10 @@ nav ul li[style*="font-size:11px"] a { display: none; }
   margin-bottom: 4px;
 }
 .schematic-box svg { max-width: 100%; height: auto; }
+
+/* Variable symbol inside labels — keeps original case despite text-transform */
+.inp-row label .var {
+  text-transform: none;
+  font-style: italic;
+  letter-spacing: 0;
+}

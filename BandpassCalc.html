@@ -63,21 +63,21 @@
 <div class="sec-lbl">Inputs</div>
 <div class="inp-grid">
   <div class="inp-row">
-    <label>Inductance, L</label>
+    <label>Inductance, <span class="var">L</span></label>
     <div class="inp-inline">
       <input type="text" id="bp-L" placeholder="value" data-tip="Inductor value. With C sets the resonant frequency f₀ = 1/(2π√LC).">
       <select id="bp-Lu"><option value="1e-6">µH</option><option value="1e-9" selected>nH</option><option value="1e-12">pH</option></select>
     </div>
   </div>
   <div class="inp-row">
-    <label>Capacitance, C</label>
+    <label>Capacitance, <span class="var">C</span></label>
     <div class="inp-inline">
       <input type="text" id="bp-C" placeholder="value" data-tip="Capacitor value. With L sets f₀. Larger C → lower f₀.">
       <select id="bp-Cu"><option value="1e-6">µF</option><option value="1e-9">nF</option><option value="1e-12" selected>pF</option></select>
     </div>
   </div>
   <div class="inp-row">
-    <label>Resistance, R</label>
+    <label>Resistance, <span class="var">R</span></label>
     <div class="inp-inline"><input type="text" id="bp-R" value="50" data-tip="Resistance in Ω. Series RLC: lower R → higher Q. Parallel RLC: higher R → higher Q."><span class="inp-units">Ω</span></div>
   </div>
   <div class="inp-row">
@@ -118,77 +118,86 @@ function drawDiagram() {
   var Qv  = document.getElementById('bp-Q')  ? document.getElementById('bp-Q').textContent  : '—';
   var bwv = document.getElementById('bp-bw') ? document.getElementById('bp-bw').textContent : '—';
   var cfg = document.getElementById('bp-config') ? document.getElementById('bp-config').value : 'series';
-  var Lv  = parseFloat(document.getElementById('bp-L')&&document.getElementById('bp-L').value)||0;
-  var Cv  = parseFloat(document.getElementById('bp-C')&&document.getElementById('bp-C').value)||0;
-  var W=560,H=160,wy=80;
-
+  var W=560, H=170, wy=76, gndY=138, cx=W/2;
   var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<text x="'+W/2+'" y="16" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">f₀ = '+f0v+'   Q = '+Qv+'   BW = '+bwv+'</text>';
 
-  if(cfg==='series'){
-    // Series RLC on horizontal wire
-    var lx=40,rx=W-40,cy2=wy;
-    s+='<line x1="'+lx+'" y1="'+cy2+'" x2="'+(lx+55)+'" y2="'+cy2+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    // R
-    s+='<rect x="'+(lx+55)+'" y="'+(cy2-10)+'" width="44"+0+" height="20" fill="white" stroke="#5533aa" stroke-width="2" rx="2"/>';
-    s+='<rect x="'+(lx+55)+'" y="'+(cy2-10)+'" width="44" height="20" fill="white" stroke="#5533aa" stroke-width="2" rx="2"/>';
-    s+='<text x="'+(lx+55+22)+'" y="'+(cy2+5)+'" text-anchor="middle" font-size="10" fill="#5533aa">R</text>';
-    s+='<line x1="'+(lx+99)+'" y1="'+cy2+'" x2="'+(lx+120)+'" y2="'+cy2+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    // L
-    var ind0=lx+120, indbw=12, indN=4, indEnd=ind0+indbw*indN;
-    var indPath='M'+ind0+','+cy2;
-    for(var k=0;k<indN;k++) indPath+=' A'+(indbw/2)+','+(indbw/2)+' 0 0,1 '+(ind0+(k+1)*indbw)+','+cy2;
-    s+='<path d="'+indPath+'" fill="none" stroke="#AA77FF" stroke-width="2.2" stroke-linecap="round"/>';
-    s+='<text x="'+(ind0+indN*indbw/2)+'" y="'+(cy2-12)+'" text-anchor="middle" font-size="10" fill="#AA77FF">L</text>';
-    s+='<line x1="'+indEnd+'" y1="'+cy2+'" x2="'+(indEnd+20)+'" y2="'+cy2+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    // C
-    var cx2=indEnd+20;
-    s+='<line x1="'+(cx2-6)+'" y1="'+(cy2-12)+'" x2="'+(cx2-6)+'" y2="'+(cy2+12)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-    s+='<line x1="'+(cx2+6)+'" y1="'+(cy2-12)+'" x2="'+(cx2+6)+'" y2="'+(cy2+12)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-    s+='<text x="'+cx2+'" y="'+(cy2+26)+'" text-anchor="middle" font-size="10" fill="#5533aa">C</text>';
-    s+='<line x1="'+(cx2+6)+'" y1="'+cy2+'" x2="'+rx+'" y2="'+cy2+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    s+='<circle cx="'+lx+'" cy="'+cy2+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
-    s+='<circle cx="'+rx+'" cy="'+cy2+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
-    s+='<text x="'+W/2+'" y="148" text-anchor="middle" font-size="10.5" fill="#888" font-style="italic">Series RLC — minimum impedance at f₀</text>';
+  if(cfg==='series') {
+    // Series R–L–C on horizontal wire
+    var lx=30, rx=W-30;
+    // Input wire to R
+    s+='<line x1="'+lx+'" y1="'+wy+'" x2="'+(lx+55)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // R box (fixed width 44)
+    var rw=44, rb=lx+55;
+    s+='<rect x="'+rb+'" y="'+(wy-11)+'" width="'+rw+'" height="22" fill="white" stroke="#5533aa" stroke-width="2" rx="2"/>';
+    s+='<text x="'+(rb+rw/2)+'" y="'+(wy+4)+'" text-anchor="middle" font-size="11" fill="#5533aa">R</text>';
+    // Wire R to L
+    var rl_start=rb+rw;
+    s+='<line x1="'+rl_start+'" y1="'+wy+'" x2="'+(rl_start+18)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // L (inductor bumps)
+    var ind0=rl_start+18, indbw=14, indN=4, indEnd=ind0+indbw*indN;
+    var ip='M'+ind0+','+wy;
+    for(var k=0;k<indN;k++) ip+=' A'+(indbw/2)+','+(indbw/2)+' 0 0,1 '+(ind0+(k+1)*indbw)+','+wy;
+    s+='<path d="'+ip+'" fill="none" stroke="#AA77FF" stroke-width="2.4" stroke-linecap="round"/>';
+    s+='<text x="'+(ind0+indN*indbw/2)+'" y="'+(wy-14)+'" text-anchor="middle" font-size="11" fill="#AA77FF" font-style="italic">L</text>';
+    // Wire L to C
+    s+='<line x1="'+indEnd+'" y1="'+wy+'" x2="'+(indEnd+18)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // C (vertical plates)
+    var cv=indEnd+18, cg=7;
+    s+='<line x1="'+(cv-cg)+'" y1="'+(wy-13)+'" x2="'+(cv-cg)+'" y2="'+(wy+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+    s+='<line x1="'+(cv+cg)+'" y1="'+(wy-13)+'" x2="'+(cv+cg)+'" y2="'+(wy+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+    s+='<text x="'+cv+'" y="'+(wy+28)+'" text-anchor="middle" font-size="11" fill="#5533aa" font-style="italic">C</text>';
+    // Wire C to output
+    s+='<line x1="'+(cv+cg)+'" y1="'+wy+'" x2="'+rx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<circle cx="'+lx+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<circle cx="'+rx+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<text x="'+W/2+'" y="160" text-anchor="middle" font-size="10" fill="#888" font-style="italic">Series RLC — minimum impedance at resonance</text>';
   } else {
-    // Parallel RLC
-    var lx2=40, rx2=W-40, jlx=lx2+55, jrx=rx2-55, cy3=wy, gnd2=wy+50;
-    s+='<line x1="'+lx2+'" y1="'+cy3+'" x2="'+jlx+'" y2="'+cy3+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    s+='<line x1="'+jrx+'" y1="'+cy3+'" x2="'+rx2+'" y2="'+cy3+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    s+='<line x1="'+jlx+'" y1="'+(cy3-25)+'" x2="'+jrx+'" y2="'+(cy3-25)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    s+='<line x1="'+jlx+'" y1="'+cy3+'" x2="'+jlx+'" y2="'+(cy3-25)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    s+='<line x1="'+jrx+'" y1="'+cy3+'" x2="'+jrx+'" y2="'+(cy3-25)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    var mcx=(jlx+jrx)/2, mcy=cy3;
-    // R
-    var rbx=mcx-70;
-    s+='<line x1="'+jlx+'" y1="'+cy3+'" x2="'+rbx+'" y2="'+cy3+'" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/>';
-    s+='<rect x="'+rbx+'" y="'+(cy3+8)+'" width="40" height="36" fill="white" stroke="#5533aa" stroke-width="2" rx="2"/>';
-    s+='<text x="'+(rbx+20)+'" y="'+(cy3+30)+'" text-anchor="middle" font-size="10" fill="#5533aa">R</text>';
-    s+='<line x1="'+rbx+'" y1="'+cy3+'" x2="'+rbx+'" y2="'+(cy3+8)+'" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/>';
-    s+='<line x1="'+rbx+'" y1="'+(cy3+44)+'" x2="'+rbx+'" y2="'+gnd2+'" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/>';
-    // L
-    var lbx=mcx+10;
-    var indPathP='M'+lbx+','+(cy3+8);
-    var ibw2=10, inN2=3;
-    for(var k2=0;k2<inN2;k2++) indPathP+=' A'+(ibw2/2)+','+(ibw2/2)+' 0 0,0 '+lbx+','+(cy3+8+(k2+1)*ibw2);
-    s+='<line x1="'+lbx+'" y1="'+cy3+'" x2="'+lbx+'" y2="'+(cy3+8)+'" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/>';
-    s+='<path d="'+indPathP+'" fill="none" stroke="#AA77FF" stroke-width="2.2" stroke-linecap="round"/>';
-    s+='<line x1="'+lbx+'" y1="'+(cy3+8+inN2*ibw2)+'" x2="'+lbx+'" y2="'+gnd2+'" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/>';
-    s+='<text x="'+(lbx+14)+'" y="'+(cy3+28)+'" font-size="10" fill="#AA77FF">L</text>';
-    // C
-    var cbx=mcx+50;
-    s+='<line x1="'+cbx+'" y1="'+cy3+'" x2="'+cbx+'" y2="'+(cy3+18)+'" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/>';
-    s+='<line x1="'+(cbx-12)+'" y1="'+(cy3+18)+'" x2="'+(cbx+12)+'" y2="'+(cy3+18)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-    s+='<line x1="'+(cbx-12)+'" y1="'+(cy3+28)+'" x2="'+(cbx+12)+'" y2="'+(cy3+28)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-    s+='<line x1="'+cbx+'" y1="'+(cy3+28)+'" x2="'+cbx+'" y2="'+gnd2+'" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/>';
-    s+='<text x="'+(cbx+16)+'" y="'+(cy3+26)+'" font-size="10" fill="#5533aa">C</text>';
-    // Ground rail
-    s+='<line x1="'+(rbx-10)+'" y1="'+gnd2+'" x2="'+(cbx+20)+'" y2="'+gnd2+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
-    s+='<circle cx="'+lx2+'" cy="'+cy3+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
-    s+='<circle cx="'+rx2+'" cy="'+cy3+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
-    s+='<text x="'+W/2+'" y="148" text-anchor="middle" font-size="10.5" fill="#888" font-style="italic">Parallel RLC — maximum impedance at f₀</text>';
+    // Parallel R‖L‖C between two rails
+    var lx2=30, rx2=W-30, jlx=lx2+55, jrx=rx2-55;
+    // Top rail
+    s+='<line x1="'+lx2+'" y1="'+wy+'" x2="'+jrx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Left and right bus connections
+    s+='<line x1="'+jlx+'" y1="'+wy+'" x2="'+jlx+'" y2="'+(wy+16)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+jrx+'" y1="'+wy+'" x2="'+jrx+'" y2="'+(wy+16)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Bottom bus
+    s+='<line x1="'+jlx+'" y1="'+gndY+'" x2="'+jrx+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Left wire
+    s+='<line x1="'+lx2+'" y1="'+wy+'" x2="'+jlx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+jlx+'" y1="'+gndY+'" x2="'+lx2+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+lx2+'" y1="'+wy+'" x2="'+lx2+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Right wire
+    s+='<line x1="'+jrx+'" y1="'+gndY+'" x2="'+rx2+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+rx2+'" y1="'+wy+'" x2="'+rx2+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // R branch
+    var rbx=cx-70; var rh=38;
+    s+='<circle cx="'+rbx+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
+    s+='<line x1="'+rbx+'" y1="'+wy+'" x2="'+rbx+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<rect x="'+(rbx-18)+'" y="'+(wy+18)+'" width="36" height="'+rh+'" fill="white" stroke="#5533aa" stroke-width="2" rx="2"/>';
+    s+='<text x="'+rbx+'" y="'+(wy+18+rh/2+4)+'" text-anchor="middle" font-size="11" fill="#5533aa">R</text>';
+    s+='<line x1="'+rbx+'" y1="'+(wy+18+rh)+'" x2="'+rbx+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // L branch
+    var lbx=cx;
+    s+='<circle cx="'+lbx+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
+    s+='<line x1="'+lbx+'" y1="'+wy+'" x2="'+lbx+'" y2="'+(wy+10)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    var ipv='M'+lbx+','+(wy+10); var ibw2=11; var iN2=4;
+    for(var k2=0;k2<iN2;k2++) ipv+=' A'+(ibw2/2)+','+(ibw2/2)+' 0 0,0 '+lbx+','+(wy+10+(k2+1)*ibw2);
+    s+='<path d="'+ipv+'" fill="none" stroke="#AA77FF" stroke-width="2.4" stroke-linecap="round"/>';
+    s+='<line x1="'+lbx+'" y1="'+(wy+10+iN2*ibw2)+'" x2="'+lbx+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<text x="'+(lbx+14)+'" y="'+(wy+40)+'" font-size="11" fill="#AA77FF" font-style="italic">L</text>';
+    // C branch
+    var cbx=cx+70;
+    s+='<circle cx="'+cbx+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
+    s+='<line x1="'+cbx+'" y1="'+wy+'" x2="'+cbx+'" y2="'+(wy+22)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+(cbx-13)+'" y1="'+(wy+22)+'" x2="'+(cbx+13)+'" y2="'+(wy+22)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+    s+='<line x1="'+(cbx-13)+'" y1="'+(wy+32)+'" x2="'+(cbx+13)+'" y2="'+(wy+32)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+    s+='<line x1="'+cbx+'" y1="'+(wy+32)+'" x2="'+cbx+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<text x="'+(cbx+16)+'" y="'+(wy+30)+'" font-size="11" fill="#5533aa" font-style="italic">C</text>';
+    s+='<circle cx="'+lx2+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<circle cx="'+rx2+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<text x="'+W/2+'" y="160" text-anchor="middle" font-size="10" fill="#888" font-style="italic">Parallel RLC — maximum impedance at resonance</text>';
   }
-  s+='<text x="'+W/2+'" y="18" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">f₀ = '+f0v+'  |  Q = '+Qv+'  |  BW = '+bwv+'</text>';
   s+='</svg>';
   document.getElementById('tool-diagram').innerHTML=s;
 }
