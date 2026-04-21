@@ -54,7 +54,7 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="sd-f" placeholder="value" ><select id="sd-fu"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Conductor material</label><select id="sd-mat"><option value="5.8e7">Copper (5.8×10⁷ S/m)</option><option value="3.77e7">Aluminium</option><option value="6.3e7">Silver</option><option value="4.1e7">Gold</option><option value="1.0e7">Steel</option><option value="custom">Custom σ</option></select></div><div class="inp-row"><label>Custom conductivity σ</label><div class="inp-inline"><input type="text" id="sd-sigma" placeholder="S/m" disabled><span class="inp-units">S/m</span></div><span class="inp-hint">Enabled when Custom selected above</span></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="sd-f" placeholder="value"  data-tip="Frequency at which to compute skin depth. Skin depth decreases with √f."><select id="sd-fu"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Conductor material</label><select id="sd-mat"><option value="5.8e7">Copper (5.8×10⁷ S/m)</option><option value="3.77e7">Aluminium</option><option value="6.3e7">Silver</option><option value="4.1e7">Gold</option><option value="1.0e7">Steel</option><option value="custom">Custom σ</option></select></div><div class="inp-row"><label>Custom conductivity σ</label><div class="inp-inline"><input type="text" id="sd-sigma" placeholder="S/m" disabled data-tip="Electrical conductivity in S/m. Copper = 5.8×10⁷, silver = 6.3×10⁷, gold = 4.1×10⁷."><span class="inp-units">S/m</span></div><span class="inp-hint">Enabled when Custom selected above</span></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="sd-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;sd-f&quot;: &quot;100&quot;, &quot;sd-fu&quot;: &quot;1e6&quot;, &quot;sd-mat&quot;: &quot;5.8e7&quot;})" title="Copper at 100 MHz">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
@@ -63,6 +63,52 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(\delta = \sqrt{\dfrac{2}{\omega\mu\sigma}}\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var umEl  = document.getElementById('sd-um');
+  var matEl = document.getElementById('sd-mat');
+  var umStr = umEl ? umEl.textContent : '—';
+  var mat   = matEl ? matEl.options[matEl.selectedIndex].text.split(' ')[0] : 'Conductor';
+  var W=480, H=175, cx=W/2, cy=82, R=60;
+  // Parse skin depth for visual scaling.
+  // Assume a conductor ~2 mm thick; skin depth as fraction of radius.
+  var delta_um = parseFloat(umStr) || 0;
+  // Assume nominal conductor radius 1000 µm for scaling.
+  var shellFrac = delta_um > 0 ? Math.min(0.5, Math.max(0.05, delta_um / 1000)) : 0.18;
+  var innerR = Math.round(R * (1 - shellFrac));
+  var ringW  = R - innerR;  // pixels
+
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Bulk conductor fill
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="#e8e0ff"/>';
+  // Skin layer ring — drawn as stroke so width is ringW
+  var ringR = innerR + ringW/2;
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+ringR+'" fill="none" stroke="#AA77FF" stroke-width="'+ringW+'" opacity="0.85"/>';
+  // Outer border
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#5533aa" stroke-width="2"/>';
+  // Inner boundary
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+innerR+'" fill="none" stroke="#d0c8f0" stroke-width="1" stroke-dasharray="3,3"/>';
+  // δ dimension arrow (horizontal, from surface inward)
+  var ax_out=cx+R, ax_in=cx+innerR;
+  s+='<line x1="'+ax_in+'" y1="'+cy+'" x2="'+ax_out+'" y2="'+cy+'" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>';
+  s+='<line x1="'+ax_in+'" y1="'+(cy-5)+'" x2="'+ax_in+'" y2="'+(cy+5)+'" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>';
+  s+='<line x1="'+ax_out+'" y1="'+(cy-5)+'" x2="'+ax_out+'" y2="'+(cy+5)+'" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>';
+  s+='<text x="'+(ax_out+14)+'" y="'+(cy-4)+'" font-size="12" font-weight="bold" fill="#5533aa">δ = '+umStr+'</text>';
+  // Current density labels
+  s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" font-size="10" fill="#888">J ≈ 0</text>';
+  // Caption
+  s+='<text x="'+W/2+'" y="155" text-anchor="middle" font-size="11" fill="#888" font-style="italic">'+mat+' cross-section — current concentrated in purple skin layer</text>';
+  s+='<text x="'+W/2+'" y="170" text-anchor="middle" font-size="10" fill="#888" font-style="italic">Below the dashed line, J = J₀·e⁻ˣ/δ falls to 1/e per skin depth</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_skin_effect.html">Learn about the skin effect →</a></div>
 <script src="SkinDepth.js"></script>
 </article>

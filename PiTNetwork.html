@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pi / T Network Impedance Matching Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate Pi and T network component values for impedance matching with selectable Q factor. Choose Q independently of the impedance ratio. Low-pass and high-pass topologies.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/PiTNetwork.html">
+  <meta property="og:title" content="Pi / T Network Impedance Matching Calculator | RF Toolbox">
+  <meta property="og:description" content="Calculate Pi and T network component values for impedance matching with selectable Q factor. Choose Q independently of the impedance ratio. Low-pass and high-pass topologies.">
+  <meta property="og:url" content="https://rftoolbox.ca/PiTNetwork.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Pi / T Network Impedance Matching Calculator",
+    "description": "Calculate Pi and T network component values for impedance matching with selectable Q factor. Choose Q independently of the impedance ratio. Low-pass and high-pass topologies.",
+    "url": "https://rftoolbox.ca/PiTNetwork.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Pi / T Network Impedance Matcher</h3>
+<div class="tool-concept">
+  <p>Pi and T networks add a degree of freedom over the L-network: Q can be chosen independently of the impedance ratio. Higher Q gives better harmonic rejection but narrower bandwidth. Pi networks are preferred when both ports are high impedance; T networks when both ports are low impedance.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Matching frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R₁, R₂</td><td style="padding:3px 0;">Source and load impedances (Ω). Works for any ratio.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Q</td><td style="padding:3px 0;">Loaded Q of the network. Must satisfy Q > √(R_max/R_min − 1). Higher Q → sharper response.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pi (low-pass)</td><td style="padding:3px 0;">Two shunt capacitors + one series inductor. Good for harmonic suppression.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pi (high-pass)</td><td style="padding:3px 0;">Two shunt inductors + one series capacitor.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T (low-pass)</td><td style="padding:3px 0;">Two series inductors + one shunt capacitor.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T (high-pass)</td><td style="padding:3px 0;">Two series capacitors + one shunt inductor.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="pt-f" value="144" ><select id="pt-fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Source impedance, <span class="var">R₁</span></label><div class="inp-inline"><input type="text" id="pt-r1" value="200" ><span class='inp-units'>Ω</span></div></div><div class="inp-row"><label>Load impedance, <span class="var">R₂</span></label><div class="inp-inline"><input type="text" id="pt-r2" value="50" ><span class='inp-units'>Ω</span></div></div><div class="inp-row"><label>Loaded Q, <span class="var">Q</span></label><div class="inp-inline"><input type="text" id="pt-q" value="5" ></div><span class="inp-hint">must exceed √(R_max/R_min − 1)</span></div><div class="inp-row"><label>Topology</label><select id='pt-topo'><option value='pi-lp'>Pi — Low-pass</option><option value='pi-hp'>Pi — High-pass</option><option value='t-lp'>T — Low-pass</option><option value='t-hp'>T — High-pass</option></select></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="pt-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;pt-f&quot;: &quot;144&quot;, &quot;pt-fu&quot;: &quot;1e6&quot;, &quot;pt-r1&quot;: &quot;200&quot;, &quot;pt-r2&quot;: &quot;50&quot;, &quot;pt-q&quot;: &quot;5&quot;, &quot;pt-topo&quot;: &quot;pi-lp&quot;})" title="144 MHz VHF: 200Ω→50Ω, Q=5">Load Example</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Network Elements</h4><div class="res-row"><span class="res-lbl">Element 1 (shunt/series)</span><span class="res-val" id="pt-e1">—</span></div><div class="res-row"><span class="res-lbl">Element 2 (series/shunt)</span><span class="res-val" id="pt-e2">—</span></div><div class="res-row"><span class="res-lbl">Element 3 (shunt/series)</span><span class="res-val" id="pt-e3">—</span></div></div><div class="res-card"><h4>Performance</h4><div class="res-row"><span class="res-lbl">Q_low (verified)</span><span class="res-val" id="pt-qv">—</span></div><div class="res-row"><span class="res-lbl">Bandwidth (−3 dB)</span><span class="res-val" id="pt-bw">—</span></div><div class="res-row"><span class="res-lbl">Virtual impedance R_v</span><span class="res-val" id="pt-rv">—</span></div></div></div>
+<div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0 8px;">Pi LP: \(C_1=\dfrac{Q}{\omega R_1},\ L=\dfrac{R_v(Q+Q_2)}{\omega},\ C_2=\dfrac{Q_2}{\omega R_2},\ R_v=\dfrac{R_1}{Q^2+1}\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn the theory behind this tool →</a></div>
+<script>
+document.getElementById('pt-btn').addEventListener('click', function(){
+  var f  = parseFloat(document.getElementById('pt-f').value)*parseFloat(document.getElementById('pt-fu').value);
+  var R1 = parseFloat(document.getElementById('pt-r1').value);
+  var R2 = parseFloat(document.getElementById('pt-r2').value);
+  var Q  = parseFloat(document.getElementById('pt-q').value);
+  var topo = document.getElementById('pt-topo').value;
+  document.getElementById('error').textContent='';
+  if([f,R1,R2,Q].some(isNaN)||f<=0||R1<=0||R2<=0||Q<=0){document.getElementById('error').textContent='Enter valid positive values.';return;}
+  var w=2*Math.PI*f;
+  var Rh=Math.max(R1,R2), Rl=Math.min(R1,R2);
+  var Qmin=Math.sqrt(Rh/Rl-1);
+  if(Q<=Qmin){document.getElementById('error').textContent='Q must be > '+Qmin.toFixed(3)+' for this impedance ratio. Increase Q.';return;}
+  // Always work with the network referenced high→low
+  var Rv, Q2, E1,E2,E3, lbl1,lbl2,lbl3;
+  if(topo==='pi-lp'||topo==='pi-hp'){
+    // Pi network: virtual resistance Rv = Rh/(Q²+1)
+    Rv = Rh/(Q*Q+1);
+    Q2 = Math.sqrt(Rl/Rv-1);
+    if(topo==='pi-lp'){
+      // Shunt C1 at Rh, series L, shunt C2 at Rl
+      E1 = engFmt(Q/(w*Rh),'F'); lbl1='Shunt C₁ (high-Z port)';
+      E2 = engFmt(Rv*(Q+Q2)/w,'H'); lbl2='Series L';
+      E3 = engFmt(Q2/(w*Rl),'F'); lbl3='Shunt C₂ (low-Z port)';
+    } else {
+      // Shunt L1 at Rh, series C, shunt L2 at Rl
+      E1 = engFmt(Rh/(Q*w),'H'); lbl1='Shunt L₁ (high-Z port)';
+      E2 = engFmt(1/(w*Rv*(Q+Q2)),'F'); lbl2='Series C';
+      E3 = engFmt(Rl/(Q2*w),'H'); lbl3='Shunt L₂ (low-Z port)';
+    }
+  } else {
+    // T network: virtual resistance Rv = Rh*(Q²+1) — at series junction
+    Rv = Rh*(Q*Q+1);
+    Q2 = Math.sqrt(Rv/Rl-1);
+    if(topo==='t-lp'){
+      // Series L1 at Rh, shunt C, series L2 at Rl
+      E1 = engFmt(Q*Rh/w,'H'); lbl1='Series L₁ (high-Z port)';
+      E2 = engFmt((Q+Q2)/(w*Rv),'F'); lbl2='Shunt C';
+      E3 = engFmt(Q2*Rl/w,'H'); lbl3='Series L₂ (low-Z port)';
+    } else {
+      // Series C1, shunt L, series C2
+      E1 = engFmt(1/(Q*w*Rh),'F'); lbl1='Series C₁ (high-Z port)';
+      E2 = engFmt(Rv/((Q+Q2)*w),'H'); lbl2='Shunt L';
+      E3 = engFmt(1/(Q2*w*Rl),'F'); lbl3='Series C₂ (low-Z port)';
+    }
+  }
+  var BW = f/Q;
+  document.getElementById('pt-e1').textContent=lbl1+': '+E1;
+  document.getElementById('pt-e2').textContent=lbl2+': '+E2;
+  document.getElementById('pt-e3').textContent=lbl3+': '+E3;
+  document.getElementById('pt-qv').textContent=Q.toFixed(3);
+  document.getElementById('pt-bw').textContent=engFmt(BW,'Hz');
+  document.getElementById('pt-rv').textContent=engFmt(Rv,'Ω');
+  if(window.drawDiagram) drawDiagram(topo,E1,E2,E3,lbl1,lbl2,lbl3,R1,R2);
+});
+function drawDiagram(topo,E1,E2,E3,l1,l2,l3,R1,R2){
+  var W=520,H=175,wy=80,gnd=145,lx=30,rx=490;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if(!topo){topo='pi-lp'; E1=E2=E3='—'; l1='Shunt C₁'; l2='Series L'; l3='Shunt C₂'; R1=200; R2=50;}
+  var isPi=topo.startsWith('pi');
+  if(isPi){
+    // Pi: shunt|series|shunt
+    var j1=120,j2=380;
+    s+='<line x1="'+lx+'" y1="'+wy+'" x2="'+rx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Shunt element 1
+    s+='<circle cx="'+j1+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
+    s+='<line x1="'+j1+'" y1="'+wy+'" x2="'+j1+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    var isC1=l1.indexOf('C')>=0;
+    if(isC1){s+='<line x1="'+(j1-12)+'" y1="'+(wy+18)+'" x2="'+(j1+12)+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';s+='<line x1="'+(j1-12)+'" y1="'+(wy+27)+'" x2="'+(j1+12)+'" y2="'+(wy+27)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';s+='<line x1="'+j1+'" y1="'+(wy+27)+'" x2="'+j1+'" y2="'+gnd+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';}
+    else{var ip='M'+j1+','+(wy+18);for(var k=0;k<3;k++)ip+=' A5,5 0 0,0 '+j1+','+(wy+18+(k+1)*10);s+='<path d="'+ip+'" fill="none" stroke="#AA77FF" stroke-width="2.4" stroke-linecap="round"/>';s+='<line x1="'+j1+'" y1="'+(wy+48)+'" x2="'+j1+'" y2="'+gnd+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';}
+    s+='<line x1="'+(j1-10)+'" y1="'+gnd+'" x2="'+(j1+10)+'" y2="'+gnd+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
+    s+='<text x="'+(j1+14)+'" y="'+(wy+30)+'" font-size="9.5" fill="#5533aa">'+E1+'</text>';
+    // Series middle element
+    var isLm=l2.indexOf('L')>=0;
+    var mx=(j1+j2)/2;
+    if(isLm){var ip2='M'+(mx-28)+','+wy;for(var k=0;k<4;k++)ip2+=' A7,7 0 0,1 '+(mx-28+(k+1)*14)+','+wy;s+='<path d="'+ip2+'" fill="none" stroke="#AA77FF" stroke-width="2.4" stroke-linecap="round"/>';}
+    else{s+='<line x1="'+(mx-10)+'" y1="'+(wy-13)+'" x2="'+(mx-10)+'" y2="'+(wy+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';s+='<line x1="'+(mx+10)+'" y1="'+(wy-13)+'" x2="'+(mx+10)+'" y2="'+(wy+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';}
+    s+='<text x="'+mx+'" y="'+(wy-15)+'" text-anchor="middle" font-size="9.5" fill="#AA77FF">'+E2+'</text>';
+    // Shunt element 2
+    s+='<circle cx="'+j2+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
+    s+='<line x1="'+j2+'" y1="'+wy+'" x2="'+j2+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    var isC3=l3.indexOf('C')>=0;
+    if(isC3){s+='<line x1="'+(j2-12)+'" y1="'+(wy+18)+'" x2="'+(j2+12)+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';s+='<line x1="'+(j2-12)+'" y1="'+(wy+27)+'" x2="'+(j2+12)+'" y2="'+(wy+27)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';s+='<line x1="'+j2+'" y1="'+(wy+27)+'" x2="'+j2+'" y2="'+gnd+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';}
+    else{var ip3='M'+j2+','+(wy+18);for(var k=0;k<3;k++)ip3+=' A5,5 0 0,0 '+j2+','+(wy+18+(k+1)*10);s+='<path d="'+ip3+'" fill="none" stroke="#AA77FF" stroke-width="2.4" stroke-linecap="round"/>';s+='<line x1="'+j2+'" y1="'+(wy+48)+'" x2="'+j2+'" y2="'+gnd+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';}
+    s+='<line x1="'+(j2-10)+'" y1="'+gnd+'" x2="'+(j2+10)+'" y2="'+gnd+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
+    s+='<text x="'+(j2+14)+'" y="'+(wy+30)+'" font-size="9.5" fill="#5533aa">'+E3+'</text>';
+  } else {
+    // T: series|shunt|series
+    var j1t=160,j2t=360;
+    s+='<line x1="'+lx+'" y1="'+wy+'" x2="'+rx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Series left
+    var isL1=l1.indexOf('L')>=0;
+    if(isL1){var ip='M'+(lx+30)+','+wy;for(var k=0;k<4;k++)ip+=' A7,7 0 0,1 '+(lx+30+(k+1)*14)+','+wy;s+='<path d="'+ip+'" fill="none" stroke="#AA77FF" stroke-width="2.4" stroke-linecap="round"/>';}
+    else{s+='<line x1="'+(lx+40)+'" y1="'+(wy-13)+'" x2="'+(lx+40)+'" y2="'+(wy+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';s+='<line x1="'+(lx+56)+'" y1="'+(wy-13)+'" x2="'+(lx+56)+'" y2="'+(wy+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';}
+    s+='<text x="'+(lx+70)+'" y="'+(wy-15)+'" text-anchor="middle" font-size="9.5" fill="#AA77FF">'+E1+'</text>';
+    // Shunt middle
+    var jm2=(j1t+j2t)/2;
+    s+='<circle cx="'+jm2+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
+    s+='<line x1="'+jm2+'" y1="'+wy+'" x2="'+jm2+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    var isC2=l2.indexOf('C')>=0;
+    if(isC2){s+='<line x1="'+(jm2-12)+'" y1="'+(wy+18)+'" x2="'+(jm2+12)+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';s+='<line x1="'+(jm2-12)+'" y1="'+(wy+27)+'" x2="'+(jm2+12)+'" y2="'+(wy+27)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';s+='<line x1="'+jm2+'" y1="'+(wy+27)+'" x2="'+jm2+'" y2="'+gnd+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';}
+    else{var ip4='M'+jm2+','+(wy+18);for(var k=0;k<3;k++)ip4+=' A5,5 0 0,0 '+jm2+','+(wy+18+(k+1)*10);s+='<path d="'+ip4+'" fill="none" stroke="#AA77FF" stroke-width="2.4" stroke-linecap="round"/>';s+='<line x1="'+jm2+'" y1="'+(wy+48)+'" x2="'+jm2+'" y2="'+gnd+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';}
+    s+='<line x1="'+(jm2-10)+'" y1="'+gnd+'" x2="'+(jm2+10)+'" y2="'+gnd+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
+    s+='<text x="'+(jm2+14)+'" y="'+(wy+30)+'" font-size="9.5" fill="#5533aa">'+E2+'</text>';
+    // Series right
+    var isL3=l3.indexOf('L')>=0;
+    if(isL3){var ip5='M'+(rx-86)+','+wy;for(var k=0;k<4;k++)ip5+=' A7,7 0 0,1 '+(rx-86+(k+1)*14)+','+wy;s+='<path d="'+ip5+'" fill="none" stroke="#AA77FF" stroke-width="2.4" stroke-linecap="round"/>';}
+    else{s+='<line x1="'+(rx-86)+'" y1="'+(wy-13)+'" x2="'+(rx-86)+'" y2="'+(wy+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';s+='<line x1="'+(rx-70)+'" y1="'+(wy-13)+'" x2="'+(rx-70)+'" y2="'+(wy+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';}
+    s+='<text x="'+(rx-58)+'" y="'+(wy-15)+'" text-anchor="middle" font-size="9.5" fill="#AA77FF">'+E3+'</text>';
+  }
+  s+='<circle cx="'+lx+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+  s+='<circle cx="'+rx+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+  s+='<text x="'+lx+'" y="'+(wy-14)+'" text-anchor="middle" font-size="9" fill="#888">'+R1+' Ω</text>';
+  s+='<text x="'+rx+'" y="'+(wy-14)+'" text-anchor="middle" font-size="9" fill="#888">'+R2+' Ω</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

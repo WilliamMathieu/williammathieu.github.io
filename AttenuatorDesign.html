@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Attenuator Designer — Pi, T, L-pad & Bridged-T | RF Toolbox</title>
+  <meta name="description" content="Calculate resistor values for Pi, T, L-pad, and Bridged-T RF attenuators. Enter attenuation in dB and impedance to get all component values.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/AttenuatorDesign.html">
+  <meta property="og:title" content="RF Attenuator Designer — Pi, T, L-pad & Bridged-T | RF Toolbox">
+  <meta property="og:description" content="Calculate resistor values for Pi, T, L-pad, and Bridged-T RF attenuators. Enter attenuation in dB and impedance to get all component values.">
+  <meta property="og:url" content="https://rftoolbox.ca/AttenuatorDesign.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "RF Attenuator Designer — Pi, T, L-pad & Bridged-T",
+    "description": "Calculate resistor values for Pi, T, L-pad, and Bridged-T RF attenuators. Enter attenuation in dB and impedance to get all component values.",
+    "url": "https://rftoolbox.ca/AttenuatorDesign.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>RF Attenuator Designer</h3>
+<div class="tool-concept">
+  <p>Calculate resistor values for Pi, T, L, and Bridged-T attenuator pads. Pi and T pads work with equal impedances and provide precise attenuation. L-pads match two different impedances while attenuating. Bridged-T gives constant input/output impedance with minimum component count for high attenuation.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">A</td><td style="padding:3px 0;">Attenuation in dB. Positive value = signal reduction.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Characteristic impedance (equal on both ports for Pi/T). Typically 50 Ω.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z_S/Z_L</td><td style="padding:3px 0;">Source and load impedances for L-pad (can differ).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pi</td><td style="padding:3px 0;">Two shunt resistors + one series resistor. Good for PCB layout.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T</td><td style="padding:3px 0;">Two series resistors + one shunt resistor. Symmetric, good for cable use.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L-pad</td><td style="padding:3px 0;">One series + one shunt resistor. Matches AND attenuates two different impedances.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Bridged-T</td><td style="padding:3px 0;">Efficient for large attenuation values.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Topology</label><select id='at-topo' onchange='atTopoChange()'><option value='pi'>Pi (Π)</option><option value='t'>T</option><option value='l'>L-pad</option><option value='bt'>Bridged-T</option></select></div><div class="inp-row"><label>Attenuation, <span class="var">A</span></label><div class="inp-inline"><input type="text" id="at-atten" value="6" ><span class='inp-units'>dB</span></div><span class="inp-hint">positive value</span></div><div class="inp-row"><label>Impedance, Z₀, <span class="var"><div class="inp-inline"><input type="text" id="at-z0" value="50" ><span class='inp-units'>Ω</span></div></span></label><span class="inp-hint">Typical: 50 Ω or 75 Ω</span></div></div>
+<div id="at-lpad-row" style="display:none;">
+<div class="inp-grid"><div class="inp-row"><label>Source impedance, <span class="var">Z_S</span></label><div class="inp-inline"><input type="text" id="at-zs" value="75" ><span class='inp-units'>Ω</span></div><span class="inp-hint">for L-pad only</span></div><div class="inp-row"><label>Load impedance, <span class="var">Z_L</span></label><div class="inp-inline"><input type="text" id="at-zl" value="50" ><span class='inp-units'>Ω</span></div><span class="inp-hint">for L-pad only</span></div></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="at-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;at-atten&quot;: &quot;10&quot;, &quot;at-z0&quot;: &quot;50&quot;, &quot;at-topo&quot;: &quot;pi&quot;})" title="10 dB Pi attenuator, 50 Ω">Load Example</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Component Values</h4><div class="res-row"><span class="res-lbl">R₁</span><span class="res-val" id="at-r1">—</span></div><div class="res-row"><span class="res-lbl">R₂</span><span class="res-val" id="at-r2">—</span></div><div class="res-row"><span class="res-lbl">R₃</span><span class="res-val" id="at-r3">—</span></div><div class="res-row"><span class="res-lbl">Exact attenuation</span><span class="res-val" id="at-atten-check">—</span></div><div class="res-row"><span class="res-lbl">Min return loss</span><span class="res-val" id="at-rl">—</span></div></div></div>
+<div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0 8px;">Pi: \(R_1=R_3=Z_0\!\dfrac{K+1}{K-1},\quad R_2=Z_0\dfrac{K^2-1}{2K}\quad K=10^{A/20}\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_microwave_components.html">Learn about attenuators and passive components →</a></div>
+<script>
+document.getElementById('at-btn').addEventListener('click', function() {
+  var A  = parseFloat(document.getElementById('at-atten').value);
+  var Z0 = parseFloat(document.getElementById('at-z0').value);
+  var topo = document.getElementById('at-topo').value;
+  document.getElementById('error').textContent='';
+  if(isNaN(A)||A<=0||isNaN(Z0)||Z0<=0){document.getElementById('error').textContent='Enter valid positive values.';return;}
+  var K=Math.pow(10,A/20), R1,R2,R3;
+  if(topo==='pi'){
+    R1=Z0*(K+1)/(K-1); R2=Z0*(K*K-1)/(2*K); R3=R1;
+  } else if(topo==='t'){
+    R1=Z0*(K-1)/(K+1); R2=2*Z0*K/(K*K-1); R3=R1;
+  } else if(topo==='l'){
+    var ZS=parseFloat(document.getElementById('at-zs').value);
+    var ZL=parseFloat(document.getElementById('at-zl').value);
+    if(isNaN(ZS)||isNaN(ZL)){document.getElementById('error').textContent='Enter ZS and ZL for L-pad.';return;}
+    // L-pad: R_series in series with ZS side, R_shunt across ZL side
+    // Attenuation A_lpad from voltage divider; also matches ZS to ZL
+    R2=Math.sqrt(ZS*ZL*(1-1/(K*K)));  // shunt R
+    R1=ZS/K - R2*ZL/(R2+ZL);           // series R
+    if(R1<0){document.getElementById('error').textContent='ZS must be > ZL for L-pad. Swap if needed.';return;}
+    R3=NaN;
+  } else { // Bridged-T
+    R1=Z0*(K-1); R2=Z0/(K-1); R3=Z0;
+  }
+  var set=function(id,v){var el=document.getElementById(id);el.textContent=isNaN(v)||!isFinite(v)?'N/A':engFmt(v,'Ω');};
+  set('at-r1',R1); set('at-r2',R2); set('at-r3',R3);
+  document.getElementById('at-atten-check').textContent=A.toFixed(2)+' dB';
+  document.getElementById('at-rl').textContent='>'+Math.max(20,A*2).toFixed(0)+' dB (ideal)';
+  if(window.drawDiagram) drawDiagram();
+});
+function atTopoChange(){
+  var topo=document.getElementById('at-topo').value;
+  document.getElementById('at-lpad-row').style.display=(topo==='l')?'':'none';
+  var r3=document.getElementById('ro-r3');
+}
+function drawDiagram(){
+  var topo=document.getElementById('at-topo').value;
+  var R1=document.getElementById('at-r1').textContent;
+  var R2=document.getElementById('at-r2').textContent;
+  var R3=document.getElementById('at-r3').textContent;
+  var A=document.getElementById('at-atten').value||'?';
+  var Z0=document.getElementById('at-z0').value||'50';
+  var W=520,H=160,wy=75,gnd=130;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<text x="'+W/2+'" y="14" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">'+topo.toUpperCase()+' Attenuator — '+A+' dB   Z₀ = '+Z0+' Ω</text>';
+
+  if(topo==='pi'){
+    // Pi: shunt R1 | series R2 | shunt R3
+    var j1=100,j2=380,lx=30,rx=490;
+    s+='<line x1="'+lx+'" y1="'+wy+'" x2="'+rx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Shunt R1
+    [''+j1,''+j2].forEach(function(jx,i){
+      var Rv=i===0?R1:R3;
+      s+='<circle cx="'+jx+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
+      s+='<line x1="'+jx+'" y1="'+wy+'" x2="'+jx+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+      s+='<rect x="'+(parseInt(jx)-16)+'" y="'+(wy+18)+'" width="32" height="20" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/>';
+      s+='<text x="'+jx+'" y="'+(wy+32)+'" text-anchor="middle" font-size="9" fill="#5533aa">'+Rv+'</text>';
+      s+='<line x1="'+jx+'" y1="'+(wy+38)+'" x2="'+jx+'" y2="'+gnd+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+      s+='<line x1="'+(parseInt(jx)-10)+'" y1="'+gnd+'" x2="'+(parseInt(jx)+10)+'" y2="'+gnd+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
+      s+='<line x1="'+(parseInt(jx)-6)+'" y1="'+(gnd+5)+'" x2="'+(parseInt(jx)+6)+'" y2="'+(gnd+5)+'" stroke="#444" stroke-width="1.4" stroke-linecap="round"/>';
+    });
+    // Series R2 between j1 and j2
+    var rm=parseInt(j1)+(parseInt(j2)-parseInt(j1))/2;
+    s+='<rect x="'+(rm-28)+'" y="'+(wy-11)+'" width="56" height="22" fill="white" stroke="#AA77FF" stroke-width="2" rx="2"/>';
+    s+='<text x="'+rm+'" y="'+(wy+4)+'" text-anchor="middle" font-size="9" fill="#AA77FF">'+R2+'</text>';
+    // Port circles
+    s+='<circle cx="'+lx+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<circle cx="'+rx+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<text x="'+lx+'" y="'+(wy-12)+'" text-anchor="middle" font-size="9" fill="#888">IN</text>';
+    s+='<text x="'+rx+'" y="'+(wy-12)+'" text-anchor="middle" font-size="9" fill="#888">OUT</text>';
+  } else if(topo==='t'){
+    // T: series R1 | shunt R2 | series R3
+    var lx2=30,rx2=490,jm=260;
+    s+='<line x1="'+lx2+'" y1="'+wy+'" x2="'+rx2+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Series R1
+    s+='<rect x="'+(lx2+30)+'" y="'+(wy-11)+'" width="56" height="22" fill="white" stroke="#AA77FF" stroke-width="2" rx="2"/>';
+    s+='<text x="'+(lx2+58)+'" y="'+(wy+4)+'" text-anchor="middle" font-size="9" fill="#AA77FF">'+R1+'</text>';
+    // Series R3
+    s+='<rect x="'+(rx2-86)+'" y="'+(wy-11)+'" width="56" height="22" fill="white" stroke="#AA77FF" stroke-width="2" rx="2"/>';
+    s+='<text x="'+(rx2-58)+'" y="'+(wy+4)+'" text-anchor="middle" font-size="9" fill="#AA77FF">'+R3+'</text>';
+    // Shunt R2 at centre
+    s+='<circle cx="'+jm+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
+    s+='<line x1="'+jm+'" y1="'+wy+'" x2="'+jm+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<rect x="'+(jm-16)+'" y="'+(wy+18)+'" width="32" height="20" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/>';
+    s+='<text x="'+jm+'" y="'+(wy+32)+'" text-anchor="middle" font-size="9" fill="#5533aa">'+R2+'</text>';
+    s+='<line x1="'+jm+'" y1="'+(wy+38)+'" x2="'+jm+'" y2="'+gnd+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+(jm-10)+'" y1="'+gnd+'" x2="'+(jm+10)+'" y2="'+gnd+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+(jm-6)+'" y1="'+(gnd+5)+'" x2="'+(jm+6)+'" y2="'+(gnd+5)+'" stroke="#444" stroke-width="1.4" stroke-linecap="round"/>';
+    s+='<circle cx="'+lx2+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<circle cx="'+rx2+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<text x="'+lx2+'" y="'+(wy-12)+'" text-anchor="middle" font-size="9" fill="#888">IN</text>';
+    s+='<text x="'+rx2+'" y="'+(wy-12)+'" text-anchor="middle" font-size="9" fill="#888">OUT</text>';
+  } else {
+    // Generic label for L and BT
+    s+='<rect x="160" y="40" width="200" height="60" fill="#f0eeff" stroke="#AA77FF" stroke-width="2" rx="6"/>';
+    s+='<text x="260" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#5533aa">'+topo.toUpperCase()+' Attenuator</text>';
+    s+='<text x="260" y="85" text-anchor="middle" font-size="10" fill="#AA77FF">R₁='+R1+'  R₂='+R2+(R3!=='N/A'?'  R₃='+R3:'')+'</text>';
+    s+='<line x1="30" y1="'+wy+'" x2="160" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="360" y1="'+wy+'" x2="490" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<circle cx="30" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<circle cx="490" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+  }
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

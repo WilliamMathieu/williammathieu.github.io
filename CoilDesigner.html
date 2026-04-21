@@ -55,9 +55,9 @@
 </div>
 <div class="sec-lbl">Inputs</div>
 <div class="sec-lbl" style="margin-top:0;margin-bottom:6px;border:none;color:#888;">Loop geometry</div>
-<div class="inp-grid"><div class="inp-row"><label>Wire diameter, d</label><div class="inp-inline"><input type="text" id="d" placeholder="Enter mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Conductor diameter, not radius</span></div><div class="inp-row"><label>Loop diameter, D</label><div class="inp-inline"><input type="text" id="D" placeholder="Enter mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Centre-to-centre of conductor</span></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Wire diameter, <span class="var">d</span></label><div class="inp-inline"><input type="text" id="d" placeholder="Enter mm"  data-tip="Conductor (wire or tube) diameter. Thicker wire lowers resistance and raises Q."><span class="inp-units">mm</span></div><span class="inp-hint">Conductor diameter, not radius</span></div><div class="inp-row"><label>Loop diameter, <span class="var">D</span></label><div class="inp-inline"><input type="text" id="D" placeholder="Enter mm"  data-tip="Loop diameter, measured centre-to-centre of the conductor. Larger D → more inductance."><span class="inp-units">mm</span></div><span class="inp-hint">Centre-to-centre of conductor</span></div></div>
 <div class="sec-lbl" style="margin-top:8px;margin-bottom:6px;border:none;color:#888;">Field parameters</div>
-<div class="inp-grid"><div class="inp-row"><label>Larmor frequency, f</label><div class="inp-inline"><input type="text" id="f" placeholder="Enter freq" ><select id="f_dropdown"><option value="0">kHz</option><option value="1" selected>MHz</option><option value="2">GHz</option><option value="3">THz</option></select></div><span class="inp-hint">¹H at 3T ≈ 128 MHz</span></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Larmor frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="f" placeholder="Enter freq"  data-tip="Larmor frequency. ¹H: 64 MHz at 1.5T, 128 MHz at 3T, 298 MHz at 7T."><select id="f_dropdown"><option value="0">kHz</option><option value="1" selected>MHz</option><option value="2">GHz</option><option value="3">THz</option></select></div><span class="inp-hint">¹H at 3T ≈ 128 MHz</span></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;d&quot;: &quot;1.5&quot;, &quot;D&quot;: &quot;80&quot;, &quot;f&quot;: &quot;128&quot;, &quot;f_dropdown&quot;: &quot;1&quot;})" title="3T MRI ¹H coil — 80 mm loop, 1.5 mm wire, 128 MHz">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
@@ -66,6 +66,48 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(L = \mu_0\mu_r\!\left(\tfrac{D}{2}\right)\!\left[\ln\!\left(\tfrac{8D}{d}\right)-2\right] \qquad C = \dfrac{1}{4\pi^2 f^2 L}\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var Lv = document.getElementById('L') ? document.getElementById('L').textContent : '—';
+  var Cv = document.getElementById('C') ? document.getElementById('C').textContent : '—';
+  var Dv = document.getElementById('D') ? (parseFloat(document.getElementById('D').value)||0) : 0;
+  var W=560,H=170,cx=200,cy=85,R=65;
+  var s='<svg viewBox="0 0 '+W+'" height="'+H+'" width="'+W+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Loop
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#5533aa" stroke-width="3" stroke-linecap="round"/>';
+  // Feed/tuning cap gap at right
+  var gx=cx+R;
+  s+='<line x1="'+(gx-1)+'" y1="'+(cy-8)+'" x2="'+(gx-1)+'" y2="'+(cy-2)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+  s+='<line x1="'+(gx+5)+'" y1="'+(cy-8)+'" x2="'+(gx+5)+'" y2="'+(cy-2)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+  s+='<line x1="'+(gx-1)+'" y1="'+(cy+2)+'" x2="'+(gx-1)+'" y2="'+(cy+8)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+  s+='<line x1="'+(gx+5)+'" y1="'+(cy+2)+'" x2="'+(gx+5)+'" y2="'+(cy+8)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+  s+='<text x="'+(gx+18)+'" y="'+(cy+4)+'" text-anchor="start" font-size="10" fill="#5533aa">C</text>';
+  // L label inside loop
+  s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" font-size="14" fill="#AA77FF" font-weight="bold" font-style="italic">L</text>';
+  // D arrow
+  s+='<line x1="'+(cx-R)+'" y1="'+(cy+R+10)+'" x2="'+(cx+R)+'" y2="'+(cy+R+10)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<text x="'+cx+'" y="'+(cy+R+24)+'" text-anchor="middle" font-size="9.5" fill="#888">D'+(Dv?' = '+Dv+' mm':'')+'</text>';
+  // Results panel
+  var rx2=330;
+  s+='<rect x="'+rx2+'" y="25" width="210" height="120" fill="white" stroke="#d0c8f0" stroke-width="1" rx="4"/>';
+  s+='<text x="'+(rx2+10)+'" y="42" font-size="10" font-weight="bold" fill="#5533aa" letter-spacing="1">RESULTS</text>';
+  s+='<line x1="'+rx2+'" y1="47" x2="'+(rx2+210)+'" y2="47" stroke="#e0d8ff" stroke-width="1"/>';
+  s+='<text x="'+(rx2+10)+'" y="66" font-size="11" fill="#555">Self-inductance, L</text>';
+  s+='<text x="'+(rx2+200)+'" y="66" text-anchor="end" font-size="12" font-weight="bold" fill="#1a1a1a">'+Lv+'</text>';
+  s+='<line x1="'+rx2+'" y1="72" x2="'+(rx2+210)+'" y2="72" stroke="#e8e0ff" stroke-width="1" stroke-dasharray="2,2"/>';
+  s+='<text x="'+(rx2+10)+'" y="92" font-size="11" fill="#555">Tuning capacitor, C</text>';
+  s+='<text x="'+(rx2+200)+'" y="92" text-anchor="end" font-size="12" font-weight="bold" fill="#1a1a1a">'+Cv+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_coil_design.html">Learn about RF coil design for MRI →</a></div>
 <script src="CoilDesigner.js"></script>
 </article>

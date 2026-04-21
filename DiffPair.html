@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Differential Pair Impedance Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate differential and common-mode impedance for edge-coupled microstrip differential pairs. Enter trace width, spacing, and substrate to get Z_diff and Z_odd.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/DiffPair.html">
+  <meta property="og:title" content="Differential Pair Impedance Calculator | RF Toolbox">
+  <meta property="og:description" content="Calculate differential and common-mode impedance for edge-coupled microstrip differential pairs. Enter trace width, spacing, and substrate to get Z_diff and Z_odd.">
+  <meta property="og:url" content="https://rftoolbox.ca/DiffPair.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Differential Pair Impedance Calculator",
+    "description": "Calculate differential and common-mode impedance for edge-coupled microstrip differential pairs. Enter trace width, spacing, and substrate to get Z_diff and Z_odd.",
+    "url": "https://rftoolbox.ca/DiffPair.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Differential Pair Impedance Calculator</h3>
+<div class="tool-concept">
+  <p>Edge-coupled differential pairs carry balanced signals. The differential impedance Z_diff = 2·Z_odd is what high-speed differential lines (USB, HDMI, LVDS) must be controlled to. Odd-mode signals travel in opposite directions; even-mode in the same direction.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">w</td><td style="padding:3px 0;">Trace width (mm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">s</td><td style="padding:3px 0;">Edge-to-edge spacing between the two traces (mm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">h</td><td style="padding:3px 0;">Substrate height (mm). Trace to nearest ground plane.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">t</td><td style="padding:3px 0;">Trace thickness (mm). Standard 1 oz = 0.035 mm.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Substrate dielectric constant.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z_odd</td><td style="padding:3px 0;">Odd-mode impedance — the impedance each trace sees when signals are opposite.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z_diff</td><td style="padding:3px 0;">Differential impedance = 2·Z_odd. The target specification, typically 100 Ω.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z_even</td><td style="padding:3px 0;">Even-mode impedance — both traces driven together. Z_cm = Z_even/2.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Trace width, <span class="var">w</span></label><div class="inp-inline"><input type="text" id="dp2-w" value="0.2" ><span class='inp-units'>mm</span></div></div><div class="inp-row"><label>Edge spacing, <span class="var">s</span></label><div class="inp-inline"><input type="text" id="dp2-s" value="0.2" ><span class='inp-units'>mm</span></div><span class="inp-hint">trace edge to trace edge</span></div><div class="inp-row"><label>Substrate height, <span class="var">h</span></label><div class="inp-inline"><input type="text" id="dp2-h" value="0.2" ><span class='inp-units'>mm</span></div><span class="inp-hint">trace to nearest ground</span></div><div class="inp-row"><label>Trace thickness, <span class="var">t</span></label><div class="inp-inline"><input type="text" id="dp2-t" value="0.035" ><span class='inp-units'>mm</span></div><span class="inp-hint">1 oz Cu = 0.035 mm</span></div><div class="inp-row"><label>Dielectric constant, <span class="var">εᵣ</span></label><div class="inp-inline"><input type="text" id="dp2-er" value="4.4" ></div><span class="inp-hint">FR4≈4.4, Rogers4003≈3.55, PTFE≈2.1</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="dp2-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;dp2-w&quot;: &quot;0.2&quot;, &quot;dp2-s&quot;: &quot;0.2&quot;, &quot;dp2-h&quot;: &quot;0.2&quot;, &quot;dp2-t&quot;: &quot;0.035&quot;, &quot;dp2-er&quot;: &quot;4.4&quot;})" title="100Ω diff pair on FR4">Load Example</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Differential</h4><div class="res-row"><span class="res-lbl">Differential impedance, Z_diff</span><span class="res-val" id="dp2-zdiff">—</span></div><div class="res-row"><span class="res-lbl">Odd-mode impedance, Z_odd</span><span class="res-val" id="dp2-zodd">—</span></div></div><div class="res-card"><h4>Common-mode</h4><div class="res-row"><span class="res-lbl">Even-mode impedance, Z_even</span><span class="res-val" id="dp2-zeven">—</span></div><div class="res-row"><span class="res-lbl">Common-mode impedance, Z_cm</span><span class="res-val" id="dp2-zcm">—</span></div><div class="res-row"><span class="res-lbl">Single-trace Z₀</span><span class="res-val" id="dp2-z0single">—</span></div></div></div>
+<div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<div class="wiki-link-hint">📖 <a href="wiki_microwave_lines.html">Learn the theory behind this tool →</a></div>
+<script>
+// Microstrip Z0 (Hammerstad-Jensen)
+function msZ0(w,h,t,er){
+  var weff=w+(t/Math.PI)*(1+Math.log(2*h/t));
+  var u=weff/h;
+  var fu=6+(2*Math.PI-6)*Math.exp(-Math.pow(30.666/u,0.7528));
+  var Z0air=60*Math.log(fu/u+Math.sqrt(1+4/u/u));
+  var a=1+(1/49)*Math.log((Math.pow(u,4)+Math.pow(u/52,2))/(Math.pow(u,4)+0.432))+
+         (1/18.7)*Math.log(1+Math.pow(u/18.1,3));
+  var b=0.564*Math.pow((er-0.9)/(er+3),0.053);
+  var eeff=((er+1)/2+(er-1)/2*Math.pow(1+10/u,-a*b));
+  return{Z0:Z0air/Math.sqrt(eeff), eeff:eeff};
+}
+document.getElementById('dp2-btn').addEventListener('click', function(){
+  var w=parseFloat(document.getElementById('dp2-w').value);
+  var s=parseFloat(document.getElementById('dp2-s').value);
+  var h=parseFloat(document.getElementById('dp2-h').value);
+  var t=parseFloat(document.getElementById('dp2-t').value);
+  var er=parseFloat(document.getElementById('dp2-er').value);
+  document.getElementById('error').textContent='';
+  if([w,s,h,t,er].some(isNaN)||[w,s,h].some(function(v){return v<=0;})){document.getElementById('error').textContent='Enter valid positive values.';return;}
+  var single=msZ0(w,h,t,er);
+  var Z0=single.Z0;
+  // Coupled microstrip correction (Kirschning & Jansen simplified)
+  var Q=0.347*Math.exp(-2.655*s/h);
+  var Zodd=Z0*(1-Q);
+  var Zeven=Z0*(1+Q);
+  document.getElementById('dp2-z0single').textContent=Z0.toFixed(2)+' Ω';
+  document.getElementById('dp2-zodd').textContent=Zodd.toFixed(2)+' Ω';
+  document.getElementById('dp2-zdiff').textContent=(2*Zodd).toFixed(2)+' Ω';
+  document.getElementById('dp2-zeven').textContent=Zeven.toFixed(2)+' Ω';
+  document.getElementById('dp2-zcm').textContent=(Zeven/2).toFixed(2)+' Ω';
+  if(window.drawDiagram) drawDiagram(w,s,h,t,er,(2*Zodd).toFixed(1));
+});
+function drawDiagram(w,s,h,t,er,zdiff){
+  if(!w){w=0.2;s=0.2;h=0.2;t=0.035;er=4.4;zdiff='—';}
+  var W=480,H=160,sc=Math.min(80,50/w);
+  var wp=w*sc, sp=s*sc, hp=Math.min(40,h*sc*0.8);
+  var cx=W/2, topY=55, gndY=topY+hp;
+  var sv='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  sv+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  sv+='<rect x="'+(cx-wp-sp/2-20)+'" y="'+topY+'" width="'+(wp*2+sp+40)+'" height="'+hp+'" fill="#d4ecca" stroke="#5a9020" stroke-width="1" rx="1"/>';
+  sv+='<text x="'+cx+'" y="'+(topY+hp/2+4)+'" text-anchor="middle" font-size="9.5" fill="#3a6010">εᵣ = '+er+'</text>';
+  // Two traces
+  var tx1=cx-sp/2-wp, tx2=cx+sp/2;
+  sv+='<rect x="'+tx1+'" y="'+(topY-8)+'" width="'+wp+'" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  sv+='<rect x="'+tx2+'" y="'+(topY-8)+'" width="'+wp+'" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  // Ground
+  sv+='<rect x="'+(cx-wp-sp/2-20)+'" y="'+gndY+'" width="'+(wp*2+sp+40)+'" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  // Labels
+  sv+='<text x="'+(tx1+wp/2)+'" y="'+(topY-14)+'" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">+</text>';
+  sv+='<text x="'+(tx2+wp/2)+'" y="'+(topY-14)+'" text-anchor="middle" font-size="10" fill="#cc3333" font-weight="bold">−</text>';
+  // w annotation
+  sv+='<text x="'+(tx1+wp/2)+'" y="150" text-anchor="middle" font-size="9.5" fill="#888">w='+w+'mm</text>';
+  sv+='<text x="'+cx+'" y="150" text-anchor="middle" font-size="9.5" fill="#888">s='+s+'mm</text>';
+  sv+='<text x="'+(cx+wp*1.5+sp/2+10)+'" y="'+(topY+hp/2+4)+'" font-size="9.5" fill="#888">h='+h+'mm</text>';
+  sv+='<text x="'+W/2+'" y="165" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">Z_diff = '+zdiff+' Ω</text>';
+  sv+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=sv;
+}
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

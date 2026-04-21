@@ -11,6 +11,7 @@ document.getElementById('qw-btn').addEventListener('click', function() {
     var l=3e8/(f*Math.sqrt(er))/4;
     document.getElementById('qw-zt').textContent=Zt.toFixed(4)+' \u03a9';
     document.getElementById('qw-len').textContent=(l*1000).toFixed(4)+' mm';
+    if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

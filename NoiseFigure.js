@@ -25,6 +25,7 @@ function nfCalc(){
     for(var j=1;j<nfCount;j++){F+=(nfs[j]-1)/G; G*=gains[j];}
     document.getElementById('nf-nf').textContent=(10*Math.log10(F)).toFixed(4)+' dB';
     document.getElementById('nf-gain').textContent=(10*Math.log10(G)).toFixed(4)+' dB';
+    if(window.drawDiagram) window.drawDiagram();
 }
 nfBuild();
 

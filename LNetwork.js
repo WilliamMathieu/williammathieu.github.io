@@ -15,6 +15,7 @@ document.getElementById('ln-btn').addEventListener('click', function() {
     document.getElementById('ln-L1').textContent=engFmt(Xseries/w,'H');
     document.getElementById('ln-C2').textContent=engFmt(1/(w*Xseries),'F');
     document.getElementById('ln-L2').textContent=engFmt(Xshunt/w,'H');
+    if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

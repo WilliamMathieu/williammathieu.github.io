@@ -54,7 +54,7 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Source impedance, Z₁</label><div class="inp-inline"><input type="text" id="qw-z1" value="50" ><span class="inp-units">Ω</span></div><span class="inp-hint">e.g. 50 Ω coax</span></div><div class="inp-row"><label>Load impedance, Z₂</label><div class="inp-inline"><input type="text" id="qw-z2" placeholder="Ω" ><span class="inp-units">Ω</span></div><span class="inp-hint">e.g. 200 Ω antenna</span></div><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="qw-f" placeholder="value" ><select id="qw-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="qw-er" value="1" ></div><span class="inp-hint">1 = air/coax, 4.4 = FR4</span></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Source impedance, <span class="var">Z₁</span></label><div class="inp-inline"><input type="text" id="qw-z1" value="50"  data-tip="Source-side characteristic impedance. Usually 50 Ω for coaxial systems."><span class="inp-units">Ω</span></div><span class="inp-hint">e.g. 50 Ω coax</span></div><div class="inp-row"><label>Load impedance, <span class="var">Z₂</span></label><div class="inp-inline"><input type="text" id="qw-z2" placeholder="Ω"  data-tip="Load impedance to match to. Transformer impedance = √(Z₁·Z₂)."><span class="inp-units">Ω</span></div><span class="inp-hint">e.g. 200 Ω antenna</span></div><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="qw-f" placeholder="value"  data-tip="Design frequency. The transformer is only perfectly matched at this frequency."><select id="qw-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Dielectric constant, <span class="var">εᵣ</span></label><div class="inp-inline"><input type="text" id="qw-er" value="1"  data-tip="Substrate dielectric constant. Sets physical length: ℓ = c/(4f√εᵣ)."></div><span class="inp-hint">1 = air/coax, 4.4 = FR4</span></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="qw-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;qw-z1&quot;: &quot;50&quot;, &quot;qw-z2&quot;: &quot;200&quot;, &quot;qw-f&quot;: &quot;1&quot;, &quot;qw-fu&quot;: &quot;1e9&quot;, &quot;qw-er&quot;: &quot;1&quot;})" title="Match 200Ω to 50Ω at 1 GHz in air">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
@@ -63,6 +63,41 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(Z_t = \sqrt{Z_1 Z_2} \qquad \ell = \dfrac{c}{4f\sqrt{\varepsilon_r}}\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var Zt  = document.getElementById('qw-zt')  ? document.getElementById('qw-zt').textContent  : '—';
+  var len = document.getElementById('qw-len') ? document.getElementById('qw-len').textContent : '—';
+  var Z1  = parseFloat(document.getElementById('qw-z1')&&document.getElementById('qw-z1').value)||50;
+  var Z2  = parseFloat(document.getElementById('qw-z2')&&document.getElementById('qw-z2').value)||200;
+  var W=560,H=130,wy=65;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  var x1=40,x2=180,x3=380,x4=520;
+  // Left section Z1
+  s+='<line x1="'+x1+'" y1="'+wy+'" x2="'+x2+'" y2="'+wy+'" stroke="#5533aa" stroke-width="3" stroke-linecap="round"/>';
+  s+='<text x="'+((x1+x2)/2)+'" y="'+(wy-14)+'" text-anchor="middle" font-size="11" fill="#5533aa">Z₁ = '+Z1+' Ω</text>';
+  // λ/4 transformer box
+  s+='<rect x="'+x2+'" y="'+(wy-22)+'" width="'+(x3-x2)+'" height="44" fill="#f0eeff" stroke="#AA77FF" stroke-width="2" rx="4"/>';
+  s+='<text x="'+((x2+x3)/2)+'" y="'+(wy-4)+'" text-anchor="middle" font-size="11" fill="#AA77FF" font-weight="bold">λ/4 transformer</text>';
+  s+='<text x="'+((x2+x3)/2)+'" y="'+(wy+11)+'" text-anchor="middle" font-size="10.5" fill="#5533aa">Z_t = '+Zt+'</text>';
+  s+='<text x="'+((x2+x3)/2)+'" y="'+(wy+26)+'" text-anchor="middle" font-size="9.5" fill="#888">ℓ = '+len+'</text>';
+  // Right section Z2
+  s+='<line x1="'+x3+'" y1="'+wy+'" x2="'+x4+'" y2="'+wy+'" stroke="#5533aa" stroke-width="3" stroke-linecap="round"/>';
+  s+='<text x="'+((x3+x4)/2)+'" y="'+(wy-14)+'" text-anchor="middle" font-size="11" fill="#5533aa">Z₂ = '+Z2+' Ω</text>';
+  // Terminals
+  s+='<circle cx="'+x1+'" cy="'+wy+'" r="4.5" fill="white" stroke="#5533aa" stroke-width="2"/>';
+  s+='<circle cx="'+x4+'" cy="'+wy+'" r="4.5" fill="white" stroke="#5533aa" stroke-width="2"/>';
+  // Z_t formula
+  s+='<text x="'+W/2+'" y="118" text-anchor="middle" font-size="10.5" fill="#888" font-style="italic">Z_t = √(Z₁ · Z₂)</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_transmission_lines.html">Learn the theory behind this tool →</a></div>
 <script src="QuarterWave.js"></script>
 </article>

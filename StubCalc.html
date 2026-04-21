@@ -54,7 +54,7 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="st-f" placeholder="value" ><select id="st-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Line impedance, Z₀</label><div class="inp-inline"><input type="text" id="st-z0" value="50" ><span class="inp-units">Ω</span></div><span class="inp-hint">Stub characteristic impedance</span></div><div class="inp-row"><label>Target susceptance, B</label><div class="inp-inline"><input type="text" id="st-B" placeholder="mS" ><span class="inp-units">mS</span></div><span class="inp-hint">+ve = capacitive load</span></div><div class="inp-row"><label>Stub termination</label><select id="st-type"><option value="short">Short circuit</option><option value="open">Open circuit</option></select></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="st-f" placeholder="value"  data-tip="Operating frequency at which the stub provides the target susceptance."><select id="st-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Line impedance, <span class="var">Z₀</span></label><div class="inp-inline"><input type="text" id="st-z0" value="50"  data-tip="Characteristic impedance of the stub line. Usually 50 Ω."><span class="inp-units">Ω</span></div><span class="inp-hint">Stub characteristic impedance</span></div><div class="inp-row"><label>Target susceptance, <span class="var">B</span></label><div class="inp-inline"><input type="text" id="st-B" placeholder="mS"  data-tip="Target shunt susceptance in mS. Positive = capacitive, negative = inductive. Cancels load reactance."><span class="inp-units">mS</span></div><span class="inp-hint">+ve = capacitive load</span></div><div class="inp-row"><label>Stub termination</label><select id="st-type"><option value="short">Short circuit</option><option value="open">Open circuit</option></select></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="st-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;st-f&quot;: &quot;2.45&quot;, &quot;st-fu&quot;: &quot;1e9&quot;, &quot;st-z0&quot;: &quot;50&quot;, &quot;st-B&quot;: &quot;20&quot;, &quot;st-type&quot;: &quot;short&quot;})" title="Cancel +j50Ω reactance at 2.45 GHz">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
@@ -63,6 +63,51 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(\ell_{SC} = \tfrac{1}{\beta}\arctan\!\left(\tfrac{Y_0}{B}\right)\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var el_deg = document.getElementById('st-el') ? document.getElementById('st-el').textContent : '—';
+  var pl     = document.getElementById('st-pl') ? document.getElementById('st-pl').textContent.replace(' (free space)','') : '—';
+  var typeEl = document.getElementById('st-type');
+  var stubType = typeEl ? typeEl.value : 'short';
+  var W=560,H=160,wy=68;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Main line
+  var lx=30,jx=240,rx=520;
+  s+='<line x1="'+lx+'" y1="'+wy+'" x2="'+rx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/>';
+  s+='<text x="'+((lx+jx)/2)+'" y="'+(wy-12)+'" text-anchor="middle" font-size="11" fill="#5533aa">Z₀</text>';
+  // Junction dot
+  s+='<circle cx="'+jx+'" cy="'+wy+'" r="5" fill="#5533aa"/>';
+  // Stub (going down)
+  var stubLen=65, stubBot=wy+stubLen;
+  s+='<line x1="'+jx+'" y1="'+wy+'" x2="'+jx+'" y2="'+stubBot+'" stroke="#AA77FF" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6,3"/>';
+  // Stub termination
+  if(stubType==='short') {
+    s+='<line x1="'+(jx-12)+'" y1="'+stubBot+'" x2="'+(jx+12)+'" y2="'+stubBot+'" stroke="#5533aa" stroke-width="3" stroke-linecap="round"/>';
+    s+='<text x="'+(jx+18)+'" y="'+(stubBot+4)+'" font-size="9.5" fill="#5533aa">short</text>';
+  } else {
+    s+='<circle cx="'+jx+'" cy="'+stubBot+'" r="5" fill="white" stroke="#5533aa" stroke-width="2"/>';
+    s+='<text x="'+(jx+14)+'" y="'+(stubBot+4)+'" font-size="9.5" fill="#5533aa">open</text>';
+  }
+  // Length annotation
+  s+='<line x1="'+(jx+20)+'" y1="'+wy+'" x2="'+(jx+20)+'" y2="'+stubBot+'" stroke="#888" stroke-width="1" stroke-dasharray="2,3"/>';
+  s+='<line x1="'+(jx+16)+'" y1="'+wy+'" x2="'+(jx+24)+'" y2="'+wy+'" stroke="#888" stroke-width="1"/>';
+  s+='<line x1="'+(jx+16)+'" y1="'+stubBot+'" x2="'+(jx+24)+'" y2="'+stubBot+'" stroke="#888" stroke-width="1"/>';
+  s+='<text x="'+(jx+32)+'" y="'+(wy+stubLen/2+4)+'" font-size="10.5" fill="#888">ℓ = '+pl+'</text>';
+  s+='<text x="'+(jx+32)+'" y="'+(wy+stubLen/2+18)+'" font-size="10" fill="#888">θ = '+el_deg+'</text>';
+  // Load label
+  s+='<text x="'+(jx+110)+'" y="'+(wy-12)+'" text-anchor="middle" font-size="10.5" fill="#888">Z_L</text>';
+  s+='<circle cx="'+rx+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+  s+='<circle cx="'+lx+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_transmission_lines.html">Learn the theory behind this tool →</a></div>
 <script src="StubCalc.js"></script>
 </article>

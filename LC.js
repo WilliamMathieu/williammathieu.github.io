@@ -11,6 +11,7 @@ btn.addEventListener('click', function() {
   var Cmul = {'10':1e-6,'20':1e-9,'30':1e-12}[Fu];
   var f = 1 / (2 * Math.PI * Math.sqrt(L * Lmul * C * Cmul));
   document.getElementById("f").textContent = engFmt(f,'Hz');
+  if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg) {

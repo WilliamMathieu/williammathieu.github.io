@@ -76,6 +76,59 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(\text{Parallel: } C = \sum C_n \qquad \text{Series: } \dfrac{1}{C} = \sum\dfrac{1}{C_n}\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var mode = document.getElementById('mode') ? document.getElementById('mode').value : 'series';
+  var total = document.getElementById('C_out') ? document.getElementById('C_out').textContent : '—';
+  var n = parseInt(document.getElementById('numCaps')&&document.getElementById('numCaps').value)||3;
+  n = Math.min(n, 6);
+  var W=560,H=140,wy=70;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+
+  if(mode==='series'){
+    // Caps in series on horizontal wire
+    var totalWidth=n*50+(n-1)*30, startX=(W-totalWidth)/2;
+    s+='<line x1="30" y1="'+wy+'" x2="'+startX+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    for(var i=0;i<n;i++){
+      var cx2=startX+i*80+25;
+      s+='<line x1="'+(cx2-16)+'" y1="'+wy+'" x2="'+(cx2-6)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+      s+='<line x1="'+(cx2-6)+'" y1="'+(wy-12)+'" x2="'+(cx2-6)+'" y2="'+(wy+12)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+      s+='<line x1="'+(cx2+6)+'" y1="'+(wy-12)+'" x2="'+(cx2+6)+'" y2="'+(wy+12)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+      s+='<line x1="'+(cx2+6)+'" y1="'+wy+'" x2="'+(cx2+24)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+      s+='<text x="'+cx2+'" y="'+(wy+26)+'" text-anchor="middle" font-size="9.5" fill="#5533aa">C'+(i+1)+'</text>';
+    }
+    s+='<line x1="'+(startX+n*80-10)+'" y1="'+wy+'" x2="'+(W-30)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<circle cx="30" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<circle cx="'+(W-30)+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+  } else {
+    // Parallel caps
+    var capSpacing=W/(n+1), topY=wy-35, botY=wy+35;
+    s+='<line x1="30" y1="'+wy+'" x2="'+(W-30)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    for(var i2=0;i2<n;i2++){
+      var cx3=capSpacing*(i2+1);
+      s+='<circle cx="'+cx3+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
+      s+='<line x1="'+cx3+'" y1="'+wy+'" x2="'+cx3+'" y2="'+(wy+14)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+      s+='<line x1="'+(cx3-12)+'" y1="'+(wy+14)+'" x2="'+(cx3+12)+'" y2="'+(wy+14)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+      s+='<line x1="'+(cx3-12)+'" y1="'+(wy+24)+'" x2="'+(cx3+12)+'" y2="'+(wy+24)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+      s+='<line x1="'+cx3+'" y1="'+(wy+24)+'" x2="'+cx3+'" y2="'+(wy+44)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+      s+='<text x="'+cx3+'" y="'+(wy-10)+'" text-anchor="middle" font-size="9.5" fill="#5533aa">C'+(i2+1)+'</text>';
+    }
+    // Bottom rail
+    s+='<line x1="30" y1="'+(wy+44)+'" x2="'+(W-30)+'" y2="'+(wy+44)+'" stroke="#444" stroke-width="1.8" stroke-linecap="round"/>';
+    s+='<circle cx="30" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<circle cx="'+(W-30)+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+  }
+  s+='<text x="'+W/2+'" y="128" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">C_total = '+total+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn the theory behind this tool →</a></div>
 <script src="CapacitorNetwork.js"></script>
 </article>

@@ -68,7 +68,7 @@
 </div>
 
 <div class="sec-lbl">Geometry → Impedance</div>
-<div class="inp-grid"><div class="inp-row"><label>Substrate height, h</label><div class="inp-inline"><input type="text" id="ms-h" placeholder="mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Trace to ground plane</span></div><div class="inp-row"><label>Trace width, w</label><div class="inp-inline"><input type="text" id="ms-w" placeholder="mm" ><span class="inp-units">mm</span></div></div><div class="inp-row"><label>Trace thickness, t</label><div class="inp-inline"><input type="text" id="ms-t" value="0.035" ><span class="inp-units">mm</span></div><span class="inp-hint">35 µm = 1 oz copper</span></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="ms-er" placeholder="e.g. 4.4" ></div></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Substrate height, <span class="var">h</span></label><div class="inp-inline"><input type="text" id="ms-h" placeholder="mm"  data-tip="Substrate height (trace to ground plane) in mm. FR4 standard = 1.6 mm."><span class="inp-units">mm</span></div><span class="inp-hint">Trace to ground plane</span></div><div class="inp-row"><label>Trace width, <span class="var">w</span></label><div class="inp-inline"><input type="text" id="ms-w" placeholder="mm"  data-tip="Trace width in mm. Wider trace → lower Z₀. For 50 Ω on FR4: w ≈ h × 2."><span class="inp-units">mm</span></div></div><div class="inp-row"><label>Trace thickness, <span class="var">t</span></label><div class="inp-inline"><input type="text" id="ms-t" value="0.035"  data-tip="Copper trace thickness in mm. Standard PCB: 35 µm (1 oz), 70 µm (2 oz)."><span class="inp-units">mm</span></div><span class="inp-hint">35 µm = 1 oz copper</span></div><div class="inp-row"><label>Dielectric constant, <span class="var">εᵣ</span></label><div class="inp-inline"><input type="text" id="ms-er" placeholder="e.g. 4.4"  data-tip="Substrate dielectric constant. FR4 ≈ 4.4, Rogers 4003C ≈ 3.55, PTFE ≈ 2.1."></div></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;">
   <button class="calc-btn" id="ms-btn1">Calculate Z₀</button>
   <button class="example-btn" onclick="loadExample({'ms-h':'1.6','ms-w':'3','ms-t':'0.035','ms-er':'4.4'})" title="50Ω trace on FR4">Load Example</button>
@@ -77,7 +77,7 @@
 <div class="res-grid"><div class="res-card"><h4>From Geometry</h4><div class="res-row"><span class="res-lbl">Characteristic impedance, Z₀</span><span class="res-val " id="ms-z0-out">—</span></div><div class="res-row"><span class="res-lbl">Effective εᵣ</span><span class="res-val " id="ms-eeff-out">—</span></div><div class="res-row"><span class="res-lbl">Phase velocity, vₚ</span><span class="res-val " id="ms-vp-out">—</span></div></div></div>
 
 <div class="sec-lbl" style="margin-top:16px;">Target Impedance → Width</div>
-<div class="inp-grid"><div class="inp-row"><label>Target impedance, Z₀</label><div class="inp-inline"><input type="text" id="ms-z0" value="50" ><span class="inp-units">Ω</span></div></div><div class="inp-row"><label>Substrate height, h</label><div class="inp-inline"><input type="text" id="ms-h2" placeholder="mm" ><span class="inp-units">mm</span></div></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="ms-er2" placeholder="e.g. 4.4" ></div></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Target impedance, <span class="var">Z₀</span></label><div class="inp-inline"><input type="text" id="ms-z0" value="50"  data-tip="Target characteristic impedance in Ω. Standard RF = 50 Ω, video = 75 Ω."><span class="inp-units">Ω</span></div></div><div class="inp-row"><label>Substrate height, <span class="var">h</span></label><div class="inp-inline"><input type="text" id="ms-h2" placeholder="mm"  data-tip="Substrate height in mm. Same as the Geometry→Impedance panel above."><span class="inp-units">mm</span></div></div><div class="inp-row"><label>Dielectric constant, <span class="var">εᵣ</span></label><div class="inp-inline"><input type="text" id="ms-er2" placeholder="e.g. 4.4"  data-tip="Substrate dielectric constant. FR4 ≈ 4.4."></div></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;">
   <button class="calc-btn" id="ms-btn2">Calculate Width</button>
   <button class="example-btn" onclick="loadExample({'ms-z0':'50','ms-h2':'1.6','ms-er2':'4.4'})" title="50Ω trace width on FR4">Load Example</button>
@@ -89,6 +89,54 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(Z_0 = \dfrac{120\pi}{\sqrt{\varepsilon_{eff}}\!\left[\,w/h + 1.393 + 0.667\ln(w/h+1.444)\right]}\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var z0El  = document.getElementById('ms-z0-out');  var z0  = z0El  ? z0El.textContent  : '—';
+  var eeffEl= document.getElementById('ms-eeff-out'); var eeff= eeffEl? eeffEl.textContent: '—';
+  var wv = parseFloat(document.getElementById('ms-w')&&document.getElementById('ms-w').value)||3;
+  var hv = parseFloat(document.getElementById('ms-h')&&document.getElementById('ms-h').value)||1.6;
+  var erv= parseFloat(document.getElementById('ms-er')&&document.getElementById('ms-er').value)||4.4;
+  // Scale for display
+  var scale=18, hpx=Math.min(40, hv*scale), wpx=Math.min(120, wv*scale);
+  var W=560,H=160,gndY=120,subTop=gndY-hpx,traceY=subTop-8;
+  var cx=W/2;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Ground plane
+  s+='<rect x="80" y="'+gndY+'" width="400" height="12" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  s+='<text x="'+(80+400/2)+'" y="'+(gndY+24)+'" text-anchor="middle" font-size="10" fill="#7a5000">Ground plane</text>';
+  // Substrate
+  s+='<rect x="80" y="'+subTop+'" width="400" height="'+hpx+'" fill="#d4ecca" stroke="#5a9020" stroke-width="1" rx="1"/>';
+  s+='<text x="'+(80+400/2)+'" y="'+(subTop+hpx/2+4)+'" text-anchor="middle" font-size="9.5" fill="#3a6010">εᵣ = '+erv+(eeff!=='—'?'  |  εeff = '+eeff:'')+'</text>';
+  // Trace
+  var tx=cx-wpx/2;
+  s+='<rect x="'+tx+'" y="'+(subTop-7)+'" width="'+wpx+'" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  // h dimension arrow
+  s+='<line x1="60" y1="'+subTop+'" x2="60" y2="'+gndY+'" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/>';
+  s+='<line x1="54" y1="'+subTop+'" x2="66" y2="'+subTop+'" stroke="#888" stroke-width="1.2"/>';
+  s+='<line x1="54" y1="'+gndY+'" x2="66" y2="'+gndY+'" stroke="#888" stroke-width="1.2"/>';
+  s+='<text x="48" y="'+(subTop+hpx/2+4)+'" text-anchor="end" font-size="9.5" fill="#888">h = '+hv+' mm</text>';
+  // w dimension arrow
+  s+='<line x1="'+tx+'" y1="20" x2="'+(tx+wpx)+'" y2="20" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/>';
+  s+='<line x1="'+tx+'" y1="15" x2="'+tx+'" y2="25" stroke="#888" stroke-width="1.2"/>';
+  s+='<line x1="'+(tx+wpx)+'" y1="15" x2="'+(tx+wpx)+'" y2="25" stroke="#888" stroke-width="1.2"/>';
+  s+='<text x="'+cx+'" y="14" text-anchor="middle" font-size="9.5" fill="#888">w = '+wv+' mm</text>';
+  // Z0 result
+  s+='<text x="'+W/2+'" y="150" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">Z₀ = '+z0+'</text>';
+  // Field lines (simple arcs)
+  for(var fi=0;fi<5;fi++){
+    var fr=(fi+0.5)*wpx/5+tx, fry=subTop-1, frad=8+fi*7;
+    s+='<path d="M'+fr+','+(fry)+' A'+frad+','+frad+' 0 0,1 '+(fr+frad*0.1)+','+(fry-frad*0.8)+'" fill="none" stroke="#00aacc" stroke-width="0.8" opacity="0.5"/>';
+  }
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_microwave_lines.html">Learn the theory behind this tool →</a></div>
 <script src="Microstrip.js"></script>
 </article>

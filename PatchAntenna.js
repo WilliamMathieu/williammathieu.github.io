@@ -14,6 +14,7 @@ document.getElementById('pa-btn').addEventListener('click', function() {
     document.getElementById('pa-L').textContent=(L*1000).toFixed(3)+' mm';
     document.getElementById('pa-eeff').textContent=erEff.toFixed(4);
     document.getElementById('pa-dL').textContent=(dL*1000).toFixed(4)+' mm';
+    if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

@@ -611,3 +611,22 @@ nav ul li[style*="font-size:11px"] {
   margin-top: 4px;
 }
 nav ul li[style*="font-size:11px"] a { display: none; }
+
+/* ── Diagram / Schematic box (shared by all tools) ─────────────────────── */
+.schematic-box {
+  background: #faf9ff;
+  border: 1px solid #d0c8f0;
+  border-radius: 5px;
+  padding: 12px;
+  text-align: center;
+  overflow-x: auto;
+  margin-bottom: 4px;
+}
+.schematic-box svg { max-width: 100%; height: auto; }
+
+/* Variable symbol inside labels — keeps original case despite text-transform */
+.inp-row label .var {
+  text-transform: none;
+  font-style: italic;
+  letter-spacing: 0;
+}

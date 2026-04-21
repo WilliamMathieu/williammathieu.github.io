@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase Noise to Jitter Converter | RF Toolbox</title>
+  <meta name="description" content="Convert phase noise (dBc/Hz) to RMS jitter (ps) by numerical integration. Supports piecewise linear phase noise profiles. Essential for oscillator and clock specification.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/PhaseNoiseJitter.html">
+  <meta property="og:title" content="Phase Noise to Jitter Converter | RF Toolbox">
+  <meta property="og:description" content="Convert phase noise (dBc/Hz) to RMS jitter (ps) by numerical integration. Supports piecewise linear phase noise profiles. Essential for oscillator and clock specification.">
+  <meta property="og:url" content="https://rftoolbox.ca/PhaseNoiseJitter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Phase Noise to Jitter Converter",
+    "description": "Convert phase noise (dBc/Hz) to RMS jitter (ps) by numerical integration. Supports piecewise linear phase noise profiles. Essential for oscillator and clock specification.",
+    "url": "https://rftoolbox.ca/PhaseNoiseJitter.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Phase Noise to Jitter Converter</h3>
+<div class="tool-concept">
+  <p>Phase noise and jitter are two descriptions of the same phenomenon — timing uncertainty in an oscillator. Phase noise is expressed in the frequency domain (dBc/Hz at an offset), jitter in the time domain (ps RMS). This calculator converts between them and integrates a piecewise phase noise profile.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f_c</td><td style="padding:3px 0;">Carrier frequency (Hz).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L(f)</td><td style="padding:3px 0;">Single-sideband phase noise at offset f, in dBc/Hz.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f_low, f_high</td><td style="padding:3px 0;">Integration band. RMS jitter depends on what frequency range you integrate over.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">σ_t</td><td style="padding:3px 0;">RMS jitter = (1/(2π·f_c)) · √(2 · ∫L(f)·df). Result in ps RMS.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">J_pp</td><td style="padding:3px 0;">Peak-to-peak jitter ≈ 6–7× RMS (3–3.5σ confidence interval).</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Carrier & Integration Band</div>
+<div class="inp-grid"><div class="inp-row"><label>Carrier frequency, <span class="var">f_c</span></label><div class="inp-inline"><input type="text" id="pn-fc" value="100" ><select id="pn-fcu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Integration start, <span class="var">f_low</span></label><div class="inp-inline"><input type="text" id="pn-flow" value="1e3" ><span class='inp-units'>Hz</span></div><span class="inp-hint">lower integration bound</span></div><div class="inp-row"><label>Integration end, <span class="var">f_high</span></label><div class="inp-inline"><input type="text" id="pn-fhigh" value="1e7" ><span class='inp-units'>Hz</span></div><span class="inp-hint">upper integration bound</span></div></div>
+<div class="sec-lbl">Phase Noise Profile (up to 5 offset/level pairs)</div>
+<div class="note-info" style="font-size:12px;">Enter offset frequencies and phase noise levels. The calculator integrates using linear interpolation on a log-log scale between adjacent points.</div>
+<div id="pn-rows"></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="pn-btn">Calculate</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Jitter</h4><div class="res-row"><span class="res-lbl">RMS jitter, σ_t</span><span class="res-val" id="pn-rms">—</span></div><div class="res-row"><span class="res-lbl">Peak-to-peak jitter (6σ)</span><span class="res-val" id="pn-pp">—</span></div><div class="res-row"><span class="res-lbl">Integrated phase noise</span><span class="res-val" id="pn-int">—</span></div></div><div class="res-card"><h4>Reference</h4><div class="res-row"><span class="res-lbl">Carrier frequency</span><span class="res-val" id="pn-fc-out">—</span></div><div class="res-row"><span class="res-lbl">Integration band</span><span class="res-val" id="pn-band">—</span></div><div class="res-row"><span class="res-lbl">Phase noise at 1 kHz offset</span><span class="res-val" id="pn-at1k">—</span></div></div></div>
+<div class="wiki-link-hint">📖 <a href="wiki_oscillators.html">Learn about oscillators and phase noise →</a></div>
+<script>
+// Build input rows
+(function(){
+  var defaults=[['1e3','-80'],['1e4','-100'],['1e5','-120'],['1e6','-140'],['1e7','-155']];
+  var h='<div class="inp-grid" style="grid-template-columns:1fr 1fr 1fr 1fr 1fr;">';
+  defaults.forEach(function(d,i){
+    h+='<div class="inp-row"><label>Offset '+( i+1)+' (Hz)</label><input type="text" id="pn-f'+i+'" value="'+d[0]+'" style="width:100%;"></div>';
+    h+='<div class="inp-row"><label>L(f) (dBc/Hz)</label><input type="text" id="pn-l'+i+'" value="'+d[1]+'" style="width:100%;"></div>';
+    if(i<4) h+='<div></div>';
+  });
+  h+='</div>';
+  document.getElementById('pn-rows').innerHTML=h;
+})();
+document.getElementById('pn-btn').addEventListener('click', function(){
+  var fc=parseFloat(document.getElementById('pn-fc').value)*parseFloat(document.getElementById('pn-fcu').value);
+  var flow=parseFloat(document.getElementById('pn-flow').value);
+  var fhigh=parseFloat(document.getElementById('pn-fhigh').value);
+  document.getElementById('error').textContent='';
+  if([fc,flow,fhigh].some(isNaN)||fc<=0||flow<=0||fhigh<=flow){document.getElementById('error').textContent='Enter valid values. f_high must exceed f_low.';return;}
+  // Collect points
+  var pts=[];
+  for(var i=0;i<5;i++){
+    var f2=parseFloat(document.getElementById('pn-f'+i).value);
+    var l=parseFloat(document.getElementById('pn-l'+i).value);
+    if(!isNaN(f2)&&!isNaN(l)) pts.push([f2,l]);
+  }
+  if(pts.length<2){document.getElementById('error').textContent='Enter at least 2 offset/level pairs.';return;}
+  pts.sort(function(a,b){return a[0]-b[0];});
+  // Integrate L(f) (linear) over [flow,fhigh] using trapezoid on log scale
+  // L(f) linear = 10^(L_dBc/10)
+  function getLlin(f){
+    if(f<=pts[0][0]) return Math.pow(10,pts[0][1]/10);
+    if(f>=pts[pts.length-1][0]) return Math.pow(10,pts[pts.length-1][1]/10);
+    for(var j=0;j<pts.length-1;j++){
+      if(f>=pts[j][0]&&f<=pts[j+1][0]){
+        // Log-log interpolation
+        var t=(Math.log10(f)-Math.log10(pts[j][0]))/(Math.log10(pts[j+1][0])-Math.log10(pts[j][0]));
+        var ldBc=pts[j][1]+(pts[j+1][1]-pts[j][1])*t;
+        return Math.pow(10,ldBc/10);
+      }
+    }
+    return 0;
+  }
+  // Numerical integration (100 steps log-spaced)
+  var N=200;
+  var integral=0;
+  var lf1=Math.log10(flow), lf2=Math.log10(fhigh);
+  for(var i=0;i<N;i++){
+    var f1=Math.pow(10,lf1+(lf2-lf1)*i/N);
+    var f2b=Math.pow(10,lf1+(lf2-lf1)*(i+1)/N);
+    var df=f2b-f1;
+    integral+=(getLlin(f1)+getLlin(f2b))/2*df;
+  }
+  var sigma_t=Math.sqrt(2*integral)/(2*Math.PI*fc);
+  var sigma_ps=sigma_t*1e12;
+  var intdBc=10*Math.log10(integral);
+  var l1k=pts[0][1]; // first point
+  document.getElementById('pn-rms').textContent=sigma_ps.toFixed(2)+' ps RMS';
+  document.getElementById('pn-pp').textContent=(6*sigma_ps).toFixed(1)+' ps (6σ)';
+  document.getElementById('pn-int').textContent=intdBc.toFixed(1)+' dBc';
+  document.getElementById('pn-fc-out').textContent=engFmt(fc,'Hz');
+  document.getElementById('pn-band').textContent=engFmt(flow,'Hz')+' – '+engFmt(fhigh,'Hz');
+  document.getElementById('pn-at1k').textContent=pts[0][1]+' dBc/Hz @ '+engFmt(pts[0][0],'Hz');
+});
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

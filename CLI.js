@@ -9,6 +9,7 @@ btn.addEventListener('click', function() {
   var dSI = d * 1e-3, DSI = D * 1e-3;
   var L = 1.25663706e-6 * (DSI/2) * (Math.log(8*DSI/dSI) - 2);
   document.getElementById("L").textContent = engFmt(L,'H');
+  if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg) {

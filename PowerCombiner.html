@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Power Combining Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate combined output power for N-way RF power combining arrays. Includes combining efficiency, gain over single module, and graceful degradation analysis for failed modules.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/PowerCombiner.html">
+  <meta property="og:title" content="RF Power Combining Calculator | RF Toolbox">
+  <meta property="og:description" content="Calculate combined output power for N-way RF power combining arrays. Includes combining efficiency, gain over single module, and graceful degradation analysis for failed modules.">
+  <meta property="og:url" content="https://rftoolbox.ca/PowerCombiner.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "RF Power Combining Calculator",
+    "description": "Calculate combined output power for N-way RF power combining arrays. Includes combining efficiency, gain over single module, and graceful degradation analysis for failed modules.",
+    "url": "https://rftoolbox.ca/PowerCombiner.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>RF Power Combining Calculator</h3>
+<div class="tool-concept">
+  <p>When N amplifiers drive a power combining network, the combined output depends on the combining efficiency, phase/amplitude matching, and what happens when one element fails. This tool calculates combined power, efficiency loss, and degraded operation.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Number of amplifier modules to combine.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">P_each</td><td style="padding:3px 0;">Output power of each individual amplifier (dBm or W).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">η</td><td style="padding:3px 0;">Combining efficiency (0–1). Ideal corporate combiner: η ≈ 0.95–0.98; spatial: η ≈ 0.80.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N_fail</td><td style="padding:3px 0;">Number of failed modules. Combined output degrades gracefully.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Degradation</td><td style="padding:3px 0;">With k failed modules: P_out = (N−k)²/N² × P_ideal (coherent combining).</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Number of modules, <span class="var">N</span></label><div class="inp-inline"><input type="text" id="pc-n" value="4" ></div><span class="inp-hint">total amplifiers</span></div><div class="inp-row"><label>Power per module, <span class="var">P_each</span></label><div class="inp-inline"><input type="text" id="pc-p" value="10" ><span class='inp-units'>dBm</span></div></div><div class="inp-row"><label>Combining efficiency, <span class="var">η</span></label><div class="inp-inline"><input type="text" id="pc-eta" value="0.95" ></div><span class="inp-hint">0 to 1 (95% = corporate combiner)</span></div><div class="inp-row"><label>Failed modules, <span class="var">k</span></label><div class="inp-inline"><input type="text" id="pc-fail" value="0" ></div><span class="inp-hint">0 for normal operation</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="pc-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;pc-n&quot;: &quot;4&quot;, &quot;pc-p&quot;: &quot;10&quot;, &quot;pc-eta&quot;: &quot;0.95&quot;, &quot;pc-fail&quot;: &quot;0&quot;})" title="4× 10 dBm modules at 95% efficiency">Load Example</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Combined Output</h4><div class="res-row"><span class="res-lbl">Combined power (dBm)</span><span class="res-val" id="pc-pout">—</span></div><div class="res-row"><span class="res-lbl">Combined power (W)</span><span class="res-val" id="pc-pout-w">—</span></div><div class="res-row"><span class="res-lbl">Combining gain vs single</span><span class="res-val" id="pc-cgain">—</span></div><div class="res-row"><span class="res-lbl">Efficiency loss</span><span class="res-val" id="pc-eloss">—</span></div></div><div class="res-card"><h4>Failure Analysis</h4><div class="res-row"><span class="res-lbl">Output with k failed</span><span class="res-val" id="pc-pfail">—</span></div><div class="res-row"><span class="res-lbl">Degradation (dB)</span><span class="res-val" id="pc-degrad">—</span></div><div class="res-row"><span class="res-lbl">Surviving modules</span><span class="res-val" id="pc-surv">—</span></div><div class="res-row"><span class="res-lbl">% power retained</span><span class="res-val" id="pc-pct">—</span></div></div></div>
+<div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<div class="wiki-link-hint">📖 <a href="wiki_microwave_components.html">Learn the theory behind this tool →</a></div>
+<script>
+document.getElementById('pc-btn').addEventListener('click', function(){
+  var N=parseInt(document.getElementById('pc-n').value);
+  var P=parseFloat(document.getElementById('pc-p').value);
+  var eta=parseFloat(document.getElementById('pc-eta').value);
+  var k=parseInt(document.getElementById('pc-fail').value)||0;
+  document.getElementById('error').textContent='';
+  if(isNaN(N)||isNaN(P)||isNaN(eta)||N<1||eta<=0||eta>1||k<0||k>=N){document.getElementById('error').textContent='Enter valid values. k must be < N.';return;}
+  var Peach_W=1e-3*Math.pow(10,P/10);
+  var Ptotal_ideal_W=N*Peach_W;
+  var Pout_W=Ptotal_ideal_W*eta;
+  var Pout_dBm=10*Math.log10(Pout_W/1e-3);
+  var Cgain=Pout_dBm-P; // dB over single module
+  var Eloss_dB=-10*Math.log10(eta);
+  // Failure: coherent combining → amplitude drops by (N-k)/N, power by ((N-k)/N)²
+  var surv=N-k;
+  var Pfail_W=Pout_W*(surv/N)*(surv/N);
+  var Pfail_dBm=10*Math.log10(Pfail_W/1e-3);
+  var degrad_dB=Pout_dBm-Pfail_dBm;
+  var pct_retained=(Pfail_W/Pout_W)*100;
+  document.getElementById('pc-pout').textContent=Pout_dBm.toFixed(2)+' dBm';
+  document.getElementById('pc-pout-w').textContent=engFmt(Pout_W,'W');
+  document.getElementById('pc-cgain').textContent='+'+Cgain.toFixed(1)+' dB';
+  document.getElementById('pc-eloss').textContent=Eloss_dB.toFixed(2)+' dB';
+  document.getElementById('pc-pfail').textContent=(k>0?Pfail_dBm.toFixed(2)+' dBm':'N/A (no failures)');
+  document.getElementById('pc-degrad').textContent=(k>0?'-'+degrad_dB.toFixed(1)+' dB':'0 dB');
+  document.getElementById('pc-surv').textContent=surv+' of '+N;
+  document.getElementById('pc-pct').textContent=(k>0?pct_retained.toFixed(0)+'%':'100%');
+  if(window.drawDiagram) drawDiagram(N,k,Pout_dBm.toFixed(1),P);
+});
+function drawDiagram(N,k,Pout,Peach){
+  if(!N) return;
+  var W=520,H=Math.max(140,N*32+60);
+  var sv='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  sv+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  var jx=W-100, cy=H/2;
+  // Combiner block
+  sv+='<rect x="'+(jx-30)+'" y="'+(cy-30)+'" width="60" height="60" fill="#f0eeff" stroke="#5533aa" stroke-width="2" rx="4"/>';
+  sv+='<text x="'+jx+'" y="'+(cy-4)+'" text-anchor="middle" font-size="10" font-weight="bold" fill="#5533aa">N-way</text>';
+  sv+='<text x="'+jx+'" y="'+(cy+10)+'" text-anchor="middle" font-size="10" fill="#5533aa">combiner</text>';
+  // Output
+  sv+='<line x1="'+(jx+30)+'" y1="'+cy+'" x2="'+(W-20)+'" y2="'+cy+'" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/>';
+  sv+='<circle cx="'+(W-20)+'" cy="'+cy+'" r="4" fill="white" stroke="#5533aa" stroke-width="2"/>';
+  sv+='<text x="'+(W-20)+'" y="'+(cy-12)+'" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">'+Pout+' dBm</text>';
+  // Input amplifier modules
+  for(var i=0;i<Math.min(N,8);i++){
+    var iy=H/(N+1)*(i+1);
+    var failed=i<k;
+    var col=failed?'#cc3333':'#5533aa';
+    var fill=failed?'#ffeeee':'white';
+    sv+='<rect x="30" y="'+(iy-14)+'" width="70" height="28" fill="'+fill+'" stroke="'+col+'" stroke-width="1.8" rx="3"/>';
+    sv+='<text x="65" y="'+(iy+4)+'" text-anchor="middle" font-size="9" fill="'+col+'">'+(failed?'FAILED':'Amp '+(i+1))+' '+Peach+' dBm</text>';
+    sv+='<line x1="100" y1="'+iy+'" x2="'+(jx-30)+'" y2="'+cy+'" stroke="'+(failed?'#ffaaaa':col)+'" stroke-width="1.8" '+(failed?'stroke-dasharray="4,3"':'')+' stroke-linecap="round"/>';
+  }
+  if(N>8){
+    sv+='<text x="65" y="'+(H-20)+'" text-anchor="middle" font-size="9" fill="#888">… '+N+' modules total</text>';
+  }
+  sv+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=sv;
+}
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

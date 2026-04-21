@@ -10,6 +10,7 @@ document.getElementById('dp-btn').addEventListener('click', function() {
     document.getElementById('dp-half').textContent=(L*1000).toFixed(2)+' mm';
     document.getElementById('dp-arm').textContent=(arm*1000).toFixed(2)+' mm';
     document.getElementById('dp-mono').textContent=(arm*1000).toFixed(2)+' mm';
+    if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

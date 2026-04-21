@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VSWR / Return Loss / Reflection Coefficient Converter | RF Toolbox</title>
+  <meta name="description" content="Convert between VSWR, reflection coefficient |Γ|, return loss (dB), and mismatch loss (dB). Live reactive — enter any value and all others update instantly.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/VSWRConverter.html">
+  <meta property="og:title" content="VSWR / Return Loss / Reflection Coefficient Converter | RF Toolbox">
+  <meta property="og:description" content="Convert between VSWR, reflection coefficient |Γ|, return loss (dB), and mismatch loss (dB). Live reactive — enter any value and all others update instantly.">
+  <meta property="og:url" content="https://rftoolbox.ca/VSWRConverter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "VSWR / Return Loss / Reflection Coefficient Converter",
+    "description": "Convert between VSWR, reflection coefficient |Γ|, return loss (dB), and mismatch loss (dB). Live reactive — enter any value and all others update instantly.",
+    "url": "https://rftoolbox.ca/VSWRConverter.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>VSWR / Return Loss / Reflection Coefficient Converter</h3>
+<div class="tool-concept">
+  <p>Enter any one of the four equivalent match-quality metrics and all others update instantly. These four quantities are all different ways of expressing the same physical thing — how well two impedances are matched.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">VSWR</td><td style="padding:3px 0;">Voltage Standing Wave Ratio = (1+|Γ|)/(1−|Γ|). Perfect match = 1. Typically target ≤ 2.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">|Γ|</td><td style="padding:3px 0;">Reflection coefficient magnitude 0–1. 0 = perfect match, 1 = total reflection.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">RL</td><td style="padding:3px 0;">Return loss = −20·log₁₀|Γ| dB. Higher = better. Common target > 10 dB.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ML</td><td style="padding:3px 0;">Mismatch loss = −10·log₁₀(1−|Γ|²) dB. Power lost to reflection.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Enter any one value</div>
+<div class="inp-grid"><div class="inp-row"><label>VSWR</label><div class='inp-inline'><input type="text" id="v-vswr" placeholder="e.g. 2.0" oninput="vswrUpdate('vswr')"></div><span class="inp-hint">≥ 1</span></div><div class="inp-row"><label>Reflection coeff., <span class="var">\u0393</span></label><div class='inp-inline'><input type="text" id="v-gamma" placeholder="0 – 1" oninput="vswrUpdate('gamma')"></div><span class="inp-hint">0 to 1</span></div><div class="inp-row"><label>Return loss, <span class="var">RL</span></label><div class='inp-inline'><input type="text" id="v-rl" placeholder="dB" oninput="vswrUpdate('rl')"><span class='inp-units'>dB</span></div><span class="inp-hint">positive dB</span></div><div class="inp-row"><label>Mismatch loss, <span class="var">ML</span></label><div class='inp-inline'><input type="text" id="v-ml" placeholder="dB" oninput="vswrUpdate('ml')"><span class='inp-units'>dB</span></div><span class="inp-hint">power lost to reflection</span></div></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Match Quality</h4><div class="res-row"><span class="res-lbl">VSWR</span><span class="res-val" id="ro-vswr">—</span></div><div class="res-row"><span class="res-lbl">|Γ|</span><span class="res-val" id="ro-gamma">—</span></div><div class="res-row"><span class="res-lbl">Return Loss (dB)</span><span class="res-val" id="ro-rl">—</span></div><div class="res-row"><span class="res-lbl">Mismatch Loss (dB)</span><span class="res-val" id="ro-ml">—</span></div><div class="res-row"><span class="res-lbl">Transmission (%)</span><span class="res-val" id="ro-tx">—</span></div></div></div>
+<div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<div class="wiki-link-hint">📖 <a href="wiki_sparam.html">Learn about S-parameters and reflection →</a></div>
+<script>
+function vswrUpdate(src) {
+  var vswr,gamma,rl,ml;
+  try {
+    if(src==='vswr')  { vswr =parseFloat(document.getElementById('v-vswr').value);  if(vswr<1)throw 1; gamma=(vswr-1)/(vswr+1); }
+    else if(src==='gamma') { gamma=parseFloat(document.getElementById('v-gamma').value); if(gamma<0||gamma>1)throw 1; vswr=(1+gamma)/(1-gamma); }
+    else if(src==='rl') { rl=parseFloat(document.getElementById('v-rl').value); if(rl<0)throw 1; gamma=Math.pow(10,-rl/20); vswr=(1+gamma)/(1-gamma); }
+    else { ml=parseFloat(document.getElementById('v-ml').value); if(ml<0)throw 1; gamma=Math.sqrt(1-Math.pow(10,-ml/10)); vswr=(1+gamma)/(1-gamma); }
+    if(!isFinite(vswr)||!isFinite(gamma)) throw 1;
+    rl  = -20*Math.log10(gamma);
+    ml  = -10*Math.log10(1-gamma*gamma);
+    var tx = (1-gamma*gamma)*100;
+    document.getElementById('ro-vswr').textContent  = vswr.toFixed(4);
+    document.getElementById('ro-gamma').textContent = gamma.toFixed(4);
+    document.getElementById('ro-rl').textContent    = (isFinite(rl)?rl.toFixed(2):'∞')+' dB';
+    document.getElementById('ro-ml').textContent    = ml.toFixed(4)+' dB';
+    document.getElementById('ro-tx').textContent    = tx.toFixed(2)+'%';
+    // Colour code VSWR result
+    var el=document.getElementById('ro-vswr');
+    el.className='res-val '+(vswr<=1.5?'good':vswr<=2?'warn':'bad');
+    document.getElementById('error').textContent='';
+    if(window.drawDiagram) drawDiagram(gamma);
+  } catch(e) { document.getElementById('error').textContent='Enter a valid value.'; }
+}
+function drawDiagram(g) {
+  if(g===undefined){var rl=parseFloat(document.getElementById('v-rl').value)||20;g=Math.pow(10,-rl/20);}
+  var W=480,H=130,wy=65;
+  var tx_len=Math.round((1-g)*240+20), ref_len=Math.round(g*240);
+  var col=g<0.1?'#1a8a1a':g<0.316?'#aa6600':'#cc2222';
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Incident wave arrow
+  s+='<line x1="20" y1="45" x2="'+(20+tx_len)+'" y2="45" stroke="#5533aa" stroke-width="3" stroke-linecap="round"/>';
+  s+='<polygon points="'+(20+tx_len)+',45 '+(20+tx_len-10)+',39 '+(20+tx_len-10)+',51" fill="#5533aa"/>';
+  s+='<text x="'+(20+tx_len/2)+'" y="36" text-anchor="middle" font-size="11" fill="#5533aa">Incident power ('+((1-g*g)*100).toFixed(1)+'% transmitted)</text>';
+  // Load block
+  s+='<rect x="'+(20+tx_len)+'" y="30" width="50" height="30" fill="#f0eeff" stroke="#5533aa" stroke-width="2" rx="4"/>';
+  s+='<text x="'+(20+tx_len+25)+'" y="50" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">Z_L</text>';
+  // Reflected arrow
+  if(ref_len>4){
+    s+='<line x1="'+(20+tx_len)+'" y1="88" x2="'+(20+tx_len-ref_len)+'" y2="88" stroke="'+col+'" stroke-width="3" stroke-linecap="round"/>';
+    s+='<polygon points="'+(20+tx_len-ref_len)+',88 '+(20+tx_len-ref_len+10)+',82 '+(20+tx_len-ref_len+10)+',94" fill="'+col+'"/>';
+    s+='<text x="'+(20+tx_len-ref_len/2)+'" y="106" text-anchor="middle" font-size="11" fill="'+col+'">Reflected (|Γ|='+g.toFixed(3)+', RL='+(isFinite(-20*Math.log10(g))?(-20*Math.log10(g)).toFixed(1):'∞')+'dB)</text>';
+  } else {
+    s+='<text x="240" y="100" text-anchor="middle" font-size="11" fill="#1a8a1a">Near-perfect match — negligible reflection</text>';
+  }
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+window.addEventListener('load',()=>{vswrUpdate('rl');});
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

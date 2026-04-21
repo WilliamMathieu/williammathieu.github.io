@@ -54,7 +54,7 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Inner conductor diameter, d</label><div class="inp-inline"><input type="text" id="cx-d" placeholder="mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Central conductor</span></div><div class="inp-row"><label>Outer conductor diameter, D</label><div class="inp-inline"><input type="text" id="cx-D" placeholder="mm" ><span class="inp-units">mm</span></div><span class="inp-hint">Shield inner diameter</span></div><div class="inp-row"><label>Dielectric constant, εᵣ</label><div class="inp-inline"><input type="text" id="cx-er" value="2.25" ></div><span class="inp-hint">PE=2.25, PTFE=2.1, foam≈1.5</span></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Inner conductor diameter, <span class="var">d</span></label><div class="inp-inline"><input type="text" id="cx-d" placeholder="mm"  data-tip="Inner conductor diameter in mm. Larger d → lower Z₀."><span class="inp-units">mm</span></div><span class="inp-hint">Central conductor</span></div><div class="inp-row"><label>Outer conductor diameter, <span class="var">D</span></label><div class="inp-inline"><input type="text" id="cx-D" placeholder="mm"  data-tip="Outer conductor (shield) inner diameter in mm. Larger D → higher Z₀."><span class="inp-units">mm</span></div><span class="inp-hint">Shield inner diameter</span></div><div class="inp-row"><label>Dielectric constant, <span class="var">εᵣ</span></label><div class="inp-inline"><input type="text" id="cx-er" value="2.25"  data-tip="Dielectric constant of the insulating material. Polyethylene ≈ 2.25, PTFE ≈ 2.1, foam ≈ 1.4."></div><span class="inp-hint">PE=2.25, PTFE=2.1, foam≈1.5</span></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="cx-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;cx-d&quot;: &quot;0.9&quot;, &quot;cx-D&quot;: &quot;3.0&quot;, &quot;cx-er&quot;: &quot;2.3&quot;})" title="RG-174 coax (PE dielectric)">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
@@ -63,6 +63,46 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(Z_0 = \dfrac{60}{\sqrt{\varepsilon_r}}\ln\!\dfrac{D}{d}\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var Z0El = document.getElementById('cx-z0'); var Z0 = Z0El ? Z0El.textContent : '—';
+  var vpEl = document.getElementById('cx-vp'); var vp = vpEl ? vpEl.textContent : '—';
+  var d = parseFloat(document.getElementById('cx-d')&&document.getElementById('cx-d').value)||0.9;
+  var D = parseFloat(document.getElementById('cx-D')&&document.getElementById('cx-D').value)||3.0;
+  var ratio = D>0&&d>0 ? D/d : 3.33;
+  var W=560,H=170,cx=W/2,cy=85,outerR=62,innerR=outerR/ratio;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Dielectric fill
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+outerR+'" fill="#e8f4ec" stroke="none"/>';
+  s+='<text x="'+(cx+outerR*0.6)+'" y="'+(cy-outerR*0.5)+'" text-anchor="middle" font-size="9" fill="#4a8a5a">εᵣ</text>';
+  // Outer conductor
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+outerR+'" fill="none" stroke="#b8922a" stroke-width="7"/>';
+  // Inner conductor
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+innerR+'" fill="#b8922a" stroke="none"/>';
+  // Dimension arrows
+  // d (inner diameter)
+  var aix=cx+innerR, aox=cx+outerR-4;
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+aix+'" y2="'+cy+'" stroke="#333" stroke-width="1" stroke-dasharray="2,2"/>';
+  s+='<text x="'+(cx+innerR/2)+'" y="'+(cy-innerR-4)+'" text-anchor="middle" font-size="9.5" fill="#555">d = '+d+' mm</text>';
+  s+='<line x1="'+cx+'" y1="'+(cy-innerR-1)+'" x2="'+cx+'" y2="'+(cy-4)+'" stroke="#333" stroke-width="1" stroke-dasharray="2,2"/>';
+  // D (outer diameter)
+  s+='<line x1="'+(cx-outerR-18)+'" y1="'+cy+'" x2="'+(cx+outerR+18)+'" y2="'+cy+'" stroke="#444" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<line x1="'+(cx-outerR)+'" y1="'+(cy-8)+'" x2="'+(cx-outerR)+'" y2="'+(cy+8)+'" stroke="#444" stroke-width="1.2"/>';
+  s+='<line x1="'+(cx+outerR)+'" y1="'+(cy-8)+'" x2="'+(cx+outerR)+'" y2="'+(cy+8)+'" stroke="#444" stroke-width="1.2"/>';
+  s+='<text x="'+(cx)+'" y="'+(cy+outerR+16)+'" text-anchor="middle" font-size="9.5" fill="#555">D = '+D+' mm</text>';
+  // Results
+  s+='<text x="80" y="30" text-anchor="middle" font-size="11" font-weight="bold" fill="#5533aa">Z₀ = '+Z0+'</text>';
+  s+='<text x="80" y="148" text-anchor="middle" font-size="10" fill="#888">vₚ = '+vp+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_microwave_lines.html">Learn the theory behind this tool →</a></div>
 <script src="Coaxial.js"></script>
 </article>

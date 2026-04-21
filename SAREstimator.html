@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MRI SAR Estimator — RF Safety Calculator | RF Toolbox</title>
+  <meta name="description" content="Estimate local SAR (W/kg) in MRI tissue from B1+ field amplitude, frequency, and tissue properties. Compares against IEC 60601-2-33 safety limits.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/SAREstimator.html">
+  <meta property="og:title" content="MRI SAR Estimator — RF Safety Calculator | RF Toolbox">
+  <meta property="og:description" content="Estimate local SAR (W/kg) in MRI tissue from B1+ field amplitude, frequency, and tissue properties. Compares against IEC 60601-2-33 safety limits.">
+  <meta property="og:url" content="https://rftoolbox.ca/SAREstimator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "MRI SAR Estimator — RF Safety Calculator",
+    "description": "Estimate local SAR (W/kg) in MRI tissue from B1+ field amplitude, frequency, and tissue properties. Compares against IEC 60601-2-33 safety limits.",
+    "url": "https://rftoolbox.ca/SAREstimator.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>MRI SAR Estimator</h3>
+<div class="tool-concept">
+  <p>Specific Absorption Rate (SAR) measures power deposited per unit mass in tissue (W/kg). IEC 60601-2-33 limits whole-body SAR to 2 W/kg (normal mode) and local head SAR to 3.2 W/kg. SAR scales with B₁⁺ amplitude squared, frequency squared, and tissue conductivity.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B₁⁺</td><td style="padding:3px 0;">RF excitation field amplitude at the tissue (µT). Typical body coil: 10–20 µT for a 90° pulse.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Larmor frequency. SAR scales as f² (or B₀²).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">σ</td><td style="padding:3px 0;">Tissue electrical conductivity (S/m). Muscle ≈ 0.7–0.9 S/m at 128 MHz.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ρ</td><td style="padding:3px 0;">Tissue mass density (kg/m³). Muscle ≈ 1050 kg/m³.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Duty cycle</td><td style="padding:3px 0;">Fraction of time RF is on. SAR is time-averaged.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">SAR formula</td><td style="padding:3px 0;">SAR = σ·|E|²/(2ρ) ≈ (ω·µ₀·B₁⁺)²·σ/(2ρ·µ₀²) = ω²·(B₁⁺)²·σ/(2ρ).</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>B₁⁺ amplitude, <span class="var">B₁⁺</span></label><div class="inp-inline"><input type="text" id="sar-b1" value="15" ><span class='inp-units'>µT</span></div><span class="inp-hint">peak RF field at tissue</span></div><div class="inp-row"><label>Larmor frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="sar-f" value="128" ><span class='inp-units'>MHz</span></div><span class="inp-hint">¹H: 64/128/298 MHz at 1.5/3/7T</span></div><div class="inp-row"><label>Tissue type</label><select id='sar-tissue' onchange='sarTissueChange()'><option value='muscle'>Muscle (σ=0.77, ρ=1050)</option><option value='brain'>Brain GM (σ=0.59, ρ=1040)</option><option value='fat'>Fat (σ=0.044, ρ=920)</option><option value='blood'>Blood (σ=1.24, ρ=1060)</option><option value='custom'>Custom</option></select></div><div class="inp-row"><label>Conductivity, <span class="var">σ</span></label><div class="inp-inline"><input type="text" id="sar-sigma" value="0.77" ><span class='inp-units'>S/m</span></div><span class="inp-hint">enabled for custom tissue</span></div><div class="inp-row"><label>Mass density, <span class="var">ρ</span></label><div class="inp-inline"><input type="text" id="sar-rho" value="1050" ><span class='inp-units'>kg/m³</span></div><span class="inp-hint">enabled for custom tissue</span></div><div class="inp-row"><label>RF duty cycle, <span class="var">DC</span></label><div class="inp-inline"><input type="text" id="sar-dc" value="0.1" ><span class='inp-units'>(0–1)</span></div><span class="inp-hint">time-average fraction</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="sar-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;sar-b1&quot;: &quot;15&quot;, &quot;sar-f&quot;: &quot;128&quot;, &quot;sar-sigma&quot;: &quot;0.77&quot;, &quot;sar-rho&quot;: &quot;1050&quot;, &quot;sar-dc&quot;: &quot;0.1&quot;})" title="3T ¹H, muscle, 10% duty cycle">Load Example</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>SAR</h4><div class="res-row"><span class="res-lbl">Peak local SAR</span><span class="res-val" id="sar-peak">—</span></div><div class="res-row"><span class="res-lbl">Time-averaged SAR</span><span class="res-val" id="sar-avg">—</span></div><div class="res-row"><span class="res-lbl">IEC whole-body limit (2 W/kg)</span><span class="res-val" id="sar-wb">—</span></div><div class="res-row"><span class="res-lbl">IEC head limit (3.2 W/kg)</span><span class="res-val" id="sar-head">—</span></div></div><div class="res-card"><h4>Context</h4><div class="res-row"><span class="res-lbl">E-field estimate</span><span class="res-val" id="sar-e">—</span></div><div class="res-row"><span class="res-lbl">ω·B₁⁺ product</span><span class="res-val" id="sar-wb1">—</span></div><div class="res-row"><span class="res-lbl">B₁⁺ for 2 W/kg limit</span><span class="res-val" id="sar-b1lim">—</span></div><div class="res-row"><span class="res-lbl">Safety margin</span><span class="res-val" id="sar-margin">—</span></div></div></div>
+<div class="note-warn"><b>⚠ Disclaimer:</b> This is a simplified local SAR estimate for educational purposes only. Clinical SAR compliance requires full electromagnetic simulation with patient-specific models. Always consult IEC 60601-2-33 and vendor-provided SAR models for actual scanner operation.</div>
+<div class="wiki-link-hint">📖 <a href="wiki_sar.html">Learn about SAR and RF safety in MRI →</a></div>
+<script>
+var sarTissues={
+  muscle:{s:0.77,r:1050}, brain:{s:0.59,r:1040},
+  fat:{s:0.044,r:920}, blood:{s:1.24,r:1060}
+};
+function sarTissueChange(){
+  var t=document.getElementById('sar-tissue').value;
+  var d=sarTissues[t];
+  var cust=!d;
+  document.getElementById('sar-sigma').disabled=!cust;
+  document.getElementById('sar-rho').disabled=!cust;
+  if(d){document.getElementById('sar-sigma').value=d.s; document.getElementById('sar-rho').value=d.r;}
+}
+document.getElementById('sar-btn').addEventListener('click', function(){
+  var B1=parseFloat(document.getElementById('sar-b1').value)*1e-6;
+  var f=parseFloat(document.getElementById('sar-f').value)*1e6;
+  var sig=parseFloat(document.getElementById('sar-sigma').value);
+  var rho=parseFloat(document.getElementById('sar-rho').value);
+  var dc=parseFloat(document.getElementById('sar-dc').value);
+  document.getElementById('error').textContent='';
+  if([B1,f,sig,rho,dc].some(isNaN)||B1<=0||f<=0||sig<=0||rho<=0||dc<=0||dc>1){
+    document.getElementById('error').textContent='Enter valid positive values. Duty cycle 0–1.';return;}
+  var w=2*Math.PI*f, mu0=4*Math.PI*1e-7;
+  // SAR = ω²·B₁²·σ/(2·ρ·µ₀²) ... units check:
+  // (rad/s)²·(T)²·(S/m)/(kg/m³·H/m)² = W/kg ✓
+  var SAR_peak=w*w*B1*B1*sig/(2*rho*mu0*mu0*sig*sig); 
+  // Simplified: E ≈ ω*µ0*B1 / (µ0*sig) ... actually E = ω*B1/sig^0.5... 
+  // Correct formula: SAR = σ*E²/(2ρ) where E is induced electric field
+  // For uniform B1: E ~ ω*µ0*B1*r_eff (induced in tissue of radius r_eff)
+  // Use analytical estimate for cylindrical tissue of radius 10cm:
+  var r_eff=0.10; // 10 cm typical for head/body
+  var E_est=w*mu0*B1*r_eff; // V/m (Faraday induction)
+  SAR_peak=sig*E_est*E_est/(2*rho);
+  var SAR_avg=SAR_peak*dc;
+  // B1+ limit for 2 W/kg (whole body)
+  var B1_lim=Math.sqrt(2*rho*2.0/(sig*w*w*mu0*mu0*r_eff*r_eff));
+  var margin_dB=20*Math.log10(B1_lim/(B1/1e-6)*1e6);
+  var wb_status=SAR_avg<=2?'✓ Within limit ('+SAR_avg.toFixed(2)+' / 2.0 W/kg)':'⚠ EXCEEDS LIMIT';
+  var head_status=SAR_avg<=3.2?'✓ Within limit':'⚠ EXCEEDS LIMIT';
+  document.getElementById('sar-peak').textContent=SAR_peak.toFixed(2)+' W/kg';
+  document.getElementById('sar-avg').textContent=SAR_avg.toFixed(2)+' W/kg (DC='+dc+')';
+  document.getElementById('sar-wb').textContent=wb_status;
+  document.getElementById('sar-head').textContent=head_status;
+  document.getElementById('sar-e').textContent=E_est.toFixed(1)+' V/m';
+  document.getElementById('sar-wb1').textContent=(w*mu0*B1).toExponential(3)+' V/m/m';
+  document.getElementById('sar-b1lim').textContent=(B1_lim*1e6).toFixed(1)+' µT';
+  document.getElementById('sar-margin').textContent=margin_dB.toFixed(1)+' dB';
+});
+document.addEventListener('DOMContentLoaded', sarTissueChange);
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

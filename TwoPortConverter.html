@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two-Port Parameter Converter — S, Z, Y, ABCD | RF Toolbox</title>
+  <meta name="description" content="Convert between S-parameters, Z-parameters, Y-parameters, and ABCD (transmission) matrix representations for 2-port networks. Enter complex matrix elements.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/TwoPortConverter.html">
+  <meta property="og:title" content="Two-Port Parameter Converter — S, Z, Y, ABCD | RF Toolbox">
+  <meta property="og:description" content="Convert between S-parameters, Z-parameters, Y-parameters, and ABCD (transmission) matrix representations for 2-port networks. Enter complex matrix elements.">
+  <meta property="og:url" content="https://rftoolbox.ca/TwoPortConverter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Two-Port Parameter Converter — S, Z, Y, ABCD",
+    "description": "Convert between S-parameters, Z-parameters, Y-parameters, and ABCD (transmission) matrix representations for 2-port networks. Enter complex matrix elements.",
+    "url": "https://rftoolbox.ca/TwoPortConverter.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Two-Port Parameter Converter</h3>
+<div class="tool-concept">
+  <p>Convert between S, Z, Y, and ABCD (transmission) parameter matrices for a 2-port network. Enter the 4 complex parameters of one type and all other representations are computed instantly. Real and imaginary parts for each element.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">S</td><td style="padding:3px 0;">Scattering parameters — measured at RF with a VNA. S11=ΓIN, S21=forward gain.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z</td><td style="padding:3px 0;">Impedance parameters — open-circuit driving-point/transfer impedances.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Y</td><td style="padding:3px 0;">Admittance parameters — short-circuit. Y = Z⁻¹.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ABCD</td><td style="padding:3px 0;">Transmission (chain) matrix — cascade by multiplying matrices. Used for filter/transmission line analysis.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Input Type & Reference Impedance</div>
+<div class="inp-grid"><div class="inp-row"><label>Parameter type</label><select id='tp-type'><option value='s'>S-parameters</option><option value='z'>Z-parameters</option><option value='y'>Y-parameters</option><option value='abcd'>ABCD matrix</option></select></div><div class="inp-row"><label>Reference impedance, <span class="var">Z₀</span></label><div class="inp-inline"><input type="text" id="tp-z0" value="50" ><span class='inp-units'>Ω</span></div><span class="inp-hint">for S↔Z/Y/ABCD conversion</span></div></div>
+<div class="sec-lbl">Input Matrix (Real + jImag)</div>
+<div class="inp-grid" style="grid-template-columns:1fr 1fr 1fr 1fr;">
+  <div class="inp-row"><label>P₁₁ real</label><input type="text" id="tp-11r" value="0.1" ></div>
+  <div class="inp-row"><label>P₁₁ imag</label><input type="text" id="tp-11i" value="-0.8" ></div>
+  <div class="inp-row"><label>P₁₂ real</label><input type="text" id="tp-12r" value="0.05" ></div>
+  <div class="inp-row"><label>P₁₂ imag</label><input type="text" id="tp-12i" value="0.02" ></div>
+  <div class="inp-row"><label>P₂₁ real</label><input type="text" id="tp-21r" value="0.5" ></div>
+  <div class="inp-row"><label>P₂₁ imag</label><input type="text" id="tp-21i" value="0.6" ></div>
+  <div class="inp-row"><label>P₂₂ real</label><input type="text" id="tp-22r" value="0.08" ></div>
+  <div class="inp-row"><label>P₂₂ imag</label><input type="text" id="tp-22i" value="-0.7" ></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="tp-btn">Calculate</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="tp-out"></div>
+<div class="wiki-link-hint">📖 <a href="wiki_sparam.html">Learn about S-parameters and two-port network theory →</a></div>
+<script>
+document.getElementById('tp-btn').addEventListener('click', function() {
+  var Z0=parseFloat(document.getElementById('tp-z0').value)||50;
+  var type=document.getElementById('tp-type').value;
+  var g=function(id){return parseFloat(document.getElementById(id).value)||0;};
+  var p={a:[g('tp-11r'),g('tp-11i')],b:[g('tp-12r'),g('tp-12i')],c:[g('tp-21r'),g('tp-21i')],d:[g('tp-22r'),g('tp-22i')]};
+  // Complex arithmetic helpers
+  var C={
+    add:function(a,b){return[a[0]+b[0],a[1]+b[1]];},
+    sub:function(a,b){return[a[0]-b[0],a[1]-b[1]];},
+    mul:function(a,b){return[a[0]*b[0]-a[1]*b[1],a[0]*b[1]+a[1]*b[0]];},
+    div:function(a,b){var d=b[0]*b[0]+b[1]*b[1];return[(a[0]*b[0]+a[1]*b[1])/d,(a[1]*b[0]-a[0]*b[1])/d];},
+    inv:function(a){var d=a[0]*a[0]+a[1]*a[1];return[a[0]/d,-a[1]/d];},
+    sc:function(a,k){return[a[0]*k,a[1]*k];},
+    neg:function(a){return[-a[0],-a[1]];},
+    fmt:function(a){var r=a[0].toFixed(4),i=a[1];return r+(i>=0?'+':'')+i.toFixed(4)+'j';}
+  };
+  var z0=[Z0,0]; // Z0 as complex
+  var S,Z,Y,ABCD;
+  // Convert input to S first
+  if(type==='s'){
+    S=[p.a,p.b,p.c,p.d];
+  } else if(type==='z'){
+    // S = (Z-Z0*I)(Z+Z0*I)^-1 ... using explicit 2x2 inversion
+    var za=p.a,zb=p.b,zc=p.c,zd=p.d;
+    var z0c=[Z0,0];
+    var Ap=C.sub(za,z0c), Bp=zb, Cp=zc, Dp=C.sub(zd,z0c);
+    var Am=C.add(za,z0c), Bm=zb, Cm=zc, Dm=C.add(zd,z0c);
+    // det of M+
+    var det=C.sub(C.mul(Am,Dm),C.mul(Bm,Cm));
+    // (M+)^-1 * M-
+    var inv11=C.div(Dm,det), inv12=C.div(C.neg(Bm),det), inv21=C.div(C.neg(Cm),det), inv22=C.div(Am,det);
+    S=[C.add(C.mul(inv11,Ap),C.mul(inv12,Cp)), C.add(C.mul(inv11,Bp),C.mul(inv12,Dp)),
+       C.add(C.mul(inv21,Ap),C.mul(inv22,Cp)), C.add(C.mul(inv21,Bp),C.mul(inv22,Dp))];
+  } else if(type==='y'){
+    // Z = Y^-1 then convert
+    var ya=p.a,yb=p.b,yc=p.c,yd=p.d;
+    var dety=C.sub(C.mul(ya,yd),C.mul(yb,yc));
+    var Za=C.div(yd,dety), Zb=C.div(C.neg(yb),dety), Zc=C.div(C.neg(yc),dety), Zd=C.div(ya,dety);
+    p={a:Za,b:Zb,c:Zc,d:Zd}; type='z';
+    // Re-run Z->S
+    var z0c=[Z0,0];
+    var Ap=C.sub(Za,z0c),Bp=Zb,Cp=Zc,Dp=C.sub(Zd,z0c);
+    var Am=C.add(Za,z0c),Bm=Zb,Cm=Zc,Dm=C.add(Zd,z0c);
+    var det2=C.sub(C.mul(Am,Dm),C.mul(Bm,Cm));
+    var i11=C.div(Dm,det2),i12=C.div(C.neg(Bm),det2),i21=C.div(C.neg(Cm),det2),i22=C.div(Am,det2);
+    S=[C.add(C.mul(i11,Ap),C.mul(i12,Cp)),C.add(C.mul(i11,Bp),C.mul(i12,Dp)),
+       C.add(C.mul(i21,Ap),C.mul(i22,Cp)),C.add(C.mul(i21,Bp),C.mul(i22,Dp))];
+    type='s';
+  } else {
+    // ABCD → S
+    var A=p.a,B=p.b,CC=p.c,D=p.d;
+    var z0c=[Z0,0];
+    var denom=C.add(C.add(A,C.div(B,z0c)),C.add(C.mul(CC,z0c),D));
+    S=[C.div(C.sub(C.sub(C.add(A,C.div(B,z0c)),C.mul(CC,z0c)),D),denom),
+       C.div(C.sc([1,0],2),denom),
+       C.div(C.sc([1,0],2),denom),
+       C.div(C.sub(C.sub(C.add(C.neg(A),C.div(B,z0c)),C.mul(CC,z0c)),C.neg(D)),denom)];
+    // S12: 2/(A+B/Z0+C*Z0+D), S11: (A+B/Z0-C*Z0-D)/denom
+    S[0]=C.div(C.sub(C.sub(A,C.div(C.neg(B),z0c)),C.add(C.mul(CC,z0c),C.neg(D))),denom);
+  }
+  // S → Z
+  var s11=S[0],s12=S[1],s21=S[2],s22=S[3];
+  var z0c=[Z0,0];
+  var detS=C.sub(C.mul(C.sub([1,0],s11),C.sub([1,0],s22)),C.mul(s12,s21));
+  Z=[C.div(C.mul(z0c,C.add(C.add(C.mul(C.add([1,0],s11),C.sub([1,0],s22)),C.mul(s12,s21)),C.mul(s12,s21))),detS),
+     C.div(C.mul(C.sc(z0c,2),s12),detS),
+     C.div(C.mul(C.sc(z0c,2),s21),detS),
+     C.div(C.mul(z0c,C.add(C.add(C.mul(C.sub([1,0],s11),C.add([1,0],s22)),C.mul(s12,s21)),C.mul(s12,s21))),detS)];
+  // Simpler Z: Z = Z0*(I+S)*(I-S)^-1
+  var IS_a=C.add([1,0],s11),IS_b=s12,IS_c=s21,IS_d=C.add([1,0],s22);
+  var ImS_a=C.sub([1,0],s11),ImS_b=C.neg(s12),ImS_c=C.neg(s21),ImS_d=C.sub([1,0],s22);
+  var dIm=C.sub(C.mul(ImS_a,ImS_d),C.mul(ImS_b,ImS_c));
+  var inv_a=C.div(ImS_d,dIm),inv_b=C.div(C.neg(ImS_b),dIm),inv_c=C.div(C.neg(ImS_c),dIm),inv_d=C.div(ImS_a,dIm);
+  var ZZ_a=C.sc(C.add(C.mul(IS_a,inv_a),C.mul(IS_b,inv_c)),Z0);
+  var ZZ_b=C.sc(C.add(C.mul(IS_a,inv_b),C.mul(IS_b,inv_d)),Z0);
+  var ZZ_c=C.sc(C.add(C.mul(IS_c,inv_a),C.mul(IS_d,inv_c)),Z0);
+  var ZZ_d=C.sc(C.add(C.mul(IS_c,inv_b),C.mul(IS_d,inv_d)),Z0);
+  Z=[ZZ_a,ZZ_b,ZZ_c,ZZ_d];
+  // Z → Y
+  var detZ=C.sub(C.mul(Z[0],Z[3]),C.mul(Z[1],Z[2]));
+  Y=[C.div(Z[3],detZ),C.div(C.neg(Z[1]),detZ),C.div(C.neg(Z[2]),detZ),C.div(Z[0],detZ)];
+  // S → ABCD
+  var d2s=C.sc(s21,0.5);// denominator  
+  ABCD=[C.div(C.add(C.sub([1,0],s11),C.add([1,0],s22)), C.sc(s21,2)),
+        C.div(C.mul(z0c,C.add(C.add([1,0],s11),C.sub([1,0],s22))),C.sc(s21,2)),
+        C.div(C.sub(C.sub([1,0],s11),C.add([1,0],s22)),C.mul(C.sc(z0c,2),s21)),
+        C.div(C.sub(C.add([1,0],s11),C.sub([1,0],s22)),C.sc(s21,2))];
+  // ABCD more carefully: 
+  // A=(1-s11)(1+s22)/2/s21 + s12/(2s21) ... actually standard formula:
+  // A = ((1+s11)(1-s22)+s12*s21)/(2s21), B=Z0*((1+s11)(1+s22)-s12*s21)/(2s21)
+  // C = (1/Z0)*((1-s11)(1-s22)-s12*s21)/(2s21), D=((1-s11)(1+s22)+s12*s21)/(2s21)
+  var AB=C.sc(s21,2);
+  ABCD=[C.div(C.add(C.mul(C.add([1,0],s11),C.sub([1,0],s22)),C.mul(s12,s21)),AB),
+        C.div(C.mul(z0c,C.add(C.mul(C.add([1,0],s11),C.add([1,0],s22)),C.neg(C.mul(s12,s21)))),AB),
+        C.div(C.div(C.sub(C.mul(C.sub([1,0],s11),C.sub([1,0],s22)),C.mul(s12,s21)),AB),z0c),
+        C.div(C.add(C.mul(C.sub([1,0],s11),C.add([1,0],s22)),C.mul(s12,s21)),AB)];
+  function mat(label,m,cols){
+    var h='<div style="margin-bottom:12px;"><div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;padding-bottom:3px;border-bottom:1px solid #e0d8ff;">'+label+'</div>';
+    h+='<table style="font-size:12px;border-collapse:collapse;font-family:monospace;width:100%;">';
+    var row=function(r,c,v){return '<td style="padding:4px 12px;border-bottom:1px dotted #e8e0ff;color:#1a1a1a;font-weight:bold;">'+v+'</td>';}
+    h+='<tr>'+row(0,0,cols[0]+' = '+C.fmt(m[0]))+row(0,1,cols[1]+' = '+C.fmt(m[1]))+'</tr>';
+    h+='<tr>'+row(1,0,cols[2]+' = '+C.fmt(m[2]))+row(1,1,cols[3]+' = '+C.fmt(m[3]))+'</tr>';
+    h+='</table></div>'; return h;
+  }
+  document.getElementById('tp-out').innerHTML=
+    mat('S-Parameters',S,['S₁₁','S₁₂','S₂₁','S₂₂'])+
+    mat('Z-Parameters (Ω)',Z,['Z₁₁','Z₁₂','Z₂₁','Z₂₂'])+
+    mat('Y-Parameters (S)',Y,['Y₁₁','Y₁₂','Y₂₁','Y₂₂'])+
+    mat('ABCD Matrix',ABCD,['A','B (Ω)','C (S)','D']);
+});
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

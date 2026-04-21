@@ -54,7 +54,7 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="dp-f" placeholder="value" ><select id="dp-fu"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Shortening factor, k</label><div class="inp-inline"><input type="text" id="dp-k" value="0.97" ></div><span class="inp-hint">0.95–0.98 for thin wire dipole</span></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="dp-f" placeholder="value"  data-tip="Resonant frequency. Sets λ and therefore the physical arm length."><select id="dp-fu"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Shortening factor, <span class="var">k</span></label><div class="inp-inline"><input type="text" id="dp-k" value="0.97"  data-tip="Shortening factor accounts for end effects. Thin wire: 0.96–0.98, fat element: down to 0.92."></div><span class="inp-hint">0.95–0.98 for thin wire dipole</span></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="dp-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;dp-f&quot;: &quot;433&quot;, &quot;dp-fu&quot;: &quot;1e6&quot;, &quot;dp-k&quot;: &quot;0.97&quot;})" title="433 MHz ISM band dipole">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
@@ -63,6 +63,38 @@
   <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
   <div style="padding:4px 0;">\(\ell_{arm} = \dfrac{k\lambda}{4} = \dfrac{kc}{4f}\)</div>
 </details>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var armEl = document.getElementById('dp-arm'); var arm = armEl ? armEl.textContent : '—';
+  var lamEl = document.getElementById('dp-lam'); var lam = lamEl ? lamEl.textContent : '—';
+  var W=560,H=160,cx=W/2,cy=80,armLen=90;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Radiation pattern (simple ellipses for visual)
+  s+='<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+(armLen*0.8)+'" ry="'+(armLen*0.45)+'" fill="none" stroke="#AA77FF" stroke-width="1" opacity="0.4" stroke-dasharray="4,3"/>';
+  s+='<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+(armLen*0.5)+'" ry="'+(armLen*0.28)+'" fill="rgba(170,119,255,0.07)" stroke="#AA77FF" stroke-width="1" opacity="0.5" stroke-dasharray="3,3"/>';
+  // Dipole arms (vertical)
+  s+='<line x1="'+cx+'" y1="'+(cy-armLen)+'" x2="'+cx+'" y2="'+(cy-8)+'" stroke="#5533aa" stroke-width="4" stroke-linecap="round"/>';
+  s+='<line x1="'+cx+'" y1="'+(cy+8)+'" x2="'+cx+'" y2="'+(cy+armLen)+'" stroke="#5533aa" stroke-width="4" stroke-linecap="round"/>';
+  // Feed gap
+  s+='<rect x="'+(cx-6)+'" y="'+(cy-8)+'" width="12" height="16" fill="white" stroke="#AA77FF" stroke-width="2" rx="2"/>';
+  s+='<text x="'+(cx+14)+'" y="'+(cy+4)+'" font-size="10" fill="#AA77FF">feed</text>';
+  // Arm length annotation
+  s+='<line x1="'+(cx+20)+'" y1="'+(cy-armLen)+'" x2="'+(cx+20)+'" y2="'+(cy-8)+'" stroke="#888" stroke-width="1" stroke-dasharray="2,3"/>';
+  s+='<line x1="'+(cx+16)+'" y1="'+(cy-armLen)+'" x2="'+(cx+24)+'" y2="'+(cy-armLen)+'" stroke="#888" stroke-width="1.2"/>';
+  s+='<line x1="'+(cx+16)+'" y1="'+(cy-8)+'" x2="'+(cx+24)+'" y2="'+(cy-8)+'" stroke="#888" stroke-width="1.2"/>';
+  s+='<text x="'+(cx+32)+'" y="'+(cy-armLen/2+4)+'" font-size="10.5" fill="#888">λ/4 = '+arm+'</text>';
+  // λ label
+  s+='<text x="'+W/2+'" y="150" text-anchor="middle" font-size="11" fill="#888">λ = '+lam+'  |  total dipole = 2 × λ/4</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_antennas.html">Learn about antenna fundamentals →</a></div>
 <script src="Dipole.js"></script>
 </article>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wilkinson Power Divider Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate Wilkinson power divider arm impedances, isolation resistor, and physical length. Supports equal and unequal power splits at any frequency.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/Wilkinson.html">
+  <meta property="og:title" content="Wilkinson Power Divider Calculator | RF Toolbox">
+  <meta property="og:description" content="Calculate Wilkinson power divider arm impedances, isolation resistor, and physical length. Supports equal and unequal power splits at any frequency.">
+  <meta property="og:url" content="https://rftoolbox.ca/Wilkinson.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Wilkinson Power Divider Calculator",
+    "description": "Calculate Wilkinson power divider arm impedances, isolation resistor, and physical length. Supports equal and unequal power splits at any frequency.",
+    "url": "https://rftoolbox.ca/Wilkinson.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Wilkinson Power Divider</h3>
+<div class="tool-concept">
+  <p>The Wilkinson divider splits an input signal into two output ports, or combines two inputs into one, while maintaining isolation between the output ports. It uses two λ/4 transmission line sections and one isolation resistor. Matched, isolated, and lossless (in the ideal case). Can be unequal-split for asymmetric power division.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">System characteristic impedance, typically 50 Ω.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">K²</td><td style="padding:3px 0;">Power split ratio: output port 2 receives K² times more power than port 3. K=1 gives equal split (3 dB each).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Design frequency. The λ/4 sections are this length.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z_arm1, Z_arm2</td><td style="padding:3px 0;">λ/4 arm impedances. Equal split: both = Z₀√2.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R_iso</td><td style="padding:3px 0;">Isolation resistor between the two output ports. Equal split: R = 2Z₀.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Substrate dielectric for computing physical arm lengths.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>System impedance, <span class="var">Z₀</span></label><div class="inp-inline"><input type="text" id="wk-z0" value="50" ><span class='inp-units'>Ω</span></div></div><div class="inp-row"><label>Power ratio, <span class="var">K²:1</span></label><div class="inp-inline"><input type="text" id="wk-k2" value="1" ><span class='inp-units'></span></div><span class="inp-hint">1 = equal split (3dB/3dB)</span></div><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="wk-f" value="2.45" ><select id="wk-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Substrate εᵣ, <span class="var">εᵣ</span></label><div class="inp-inline"><input type="text" id="wk-er" value="4.4" ></div><span class="inp-hint">for physical length. 1 = air/coax</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="wk-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;wk-z0&quot;: &quot;50&quot;, &quot;wk-k2&quot;: &quot;1&quot;, &quot;wk-f&quot;: &quot;2.45&quot;, &quot;wk-fu&quot;: &quot;1e9&quot;, &quot;wk-er&quot;: &quot;1&quot;})" title="Equal-split at 2.45 GHz">Load Example</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Transmission Line Arms</h4><div class="res-row"><span class="res-lbl">Z_arm1 (to port 2)</span><span class="res-val" id="wk-z1">—</span></div><div class="res-row"><span class="res-lbl">Z_arm2 (to port 3)</span><span class="res-val" id="wk-z2">—</span></div><div class="res-row"><span class="res-lbl">Physical arm length</span><span class="res-val" id="wk-len">—</span></div><div class="res-row"><span class="res-lbl">Split at port 2</span><span class="res-val" id="wk-s1">—</span></div><div class="res-row"><span class="res-lbl">Split at port 3</span><span class="res-val" id="wk-s2">—</span></div></div><div class="res-card"><h4>Isolation</h4><div class="res-row"><span class="res-lbl">Isolation resistor, R_iso</span><span class="res-val" id="wk-r">—</span></div><div class="res-row"><span class="res-lbl">Ideal isolation (>20 dB)</span><span class="res-val" id="wk-iso">—</span></div><div class="res-row"><span class="res-lbl">Return loss at ports</span><span class="res-val" id="wk-rl">—</span></div></div></div>
+<div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0 8px;">\(Z_1=Z_0\!\sqrt{\tfrac{1+K^2}{K^3}},\quad Z_2=Z_0\!\sqrt{K(1+K^2)},\quad R_{iso}=Z_0\!\left(K+\tfrac{1}{K}\right)\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_microwave_components.html">Learn about microwave couplers and dividers →</a></div>
+<script>
+document.getElementById('wk-btn').addEventListener('click', function(){
+  var Z0=parseFloat(document.getElementById('wk-z0').value);
+  var K2=parseFloat(document.getElementById('wk-k2').value);
+  var f=parseFloat(document.getElementById('wk-f').value)*parseFloat(document.getElementById('wk-fu').value);
+  var er=parseFloat(document.getElementById('wk-er').value)||1;
+  document.getElementById('error').textContent='';
+  if([Z0,K2,f].some(isNaN)||Z0<=0||K2<=0||f<=0){document.getElementById('error').textContent='Enter valid positive values.';return;}
+  var K=Math.sqrt(K2);
+  var Z1=Z0*Math.sqrt((1+K2)/Math.pow(K,3));
+  var Z2=Z0*Math.sqrt(K*(1+K2));
+  var Riso=Z0*(K+1/K);
+  var lam4=3e8/(4*f*Math.sqrt(er))*1000; // mm
+  var s1_dB=10*Math.log10(1+1/K2);
+  var s2_dB=10*Math.log10(1+K2);
+  document.getElementById('wk-z1').textContent=Z1.toFixed(3)+' Ω';
+  document.getElementById('wk-z2').textContent=Z2.toFixed(3)+' Ω';
+  document.getElementById('wk-len').textContent=lam4.toFixed(2)+' mm (λ/4)';
+  document.getElementById('wk-s1').textContent='-'+s1_dB.toFixed(2)+' dB';
+  document.getElementById('wk-s2').textContent='-'+s2_dB.toFixed(2)+' dB';
+  document.getElementById('wk-r').textContent=Riso.toFixed(2)+' Ω';
+  document.getElementById('wk-iso').textContent='> 20 dB (ideal)';
+  document.getElementById('wk-rl').textContent='> 20 dB (ideal)';
+  if(window.drawDiagram) drawDiagram(Z1.toFixed(1),Z2.toFixed(1),Riso.toFixed(1),lam4.toFixed(1));
+});
+function drawDiagram(Z1,Z2,R,len){
+  if(!Z1){Z1='70.7Ω';Z2='70.7Ω';R='100Ω';len='—';}
+  var W=520,H=190,px=90,cx=W/2,py=80;
+  var sv='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  sv+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Port 1 (left)
+  sv+='<line x1="30" y1="'+py+'" x2="'+px+'" y2="'+py+'" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/>';
+  sv+='<circle cx="30" cy="'+py+'" r="4" fill="white" stroke="#5533aa" stroke-width="2"/>';
+  sv+='<text x="20" y="'+(py-12)+'" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">Port 1</text>';
+  // Split node
+  sv+='<circle cx="'+px+'" cy="'+py+'" r="4" fill="#5533aa"/>';
+  // Upper arm to port 2
+  var p2y=50, p2x=W-40;
+  sv+='<path d="M'+px+','+py+' Q'+(cx)+','+p2y+' '+p2x+','+p2y+'" fill="none" stroke="#AA77FF" stroke-width="2.5" stroke-dasharray="6,3" stroke-linecap="round"/>';
+  sv+='<text x="'+cx+'" y="'+(p2y-8)+'" text-anchor="middle" font-size="9.5" fill="#AA77FF">Z_arm1 = '+Z1+' Ω  (λ/4 = '+len+' mm)</text>';
+  sv+='<circle cx="'+p2x+'" cy="'+p2y+'" r="4" fill="white" stroke="#5533aa" stroke-width="2"/>';
+  sv+='<text x="'+(p2x+18)+'" y="'+(p2y+4)+'" font-size="10" fill="#5533aa" font-weight="bold">Port 2</text>';
+  // Lower arm to port 3
+  var p3y=110, p3x=W-40;
+  sv+='<path d="M'+px+','+py+' Q'+cx+','+p3y+' '+p3x+','+p3y+'" fill="none" stroke="#AA77FF" stroke-width="2.5" stroke-dasharray="6,3" stroke-linecap="round"/>';
+  sv+='<text x="'+cx+'" y="'+(p3y+18)+'" text-anchor="middle" font-size="9.5" fill="#AA77FF">Z_arm2 = '+Z2+' Ω</text>';
+  sv+='<circle cx="'+p3x+'" cy="'+p3y+'" r="4" fill="white" stroke="#5533aa" stroke-width="2"/>';
+  sv+='<text x="'+(p3x+18)+'" y="'+(p3y+4)+'" font-size="10" fill="#5533aa" font-weight="bold">Port 3</text>';
+  // Isolation resistor between port 2 and port 3
+  sv+='<line x1="'+p2x+'" y1="'+p2y+'" x2="'+p2x+'" y2="'+(p2y+24)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  sv+='<rect x="'+(p2x-16)+'" y="'+(p2y+24)+'" width="32" height="22" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/>';
+  sv+='<text x="'+p2x+'" y="'+(p2y+39)+'" text-anchor="middle" font-size="9.5" fill="#5533aa">'+R+' Ω</text>';
+  sv+='<line x1="'+p2x+'" y1="'+(p2y+46)+'" x2="'+p2x+'" y2="'+p3y+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  sv+='<text x="'+W/2+'" y="175" text-anchor="middle" font-size="10.5" fill="#888" font-style="italic">λ/4 arms + isolation resistor — all ports matched simultaneously</text>';
+  sv+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=sv;
+}
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

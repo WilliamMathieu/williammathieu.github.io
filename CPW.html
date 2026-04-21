@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coplanar Waveguide (CPW) Calculator — Z₀ & εeff | RF Toolbox</title>
+  <meta name="description" content="Calculate coplanar waveguide characteristic impedance, effective permittivity, and phase velocity using elliptic integral conformal mapping. Supports CPW and grounded CPW (GCPW).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/CPW.html">
+  <meta property="og:title" content="Coplanar Waveguide (CPW) Calculator — Z₀ & εeff | RF Toolbox">
+  <meta property="og:description" content="Calculate coplanar waveguide characteristic impedance, effective permittivity, and phase velocity using elliptic integral conformal mapping. Supports CPW and grounded CPW (GCPW).">
+  <meta property="og:url" content="https://rftoolbox.ca/CPW.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Coplanar Waveguide (CPW) Calculator — Z₀ & εeff",
+    "description": "Calculate coplanar waveguide characteristic impedance, effective permittivity, and phase velocity using elliptic integral conformal mapping. Supports CPW and grounded CPW (GCPW).",
+    "url": "https://rftoolbox.ca/CPW.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Coplanar Waveguide (CPW) Calculator</h3>
+<div class="tool-concept">
+  <p>Coplanar waveguide has the signal trace and ground planes on the same side of the substrate. This allows easy shunt connections without vias and is preferred for MMICs and millimetre-wave PCBs. Uses elliptic integral conformal mapping for accurate results.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">w</td><td style="padding:3px 0;">Signal trace width (mm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">s</td><td style="padding:3px 0;">Gap between trace and ground plane (mm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">h</td><td style="padding:3px 0;">Substrate height (mm). Infinite assumed if h >> w+2s.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Substrate dielectric constant.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Characteristic impedance = 30π/√εeff · K(k′)/K(k).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εeff</td><td style="padding:3px 0;">Effective permittivity via Schnieder/Hammerstad conformal mapping.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Trace width, <span class="var">w</span></label><div class="inp-inline"><input type="text" id="cpw-w" value="1.0" ><span class='inp-units'>mm</span></div><span class="inp-hint">signal conductor width</span></div><div class="inp-row"><label>Gap width, <span class="var">s</span></label><div class="inp-inline"><input type="text" id="cpw-s" value="0.3" ><span class='inp-units'>mm</span></div><span class="inp-hint">trace edge to ground</span></div><div class="inp-row"><label>Substrate height, <span class="var">h</span></label><div class="inp-inline"><input type="text" id="cpw-h" value="0.5" ><span class='inp-units'>mm</span></div><span class="inp-hint">trace to bottom ground (if any)</span></div><div class="inp-row"><label>Dielectric constant, <span class="var">εᵣ</span></label><div class="inp-inline"><input type="text" id="cpw-er" value="9.9" ></div><span class="inp-hint">alumina=9.9, GaAs=12.9, Si=11.9, FR4=4.4</span></div><div class="inp-row"><label>Has bottom ground plane</label><select id='cpw-bg'><option value='1'>Yes (GCPW)</option><option value='0'>No (CPW on thick substrate)</option></select></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="cpw-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;cpw-w&quot;: &quot;1.0&quot;, &quot;cpw-s&quot;: &quot;0.3&quot;, &quot;cpw-h&quot;: &quot;0.5&quot;, &quot;cpw-er&quot;: &quot;9.9&quot;, &quot;cpw-bg&quot;: &quot;1&quot;})" title="1 mm trace, 0.3 mm gap on alumina">Load Example</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Electrical</h4><div class="res-row"><span class="res-lbl">Characteristic impedance, Z₀</span><span class="res-val" id="cpw-z0">—</span></div><div class="res-row"><span class="res-lbl">Effective εᵣ</span><span class="res-val" id="cpw-eeff">—</span></div><div class="res-row"><span class="res-lbl">Phase velocity, vₚ</span><span class="res-val" id="cpw-vp">—</span></div><div class="res-row"><span class="res-lbl">Guide wavelength at 10 GHz</span><span class="res-val" id="cpw-lam">—</span></div></div></div>
+<div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0 8px;">\(Z_0 = \dfrac{30\pi}{\sqrt{\varepsilon_{eff}}}\dfrac{K(k^\prime)}{K(k)},\quad k=\dfrac{w}{w+2s},\quad \varepsilon_{eff}=1+\dfrac{\varepsilon_r-1}{2}\dfrac{K(k_1^\prime)/K(k_1)}{K(k^\prime)/K(k)}\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_microwave_lines.html">Learn about microwave transmission lines →</a></div>
+<script>
+// Complete elliptic integral K(k) via AGM
+function ellipK(k){
+  var a=1.0, b=Math.sqrt(1-k*k);
+  for(var i=0;i<30;i++){var a1=(a+b)/2; b=Math.sqrt(a*b); a=a1;}
+  return Math.PI/(2*a);
+}
+document.getElementById('cpw-btn').addEventListener('click', function(){
+  var w=parseFloat(document.getElementById('cpw-w').value);
+  var s=parseFloat(document.getElementById('cpw-s').value);
+  var h=parseFloat(document.getElementById('cpw-h').value);
+  var er=parseFloat(document.getElementById('cpw-er').value);
+  var bg=parseInt(document.getElementById('cpw-bg').value);
+  document.getElementById('error').textContent='';
+  if([w,s,h,er].some(isNaN)||w<=0||s<=0||h<=0||er<1){document.getElementById('error').textContent='Enter valid positive values.';return;}
+  var k0=w/(w+2*s), k0p=Math.sqrt(1-k0*k0);
+  var Kk0=ellipK(k0), Kk0p=ellipK(k0p);
+  var eeff, Z0;
+  if(!bg){
+    // CPW on thick substrate (Schneider)
+    var k1=Math.sinh(Math.PI*w/4/h)/Math.sinh(Math.PI*(w+2*s)/4/h);
+    var k1p=Math.sqrt(1-k1*k1);
+    eeff=1+(er-1)/2*ellipK(k1)*Kk0p/(ellipK(k1p)*Kk0);
+    Z0=30*Math.PI/Math.sqrt(eeff)*Kk0p/Kk0;
+  } else {
+    // GCPW (backed with ground plane)
+    var k1b=Math.tanh(Math.PI*w/4/h)/Math.tanh(Math.PI*(w+2*s)/4/h);
+    var k1bp=Math.sqrt(1-k1b*k1b);
+    var q=0.5*ellipK(k1b)*Kk0p/(ellipK(k1bp)*Kk0);
+    eeff=1+(er-1)*q;
+    Z0=30*Math.PI/Math.sqrt(eeff)*Kk0p/Kk0;
+  }
+  var vp=3e8/Math.sqrt(eeff);
+  var lam=vp/10e9*1000; // mm at 10 GHz
+  document.getElementById('cpw-z0').textContent=Z0.toFixed(3)+' Ω';
+  document.getElementById('cpw-eeff').textContent=eeff.toFixed(4);
+  document.getElementById('cpw-vp').textContent=(vp/1e8).toFixed(3)+'×10⁸ m/s';
+  document.getElementById('cpw-lam').textContent=lam.toFixed(2)+' mm';
+  if(window.drawDiagram) drawDiagram(w,s,h,er,Z0.toFixed(1),bg);
+});
+function drawDiagram(w,s,h,er,Z0lbl,bg){
+  if(!w){w=1;s=0.3;h=0.5;er=9.9;Z0lbl='—';bg=1;}
+  var W=480,H=170,scale=Math.min(60,120/(w+2*s+2));
+  var wp=w*scale, sp=s*scale, hp=Math.min(50,h*scale*0.6);
+  var cx=W/2, topY=50, botY=topY+hp;
+  var s2='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s2+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Substrate
+  s2+='<rect x="'+(cx-wp/2-sp*2-20)+'" y="'+topY+'" width="'+(wp+sp*4+40)+'" height="'+hp+'" fill="#d4ecca" stroke="#5a9020" stroke-width="1" rx="1"/>';
+  s2+='<text x="'+(cx+wp/4)+'" y="'+(topY+hp/2+4)+'" font-size="9.5" fill="#3a6010">εᵣ = '+er+'</text>';
+  // Ground planes (same side as trace)
+  s2+='<rect x="'+(cx-wp/2-sp*2-20)+'" y="'+(topY-10)+'" width="'+(sp*2)+'" height="10" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  s2+='<rect x="'+(cx+wp/2+sp)+'" y="'+(topY-10)+'" width="'+(sp*2+20)+'" height="10" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  // Gaps
+  s2+='<rect x="'+(cx-wp/2-sp)+'" y="'+(topY-10)+'" width="'+sp+'" height="10" fill="#faf9ff" stroke="#e0d8ff" stroke-width="0.5"/>';
+  s2+='<rect x="'+(cx+wp/2)+'" y="'+(topY-10)+'" width="'+sp+'" height="10" fill="#faf9ff" stroke="#e0d8ff" stroke-width="0.5"/>';
+  // Signal trace
+  s2+='<rect x="'+(cx-wp/2)+'" y="'+(topY-10)+'" width="'+wp+'" height="10" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  // Bottom ground (if GCPW)
+  if(bg) s2+='<rect x="'+(cx-wp/2-sp*2-20)+'" y="'+botY+'" width="'+(wp+sp*4+40)+'" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  // Dimension arrows
+  s2+='<line x1="'+(cx-wp/2)+'" y1="'+(topY+hp+22)+'" x2="'+(cx+wp/2)+'" y2="'+(topY+hp+22)+'" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/>';
+  s2+='<text x="'+cx+'" y="'+(topY+hp+36)+'" text-anchor="middle" font-size="9.5" fill="#888">w = '+w+' mm</text>';
+  s2+='<line x1="'+(cx+wp/2)+'" y1="'+(topY+hp+22)+'" x2="'+(cx+wp/2+sp)+'" y2="'+(topY+hp+22)+'" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/>';
+  s2+='<text x="'+(cx+wp/2+sp/2)+'" y="'+(topY+hp+16)+'" text-anchor="middle" font-size="9" fill="#888">s</text>';
+  s2+='<text x="'+(cx-wp/2-sp*2-4)+'" y="'+(topY+hp/2+4)+'" text-anchor="end" font-size="9.5" fill="#888">h='+h+'mm</text>';
+  s2+='<text x="'+W/2+'" y="162" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">Z₀ = '+Z0lbl+' Ω</text>';
+  s2+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s2;
+}
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

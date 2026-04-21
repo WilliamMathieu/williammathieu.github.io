@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radar Range Equation Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate maximum radar detection range, received power, and EIRP using the radar range equation. Enter transmit power, antenna gains, target RCS, and frequency.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/RadarRange.html">
+  <meta property="og:title" content="Radar Range Equation Calculator | RF Toolbox">
+  <meta property="og:description" content="Calculate maximum radar detection range, received power, and EIRP using the radar range equation. Enter transmit power, antenna gains, target RCS, and frequency.">
+  <meta property="og:url" content="https://rftoolbox.ca/RadarRange.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Radar Range Equation Calculator",
+    "description": "Calculate maximum radar detection range, received power, and EIRP using the radar range equation. Enter transmit power, antenna gains, target RCS, and frequency.",
+    "url": "https://rftoolbox.ca/RadarRange.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Radar Range Equation Calculator</h3>
+<div class="tool-concept">
+  <p>The radar equation relates transmitted power, antenna gains, target radar cross-section, and range to determine the received signal power. Use it to calculate maximum detection range, minimum detectable RCS, or required transmit power.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pₜ</td><td style="padding:3px 0;">Transmitted power (W or dBm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Gₜ, Gᵣ</td><td style="padding:3px 0;">Transmit and receive antenna gains (dBi). Monostatic radar: Gₜ=Gᵣ.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">σ</td><td style="padding:3px 0;">Radar cross-section of the target (m²). Aircraft ≈ 1–100 m², person ≈ 0.1–1 m², bird ≈ 0.01 m².</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R</td><td style="padding:3px 0;">Range to target (m).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Carrier frequency. Sets λ.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pmin</td><td style="padding:3px 0;">Minimum detectable signal power (dBm). Typically −100 to −120 dBm.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Transmit power, <span class="var">Pₜ</span></label><div class="inp-inline"><input type="text" id="rd-pt" value="10" ><span class='inp-units'>W</span></div></div><div class="inp-row"><label>TX gain, <span class="var">Gₜ</span></label><div class="inp-inline"><input type="text" id="rd-gt" value="30" ><span class='inp-units'>dBi</span></div></div><div class="inp-row"><label>RX gain, <span class="var">Gᵣ</span></label><div class="inp-inline"><input type="text" id="rd-gr" value="30" ><span class='inp-units'>dBi</span></div><span class="inp-hint">same as Gₜ for monostatic</span></div><div class="inp-row"><label>Target RCS, <span class="var">σ</span></label><div class="inp-inline"><input type="text" id="rd-sigma" value="1" ><span class='inp-units'>m²</span></div><span class="inp-hint">aircraft≈1–100, person≈0.1–1</span></div><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="rd-f" value="10" ><select id="rd-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Min. detectable signal, <span class="var">Pmin</span></label><div class="inp-inline"><input type="text" id="rd-pmin" value="-110" ><span class='inp-units'>dBm</span></div><span class="inp-hint">receiver sensitivity</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="rd-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;rd-pt&quot;: &quot;10&quot;, &quot;rd-gt&quot;: &quot;30&quot;, &quot;rd-gr&quot;: &quot;30&quot;, &quot;rd-sigma&quot;: &quot;1&quot;, &quot;rd-f&quot;: &quot;10&quot;, &quot;rd-fu&quot;: &quot;1e9&quot;, &quot;rd-pmin&quot;: &quot;-110&quot;})" title="10 GHz radar, 10 W, 30 dBi, σ=1m²">Load Example</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Performance</h4><div class="res-row"><span class="res-lbl">Maximum range, R_max</span><span class="res-val" id="rd-rmax">—</span></div><div class="res-row"><span class="res-lbl">Received power at 1 km</span><span class="res-val" id="rd-pr1k">—</span></div><div class="res-row"><span class="res-lbl">Range at Pmin</span><span class="res-val" id="rd-rangeatpmin">—</span></div></div><div class="res-card"><h4>Parameters</h4><div class="res-row"><span class="res-lbl">Wavelength, λ</span><span class="res-val" id="rd-lam">—</span></div><div class="res-row"><span class="res-lbl">EIRP</span><span class="res-val" id="rd-eirp">—</span></div><div class="res-row"><span class="res-lbl">Radar equation (dB)</span><span class="res-val" id="rd-dbeq">—</span></div></div></div>
+<div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0 8px;">\(P_r = \dfrac{P_t G_t G_r \lambda^2 \sigma}{(4\pi)^3 R^4}\qquad R_{max}=\left(\dfrac{P_t G_t G_r \lambda^2 \sigma}{(4\pi)^3 P_{min}}\right)^{1/4}\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_radar.html">Learn about radar fundamentals →</a></div>
+<script>
+document.getElementById('rd-btn').addEventListener('click', function(){
+  var Pt=parseFloat(document.getElementById('rd-pt').value);
+  var Gt=Math.pow(10,parseFloat(document.getElementById('rd-gt').value)/10);
+  var Gr=Math.pow(10,parseFloat(document.getElementById('rd-gr').value)/10);
+  var sig=parseFloat(document.getElementById('rd-sigma').value);
+  var f=parseFloat(document.getElementById('rd-f').value)*parseFloat(document.getElementById('rd-fu').value);
+  var Pmin_dBm=parseFloat(document.getElementById('rd-pmin').value);
+  document.getElementById('error').textContent='';
+  if([Pt,Gt,Gr,sig,f,Pmin_dBm].some(isNaN)||Pt<=0||sig<=0||f<=0){document.getElementById('error').textContent='Enter valid positive values.';return;}
+  var lam=3e8/f;
+  var Pmin_W=1e-3*Math.pow(10,Pmin_dBm/10);
+  var Rmax=Math.pow(Pt*Gt*Gr*lam*lam*sig/Math.pow(4*Math.PI,3)/Pmin_W,0.25);
+  var Pr1k=Pt*Gt*Gr*lam*lam*sig/Math.pow(4*Math.PI,3)/Math.pow(1000,4);
+  var Pr1k_dBm=10*Math.log10(Pr1k/1e-3);
+  var EIRP_dBm=10*Math.log10(Pt/1e-3)+10*Math.log10(Gt);
+  document.getElementById('rd-rmax').textContent=engFmt(Rmax,'m');
+  document.getElementById('rd-pr1k').textContent=Pr1k_dBm.toFixed(1)+' dBm';
+  document.getElementById('rd-rangeatpmin').textContent=engFmt(Rmax,'m');
+  document.getElementById('rd-lam').textContent=engFmt(lam,'m');
+  document.getElementById('rd-eirp').textContent=EIRP_dBm.toFixed(1)+' dBm';
+  document.getElementById('rd-dbeq').textContent=(10*Math.log10(Pt)+10*Math.log10(Gt)+10*Math.log10(Gr)+20*Math.log10(lam)+10*Math.log10(sig)-30*Math.log10(4*Math.PI)).toFixed(1)+' dBm·m⁴';
+  if(window.drawDiagram) drawDiagram(Rmax,Pmin_dBm,Pt,Gt,lam,sig);
+});
+function drawDiagram(Rmax,Pmin,Pt,Gt,lam,sig){
+  if(!Rmax){return;}
+  var W=520,H=130,wy=65;
+  var sv='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  sv+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Radar block
+  sv+='<rect x="20" y="40" width="80" height="40" fill="#f0eeff" stroke="#5533aa" stroke-width="2" rx="4"/>';
+  sv+='<text x="60" y="57" text-anchor="middle" font-size="10" font-weight="bold" fill="#5533aa">RADAR</text>';
+  sv+='<text x="60" y="72" text-anchor="middle" font-size="9" fill="#888">'+Math.round(Pt)+'W  Gₜ='+Math.round(10*Math.log10(Gt))+'dBi</text>';
+  // Range arrow
+  var rmStr=Rmax>1000?(Rmax/1000).toFixed(1)+' km':Rmax.toFixed(0)+' m';
+  sv+='<line x1="100" y1="'+wy+'" x2="400" y2="'+wy+'" stroke="#AA77FF" stroke-width="2" stroke-dasharray="6,4"/>';
+  sv+='<polygon points="400,'+wy+' 390,'+(wy-5)+' 390,'+(wy+5)+'" fill="#AA77FF"/>';
+  sv+='<polygon points="100,'+wy+' 110,'+(wy-5)+' 110,'+(wy+5)+'" fill="#AA77FF"/>';
+  sv+='<text x="250" y="'+(wy-8)+'" text-anchor="middle" font-size="11" font-weight="bold" fill="#5533aa">R_max = '+rmStr+'</text>';
+  // Target
+  sv+='<circle cx="420" cy="'+wy+'" r="12" fill="none" stroke="#cc3333" stroke-width="2" stroke-dasharray="3,2"/>';
+  sv+='<text x="420" y="'+(wy+4)+'" text-anchor="middle" font-size="9" fill="#cc3333">σ</text>';
+  sv+='<text x="420" y="'+(wy+25)+'" text-anchor="middle" font-size="9" fill="#888">'+sig+'m²</text>';
+  // Pmin note
+  sv+='<text x="250" y="115" text-anchor="middle" font-size="10" fill="#888" font-style="italic">Pmin = '+Pmin+' dBm  |  R ∝ (Pt·Gt·Gr·σ)^¼</text>';
+  sv+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=sv;
+}
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

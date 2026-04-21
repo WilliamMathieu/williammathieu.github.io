@@ -17,6 +17,7 @@ document.getElementById('cx-btn').addEventListener('click', function() {
     document.getElementById('cx-L').textContent=(L*1e9).toFixed(4)+' nH/m';
     document.getElementById('cx-vp').textContent=(vp/1e8).toFixed(4)+' \u00d7 10\u2078 m/s';
     document.getElementById('cx-fc').textContent=fc.toFixed(4)+' GHz';
+    if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

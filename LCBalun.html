@@ -54,7 +54,7 @@
   </details>
 </div>
 <div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Frequency, f</label><div class="inp-inline"><input type="text" id="bl-f" value="144" ><select id="bl-fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Topology</label><select id="bl-topo"><option value="lattice">Lattice / Bridged-T</option><option value="pi">LC π-BALUN</option><option value="marchand">Marchand (lumped)</option></select></div><div class="inp-row"><label>Unbalanced impedance, Z_u</label><div class="inp-inline"><input type="text" id="bl-zu" value="50" ><span class="inp-units">Ω</span></div><span class="inp-hint">Coaxial port</span></div><div class="inp-row"><label>Balanced impedance, Z_b</label><div class="inp-inline"><input type="text" id="bl-zb" value="200" ><span class="inp-units">Ω</span></div><span class="inp-hint">Dipole / balanced port</span></div></div>
+<div class="inp-grid"><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="bl-f" value="144"  data-tip="Operating frequency for the BALUN. Components are calculated for this single frequency."><select id="bl-fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Topology</label><select id="bl-topo"><option value="lattice">Lattice / Bridged-T</option><option value="pi">LC π-BALUN</option><option value="marchand">Marchand (lumped)</option></select></div><div class="inp-row"><label>Unbalanced impedance, <span class="var">Z_u</span></label><div class="inp-inline"><input type="text" id="bl-zu" value="50"  data-tip="Unbalanced port impedance in Ω. Typically 50 Ω for coaxial input."><span class="inp-units">Ω</span></div><span class="inp-hint">Coaxial port</span></div><div class="inp-row"><label>Balanced impedance, <span class="var">Z_b</span></label><div class="inp-inline"><input type="text" id="bl-zb" value="200"  data-tip="Balanced port impedance in Ω. Folded dipole = 300 Ω, typical dipole = 200 Ω."><span class="inp-units">Ω</span></div><span class="inp-hint">Dipole / balanced port</span></div></div>
 <div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="bl-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;bl-f&quot;: &quot;144&quot;, &quot;bl-fu&quot;: &quot;1e6&quot;, &quot;bl-zu&quot;: &quot;50&quot;, &quot;bl-zb&quot;: &quot;200&quot;})" title="VHF BALUN: 50Ω → 200Ω at 144 MHz">Load Example</button></div>
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Component Values</div>
@@ -75,6 +75,75 @@
 </div>
 <div id="bl-eq" style="margin:10px 0;font-size:13px;"></div>
 <div class="note-info" id="bl-note" style="margin-top:8px;"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var topo = document.getElementById('bl-topo') ? document.getElementById('bl-topo').value : 'lattice';
+  var L1v  = document.getElementById('bl-r1') ? document.getElementById('bl-r1').textContent : '—';
+  var C1v  = document.getElementById('bl-r2') ? document.getElementById('bl-r2').textContent : '—';
+  var Zu   = parseFloat(document.getElementById('bl-zu')&&document.getElementById('bl-zu').value)||50;
+  var Zb   = parseFloat(document.getElementById('bl-zb')&&document.getElementById('bl-zb').value)||200;
+  var W=560,H=160;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  var wy=70, lx=50, rx=W-50;
+
+  if(topo==='pi'){
+    // Pi BALUN: shunt C | series L | shunt C
+    var jl=lx+60, jr=rx-60;
+    // Input wire
+    s+='<line x1="'+lx+'" y1="'+wy+'" x2="'+jl+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Shunt C left
+    s+='<line x1="'+jl+'" y1="'+wy+'" x2="'+jl+'" y2="'+(wy+16)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+(jl-10)+'" y1="'+(wy+16)+'" x2="'+(jl+10)+'" y2="'+(wy+16)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+    s+='<line x1="'+(jl-10)+'" y1="'+(wy+24)+'" x2="'+(jl+10)+'" y2="'+(wy+24)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+    s+='<line x1="'+jl+'" y1="'+(wy+24)+'" x2="'+jl+'" y2="'+(wy+44)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+(jl-10)+'" y1="'+(wy+44)+'" x2="'+(jl+10)+'" y2="'+(wy+44)+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
+    s+='<text x="'+(jl+14)+'" y="'+(wy+22)+'" font-size="9" fill="#5533aa">C='+C1v+'</text>';
+    // Series L
+    var ind0=jl, indbw=12, indN=4, indEnd=ind0+indbw*indN;
+    s+='<line x1="'+jl+'" y1="'+wy+'" x2="'+ind0+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    var indPath='M'+ind0+','+wy;
+    for(var k=0;k<indN;k++) indPath+=' A'+(indbw/2)+','+(indbw/2)+' 0 0,1 '+(ind0+(k+1)*indbw)+','+wy;
+    s+='<path d="'+indPath+'" fill="none" stroke="#AA77FF" stroke-width="2.2" stroke-linecap="round"/>';
+    s+='<text x="'+(ind0+indN*indbw/2)+'" y="'+(wy-12)+'" text-anchor="middle" font-size="9" fill="#AA77FF">L='+L1v+'</text>';
+    s+='<line x1="'+indEnd+'" y1="'+wy+'" x2="'+jr+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Shunt C right
+    s+='<circle cx="'+jr+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
+    s+='<line x1="'+jr+'" y1="'+wy+'" x2="'+jr+'" y2="'+(wy+16)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+(jr-10)+'" y1="'+(wy+16)+'" x2="'+(jr+10)+'" y2="'+(wy+16)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+    s+='<line x1="'+(jr-10)+'" y1="'+(wy+24)+'" x2="'+(jr+10)+'" y2="'+(wy+24)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+    s+='<line x1="'+jr+'" y1="'+(wy+24)+'" x2="'+jr+'" y2="'+(wy+44)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+(jr-10)+'" y1="'+(wy+44)+'" x2="'+(jr+10)+'" y2="'+(wy+44)+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+jr+'" y1="'+wy+'" x2="'+rx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  } else {
+    // Lattice / Marchand — show generic BALUN symbol
+    // Box
+    s+='<rect x="180" y="'+(wy-30)+'" width="200" height="60" fill="#f0eeff" stroke="#AA77FF" stroke-width="2" rx="6"/>';
+    s+='<text x="280" y="'+(wy-8)+'" text-anchor="middle" font-size="12" font-weight="bold" fill="#5533aa">'+(topo==='lattice'?'Lattice':'Marchand')+' BALUN</text>';
+    s+='<text x="280" y="'+(wy+9)+'" text-anchor="middle" font-size="10" fill="#AA77FF">L = '+L1v+'  |  C = '+C1v+'</text>';
+    // Unbalanced port (left)
+    s+='<line x1="'+lx+'" y1="'+wy+'" x2="180" y2="'+wy+'" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/>';
+    // Balanced port (right - two lines offset)
+    s+='<line x1="380" y1="'+(wy-12)+'" x2="'+rx+'" y2="'+(wy-12)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="380" y1="'+(wy+12)+'" x2="'+rx+'" y2="'+(wy+12)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<text x="'+(rx+6)+'" y="'+(wy-8)+'" font-size="9" fill="#888">+</text>';
+    s+='<text x="'+(rx+6)+'" y="'+(wy+16)+'" font-size="9" fill="#888">−</text>';
+  }
+  // Port labels
+  s+='<text x="'+lx+'" y="'+(wy+28)+'" text-anchor="middle" font-size="10" fill="#888">'+Zu+' Ω</text>';
+  s+='<text x="'+rx+'" y="'+(wy+28)+'" text-anchor="middle" font-size="10" fill="#888">'+Zb+' Ω</text>';
+  s+='<text x="'+lx+'" y="'+(wy-16)+'" text-anchor="middle" font-size="9.5" fill="#5533aa">unbal.</text>';
+  s+='<text x="'+rx+'" y="'+(wy-16)+'" text-anchor="middle" font-size="9.5" fill="#5533aa">bal.</text>';
+  s+='<text x="'+W/2+'" y="145" text-anchor="middle" font-size="10.5" fill="#888">'+Zu+' Ω → '+Zb+' Ω · ratio '+parseFloat((Zb/Zu).toFixed(2))+':1</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+</script>
 <div class="wiki-link-hint">📖 <a href="wiki_balun.html">Learn about BALUNs →</a></div>
 <script src="LCBalun.js"></script>
 </article>

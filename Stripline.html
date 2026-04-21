@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stripline Impedance Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate stripline characteristic impedance, phase velocity, and per-unit-length capacitance and inductance. Fully shielded TEM line for multilayer RF PCBs.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/Stripline.html">
+  <meta property="og:title" content="Stripline Impedance Calculator | RF Toolbox">
+  <meta property="og:description" content="Calculate stripline characteristic impedance, phase velocity, and per-unit-length capacitance and inductance. Fully shielded TEM line for multilayer RF PCBs.">
+  <meta property="og:url" content="https://rftoolbox.ca/Stripline.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Stripline Impedance Calculator",
+    "description": "Calculate stripline characteristic impedance, phase velocity, and per-unit-length capacitance and inductance. Fully shielded TEM line for multilayer RF PCBs.",
+    "url": "https://rftoolbox.ca/Stripline.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<article>
+<h3>Stripline Calculator</h3>
+<div class="tool-concept">
+  <p>Stripline is a flat conductor sandwiched symmetrically between two ground planes. It is a fully shielded TEM medium — no dispersion, no radiation, lower loss than microstrip. Common in multilayer PCBs for RF routing and controlled-impedance backplanes.</p>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
+    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">w</td><td style="padding:3px 0;">Trace width (mm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">b</td><td style="padding:3px 0;">Total substrate height (mm) — distance between the two ground planes.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">t</td><td style="padding:3px 0;">Trace thickness (mm).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εᵣ</td><td style="padding:3px 0;">Dielectric constant of the filling material. FR4 ≈ 4.4.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Characteristic impedance. The trace is centred between the planes.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">vₚ</td><td style="padding:3px 0;">Phase velocity = c/√εᵣ. Stripline is fully embedded so vₚ has no air correction.</td></tr></table>
+  </details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid"><div class="inp-row"><label>Trace width, <span class="var">w</span></label><div class="inp-inline"><input type="text" id="sl-w" value="1.0" ><span class='inp-units'>mm</span></div></div><div class="inp-row"><label>Ground plane separation, <span class="var">b</span></label><div class="inp-inline"><input type="text" id="sl-b" value="3.0" ><span class='inp-units'>mm</span></div><span class="inp-hint">total gap between ground planes</span></div><div class="inp-row"><label>Trace thickness, <span class="var">t</span></label><div class="inp-inline"><input type="text" id="sl-t" value="0.035" ><span class='inp-units'>mm</span></div><span class="inp-hint">1 oz Cu = 0.035 mm</span></div><div class="inp-row"><label>Dielectric constant, <span class="var">εᵣ</span></label><div class="inp-inline"><input type="text" id="sl-er" value="4.4" ></div><span class="inp-hint">FR4≈4.4, Rogers4003≈3.55</span></div></div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="sl-btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;sl-w&quot;: &quot;1.0&quot;, &quot;sl-b&quot;: &quot;3.0&quot;, &quot;sl-t&quot;: &quot;0.035&quot;, &quot;sl-er&quot;: &quot;4.4&quot;})" title="50Ω stripline on FR4">Load Example</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Electrical</h4><div class="res-row"><span class="res-lbl">Characteristic impedance, Z₀</span><span class="res-val" id="sl-z0">—</span></div><div class="res-row"><span class="res-lbl">Phase velocity, vₚ</span><span class="res-val" id="sl-vp">—</span></div><div class="res-row"><span class="res-lbl">Capacitance/length</span><span class="res-val" id="sl-c">—</span></div><div class="res-row"><span class="res-lbl">Inductance/length</span><span class="res-val" id="sl-l">—</span></div></div></div>
+<div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0 8px;">\(Z_0 = \dfrac{60}{\sqrt{\varepsilon_r}}\ln\!\left(\dfrac{4b}{0.67\pi w_{\rm eff}(0.8+t/w)}\right)\)</div>
+</details>
+<div class="wiki-link-hint">📖 <a href="wiki_microwave_lines.html">Learn the theory behind this tool →</a></div>
+<script>
+document.getElementById('sl-btn').addEventListener('click', function(){
+  var w=parseFloat(document.getElementById('sl-w').value);
+  var b=parseFloat(document.getElementById('sl-b').value);
+  var t=parseFloat(document.getElementById('sl-t').value);
+  var er=parseFloat(document.getElementById('sl-er').value);
+  document.getElementById('error').textContent='';
+  if([w,b,t,er].some(isNaN)||w<=0||b<=0||t<=0||er<1){document.getElementById('error').textContent='Enter valid positive values. Ensure b > t.';return;}
+  if(t>=b){document.getElementById('error').textContent='Trace thickness t must be less than ground separation b.';return;}
+  var weff=w*(1-(t/b)*Math.log(2-t/b)/Math.PI);  // effective width correction
+  var Z0=(60/Math.sqrt(er))*Math.log(4*b/(0.67*Math.PI*weff*(0.8+t/weff)));
+  var vp=3e8/Math.sqrt(er);
+  var C=er/Z0/vp*1e12; // pF/m
+  var L=Z0/vp*1e9;     // nH/m
+  document.getElementById('sl-z0').textContent=Z0.toFixed(3)+' Ω';
+  document.getElementById('sl-vp').textContent=(vp/1e8).toFixed(3)+'×10⁸ m/s';
+  document.getElementById('sl-c').textContent=C.toFixed(2)+' pF/m';
+  document.getElementById('sl-l').textContent=L.toFixed(2)+' nH/m';
+  if(window.drawDiagram) drawDiagram(w,b,t,er,Z0.toFixed(1));
+});
+function drawDiagram(w,b,t,er,z0lbl){
+  if(!w){w=1;b=3;t=0.035;er=4.4;z0lbl='—';}
+  var W=480,H=160,sc=Math.min(60,80/b);
+  var wp=w*sc, bp=b*sc, tp=Math.max(4,t*sc);
+  var cx=W/2, midY=75;
+  var sv='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  sv+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  var gx1=cx-wp-30, gw=wp+60;
+  // Top ground
+  sv+='<rect x="'+gx1+'" y="'+(midY-bp/2-8)+'" width="'+gw+'" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  sv+='<text x="'+(gx1+gw+4)+'" y="'+(midY-bp/2-1)+'" font-size="9.5" fill="#7a5000">GND</text>';
+  // Dielectric fill
+  sv+='<rect x="'+gx1+'" y="'+(midY-bp/2)+'" width="'+gw+'" height="'+bp+'" fill="#d4ecca" stroke="#5a9020" stroke-width="1"/>';
+  sv+='<text x="'+cx+'" y="'+(midY-bp/4)+'" text-anchor="middle" font-size="9.5" fill="#3a6010">εᵣ = '+er+'</text>';
+  // Trace (centred)
+  sv+='<rect x="'+(cx-wp/2)+'" y="'+(midY-tp/2)+'" width="'+wp+'" height="'+tp+'" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  // Bottom ground
+  sv+='<rect x="'+gx1+'" y="'+(midY+bp/2)+'" width="'+gw+'" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  sv+='<text x="'+(gx1+gw+4)+'" y="'+(midY+bp/2+6)+'" font-size="9.5" fill="#7a5000">GND</text>';
+  // b arrow
+  sv+='<line x1="'+(gx1-14)+'" y1="'+(midY-bp/2)+'" x2="'+(gx1-14)+'" y2="'+(midY+bp/2)+'" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/>';
+  sv+='<line x1="'+(gx1-20)+'" y1="'+(midY-bp/2)+'" x2="'+(gx1-8)+'" y2="'+(midY-bp/2)+'" stroke="#888" stroke-width="1.2"/>';
+  sv+='<line x1="'+(gx1-20)+'" y1="'+(midY+bp/2)+'" x2="'+(gx1-8)+'" y2="'+(midY+bp/2)+'" stroke="#888" stroke-width="1.2"/>';
+  sv+='<text x="'+(gx1-28)+'" y="'+(midY+4)+'" text-anchor="end" font-size="9.5" fill="#888">b='+b+'mm</text>';
+  // w label
+  sv+='<text x="'+cx+'" y="'+(midY+bp/2+22)+'" text-anchor="middle" font-size="9.5" fill="#888">w = '+w+' mm</text>';
+  sv+='<text x="'+W/2+'" y="152" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">Z₀ = '+z0lbl+' Ω</text>';
+  sv+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=sv;
+}
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>
