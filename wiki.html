@@ -7,39 +7,44 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>RF Toolbox Wiki</title>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+	<meta name="description" content="57 reference articles on RF engineering, microwave design, and MRI physics — with equations, diagrams, and links to related calculators.">
+	<meta name="robots" content="index, follow">
+	<link rel="canonical" href="https://rftoolbox.ca/wiki.html">
 	<link rel="stylesheet" href="style.css">
 	<style>
-		.wiki-hero { background:#f0eeff; border-bottom:2px solid #AA77FF; padding:16px 0 14px; margin-bottom:20px; }
-		.wiki-hero h2 { font-family:monospace; font-size:22px; color:#5533aa; margin-bottom:4px; }
-		.wiki-hero p  { font-family:monospace; font-size:13px; color:#666; margin:0; }
-		.wiki-search { display:flex; gap:8px; margin-top:10px; }
-		.wiki-search input { font-family:monospace; font-size:13px; padding:5px 10px; border:1px solid #AA77FF; border-radius:4px; flex:1; }
-		.wiki-search button { font-family:monospace; font-size:13px; padding:5px 14px; border:1px solid #AA77FF; border-radius:4px; background:#AA77FF; color:#fff; cursor:pointer; }
-		.wiki-search button:hover { background:#8855dd; }
-		.wiki-cat { margin-bottom:22px; }
-		.wiki-cat-title { font-family:monospace; font-size:13px; font-weight:bold; color:#5533aa; text-transform:uppercase; letter-spacing:0.06em; border-bottom:1px solid #d0c8f0; padding-bottom:5px; margin-bottom:10px; }
+		body { background:#fff; margin:0; }
+		.wiki-wrap { max-width:1000px; margin:0 auto; padding:0 20px 50px; }
+		.wiki-back { font-family:monospace; font-size:12px; color:#888; padding:12px 0 0; }
+		.wiki-back a { color:#AA77FF; text-decoration:none; }
+		.wiki-back a:hover { text-decoration:underline; }
+		.wiki-hero { background:#f0eeff; border-bottom:2px solid #AA77FF; padding:20px 0 16px; margin-bottom:24px; }
+		.wiki-hero h1 { font-family:monospace; font-size:22px; color:#5533aa; margin:0 0 4px; }
+		.wiki-hero p  { font-family:monospace; font-size:13px; color:#666; margin:0 0 12px; }
+		.wiki-search { display:flex; gap:8px; max-width:420px; }
+		.wiki-search input { font-family:monospace; font-size:13px; padding:6px 10px; border:1px solid #AA77FF; border-radius:4px; flex:1; outline:none; }
+		.wiki-search input:focus { box-shadow:0 0 0 2px rgba(170,119,255,0.2); }
+		#wiki-no-results { display:none; font-family:monospace; font-size:13px; color:#888; margin-top:8px; }
+		.wiki-cat { margin-bottom:28px; }
+		.wiki-cat-title { font-family:monospace; font-size:12px; font-weight:bold; color:#5533aa; text-transform:uppercase; letter-spacing:0.08em; border-bottom:2px solid #AA77FF; padding-bottom:5px; margin-bottom:12px; }
 		.wiki-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:8px; }
-		.wiki-card { background:#faf9ff; border:1px solid #d0c8f0; border-radius:5px; padding:10px 12px; text-decoration:none; color:#1a1a1a; transition:background 0.12s,border-color 0.12s; }
+		.wiki-card { background:#faf9ff; border:1px solid #d0c8f0; border-radius:5px; padding:10px 12px; text-decoration:none; color:#1a1a1a; transition:background 0.12s,border-color 0.12s; display:block; }
 		.wiki-card:hover { background:#f0eeff; border-color:#AA77FF; }
 		.wiki-card .wc-title { font-family:monospace; font-weight:bold; font-size:12px; color:#5533aa; margin-bottom:3px; }
 		.wiki-card .wc-desc  { font-family:monospace; font-size:11px; color:#666; line-height:1.4; }
 		.wiki-stats { font-family:monospace; font-size:11px; color:#aaa; margin-top:16px; }
-		#wiki-no-results { display:none; font-family:monospace; font-size:13px; color:#888; margin-top:8px; }
 	</style>
 </head>
 <body>
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-<section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-<article>
+
+<div class="wiki-wrap">
+	<div class="wiki-back"><a href="index.html">⌂ Home</a></div>
+
 	<div class="wiki-hero">
-		<h2>&#128210; RF Toolbox Wiki</h2>
-		<p>Reference articles on electromagnetics, RF engineering, microwave engineering, and MRI physics.</p>
+		<h1>📖 RF Toolbox Wiki</h1>
+		<p>57 reference articles on electromagnetics, RF engineering, microwave design, and MRI physics.</p>
 		<div class="wiki-search">
-			<input type="text" id="wiki-search" placeholder="Search articles..." oninput="filterWiki()">
-			<button onclick="filterWiki()">Search</button>
+			<input type="text" id="wiki-search" placeholder="Search articles…" oninput="filterWiki()">
 		</div>
 		<div id="wiki-no-results">No articles match your search.</div>
 	</div>
@@ -50,7 +55,7 @@
 		<div class="wiki-cat-title">Electromagnetics</div>
 		<div class="wiki-list">
 			<a class="wiki-card" href="wiki_maxwells.html"><div class="wc-title">Maxwell's Equations</div><div class="wc-desc">The four laws governing all classical electromagnetism.</div></a>
-			<a class="wiki-card" href="wiki_em_waves.html"><div class="wc-title">Electromagnetic Waves</div><div class="wc-desc">Wave propagation, polarisation, and the EM spectrum.</div></a>
+			<a class="wiki-card" href="wiki_em_waves.html"><div class="wc-title">Electromagnetic Waves</div><div class="wc-desc">TEM waves, polarisation, Poynting vector, and the EM spectrum.</div></a>
 			<a class="wiki-card" href="wiki_transmission_lines.html"><div class="wc-title">Transmission Line Theory</div><div class="wc-desc">Telegrapher's equations, reflections, and standing waves.</div></a>
 			<a class="wiki-card" href="wiki_skin_effect.html"><div class="wc-title">Skin Effect</div><div class="wc-desc">Current concentration at surfaces and its impact on RF resistance.</div></a>
 			<a class="wiki-card" href="wiki_dielectrics.html"><div class="wc-title">Dielectrics and Permittivity</div><div class="wc-desc">Dielectric constant, loss tangent, and substrate materials.</div></a>
@@ -61,48 +66,48 @@
 	<div class="wiki-cat" data-cat="RF Engineering">
 		<div class="wiki-cat-title">RF Engineering</div>
 		<div class="wiki-list">
-			<a class="wiki-card" href="wiki_sparam.html"><div class="wc-title">S-Parameters			<a class="wiki-card" href="wiki_db_dbm.html"><div class="wc-title">dB, dBm & Power Units</div><div class="wc-desc">Decibel scale, dBm reference, dBc/dBi/dBW, and dB arithmetic.</div></a>
+			<a class="wiki-card" href="wiki_db_dbm.html"><div class="wc-title">dB, dBm & Power Units</div><div class="wc-desc">Decibel scale, dBm reference, dBc/dBi/dBW, and cascade arithmetic.</div></a>
 			<a class="wiki-card" href="wiki_complex_impedance.html"><div class="wc-title">Complex Impedance & Reactance</div><div class="wc-desc">Reactance, phasors, admittance, Q factor, and series/parallel equivalents.</div></a>
-			<a class="wiki-card" href="wiki_vswr.html"><div class="wc-title">VSWR & Return Loss</div><div class="wc-desc">VSWR, |Γ|, return loss, and mismatch loss — four ways to describe match quality.</div></a>
-			<a class="wiki-card" href="wiki_vna.html"><div class="wc-title">VNA Measurements & Calibration</div><div class="wc-desc">SOL calibration, port extension, time-domain gating, and measurement tips.</div></a>
+			<a class="wiki-card" href="wiki_vswr.html"><div class="wc-title">VSWR & Return Loss</div><div class="wc-desc">VSWR, |Γ|, return loss, and mismatch loss — four ways to describe a match.</div></a>
+			<a class="wiki-card" href="wiki_vna.html"><div class="wc-title">VNA Measurements & Calibration</div><div class="wc-desc">SOL calibration, port extension, time-domain gating, and tips.</div></a>
 			<a class="wiki-card" href="wiki_smith_chart_tutorial.html"><div class="wc-title">Smith Chart Tutorial</div><div class="wc-desc">How to read and use the Smith Chart for impedance matching design.</div></a>
-			<a class="wiki-card" href="wiki_attenuators.html"><div class="wc-title">RF Attenuators</div><div class="wc-desc">Pi, T, L-pad, and Bridged-T attenuator design equations and component values.</div></a>
-			<a class="wiki-card" href="wiki_intermodulation.html"><div class="wc-title">Intermodulation & IP3</div><div class="wc-desc">IM3 products, IIP3/OIP3, IMD ratio, and cascaded IP3 in RF chains.</div></a>
-			<a class="wiki-card" href="wiki_power_dividers.html"><div class="wc-title">Power Dividers & Combiners</div><div class="wc-desc">Wilkinson divider, hybrid couplers, equal/unequal splits, and N-way combining.</div></a>
-			<a class="wiki-card" href="wiki_superheterodyne.html"><div class="wc-title">Superheterodyne Receiver</div><div class="wc-desc">Signal flow, image rejection, IF selection, and dynamic range analysis.</div></a>
-			<a class="wiki-card" href="wiki_cascade_analysis.html"><div class="wc-title">Receiver Cascade Analysis</div><div class="wc-desc">Combined NF, gain, and IP3 cascade with worked numerical example.</div></a>
-			<a class="wiki-card" href="wiki_pa_design.html"><div class="wc-title">Power Amplifier Design</div><div class="wc-desc">PA classes A–F, efficiency, back-off, Doherty, and DPD.</div></a>
-			<a class="wiki-card" href="wiki_pll.html"><div class="wc-title">PLL & Frequency Synthesis</div><div class="wc-desc">PFD, loop filter, VCO, divider, integer-N vs fractional-N, reference spurs.</div></a>
-			<a class="wiki-card" href="wiki_phase_noise.html"><div class="wc-title">Phase Noise & Jitter</div><div class="wc-desc">L(f) definition, Leeson model, 1/f² region, jitter integration.</div></a>
-</div><div class="wc-desc">Scattering parameters, Smith Chart, return loss, VSWR.</div></a>
+			<a class="wiki-card" href="wiki_sparam.html"><div class="wc-title">S-Parameters</div><div class="wc-desc">Scattering parameters, return loss, and two-port network analysis.</div></a>
 			<a class="wiki-card" href="wiki_impedance_matching.html"><div class="wc-title">Impedance Matching</div><div class="wc-desc">Why matching matters and the main techniques.</div></a>
-			<a class="wiki-card" href="wiki_noise.html"><div class="wc-title">Noise in RF Systems</div><div class="wc-desc">Thermal noise, noise figure, and Friis formula.</div></a>
+			<a class="wiki-card" href="wiki_attenuators.html"><div class="wc-title">RF Attenuators</div><div class="wc-desc">Pi, T, L-pad, and Bridged-T attenuator design equations.</div></a>
 			<a class="wiki-card" href="wiki_filters.html"><div class="wc-title">RF Filters</div><div class="wc-desc">Butterworth, Chebyshev, and LC ladder filter design.</div></a>
+			<a class="wiki-card" href="wiki_noise.html"><div class="wc-title">Noise in RF Systems</div><div class="wc-desc">Thermal noise, noise figure, and the Friis formula.</div></a>
 			<a class="wiki-card" href="wiki_amplifiers.html"><div class="wc-title">RF Amplifiers</div><div class="wc-desc">LNAs, PAs, gain, stability, and linearity (P1dB, IP3).</div></a>
+			<a class="wiki-card" href="wiki_pa_design.html"><div class="wc-title">Power Amplifier Design</div><div class="wc-desc">PA classes A–F, efficiency, back-off, Doherty, and DPD.</div></a>
+			<a class="wiki-card" href="wiki_intermodulation.html"><div class="wc-title">Intermodulation & IP3</div><div class="wc-desc">IM3 products, IIP3/OIP3, IMD ratio, and cascaded IP3.</div></a>
+			<a class="wiki-card" href="wiki_power_dividers.html"><div class="wc-title">Power Dividers & Combiners</div><div class="wc-desc">Wilkinson divider, hybrid couplers, and N-way combining.</div></a>
 			<a class="wiki-card" href="wiki_mixers.html"><div class="wc-title">Mixers and Frequency Conversion</div><div class="wc-desc">Upconversion, downconversion, IQ mixers, and spurs.</div></a>
-			<a class="wiki-card" href="wiki_oscillators.html"><div class="wc-title">Oscillators and PLLs</div><div class="wc-desc">Phase noise, VCOs, and phase-locked loop fundamentals.</div></a>
-			<a class="wiki-card" href="wiki_link_budget.html"><div class="wc-title">Link Budgets</div><div class="wc-desc">Systematic analysis of a communication link end-to-end.</div></a>
 			<a class="wiki-card" href="wiki_modulation.html"><div class="wc-title">Modulation Schemes</div><div class="wc-desc">AM, FM, PSK, QAM, and OFDM basics.</div></a>
+			<a class="wiki-card" href="wiki_oscillators.html"><div class="wc-title">Oscillators</div><div class="wc-desc">Phase noise, VCOs, and oscillator design.</div></a>
+			<a class="wiki-card" href="wiki_pll.html"><div class="wc-title">PLL & Frequency Synthesis</div><div class="wc-desc">PFD, loop filter, VCO, integer-N vs fractional-N, reference spurs.</div></a>
+			<a class="wiki-card" href="wiki_phase_noise.html"><div class="wc-title">Phase Noise & Jitter</div><div class="wc-desc">L(f) definition, Leeson model, 1/f² region, jitter integration.</div></a>
+			<a class="wiki-card" href="wiki_link_budget.html"><div class="wc-title">Link Budgets</div><div class="wc-desc">Systematic end-to-end RF link analysis.</div></a>
+			<a class="wiki-card" href="wiki_cascade_analysis.html"><div class="wc-title">Receiver Cascade Analysis</div><div class="wc-desc">Combined NF, gain, and IP3 cascade with worked example.</div></a>
+			<a class="wiki-card" href="wiki_superheterodyne.html"><div class="wc-title">Superheterodyne Receiver</div><div class="wc-desc">Signal flow, image rejection, IF selection, and dynamic range.</div></a>
+			<a class="wiki-card" href="wiki_radar.html"><div class="wc-title">Radar Fundamentals</div><div class="wc-desc">Radar equation, range resolution, and Doppler effect.</div></a>
 		</div>
 	</div>
 
 	<div class="wiki-cat" data-cat="Microwave Engineering">
 		<div class="wiki-cat-title">Microwave Engineering</div>
 		<div class="wiki-list">
-			<a class="wiki-card" href="wiki_microwave_lines.html"><div class="wc-title">Microwave Transmission Lines			<a class="wiki-card" href="wiki_pcb_rf.html"><div class="wc-title">RF PCB Design</div><div class="wc-desc">CPW, differential pairs, stripline, via parasitics, bond wire inductance.</div></a>
+			<a class="wiki-card" href="wiki_microwave_lines.html"><div class="wc-title">Microwave Transmission Lines</div><div class="wc-desc">Microstrip, CPW, stripline, and coax at microwave frequencies.</div></a>
+			<a class="wiki-card" href="wiki_pcb_rf.html"><div class="wc-title">RF PCB Design</div><div class="wc-desc">CPW, differential pairs, stripline, via parasitics, bond wire inductance.</div></a>
 			<a class="wiki-card" href="wiki_coax_cable.html"><div class="wc-title">Coaxial Cable Reference</div><div class="wc-desc">RG-58, LMR-400, semi-rigid — attenuation, velocity factor, power ratings.</div></a>
-			<a class="wiki-card" href="wiki_connectors.html"><div class="wc-title">RF Connectors Reference</div><div class="wc-desc">SMA, N-type, BNC, 2.92 mm, 2.4 mm, 1.85 mm — frequency limits and torque.</div></a>
-			<a class="wiki-card" href="wiki_emc_shielding.html"><div class="wc-title">EMC Shielding</div><div class="wc-desc">SE mechanisms, aperture leakage, cable shield transfer impedance, PCB cans.</div></a>
-			<a class="wiki-card" href="wiki_fmcw_radar.html"><div class="wc-title">FMCW & Pulsed Radar</div><div class="wc-desc">Range resolution, Doppler, FMCW beat frequency, range-Doppler matrix.</div></a>
-			<a class="wiki-card" href="wiki_frequency_bands.html"><div class="wc-title">RF Frequency Bands</div><div class="wc-desc">ITU and IEEE band designations, key allocations, antenna size reference.</div></a>
-			<a class="wiki-card" href="wiki_polarisation.html"><div class="wc-title">Antenna Polarisation</div><div class="wc-desc">Linear, CP, axial ratio, mismatch loss, and reading radiation patterns.</div></a>
-			<a class="wiki-card" href="wiki_rf_safety.html"><div class="wc-title">RF Safety & Exposure</div><div class="wc-desc">ICNIRP/FCC power density limits, SAR, safe distance formula.</div></a>
-</div><div class="wc-desc">Microstrip, CPW, stripline, and coax at microwave frequencies.</div></a>
+			<a class="wiki-card" href="wiki_connectors.html"><div class="wc-title">RF Connectors Reference</div><div class="wc-desc">SMA, N-type, BNC, 2.92 mm, 1.85 mm — frequency limits and torque specs.</div></a>
 			<a class="wiki-card" href="wiki_antennas.html"><div class="wc-title">Antenna Fundamentals</div><div class="wc-desc">Gain, directivity, polarisation, and radiation patterns.</div></a>
+			<a class="wiki-card" href="wiki_polarisation.html"><div class="wc-title">Antenna Polarisation</div><div class="wc-desc">Linear, CP, axial ratio, mismatch loss, and reading radiation patterns.</div></a>
+			<a class="wiki-card" href="wiki_frequency_bands.html"><div class="wc-title">RF Frequency Bands</div><div class="wc-desc">ITU and IEEE band designations, key allocations, antenna size reference.</div></a>
+			<a class="wiki-card" href="wiki_waveguide.html"><div class="wc-title">Waveguides</div><div class="wc-desc">Rectangular waveguide modes, cutoff frequency, and applications.</div></a>
 			<a class="wiki-card" href="wiki_balun.html"><div class="wc-title">BALUNs and Hybrids</div><div class="wc-desc">Balanced–unbalanced transitions and 90°/180° hybrids.</div></a>
-			<a class="wiki-card" href="wiki_waveguide.html"><div class="wc-title">Waveguides</div><div class="wc-desc">Rectangular waveguide modes, cutoff, and applications.</div></a>
 			<a class="wiki-card" href="wiki_microwave_components.html"><div class="wc-title">Microwave Passive Components</div><div class="wc-desc">Couplers, circulators, attenuators, and power dividers.</div></a>
-			<a class="wiki-card" href="wiki_radar.html"><div class="wc-title">Radar Fundamentals</div><div class="wc-desc">Radar equation, range resolution, and Doppler effect.</div></a>
+			<a class="wiki-card" href="wiki_fmcw_radar.html"><div class="wc-title">FMCW & Pulsed Radar</div><div class="wc-desc">Range resolution, Doppler, beat frequency, and range-Doppler matrix.</div></a>
+			<a class="wiki-card" href="wiki_emc_shielding.html"><div class="wc-title">EMC Shielding</div><div class="wc-desc">SE mechanisms, aperture leakage, cable shield transfer impedance.</div></a>
+			<a class="wiki-card" href="wiki_rf_safety.html"><div class="wc-title">RF Safety & Exposure</div><div class="wc-desc">ICNIRP/FCC power density limits, SAR, and safe distance formula.</div></a>
 			<a class="wiki-card" href="wiki_phased_arrays.html"><div class="wc-title">Phased Arrays</div><div class="wc-desc">Electronic beam steering, array factor, and beamforming.</div></a>
 		</div>
 	</div>
@@ -110,53 +115,48 @@
 	<div class="wiki-cat" data-cat="MRI Physics">
 		<div class="wiki-cat-title">MRI Physics</div>
 		<div class="wiki-list">
-			<a class="wiki-card" href="wiki_nmr_basics.html"><div class="wc-title">NMR Basics			<a class="wiki-card" href="wiki_mri_gradients.html"><div class="wc-title">MRI Gradient Coils</div><div class="wc-desc">Gradient efficiency, slew rate, eddy currents, and PNS limits.</div></a>
-</div><div class="wc-desc">Nuclear spin, Larmor precession, and the Bloch equations.</div></a>
+			<a class="wiki-card" href="wiki_nmr_basics.html"><div class="wc-title">NMR Basics</div><div class="wc-desc">Nuclear spin, Larmor precession, and the Bloch equations.</div></a>
 			<a class="wiki-card" href="wiki_mri_hardware.html"><div class="wc-title">MRI Hardware</div><div class="wc-desc">Main magnet, gradient coils, and RF system overview.</div></a>
-			<a class="wiki-card" href="wiki_mri_sequences.html"><div class="wc-title">MRI Pulse Sequences</div><div class="wc-desc">Spin echo, gradient echo, and k-space.</div></a>
-			<a class="wiki-card" href="wiki_mri_contrast.html"><div class="wc-title">MRI Contrast and Relaxation</div><div class="wc-desc">T1, T2, T2*, proton density, and contrast agents.</div></a>
-			<a class="wiki-card" href="wiki_mri_artifacts.html"><div class="wc-title">MRI Artifacts</div><div class="wc-desc">Gibbs ringing, chemical shift, motion, and susceptibility artifacts.</div></a>
+			<a class="wiki-card" href="wiki_mri_sequences.html"><div class="wc-title">MRI Pulse Sequences</div><div class="wc-desc">Spin echo, gradient echo, EPI, and k-space.</div></a>
+			<a class="wiki-card" href="wiki_mri_contrast.html"><div class="wc-title">MRI Contrast & Relaxation</div><div class="wc-desc">T1, T2, T2*, proton density, and contrast agents.</div></a>
+			<a class="wiki-card" href="wiki_mri_artifacts.html"><div class="wc-title">MRI Artefacts</div><div class="wc-desc">Gibbs ringing, chemical shift, motion, and susceptibility artefacts.</div></a>
 			<a class="wiki-card" href="wiki_parallel_imaging.html"><div class="wc-title">Parallel Imaging</div><div class="wc-desc">SENSE, GRAPPA, and accelerated acquisition.</div></a>
-			<a class="wiki-card" href="wiki_sar.html"><div class="wc-title">SAR and RF Safety</div><div class="wc-desc">Specific absorption rate, B1+ field, and safety limits.</div></a>
-		</div>
-	</div>
-
-	<div class="wiki-cat" data-cat="MRI Coils">
-		<div class="wiki-cat-title">MRI Coils</div>
-		<div class="wiki-list">
-			<a class="wiki-card" href="wiki_coil_types.html"><div class="wc-title">Coil Types</div><div class="wc-desc">Volume coils, surface coils, phased arrays, and birdcages.</div></a>
+			<a class="wiki-card" href="wiki_mri_gradients.html"><div class="wc-title">MRI Gradient Coils</div><div class="wc-desc">Gradient efficiency, slew rate, eddy currents, and PNS limits.</div></a>
 			<a class="wiki-card" href="wiki_coil_design.html"><div class="wc-title">RF Coil Design</div><div class="wc-desc">Tuning, matching, decoupling, and coil Q.</div></a>
-			<a class="wiki-card" href="wiki_birdcage.html"><div class="wc-title">Birdcage Coil</div><div class="wc-desc">Theory, design equations, and quadrature excitation.</div></a>
+			<a class="wiki-card" href="wiki_coil_types.html"><div class="wc-title">Coil Types</div><div class="wc-desc">Volume coils, surface coils, phased arrays, and birdcages.</div></a>
 			<a class="wiki-card" href="wiki_coil_snr.html"><div class="wc-title">SNR in MRI Coils</div><div class="wc-desc">Noise sources, filling factor, and optimising receive SNR.</div></a>
+			<a class="wiki-card" href="wiki_birdcage.html"><div class="wc-title">Birdcage Coil</div><div class="wc-desc">Theory, design equations, mode frequencies, and quadrature excitation.</div></a>
 			<a class="wiki-card" href="wiki_preamplifier_decoupling.html"><div class="wc-title">Preamplifier Decoupling</div><div class="wc-desc">Low-impedance preamp technique for array element isolation.</div></a>
+			<a class="wiki-card" href="wiki_sar.html"><div class="wc-title">SAR and RF Safety</div><div class="wc-desc">Specific absorption rate, B1+ field, and IEC safety limits.</div></a>
 			<a class="wiki-card" href="wiki_b1_mapping.html"><div class="wc-title">B1 Field Mapping</div><div class="wc-desc">Methods for measuring transmit field uniformity in MRI.</div></a>
 		</div>
 	</div>
 
-	</div><!-- /wiki-all -->
-	<div class="wiki-stats" id="wiki-stats"></div>
-</article>
-</section>
-<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+	</div>
+	<p class="wiki-stats">57 articles &nbsp;·&nbsp; All articles include original SVG diagrams and links to related calculators</p>
+</div>
+
+<footer style="text-align:center;padding:12px;font-family:monospace;font-size:11px;color:#888;border-top:1px solid #eee;">
+	<a href="index.html" style="color:#AA77FF;">⌂ Home</a> &nbsp;·&nbsp; <a href="games.html" style="color:#AA77FF;">Games</a>
+</footer>
+
 <script>
-var cards = document.querySelectorAll('.wiki-card');
-document.getElementById('wiki-stats').textContent = cards.length + ' articles';
 function filterWiki() {
-	var q = document.getElementById('wiki-search').value.toLowerCase().trim();
-	var shown = 0;
-	cards.forEach(function(card) {
-		var text = card.textContent.toLowerCase();
-		var match = !q || text.indexOf(q) !== -1;
-		card.style.display = match ? '' : 'none';
-		if (match) shown++;
+	var q = document.getElementById('wiki-search').value.trim().toLowerCase();
+	var cards = document.querySelectorAll('.wiki-card');
+	var visible = 0;
+	cards.forEach(function(c) {
+		var t = c.textContent.toLowerCase();
+		var show = !q || t.includes(q);
+		c.style.display = show ? '' : 'none';
+		if(show) visible++;
 	});
-	// Hide/show category headers
+	// Show/hide category headers
 	document.querySelectorAll('.wiki-cat').forEach(function(cat) {
-		var visible = Array.from(cat.querySelectorAll('.wiki-card')).some(function(c){ return c.style.display !== 'none'; });
-		cat.style.display = visible ? '' : 'none';
+		var any = Array.from(cat.querySelectorAll('.wiki-card')).some(c => c.style.display !== 'none');
+		cat.style.display = any ? '' : 'none';
 	});
-	document.getElementById('wiki-no-results').style.display = shown === 0 ? '' : 'none';
-	document.getElementById('wiki-stats').textContent = q ? shown + ' of ' + cards.length + ' articles' : cards.length + ' articles';
+	document.getElementById('wiki-no-results').style.display = (q && visible===0) ? '' : 'none';
 }
 </script>
 </body>
