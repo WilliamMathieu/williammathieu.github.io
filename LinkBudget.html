@@ -94,7 +94,7 @@ function drawDiagram() {
   var margin = entries.find(function(e){return e.label.indexOf('margin')>=0||e.label.indexOf('Margin')>=0;});
   var passing = margin && margin.val >= 0;
 
-  var W=560, H=160;
+  var W=560, H=220;
   var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
 
