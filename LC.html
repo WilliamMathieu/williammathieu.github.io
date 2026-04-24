@@ -52,6 +52,15 @@
     <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
     <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Inductance. Stores energy in a magnetic field.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Capacitance. Stores energy in an electric field.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f₀</td><td style="padding:3px 0;">Resonant frequency = 1/(2π√LC). At this frequency ωL = 1/(ωC).</td></tr></table>
   </details>
+
+      <details style="margin-top:8px;">
+        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants used ▸</summary>
+        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr>
+        </table>
+      </details>
 </div>
 <div class="sec-lbl">Inputs</div>
 <div class="inp-grid"><div class="inp-row"><label>Inductance, <span class="var">L</span></label><div class="inp-inline"><input type="text" id="L" placeholder="value"  data-tip="Inductance of the coil or inductor element."><select id="H_dropdown"><option value="1">µH</option><option value="2" selected>nH</option><option value="3">pH</option></select></div></div><div class="inp-row"><label>Capacitance, <span class="var">C</span></label><div class="inp-inline"><input type="text" id="C" placeholder="value"  data-tip="Capacitance. Leave blank to calculate the required C for a given L and f."><select id="F_dropdown"><option value="10">µF</option><option value="20">nF</option><option value="30" selected>pF</option></select></div></div></div>

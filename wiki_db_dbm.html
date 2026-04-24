@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dB, dBm & RF Power Units | RF Toolbox Wiki</title>
+  <meta name="description" content="The decibel scale explained from first principles. dBm, dBW, dBc, and dBi defined. How to do dB arithmetic mentally. Power ratios, voltage ratios, and common reference values every RF engineer should know.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_db_dbm.html">
+  <meta property="og:title" content="dB, dBm & RF Power Units | RF Toolbox Wiki">
+  <meta property="og:description" content="The decibel scale explained from first principles. dBm, dBW, dBc, and dBi defined. How to do dB arithmetic mentally. Power ratios, voltage ratios, and common reference values every RF engineer should know.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_db_dbm.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+    .wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+    .wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+    .wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+    .wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+    .wa .note{background:#fffbee;border-left:3px solid #cc8800;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:12px;}
+    .wa table{font-size:12px;border-collapse:collapse;margin:8px 0 12px;width:100%;}
+    .wa th{font-family:monospace;font-size:11px;color:#5533aa;text-transform:uppercase;letter-spacing:0.05em;padding:5px 12px;border-bottom:2px solid #d0c8f0;background:#f0eeff;text-align:left;}
+    .wa td{padding:5px 12px;border-bottom:1px solid #eee;}
+    .wa tr:last-child td{border-bottom:none;}
+    .wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+    .wiki-back a{color:#AA77FF;}
+  </style>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+  <nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+  <article>
+    <div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+    <div class="wa">
+      <h3>dB, dBm &amp; RF Power Units</h3>
+
+      <p>The decibel (dB) is the most important unit in RF engineering. It turns multiplication into addition, making cascade analysis practical. Once you're fluent in dB arithmetic, working with gain, loss, and power levels becomes fast and intuitive.</p>
+
+      <h4>Why Logarithmic Scales?</h4>
+      <p>A receiver handles signals ranging from 10⁻¹⁵ W (noise floor) to 10⁻³ W (nearby transmitter) — a range of 10¹². Writing and plotting these on a linear scale is impractical. Logarithms compress that 10¹² ratio to a 120 dB range that fits on a graph. More importantly, a cascade of gain and loss stages multiplies powers together — in dB you just add.</p>
+<figure><svg viewBox="0 0 480 130" width="480" height="130" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="480" height="130" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="240" y="12" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Same power values on linear (top) and dB (bottom) scales</text><rect x="20" y="28" width="2" height="14" fill="#00aacc" opacity="0.7"/><rect x="20" y="28" width="2" height="14" fill="#00aacc" opacity="0.7"/><rect x="20" y="28" width="2" height="14" fill="#00aacc" opacity="0.7"/><rect x="20" y="28" width="2" height="14" fill="#AA77FF" opacity="0.7"/><rect x="20" y="28" width="2" height="14" fill="#5533aa" opacity="0.7"/><rect x="20" y="28" width="2" height="14" fill="#5533aa" opacity="0.7"/><rect x="20" y="28" width="20" height="14" fill="#5533aa" opacity="0.7"/><rect x="20" y="28" width="200" height="14" fill="#5533aa" opacity="0.7"/><text x="25" y="25" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Linear scale (bars nearly invisible for small values)</text><rect x="20" y="72" width="53" height="18" fill="#00aacc" opacity="0.8"/><text x="47" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">-30</text><text x="47" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">1 µW</text><rect x="75" y="72" width="53" height="18" fill="#00aacc" opacity="0.8"/><text x="102" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">-20</text><text x="102" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">10 µW</text><rect x="130" y="72" width="53" height="18" fill="#00aacc" opacity="0.8"/><text x="157" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">-10</text><text x="157" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">0.1 mW</text><rect x="185" y="72" width="53" height="18" fill="#AA77FF" opacity="0.8"/><text x="212" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+0</text><text x="212" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">1 mW</text><rect x="240" y="72" width="53" height="18" fill="#5533aa" opacity="0.8"/><text x="267" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+10</text><text x="267" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">10 mW</text><rect x="295" y="72" width="53" height="18" fill="#5533aa" opacity="0.8"/><text x="322" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+20</text><text x="322" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">0.1 W</text><rect x="350" y="72" width="53" height="18" fill="#5533aa" opacity="0.8"/><text x="377" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+30</text><text x="377" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">1 W</text><rect x="405" y="72" width="53" height="18" fill="#5533aa" opacity="0.8"/><text x="432" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+40</text><text x="432" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">10 W</text><text x="25" y="60" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">dB scale (evenly spaced — each step is ×10 power)</text><text x="240" y="126" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">dBm value →</text></svg>
+<figcaption>The dB scale compresses a million-fold power range into readable 10 dB steps.</figcaption></figure>
+
+<figure><svg viewBox="0 0 480 130" width="480" height="130" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="480" height="130" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="240" y="12" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Same power values on linear (top) and dB (bottom) scales</text><rect x="20" y="28" width="2" height="14" fill="#00aacc" opacity="0.7"/><rect x="20" y="28" width="2" height="14" fill="#00aacc" opacity="0.7"/><rect x="20" y="28" width="2" height="14" fill="#00aacc" opacity="0.7"/><rect x="20" y="28" width="2" height="14" fill="#AA77FF" opacity="0.7"/><rect x="20" y="28" width="2" height="14" fill="#5533aa" opacity="0.7"/><rect x="20" y="28" width="2" height="14" fill="#5533aa" opacity="0.7"/><rect x="20" y="28" width="20" height="14" fill="#5533aa" opacity="0.7"/><rect x="20" y="28" width="200" height="14" fill="#5533aa" opacity="0.7"/><text x="25" y="25" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Linear scale (bars nearly invisible for small values)</text><rect x="20" y="72" width="53" height="18" fill="#00aacc" opacity="0.8"/><text x="47" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">-30</text><text x="47" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">1 µW</text><rect x="75" y="72" width="53" height="18" fill="#00aacc" opacity="0.8"/><text x="102" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">-20</text><text x="102" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">10 µW</text><rect x="130" y="72" width="53" height="18" fill="#00aacc" opacity="0.8"/><text x="157" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">-10</text><text x="157" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">0.1 mW</text><rect x="185" y="72" width="53" height="18" fill="#AA77FF" opacity="0.8"/><text x="212" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+0</text><text x="212" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">1 mW</text><rect x="240" y="72" width="53" height="18" fill="#5533aa" opacity="0.8"/><text x="267" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+10</text><text x="267" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">10 mW</text><rect x="295" y="72" width="53" height="18" fill="#5533aa" opacity="0.8"/><text x="322" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+20</text><text x="322" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">0.1 W</text><rect x="350" y="72" width="53" height="18" fill="#5533aa" opacity="0.8"/><text x="377" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+30</text><text x="377" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">1 W</text><rect x="405" y="72" width="53" height="18" fill="#5533aa" opacity="0.8"/><text x="432" y="102" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+40</text><text x="432" y="69" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">10 W</text><text x="25" y="60" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">dB scale (evenly spaced — each step is ×10 power)</text><text x="240" y="126" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">dBm value →</text></svg>
+<figcaption>The dB scale compresses a million-fold power range into readable 10 dB steps.</figcaption></figure>
+
+
+      <h4>The Decibel (dB)</h4>
+      <p>The decibel expresses a <em>ratio</em> between two power values:</p>
+      <div class="eq">\(\text{ratio (dB)} = 10\log_{10}\!\left(\dfrac{P_2}{P_1}\right)\)</div>
+      <p>For voltage or current ratios (into the same impedance), the factor is 20 instead of 10 because power is proportional to voltage squared:</p>
+      <div class="eq">\(\text{ratio (dB)} = 20\log_{10}\!\left(\dfrac{V_2}{V_1}\right)\)</div>
+      <p>Key values to memorise:</p>
+      <table>
+        <tr><th>Power ratio</th><th>Voltage ratio</th><th>dB</th><th>Memory aid</th></tr>
+        <tr><td>10×</td><td>3.16×</td><td>+10 dB</td><td>One order of magnitude</td></tr>
+        <tr><td>2×</td><td>1.41×</td><td>+3 dB</td><td>Double the power</td></tr>
+        <tr><td>1.26×</td><td>1.12×</td><td>+1 dB</td><td>Smallest audible difference</td></tr>
+        <tr><td>1×</td><td>1×</td><td>0 dB</td><td>No change</td></tr>
+        <tr><td>0.5×</td><td>0.71×</td><td>−3 dB</td><td>Half the power</td></tr>
+        <tr><td>0.1×</td><td>0.316×</td><td>−10 dB</td><td>One tenth</td></tr>
+        <tr><td>0.001×</td><td>0.0316×</td><td>−30 dB</td><td>One thousandth</td></tr>
+      </table>
+
+      <h4>Absolute Power: dBm and dBW</h4>
+      <p>dB alone is a ratio — it needs a reference to become an absolute level. <strong>dBm</strong> uses 1 milliwatt as the reference:</p>
+      <div class="eq">\(P_{\text{dBm}} = 10\log_{10}\!\left(\dfrac{P_{\text{watts}}}{1\text{ mW}}\right)\)</div>
+      <p><strong>dBW</strong> uses 1 watt. The conversion: P(dBm) = P(dBW) + 30.</p>
+      <table>
+        <tr><th>Power</th><th>dBm</th><th>dBW</th><th>Context</th></tr>
+        <tr><td>1 kW</td><td>+60 dBm</td><td>+30 dBW</td><td>AM broadcast transmitter</td></tr>
+        <tr><td>10 W</td><td>+40 dBm</td><td>+10 dBW</td><td>Handheld radio TX</td></tr>
+        <tr><td>1 W</td><td>+30 dBm</td><td>0 dBW</td><td>Bluetooth TX max</td></tr>
+        <tr><td>100 mW</td><td>+20 dBm</td><td>−10 dBW</td><td>Wi-Fi typical</td></tr>
+        <tr><td>1 mW</td><td>0 dBm</td><td>−30 dBW</td><td>Reference level</td></tr>
+        <tr><td>1 µW</td><td>−30 dBm</td><td>−60 dBW</td><td>Strong receiver input</td></tr>
+        <tr><td>1 nW</td><td>−60 dBm</td><td>−90 dBW</td><td>Typical receiver input</td></tr>
+        <tr><td>−100 dBm</td><td>−100 dBm</td><td>−130 dBW</td><td>Near noise floor</td></tr>
+        <tr><td>10⁻¹⁵ W = 1 fW</td><td>−120 dBm</td><td>−150 dBW</td><td>Thermal noise floor, 1 MHz BW, room temperature</td></tr>
+      </table>
+
+      <h4>dB Arithmetic in Cascades</h4>
+      <p>This is where dB pays off. A system with a 20 dB LNA, a 7 dB cable loss, a 10 dB mixer loss, and 30 dB of IF gain, driven by a −90 dBm signal:</p>
+<figure><svg viewBox="0 0 500 100" width="500" height="100" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="500" height="100" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><rect x="5" y="28" width="62" height="38" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5" rx="4"/><text x="36" y="43" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">TX</text><text x="36" y="55" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">+20dBm</text><line x1="67" y1="47" x2="77" y2="47" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="77,47 71,44 71,50" fill="#5533aa"/><rect x="77" y="28" width="62" height="38" fill="#eeffee" stroke="#228844" stroke-width="1.5" rx="4"/><text x="108" y="43" text-anchor="middle" font-size="9" fill="#228844" font-weight="bold" font-family="monospace">Cable</text><text x="108" y="55" text-anchor="middle" font-size="9" fill="#228844" font-weight="normal" font-family="monospace">−3dB</text><text x="73" y="51" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="bold" font-family="monospace">17</text><line x1="139" y1="47" x2="149" y2="47" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="149,47 143,44 143,50" fill="#5533aa"/><rect x="149" y="28" width="62" height="38" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5" rx="4"/><text x="180" y="43" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">LNA</text><text x="180" y="55" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">+20dB</text><text x="145" y="51" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="bold" font-family="monospace">37</text><line x1="211" y1="47" x2="221" y2="47" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="221,47 215,44 215,50" fill="#5533aa"/><rect x="221" y="28" width="62" height="38" fill="#eeffee" stroke="#228844" stroke-width="1.5" rx="4"/><text x="252" y="43" text-anchor="middle" font-size="9" fill="#228844" font-weight="bold" font-family="monospace">Filter</text><text x="252" y="55" text-anchor="middle" font-size="9" fill="#228844" font-weight="normal" font-family="monospace">−2dB</text><text x="217" y="51" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="bold" font-family="monospace">35</text><line x1="283" y1="47" x2="293" y2="47" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="293,47 287,44 287,50" fill="#5533aa"/><rect x="293" y="28" width="62" height="38" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5" rx="4"/><text x="324" y="43" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Mixer</text><text x="324" y="55" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">−8dB</text><text x="289" y="51" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="bold" font-family="monospace">27</text><line x1="355" y1="47" x2="365" y2="47" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="365,47 359,44 359,50" fill="#5533aa"/><rect x="365" y="28" width="62" height="38" fill="#eeffee" stroke="#228844" stroke-width="1.5" rx="4"/><text x="396" y="43" text-anchor="middle" font-size="9" fill="#228844" font-weight="bold" font-family="monospace">IF Amp</text><text x="396" y="55" text-anchor="middle" font-size="9" fill="#228844" font-weight="normal" font-family="monospace">+30dB</text><text x="361" y="51" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="bold" font-family="monospace">57</text><text x="250" y="95" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Output power = −90 + 20 − 3 + 20 − 2 − 8 + 30 = −33 dBm (just add/subtract!)</text></svg>
+<figcaption>In dB arithmetic, cascade gain/loss is simple addition. No need to multiply or divide linear values.</figcaption></figure>
+
+<figure><svg viewBox="0 0 500 100" width="500" height="100" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="500" height="100" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><rect x="5" y="28" width="62" height="38" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5" rx="4"/><text x="36" y="43" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">TX</text><text x="36" y="55" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">+20dBm</text><line x1="67" y1="47" x2="77" y2="47" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="77,47 71,44 71,50" fill="#5533aa"/><rect x="77" y="28" width="62" height="38" fill="#eeffee" stroke="#228844" stroke-width="1.5" rx="4"/><text x="108" y="43" text-anchor="middle" font-size="9" fill="#228844" font-weight="bold" font-family="monospace">Cable</text><text x="108" y="55" text-anchor="middle" font-size="9" fill="#228844" font-weight="normal" font-family="monospace">−3dB</text><text x="73" y="51" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="bold" font-family="monospace">17</text><line x1="139" y1="47" x2="149" y2="47" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="149,47 143,44 143,50" fill="#5533aa"/><rect x="149" y="28" width="62" height="38" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5" rx="4"/><text x="180" y="43" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">LNA</text><text x="180" y="55" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">+20dB</text><text x="145" y="51" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="bold" font-family="monospace">37</text><line x1="211" y1="47" x2="221" y2="47" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="221,47 215,44 215,50" fill="#5533aa"/><rect x="221" y="28" width="62" height="38" fill="#eeffee" stroke="#228844" stroke-width="1.5" rx="4"/><text x="252" y="43" text-anchor="middle" font-size="9" fill="#228844" font-weight="bold" font-family="monospace">Filter</text><text x="252" y="55" text-anchor="middle" font-size="9" fill="#228844" font-weight="normal" font-family="monospace">−2dB</text><text x="217" y="51" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="bold" font-family="monospace">35</text><line x1="283" y1="47" x2="293" y2="47" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="293,47 287,44 287,50" fill="#5533aa"/><rect x="293" y="28" width="62" height="38" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5" rx="4"/><text x="324" y="43" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Mixer</text><text x="324" y="55" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">−8dB</text><text x="289" y="51" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="bold" font-family="monospace">27</text><line x1="355" y1="47" x2="365" y2="47" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="365,47 359,44 359,50" fill="#5533aa"/><rect x="365" y="28" width="62" height="38" fill="#eeffee" stroke="#228844" stroke-width="1.5" rx="4"/><text x="396" y="43" text-anchor="middle" font-size="9" fill="#228844" font-weight="bold" font-family="monospace">IF Amp</text><text x="396" y="55" text-anchor="middle" font-size="9" fill="#228844" font-weight="normal" font-family="monospace">+30dB</text><text x="361" y="51" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="bold" font-family="monospace">57</text><text x="250" y="95" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Output power = −90 + 20 − 3 + 20 − 2 − 8 + 30 = −33 dBm (just add/subtract!)</text></svg>
+<figcaption>In dB arithmetic, cascade gain/loss is simple addition. No need to multiply or divide linear values.</figcaption></figure>
+
+      <div class="eq">\(P_{out} = -90 + 20 - 7 - 10 + 30 = -57\text{ dBm}\)</div>
+      <p>Compare doing this in linear: 10⁻¹² × 100 × 0.2 × 0.1 × 1000 = 2×10⁻¹² W. Much harder to get right mentally.</p>
+
+      <h4>Other dB Variants</h4>
+      <table>
+        <tr><th>Unit</th><th>Reference</th><th>Use</th></tr>
+        <tr><td>dBm</td><td>1 mW</td><td>Absolute RF power, transmitters and receivers</td></tr>
+        <tr><td>dBW</td><td>1 W</td><td>Satellite EIRP specifications</td></tr>
+        <tr><td>dBc</td><td>Carrier power</td><td>Relative: spurious, harmonics, phase noise</td></tr>
+        <tr><td>dBi</td><td>Isotropic antenna</td><td>Antenna gain (absolute)</td></tr>
+        <tr><td>dBd</td><td>Half-wave dipole</td><td>Antenna gain (relative to dipole). 0 dBd = 2.15 dBi</td></tr>
+        <tr><td>dBµV</td><td>1 µV</td><td>EMC and receiver sensitivity specifications in Europe</td></tr>
+        <tr><td>dBµV/m</td><td>1 µV/m</td><td>Field strength in EMC measurements</td></tr>
+        <tr><td>dBFS</td><td>Full scale</td><td>Digital audio and ADC levels (always ≤ 0 dBFS)</td></tr>
+      </table>
+
+      <h4>Noise Floor and kTB</h4>
+      <p>Thermal noise power available from a resistor at temperature T in bandwidth B:</p>
+      <div class="eq">\(P_{noise} = kTB \approx -174\text{ dBm/Hz at } 290\text{ K}\)</div>
+      <p>In a bandwidth B (Hz): \(P_{noise} = -174 + 10\log_{10}(B)\) dBm. In 1 MHz bandwidth: −174 + 60 = −114 dBm. In 20 MHz (Wi-Fi): −174 + 73 = −101 dBm. Add the receiver noise figure to get the actual noise floor.</p>
+
+      <h4>Converting Back to Linear</h4>
+      <div class="eq">\(P_{\text{watts}} = 10^{P_{dBm}/10} \times 10^{-3}\text{ W}\)</div>
+      <p>Shortcut: 0 dBm = 1 mW, every +10 dB multiplies by 10, every +3 dB doubles.</p>
+    </div>
+    <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+      <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <a href="dBmConverter.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">dBm ↔ Watts Converter →</a>
+      <a href="NoiseFigure.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Cascaded Noise Figure →</a>
+      <a href="LinkBudget.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Link Budget Calculator →</a>
+      </div>
+    </div>
+  </article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+</body>
+</html>

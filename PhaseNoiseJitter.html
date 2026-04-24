@@ -49,6 +49,18 @@
     <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
     <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f_c</td><td style="padding:3px 0;">Carrier frequency (Hz).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L(f)</td><td style="padding:3px 0;">Single-sideband phase noise at offset f, in dBc/Hz.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f_low, f_high</td><td style="padding:3px 0;">Integration band. RMS jitter depends on what frequency range you integrate over.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">σ_t</td><td style="padding:3px 0;">RMS jitter = (1/(2π·f_c)) · √(2 · ∫L(f)·df). Result in ps RMS.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">J_pp</td><td style="padding:3px 0;">Peak-to-peak jitter ≈ 6–7× RMS (3–3.5σ confidence interval).</td></tr></table>
   </details>
+
+      <details style="margin-top:8px;">
+        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants used ▸</summary>
+        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">k_B</td><td>Boltzmann constant = 1.381×10⁻²³ J/K</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">h</td><td>Planck constant = 6.626×10⁻³⁴ J·s</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">¹H gyromagnetic ratio</td><td>γ/2π = 42.577 MHz/T</td></tr>
+        </table>
+      </details>
 </div>
 <div class="sec-lbl">Carrier & Integration Band</div>
 <div class="inp-grid"><div class="inp-row"><label>Carrier frequency, <span class="var">f_c</span></label><div class="inp-inline"><input type="text" id="pn-fc" value="100" ><select id="pn-fcu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Integration start, <span class="var">f_low</span></label><div class="inp-inline"><input type="text" id="pn-flow" value="1e3" ><span class='inp-units'>Hz</span></div><span class="inp-hint">lower integration bound</span></div><div class="inp-row"><label>Integration end, <span class="var">f_high</span></label><div class="inp-inline"><input type="text" id="pn-fhigh" value="1e7" ><span class='inp-units'>Hz</span></div><span class="inp-hint">upper integration bound</span></div></div>
@@ -59,6 +71,10 @@
 <div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
 <div class="sec-lbl">Results</div>
 <div class="res-grid"><div class="res-card"><h4>Jitter</h4><div class="res-row"><span class="res-lbl">RMS jitter, σ_t</span><span class="res-val" id="pn-rms">—</span></div><div class="res-row"><span class="res-lbl">Peak-to-peak jitter (6σ)</span><span class="res-val" id="pn-pp">—</span></div><div class="res-row"><span class="res-lbl">Integrated phase noise</span><span class="res-val" id="pn-int">—</span></div></div><div class="res-card"><h4>Reference</h4><div class="res-row"><span class="res-lbl">Carrier frequency</span><span class="res-val" id="pn-fc-out">—</span></div><div class="res-row"><span class="res-lbl">Integration band</span><span class="res-val" id="pn-band">—</span></div><div class="res-row"><span class="res-lbl">Phase noise at 1 kHz offset</span><span class="res-val" id="pn-at1k">—</span></div></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0 8px;">\(\sigma_t=\dfrac{1}{2\pi f_c}\sqrt{2\int_{f_{low}}^{f_{high}}\mathcal{L}(f)\,df}\quad[\text{s RMS}]\)</div>
+</details>
 <div class="wiki-link-hint">📖 <a href="wiki_oscillators.html">Learn about oscillators and phase noise →</a></div>
 <script>
 // Build input rows

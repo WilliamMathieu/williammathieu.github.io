@@ -49,6 +49,15 @@
     <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
     <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Number of amplifier modules to combine.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">P_each</td><td style="padding:3px 0;">Output power of each individual amplifier (dBm or W).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">η</td><td style="padding:3px 0;">Combining efficiency (0–1). Ideal corporate combiner: η ≈ 0.95–0.98; spatial: η ≈ 0.80.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N_fail</td><td style="padding:3px 0;">Number of failed modules. Combined output degrades gracefully.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Degradation</td><td style="padding:3px 0;">With k failed modules: P_out = (N−k)²/N² × P_ideal (coherent combining).</td></tr></table>
   </details>
+
+      <details style="margin-top:8px;">
+        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants used ▸</summary>
+        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr>
+        </table>
+      </details>
 </div>
 <div class="sec-lbl">Inputs</div>
 <div class="inp-grid"><div class="inp-row"><label>Number of modules, <span class="var">N</span></label><div class="inp-inline"><input type="text" id="pc-n" value="4" ></div><span class="inp-hint">total amplifiers</span></div><div class="inp-row"><label>Power per module, <span class="var">P_each</span></label><div class="inp-inline"><input type="text" id="pc-p" value="10" ><span class='inp-units'>dBm</span></div></div><div class="inp-row"><label>Combining efficiency, <span class="var">η</span></label><div class="inp-inline"><input type="text" id="pc-eta" value="0.95" ></div><span class="inp-hint">0 to 1 (95% = corporate combiner)</span></div><div class="inp-row"><label>Failed modules, <span class="var">k</span></label><div class="inp-inline"><input type="text" id="pc-fail" value="0" ></div><span class="inp-hint">0 for normal operation</span></div></div>
@@ -57,6 +66,10 @@
 <div class="sec-lbl">Results</div>
 <div class="res-grid"><div class="res-card"><h4>Combined Output</h4><div class="res-row"><span class="res-lbl">Combined power (dBm)</span><span class="res-val" id="pc-pout">—</span></div><div class="res-row"><span class="res-lbl">Combined power (W)</span><span class="res-val" id="pc-pout-w">—</span></div><div class="res-row"><span class="res-lbl">Combining gain vs single</span><span class="res-val" id="pc-cgain">—</span></div><div class="res-row"><span class="res-lbl">Efficiency loss</span><span class="res-val" id="pc-eloss">—</span></div></div><div class="res-card"><h4>Failure Analysis</h4><div class="res-row"><span class="res-lbl">Output with k failed</span><span class="res-val" id="pc-pfail">—</span></div><div class="res-row"><span class="res-lbl">Degradation (dB)</span><span class="res-val" id="pc-degrad">—</span></div><div class="res-row"><span class="res-lbl">Surviving modules</span><span class="res-val" id="pc-surv">—</span></div><div class="res-row"><span class="res-lbl">% power retained</span><span class="res-val" id="pc-pct">—</span></div></div></div>
 <div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0 8px;">\(P_{out}=\eta N P_{each}\quad[\text{W}]\qquad\text{With }k\text{ failures: }P_{out}=\eta P_{ideal}\left(\dfrac{N-k}{N}\right)^{\!2}\)</div>
+</details>
 <div class="wiki-link-hint">📖 <a href="wiki_microwave_components.html">Learn the theory behind this tool →</a></div>
 <script>
 document.getElementById('pc-btn').addEventListener('click', function(){

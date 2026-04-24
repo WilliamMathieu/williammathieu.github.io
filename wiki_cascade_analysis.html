@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receiver Cascade Analysis — Noise, Gain & IP3 Together | RF Toolbox Wiki</title>
+  <meta name="description" content="How to analyse a complete RF receiver chain: combining noise figure, gain, and IP3 from antenna to ADC. Worked numerical example. Optimising front-end architecture.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_cascade_analysis.html">
+  <meta property="og:title" content="Receiver Cascade Analysis — Noise, Gain & IP3 Together | RF Toolbox Wiki">
+  <meta property="og:description" content="How to analyse a complete RF receiver chain: combining noise figure, gain, and IP3 from antenna to ADC. Worked numerical example. Optimising front-end architecture.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_cascade_analysis.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+    .wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+    .wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+    .wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+    .wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+    .wa .note{background:#fffbee;border-left:3px solid #cc8800;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:12px;}
+    .wa table{font-size:12px;border-collapse:collapse;margin:8px 0 12px;width:100%;}
+    .wa th{font-family:monospace;font-size:11px;color:#5533aa;text-transform:uppercase;letter-spacing:0.05em;padding:5px 12px;border-bottom:2px solid #d0c8f0;background:#f0eeff;text-align:left;}
+    .wa td{padding:5px 12px;border-bottom:1px solid #eee;}
+    .wa tr:last-child td{border-bottom:none;}
+    .wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+    .wiki-back a{color:#AA77FF;}
+  </style>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+  <nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+  <article>
+    <div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+    <div class="wa">
+      <h3>Receiver Cascade Analysis</h3>
+
+      <p>A receiver chain is a sequence of amplifiers, filters, and frequency converters from antenna to digital output. The system noise figure determines sensitivity, the gain distribution determines dynamic range, and the IP3 cascade determines linearity. These three analyses — Friis NF, gain chain, and cascaded IP3 — must be done together to optimise the receiver architecture.</p>
+
+      <h4>The Three-Parameter Cascade</h4>
+      <p>For each stage, you need three numbers: gain G (dB), noise figure NF (dB), and input-referred IP3 (IIP3, dBm). From these, the cascaded quantities are computed.</p>
+<figure><svg viewBox="0 0 500 110" width="500" height="110" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="500" height="110" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><rect x="15" y="30" width="90" height="50" fill="#f0eeff" stroke="#5533aa" stroke-width="2" rx="4"/><text x="60" y="44" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">RF Filter</text><text x="60" y="57" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">G=−2</text><text x="60" y="70" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">NF=2</text><line x1="105" y1="55" x2="117" y2="55" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="117,55 111,52 111,58" fill="#5533aa"/><rect x="117" y="30" width="90" height="50" fill="#e8e0ff" stroke="#AA77FF" stroke-width="2" rx="4"/><text x="162" y="44" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="bold" font-family="monospace">LNA</text><text x="162" y="57" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">G=+18</text><text x="162" y="70" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">NF=1.5</text><line x1="207" y1="55" x2="219" y2="55" stroke="#AA77FF" stroke-width="1.5" stroke-linecap="round"/><polygon points="219,55 213,52 213,58" fill="#AA77FF"/><rect x="219" y="30" width="90" height="50" fill="#fffbee" stroke="#cc8800" stroke-width="2" rx="4"/><text x="264" y="44" text-anchor="middle" font-size="9" fill="#cc8800" font-weight="bold" font-family="monospace">Mixer</text><text x="264" y="57" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">G=−8</text><text x="264" y="70" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">NF=10</text><line x1="309" y1="55" x2="321" y2="55" stroke="#cc8800" stroke-width="1.5" stroke-linecap="round"/><polygon points="321,55 315,52 315,58" fill="#cc8800"/><rect x="321" y="30" width="90" height="50" fill="#eeffee" stroke="#228844" stroke-width="2" rx="4"/><text x="366" y="44" text-anchor="middle" font-size="9" fill="#228844" font-weight="bold" font-family="monospace">IF Amp</text><text x="366" y="57" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">G=+30</text><text x="366" y="70" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">NF=3</text><text x="60" y="107" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">NF→2.0dB</text><text x="162" y="107" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">NF→3.5dB</text><text x="264" y="107" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">NF→4.3dB</text><text x="366" y="107" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">NF→4.3dB</text></svg>
+<figcaption>Cumulative noise figure stabilises after the LNA. First stage and its gain dominate the system NF.</figcaption></figure>
+
+<figure><svg viewBox="0 0 500 110" width="500" height="110" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="500" height="110" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><rect x="15" y="30" width="90" height="50" fill="#f0eeff" stroke="#5533aa" stroke-width="2" rx="4"/><text x="60" y="44" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">RF Filter</text><text x="60" y="57" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">G=−2</text><text x="60" y="70" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">NF=2</text><line x1="105" y1="55" x2="117" y2="55" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="117,55 111,52 111,58" fill="#5533aa"/><rect x="117" y="30" width="90" height="50" fill="#e8e0ff" stroke="#AA77FF" stroke-width="2" rx="4"/><text x="162" y="44" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="bold" font-family="monospace">LNA</text><text x="162" y="57" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">G=+18</text><text x="162" y="70" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">NF=1.5</text><line x1="207" y1="55" x2="219" y2="55" stroke="#AA77FF" stroke-width="1.5" stroke-linecap="round"/><polygon points="219,55 213,52 213,58" fill="#AA77FF"/><rect x="219" y="30" width="90" height="50" fill="#fffbee" stroke="#cc8800" stroke-width="2" rx="4"/><text x="264" y="44" text-anchor="middle" font-size="9" fill="#cc8800" font-weight="bold" font-family="monospace">Mixer</text><text x="264" y="57" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">G=−8</text><text x="264" y="70" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">NF=10</text><line x1="309" y1="55" x2="321" y2="55" stroke="#cc8800" stroke-width="1.5" stroke-linecap="round"/><polygon points="321,55 315,52 315,58" fill="#cc8800"/><rect x="321" y="30" width="90" height="50" fill="#eeffee" stroke="#228844" stroke-width="2" rx="4"/><text x="366" y="44" text-anchor="middle" font-size="9" fill="#228844" font-weight="bold" font-family="monospace">IF Amp</text><text x="366" y="57" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">G=+30</text><text x="366" y="70" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">NF=3</text><text x="60" y="107" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">NF→2.0dB</text><text x="162" y="107" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">NF→3.5dB</text><text x="264" y="107" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">NF→4.3dB</text><text x="366" y="107" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">NF→4.3dB</text></svg>
+<figcaption>Cumulative noise figure stabilises after the LNA. First stage and its gain dominate the system NF.</figcaption></figure>
+
+
+      <h4>Friis Formula for Cascaded Noise Figure</h4>
+      <div class="eq">\(F_{sys} = F_1 + \dfrac{F_2-1}{G_1} + \dfrac{F_3-1}{G_1 G_2} + \cdots\)</div>
+      <p>where F = 10^(NF/10) (linear). The first stage dominates if G₁ is large. A low-NF, high-gain LNA first is critical.</p>
+
+      <h4>Cascaded IIP3</h4>
+      <div class="eq">\(\dfrac{1}{IIP3_{sys}} = \dfrac{1}{IIP3_1} + \dfrac{G_1}{IIP3_2} + \dfrac{G_1 G_2}{IIP3_3} + \cdots\)</div>
+      <p>(all in linear watts, not dBm). The last high-gain stage dominates linearity — opposite to noise figure.</p>
+
+      <h4>Worked Example: 2.4 GHz Receiver</h4>
+      <table>
+        <tr><th>Stage</th><th>G (dB)</th><th>NF (dB)</th><th>IIP3 (dBm)</th><th>Cumul. NF</th><th>Cumul. IIP3</th></tr>
+        <tr><td>RF filter (insertion loss)</td><td>−2</td><td>2</td><td>∞</td><td>2.0 dB</td><td>—</td></tr>
+        <tr><td>LNA</td><td>+18</td><td>1.5</td><td>+10</td><td>3.5 dB</td><td>+8.5 dBm</td></tr>
+        <tr><td>Image rejection filter</td><td>−2</td><td>2</td><td>∞</td><td>3.5 dB</td><td>+8.5 dBm</td></tr>
+        <tr><td>Mixer</td><td>−8</td><td>10</td><td>+20</td><td>4.3 dB</td><td>+4.5 dBm</td></tr>
+        <tr><td>IF amplifier</td><td>+30</td><td>3</td><td>+25</td><td>4.3 dB</td><td>−6.3 dBm</td></tr>
+      </table>
+      <p>The cumulative noise figure stabilises at 4.3 dB after the LNA — the LNA gain means all downstream stages add negligible noise. The IIP3 degrades to −6.3 dBm due to the high IF amplifier gain — if this is insufficient, the IF gain must be spread across more stages or reduced.</p>
+
+      <h4>Minimum Detectable Signal</h4>
+      <div class="eq">\(MDS = -174 + NF_{sys} + 10\log_{10}(BW) + SNR_{min}\quad[\text{dBm}]\)</div>
+      <p>For the example above with 5 MHz bandwidth and 10 dB minimum SNR: MDS = −174 + 4.3 + 67 + 10 = −92.7 dBm.</p>
+<figure><svg viewBox="0 0 400 160" width="400" height="160" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="400" height="160" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="200" y="12" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Why the first stage dominates: NF contribution per stage</text><rect x="35" y="30" width="75" height="100" fill="#5533aa" opacity="0.8" rx="2"/><text x="72" y="25" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+2.00dB</text><text x="72" y="142" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">RF filter</text><text x="72" y="153" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">(−2dB)</text><rect x="120" y="56" width="75" height="74" fill="#AA77FF" opacity="0.8" rx="2"/><text x="157" y="51" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">+1.49dB</text><text x="157" y="142" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">LNA</text><text x="157" y="153" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">(G=18,NF=1.5)</text><rect x="205" y="110" width="75" height="20" fill="#cc8800" opacity="0.8" rx="2"/><text x="242" y="105" text-anchor="middle" font-size="8" fill="#cc8800" font-weight="normal" font-family="monospace">+0.41dB</text><text x="242" y="142" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">Mixer</text><text x="242" y="153" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">(G=−8,NF=10)</text><rect x="290" y="130" width="75" height="0" fill="#228844" opacity="0.8" rx="2"/><text x="327" y="125" text-anchor="middle" font-size="8" fill="#228844" font-weight="normal" font-family="monospace">+0.00dB</text><text x="327" y="142" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">IF Amp</text><text x="327" y="153" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">(G=+30,NF=3)</text><line x1="30" y1="130" x2="380" y2="130" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="200" y="158" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">NF contribution to cascaded system NF — first two stages account for >99%</text></svg>
+<figcaption>Each stage's marginal contribution to cascaded NF (linear units). Later stages contribute nearly nothing after a high-gain LNA.</figcaption></figure>
+
+<figure><svg viewBox="0 0 400 160" width="400" height="160" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="400" height="160" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="200" y="12" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Why the first stage dominates: NF contribution per stage</text><rect x="35" y="30" width="75" height="100" fill="#5533aa" opacity="0.8" rx="2"/><text x="72" y="25" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">+2.00dB</text><text x="72" y="142" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">RF filter</text><text x="72" y="153" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">(−2dB)</text><rect x="120" y="56" width="75" height="74" fill="#AA77FF" opacity="0.8" rx="2"/><text x="157" y="51" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">+1.49dB</text><text x="157" y="142" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">LNA</text><text x="157" y="153" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">(G=18,NF=1.5)</text><rect x="205" y="110" width="75" height="20" fill="#cc8800" opacity="0.8" rx="2"/><text x="242" y="105" text-anchor="middle" font-size="8" fill="#cc8800" font-weight="normal" font-family="monospace">+0.41dB</text><text x="242" y="142" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">Mixer</text><text x="242" y="153" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">(G=−8,NF=10)</text><rect x="290" y="130" width="75" height="0" fill="#228844" opacity="0.8" rx="2"/><text x="327" y="125" text-anchor="middle" font-size="8" fill="#228844" font-weight="normal" font-family="monospace">+0.00dB</text><text x="327" y="142" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">IF Amp</text><text x="327" y="153" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">(G=+30,NF=3)</text><line x1="30" y1="130" x2="380" y2="130" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="200" y="158" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">NF contribution to cascaded system NF — first two stages account for >99%</text></svg>
+<figcaption>Each stage's marginal contribution to cascaded NF (linear units). Later stages contribute nearly nothing after a high-gain LNA.</figcaption></figure>
+
+
+      <h4>Spurious-Free Dynamic Range</h4>
+      <div class="eq">\(SFDR = \tfrac{2}{3}(IIP3_{sys} - MDS)\)</div>
+      <p>With IIP3 = −6.3 dBm and MDS = −92.7 dBm: SFDR = 2/3 × 86.4 = 57.6 dB. This means the receiver can handle a 57.6 dB range of input signal levels without the IM3 products exceeding the noise floor.</p>
+
+      <h4>Gain Distribution Rules of Thumb</h4>
+      <ul>
+        <li>Place the LNA as early as possible (after only necessary filtering) to establish noise figure.</li>
+        <li>Total front-end gain before the ADC should be enough that ADC noise is irrelevant: typically 60–90 dB total gain for a −100 dBm sensitivity target into an ADC with −70 dBm full scale.</li>
+        <li>Distribute gain across multiple stages to keep no single stage near compression. Each high-gain stage needs correspondingly high IIP3.</li>
+        <li>Use variable gain amplifiers (VGAs) to handle the signal range: the AGC loop keeps the ADC input level constant regardless of received signal power.</li>
+        <li>Don't forget the ADC itself: its ENOB and input full-scale power set the final SNR.</li>
+      </ul>
+
+      <h4>AGC and Automatic Gain Control</h4>
+      <p>An AGC loop monitors the signal level (usually after the IF filter) and adjusts attenuators or VGAs to keep the ADC input at a constant level. Good AGC design requires: fast attack time (handles sudden strong signals before saturation), slow decay time (prevents noise pumping), and sufficient control range (&gt; dynamic range of expected input signals).</p>
+    </div>
+    <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+      <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <a href="NoiseFigure.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Cascaded Noise Figure →</a>
+      <a href="LinkBudget.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Link Budget Calculator →</a>
+      <a href="IP3Calc.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">IP3 & Intermodulation →</a>
+      <a href="dBmConverter.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">dBm ↔ Watts Converter →</a>
+      <a href="Friis.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Friis Equation →</a>
+      </div>
+    </div>
+  </article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+</body>
+</html>

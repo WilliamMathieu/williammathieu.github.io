@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Connectors Reference — SMA, N-type, BNC, 2.92 mm & More | RF Toolbox Wiki</title>
+  <meta name="description" content="RF connector types, frequency limits, power ratings, and insertion loss. SMA, N-type, BNC, TNC, 2.92 mm (K), 2.4 mm, 1.85 mm (V), and PCB launch connectors compared.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_connectors.html">
+  <meta property="og:title" content="RF Connectors Reference — SMA, N-type, BNC, 2.92 mm & More | RF Toolbox Wiki">
+  <meta property="og:description" content="RF connector types, frequency limits, power ratings, and insertion loss. SMA, N-type, BNC, TNC, 2.92 mm (K), 2.4 mm, 1.85 mm (V), and PCB launch connectors compared.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_connectors.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+    .wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+    .wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+    .wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+    .wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+    .wa .note{background:#fffbee;border-left:3px solid #cc8800;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:12px;}
+    .wa table{font-size:12px;border-collapse:collapse;margin:8px 0 12px;width:100%;}
+    .wa th{font-family:monospace;font-size:11px;color:#5533aa;text-transform:uppercase;letter-spacing:0.05em;padding:5px 12px;border-bottom:2px solid #d0c8f0;background:#f0eeff;text-align:left;}
+    .wa td{padding:5px 12px;border-bottom:1px solid #eee;}
+    .wa tr:last-child td{border-bottom:none;}
+    .wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+    .wiki-back a{color:#AA77FF;}
+  </style>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+  <nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+  <article>
+    <div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+    <div class="wa">
+      <h3>RF Connectors Reference</h3>
+
+      <p>Connector choice often determines system performance at microwave frequencies. Every connector junction contributes insertion loss, a small impedance discontinuity (which worsens with frequency), and a potential point of failure. Choosing the right connector requires balancing frequency range, power handling, mechanical robustness, and cost.</p>
+
+      <h4>Connector Comparison Table</h4>
+      <table>
+        <tr><th>Connector</th><th>Max frequency</th><th>Impedance</th><th>Power (CW)</th><th>Torque spec</th><th>Notes</th></tr>
+        <tr><td>BNC</td><td>4 GHz</td><td>50 Ω / 75 Ω</td><td>80 W @ 1 GHz</td><td>Bayonet lock</td><td>Quick-connect; RF lab, oscilloscopes, video (75 Ω)</td></tr>
+        <tr><td>TNC</td><td>12 GHz</td><td>50 Ω / 75 Ω</td><td>100 W</td><td>1.13 N·m</td><td>BNC with threaded coupling; more rugged</td></tr>
+        <tr><td>N-type</td><td>18 GHz</td><td>50 Ω / 75 Ω</td><td>300 W @ 1 GHz</td><td>1.36 N·m</td><td>Workhorse for VHF/UHF/microwave; weatherproof versions</td></tr>
+        <tr><td>SMA</td><td>18 GHz (26 GHz semi-precision)</td><td>50 Ω</td><td>100 W @ 1 GHz</td><td>0.9 N·m</td><td>Most common RF connector; keep to 12 GHz in production</td></tr>
+        <tr><td>SMB</td><td>4 GHz</td><td>50 Ω</td><td>25 W</td><td>Snap-on</td><td>Compact snap-on; consumer electronics</td></tr>
+        <tr><td>MMCX</td><td>6 GHz</td><td>50 Ω</td><td>50 W</td><td>Snap-on</td><td>Miniature; Wi-Fi modules, GPS receivers</td></tr>
+        <tr><td>U.FL / IPEX</td><td>6 GHz</td><td>50 Ω</td><td>10 W</td><td>Snap-on</td><td>Very small; &lt; 30 insertion cycles; PCB to antenna pigtail</td></tr>
+        <tr><td>2.92 mm (K)</td><td>40 GHz</td><td>50 Ω</td><td>10 W</td><td>0.9 N·m</td><td>SMA-compatible mating; 26–40 GHz range</td></tr>
+        <tr><td>2.4 mm</td><td>50 GHz</td><td>50 Ω</td><td>8 W</td><td>0.9 N·m</td><td>Fragile; Ka-band test and mmWave</td></tr>
+        <tr><td>1.85 mm (V)</td><td>67 GHz</td><td>50 Ω</td><td>5 W</td><td>0.9 N·m</td><td>Very fragile; V-band measurements</td></tr>
+        <tr><td>1.0 mm</td><td>110 GHz</td><td>50 Ω</td><td>2 W</td><td>0.45 N·m</td><td>W-band; lab use only</td></tr>
+      </table>
+
+      <h4>Insertion Loss Rules of Thumb</h4>
+      <p>Every connector pair (male + female) contributes roughly:</p>
+<figure><svg viewBox="0 0 440 130" width="440" height="130" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="440" height="130" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="220" y="12" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Connector maximum frequency vs physical size</text><circle cx="61" cy="65" r="14" fill="#cc8800" opacity="0.7"/><text x="60.57142857142857" y="90" text-anchor="middle" font-size="8" fill="#cc8800" font-weight="normal" font-family="monospace">BNC</text><text x="60.57142857142857" y="69" text-anchor="middle" font-size="7" fill="#cc8800" font-weight="normal" font-family="monospace">4G</text><circle cx="102" cy="65" r="12" fill="#5533aa" opacity="0.7"/><text x="101.71428571428572" y="88" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">TNC</text><text x="101.71428571428572" y="69" text-anchor="middle" font-size="7" fill="#5533aa" font-weight="normal" font-family="monospace">12G</text><circle cx="133" cy="65" r="11" fill="#AA77FF" opacity="0.7"/><text x="132.57142857142856" y="87" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">N-type</text><text x="132.57142857142856" y="69" text-anchor="middle" font-size="7" fill="#AA77FF" font-weight="normal" font-family="monospace">18G</text><circle cx="174" cy="65" r="9" fill="#00aacc" opacity="0.7"/><text x="173.71428571428572" y="85" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">SMA</text><text x="173.71428571428572" y="69" text-anchor="middle" font-size="7" fill="#00aacc" font-weight="normal" font-family="monospace">26G</text><circle cx="246" cy="65" r="7" fill="#5533aa" opacity="0.7"/><text x="245.71428571428572" y="83" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">2.92mm</text><text x="245.71428571428572" y="69" text-anchor="middle" font-size="7" fill="#5533aa" font-weight="normal" font-family="monospace">40G</text><circle cx="297" cy="65" r="5" fill="#228844" opacity="0.7"/><text x="297.14285714285717" y="81" text-anchor="middle" font-size="8" fill="#228844" font-weight="normal" font-family="monospace">2.4mm</text><text x="297.14285714285717" y="69" text-anchor="middle" font-size="7" fill="#228844" font-weight="normal" font-family="monospace">50G</text><circle cx="385" cy="65" r="3.5" fill="#cc2222" opacity="0.7"/><text x="384.57142857142856" y="79.5" text-anchor="middle" font-size="8" fill="#cc2222" font-weight="normal" font-family="monospace">1.85mm</text><text x="384.57142857142856" y="69" text-anchor="middle" font-size="7" fill="#cc2222" font-weight="normal" font-family="monospace">67G</text><line x1="30" y1="65" x2="422.0" y2="65.0" stroke="#888" stroke-width="1" stroke-linecap="round"/><polygon points="430,65 422.0,69.0 422.0,61.0" fill="#888"/><text x="435" y="60" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">max freq (GHz)</text><line x1="40.0" y1="60" x2="40.0" y2="70" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="40.0" y="78" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">DC</text><line x1="132.57142857142856" y1="60" x2="132.57142857142856" y2="70" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="132.57142857142856" y="78" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">18G</text><line x1="245.71428571428572" y1="60" x2="245.71428571428572" y2="70" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="245.71428571428572" y="78" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">40G</text><line x1="384.57142857142856" y1="60" x2="384.57142857142856" y2="70" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="384.57142857142856" y="78" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">67G</text><text x="220" y="127" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">Circle size proportional to connector physical size — bigger connectors have lower max frequency</text></svg>
+<figcaption>RF connector maximum frequency vs physical size. Smaller connectors enable higher frequencies but are more fragile.</figcaption></figure>
+
+<figure><svg viewBox="0 0 440 130" width="440" height="130" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="440" height="130" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="220" y="12" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Connector maximum frequency vs physical size</text><circle cx="61" cy="65" r="14" fill="#cc8800" opacity="0.7"/><text x="60.57142857142857" y="90" text-anchor="middle" font-size="8" fill="#cc8800" font-weight="normal" font-family="monospace">BNC</text><text x="60.57142857142857" y="69" text-anchor="middle" font-size="7" fill="#cc8800" font-weight="normal" font-family="monospace">4G</text><circle cx="102" cy="65" r="12" fill="#5533aa" opacity="0.7"/><text x="101.71428571428572" y="88" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">TNC</text><text x="101.71428571428572" y="69" text-anchor="middle" font-size="7" fill="#5533aa" font-weight="normal" font-family="monospace">12G</text><circle cx="133" cy="65" r="11" fill="#AA77FF" opacity="0.7"/><text x="132.57142857142856" y="87" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">N-type</text><text x="132.57142857142856" y="69" text-anchor="middle" font-size="7" fill="#AA77FF" font-weight="normal" font-family="monospace">18G</text><circle cx="174" cy="65" r="9" fill="#00aacc" opacity="0.7"/><text x="173.71428571428572" y="85" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">SMA</text><text x="173.71428571428572" y="69" text-anchor="middle" font-size="7" fill="#00aacc" font-weight="normal" font-family="monospace">26G</text><circle cx="246" cy="65" r="7" fill="#5533aa" opacity="0.7"/><text x="245.71428571428572" y="83" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">2.92mm</text><text x="245.71428571428572" y="69" text-anchor="middle" font-size="7" fill="#5533aa" font-weight="normal" font-family="monospace">40G</text><circle cx="297" cy="65" r="5" fill="#228844" opacity="0.7"/><text x="297.14285714285717" y="81" text-anchor="middle" font-size="8" fill="#228844" font-weight="normal" font-family="monospace">2.4mm</text><text x="297.14285714285717" y="69" text-anchor="middle" font-size="7" fill="#228844" font-weight="normal" font-family="monospace">50G</text><circle cx="385" cy="65" r="3.5" fill="#cc2222" opacity="0.7"/><text x="384.57142857142856" y="79.5" text-anchor="middle" font-size="8" fill="#cc2222" font-weight="normal" font-family="monospace">1.85mm</text><text x="384.57142857142856" y="69" text-anchor="middle" font-size="7" fill="#cc2222" font-weight="normal" font-family="monospace">67G</text><line x1="30" y1="65" x2="422.0" y2="65.0" stroke="#888" stroke-width="1" stroke-linecap="round"/><polygon points="430,65 422.0,69.0 422.0,61.0" fill="#888"/><text x="435" y="60" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">max freq (GHz)</text><line x1="40.0" y1="60" x2="40.0" y2="70" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="40.0" y="78" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">DC</text><line x1="132.57142857142856" y1="60" x2="132.57142857142856" y2="70" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="132.57142857142856" y="78" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">18G</text><line x1="245.71428571428572" y1="60" x2="245.71428571428572" y2="70" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="245.71428571428572" y="78" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">40G</text><line x1="384.57142857142856" y1="60" x2="384.57142857142856" y2="70" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="384.57142857142856" y="78" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">67G</text><text x="220" y="127" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">Circle size proportional to connector physical size — bigger connectors have lower max frequency</text></svg>
+<figcaption>RF connector maximum frequency vs physical size. Smaller connectors enable higher frequencies but are more fragile.</figcaption></figure>
+
+      <ul>
+        <li>SMA pair: 0.1 dB at 10 GHz, 0.2 dB at 18 GHz</li>
+        <li>N-type pair: 0.05 dB at 10 GHz</li>
+        <li>2.92 mm pair: 0.15 dB at 30 GHz, 0.3 dB at 40 GHz</li>
+        <li>Each adapter (e.g. SMA-to-N): doubles the connector insertion loss</li>
+      </ul>
+      <p>In a 10-connector measurement path at 18 GHz, connector losses alone can exceed 2 dB — easily dominating the DUT's own loss.</p>
+
+      <h4>Torque and Connector Longevity</h4>
+      <p>Over-torquing damages centre pin contacts. Under-torquing causes intermittent connections and unpredictable impedance discontinuities. Always use a torque wrench for precision measurements. SMA connectors are rated for ~500 mating cycles; precision SMA (0.9 N·m spec) for ~2000 cycles. 2.4 mm and 1.85 mm connectors are easily damaged by cross-threading — always align carefully before tightening.</p>
+
+      <h4>PCB Launch Connectors</h4>
+      <p>The transition from a PCB trace to a connector is a discontinuity. Edge-launch SMA connectors must be carefully matched — the launch geometry, board thickness, and connector pin dimension must all be designed together. At 20+ GHz, a poorly designed SMA launch can add 0.5–1 dB of loss and create a visible ripple in S₁₁ measurements. Some vendors provide field-solver-optimised footprints for their connectors at specific frequencies.</p>
+
+      <h4>75 Ω Systems</h4>
+      <p>Cable television, broadcast video, and some telecommunications infrastructure use 75 Ω impedance (derived from the impedance of a centre-loaded dipole in free space). BNC-75, TNC-75, N-75, and F-connectors are used. Never mate 50 Ω and 75 Ω connectors — the impedance mismatch causes a permanent reflection, and physically incompatible types (N-50 vs N-75) can be damaged if forced.</p>
+    </div>
+    <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+      <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <a href="VSWRConverter.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">VSWR / RL Converter →</a>
+      <a href="Coaxial.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Coaxial Line Calculator →</a>
+      <a href="SParamPlotter.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">S-Parameter Plotter →</a>
+      </div>
+    </div>
+  </article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smith Chart Tutorial — How to Read and Use a Smith Chart | RF Toolbox Wiki</title>
+  <meta name="description" content="Step-by-step Smith Chart tutorial: reading impedance, constant circles, moving along transmission lines, and designing L-network and stub matching networks graphically.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_smith_chart_tutorial.html">
+  <meta property="og:title" content="Smith Chart Tutorial — How to Read and Use a Smith Chart | RF Toolbox Wiki">
+  <meta property="og:description" content="Step-by-step Smith Chart tutorial: reading impedance, constant circles, moving along transmission lines, and designing L-network and stub matching networks graphically.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_smith_chart_tutorial.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+    .wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+    .wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+    .wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+    .wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+    .wa .note{background:#fffbee;border-left:3px solid #cc8800;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:12px;}
+    .wa table{font-size:12px;border-collapse:collapse;margin:8px 0 12px;width:100%;}
+    .wa th{font-family:monospace;font-size:11px;color:#5533aa;text-transform:uppercase;letter-spacing:0.05em;padding:5px 12px;border-bottom:2px solid #d0c8f0;background:#f0eeff;text-align:left;}
+    .wa td{padding:5px 12px;border-bottom:1px solid #eee;}
+    .wa tr:last-child td{border-bottom:none;}
+    .wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+    .wiki-back a{color:#AA77FF;}
+  </style>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+  <nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+  <article>
+    <div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+    <div class="wa">
+      <h3>Smith Chart Tutorial</h3>
+
+      <p>The Smith Chart is a polar plot of the reflection coefficient Γ with constant-resistance circles and constant-reactance arcs overlaid. Every point on the chart represents a unique normalised impedance z = Z/Z₀. Once you understand its structure, the chart makes impedance matching design immediate and visual.</p>
+
+      <h4>Chart Structure</h4>
+      <p>The chart is a circle of radius 1 (the |Γ| = 1 boundary, representing total reflection). The centre is the perfect match point (z = 1, Γ = 0). The right-most point is an open circuit (z = ∞). The left-most point is a short circuit (z = 0).</p>
+<figure><svg viewBox="0 0 320 320" width="320" height="320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="320" height="320" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><circle cx="160.0" cy="160" r="130.0" fill="none" stroke="#ccc" stroke-width="1"/><circle cx="203.3" cy="160" r="86.7" fill="none" stroke="#AA77FF66" stroke-width="1"/><circle cx="225.0" cy="160" r="65.0" fill="none" stroke="#AA77FF" stroke-width="1.5"/><circle cx="246.7" cy="160" r="43.3" fill="none" stroke="#AA77FF88" stroke-width="1"/><circle cx="268.3" cy="160" r="21.7" fill="none" stroke="#AA77FF55" stroke-width="1"/><circle cx="290.0" cy="-100.0" r="260.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="290.0" cy="420.0" r="260.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="290.0" cy="30.0" r="130.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="290.0" cy="290.0" r="130.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="290.0" cy="95.0" r="65.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="290.0" cy="225.0" r="65.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="160" cy="160" r="130" fill="none" stroke="#333" stroke-width="2"/><line x1="30" y1="160" x2="290" y2="160" stroke="#888" stroke-width="0.8" stroke-linecap="round"/><text x="160" y="304" text-anchor="middle" font-size="9" fill="#444" font-weight="normal" font-family="monospace">Short (0)</text><text x="295" y="160" text-anchor="start" font-size="8" fill="#444" font-weight="normal" font-family="monospace">Open (∞)</text><text x="160" y="164" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Match</text><text x="95" y="150" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">r=0</text><text x="203" y="150" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">r=1</text><text x="178" y="70" text-anchor="start" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">+jX (inductive)</text><text x="178" y="250" text-anchor="start" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">−jX (capacitive)</text><circle cx="200" cy="124" r="5" fill="#AA77FF"/><line x1="160" y1="160" x2="200.3448275862069" y2="124.13793103448276" stroke="#AA77FF" stroke-width="1" stroke-linecap="round" stroke-dasharray="3,2"/><text x="208.3448275862069" y="119.13793103448276" text-anchor="start" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">z=1.5+j1</text><circle cx="160" cy="160" r="54" fill="none" stroke="#AA77FF" stroke-width="1.2" stroke-dasharray="4,3"/><text x="160" y="317" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Annotated Smith Chart (normalised to Z₀)</text></svg>
+<figcaption>Smith Chart: constant-resistance circles (purple) and constant-reactance arcs (teal). Upper half = inductive; lower half = capacitive.</figcaption></figure>
+
+<figure><svg viewBox="0 0 320 320" width="320" height="320" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="320" height="320" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><circle cx="160.0" cy="160" r="130.0" fill="none" stroke="#ccc" stroke-width="1"/><circle cx="203.3" cy="160" r="86.7" fill="none" stroke="#AA77FF66" stroke-width="1"/><circle cx="225.0" cy="160" r="65.0" fill="none" stroke="#AA77FF" stroke-width="1.5"/><circle cx="246.7" cy="160" r="43.3" fill="none" stroke="#AA77FF88" stroke-width="1"/><circle cx="268.3" cy="160" r="21.7" fill="none" stroke="#AA77FF55" stroke-width="1"/><circle cx="290.0" cy="-100.0" r="260.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="290.0" cy="420.0" r="260.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="290.0" cy="30.0" r="130.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="290.0" cy="290.0" r="130.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="290.0" cy="95.0" r="65.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="290.0" cy="225.0" r="65.0" fill="none" stroke="#00aacc55" stroke-width="0.8"/><circle cx="160" cy="160" r="130" fill="none" stroke="#333" stroke-width="2"/><line x1="30" y1="160" x2="290" y2="160" stroke="#888" stroke-width="0.8" stroke-linecap="round"/><text x="160" y="304" text-anchor="middle" font-size="9" fill="#444" font-weight="normal" font-family="monospace">Short (0)</text><text x="295" y="160" text-anchor="start" font-size="8" fill="#444" font-weight="normal" font-family="monospace">Open (∞)</text><text x="160" y="164" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Match</text><text x="95" y="150" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">r=0</text><text x="203" y="150" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">r=1</text><text x="178" y="70" text-anchor="start" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">+jX (inductive)</text><text x="178" y="250" text-anchor="start" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">−jX (capacitive)</text><circle cx="200" cy="124" r="5" fill="#AA77FF"/><line x1="160" y1="160" x2="200.3448275862069" y2="124.13793103448276" stroke="#AA77FF" stroke-width="1" stroke-linecap="round" stroke-dasharray="3,2"/><text x="208.3448275862069" y="119.13793103448276" text-anchor="start" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">z=1.5+j1</text><circle cx="160" cy="160" r="54" fill="none" stroke="#AA77FF" stroke-width="1.2" stroke-dasharray="4,3"/><text x="160" y="317" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Annotated Smith Chart (normalised to Z₀)</text></svg>
+<figcaption>Smith Chart: constant-resistance circles (purple) and constant-reactance arcs (teal). Upper half = inductive; lower half = capacitive.</figcaption></figure>
+
+      <ul>
+        <li><strong>Constant-resistance circles</strong> (drawn in purple on the RF Toolbox chart): Circles tangent to the right side. The r = 1 circle passes through the centre and represents all impedances with real part equal to Z₀.</li>
+        <li><strong>Constant-reactance arcs</strong> (drawn in teal): Arcs emanating from the right-most point. Upper half = inductive (positive X), lower half = capacitive (negative X). The real axis (X = 0) represents purely resistive impedances.</li>
+      </ul>
+
+      <h4>Reading an Impedance</h4>
+      <p>To plot Z = 75 + j50 Ω in a 50 Ω system, first normalise: z = (75 + j50)/50 = 1.5 + j1.0. Find the intersection of the r = 1.5 circle and the x = +1.0 arc. That point is in the upper half of the chart (inductive).</p>
+
+      <h4>Moving Along a Transmission Line</h4>
+      <p>Moving along a <em>lossless</em> transmission line toward the generator rotates the impedance point <em>clockwise</em> around the centre of the chart. The radius stays constant (|Γ| is constant because the line has no loss). One full revolution = λ/2 of travel. Moving λ/4 toward the generator rotates 180°.</p>
+<figure><svg viewBox="0 0 360 220" width="360" height="220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="360" height="220" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><circle cx="120" cy="110" r="90" fill="none" stroke="#ddd" stroke-width="1.2"/><circle cx="120" cy="110" r="1.5" fill="#5533aa"/><line x1="30" y1="110" x2="210" y2="110" stroke="#888" stroke-width="0.8" stroke-linecap="round"/><line x1="120" y1="20" x2="120" y2="200" stroke="#888" stroke-width="0.8" stroke-linecap="round"/><circle cx="156" cy="65" r="5" fill="#00aacc"/><text x="163.0" y="61.0" text-anchor="start" font-size="9" fill="#00aacc" font-weight="normal" font-family="monospace">Z_L</text><circle cx="120" cy="110" r="58" fill="none" stroke="#AA77FF" stroke-width="1.5" stroke-dasharray="5,3"/><circle cx="84" cy="155" r="5" fill="#AA77FF"/><text x="91.0" y="151.0" text-anchor="start" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">Z_in (λ/4)</text><path d="M156,65 A58,58 0 1,1 84,155" fill="none" stroke="#AA77FF" stroke-width="2" stroke-dasharray="0"/><text x="110" y="212" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">CW rotation = toward generator</text><text x="270" y="30" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="normal" font-family="monospace">Moving along</text><text x="270" y="44" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="normal" font-family="monospace">lossless TL:</text><text x="270" y="65" text-anchor="middle" font-size="9" fill="#888" font-weight="normal" font-family="monospace">• Radius constant</text><text x="270" y="79" text-anchor="middle" font-size="9" fill="#888" font-weight="normal" font-family="monospace">(|Γ| unchanged)</text><text x="270" y="100" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">• Rotates clockwise</text><text x="270" y="114" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">(toward generator)</text><text x="270" y="135" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">• λ/4 = 180° rotation</text><text x="270" y="149" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">Z_in = Z₀²/Z_L</text><text x="270" y="170" text-anchor="middle" font-size="9" fill="#888" font-weight="normal" font-family="monospace">• λ/2 = 360° = Z_L</text></svg>
+<figcaption>Transmission line moves impedance clockwise on a constant-|Γ| circle. A λ/4 section rotates 180°.</figcaption></figure>
+
+<figure><svg viewBox="0 0 360 220" width="360" height="220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="360" height="220" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><circle cx="120" cy="110" r="90" fill="none" stroke="#ddd" stroke-width="1.2"/><circle cx="120" cy="110" r="1.5" fill="#5533aa"/><line x1="30" y1="110" x2="210" y2="110" stroke="#888" stroke-width="0.8" stroke-linecap="round"/><line x1="120" y1="20" x2="120" y2="200" stroke="#888" stroke-width="0.8" stroke-linecap="round"/><circle cx="156" cy="65" r="5" fill="#00aacc"/><text x="163.0" y="61.0" text-anchor="start" font-size="9" fill="#00aacc" font-weight="normal" font-family="monospace">Z_L</text><circle cx="120" cy="110" r="58" fill="none" stroke="#AA77FF" stroke-width="1.5" stroke-dasharray="5,3"/><circle cx="84" cy="155" r="5" fill="#AA77FF"/><text x="91.0" y="151.0" text-anchor="start" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">Z_in (λ/4)</text><path d="M156,65 A58,58 0 1,1 84,155" fill="none" stroke="#AA77FF" stroke-width="2" stroke-dasharray="0"/><text x="110" y="212" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">CW rotation = toward generator</text><text x="270" y="30" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="normal" font-family="monospace">Moving along</text><text x="270" y="44" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="normal" font-family="monospace">lossless TL:</text><text x="270" y="65" text-anchor="middle" font-size="9" fill="#888" font-weight="normal" font-family="monospace">• Radius constant</text><text x="270" y="79" text-anchor="middle" font-size="9" fill="#888" font-weight="normal" font-family="monospace">(|Γ| unchanged)</text><text x="270" y="100" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">• Rotates clockwise</text><text x="270" y="114" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">(toward generator)</text><text x="270" y="135" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">• λ/4 = 180° rotation</text><text x="270" y="149" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">Z_in = Z₀²/Z_L</text><text x="270" y="170" text-anchor="middle" font-size="9" fill="#888" font-weight="normal" font-family="monospace">• λ/2 = 360° = Z_L</text></svg>
+<figcaption>Transmission line moves impedance clockwise on a constant-|Γ| circle. A λ/4 section rotates 180°.</figcaption></figure>
+
+      <div class="eq">\(\Gamma_{in} = \Gamma_L \cdot e^{-j2\beta\ell}\)</div>
+      <p>This is the basis of the quarter-wave transformer: rotate 180°, and impedance Z_L becomes Z₀²/Z_L at the input.</p>
+
+      <h4>Reading |Γ|, Return Loss, and VSWR</h4>
+      <p>The radius of the point from the chart centre equals |Γ|. The dashed constant-|Γ| circle that passes through the operating point is the "VSWR circle" — the VSWR equals (1 + |Γ|)/(1 − |Γ|). Return loss = −20 log₁₀|Γ| dB. A point right at the centre has |Γ| = 0, VSWR = 1, RL = ∞ dB (perfect match).</p>
+
+      <h4>Admittance: The Rotated Chart</h4>
+      <p>The admittance Smith Chart is identical to the impedance chart but rotated 180° around the centre. On a combined Z/Y chart, the admittance of any impedance point is found by rotating that point 180° through the centre. This is useful for adding shunt (parallel) elements — on the admittance chart, adding a shunt susceptance moves the point along a constant-conductance circle.</p>
+
+      <h4>Matching Network Design — Step by Step</h4>
+      <p>To match Z_L = 25 − j30 Ω to 50 Ω using an L-network:</p>
+      <ol>
+        <li>Normalise: z_L = (25 − j30)/50 = 0.5 − j0.6. Plot this point.</li>
+        <li>Adding a series inductor moves the point clockwise along the constant r = 0.5 circle (toward more positive X). Add series L until you reach the r = 1 circle.</li>
+        <li>The new point is on r = 1 with some positive X. Now add a shunt capacitor: switch to the admittance chart (rotate 180°), move along constant g = 1 circle to the centre by adding susceptance. Read off the capacitor value.</li>
+        <li>Alternatively, use the RF Toolbox L-Network calculator to get exact values, then verify on the Smith Chart.</li>
+      </ol>
+
+      <h4>Stub Matching</h4>
+      <p>A shunt stub matching network uses a transmission line stub to add the right susceptance to cancel the load's reactive part, bringing the point to the real axis, then a series line section to rotate it to the centre. On the Smith Chart this is done graphically: move along the constant-|Γ| circle until you hit the g = 1 circle (for shunt matching), then add stub susceptance to reach the centre.</p>
+
+      <h4>Practical Tips</h4>
+      <ul>
+        <li>An impedance that sweeps a clockwise circle on the Smith Chart as frequency increases is dominated by transmission line behaviour.</li>
+        <li>A small anticlockwise hook in the sweep indicates a series resonance.</li>
+        <li>The upper half of the chart = inductive = store energy in magnetic field. Lower half = capacitive = store energy in electric field.</li>
+        <li>The outer rim (|Γ| = 1) represents lossless reactive terminations: shorts, opens, and purely reactive loads.</li>
+      </ul>
+    </div>
+    <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+      <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <a href="SmithChart.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Interactive Smith Chart →</a>
+      <a href="LNetwork.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">L-Network Impedance Matcher →</a>
+      <a href="PiTNetwork.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Pi / T Network Matcher →</a>
+      <a href="StubCalc.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Stub Calculator →</a>
+      <a href="VSWRConverter.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">VSWR / RL Converter →</a>
+      </div>
+    </div>
+  </article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+</body>
+</html>

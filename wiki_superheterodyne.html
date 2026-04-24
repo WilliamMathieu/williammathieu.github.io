@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Superheterodyne Receiver Architecture | RF Toolbox Wiki</title>
+  <meta name="description" content="How a superheterodyne receiver works: RF front-end, LNA, image rejection, mixer, IF chain, demodulation. Complete signal-flow walkthrough with noise and dynamic range analysis.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_superheterodyne.html">
+  <meta property="og:title" content="Superheterodyne Receiver Architecture | RF Toolbox Wiki">
+  <meta property="og:description" content="How a superheterodyne receiver works: RF front-end, LNA, image rejection, mixer, IF chain, demodulation. Complete signal-flow walkthrough with noise and dynamic range analysis.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_superheterodyne.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+    .wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+    .wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+    .wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+    .wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+    .wa .note{background:#fffbee;border-left:3px solid #cc8800;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:12px;}
+    .wa table{font-size:12px;border-collapse:collapse;margin:8px 0 12px;width:100%;}
+    .wa th{font-family:monospace;font-size:11px;color:#5533aa;text-transform:uppercase;letter-spacing:0.05em;padding:5px 12px;border-bottom:2px solid #d0c8f0;background:#f0eeff;text-align:left;}
+    .wa td{padding:5px 12px;border-bottom:1px solid #eee;}
+    .wa tr:last-child td{border-bottom:none;}
+    .wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+    .wiki-back a{color:#AA77FF;}
+  </style>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+  <nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+  <article>
+    <div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+    <div class="wa">
+      <h3>Superheterodyne Receiver Architecture</h3>
+
+      <p>The superheterodyne receiver, invented by Edwin Armstrong in 1918, translates the received RF signal to an intermediate frequency (IF) where filtering and amplification are more practical. It remains the dominant architecture in virtually every radio, cellular phone, and test instrument made today.</p>
+
+      <h4>Block Diagram Signal Flow</h4>
+      <p>The signal path from antenna to baseband:</p>
+<figure><svg viewBox="0 0 500 115" width="500" height="115" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="500" height="115" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><polygon points="36,28 15,78 57,78" fill="#f8f6ff" stroke="#888" stroke-width="1.5"/><text x="36" y="88" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Ant.</text><line x1="62" y1="53" x2="67" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="67,53 62,50 62,56" fill="#5533aa"/><rect x="67" y="28" width="52" height="50" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8" rx="4"/><text x="93" y="49" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">RF</text><text x="93" y="61" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Filter</text><line x1="119" y1="53" x2="124" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="124,53 119,50 119,56" fill="#5533aa"/><rect x="124" y="28" width="52" height="50" fill="#e8e0ff" stroke="#AA77FF" stroke-width="1.8" rx="4"/><text x="150" y="49" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="bold" font-family="monospace">Low-</text><text x="150" y="61" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="bold" font-family="monospace">noise</text><text x="150" y="73" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="bold" font-family="monospace">Amp</text><line x1="176" y1="53" x2="181" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="181,53 176,50 176,56" fill="#5533aa"/><rect x="181" y="28" width="52" height="50" fill="#e8f8ff" stroke="#00aacc" stroke-width="1.8" rx="4"/><text x="207" y="49" text-anchor="middle" font-size="9" fill="#00aacc" font-weight="bold" font-family="monospace">Mixer</text><line x1="233" y1="53" x2="238" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="238,53 233,50 233,56" fill="#5533aa"/><rect x="238" y="28" width="52" height="50" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8" rx="4"/><text x="264" y="49" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">IF</text><text x="264" y="61" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Filter</text><line x1="290" y1="53" x2="295" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="295,53 290,50 290,56" fill="#5533aa"/><rect x="295" y="28" width="52" height="50" fill="#e8e0ff" stroke="#AA77FF" stroke-width="1.8" rx="4"/><text x="321" y="49" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="bold" font-family="monospace">IF Amp</text><line x1="347" y1="53" x2="352" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="352,53 347,50 347,56" fill="#5533aa"/><rect x="352" y="28" width="52" height="50" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8" rx="4"/><text x="378" y="49" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">ADC/</text><text x="378" y="61" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Demod</text><line x1="207" y1="78" x2="207" y2="105" stroke="#00aacc" stroke-width="1.5" stroke-linecap="round"/><polygon points="207,78 203,86 211,86" fill="#00aacc"/><text x="212" y="111" text-anchor="start" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">LO (f_RF ± f_IF)</text></svg>
+<figcaption>Superheterodyne receiver signal flow. The RF filter sets image rejection; the IF filter provides channel selectivity.</figcaption></figure>
+
+<figure><svg viewBox="0 0 500 115" width="500" height="115" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="500" height="115" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><polygon points="36,28 15,78 57,78" fill="#f8f6ff" stroke="#888" stroke-width="1.5"/><text x="36" y="88" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Ant.</text><line x1="62" y1="53" x2="67" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="67,53 62,50 62,56" fill="#5533aa"/><rect x="67" y="28" width="52" height="50" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8" rx="4"/><text x="93" y="49" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">RF</text><text x="93" y="61" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Filter</text><line x1="119" y1="53" x2="124" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="124,53 119,50 119,56" fill="#5533aa"/><rect x="124" y="28" width="52" height="50" fill="#e8e0ff" stroke="#AA77FF" stroke-width="1.8" rx="4"/><text x="150" y="49" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="bold" font-family="monospace">Low-</text><text x="150" y="61" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="bold" font-family="monospace">noise</text><text x="150" y="73" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="bold" font-family="monospace">Amp</text><line x1="176" y1="53" x2="181" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="181,53 176,50 176,56" fill="#5533aa"/><rect x="181" y="28" width="52" height="50" fill="#e8f8ff" stroke="#00aacc" stroke-width="1.8" rx="4"/><text x="207" y="49" text-anchor="middle" font-size="9" fill="#00aacc" font-weight="bold" font-family="monospace">Mixer</text><line x1="233" y1="53" x2="238" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="238,53 233,50 233,56" fill="#5533aa"/><rect x="238" y="28" width="52" height="50" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8" rx="4"/><text x="264" y="49" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">IF</text><text x="264" y="61" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Filter</text><line x1="290" y1="53" x2="295" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="295,53 290,50 290,56" fill="#5533aa"/><rect x="295" y="28" width="52" height="50" fill="#e8e0ff" stroke="#AA77FF" stroke-width="1.8" rx="4"/><text x="321" y="49" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="bold" font-family="monospace">IF Amp</text><line x1="347" y1="53" x2="352" y2="53" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><polygon points="352,53 347,50 347,56" fill="#5533aa"/><rect x="352" y="28" width="52" height="50" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8" rx="4"/><text x="378" y="49" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">ADC/</text><text x="378" y="61" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Demod</text><line x1="207" y1="78" x2="207" y2="105" stroke="#00aacc" stroke-width="1.5" stroke-linecap="round"/><polygon points="207,78 203,86 211,86" fill="#00aacc"/><text x="212" y="111" text-anchor="start" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">LO (f_RF ± f_IF)</text></svg>
+<figcaption>Superheterodyne receiver signal flow. The RF filter sets image rejection; the IF filter provides channel selectivity.</figcaption></figure>
+
+      <ol>
+        <li><strong>Antenna</strong> → receives signal + noise + interference across all frequencies.</li>
+        <li><strong>RF bandpass filter (BPF)</strong> → passes the desired RF band, rejects out-of-band signals. Critical for preventing image interference and protecting the LNA.</li>
+        <li><strong>Low-noise amplifier (LNA)</strong> → first amplification stage. Dominates system noise figure (Friis: first stage matters most). Typically 15–25 dB gain, 1–3 dB NF.</li>
+        <li><strong>Image rejection filter</strong> → rejects the image frequency f_image = f_LO − f_IF (for low-side injection). Must be placed before the mixer.</li>
+        <li><strong>Mixer</strong> → multiplies RF by local oscillator (LO), producing sum and difference frequencies. Desired output is |f_RF − f_LO| = f_IF.</li>
+        <li><strong>IF bandpass filter</strong> → selects the IF and provides adjacent-channel rejection. This is where most selectivity comes from — fixed-frequency filters are practical at IF.</li>
+        <li><strong>IF amplifier</strong> → provides most of the system gain at IF (easier to build stable high-gain amplifiers at lower frequencies).</li>
+        <li><strong>Demodulator / ADC</strong> → extracts information from the IF signal.</li>
+      </ol>
+
+      <h4>The Image Frequency Problem</h4>
+      <p>The mixer responds to two input frequencies — the desired signal at f_RF and an "image" at f_image = f_LO ± f_IF. Noise or interference at the image frequency is also downconverted to the IF and corrupts the desired signal. Image rejection is the ratio (in dB) of how much the receiver attenuates the image relative to the desired frequency:</p>
+<figure><svg viewBox="0 0 460 130" width="460" height="130" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="460" height="130" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="230" y="12" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Image frequency problem in low-side injection</text><line x1="20" y1="65" x2="442.0" y2="65.0" stroke="#888" stroke-width="1.5" stroke-linecap="round"/><polygon points="450,65 442.0,69.0 442.0,61.0" fill="#888"/><text x="455" y="60" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">f</text><rect x="203" y="40" width="30" height="50" fill="#ffeeee" rx="2"/><text x="220.0" y="35" text-anchor="middle" font-size="8" fill="#cc3333" font-weight="normal" font-family="monospace">Image band</text><text x="220.0" y="92" text-anchor="middle" font-size="8" fill="#cc3333" font-weight="normal" font-family="monospace">f_im</text><rect x="314" y="40" width="30" height="50" fill="#eef0ff" rx="2"/><text x="331.11111111111114" y="35" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Desired RF</text><text x="331.11111111111114" y="92" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">f_RF</text><line x1="275.55555555555554" y1="35" x2="275.55555555555554" y2="90" stroke="#00aacc" stroke-width="2" stroke-linecap="round" stroke-dasharray="3,2"/><text x="275.55555555555554" y="30" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">f_LO</text><line x1="331.11111111111114" y1="60" x2="283.55555555555554" y2="60.0" stroke="#5533aa" stroke-width="1.2" stroke-linecap="round"/><polygon points="275.55555555555554,60 283.55555555555554,56.0 283.55555555555554,64.0" fill="#5533aa"/><line x1="220.0" y1="60" x2="267.55555555555554" y2="60.0" stroke="#cc3333" stroke-width="1.2" stroke-linecap="round"/><polygon points="275.55555555555554,60 267.55555555555554,64.0 267.55555555555554,56.0" fill="#cc3333"/><text x="303.33333333333337" y="53" text-anchor="middle" font-size="7" fill="#5533aa" font-weight="normal" font-family="monospace">f_IF=50</text><text x="247.77777777777777" y="53" text-anchor="middle" font-size="7" fill="#cc3333" font-weight="normal" font-family="monospace">f_IF=50</text><text x="230" y="127" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">Both f_RF and f_image mix to the same f_IF — image rejection filter must reject f_image before the mixer</text></svg>
+<figcaption>The image frequency f_image = f_LO − f_IF (low-side injection) produces the same IF as the desired signal.</figcaption></figure>
+
+<figure><svg viewBox="0 0 460 130" width="460" height="130" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="460" height="130" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="230" y="12" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Image frequency problem in low-side injection</text><line x1="20" y1="65" x2="442.0" y2="65.0" stroke="#888" stroke-width="1.5" stroke-linecap="round"/><polygon points="450,65 442.0,69.0 442.0,61.0" fill="#888"/><text x="455" y="60" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">f</text><rect x="203" y="40" width="30" height="50" fill="#ffeeee" rx="2"/><text x="220.0" y="35" text-anchor="middle" font-size="8" fill="#cc3333" font-weight="normal" font-family="monospace">Image band</text><text x="220.0" y="92" text-anchor="middle" font-size="8" fill="#cc3333" font-weight="normal" font-family="monospace">f_im</text><rect x="314" y="40" width="30" height="50" fill="#eef0ff" rx="2"/><text x="331.11111111111114" y="35" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Desired RF</text><text x="331.11111111111114" y="92" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">f_RF</text><line x1="275.55555555555554" y1="35" x2="275.55555555555554" y2="90" stroke="#00aacc" stroke-width="2" stroke-linecap="round" stroke-dasharray="3,2"/><text x="275.55555555555554" y="30" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">f_LO</text><line x1="331.11111111111114" y1="60" x2="283.55555555555554" y2="60.0" stroke="#5533aa" stroke-width="1.2" stroke-linecap="round"/><polygon points="275.55555555555554,60 283.55555555555554,56.0 283.55555555555554,64.0" fill="#5533aa"/><line x1="220.0" y1="60" x2="267.55555555555554" y2="60.0" stroke="#cc3333" stroke-width="1.2" stroke-linecap="round"/><polygon points="275.55555555555554,60 267.55555555555554,64.0 267.55555555555554,56.0" fill="#cc3333"/><text x="303.33333333333337" y="53" text-anchor="middle" font-size="7" fill="#5533aa" font-weight="normal" font-family="monospace">f_IF=50</text><text x="247.77777777777777" y="53" text-anchor="middle" font-size="7" fill="#cc3333" font-weight="normal" font-family="monospace">f_IF=50</text><text x="230" y="127" text-anchor="middle" font-size="7" fill="#888" font-weight="normal" font-family="monospace">Both f_RF and f_image mix to the same f_IF — image rejection filter must reject f_image before the mixer</text></svg>
+<figcaption>The image frequency f_image = f_LO − f_IF (low-side injection) produces the same IF as the desired signal.</figcaption></figure>
+
+      <div class="eq">\(f_{image} = f_{RF} \pm 2f_{IF}\)</div>
+      <p>Higher IF → image is further from f_RF → easier to filter. This motivates the choice of IF. A high first IF (e.g. 70 MHz or 1.4 GHz) gives good image rejection; a second lower IF can then improve channel selectivity.</p>
+
+      <h4>Noise Figure Through the Chain</h4>
+      <p>Using the Friis formula, the cascaded noise figure:</p>
+      <div class="eq">\(F_{sys} = F_{filter} + \dfrac{F_{LNA}-1}{G_{filter}} + \dfrac{F_{mixer}-1}{G_{filter}G_{LNA}} + \cdots\)</div>
+      <p>A passive RF filter before the LNA (e.g. with 2 dB insertion loss) adds directly to the noise figure: F_filter = 1 + loss(linear) = 1 + (L−1)/L. This is why a low-noise LNA must come as early in the chain as possible, and why surface-mount filters with high insertion loss degrade sensitivity.</p>
+
+      <h4>Dynamic Range</h4>
+      <p>The receiver must handle signals from the noise floor (−100 to −120 dBm) to strong in-band signals that could be 80 dB stronger. Two limits define the dynamic range:</p>
+      <ul>
+        <li><strong>Minimum detectable signal (MDS)</strong>: noise floor + minimum required SNR. Determined by noise figure and bandwidth.</li>
+        <li><strong>Blocking / desensitisation</strong>: strong off-channel signals that compress the LNA or generate intermodulation products that mask the desired signal. Determined by IIP3 and P₁dB.</li>
+      </ul>
+      <div class="eq">\(\text{Dynamic Range} = P_{1dB,input} - \text{MDS}\quad[\text{dB}]\)</div>
+
+      <h4>Superheterodyne vs Direct Conversion (Zero-IF)</h4>
+      <table>
+        <tr><th>Feature</th><th>Superheterodyne</th><th>Direct conversion (zero-IF)</th></tr>
+        <tr><td>IF frequency</td><td>Fixed non-zero value</td><td>0 Hz (baseband I/Q output)</td></tr>
+        <tr><td>Image rejection</td><td>Achieved by RF filter</td><td>No image problem (I/Q cancellation)</td></tr>
+        <tr><td>Channel filtering</td><td>Fixed IF filter (ceramic, SAW)</td><td>Baseband low-pass filter (active)</td></tr>
+        <tr><td>Integration</td><td>Harder — off-chip IF filters needed</td><td>Easier — fully on-chip in CMOS</td></tr>
+        <tr><td>Key problems</td><td>Image, LO harmonics, IF filter</td><td>DC offset, IQ imbalance, 1/f noise</td></tr>
+        <tr><td>Used in</td><td>Test instruments, broadcast receivers</td><td>Smartphones, SDR, Wi-Fi, Bluetooth</td></tr>
+      </table>
+    </div>
+    <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+      <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <a href="NoiseFigure.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Cascaded Noise Figure →</a>
+      <a href="LinkBudget.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Link Budget Calculator →</a>
+      <a href="Friis.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Friis Transmission →</a>
+      <a href="IP3Calc.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">IP3 & Intermodulation →</a>
+      <a href="dBmConverter.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">dBm ↔ Watts Converter →</a>
+      </div>
+    </div>
+  </article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+</body>
+</html>

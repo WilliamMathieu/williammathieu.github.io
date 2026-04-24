@@ -52,6 +52,15 @@
     <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
     <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Operating frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z_unbal</td><td style="padding:3px 0;">Unbalanced port impedance (Ω) — typically 50 Ω coax.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z_bal</td><td style="padding:3px 0;">Balanced port impedance (Ω) — e.g. 200 Ω folded dipole.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Topology</td><td style="padding:3px 0;">Lattice/Bridged-T: wide use. LC π-BALUN: simpler. Marchand: lumped approx.</td></tr></table>
   </details>
+
+      <details style="margin-top:8px;">
+        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants used ▸</summary>
+        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr>
+        </table>
+      </details>
 </div>
 <div class="sec-lbl">Inputs</div>
 <div class="inp-grid"><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="bl-f" value="144"  data-tip="Operating frequency for the BALUN. Components are calculated for this single frequency."><select id="bl-fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Topology</label><select id="bl-topo"><option value="lattice">Lattice / Bridged-T</option><option value="pi">LC π-BALUN</option><option value="marchand">Marchand (lumped)</option></select></div><div class="inp-row"><label>Unbalanced impedance, <span class="var">Z_u</span></label><div class="inp-inline"><input type="text" id="bl-zu" value="50"  data-tip="Unbalanced port impedance in Ω. Typically 50 Ω for coaxial input."><span class="inp-units">Ω</span></div><span class="inp-hint">Coaxial port</span></div><div class="inp-row"><label>Balanced impedance, <span class="var">Z_b</span></label><div class="inp-inline"><input type="text" id="bl-zb" value="200"  data-tip="Balanced port impedance in Ω. Folded dipole = 300 Ω, typical dipole = 200 Ω."><span class="inp-units">Ω</span></div><span class="inp-hint">Dipole / balanced port</span></div></div>
@@ -144,6 +153,10 @@ function drawDiagram() {
 }
 
 </script>
+<details style="margin:12px 0 4px;">
+  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
+  <div style="padding:4px 0 8px;">\(\text{Lattice: }L=\frac{\sqrt{Z_uZ_b}}{2\omega_0},\; C=\frac{1}{2\omega_0\sqrt{Z_uZ_b}} \quad \text{Pi: }L=\frac{Z_{vm}}{\omega_0},\; C=\frac{1}{\omega_0 Z_{vm}}\)</div>
+</details>
 <div class="wiki-link-hint">📖 <a href="wiki_balun.html">Learn about BALUNs →</a></div>
 <script src="LCBalun.js"></script>
 </article>

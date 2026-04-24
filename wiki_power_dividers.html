@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Power Dividers & Combiners — Wilkinson & Hybrids | RF Toolbox Wiki</title>
+  <meta name="description" content="Wilkinson power divider design, equal and unequal splits, N-way combining. Hybrid couplers (90° and 180°), coherent power combining, and graceful degradation.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_power_dividers.html">
+  <meta property="og:title" content="RF Power Dividers & Combiners — Wilkinson & Hybrids | RF Toolbox Wiki">
+  <meta property="og:description" content="Wilkinson power divider design, equal and unequal splits, N-way combining. Hybrid couplers (90° and 180°), coherent power combining, and graceful degradation.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_power_dividers.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+    .wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+    .wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+    .wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+    .wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+    .wa table{font-size:12px;border-collapse:collapse;margin:8px 0 12px;width:100%;}
+    .wa th{font-family:monospace;font-size:11px;color:#5533aa;text-transform:uppercase;letter-spacing:0.05em;padding:5px 12px;border-bottom:2px solid #d0c8f0;background:#f0eeff;text-align:left;}
+    .wa td{padding:5px 12px;border-bottom:1px solid #eee;}
+    .wa tr:last-child td{border-bottom:none;}
+    .wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+    .wiki-back a{color:#AA77FF;}
+  </style>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+  <nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+  <article>
+    <div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+    <div class="wa">
+      <h3>RF Power Dividers &amp; Combiners</h3>
+
+      <p>Power dividers split one signal into two or more outputs. Power combiners do the reverse: sum multiple signals into one output. The Wilkinson divider is the classic design because it achieves simultaneous matching, isolation, and lossless operation using only transmission line sections and a single resistor.</p>
+
+      <h4>Wilkinson Power Divider</h4>
+      <p>The equal-split Wilkinson divider uses two λ/4 transmission line arms of impedance \(Z_0\sqrt{2}\) (≈ 70.7 Ω in a 50 Ω system) and an isolation resistor \(R = 2Z_0\) between the two output ports:</p>
+<figure><svg viewBox="0 0 400 200" width="400" height="200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="400" height="200" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="200" y="12" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold" font-family="monospace">Wilkinson Power Divider</text><line x1="10" y1="100" x2="70" y2="100" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/><circle cx="10" cy="100" r="4" fill="white" stroke="#5533aa" stroke-width="2"/><text x="10" y="88" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Port 1</text><text x="10" y="118" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">P_in</text><path d="M70,100 Q160,40 250,50" fill="none" stroke="#AA77FF" stroke-width="3" stroke-dasharray="8,4"/><text x="155" y="35" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">Z₀√2  (λ/4)</text><path d="M70,100 Q160,170 250,150" fill="none" stroke="#AA77FF" stroke-width="3" stroke-dasharray="8,4"/><text x="155" y="180" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">Z₀√2  (λ/4)</text><circle cx="250" cy="50" r="4" fill="white" stroke="#5533aa" stroke-width="2"/><line x1="250" y1="50" x2="320" y2="50" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/><text x="330" y="46" text-anchor="start" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Port 2</text><text x="330" y="60" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">P_out/2</text><circle cx="250" cy="150" r="4" fill="white" stroke="#5533aa" stroke-width="2"/><line x1="250" y1="150" x2="320" y2="150" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/><text x="330" y="146" text-anchor="start" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Port 3</text><text x="330" y="160" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">P_out/2</text><line x1="250" y1="50" x2="250" y2="82" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><rect x="235" y="82" width="30" height="36" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/><text x="250" y="104" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">2Z₀</text><line x1="250" y1="118" x2="250" y2="150" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><text x="270" y="100" text-anchor="start" font-size="7" fill="#888" font-weight="normal" font-family="monospace">R_iso</text></svg>
+<figcaption>Equal-split Wilkinson divider: two λ/4 arms at Z₀√2 ≈ 70.7 Ω, isolation resistor 2Z₀ = 100 Ω (for 50 Ω system).</figcaption></figure>
+
+<figure><svg viewBox="0 0 400 200" width="400" height="200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="400" height="200" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="200" y="12" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold" font-family="monospace">Wilkinson Power Divider</text><line x1="10" y1="100" x2="70" y2="100" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/><circle cx="10" cy="100" r="4" fill="white" stroke="#5533aa" stroke-width="2"/><text x="10" y="88" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Port 1</text><text x="10" y="118" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">P_in</text><path d="M70,100 Q160,40 250,50" fill="none" stroke="#AA77FF" stroke-width="3" stroke-dasharray="8,4"/><text x="155" y="35" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">Z₀√2  (λ/4)</text><path d="M70,100 Q160,170 250,150" fill="none" stroke="#AA77FF" stroke-width="3" stroke-dasharray="8,4"/><text x="155" y="180" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">Z₀√2  (λ/4)</text><circle cx="250" cy="50" r="4" fill="white" stroke="#5533aa" stroke-width="2"/><line x1="250" y1="50" x2="320" y2="50" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/><text x="330" y="46" text-anchor="start" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Port 2</text><text x="330" y="60" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">P_out/2</text><circle cx="250" cy="150" r="4" fill="white" stroke="#5533aa" stroke-width="2"/><line x1="250" y1="150" x2="320" y2="150" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/><text x="330" y="146" text-anchor="start" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Port 3</text><text x="330" y="160" text-anchor="start" font-size="8" fill="#888" font-weight="normal" font-family="monospace">P_out/2</text><line x1="250" y1="50" x2="250" y2="82" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><rect x="235" y="82" width="30" height="36" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/><text x="250" y="104" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">2Z₀</text><line x1="250" y1="118" x2="250" y2="150" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><text x="270" y="100" text-anchor="start" font-size="7" fill="#888" font-weight="normal" font-family="monospace">R_iso</text></svg>
+<figcaption>Equal-split Wilkinson divider: two λ/4 arms at Z₀√2 ≈ 70.7 Ω, isolation resistor 2Z₀ = 100 Ω (for 50 Ω system).</figcaption></figure>
+
+      <div class="eq">\(Z_{arm} = Z_0\sqrt{2}, \quad R_{iso} = 2Z_0\)</div>
+      <p>Key properties: all three ports are simultaneously matched; the output ports are isolated from each other (signals applied to port 2 are absorbed by R and do not appear at port 3); the divider is lossless when port 2 and port 3 signals are in phase (the isolation resistor carries no current).</p>
+
+      <h4>Unequal-Split Wilkinson</h4>
+      <p>For a power split ratio \(K^2:1\) (port 2 gets \(K^2\) times more power than port 3):</p>
+      <div class="eq">\(Z_1 = Z_0\sqrt{\dfrac{1+K^2}{K^3}}, \quad Z_2 = Z_0\sqrt{K(1+K^2)}, \quad R_{iso} = Z_0\!\left(K + \dfrac{1}{K}\right)\)</div>
+      <p>For K=1 (equal split): \(Z_1 = Z_2 = Z_0\sqrt{2}\), \(R = 2Z_0\). For K=2 (6 dB more to port 2): \(Z_1 ≈ 35.4\) Ω, \(Z_2 ≈ 112\) Ω, \(R = 125\) Ω (in 50 Ω system).</p>
+
+      <h4>N-Way Dividers</h4>
+      <p>An N-way Wilkinson divider can be built by cascading 2-way sections or using a star junction with N arms. The N-way lumped design uses N λ/4 arms of impedance \(Z_0\sqrt{N}\) and isolation resistors \(NZ_0\) between adjacent output ports.</p>
+
+      <h4>Hybrid Couplers</h4>
+      <p>A 90° hybrid (branch-line coupler) is a four-port device where the two outputs are 90° apart in phase. It is used in balanced amplifiers and I/Q mixers. A 180° hybrid (rat-race or magic T) gives outputs that are either in-phase or anti-phase, used for sum-difference networks and balanced mixers.</p>
+<figure><svg viewBox="0 0 460 140" width="460" height="140" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="460" height="140" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="230" y="12" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Hybrid coupler types and phase splits</text><text x="75" y="28" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Type</text><text x="185" y="28" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Phase split</text><text x="295" y="28" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">BW</text><text x="405" y="28" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Use</text><line x1="20" y1="33" x2="440" y2="33" stroke="#5533aa" stroke-width="0.8" stroke-linecap="round"/><text x="75" y="45" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Wilkinson</text><text x="185" y="45" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">0°</text><text x="295" y="45" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">N/A</text><text x="405" y="45" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">in-phase split</text><line x1="20" y1="53" x2="440" y2="53" stroke="#eee" stroke-width="0.5" stroke-linecap="round"/><text x="75" y="65" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">90° Hybrid</text><text x="185" y="65" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">0°/90°</text><text x="295" y="65" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">~20 dB</text><text x="405" y="65" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">I/Q mixers, balanced amps</text><line x1="20" y1="73" x2="440" y2="73" stroke="#eee" stroke-width="0.5" stroke-linecap="round"/><text x="75" y="85" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">180° Rat-race</text><text x="185" y="85" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">0°/180°</text><text x="295" y="85" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">~20 dB</text><text x="405" y="85" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">Balanced mixers, Σ/Δ</text><line x1="20" y1="93" x2="440" y2="93" stroke="#eee" stroke-width="0.5" stroke-linecap="round"/><text x="75" y="105" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Lange Coupler</text><text x="185" y="105" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">0°/90°</text><text x="295" y="105" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">octave</text><text x="405" y="105" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Wideband balanced amps</text><line x1="20" y1="113" x2="440" y2="113" stroke="#eee" stroke-width="0.5" stroke-linecap="round"/></svg>
+<figcaption>Comparison of common RF power divider and hybrid coupler types.</figcaption></figure>
+
+<figure><svg viewBox="0 0 460 140" width="460" height="140" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="460" height="140" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="230" y="12" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Hybrid coupler types and phase splits</text><text x="75" y="28" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Type</text><text x="185" y="28" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Phase split</text><text x="295" y="28" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">BW</text><text x="405" y="28" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="bold" font-family="monospace">Use</text><line x1="20" y1="33" x2="440" y2="33" stroke="#5533aa" stroke-width="0.8" stroke-linecap="round"/><text x="75" y="45" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">Wilkinson</text><text x="185" y="45" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">0°</text><text x="295" y="45" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">N/A</text><text x="405" y="45" text-anchor="middle" font-size="8" fill="#5533aa" font-weight="normal" font-family="monospace">in-phase split</text><line x1="20" y1="53" x2="440" y2="53" stroke="#eee" stroke-width="0.5" stroke-linecap="round"/><text x="75" y="65" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">90° Hybrid</text><text x="185" y="65" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">0°/90°</text><text x="295" y="65" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">~20 dB</text><text x="405" y="65" text-anchor="middle" font-size="8" fill="#00aacc" font-weight="normal" font-family="monospace">I/Q mixers, balanced amps</text><line x1="20" y1="73" x2="440" y2="73" stroke="#eee" stroke-width="0.5" stroke-linecap="round"/><text x="75" y="85" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">180° Rat-race</text><text x="185" y="85" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">0°/180°</text><text x="295" y="85" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">~20 dB</text><text x="405" y="85" text-anchor="middle" font-size="8" fill="#AA77FF" font-weight="normal" font-family="monospace">Balanced mixers, Σ/Δ</text><line x1="20" y1="93" x2="440" y2="93" stroke="#eee" stroke-width="0.5" stroke-linecap="round"/><text x="75" y="105" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Lange Coupler</text><text x="185" y="105" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">0°/90°</text><text x="295" y="105" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">octave</text><text x="405" y="105" text-anchor="middle" font-size="8" fill="#888" font-weight="normal" font-family="monospace">Wideband balanced amps</text><line x1="20" y1="113" x2="440" y2="113" stroke="#eee" stroke-width="0.5" stroke-linecap="round"/></svg>
+<figcaption>Comparison of common RF power divider and hybrid coupler types.</figcaption></figure>
+
+      <table>
+        <tr><th>Device</th><th>Phase split</th><th>Bandwidth</th><th>Use</th></tr>
+        <tr><td>Wilkinson divider</td><td>0° (in-phase)</td><td>Moderate (~20%)</td><td>Power splitting, combining</td></tr>
+        <tr><td>90° hybrid coupler</td><td>0°/90°</td><td>~20%</td><td>Balanced amps, I/Q mixers</td></tr>
+        <tr><td>180° rat-race</td><td>0°/180°</td><td>~20%</td><td>Balanced mixers, sum/difference</td></tr>
+        <tr><td>Lange coupler</td><td>0°/90° (3 dB)</td><td>Wide (octave)</td><td>Wideband balanced amps</td></tr>
+      </table>
+
+      <h4>Coherent Power Combining</h4>
+      <p>When N amplifiers feed a combining network, the combined output power is:</p>
+      <div class="eq">\(P_{out} = \eta N P_{each}\)</div>
+      <p>where η is the combining efficiency (0.93–0.98 for corporate networks). The gain over a single amplifier is \(10\log_{10}(N) + 10\log_{10}(\eta)\) dB. If <em>k</em> amplifiers fail, coherent combining means power drops as \((N-k)^2/N^2\) of the full output — graceful degradation rather than total failure.</p>
+
+      <h4>Physical Implementation</h4>
+      <ul>
+        <li><strong>PCB microstrip</strong>: The most common implementation. λ/4 at 2.45 GHz on FR4 (εᵣ ≈ 4.4) is about 18–20 mm long.</li>
+        <li><strong>Lumped element</strong>: Below ~1 GHz, LC equivalents replace transmission line sections, saving board space.</li>
+        <li><strong>SMD Wilkinson</strong>: Available as pre-packaged components from manufacturers at fixed frequencies.</li>
+      </ul>
+    </div>
+    <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+      <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <a href="Wilkinson.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Wilkinson Power Divider →</a>
+      <a href="PowerCombiner.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">RF Power Combining →</a>
+      <a href="QuarterWave.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Quarter-Wave Transformer →</a>
+      </div>
+    </div>
+  </article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+</body>
+</html>

@@ -52,6 +52,17 @@
     <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
     <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Frequency. Skin depth decreases with √f.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">σ</td><td style="padding:3px 0;">Electrical conductivity (S/m). Copper ≈ 5.8×10⁷, aluminium ≈ 3.8×10⁷, silver ≈ 6.3×10⁷.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">δ</td><td style="padding:3px 0;">Skin depth = √(2/ωμσ). Below this depth, current is negligible.</td></tr></table>
   </details>
+
+      <details style="margin-top:8px;">
+        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants used ▸</summary>
+        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">σ_Cu</td><td>Copper conductivity = 5.8×10⁷ S/m</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">σ_Al</td><td>Aluminium conductivity = 3.8×10⁷ S/m</td></tr>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">σ_Ag</td><td>Silver conductivity = 6.3×10⁷ S/m</td></tr>
+        </table>
+      </details>
 </div>
 <div class="sec-lbl">Inputs</div>
 <div class="inp-grid"><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="sd-f" placeholder="value"  data-tip="Frequency at which to compute skin depth. Skin depth decreases with √f."><select id="sd-fu"><option value="1e3">kHz</option><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Conductor material</label><select id="sd-mat"><option value="5.8e7">Copper (5.8×10⁷ S/m)</option><option value="3.77e7">Aluminium</option><option value="6.3e7">Silver</option><option value="4.1e7">Gold</option><option value="1.0e7">Steel</option><option value="custom">Custom σ</option></select></div><div class="inp-row"><label>Custom conductivity σ</label><div class="inp-inline"><input type="text" id="sd-sigma" placeholder="S/m" disabled data-tip="Electrical conductivity in S/m. Copper = 5.8×10⁷, silver = 6.3×10⁷, gold = 4.1×10⁷."><span class="inp-units">S/m</span></div><span class="inp-hint">Enabled when Custom selected above</span></div></div>

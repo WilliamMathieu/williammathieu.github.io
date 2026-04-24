@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complex Impedance, Reactance & Admittance | RF Toolbox Wiki</title>
+  <meta name="description" content="Complex impedance explained from first principles. Reactance of inductors and capacitors, phasors, series vs parallel equivalents, Q factor, and why impedance matters at RF frequencies.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_complex_impedance.html">
+  <meta property="og:title" content="Complex Impedance, Reactance & Admittance | RF Toolbox Wiki">
+  <meta property="og:description" content="Complex impedance explained from first principles. Reactance of inductors and capacitors, phasors, series vs parallel equivalents, Q factor, and why impedance matters at RF frequencies.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_complex_impedance.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+    .wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+    .wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+    .wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+    .wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+    .wa .note{background:#fffbee;border-left:3px solid #cc8800;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:12px;}
+    .wa table{font-size:12px;border-collapse:collapse;margin:8px 0 12px;width:100%;}
+    .wa th{font-family:monospace;font-size:11px;color:#5533aa;text-transform:uppercase;letter-spacing:0.05em;padding:5px 12px;border-bottom:2px solid #d0c8f0;background:#f0eeff;text-align:left;}
+    .wa td{padding:5px 12px;border-bottom:1px solid #eee;}
+    .wa tr:last-child td{border-bottom:none;}
+    .wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+    .wiki-back a{color:#AA77FF;}
+  </style>
+</head>
+<body>
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+  <nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+  <article>
+    <div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+    <div class="wa">
+      <h3>Complex Impedance, Reactance &amp; Admittance</h3>
+
+      <p>At DC, resistance is the only opposition to current flow. At RF, inductors and capacitors also oppose current — but in a frequency-dependent and phase-shifting way. The complete description requires complex numbers: impedance Z = R + jX, where the imaginary part X is the reactance.</p>
+
+      <h4>Phasors and Sinusoidal Steady State</h4>
+      <p>In a circuit driven by a sinusoidal source at frequency f, all voltages and currents are sinusoids at the same frequency. We represent them as phasors — complex numbers whose magnitude gives amplitude and whose angle gives phase. Multiplying a phasor by j rotates it 90° (a quarter cycle), which is exactly what an inductor does: it makes current lag voltage by 90°.</p>
+
+      <h4>Reactance</h4>
+      <p>Reactance X is the imaginary part of impedance. It stores and releases energy without dissipating it:</p>
+<figure><svg viewBox="0 0 340 200" width="340" height="200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="340" height="200" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><line x1="70" y1="110" x2="300" y2="110" stroke="#888" stroke-width="1" stroke-linecap="round"/><line x1="80" y1="120" x2="80" y2="10" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="295" y="120" text-anchor="start" font-size="9" fill="#888" font-weight="normal" font-family="monospace">Re</text><text x="72" y="15" text-anchor="end" font-size="9" fill="#888" font-weight="normal" font-family="monospace">Im</text><line x1="80" y1="110" x2="200" y2="110" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/><text x="140" y="103" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="normal" font-family="monospace">R</text><line x1="200" y1="110" x2="200" y2="40" stroke="#00aacc" stroke-width="2" stroke-linecap="round" stroke-dasharray="3,2"/><text x="216" y="75" text-anchor="start" font-size="10" fill="#00aacc" font-weight="normal" font-family="monospace">jX</text><line x1="80" y1="110" x2="193.08976879281252" y2="44.03096820419269" stroke="#AA77FF" stroke-width="2.2" stroke-linecap="round"/><polygon points="200,40 195.10525289490886,47.48608380778642 191.07428469071618,40.57585260059896" fill="#AA77FF"/><text x="148" y="65" text-anchor="start" font-size="10" fill="#AA77FF" font-weight="bold" font-family="monospace">Z = R + jX</text><path d="M108,110 A28,28 0 0,0 104,96" fill="none" stroke="#AA77FF" stroke-width="1.2"/><text x="118" y="98" text-anchor="start" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">φ</text><text x="265" y="30" text-anchor="start" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">|Z| = √(R²+X²)</text><text x="265" y="42" text-anchor="start" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">φ = arctan(X/R)</text></svg>
+<figcaption>Impedance Z = R + jX as a phasor in the complex plane. R is resistance, X is reactance.</figcaption></figure>
+
+<figure><svg viewBox="0 0 340 200" width="340" height="200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="340" height="200" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><line x1="70" y1="110" x2="300" y2="110" stroke="#888" stroke-width="1" stroke-linecap="round"/><line x1="80" y1="120" x2="80" y2="10" stroke="#888" stroke-width="1" stroke-linecap="round"/><text x="295" y="120" text-anchor="start" font-size="9" fill="#888" font-weight="normal" font-family="monospace">Re</text><text x="72" y="15" text-anchor="end" font-size="9" fill="#888" font-weight="normal" font-family="monospace">Im</text><line x1="80" y1="110" x2="200" y2="110" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/><text x="140" y="103" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="normal" font-family="monospace">R</text><line x1="200" y1="110" x2="200" y2="40" stroke="#00aacc" stroke-width="2" stroke-linecap="round" stroke-dasharray="3,2"/><text x="216" y="75" text-anchor="start" font-size="10" fill="#00aacc" font-weight="normal" font-family="monospace">jX</text><line x1="80" y1="110" x2="193.08976879281252" y2="44.03096820419269" stroke="#AA77FF" stroke-width="2.2" stroke-linecap="round"/><polygon points="200,40 195.10525289490886,47.48608380778642 191.07428469071618,40.57585260059896" fill="#AA77FF"/><text x="148" y="65" text-anchor="start" font-size="10" fill="#AA77FF" font-weight="bold" font-family="monospace">Z = R + jX</text><path d="M108,110 A28,28 0 0,0 104,96" fill="none" stroke="#AA77FF" stroke-width="1.2"/><text x="118" y="98" text-anchor="start" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">φ</text><text x="265" y="30" text-anchor="start" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">|Z| = √(R²+X²)</text><text x="265" y="42" text-anchor="start" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">φ = arctan(X/R)</text></svg>
+<figcaption>Impedance Z = R + jX as a phasor in the complex plane. R is resistance, X is reactance.</figcaption></figure>
+
+      <table>
+        <tr><th>Component</th><th>Impedance Z</th><th>Reactance X</th><th>Phase</th></tr>
+        <tr><td>Resistor R</td><td>R</td><td>0</td><td>V and I in phase</td></tr>
+        <tr><td>Inductor L</td><td>jωL</td><td>+ωL = +2πfL</td><td>I lags V by 90°</td></tr>
+        <tr><td>Capacitor C</td><td>1/(jωC)</td><td>−1/(ωC) = −1/(2πfC)</td><td>I leads V by 90°</td></tr>
+      </table>
+      <p>At resonance (ωL = 1/ωC), the inductive and capacitive reactances cancel and the impedance is purely resistive.</p>
+
+      <h4>Admittance Y = 1/Z</h4>
+      <p>For parallel circuit analysis, admittance Y = G + jB is more convenient than impedance. G is the conductance (1/R) and B is the susceptance (−1/X for an inductor, +1/X for a capacitor — note the sign flip). On a Smith Chart, the admittance chart is the impedance chart rotated 180°.</p>
+      <div class="eq">\(Y = \dfrac{1}{Z} = \dfrac{1}{R+jX} = \dfrac{R}{R^2+X^2} - j\dfrac{X}{R^2+X^2} = G + jB\)</div>
+
+      <h4>Series vs Parallel Equivalents</h4>
+      <p>A real inductor has both inductance L and series resistance R_s. It can be represented equivalently as a parallel combination of L_p and R_p, where the two representations are equivalent at one frequency. This conversion matters when designing matching networks:</p>
+      <div class="eq">\(Q = \dfrac{X_s}{R_s} = \dfrac{R_p}{X_p} \qquad R_p = R_s(1+Q^2) \qquad X_p = X_s\dfrac{Q^2+1}{Q^2}\)</div>
+
+      <h4>Quality Factor Q</h4>
+      <p>The Q factor of a reactive element describes how "ideal" it is — the ratio of energy stored to energy lost per cycle:</p>
+      <div class="eq">\(Q = \dfrac{|X|}{R} = \dfrac{\omega_0 L}{R_s} = \dfrac{1}{\omega_0 C R_s}\)</div>
+      <p>High Q means low loss. A typical SMD inductor at 100 MHz has Q = 30–80. A quartz crystal resonator has Q = 10,000–100,000. Q also sets bandwidth: \(BW = f_0/Q\).</p>
+
+      <h4>Frequency Dependence</h4>
+      <p>At higher frequencies, parasitics dominate. A real capacitor has series inductance (ESL) that causes it to become inductive above its self-resonant frequency (SRF). A real inductor has inter-winding capacitance that causes it to self-resonate. Always check the SRF of a component against your operating frequency:</p>
+<figure><svg viewBox="0 0 460 130" width="460" height="130" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="460" height="130" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="100" y="15" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="normal" font-family="monospace">Series Z = R + jωL + 1/jωC</text><line x1="10" y1="55" x2="30" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><rect x="30" y="47" width="30" height="16" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/><text x="45" y="57" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">R</text><line x1="60" y1="55" x2="80" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><path d="M80,55 A6.0,6.0 0 0,1 92,55 A6.0,6.0 0 0,1 104,55 A6.0,6.0 0 0,1 116,55" fill="none" stroke="#AA77FF" stroke-width="2" stroke-linecap="round"/><text x="98" y="47" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">L</text><line x1="116" y1="55" x2="130" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="132" y1="47" x2="132" y2="63" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/><line x1="144" y1="47" x2="144" y2="63" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/><line x1="144" y1="55" x2="160" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><text x="138" y="47" text-anchor="middle" font-size="9" fill="#00aacc" font-weight="normal" font-family="monospace">C</text><circle cx="10" cy="55" r="3" fill="white" stroke="#5533aa" stroke-width="1.5"/><circle cx="160" cy="55" r="3" fill="white" stroke="#5533aa" stroke-width="1.5"/><text x="165" y="59" text-anchor="start" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Z_in</text><text x="85" y="80" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">At f₀: XL = XC, Im(Z) = 0</text><text x="85" y="94" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Z_min = R (purely resistive)</text><text x="360" y="15" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="normal" font-family="monospace">Parallel Z → max at f₀</text><line x1="250" y1="55" x2="270" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="270" y1="30" x2="270" y2="80" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="270" y1="80" x2="400" y2="80" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="400" y1="30" x2="400" y2="80" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="400" y1="55" x2="420" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="270" y1="30" x2="400" y2="30" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><rect x="290" y="32" width="30" height="16" fill="white" stroke="#5533aa" stroke-width="1.5" rx="2"/><text x="305" y="43" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">R</text><path d="M332,47 A5.0,5.0 0 0,1 342,47 A5.0,5.0 0 0,1 352,47" fill="none" stroke="#AA77FF" stroke-width="2" stroke-linecap="round"/><text x="347" y="32" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">L</text><line x1="370" y1="30" x2="370" y2="39" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><line x1="364" y1="39" x2="376" y2="39" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/><line x1="364" y1="45" x2="376" y2="45" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/><line x1="370" y1="45" x2="370" y2="80" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><text x="380" y="43" text-anchor="start" font-size="9" fill="#00aacc" font-weight="normal" font-family="monospace">C</text><circle cx="250" cy="55" r="3" fill="white" stroke="#5533aa" stroke-width="1.5"/><circle cx="420" cy="55" r="3" fill="white" stroke="#5533aa" stroke-width="1.5"/></svg>
+<figcaption>Series RLC: minimum impedance at resonance. Parallel RLC: maximum impedance at resonance.</figcaption></figure>
+
+<figure><svg viewBox="0 0 460 130" width="460" height="130" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="460" height="130" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><text x="100" y="15" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="normal" font-family="monospace">Series Z = R + jωL + 1/jωC</text><line x1="10" y1="55" x2="30" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><rect x="30" y="47" width="30" height="16" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/><text x="45" y="57" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">R</text><line x1="60" y1="55" x2="80" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><path d="M80,55 A6.0,6.0 0 0,1 92,55 A6.0,6.0 0 0,1 104,55 A6.0,6.0 0 0,1 116,55" fill="none" stroke="#AA77FF" stroke-width="2" stroke-linecap="round"/><text x="98" y="47" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">L</text><line x1="116" y1="55" x2="130" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="132" y1="47" x2="132" y2="63" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/><line x1="144" y1="47" x2="144" y2="63" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/><line x1="144" y1="55" x2="160" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><text x="138" y="47" text-anchor="middle" font-size="9" fill="#00aacc" font-weight="normal" font-family="monospace">C</text><circle cx="10" cy="55" r="3" fill="white" stroke="#5533aa" stroke-width="1.5"/><circle cx="160" cy="55" r="3" fill="white" stroke="#5533aa" stroke-width="1.5"/><text x="165" y="59" text-anchor="start" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Z_in</text><text x="85" y="80" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">At f₀: XL = XC, Im(Z) = 0</text><text x="85" y="94" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">Z_min = R (purely resistive)</text><text x="360" y="15" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="normal" font-family="monospace">Parallel Z → max at f₀</text><line x1="250" y1="55" x2="270" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="270" y1="30" x2="270" y2="80" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="270" y1="80" x2="400" y2="80" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="400" y1="30" x2="400" y2="80" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="400" y1="55" x2="420" y2="55" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><line x1="270" y1="30" x2="400" y2="30" stroke="#5533aa" stroke-width="1.8" stroke-linecap="round"/><rect x="290" y="32" width="30" height="16" fill="white" stroke="#5533aa" stroke-width="1.5" rx="2"/><text x="305" y="43" text-anchor="middle" font-size="9" fill="#5533aa" font-weight="normal" font-family="monospace">R</text><path d="M332,47 A5.0,5.0 0 0,1 342,47 A5.0,5.0 0 0,1 352,47" fill="none" stroke="#AA77FF" stroke-width="2" stroke-linecap="round"/><text x="347" y="32" text-anchor="middle" font-size="9" fill="#AA77FF" font-weight="normal" font-family="monospace">L</text><line x1="370" y1="30" x2="370" y2="39" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><line x1="364" y1="39" x2="376" y2="39" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/><line x1="364" y1="45" x2="376" y2="45" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/><line x1="370" y1="45" x2="370" y2="80" stroke="#5533aa" stroke-width="1.5" stroke-linecap="round"/><text x="380" y="43" text-anchor="start" font-size="9" fill="#00aacc" font-weight="normal" font-family="monospace">C</text><circle cx="250" cy="55" r="3" fill="white" stroke="#5533aa" stroke-width="1.5"/><circle cx="420" cy="55" r="3" fill="white" stroke="#5533aa" stroke-width="1.5"/></svg>
+<figcaption>Series RLC: minimum impedance at resonance. Parallel RLC: maximum impedance at resonance.</figcaption></figure>
+
+      <table>
+        <tr><th>Component value</th><th>Typical SRF</th><th>Notes</th></tr>
+        <tr><td>10 µF electrolytic</td><td>500 kHz</td><td>Useless for RF bypassing</td></tr>
+        <tr><td>100 nF ceramic (0402)</td><td>50 MHz</td><td>Good for audio, limited at RF</td></tr>
+        <tr><td>10 nF ceramic (0402)</td><td>200 MHz</td><td>OK for HF/VHF bypassing</td></tr>
+        <tr><td>100 pF ceramic (0402)</td><td>2 GHz</td><td>Good RF bypass to ~1 GHz</td></tr>
+        <tr><td>10 pF ceramic (0402)</td><td>8 GHz</td><td>Good for microwave matching</td></tr>
+        <tr><td>1 pF ceramic (0402)</td><td>20+ GHz</td><td>Usable at mmWave</td></tr>
+      </table>
+
+      <h4>Impedance vs Frequency: What to Expect</h4>
+      <p>A 50 Ω transmission line port expects 50 + j0 Ω. Impedance that deviates from this causes reflections. The Smith Chart provides an intuitive visual representation of complex impedance across frequency — a single-frequency impedance is a point, and an impedance varying with frequency traces a curve. Understanding complex impedance is the prerequisite for reading and using the Smith Chart.</p>
+    </div>
+    <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+      <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <a href="SmithChart.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Interactive Smith Chart →</a>
+      <a href="LNetwork.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">L-Network Impedance Matcher →</a>
+      <a href="LC.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">LC Resonance Calculator →</a>
+      <a href="VSWRConverter.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">VSWR / RL Converter →</a>
+      </div>
+    </div>
+  </article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+</body>
+</html>
