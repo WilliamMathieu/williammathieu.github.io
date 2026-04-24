@@ -20,7 +20,6 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
   <link rel="stylesheet" href="style.css">
 
   <script type="application/ld+json">
@@ -37,23 +36,21 @@
   }
   </script>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>Birdcage Coil Designer (MRI)</h3>
 <div class="tool-concept">
   <p>The birdcage resonator is the standard volume coil for MRI. It produces a highly homogeneous circularly polarised B₁ field inside the bore. This tool designs low-pass (LP), high-pass (HP), and band-pass (BP) birdcage coils: given the bore dimensions and Larmor frequency, it computes the required element values and mode frequencies.</p>
   <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
-    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Number of rungs (legs). Typical values: 8, 12, 16. More rungs → better homogeneity.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">r</td><td style="padding:3px 0;">Bore radius (mm) — radius of the cylindrical coil.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ℓ</td><td style="padding:3px 0;">Coil length (mm). Longer → more homogeneous central region. Entered as field <span style="font-family:monospace;font-size:11px;background:#f0eeff;padding:1px 4px;border-radius:2px;">ℓ (coil length)</span>.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Wire or strip width/diameter (mm). Sets wire inductance using the Rosa formula.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">LP</td><td style="padding:3px 0;">Low-pass: capacitors in legs, inductors in end-ring arcs (or mesh). Common for high-field MRI.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">HP</td><td style="padding:3px 0;">High-pass: inductors in legs, capacitors in end-ring arcs. Common for low-field.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f₀</td><td style="padding:3px 0;">Target ¹H Larmor frequency. The m=1 mode must resonate here.</td></tr></table>
-  </details>
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
 
-      <details style="margin-top:8px;">
-        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants &amp; reference values ▸</summary>
-        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>4π×10⁻⁷ H/m</td></tr>
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(\omega_m^2 = \dfrac{2}{C}\!\left[L_{leg} + \dfrac{4L_{arc}}{N}\sin^2\!\left(\dfrac{m\pi}{N}\right)\right]^{-1}\qquad\text{(LP birdcage)}\)</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Number of rungs (legs). Typical values: 8, 12, 16. More rungs → better homogeneity.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">r</td><td style="padding:3px 0;">Bore radius (mm) — radius of the cylindrical coil.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ℓ</td><td style="padding:3px 0;">Coil length (mm). Longer → more homogeneous central region. Entered as field <span style="font-family:monospace;font-size:11px;background:#f0eeff;padding:1px 4px;border-radius:2px;">ℓ (coil length)</span>.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Wire or strip width/diameter (mm). Sets wire inductance using the Rosa formula.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">LP</td><td style="padding:3px 0;">Low-pass: capacitors in legs, inductors in end-ring arcs (or mesh). Common for high-field MRI.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">HP</td><td style="padding:3px 0;">High-pass: inductors in legs, capacitors in end-ring arcs. Common for low-field.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f₀</td><td style="padding:3px 0;">Target ¹H Larmor frequency. The m=1 mode must resonate here.</td></tr></table>
+
+<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e0d8ff;"><div style="font-size:10px;font-weight:bold;color:#AA77FF;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;">Physical constants used</div><table style="font-size:12px;border-collapse:collapse;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>4π×10⁻⁷ H/m</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">¹H γ/2π</td><td>42.577 MHz/T (Larmor frequency per Tesla)</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">¹H at 1.5 T</td><td>63.87 MHz</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">¹H at 3 T</td><td>127.74 MHz</td></tr>
@@ -61,9 +58,8 @@
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">σ_muscle @ 128 MHz</td><td>≈ 0.77 S/m</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε_muscle @ 128 MHz</td><td>≈ 58</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">IEC SAR limit (WB normal)</td><td>2 W/kg (over 6 min)</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">IEC SAR limit (head)</td><td>3.2 W/kg (over 10 min)</td></tr>
-        </table>
-      </details>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">IEC SAR limit (head)</td><td>3.2 W/kg (over 10 min)</td></tr></table></div>
+</details>
 </div>
 <div class="sec-lbl">Geometry</div>
 <div class="inp-grid"><div class="inp-row"><label>Number of rungs, <span class="var">N</span></label><div class="inp-inline"><input type="text" id="bc-n" value="16" ></div><span class="inp-hint">8, 12, or 16 typical</span></div><div class="inp-row"><label>Bore radius, <span class="var">r</span></label><div class="inp-inline"><input type="text" id="bc-r" value="150" ><span class='inp-units'>mm</span></div><span class="inp-hint">coil radius</span></div><div class="inp-row"><label>Coil length, <span class="var">ℓ</span></label><div class="inp-inline"><input type="text" id="bc-l" value="300" ><span class='inp-units'>mm</span></div></div><div class="inp-row"><label>Wire/strip width, <span class="var">d</span></label><div class="inp-inline"><input type="text" id="bc-d" value="5" ><span class='inp-units'>mm</span></div><span class="inp-hint">conductor width or diameter</span></div><div class="inp-row"><label>Coil type</label><select id='bc-type'><option value='lp'>Low-pass (C in legs)</option><option value='hp'>High-pass (C in ring arcs)</option></select></div><div class="inp-row"><label>Target frequency, <span class="var">f₀</span></label><div class="inp-inline"><input type="text" id="bc-f" value="128" ><span class='inp-units'>MHz</span></div><span class="inp-hint">¹H at 3T = 128 MHz</span></div></div>
@@ -72,10 +68,7 @@
 <div class="sec-lbl">Results</div>
 <div class="res-grid"><div class="res-card"><h4>Element Values</h4><div class="res-row"><span class="res-lbl">Leg inductance, L_leg</span><span class="res-val" id="bc-Lleg">—</span></div><div class="res-row"><span class="res-lbl">Ring arc inductance, L_arc</span><span class="res-val" id="bc-Larc">—</span></div><div class="res-row"><span class="res-lbl">Required capacitance, C</span><span class="res-val" id="bc-C">—</span></div><div class="res-row"><span class="res-lbl">Capacitor placement</span><span class="res-val" id="bc-cplace">—</span></div></div><div class="res-card"><h4>Resonance</h4><div class="res-row"><span class="res-lbl">Imaging mode (m=1) frequency</span><span class="res-val" id="bc-f1">—</span></div><div class="res-row"><span class="res-lbl">Next mode (m=2) frequency</span><span class="res-val" id="bc-f2">—</span></div><div class="res-row"><span class="res-lbl">Mode separation</span><span class="res-val" id="bc-msep">—</span></div><div class="res-row"><span class="res-lbl">Q estimate (unloaded)</span><span class="res-val" id="bc-Q">—</span></div></div></div>
 <div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
-<details style="margin:12px 0 4px;">
-  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
-  <div style="padding:4px 0 8px;">\(\omega_m^2 = \dfrac{2}{C}\!\left[L_{leg} + \dfrac{4L_{arc}}{N}\sin^2\!\left(\dfrac{m\pi}{N}\right)\right]^{-1}\qquad\text{(LP birdcage)}\)</div>
-</details>
+
 <div class="wiki-link-hint">📖 <a href="wiki_birdcage.html">Learn about birdcage coil theory →</a></div>
 <script>
 var MU0=4*Math.PI*1e-7;
@@ -183,5 +176,12 @@ function drawDiagram(N,r,type){
 </section>
 <footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 <script src="tool-enhancements.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

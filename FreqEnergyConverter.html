@@ -20,7 +20,6 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
   <link rel="stylesheet" href="style.css">
 
   <script type="application/ld+json">
@@ -37,30 +36,26 @@
   }
   </script>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>Frequency / Wavelength / Energy Converter</h3>
 <div class="tool-concept">
   <p>Enter any one quantity and all others update instantly. Covers the full electromagnetic spectrum from ELF radio waves to X-rays, including the Larmor frequencies used in MRI and NMR spectroscopy.</p>
   <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
-    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Frequency (Hz, kHz, MHz, GHz, THz).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">λ</td><td style="padding:3px 0;">Free-space wavelength = c/f.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T</td><td style="padding:3px 0;">Period = 1/f.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">E</td><td style="padding:3px 0;">Photon energy in eV = hf/e. Useful for quantum/NMR applications.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B₀</td><td style="padding:3px 0;">Static B₀ field for ¹H MRI at this Larmor frequency. f = 42.577 MHz/T × B₀.</td></tr></table>
-  </details>
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
 
-      <details style="margin-top:8px;">
-        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants used ▸</summary>
-        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Frequency (Hz, kHz, MHz, GHz, THz).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">λ</td><td style="padding:3px 0;">Free-space wavelength = c/f.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T</td><td style="padding:3px 0;">Period = 1/f.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">E</td><td style="padding:3px 0;">Photon energy in eV = hf/e. Useful for quantum/NMR applications.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B₀</td><td style="padding:3px 0;">Static B₀ field for ¹H MRI at this Larmor frequency. f = 42.577 MHz/T × B₀.</td></tr></table>
+
+<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e0d8ff;"><div style="font-size:10px;font-weight:bold;color:#AA77FF;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;">Physical constants used</div><table style="font-size:12px;border-collapse:collapse;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">k_B</td><td>Boltzmann constant = 1.381×10⁻²³ J/K</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">h</td><td>Planck constant = 6.626×10⁻³⁴ J·s</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">¹H gyromagnetic ratio</td><td>γ/2π = 42.577 MHz/T</td></tr>
-        </table>
-      </details>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">¹H gyromagnetic ratio</td><td>γ/2π = 42.577 MHz/T</td></tr></table></div>
+</details>
 </div>
 <div class="sec-lbl">Enter any one value</div>
 <div class="inp-grid"><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class='inp-inline'><input type="text" id="fe-f" placeholder="value" oninput="feUpdate('f')"><span id='fe-fu-lbl'><select id="fe-fu"><option value="1">Hz</option><option value="1e3">kHz</option><option value="1e6" selected>MHz</option><option value="1e9">GHz</option><option value="1e12">THz</option></select></span></div></div><div class="inp-row"><label>Wavelength, <span class="var">λ</span></label><div class='inp-inline'><input type="text" id="fe-lam" placeholder="m" oninput="feUpdate('lam')"><span id='fe-lam-u'><select id="fe-lamu"><option value="1">m</option><option value="1e-2">cm</option><option value="1e-3" selected>mm</option><option value="1e-6">µm</option><option value="1e-9">nm</option></select></span></div><span class="inp-hint">free space</span></div><div class="inp-row"><label>Period, <span class="var">T</span></label><div class='inp-inline'><input type="text" id="fe-T" placeholder="s" oninput="feUpdate('T')"><select id="fe-tu"><option value="1">s</option><option value="1e-3">ms</option><option value="1e-6">µs</option><option value="1e-9" selected>ns</option><option value="1e-12">ps</option></select></div></div><div class="inp-row"><label>Photon energy, <span class="var">E</span></label><div class='inp-inline'><input type="text" id="fe-E" placeholder="eV" oninput="feUpdate('E')"><span class='inp-units'>eV</span></div><span class="inp-hint">hf/e</span></div></div>
@@ -118,5 +113,12 @@ function feUpdate(src){
 </section>
 <footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 <script src="tool-enhancements.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

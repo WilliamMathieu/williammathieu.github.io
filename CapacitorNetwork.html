@@ -21,7 +21,6 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
   
   <link rel="stylesheet" href="style.css">
   
@@ -40,18 +39,21 @@
   }
   </script>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>Total Capacitance Calculator</h3>
 <div class="tool-concept">
   <p>Calculates the equivalent capacitance of capacitors in series, parallel, or mixed combinations. Useful for verifying tuning networks, matching circuits, and filter designs.</p>
   <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
-    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Series</td><td style="padding:3px 0;">1/C_total = Σ(1/Cₙ). Total is always less than the smallest.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Parallel</td><td style="padding:3px 0;">C_total = ΣCₙ. Capacitances simply add.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Set the number of capacitors, then enter each value.</td></tr></table>
-  </details>
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(\text{Parallel: } C = \sum C_n \qquad \text{Series: } \dfrac{1}{C} = \sum\dfrac{1}{C_n}\)</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Series</td><td style="padding:3px 0;">1/C_total = Σ(1/Cₙ). Total is always less than the smallest.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Parallel</td><td style="padding:3px 0;">C_total = ΣCₙ. Capacitances simply add.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Set the number of capacitors, then enter each value.</td></tr></table>
+
+</details>
 </div>
 <div class="sec-lbl">Configuration</div>
 <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;">
@@ -72,10 +74,6 @@
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Result</div>
 <div class="res-grid"><div class="res-card"><h4>Equivalent Capacitance</h4><div class="res-row"><span class="res-lbl">C_total</span><span class="res-val " id="C_out">—</span></div></div></div>
-<details style="margin:12px 0 4px;">
-  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
-  <div style="padding:4px 0;">\(\text{Parallel: } C = \sum C_n \qquad \text{Series: } \dfrac{1}{C} = \sum\dfrac{1}{C_n}\)</div>
-</details>
 
 <div class="sec-lbl">Diagram</div>
 <div class="schematic-box"><div id="tool-diagram"></div></div>
@@ -136,5 +134,12 @@ function drawDiagram() {
 <footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
 <script src="tool-enhancements.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

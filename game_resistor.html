@@ -20,10 +20,10 @@
 		button{margin:6px;}
 	</style>
 </head>
-<body>
+<body class="no-nav">
 	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 	<section>
-		<nav><h3>Tools</h3><ul><li><a href="games.html">&#8592; Game Zone</a></li></ul></nav>
+		<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 		<article>
 			<div class="game-wrap">
 				<h3>Resistor Colour Code Quiz</h3>
@@ -114,5 +114,12 @@
 	ctx.fillStyle='#f4f4f0';ctx.fillRect(0,0,360,100);
 	renderLeaderboard('resistor','lb');
 	</script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

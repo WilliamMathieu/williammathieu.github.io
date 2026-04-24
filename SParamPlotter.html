@@ -21,7 +21,6 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="style.css">
   
@@ -40,18 +39,20 @@
   }
   </script>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>S-Parameter Plotter</h3>
 <div class="tool-concept">
   <p>Plots S-parameters from Touchstone files (.s1p–.s4p). Supports magnitude, phase, real/imaginary, and dB formats. Automatically detects file format (MA, DB, RI). Useful for visualising VNA measurement data.</p>
   <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
-    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">.s1p</td><td style="padding:3px 0;">1-port network: S11 only.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">.s2p</td><td style="padding:3px 0;">2-port: S11, S21, S12, S22. Most common for amplifiers and filters.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">.s3p/.s4p</td><td style="padding:3px 0;">3 and 4-port networks (e.g. directional couplers, power dividers).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Format</td><td style="padding:3px 0;">MA = magnitude/angle, DB = dB/angle, RI = real/imaginary. Auto-detected.</td></tr></table>
-  </details>
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">.s1p</td><td style="padding:3px 0;">1-port network: S11 only.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">.s2p</td><td style="padding:3px 0;">2-port: S11, S21, S12, S22. Most common for amplifiers and filters.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">.s3p/.s4p</td><td style="padding:3px 0;">3 and 4-port networks (e.g. directional couplers, power dividers).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Format</td><td style="padding:3px 0;">MA = magnitude/angle, DB = dB/angle, RI = real/imaginary. Auto-detected.</td></tr></table>
+
+</details>
 </div>
 <div class="sec-lbl">File Upload</div>
 <div style="margin-bottom:12px;">
@@ -65,5 +66,12 @@
 <footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
 <script src="tool-enhancements.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

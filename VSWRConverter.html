@@ -20,7 +20,6 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
   <link rel="stylesheet" href="style.css">
 
   <script type="application/ld+json">
@@ -37,27 +36,23 @@
   }
   </script>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>VSWR / Return Loss / Reflection Coefficient Converter</h3>
 <div class="tool-concept">
   <p>Enter any one of the four equivalent match-quality metrics and all others update instantly. These four quantities are all different ways of expressing the same physical thing — how well two impedances are matched.</p>
   <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
-    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">VSWR</td><td style="padding:3px 0;">Voltage Standing Wave Ratio = (1+|Γ|)/(1−|Γ|). Perfect match = 1. Typically target ≤ 2.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">|Γ|</td><td style="padding:3px 0;">Reflection coefficient magnitude 0–1. 0 = perfect match, 1 = total reflection.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">RL</td><td style="padding:3px 0;">Return loss = −20·log₁₀|Γ| dB. Higher = better. Common target > 10 dB.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ML</td><td style="padding:3px 0;">Mismatch loss = −10·log₁₀(1−|Γ|²) dB. Power lost to reflection.</td></tr></table>
-  </details>
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
 
-      <details style="margin-top:8px;">
-        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants used ▸</summary>
-        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">VSWR</td><td style="padding:3px 0;">Voltage Standing Wave Ratio = (1+|Γ|)/(1−|Γ|). Perfect match = 1. Typically target ≤ 2.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">|Γ|</td><td style="padding:3px 0;">Reflection coefficient magnitude 0–1. 0 = perfect match, 1 = total reflection.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">RL</td><td style="padding:3px 0;">Return loss = −20·log₁₀|Γ| dB. Higher = better. Common target > 10 dB.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ML</td><td style="padding:3px 0;">Mismatch loss = −10·log₁₀(1−|Γ|²) dB. Power lost to reflection.</td></tr></table>
+
+<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e0d8ff;"><div style="font-size:10px;font-weight:bold;color:#AA77FF;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;">Physical constants used</div><table style="font-size:12px;border-collapse:collapse;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr>
-        </table>
-      </details>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr></table></div>
+</details>
 </div>
 <div class="sec-lbl">Enter any one value</div>
 <div class="inp-grid"><div class="inp-row"><label>VSWR</label><div class='inp-inline'><input type="text" id="v-vswr" placeholder="e.g. 2.0" oninput="vswrUpdate('vswr')"></div><span class="inp-hint">≥ 1</span></div><div class="inp-row"><label>Reflection coeff., <span class="var">\u0393</span></label><div class='inp-inline'><input type="text" id="v-gamma" placeholder="0 – 1" oninput="vswrUpdate('gamma')"></div><span class="inp-hint">0 to 1</span></div><div class="inp-row"><label>Return loss, <span class="var">RL</span></label><div class='inp-inline'><input type="text" id="v-rl" placeholder="dB" oninput="vswrUpdate('rl')"><span class='inp-units'>dB</span></div><span class="inp-hint">positive dB</span></div><div class="inp-row"><label>Mismatch loss, <span class="var">ML</span></label><div class='inp-inline'><input type="text" id="v-ml" placeholder="dB" oninput="vswrUpdate('ml')"><span class='inp-units'>dB</span></div><span class="inp-hint">power lost to reflection</span></div></div>
@@ -121,5 +116,12 @@ window.addEventListener('load',()=>{vswrUpdate('rl');});
 </section>
 <footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 <script src="tool-enhancements.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

@@ -21,7 +21,6 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
   
   <link rel="stylesheet" href="style.css">
   
@@ -40,18 +39,20 @@
   }
   </script>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>Antenna Array Factor Plotter</h3>
 <div class="tool-concept">
   <p>The array factor is the radiation pattern contribution from the geometry and phasing of an antenna array — independent of the individual element pattern. Narrower beamwidth and higher directivity come from adding more elements. Use this to visualise steering, grating lobes, and pattern shaping.</p>
   <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
-    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Number of array elements.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Element spacing in wavelengths (λ). Half-wavelength spacing (0.5λ) avoids grating lobes.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">θ₀</td><td style="padding:3px 0;">Main beam steering angle (°). 0° = broadside, ±90° = end-fire.</td></tr></table>
-  </details>
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Number of array elements.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Element spacing in wavelengths (λ). Half-wavelength spacing (0.5λ) avoids grating lobes.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">θ₀</td><td style="padding:3px 0;">Main beam steering angle (°). 0° = broadside, ±90° = end-fire.</td></tr></table>
+
+</details>
 </div>
 <div class="sec-lbl">Inputs</div>
 <div class="inp-grid"><div class="inp-row"><label>Number of elements, <span class="var">N</span></label><div class="inp-inline"><input type="text" id="af-n" value="4"  data-tip="Number of antenna elements. More elements → narrower beam and higher directivity."></div></div><div class="inp-row"><label>Element spacing, <span class="var">d</span></label><div class="inp-inline"><input type="text" id="af-d" value="0.5"  data-tip="Element spacing in wavelengths. 0.5λ avoids grating lobes. >λ introduces grating lobes."><span class="inp-units">λ</span></div><span class="inp-hint">0.5 avoids grating lobes</span></div><div class="inp-row"><label>Steering angle, <span class="var">θ₀</span></label><div class="inp-inline"><input type="text" id="af-theta" value="0"  data-tip="Beam steering angle in degrees. 0° = broadside (perpendicular to array). ±90° = end-fire."><span class="inp-units">°</span></div><span class="inp-hint">0° = broadside</span></div></div>
@@ -66,5 +67,12 @@
 <footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
 <script src="tool-enhancements.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

@@ -8,7 +8,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>RF Toolbox — SPICE Simulator</title>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 	<link rel="stylesheet" href="style.css">
 	<style>
@@ -59,10 +58,10 @@
 		.spice-help { font-family: monospace; font-size: 11px; color: #666; background: #fafafa; border: 1px solid #eee; border-radius: 4px; padding: 8px; margin-top: 8px; line-height: 1.7; }
 	</style>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>SPICE Simulator</h3>
 <p style="font-size:13px;margin-bottom:12px;">Browser-based SPICE using Modified Nodal Analysis. Supports R, L, C, V, I elements with .AC, .DC, .OP, and .TRAN analyses.</p>
@@ -155,5 +154,12 @@ Suffix: k=1e3 meg=1e6 g=1e9<br>
 </section>
 <footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
 <script src="SpiceSim.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

@@ -20,7 +20,6 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
   
   <link rel="stylesheet" href="style.css">
   
@@ -53,27 +52,24 @@
   }
   </script>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>LC Filter Designer (Butterworth / Chebyshev)</h3>
 <div class="tool-concept">
   <p>Generates LC ladder component values for classic filter approximations. Butterworth gives maximally flat passband; Chebyshev trades passband ripple for sharper rolloff. Low-pass or high-pass, up to 9th order.</p>
   <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
-    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">n</td><td style="padding:3px 0;">Filter order. Higher order = sharper rolloff but more components.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Type</td><td style="padding:3px 0;">Low-pass (LPF) or High-pass (HPF). Bandpass can be obtained by frequency transformation.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Response</td><td style="padding:3px 0;">Butterworth: flat passband, −3 dB at fc. Chebyshev: equal ripple, faster rolloff.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Ripple</td><td style="padding:3px 0;">Chebyshev passband ripple (dB). 0.1–3 dB typical.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">fc</td><td style="padding:3px 0;">Cutoff (−3 dB or ripple) frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">System impedance (Ω). Typically 50 Ω.</td></tr></table>
-  </details>
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
 
-      <details style="margin-top:8px;">
-        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants used ▸</summary>
-        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(\text{LP proto: }g_k\text{ from Butterworth/Chebyshev tables; scaled: }L_k=g_k\frac{Z_0}{\omega_c},\; C_k=\frac{g_k}{Z_0\omega_c}\)</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">n</td><td style="padding:3px 0;">Filter order. Higher order = sharper rolloff but more components.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Type</td><td style="padding:3px 0;">Low-pass (LPF) or High-pass (HPF). Bandpass can be obtained by frequency transformation.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Response</td><td style="padding:3px 0;">Butterworth: flat passband, −3 dB at fc. Chebyshev: equal ripple, faster rolloff.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Ripple</td><td style="padding:3px 0;">Chebyshev passband ripple (dB). 0.1–3 dB typical.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">fc</td><td style="padding:3px 0;">Cutoff (−3 dB or ripple) frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">System impedance (Ω). Typically 50 Ω.</td></tr></table>
+
+<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e0d8ff;"><div style="font-size:10px;font-weight:bold;color:#AA77FF;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;">Physical constants used</div><table style="font-size:12px;border-collapse:collapse;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr>
-        </table>
-      </details>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr></table></div>
+</details>
 </div>
 <div class="sec-lbl">Inputs</div>
 <div class="inp-grid"><div class="inp-row"><label>Filter order, <span class="var">n</span></label><div class="inp-inline"><input type="text" id="fd-n" value="5"  data-tip="Filter order. Each order adds one L or C. Higher order = sharper rolloff."></div><span class="inp-hint">1–9</span></div><div class="inp-row"><label>Filter type</label><select id="fd-type"><option value="lp">Low-pass</option><option value="hp">High-pass</option></select></div><div class="inp-row"><label>Response</label><select id="fd-resp"><option value="butter">Butterworth</option><option value="cheby">Chebyshev</option></select></div><div class="inp-row"><label>Chebyshev ripple</label><div class="inp-inline"><input type="text" id="fd-ripple" value="0.5"  data-tip="Passband ripple in dB for Chebyshev response. 0.1–0.5 dB is typical."><span class="inp-units">dB</span></div><span class="inp-hint">Ignored for Butterworth</span></div><div class="inp-row"><label>Cutoff frequency, <span class="var">fc</span></label><div class="inp-inline"><input type="text" id="fd-fc" value="1"  data-tip="Cutoff (−3 dB) frequency. Components are scaled to this frequency."><select id="fd-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>System impedance, <span class="var">Z₀</span></label><div class="inp-inline"><input type="text" id="fd-r0" value="50"  data-tip="System termination impedance. Typically 50 Ω for RF, 75 Ω for video."><span class="inp-units">Ω</span></div></div></div>
@@ -178,10 +174,7 @@ function drawDiagram() {
 }
 
 </script>
-<details style="margin:12px 0 4px;">
-  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
-  <div style="padding:4px 0 8px;">\(\text{LP proto: }g_k\text{ from Butterworth/Chebyshev tables; scaled: }L_k=g_k\frac{Z_0}{\omega_c},\; C_k=\frac{g_k}{Z_0\omega_c}\)</div>
-</details>
+
 <div class="wiki-link-hint">📖 <a href="wiki_filters.html">Learn about RF filter design →</a></div>
 <script src="FilterDesign.js"></script>
 </article>
@@ -189,5 +182,12 @@ function drawDiagram() {
 <footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
 <script src="tool-enhancements.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

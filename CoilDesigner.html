@@ -21,7 +21,6 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
   
   <link rel="stylesheet" href="style.css">
   
@@ -40,23 +39,21 @@
   }
   </script>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>Simple RF Coil Designer</h3>
 <div class="tool-concept">
   <p>Designs a single-turn loop coil for MRI or NMR. Given the loop dimensions and Larmor frequency, calculates self-inductance using the Wheeler formula and the tuning capacitor required for resonance.</p>
   <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
-    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Wire diameter (mm). Thicker wire → lower resistance → higher Q.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Loop diameter (mm). Larger loop → more inductance, more signal sensitivity.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Larmor frequency — the resonant frequency of the nucleus in the static B₀ field. ¹H at 3T ≈ 128 MHz, at 7T ≈ 298 MHz.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Self-inductance (Rosa formula).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Required tuning capacitor for resonance at f.</td></tr></table>
-  </details>
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
 
-      <details style="margin-top:8px;">
-        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants &amp; reference values ▸</summary>
-        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>4π×10⁻⁷ H/m</td></tr>
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(L = \mu_0\mu_r\!\left(\tfrac{D}{2}\right)\!\left[\ln\!\left(\tfrac{8D}{d}\right)-2\right] \qquad C = \dfrac{1}{4\pi^2 f^2 L}\)</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Wire diameter (mm). Thicker wire → lower resistance → higher Q.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Loop diameter (mm). Larger loop → more inductance, more signal sensitivity.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Larmor frequency — the resonant frequency of the nucleus in the static B₀ field. ¹H at 3T ≈ 128 MHz, at 7T ≈ 298 MHz.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Self-inductance (Rosa formula).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Required tuning capacitor for resonance at f.</td></tr></table>
+
+<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e0d8ff;"><div style="font-size:10px;font-weight:bold;color:#AA77FF;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;">Physical constants used</div><table style="font-size:12px;border-collapse:collapse;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>4π×10⁻⁷ H/m</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">¹H γ/2π</td><td>42.577 MHz/T (Larmor frequency per Tesla)</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">¹H at 1.5 T</td><td>63.87 MHz</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">¹H at 3 T</td><td>127.74 MHz</td></tr>
@@ -64,9 +61,8 @@
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">σ_muscle @ 128 MHz</td><td>≈ 0.77 S/m</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε_muscle @ 128 MHz</td><td>≈ 58</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">IEC SAR limit (WB normal)</td><td>2 W/kg (over 6 min)</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">IEC SAR limit (head)</td><td>3.2 W/kg (over 10 min)</td></tr>
-        </table>
-      </details>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">IEC SAR limit (head)</td><td>3.2 W/kg (over 10 min)</td></tr></table></div>
+</details>
 </div>
 <div class="sec-lbl">Inputs</div>
 <div class="sec-lbl" style="margin-top:0;margin-bottom:6px;border:none;color:#888;">Loop geometry</div>
@@ -77,10 +73,6 @@
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
 <div class="res-grid"><div class="res-card"><h4>Coil Parameters</h4><div class="res-row"><span class="res-lbl">Self-inductance, L</span><span class="res-val " id="L">—</span></div><div class="res-row"><span class="res-lbl">Tuning capacitor, C</span><span class="res-val " id="C">—</span></div></div></div>
-<details style="margin:12px 0 4px;">
-  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
-  <div style="padding:4px 0;">\(L = \mu_0\mu_r\!\left(\tfrac{D}{2}\right)\!\left[\ln\!\left(\tfrac{8D}{d}\right)-2\right] \qquad C = \dfrac{1}{4\pi^2 f^2 L}\)</div>
-</details>
 
 <div class="sec-lbl">Diagram</div>
 <div class="schematic-box"><div id="tool-diagram"></div></div>
@@ -130,5 +122,12 @@ function drawDiagram() {
 <footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
 <script src="tool-enhancements.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

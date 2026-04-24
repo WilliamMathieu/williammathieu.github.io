@@ -8,7 +8,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>RF Toolbox — RF Circuit Simulator</title>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 	<link rel="stylesheet" href="style.css">
 	<style>
@@ -53,10 +52,10 @@
 		.result-summary { font-family: monospace; font-size: 12px; background: #f0eeff; border-left: 3px solid #AA77FF; padding: 8px 12px; border-radius: 0 4px 4px 0; margin-top: 8px; }
 	</style>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>RF Circuit Simulator</h3>
 <p style="font-size:13px;margin-bottom:12px;">Build ladder networks from R, L, C, and transmission line elements. Simulates S-parameters, impedance, and group delay vs frequency using ABCD matrix analysis.</p>
@@ -167,5 +166,12 @@
 </section>
 <footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
 <script src="RFSimulator.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

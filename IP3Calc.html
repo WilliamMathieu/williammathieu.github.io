@@ -20,7 +20,6 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
   <link rel="stylesheet" href="style.css">
 
   <script type="application/ld+json">
@@ -37,27 +36,24 @@
   }
   </script>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>IP3 & Intermodulation Calculator</h3>
 <div class="tool-concept">
   <p>In a nonlinear RF system, two input tones at f₁ and f₂ generate intermodulation products at 2f₁−f₂ and 2f₂−f₁ (third-order IM, or IM3). These fall close to the desired signals and cannot be filtered out. The third-order intercept point (IP3) characterises linearity.</p>
   <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
-    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">IIP3</td><td style="padding:3px 0;">Input-referred 3rd-order intercept point (dBm). Higher is more linear.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pin</td><td style="padding:3px 0;">Input power per tone (dBm). Two equal tones in a two-tone test.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Gain</td><td style="padding:3px 0;">Amplifier/system gain (dB).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">OIP3</td><td style="padding:3px 0;">Output IP3 = IIP3 + Gain.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">IM3</td><td style="padding:3px 0;">Output IM3 product power = 3·Pin − 2·IIP3 + Gain = 3·Pin_out − 2·OIP3.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">IMD</td><td style="padding:3px 0;">Intermodulation distortion = difference between desired output and IM3 = 2·(IIP3 − Pin).</td></tr></table>
-  </details>
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
 
-      <details style="margin-top:8px;">
-        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants used ▸</summary>
-        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(P_{IM3} = 3P_{in} - 2\cdot IIP3 + G\qquad OIP3 = IIP3 + G\qquad P_{1dB} \approx IIP3 - 9.6\,\text{dB}\)</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">IIP3</td><td style="padding:3px 0;">Input-referred 3rd-order intercept point (dBm). Higher is more linear.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pin</td><td style="padding:3px 0;">Input power per tone (dBm). Two equal tones in a two-tone test.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Gain</td><td style="padding:3px 0;">Amplifier/system gain (dB).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">OIP3</td><td style="padding:3px 0;">Output IP3 = IIP3 + Gain.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">IM3</td><td style="padding:3px 0;">Output IM3 product power = 3·Pin − 2·IIP3 + Gain = 3·Pin_out − 2·OIP3.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">IMD</td><td style="padding:3px 0;">Intermodulation distortion = difference between desired output and IM3 = 2·(IIP3 − Pin).</td></tr></table>
+
+<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e0d8ff;"><div style="font-size:10px;font-weight:bold;color:#AA77FF;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;">Physical constants used</div><table style="font-size:12px;border-collapse:collapse;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr>
-        </table>
-      </details>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr></table></div>
+</details>
 </div>
 <div class="sec-lbl">Inputs</div>
 <div class="inp-grid"><div class="inp-row"><label>Input IP3, <span class="var">IIP3</span></label><div class="inp-inline"><input type="text" id="ip-iip3" value="+20" ><span class='inp-units'>dBm</span></div><span class="inp-hint">higher = more linear</span></div><div class="inp-row"><label>Input power (per tone), <span class="var">Pin</span></label><div class="inp-inline"><input type="text" id="ip-pin" value="0" ><span class='inp-units'>dBm</span></div><span class="inp-hint">equal two-tone test</span></div><div class="inp-row"><label>System gain, <span class="var">G</span></label><div class="inp-inline"><input type="text" id="ip-gain" value="20" ><span class='inp-units'>dB</span></div><span class="inp-hint">amplifier gain or chain gain</span></div></div>
@@ -66,10 +62,7 @@
 <div class="sec-lbl">Results</div>
 <div class="res-grid"><div class="res-card"><h4>Output Powers</h4><div class="res-row"><span class="res-lbl">Output signal power</span><span class="res-val" id="ip-pout">—</span></div><div class="res-row"><span class="res-lbl">Output IP3 (OIP3)</span><span class="res-val" id="ip-oip3">—</span></div><div class="res-row"><span class="res-lbl">IM3 product power</span><span class="res-val" id="ip-im3">—</span></div><div class="res-row"><span class="res-lbl">IMD ratio</span><span class="res-val" id="ip-imd">—</span></div></div><div class="res-card"><h4>Margin</h4><div class="res-row"><span class="res-lbl">Headroom to IIP3</span><span class="res-val" id="ip-headroom">—</span></div><div class="res-row"><span class="res-lbl">Headroom to OIP3</span><span class="res-val" id="ip-oheadroom">—</span></div><div class="res-row"><span class="res-lbl">1-dB compression (P_1dB)</span><span class="res-val" id="ip-p1db">—</span></div></div></div>
 <div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
-<details style="margin:12px 0 4px;">
-  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
-  <div style="padding:4px 0 8px;">\(P_{IM3} = 3P_{in} - 2\cdot IIP3 + G\qquad OIP3 = IIP3 + G\qquad P_{1dB} \approx IIP3 - 9.6\,\text{dB}\)</div>
-</details>
+
 <div class="wiki-link-hint">📖 <a href="wiki_amplifiers.html">Learn about RF amplifier linearity →</a></div>
 <script>
 document.getElementById('ip-btn').addEventListener('click', function(){
@@ -144,5 +137,12 @@ function drawDiagram(Pin,IIP3,G,OIP3,Pout,IM3,P1dB){
 </section>
 <footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 <script src="tool-enhancements.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

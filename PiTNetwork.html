@@ -20,7 +20,6 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
   <link rel="stylesheet" href="style.css">
 
   <script type="application/ld+json">
@@ -37,27 +36,24 @@
   }
   </script>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>Pi / T Network Impedance Matcher</h3>
 <div class="tool-concept">
   <p>Pi and T networks add a degree of freedom over the L-network: Q can be chosen independently of the impedance ratio. Higher Q gives better harmonic rejection but narrower bandwidth. Pi networks are preferred when both ports are high impedance; T networks when both ports are low impedance.</p>
   <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
-    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Matching frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R₁, R₂</td><td style="padding:3px 0;">Source and load impedances (Ω). Works for any ratio.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Q</td><td style="padding:3px 0;">Loaded Q of the network. Must satisfy Q > √(R_max/R_min − 1). Higher Q → sharper response.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pi (low-pass)</td><td style="padding:3px 0;">Two shunt capacitors + one series inductor. Good for harmonic suppression.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pi (high-pass)</td><td style="padding:3px 0;">Two shunt inductors + one series capacitor.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T (low-pass)</td><td style="padding:3px 0;">Two series inductors + one shunt capacitor.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T (high-pass)</td><td style="padding:3px 0;">Two series capacitors + one shunt inductor.</td></tr></table>
-  </details>
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
 
-      <details style="margin-top:8px;">
-        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants used ▸</summary>
-        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">Pi LP: \(C_1=\dfrac{Q}{\omega R_1},\ L=\dfrac{R_v(Q+Q_2)}{\omega},\ C_2=\dfrac{Q_2}{\omega R_2},\ R_v=\dfrac{R_1}{Q^2+1}\)</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Matching frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R₁, R₂</td><td style="padding:3px 0;">Source and load impedances (Ω). Works for any ratio.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Q</td><td style="padding:3px 0;">Loaded Q of the network. Must satisfy Q > √(R_max/R_min − 1). Higher Q → sharper response.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pi (low-pass)</td><td style="padding:3px 0;">Two shunt capacitors + one series inductor. Good for harmonic suppression.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Pi (high-pass)</td><td style="padding:3px 0;">Two shunt inductors + one series capacitor.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T (low-pass)</td><td style="padding:3px 0;">Two series inductors + one shunt capacitor.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T (high-pass)</td><td style="padding:3px 0;">Two series capacitors + one shunt inductor.</td></tr></table>
+
+<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e0d8ff;"><div style="font-size:10px;font-weight:bold;color:#AA77FF;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;">Physical constants used</div><table style="font-size:12px;border-collapse:collapse;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr>
-        </table>
-      </details>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr></table></div>
+</details>
 </div>
 <div class="sec-lbl">Inputs</div>
 <div class="inp-grid"><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="pt-f" value="144" ><select id="pt-fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select></div></div><div class="inp-row"><label>Source impedance, <span class="var">R₁</span></label><div class="inp-inline"><input type="text" id="pt-r1" value="200" ><span class='inp-units'>Ω</span></div></div><div class="inp-row"><label>Load impedance, <span class="var">R₂</span></label><div class="inp-inline"><input type="text" id="pt-r2" value="50" ><span class='inp-units'>Ω</span></div></div><div class="inp-row"><label>Loaded Q, <span class="var">Q</span></label><div class="inp-inline"><input type="text" id="pt-q" value="5" ></div><span class="inp-hint">must exceed √(R_max/R_min − 1)</span></div><div class="inp-row"><label>Topology</label><select id='pt-topo'><option value='pi-lp'>Pi — Low-pass</option><option value='pi-hp'>Pi — High-pass</option><option value='t-lp'>T — Low-pass</option><option value='t-hp'>T — High-pass</option></select></div></div>
@@ -66,10 +62,7 @@
 <div class="sec-lbl">Results</div>
 <div class="res-grid"><div class="res-card"><h4>Network Elements</h4><div class="res-row"><span class="res-lbl">Element 1 (shunt/series)</span><span class="res-val" id="pt-e1">—</span></div><div class="res-row"><span class="res-lbl">Element 2 (series/shunt)</span><span class="res-val" id="pt-e2">—</span></div><div class="res-row"><span class="res-lbl">Element 3 (shunt/series)</span><span class="res-val" id="pt-e3">—</span></div></div><div class="res-card"><h4>Performance</h4><div class="res-row"><span class="res-lbl">Q_low (verified)</span><span class="res-val" id="pt-qv">—</span></div><div class="res-row"><span class="res-lbl">Bandwidth (−3 dB)</span><span class="res-val" id="pt-bw">—</span></div><div class="res-row"><span class="res-lbl">Virtual impedance R_v</span><span class="res-val" id="pt-rv">—</span></div></div></div>
 <div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
-<details style="margin:12px 0 4px;">
-  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
-  <div style="padding:4px 0 8px;">Pi LP: \(C_1=\dfrac{Q}{\omega R_1},\ L=\dfrac{R_v(Q+Q_2)}{\omega},\ C_2=\dfrac{Q_2}{\omega R_2},\ R_v=\dfrac{R_1}{Q^2+1}\)</div>
-</details>
+
 <div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn the theory behind this tool →</a></div>
 <script>
 document.getElementById('pt-btn').addEventListener('click', function(){
@@ -194,5 +187,12 @@ function drawDiagram(topo,E1,E2,E3,l1,l2,l3,R1,R2){
 </section>
 <footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 <script src="tool-enhancements.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

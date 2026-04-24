@@ -21,7 +21,6 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script>$(function(){$("#includeIndex").load("index_list.html");});</script>
   
   <link rel="stylesheet" href="style.css">
   
@@ -40,27 +39,24 @@
   }
   </script>
 </head>
-<body>
+<body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 <article>
 <h3>Transmission Line Stub Calculator</h3>
 <div class="tool-concept">
   <p>A stub is a shunt (parallel) section of terminated transmission line used for impedance matching or filtering. Its length is chosen so that it presents a target susceptance — cancelling an unwanted reactance. Short-circuit stubs are lower loss; open-circuit stubs avoid vias on PCBs.</p>
   <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Parameter reference ▸</summary>
-    <table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Operating frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Stub characteristic impedance (Ω). Typically 50 Ω.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B</td><td style="padding:3px 0;">Target shunt susceptance (mS). Positive = capacitive, negative = inductive.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Type</td><td style="padding:3px 0;">Short-circuit: lower loss, needs via. Open-circuit: no via, slightly higher loss.</td></tr></table>
-  </details>
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
 
-      <details style="margin-top:8px;">
-        <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Physical constants used ▸</summary>
-        <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(\ell_{SC} = \tfrac{1}{\beta}\arctan\!\left(\tfrac{Y_0}{B}\right)\)</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Operating frequency.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z₀</td><td style="padding:3px 0;">Stub characteristic impedance (Ω). Typically 50 Ω.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B</td><td style="padding:3px 0;">Target shunt susceptance (mS). Positive = capacitive, negative = inductive.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Type</td><td style="padding:3px 0;">Short-circuit: lower loss, needs via. Open-circuit: no via, slightly higher loss.</td></tr></table>
+
+<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e0d8ff;"><div style="font-size:10px;font-weight:bold;color:#AA77FF;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;">Physical constants used</div><table style="font-size:12px;border-collapse:collapse;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
           <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr>
-        </table>
-      </details>
+          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr></table></div>
+</details>
 </div>
 <div class="sec-lbl">Inputs</div>
 <div class="inp-grid"><div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="st-f" placeholder="value"  data-tip="Operating frequency at which the stub provides the target susceptance."><select id="st-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select></div></div><div class="inp-row"><label>Line impedance, <span class="var">Z₀</span></label><div class="inp-inline"><input type="text" id="st-z0" value="50"  data-tip="Characteristic impedance of the stub line. Usually 50 Ω."><span class="inp-units">Ω</span></div><span class="inp-hint">Stub characteristic impedance</span></div><div class="inp-row"><label>Target susceptance, <span class="var">B</span></label><div class="inp-inline"><input type="text" id="st-B" placeholder="mS"  data-tip="Target shunt susceptance in mS. Positive = capacitive, negative = inductive. Cancels load reactance."><span class="inp-units">mS</span></div><span class="inp-hint">+ve = capacitive load</span></div><div class="inp-row"><label>Stub termination</label><select id="st-type"><option value="short">Short circuit</option><option value="open">Open circuit</option></select></div></div>
@@ -68,10 +64,6 @@
 <div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
 <div class="res-grid"><div class="res-card"><h4>Stub Length</h4><div class="res-row"><span class="res-lbl">Electrical length (°)</span><span class="res-val " id="st-el">—</span></div><div class="res-row"><span class="res-lbl">Physical length</span><span class="res-val " id="st-pl">—</span></div><div class="res-row"><span class="res-lbl">λ/4 reference</span><span class="res-val " id="st-lam4">—</span></div></div></div>
-<details style="margin:12px 0 4px;">
-  <summary style="cursor:pointer;font-size:11px;color:#5533aa;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Design Equations ▸</summary>
-  <div style="padding:4px 0;">\(\ell_{SC} = \tfrac{1}{\beta}\arctan\!\left(\tfrac{Y_0}{B}\right)\)</div>
-</details>
 
 <div class="sec-lbl">Diagram</div>
 <div class="schematic-box"><div id="tool-diagram"></div></div>
@@ -124,5 +116,12 @@ function drawDiagram() {
 <footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
 
 <script src="tool-enhancements.js"></script>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

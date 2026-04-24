@@ -20,7 +20,6 @@
 	<script src="MathJax.js"></script>
 	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
 	<link rel="stylesheet" href="style.css">
 	<style>
 		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
@@ -48,10 +47,10 @@
 		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
 	</style>
 </head>
-<body>
+<body class="no-nav">
 	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 	<section>
-		<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
+		<div class="breadcrumb"><a href="index.html">⌂ RF Toolbox</a> / <span id="bc-title"></span></div>
 		<article>
 			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
 			<h3>Mixers and Frequency Conversion</h3>
@@ -84,5 +83,12 @@
 		</article>
 	</section>
 	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a></p></footer>
+<script>
+(function(){
+  var t = document.title.replace(' | RF Toolbox','').replace(' | RF Toolbox Wiki','');
+  var el = document.getElementById('bc-title');
+  if(el) el.textContent = t;
+})();
+</script>
 </body>
 </html>

@@ -1,310 +1,608 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
-  <meta name="description" content="Free online RF engineering calculators: Smith Chart, impedance matching, microstrip, filter design, link budget, MRI coil design, and 25+ more tools. No install, runs in your browser.">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
+  <meta name="description" content="Free online RF engineering calculators: Smith Chart, impedance matching, microstrip, filter design, link budget, MRI coil design, and 40+ more tools. No install, runs in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/">
   <meta property="og:title" content="RF Toolbox — Free Online RF & Microwave Engineering Calculators">
-  <meta property="og:description" content="Free online RF engineering calculators: Smith Chart, impedance matching, microstrip, filter design, link budget, MRI coil design, and 25+ more tools. No install, runs in your browser.">
+  <meta property="og:description" content="Free online RF engineering calculators and wiki for RF, microwave, and MRI engineers.">
   <meta property="og:url" content="https://rftoolbox.ca/">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="RF Toolbox">
-
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script>$(function(){$("#includeIndex").load("index_list.html");});</script>
-	<link rel="stylesheet" href="style.css">
-	<style>
-		/* ── Hero ────────────────────────────────────────────────────────── */
-		.hero{
-			background:linear-gradient(135deg,#AA77FF 0%,#5533aa 100%);
-			color:#fff;padding:28px 24px 24px;border-radius:8px;margin-bottom:22px;
-			position:relative;overflow:hidden;
-		}
-		.hero::before{
-			content:"";position:absolute;right:-40px;top:-40px;width:240px;height:240px;
-			background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 70%);
-			border-radius:50%;
-		}
-		.hero h2{font-family:monospace;font-size:26px;margin-bottom:6px;font-weight:bold;letter-spacing:-0.01em;position:relative;}
-		.hero p.tag{font-family:monospace;font-size:13px;opacity:0.92;margin-bottom:16px;max-width:640px;line-height:1.6;position:relative;}
-		.hero-stats{display:flex;gap:24px;flex-wrap:wrap;position:relative;margin-bottom:18px;}
-		.hero-stat{font-family:monospace;}
-		.hero-stat .num{font-size:22px;font-weight:bold;display:block;}
-		.hero-stat .lbl{font-size:11px;opacity:0.85;text-transform:uppercase;letter-spacing:0.08em;}
-		.hero-cta{display:flex;flex-wrap:wrap;gap:8px;position:relative;}
-		.hero-btn{
-			font-family:monospace;font-size:13px;font-weight:bold;
-			padding:9px 16px;border-radius:5px;text-decoration:none;
-			background:#fff;color:#5533aa;transition:all 0.12s;display:inline-block;
-		}
-		.hero-btn:hover{background:#f0eeff;transform:translateY(-1px);}
-		.hero-btn.alt{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.6);}
-		.hero-btn.alt:hover{background:rgba(255,255,255,0.15);border-color:#fff;}
-		/* ── Section headers ─────────────────────────────────────────────── */
-		.sec-hdr{
-			font-family:monospace;font-size:12px;color:#5533aa;font-weight:bold;
-			letter-spacing:0.1em;text-transform:uppercase;margin:22px 0 10px;
-			border-bottom:1px solid #e0d8ff;padding-bottom:5px;
-		}
-		/* ── Feature cards grid (categories) ─────────────────────────────── */
-		.cat-grid{
-			display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
-			gap:12px;margin-bottom:14px;
-		}
-		.cat-card{
-			background:#fafaff;border:1px solid #d0c8f0;border-radius:6px;
-			padding:14px;text-decoration:none;color:#1a1a1a;
-			transition:all 0.12s;display:block;
-		}
-		.cat-card:hover{background:#f0eeff;border-color:#AA77FF;transform:translateY(-2px);box-shadow:0 4px 12px rgba(170,119,255,0.15);}
-		.cat-card .cat-icon{margin-bottom:8px;line-height:0;}
-		.cat-card .cat-title{font-family:monospace;font-weight:bold;font-size:13px;color:#5533aa;margin-bottom:3px;}
-		.cat-card .cat-desc{font-family:monospace;font-size:11px;color:#666;line-height:1.5;}
-		.cat-card .cat-count{font-family:monospace;font-size:10px;color:#AA77FF;margin-top:6px;text-transform:uppercase;letter-spacing:0.06em;}
-		/* ── Featured tools ──────────────────────────────────────────────── */
-		.feat-grid{
-			display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-			gap:12px;margin-bottom:14px;
-		}
-		.feat-card{
-			background:#fff;border:1px solid #d0c8f0;border-radius:6px;overflow:hidden;
-			text-decoration:none;color:#1a1a1a;transition:all 0.12s;display:flex;flex-direction:column;
-		}
-		.feat-card:hover{border-color:#AA77FF;box-shadow:0 4px 14px rgba(170,119,255,0.15);transform:translateY(-2px);}
-		.feat-preview{background:#f8f6ff;padding:12px;border-bottom:1px solid #e8e0ff;height:130px;display:flex;align-items:center;justify-content:center;}
-		.feat-preview svg{max-width:100%;max-height:110px;}
-		.feat-body{padding:12px 14px;flex:1;display:flex;flex-direction:column;}
-		.feat-title{font-family:monospace;font-weight:bold;font-size:13px;color:#5533aa;margin-bottom:4px;}
-		.feat-desc{font-family:monospace;font-size:11px;color:#666;line-height:1.5;flex:1;}
-		/* ── Inline wiki snippet ──────────────────────────────────────────── */
-		.wiki-showcase{
-			background:#fafaff;border:1px solid #d0c8f0;border-radius:6px;padding:16px;
-			margin-bottom:14px;
-		}
-		.wiki-items{display:flex;flex-wrap:wrap;gap:6px;}
-		.wiki-item{
-			font-family:monospace;font-size:11px;padding:4px 10px;
-			background:#fff;border:1px solid #d0c8f0;border-radius:3px;
-			text-decoration:none;color:#5533aa;transition:all 0.12s;
-		}
-		.wiki-item:hover{background:#AA77FF;color:#fff;border-color:#AA77FF;}
-		/* ── Final section ──────────────────────────────────────────────── */
-		.updates{font-family:monospace;font-size:11px;color:#888;margin-top:18px;padding-top:10px;border-top:1px solid #eee;}
-		@media(max-width:600px){.hero h2{font-size:20px;}.hero-stats{gap:14px;}}
-	</style>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: #fff; margin: 0; }
+    .hp-wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px 50px; }
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #AA77FF 0%, #5533aa 100%);
+      color: #fff; padding: 28px 28px 22px; margin-bottom: 6px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content:""; position:absolute; right:-40px; top:-40px; width:220px; height:220px;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-row { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 16px; position: relative; }
+    .hero h1 { font-family: monospace; font-size: 26px; margin: 0 0 6px; font-weight: bold; }
+    .hero p  { font-family: monospace; font-size: 13px; opacity: 0.92; max-width: 560px; line-height: 1.65; margin: 0 0 14px; }
+    .hero-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 14px; }
+    .hero-stat .num { font-family: monospace; font-size: 20px; font-weight: bold; display: block; }
+    .hero-stat .lbl { font-family: monospace; font-size: 10px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .hero-link {
+      font-family: monospace; font-size: 12px; font-weight: bold;
+      padding: 8px 14px; border-radius: 5px; text-decoration: none; display: inline-block; transition: all 0.12s;
+    }
+    .hero-link.solid { background: #fff; color: #5533aa; }
+    .hero-link.solid:hover { background: #f0eeff; }
+    .hero-link.outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.55); }
+    .hero-link.outline:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+    /* ── Nav tabs ── */
+    .tab-bar {
+      display: flex; gap: 0; overflow-x: auto; border-bottom: 2px solid #e0d8ff;
+      margin: 18px 0 0; padding-bottom: 0; scrollbar-width: none;
+    }
+    .tab-bar::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      font-family: monospace; font-size: 11px; font-weight: bold;
+      color: #888; padding: 7px 14px; white-space: nowrap; cursor: pointer;
+      border: none; background: none; border-bottom: 2px solid transparent;
+      margin-bottom: -2px; text-decoration: none; display: inline-block;
+      transition: all 0.1s; letter-spacing: 0.03em;
+    }
+    .tab-btn:hover { color: #5533aa; }
+    .tab-btn.active { color: #5533aa; border-bottom-color: #AA77FF; }
+    /* ── Search ── */
+    .search-row {
+      display: flex; gap: 8px; align-items: center; margin: 14px 0 4px;
+    }
+    #tool-search {
+      font-family: monospace; font-size: 12px; padding: 7px 12px;
+      border: 1px solid #d0c8f0; border-radius: 5px; width: 100%; max-width: 380px;
+      outline: none; color: #333;
+    }
+    #tool-search:focus { border-color: #AA77FF; box-shadow: 0 0 0 2px rgba(170,119,255,0.15); }
+    #search-count { font-family: monospace; font-size: 11px; color: #888; white-space: nowrap; }
+    /* ── Filter tabs map ── */
+    .cat-section { display: none; }
+    .cat-section.visible { display: block; }
+    /* ── Wiki pills row ── */
+    .wiki-row {
+      background: #f8f6ff; border: 1px solid #d8d0f0; border-radius: 6px;
+      padding: 14px 16px; margin-top: 28px;
+    }
+    .wiki-row-hdr {
+      font-family: monospace; font-size: 11px; font-weight: bold; color: #5533aa;
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .wiki-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .wiki-pill {
+      font-family: monospace; font-size: 11px; padding: 4px 10px;
+      background: #fff; border: 1px solid #d0c8f0; border-radius: 3px;
+      text-decoration: none; color: #5533aa; transition: all 0.1s;
+    }
+    .wiki-pill:hover { background: #AA77FF; color: #fff; border-color: #AA77FF; }
+    .wiki-pill.all { background: #AA77FF; color: #fff; border-color: #AA77FF; }
+    @media(max-width:600px) { .hero h1{font-size:20px;} .hero-stats{gap:12px;} }
+  </style>
 </head>
 <body>
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-<section>
-<nav><h3>Tools</h3><div id="includeIndex"></div></nav>
-<article>
 
-	<!-- ══════════════════ HERO ══════════════════ -->
-	<div class="hero">
-		<h2>📡 RF Toolbox</h2>
-		<p class="tag">A growing collection of calculators, simulators, and reference articles for RF, microwave, and MRI coil engineering — all running in your browser, no installs required.</p>
-		<div class="hero-stats">
-			<div class="hero-stat"><span class="num">30+</span><span class="lbl">Calculators</span></div>
-			<div class="hero-stat"><span class="num">3</span><span class="lbl">Simulators</span></div>
-			<div class="hero-stat"><span class="num">35</span><span class="lbl">Wiki Articles</span></div>
-			<div class="hero-stat"><span class="num">7</span><span class="lbl">Games</span></div>
-		</div>
-		<div class="hero-cta">
-			<a class="hero-btn" href="start-here.html" style="background:#5533aa;color:#fff;">🗺 Start Here</a>
-			<a class="hero-btn" href="#categories">Browse Tools</a>
-			<a class="hero-btn alt" href="wiki.html">📖 Visit the Wiki</a>
-			<a class="hero-btn alt" href="RFSimulator.html">🔬 Try the Simulator</a>
-		</div>
-	</div>
+<div class="hero">
+  <div class="hero-row">
+    <div>
+      <h1>📡 RF Toolbox</h1>
+      <p>Free online calculators, simulators, and reference articles for RF, microwave, and MRI engineering — all running in your browser.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="num">40+</span><span class="lbl">Calculators</span></div>
+        <div class="hero-stat"><span class="num">3</span><span class="lbl">Simulators</span></div>
+        <div class="hero-stat"><span class="num">57</span><span class="lbl">Wiki Articles</span></div>
+        <div class="hero-stat"><span class="num">7</span><span class="lbl">Games</span></div>
+      </div>
+      <div class="hero-links">
+        <a class="hero-link solid" href="start-here.html">🗺 Start Here</a>
+        <a class="hero-link outline" href="wiki.html">📖 Wiki</a>
+        <a class="hero-link outline" href="games.html">🎮 Games</a>
+        <a class="hero-link outline" href="SmithChart.html">Smith Chart</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-	<!-- ══════════════════ TOOL CATEGORIES ══════════════════ -->
-	<div id="categories" class="sec-hdr">Explore by Category</div>
-	<div class="cat-grid">
+<div class="hp-wrap">
 
-		<a class="cat-card" href="CoilDesigner.html">
-			<div class="cat-icon">
-<svg viewBox="0 0 200 50" width="200" height="50" style="max-width:100%;"><path d="M10,25 q5,-15 15,0 q5,15 15,0 q5,-15 15,0 q5,15 15,0 q5,-15 15,0 q5,15 15,0 q5,-15 15,0 q5,15 15,0 q5,-15 15,0 q5,15 15,0 q5,-15 15,0 q5,15 15,0" stroke="#AA77FF" stroke-width="2.5" fill="none"/></svg>
-			</div>
-			<div class="cat-title">Coils & Resonance</div>
-			<div class="cat-desc">Loop inductance, tuning capacitors, LC resonance, and multi-turn coil design for NMR/MRI.</div>
-			<div class="cat-count">5 tools</div>
-		</a>
+  <!-- Tab bar -->
+  <div class="tab-bar" id="tab-bar">
+    <button class="tab-btn active" data-cat="all" onclick="filterCat('all',this)">All Tools</button>
+    <button class="tab-btn" data-cat="coils" onclick="filterCat('coils',this)">Coils & Resonance</button>
+    <button class="tab-btn" data-cat="tlines" onclick="filterCat('tlines',this)">Transmission Lines</button>
+    <button class="tab-btn" data-cat="matching" onclick="filterCat('matching',this)">Matching</button>
+    <button class="tab-btn" data-cat="filters" onclick="filterCat('filters',this)">Filters</button>
+    <button class="tab-btn" data-cat="antennas" onclick="filterCat('antennas',this)">Antennas</button>
+    <button class="tab-btn" data-cat="system" onclick="filterCat('system',this)">System</button>
+    <button class="tab-btn" data-cat="utils" onclick="filterCat('utils',this)">Utilities</button>
+    <button class="tab-btn" data-cat="mri" onclick="filterCat('mri',this)">MRI</button>
+    <button class="tab-btn" data-cat="sims" onclick="filterCat('sims',this)">Simulators</button>
+  </div>
 
-		<a class="cat-card" href="Microstrip.html">
-			<div class="cat-icon">
-<svg viewBox="0 0 200 50" width="200" height="50"><rect x="10" y="10" width="180" height="8" fill="#b8922a" stroke="#7a5000"/><rect x="10" y="18" width="180" height="16" fill="#d4ecca" stroke="#5a9020"/><rect x="10" y="34" width="180" height="8" fill="#b8922a" stroke="#7a5000"/><path d="M30,18 Q50,34 70,18" fill="none" stroke="#0055DD" stroke-width="1.2" stroke-dasharray="2 2"/><path d="M100,18 Q120,34 140,18" fill="none" stroke="#0055DD" stroke-width="1.2" stroke-dasharray="2 2"/></svg>
-			</div>
-			<div class="cat-title">Transmission Lines</div>
-			<div class="cat-desc">Microstrip, coax, stubs, and quarter-wave transformers with closed-form equations.</div>
-			<div class="cat-count">4 tools</div>
-		</a>
+  <!-- Search -->
+  <div class="search-row">
+    <input type="text" id="tool-search" placeholder="Search tools…" oninput="searchTools()">
+    <span id="search-count"></span>
+  </div>
 
-		<a class="cat-card" href="SmithChart.html">
-			<div class="cat-icon">
-<svg viewBox="0 0 100 50" width="100" height="50"><circle cx="50" cy="25" r="22" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="64" cy="25" r="8" fill="none" stroke="#AA77FF" stroke-width="1"/><circle cx="57" cy="25" r="15" fill="none" stroke="#AA77FF" stroke-width="1"/><line x1="28" y1="25" x2="72" y2="25" stroke="#888" stroke-width="0.7"/><circle cx="60" cy="15" r="3" fill="#ff6644"/></svg>
-			</div>
-			<div class="cat-title">Impedance Matching</div>
-			<div class="cat-desc">Interactive Smith Chart, L-networks, LC BALUNs, and capacitor combinations.</div>
-			<div class="cat-count">4 tools</div>
-		</a>
+  <!-- Tool grid -->
+  <div id="all-cards">
+<div class="cat-header">🔵 Coils & Resonance</div>
+<div class="tool-grid">
+<a class="tool-card" href="LC.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="20" y1="45" x2="50" y2="45" stroke="#5533aa" stroke-width="2"/><path d="M50,45 A6,6 0 0,1 62,45 A6,6 0 0,1 74,45 A6,6 0 0,1 86,45 A6,6 0 0,1 98,45" fill="none" stroke="#AA77FF" stroke-width="2.2"/><line x1="98" y1="45" x2="115" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="115" y1="32" x2="115" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="124" y1="32" x2="124" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="124" y1="45" x2="180" y2="45" stroke="#5533aa" stroke-width="2"/><text x="100" y="78" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">f₀ = 1/2π√LC</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">LC Resonance</div>
+    <div class="tool-card-desc">f₀, Q, and component values for series/parallel LC tanks.</div>
+  </div>
+</a><a class="tool-card" href="CLC.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="45" x2="40" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="40" y1="32" x2="40" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="49" y1="32" x2="49" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="49" y1="45" x2="75" y2="45" stroke="#5533aa" stroke-width="2"/><path d="M75,45 A6,6 0 0,1 87,45 A6,6 0 0,1 99,45 A6,6 0 0,1 111,45 A6,6 0 0,1 123,45" fill="none" stroke="#AA77FF" stroke-width="2.2"/><line x1="123" y1="45" x2="149" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="149" y1="32" x2="149" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="158" y1="32" x2="158" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="158" y1="45" x2="183" y2="45" stroke="#5533aa" stroke-width="2"/><text x="100" y="78" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">C-L-C series resonator</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">C in LC Circuit</div>
+    <div class="tool-card-desc">Find the tuning capacitor for a given coil and frequency.</div>
+  </div>
+</a><a class="tool-card" href="CLI.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="100" cy="44" r="32" fill="none" stroke="#5533aa" stroke-width="2.5"/><circle cx="132" cy="44" r="3" fill="white" stroke="#5533aa" stroke-width="1.5"/><line x1="105" y1="12" x2="95" y2="12" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/><text x="72" y="47" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">D</text><line x1="100" y1="44" x2="132" y2="44" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Loop inductance</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Loop Inductance</div>
+    <div class="tool-card-desc">Inductance of a single circular loop (Rosa formula).</div>
+  </div>
+</a><a class="tool-card" href="CoilDesigner.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><ellipse cx="100" cy="45" rx="65" ry="16" fill="none" stroke="#AA77FF" stroke-width="2.5"/><ellipse cx="100" cy="45" rx="65" ry="16" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(-18,0)" opacity="0.7"/><ellipse cx="100" cy="45" rx="65" ry="16" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(18,0)" opacity="0.7"/><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Multi-turn coil</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Multi-turn Coil Designer</div>
+    <div class="tool-card-desc">Wheeler inductance, wire resistance, Q, and tuning cap for solenoid coils.</div>
+  </div>
+</a><a class="tool-card" href="SurfaceCoilDesigner.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="100" cy="42" r="34" fill="none" stroke="#AA77FF" stroke-width="3"/><line x1="134" y1="42" x2="155" y2="42" stroke="#5533aa" stroke-width="1.5"/><rect x="155" y="36" width="22" height="12" fill="#f0eeff" stroke="#5533aa" stroke-width="1.2" rx="2"/><text x="166" y="45" text-anchor="middle" font-family="monospace" font-size="7" fill="#5533aa">C</text><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Surface coil</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Surface Coil Designer</div>
+    <div class="tool-card-desc">Complete MRI surface receive coil design with matching network.</div>
+  </div>
+</a><a class="tool-card" href="BirdcageCoil.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="144" y1="45" x2="125" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="141" y1="62" x2="123" y2="55" stroke="#5533aa" stroke-width="2"/><line x1="131" y1="76" x2="118" y2="63" stroke="#5533aa" stroke-width="2"/><line x1="117" y1="86" x2="110" y2="68" stroke="#5533aa" stroke-width="2"/><line x1="100" y1="89" x2="100" y2="70" stroke="#5533aa" stroke-width="2"/><line x1="83" y1="86" x2="90" y2="68" stroke="#5533aa" stroke-width="2"/><line x1="69" y1="76" x2="82" y2="63" stroke="#5533aa" stroke-width="2"/><line x1="59" y1="62" x2="77" y2="55" stroke="#5533aa" stroke-width="2"/><line x1="56" y1="45" x2="75" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="59" y1="28" x2="77" y2="35" stroke="#5533aa" stroke-width="2"/><line x1="69" y1="14" x2="82" y2="27" stroke="#5533aa" stroke-width="2"/><line x1="83" y1="4" x2="90" y2="22" stroke="#5533aa" stroke-width="2"/><line x1="100" y1="1" x2="100" y2="20" stroke="#5533aa" stroke-width="2"/><line x1="117" y1="4" x2="110" y2="22" stroke="#5533aa" stroke-width="2"/><line x1="131" y1="14" x2="118" y2="27" stroke="#5533aa" stroke-width="2"/><line x1="141" y1="28" x2="123" y2="35" stroke="#5533aa" stroke-width="2"/><circle cx="100" cy="45" r="44" fill="none" stroke="#5533aa" stroke-width="2"/><circle cx="100" cy="45" r="25" fill="none" stroke="#AA77FF" stroke-width="1.5" stroke-dasharray="4,3"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Birdcage coil designer</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Birdcage Coil</div>
+    <div class="tool-card-desc">LP/HP birdcage MRI volume coil: element values and mode frequencies.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">🟣 Transmission Lines</div>
+<div class="tool-grid">
+<a class="tool-card" href="Microstrip.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="60" y="30" width="80" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/><rect x="20" y="40" width="160" height="18" fill="#d4ecca" stroke="#5a9020" stroke-width="1"/><rect x="20" y="58" width="160" height="10" fill="#b8922a" stroke="#7a5000" stroke-width="1"/><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Microstrip Z₀</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Microstrip</div>
+    <div class="tool-card-desc">Z₀ and εeff from geometry, or trace width from target Z₀.</div>
+  </div>
+</a><a class="tool-card" href="Coaxial.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="100" cy="43" r="36" fill="#d4ecca" stroke="#5a9020" stroke-width="1.5"/><circle cx="100" cy="43" r="18" fill="#b8922a" stroke="#7a5000" stroke-width="1.5"/><circle cx="100" cy="43" r="6" fill="#e8d88a" stroke="#7a5000" stroke-width="1.5"/><text x="100" y="79" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Coaxial Z₀</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Coaxial Line</div>
+    <div class="tool-card-desc">Z₀, velocity factor, and cutoff frequency for coax cable.</div>
+  </div>
+</a><a class="tool-card" href="Stripline.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="20" y="18" width="160" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1"/><rect x="20" y="26" width="160" height="36" fill="#d4ecca" stroke="#5a9020" stroke-width="1"/><rect x="75" y="40" width="50" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/><rect x="20" y="62" width="160" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Stripline Z₀</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Stripline</div>
+    <div class="tool-card-desc">Fully shielded TEM stripline between two ground planes.</div>
+  </div>
+</a><a class="tool-card" href="CPW.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="20" y="30" width="160" height="22" fill="#d4ecca" stroke="#5a9020" stroke-width="1"/><rect x="20" y="20" width="52" height="12" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/><rect x="80" y="20" width="40" height="12" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/><rect x="128" y="20" width="52" height="12" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/><text x="100" y="68" text-anchor="middle" font-family="monospace" font-size="8" fill="#3a6010">εᵣ</text><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Coplanar waveguide</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Coplanar Waveguide</div>
+    <div class="tool-card-desc">CPW and GCPW Z₀ using elliptic integral conformal mapping.</div>
+  </div>
+</a><a class="tool-card" href="DiffPair.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="20" y="55" width="160" height="18" fill="#d4ecca" stroke="#5a9020" stroke-width="1"/><rect x="20" y="73" width="160" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1"/><rect x="65" y="45" width="28" height="12" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/><rect x="107" y="45" width="28" height="12" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/><text x="79" y="40" text-anchor="middle" font-family="monospace" font-size="10" fill="#AA77FF" font-weight="bold">+</text><text x="121" y="40" text-anchor="middle" font-family="monospace" font-size="10" fill="#cc3333" font-weight="bold">−</text><text x="100" y="88" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">Z_diff = 2·Z_odd</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Differential Pair</div>
+    <div class="tool-card-desc">Z_diff and Z_odd for edge-coupled microstrip pairs.</div>
+  </div>
+</a><a class="tool-card" href="StubCalc.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="20" y1="35" x2="180" y2="35" stroke="#5533aa" stroke-width="2.5"/><line x1="100" y1="35" x2="100" y2="68" stroke="#5533aa" stroke-width="2.5"/><line x1="80" y1="68" x2="120" y2="68" stroke="#5533aa" stroke-width="1.5"/><line x1="84" y1="72" x2="116" y2="72" stroke="#5533aa" stroke-width="1.2"/><line x1="90" y1="76" x2="110" y2="76" stroke="#5533aa" stroke-width="0.9"/><text x="100" y="88" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Shunt stub</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Stub Calculator</div>
+    <div class="tool-card-desc">Open/short stub length for a target shunt susceptance.</div>
+  </div>
+</a><a class="tool-card" href="QuarterWave.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="45" x2="55" y2="45" stroke="#5533aa" stroke-width="2.5"/><rect x="55" y="33" width="90" height="24" fill="#f0eeff" stroke="#AA77FF" stroke-width="2" rx="2"/><text x="100" y="46" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#5533aa">Z₀=√(Z₁·Z₂)</text><text x="100" y="56" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#888">λ/4</text><line x1="145" y1="45" x2="185" y2="45" stroke="#5533aa" stroke-width="2.5"/><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Quarter-wave transformer</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Quarter-Wave Transformer</div>
+    <div class="tool-card-desc">λ/4 impedance transformer Z and physical length.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">🔴 Impedance Matching</div>
+<div class="tool-grid">
+<a class="tool-card" href="SmithChart.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="100" cy="43" r="38" fill="none" stroke="#333" stroke-width="1.5"/><circle cx="119" cy="43" r="19" fill="none" stroke="#AA77FF" stroke-width="1"/><circle cx="109" cy="43" r="29" fill="none" stroke="#AA77FF" stroke-width="0.8" opacity="0.6"/><circle cx="138" cy="30" r="15" fill="none" stroke="#00aacc" stroke-width="0.8" opacity="0.7"/><circle cx="138" cy="56" r="15" fill="none" stroke="#00aacc" stroke-width="0.8" opacity="0.7"/><line x1="62" y1="43" x2="138" y2="43" stroke="#aaa" stroke-width="0.8"/><circle cx="126" cy="32" r="4" fill="#ff6644"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Interactive Smith Chart</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Interactive Smith Chart</div>
+    <div class="tool-card-desc">HiDPI Smith Chart — click to read, pin points, rotate with stubs.</div>
+  </div>
+</a><a class="tool-card" href="VSWRConverter.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="20" y1="40" x2="110" y2="40" stroke="#5533aa" stroke-width="2.5"/><rect x="110" y="28" width="40" height="24" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8" rx="3"/><text x="130" y="43" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">Z_L</text><line x1="110" y1="40" x2="40" y2="60" stroke="#cc3333" stroke-width="2" stroke-dasharray="5,3"/><text x="60" y="72" font-family="monospace" font-size="8" fill="#cc3333">|Γ| reflected</text><text x="100" y="84" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">VSWR / RL / |Γ| / ML</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">VSWR / Return Loss</div>
+    <div class="tool-card-desc">Live converter between VSWR, |Γ|, return loss, and mismatch loss.</div>
+  </div>
+</a><a class="tool-card" href="LNetwork.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="42" x2="50" y2="42" stroke="#5533aa" stroke-width="2"/><path d="M50,42 A7,7 0 0,1 64,42 A7,7 0 0,1 78,42 A7,7 0 0,1 92,42" fill="none" stroke="#AA77FF" stroke-width="2.2"/><line x1="92" y1="42" x2="130" y2="42" stroke="#5533aa" stroke-width="2"/><line x1="115" y1="42" x2="115" y2="58" stroke="#5533aa" stroke-width="2"/><line x1="105" y1="58" x2="125" y2="58" stroke="#5533aa" stroke-width="2.8"/><line x1="105" y1="64" x2="125" y2="64" stroke="#5533aa" stroke-width="2.8"/><line x1="115" y1="64" x2="115" y2="78" stroke="#5533aa" stroke-width="2"/><line x1="130" y1="42" x2="180" y2="42" stroke="#5533aa" stroke-width="2"/><text x="100" y="88" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">L-network matcher</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">L-Network Matcher</div>
+    <div class="tool-card-desc">L, C values for single-frequency impedance matching.</div>
+  </div>
+</a><a class="tool-card" href="PiTNetwork.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="38" x2="185" y2="38" stroke="#5533aa" stroke-width="2"/><line x1="55" y1="38" x2="55" y2="58" stroke="#5533aa" stroke-width="2"/><line x1="43" y1="58" x2="67" y2="58" stroke="#5533aa" stroke-width="2.8"/><line x1="43" y1="65" x2="67" y2="65" stroke="#5533aa" stroke-width="2.8"/><line x1="55" y1="65" x2="55" y2="78" stroke="#5533aa" stroke-width="2"/><rect x="83" y="27" width="34" height="22" fill="white" stroke="#AA77FF" stroke-width="2" rx="2"/><text x="100" y="42" text-anchor="middle" font-family="monospace" font-size="9" fill="#AA77FF">L/C</text><line x1="145" y1="38" x2="145" y2="58" stroke="#5533aa" stroke-width="2"/><line x1="133" y1="58" x2="157" y2="58" stroke="#5533aa" stroke-width="2.8"/><line x1="133" y1="65" x2="157" y2="65" stroke="#5533aa" stroke-width="2.8"/><line x1="145" y1="65" x2="145" y2="78" stroke="#5533aa" stroke-width="2"/><text x="100" y="88" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Pi / T network</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Pi / T Network</div>
+    <div class="tool-card-desc">Pi and T matching networks with free choice of loaded Q.</div>
+  </div>
+</a><a class="tool-card" href="Wilkinson.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="18" y1="45" x2="55" y2="45" stroke="#5533aa" stroke-width="2.5"/><path d="M55,45 Q100,18 145,22" fill="none" stroke="#AA77FF" stroke-width="2.2" stroke-dasharray="6,3"/><path d="M55,45 Q100,72 145,68" fill="none" stroke="#AA77FF" stroke-width="2.2" stroke-dasharray="6,3"/><line x1="145" y1="22" x2="145" y2="68" stroke="#5533aa" stroke-width="2"/><rect x="136" y="38" width="18" height="22" fill="white" stroke="#5533aa" stroke-width="1.5" rx="2"/><text x="145" y="52" text-anchor="middle" font-family="monospace" font-size="7" fill="#5533aa">R</text><line x1="145" y1="22" x2="182" y2="22" stroke="#5533aa" stroke-width="2"/><line x1="145" y1="68" x2="182" y2="68" stroke="#5533aa" stroke-width="2"/><text x="100" y="85" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Wilkinson divider</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Wilkinson Divider</div>
+    <div class="tool-card-desc">Equal and unequal power splits with isolation resistor.</div>
+  </div>
+</a><a class="tool-card" href="LCBalun.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="42" x2="55" y2="42" stroke="#5533aa" stroke-width="2"/><rect x="55" y="30" width="90" height="24" fill="#f0eeff" stroke="#AA77FF" stroke-width="2" rx="4"/><text x="100" y="43" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">BALUN</text><text x="100" y="52" text-anchor="middle" font-family="monospace" font-size="7" fill="#888">1:n</text><line x1="145" y1="36" x2="183" y2="36" stroke="#5533aa" stroke-width="2"/><line x1="145" y1="48" x2="183" y2="48" stroke="#5533aa" stroke-width="2"/><text x="185" y="39" font-family="monospace" font-size="9" fill="#AA77FF" font-weight="bold">+</text><text x="185" y="51" font-family="monospace" font-size="9" fill="#cc3333" font-weight="bold">−</text><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">LC BALUN</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">LC BALUN</div>
+    <div class="tool-card-desc">Lattice and Pi BALUN design with impedance transformation.</div>
+  </div>
+</a><a class="tool-card" href="CapacitorNetwork.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="42" x2="50" y2="42" stroke="#5533aa" stroke-width="2"/><line x1="50" y1="30" x2="50" y2="54" stroke="#5533aa" stroke-width="2.8"/><line x1="58" y1="30" x2="58" y2="54" stroke="#5533aa" stroke-width="2.8"/><line x1="58" y1="42" x2="88" y2="42" stroke="#5533aa" stroke-width="2"/><line x1="88" y1="30" x2="88" y2="54" stroke="#5533aa" stroke-width="2.8"/><line x1="96" y1="30" x2="96" y2="54" stroke="#5533aa" stroke-width="2.8"/><line x1="96" y1="42" x2="126" y2="42" stroke="#5533aa" stroke-width="2"/><line x1="126" y1="30" x2="126" y2="54" stroke="#5533aa" stroke-width="2.8"/><line x1="134" y1="30" x2="134" y2="54" stroke="#5533aa" stroke-width="2.8"/><line x1="134" y1="42" x2="180" y2="42" stroke="#5533aa" stroke-width="2"/><text x="100" y="78" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Series capacitors</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Capacitor Network</div>
+    <div class="tool-card-desc">Total capacitance for series and parallel combinations.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">🟡 Filters & Attenuators</div>
+<div class="tool-grid">
+<a class="tool-card" href="FilterDesign.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="75" x2="185" y2="75" stroke="#ccc" stroke-width="1"/><line x1="15" y1="15" x2="15" y2="75" stroke="#ccc" stroke-width="1"/><path d="M15,18 L95,18 Q115,18 120,40 Q125,72 185,72" stroke="#AA77FF" stroke-width="2" fill="none"/><path d="M15,24 Q65,24 85,28 Q108,45 125,60 Q148,72 185,73" stroke="#cc3333" stroke-width="1.8" fill="none" stroke-dasharray="4,2"/><text x="40" y="32" font-family="monospace" font-size="8" fill="#AA77FF">Butter</text><text x="150" y="55" font-family="monospace" font-size="8" fill="#cc3333">Cheby</text><text x="100" y="87" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Butterworth / Chebyshev</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">LC Filter Designer</div>
+    <div class="tool-card-desc">Butterworth/Chebyshev LP/HP up to 9th order with BOM.</div>
+  </div>
+</a><a class="tool-card" href="BandpassCalc.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="75" x2="185" y2="75" stroke="#ccc" stroke-width="1"/><path d="M15,72 Q50,72 80,30 Q100,14 120,30 Q150,72 185,72" stroke="#AA77FF" stroke-width="2.5" fill="#f0eeff" opacity="0.6"/><line x1="100" y1="14" x2="100" y2="75" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/><text x="100" y="85" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">f₀</text><text x="100" y="10" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">Q = f₀/BW</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Bandpass Calculator</div>
+    <div class="tool-card-desc">f₀, Q, and bandwidth from R, L, C for series or parallel RLC.</div>
+  </div>
+</a><a class="tool-card" href="AttenuatorDesign.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="42" x2="185" y2="42" stroke="#5533aa" stroke-width="2"/><line x1="65" y1="42" x2="65" y2="58" stroke="#5533aa" stroke-width="2"/><rect x="51" y="58" width="28" height="18" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/><text x="65" y="70" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">R₁</text><rect x="83" y="31" width="34" height="22" fill="white" stroke="#AA77FF" stroke-width="2" rx="2"/><text x="100" y="45" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#AA77FF">R₂</text><line x1="135" y1="42" x2="135" y2="58" stroke="#5533aa" stroke-width="2"/><rect x="121" y="58" width="28" height="18" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/><text x="135" y="70" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">R₃</text><text x="100" y="88" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Pi / T / L-pad attenuator</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Attenuator Designer</div>
+    <div class="tool-card-desc">Pi, T, L-pad, and Bridged-T resistor values for any attenuation.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">🟠 Antennas & Arrays</div>
+<div class="tool-grid">
+<a class="tool-card" href="Dipole.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="100" y1="12" x2="100" y2="78" stroke="#AA77FF" stroke-width="4"/><path d="M100,45 Q55,45 65,22 Q100,8 100,45 Q100,8 135,22 Q145,45 100,45 Q145,45 135,68 Q100,82 100,45 Q100,82 65,68 Q55,45 100,45" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.2" opacity="0.7"/><text x="100" y="88" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Half-wave dipole</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Dipole Antenna</div>
+    <div class="tool-card-desc">Half-wave dipole arm length and shortening factor.</div>
+  </div>
+</a><a class="tool-card" href="PatchAntenna.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="40" y="20" width="120" height="45" fill="#b8922a" stroke="#7a5000" stroke-width="1.5" rx="1"/><rect x="20" y="68" width="160" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1"/><rect x="20" y="60" width="160" height="10" fill="#d4ecca" stroke="#5a9020" stroke-width="1"/><text x="100" y="46" text-anchor="middle" font-family="monospace" font-size="9" fill="white">W</text><text x="155" y="46" font-family="monospace" font-size="9" fill="white">L</text><text x="100" y="86" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Patch antenna</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Patch Antenna</div>
+    <div class="tool-card-desc">Patch width, length, and effective permittivity for any substrate.</div>
+  </div>
+</a><a class="tool-card" href="ArrayFactor.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="100" cy="45" r="36" fill="none" stroke="#ddd" stroke-width="1"/><circle cx="100" cy="45" r="20" fill="none" stroke="#ddd" stroke-width="0.7"/><path d="M100,45 L100,9 Q125,22 136,45 Q125,68 100,81 L100,45 Q75,68 64,45 Q75,22 100,9" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.5"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Array factor pattern</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Array Factor Plotter</div>
+    <div class="tool-card-desc">Polar radiation pattern for N-element linear arrays with steering.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">🔵 System & RF Analysis</div>
+<div class="tool-grid">
+<a class="tool-card" href="Friis.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="30" cy="42" r="7" fill="#AA77FF" opacity="0.8"/><circle cx="170" cy="42" r="7" fill="#AA77FF" opacity="0.8"/><path d="M37,42 Q100,20 163,42" stroke="#AA77FF" stroke-width="2" fill="none" stroke-dasharray="5,3"/><text x="100" y="32" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">FSPL</text><text x="100" y="65" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">P_r = P_t G_t G_r (λ/4πd)²</text><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Friis equation</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Friis Equation</div>
+    <div class="tool-card-desc">Received power from EIRP, path loss, and antenna gains.</div>
+  </div>
+</a><a class="tool-card" href="NoiseFigure.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="15" y="32" width="40" height="28" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.8" rx="3"/><text x="35" y="46" text-anchor="middle" font-family="monospace" font-size="8" fill="#AA77FF">G₁</text><text x="35" y="56" text-anchor="middle" font-family="monospace" font-size="7" fill="#888">NF₁</text><line x1="55" y1="46" x2="80" y2="46" stroke="#5533aa" stroke-width="1.5"/><rect x="80" y="32" width="40" height="28" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8" rx="3"/><text x="100" y="46" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">G₂</text><text x="100" y="56" text-anchor="middle" font-family="monospace" font-size="7" fill="#888">NF₂</text><line x1="120" y1="46" x2="145" y2="46" stroke="#5533aa" stroke-width="1.5"/><rect x="145" y="32" width="40" height="28" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8" rx="3"/><text x="165" y="46" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">G₃</text><text x="165" y="56" text-anchor="middle" font-family="monospace" font-size="7" fill="#888">NF₃</text><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Cascaded noise figure</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Cascaded Noise Figure</div>
+    <div class="tool-card-desc">System NF and gain for up to 8 cascaded stages (Friis).</div>
+  </div>
+</a><a class="tool-card" href="LinkBudget.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="10" y="20" width="45" height="25" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.5" rx="3"/><text x="32" y="35" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa" font-weight="bold">TX</text><path d="M55,32 Q100,14 145,32" stroke="#AA77FF" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/><rect x="145" y="20" width="45" height="25" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.5" rx="3"/><text x="167" y="35" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa" font-weight="bold">RX</text><text x="100" y="62" text-anchor="middle" font-family="monospace" font-size="8" fill="#1a8a1a" font-weight="bold">Margin: +14 dB ✓</text><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Link budget</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Link Budget</div>
+    <div class="tool-card-desc">End-to-end RF link: EIRP, path loss, noise floor, SNR margin.</div>
+  </div>
+</a><a class="tool-card" href="RadarRange.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="12" y="30" width="50" height="30" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5" rx="3"/><text x="37" y="47" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa" font-weight="bold">RADAR</text><path d="M62,45 L148,45" stroke="#AA77FF" stroke-width="2" stroke-dasharray="6,3"/><circle cx="160" cy="45" r="10" fill="none" stroke="#cc3333" stroke-width="1.8" stroke-dasharray="3,2"/><text x="160" y="49" text-anchor="middle" font-family="monospace" font-size="7" fill="#cc3333">σ</text><text x="105" y="38" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">R_max</text><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Radar range equation</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Radar Range Equation</div>
+    <div class="tool-card-desc">R_max and received power from transmit power, RCS, and gains.</div>
+  </div>
+</a><a class="tool-card" href="IP3Calc.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="18" y1="75" x2="185" y2="75" stroke="#ccc" stroke-width="1"/><line x1="18" y1="15" x2="18" y2="75" stroke="#ccc" stroke-width="1"/><path d="M18,70 L145,18" stroke="#AA77FF" stroke-width="2" fill="none"/><path d="M30,75 L145,18" stroke="#cc3333" stroke-width="2" fill="none"/><circle cx="145" cy="18" r="4" fill="#AA77FF"/><text x="150" y="15" font-family="monospace" font-size="8" fill="#5533aa">IP3</text><text x="100" y="86" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">IP3 / Intermodulation</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">IP3 & Intermodulation</div>
+    <div class="tool-card-desc">OIP3, IM3 product power, and IMD ratio from IIP3 and gain.</div>
+  </div>
+</a><a class="tool-card" href="PowerCombiner.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="20" y="15" width="50" height="18" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.5" rx="2"/><rect x="20" y="38" width="50" height="18" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.5" rx="2"/><rect x="20" y="61" width="50" height="18" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5" rx="2"/><line x1="70" y1="24" x2="110" y2="40" stroke="#5533aa" stroke-width="1.5"/><line x1="70" y1="47" x2="110" y2="47" stroke="#5533aa" stroke-width="1.5"/><line x1="70" y1="70" x2="110" y2="54" stroke="#5533aa" stroke-width="1.5"/><rect x="110" y="33" width="45" height="28" fill="#eeffee" stroke="#228844" stroke-width="1.8" rx="3"/><text x="132" y="50" text-anchor="middle" font-family="monospace" font-size="8" fill="#228844" font-weight="bold">P_out</text><line x1="155" y1="47" x2="180" y2="47" stroke="#228844" stroke-width="2"/><text x="100" y="85" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">RF power combining</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Power Combining</div>
+    <div class="tool-card-desc">N-way combiner output power with efficiency and failure analysis.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">🟤 Utilities & Converters</div>
+<div class="tool-grid">
+<a class="tool-card" href="dBmConverter.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="25" y="20" width="60" height="30" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.5" rx="3"/><text x="55" y="33" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">dBm</text><text x="55" y="44" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">0 dBm</text><text x="100" y="40" text-anchor="middle" font-family="monospace" font-size="12" fill="#5533aa">⇄</text><rect x="115" y="20" width="60" height="30" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5" rx="3"/><text x="145" y="33" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Watts</text><text x="145" y="44" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">1 mW</text><text x="100" y="74" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">dBm ↔ Watts</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">dBm ↔ Watts</div>
+    <div class="tool-card-desc">Convert between dBm and watts in either direction.</div>
+  </div>
+</a><a class="tool-card" href="Wavelength.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><path d="M15,45 Q35,15 55,45 Q75,75 95,45 Q115,15 135,45 Q155,75 175,45" stroke="#AA77FF" stroke-width="2.5" fill="none"/><line x1="15" y1="45" x2="175" y2="45" stroke="#888" stroke-width="0.8" stroke-dasharray="3,3"/><line x1="15" y1="62" x2="95" y2="62" stroke="#5533aa" stroke-width="1.5"/><text x="55" y="76" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">λ = c/f</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Wavelength</div>
+    <div class="tool-card-desc">Free-space λ from frequency and dielectric constant.</div>
+  </div>
+</a><a class="tool-card" href="FreqEnergyConverter.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><text x="30" y="35" text-anchor="middle" font-family="monospace" font-size="9" fill="#AA77FF" font-weight="bold">f</text><text x="80" y="35" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa" font-weight="bold">λ</text><text x="130" y="35" text-anchor="middle" font-family="monospace" font-size="9" fill="#00aacc" font-weight="bold">E</text><text x="175" y="35" text-anchor="middle" font-family="monospace" font-size="9" fill="#888" font-weight="bold">B₀</text><text x="55" y="35" text-anchor="middle" font-family="monospace" font-size="11" fill="#888">⇄</text><text x="105" y="35" text-anchor="middle" font-family="monospace" font-size="11" fill="#888">⇄</text><text x="152" y="35" text-anchor="middle" font-family="monospace" font-size="11" fill="#888">⇄</text><text x="100" y="58" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">128 MHz → 3 T ¹H</text><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Freq / λ / Energy</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Freq / λ / Energy</div>
+    <div class="tool-card-desc">Live converter: frequency, wavelength, period, photon energy, B₀.</div>
+  </div>
+</a><a class="tool-card" href="SkinDepth.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="100" cy="43" r="36" fill="#e8e0ff"/><circle cx="100" cy="43" r="28" fill="white" stroke="#d0c8f0" stroke-width="1" stroke-dasharray="3,2"/><circle cx="100" cy="43" r="36" fill="none" stroke="#AA77FF" stroke-width="6" opacity="0.7"/><circle cx="100" cy="43" r="36" fill="none" stroke="#5533aa" stroke-width="2"/><text x="100" y="47" text-anchor="middle" font-family="monospace" font-size="9" fill="#888">J ≈ 0</text><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Skin depth</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Skin Depth</div>
+    <div class="tool-card-desc">Conductor skin depth vs frequency and conductivity.</div>
+  </div>
+</a><a class="tool-card" href="PhaseNoiseJitter.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="20" y1="72" x2="185" y2="72" stroke="#ccc" stroke-width="1"/><line x1="20" y1="15" x2="20" y2="72" stroke="#ccc" stroke-width="1"/><path d="M20,20 Q60,22 90,35 Q120,52 155,62 Q175,68 185,70" stroke="#AA77FF" stroke-width="2.5" fill="none"/><text x="35" y="30" font-family="monospace" font-size="8" fill="#5533aa">−30dB/dec</text><text x="100" y="84" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Phase noise → jitter</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Phase Noise → Jitter</div>
+    <div class="tool-card-desc">Integrate a piecewise phase noise profile to RMS jitter.</div>
+  </div>
+</a><a class="tool-card" href="TwoPortConverter.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="60" y="25" width="80" height="42" fill="#f0eeff" stroke="#AA77FF" stroke-width="2" rx="4"/><text x="100" y="44" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#5533aa" font-weight="bold">2-port</text><text x="100" y="56" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">S↔Z↔Y↔ABCD</text><line x1="15" y1="46" x2="60" y2="46" stroke="#5533aa" stroke-width="2"/><line x1="140" y1="46" x2="185" y2="46" stroke="#5533aa" stroke-width="2"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">S/Z/Y/ABCD converter</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">S/Z/Y/ABCD Converter</div>
+    <div class="tool-card-desc">Convert between all four 2-port parameter representations.</div>
+  </div>
+</a><a class="tool-card" href="SParamPlotter.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="12" y="12" width="90" height="62" fill="#1e1e2e" rx="3"/><text x="57" y="30" text-anchor="middle" font-family="monospace" font-size="7" fill="#a6e3a1"># Touchstone .s2p</text><text x="57" y="42" text-anchor="middle" font-family="monospace" font-size="7" fill="#cdd6f4">S11 S21 S12 S22</text><line x1="115" y1="72" x2="188" y2="72" stroke="#888" stroke-width="1"/><line x1="115" y1="20" x2="115" y2="72" stroke="#888" stroke-width="1"/><path d="M115,40 Q135,25 155,35 Q170,45 188,30" stroke="#AA77FF" stroke-width="2" fill="none"/><path d="M115,65 Q135,62 155,60 Q170,58 188,56" stroke="#cc3333" stroke-width="1.5" fill="none"/><text x="100" y="86" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">S-parameter plotter</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">S-Parameter Plotter</div>
+    <div class="tool-card-desc">Plot Touchstone .s1p–.s4p files with Chart.js.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">🟢 PCB & Parasitics</div>
+<div class="tool-grid">
+<a class="tool-card" href="BondWireVia.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="20" y="55" width="55" height="15" fill="#e8e0ff" stroke="#5533aa" stroke-width="1.5" rx="2"/><rect x="125" y="55" width="55" height="15" fill="#e8e0ff" stroke="#5533aa" stroke-width="1.5" rx="2"/><path d="M75,63 Q100,22 125,63" fill="none" stroke="#AA77FF" stroke-width="3.5" stroke-linecap="round"/><text x="100" y="40" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">~1 nH/mm</text><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Bond wire / via inductance</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Bond Wire & Via</div>
+    <div class="tool-card-desc">Inductance of bond wires (Grover) and PCB vias with SRF.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">🟣 MRI Tools</div>
+<div class="tool-grid">
+<a class="tool-card" href="SAREstimator.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><ellipse cx="100" cy="43" r="42" ry="30" fill="#ffe8e8" stroke="#cc3333" stroke-width="1.5"/><ellipse cx="100" cy="43" r="28" ry="20" fill="#ffcccc" stroke="#cc3333" stroke-width="1"/><text x="100" y="40" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#cc3333" font-weight="bold">SAR</text><text x="100" y="52" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc3333">W/kg</text><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">MRI SAR estimator</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">SAR Estimator</div>
+    <div class="tool-card-desc">Local SAR from B₁⁺, frequency, tissue type vs IEC limits.</div>
+  </div>
+</a><a class="tool-card" href="PhasedArrayDecoupling.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="80" cy="42" r="32" fill="none" stroke="#AA77FF" stroke-width="2.5"/><circle cx="120" cy="42" r="32" fill="none" stroke="#5533aa" stroke-width="2.5"/><path d="M102,14 Q100,42 102,70" fill="#AA77FF" opacity="0.15"/><text x="80" y="42" text-anchor="middle" font-family="monospace" font-size="8" fill="#AA77FF">1</text><text x="120" y="42" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">2</text><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Array decoupling</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Array Decoupling</div>
+    <div class="tool-card-desc">Mutual inductance and overlap/capacitive/preamp decoupling.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">🔬 Simulators</div>
+<div class="tool-grid">
+<a class="tool-card" href="RFSimulator.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="12" y="30" width="24" height="18" fill="#ffd0b0" stroke="#888" rx="2"/><text x="24" y="43" text-anchor="middle" font-family="monospace" font-size="8">R</text><line x1="36" y1="39" x2="56" y2="39" stroke="#555" stroke-width="1.5"/><rect x="56" y="30" width="24" height="18" fill="#c8e8ff" stroke="#888" rx="2"/><text x="68" y="43" text-anchor="middle" font-family="monospace" font-size="8">L</text><line x1="80" y1="39" x2="100" y2="39" stroke="#555" stroke-width="1.5"/><rect x="100" y="30" width="24" height="18" fill="#c8ffd8" stroke="#888" rx="2"/><text x="112" y="43" text-anchor="middle" font-family="monospace" font-size="8">C</text><line x1="124" y1="39" x2="145" y2="39" stroke="#555" stroke-width="1.5"/><path d="M145,72 Q162,42 175,35 Q185,32 188,30" stroke="#AA77FF" stroke-width="2" fill="none"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">RF circuit simulator</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">RF Circuit Simulator</div>
+    <div class="tool-card-desc">ABCD-matrix ladder network simulator: S-params, VSWR, group delay.</div>
+  </div>
+</a><a class="tool-card" href="SpiceSim.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="10" y="10" width="100" height="48" fill="#1e1e2e" rx="3"/><text x="20" y="26" font-family="monospace" font-size="7" fill="#a6e3a1">R1 in out 1k</text><text x="20" y="37" font-family="monospace" font-size="7" fill="#cdd6f4">C1 out 0 1n</text><text x="20" y="48" font-family="monospace" font-size="7" fill="#f9e2af">.AC DEC 50 1k 1g</text><path d="M118,72 Q138,38 155,32 Q172,28 188,26" stroke="#AA77FF" stroke-width="2" fill="none"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">SPICE simulator</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">SPICE Simulator</div>
+    <div class="tool-card-desc">MNA-based SPICE engine: .AC, .DC, .OP, .TRAN analyses in browser.</div>
+  </div>
+</a><a class="tool-card" href="FalstadSim.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="10" y="10" width="100" height="55" fill="#111" rx="3"/><line x1="25" y1="37" x2="55" y2="37" stroke="#0f0" stroke-width="1.5"/><circle cx="55" cy="37" r="8" fill="none" stroke="#ff0" stroke-width="1.5"/><line x1="63" y1="37" x2="100" y2="37" stroke="#0f0" stroke-width="1.5"/><path d="M118,72 Q140,40 175,35" stroke="#ff0" stroke-width="1.5" fill="none"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Falstad simulator</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Falstad Simulator</div>
+    <div class="tool-card-desc">Embedded Falstad interactive circuit simulator.</div>
+  </div>
+</a>
+</div>
 
-		<a class="cat-card" href="FilterDesign.html">
-			<div class="cat-icon">
-<svg viewBox="0 0 200 50" width="200" height="50"><path d="M10,40 C60,40 90,40 100,25 C110,10 140,10 190,10" stroke="#AA77FF" stroke-width="2.5" fill="none"/><line x1="10" y1="45" x2="190" y2="45" stroke="#ccc" stroke-width="1"/><line x1="100" y1="10" x2="100" y2="45" stroke="#888" stroke-width="0.8" stroke-dasharray="2 2"/></svg>
-			</div>
-			<div class="cat-title">Filters</div>
-			<div class="cat-desc">Butterworth, Chebyshev LC ladders; series/parallel bandpass RLC analysis.</div>
-			<div class="cat-count">2 tools</div>
-		</a>
+  </div>
 
-		<a class="cat-card" href="Dipole.html">
-			<div class="cat-icon">
-<svg viewBox="0 0 100 50" width="100" height="50"><line x1="50" y1="5" x2="50" y2="45" stroke="#AA77FF" stroke-width="3.5"/><path d="M50,25 Q15,25 25,10 Q50,0 50,25 Q50,0 75,10 Q85,25 50,25 Q85,25 75,40 Q50,50 50,25 Q50,50 25,40 Q15,25 50,25" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.5" opacity="0.8"/></svg>
-			</div>
-			<div class="cat-title">Antennas</div>
-			<div class="cat-desc">Dipole sizing, patch antenna design, and phased array factor plots.</div>
-			<div class="cat-count">3 tools</div>
-		</a>
+  <!-- Wiki section -->
+  <div class="wiki-row">
+    <div class="wiki-row-hdr">📖 Wiki — 57 Reference Articles</div>
+    <div class="wiki-pills">
+      <a class="wiki-pill" href="wiki_db_dbm.html">dB & dBm</a>
+      <a class="wiki-pill" href="wiki_complex_impedance.html">Complex Impedance</a>
+      <a class="wiki-pill" href="wiki_smith_chart_tutorial.html">Smith Chart Tutorial</a>
+      <a class="wiki-pill" href="wiki_vswr.html">VSWR & Return Loss</a>
+      <a class="wiki-pill" href="wiki_vna.html">VNA Measurements</a>
+      <a class="wiki-pill" href="wiki_sparam.html">S-Parameters</a>
+      <a class="wiki-pill" href="wiki_impedance_matching.html">Impedance Matching</a>
+      <a class="wiki-pill" href="wiki_transmission_lines.html">Transmission Lines</a>
+      <a class="wiki-pill" href="wiki_microwave_lines.html">Microwave Lines</a>
+      <a class="wiki-pill" href="wiki_pcb_rf.html">PCB RF Design</a>
+      <a class="wiki-pill" href="wiki_coax_cable.html">Coax Cable Reference</a>
+      <a class="wiki-pill" href="wiki_connectors.html">RF Connectors</a>
+      <a class="wiki-pill" href="wiki_attenuators.html">Attenuators</a>
+      <a class="wiki-pill" href="wiki_filters.html">RF Filters</a>
+      <a class="wiki-pill" href="wiki_power_dividers.html">Power Dividers</a>
+      <a class="wiki-pill" href="wiki_intermodulation.html">IP3 & IMD</a>
+      <a class="wiki-pill" href="wiki_amplifiers.html">RF Amplifiers</a>
+      <a class="wiki-pill" href="wiki_pa_design.html">PA Design</a>
+      <a class="wiki-pill" href="wiki_noise.html">Noise in RF</a>
+      <a class="wiki-pill" href="wiki_cascade_analysis.html">Cascade Analysis</a>
+      <a class="wiki-pill" href="wiki_link_budget.html">Link Budgets</a>
+      <a class="wiki-pill" href="wiki_superheterodyne.html">Superheterodyne Rx</a>
+      <a class="wiki-pill" href="wiki_mixers.html">Mixers</a>
+      <a class="wiki-pill" href="wiki_modulation.html">Modulation</a>
+      <a class="wiki-pill" href="wiki_oscillators.html">Oscillators</a>
+      <a class="wiki-pill" href="wiki_pll.html">PLL & Synthesis</a>
+      <a class="wiki-pill" href="wiki_phase_noise.html">Phase Noise</a>
+      <a class="wiki-pill" href="wiki_radar.html">Radar</a>
+      <a class="wiki-pill" href="wiki_fmcw_radar.html">FMCW Radar</a>
+      <a class="wiki-pill" href="wiki_antennas.html">Antennas</a>
+      <a class="wiki-pill" href="wiki_polarisation.html">Polarisation</a>
+      <a class="wiki-pill" href="wiki_frequency_bands.html">Frequency Bands</a>
+      <a class="wiki-pill" href="wiki_emc_shielding.html">EMC Shielding</a>
+      <a class="wiki-pill" href="wiki_rf_safety.html">RF Safety</a>
+      <a class="wiki-pill" href="wiki_em_waves.html">EM Waves</a>
+      <a class="wiki-pill" href="wiki_maxwells.html">Maxwell's Equations</a>
+      <a class="wiki-pill" href="wiki_skin_effect.html">Skin Effect</a>
+      <a class="wiki-pill" href="wiki_dielectrics.html">Dielectrics</a>
+      <a class="wiki-pill" href="wiki_magnetic_materials.html">Magnetic Materials</a>
+      <a class="wiki-pill" href="wiki_waveguide.html">Waveguides</a>
+      <a class="wiki-pill" href="wiki_microwave_components.html">Microwave Components</a>
+      <a class="wiki-pill" href="wiki_balun.html">BALUNs</a>
+      <a class="wiki-pill" href="wiki_nmr_basics.html">NMR Basics</a>
+      <a class="wiki-pill" href="wiki_coil_design.html">Coil Design</a>
+      <a class="wiki-pill" href="wiki_coil_types.html">Coil Types</a>
+      <a class="wiki-pill" href="wiki_coil_snr.html">Coil SNR</a>
+      <a class="wiki-pill" href="wiki_birdcage.html">Birdcage Coil</a>
+      <a class="wiki-pill" href="wiki_phased_arrays.html">Phased Arrays</a>
+      <a class="wiki-pill" href="wiki_preamplifier_decoupling.html">Preamp Decoupling</a>
+      <a class="wiki-pill" href="wiki_sar.html">MRI SAR</a>
+      <a class="wiki-pill" href="wiki_mri_gradients.html">Gradient Coils</a>
+      <a class="wiki-pill" href="wiki_b1_mapping.html">B₁ Mapping</a>
+      <a class="wiki-pill" href="wiki_mri_hardware.html">MRI Hardware</a>
+      <a class="wiki-pill" href="wiki_mri_sequences.html">MRI Sequences</a>
+      <a class="wiki-pill" href="wiki_mri_contrast.html">MRI Contrast</a>
+      <a class="wiki-pill" href="wiki_mri_artifacts.html">MRI Artefacts</a>
+      <a class="wiki-pill" href="wiki_parallel_imaging.html">Parallel Imaging</a>
+      <a class="wiki-pill all" href="wiki.html">Browse all 57 →</a>
+    </div>
+  </div>
 
-		<a class="cat-card" href="LinkBudget.html">
-			<div class="cat-icon">
-<svg viewBox="0 0 200 50" width="200" height="50"><circle cx="25" cy="25" r="6" fill="#AA77FF"/><circle cx="175" cy="25" r="6" fill="#AA77FF"/><path d="M25,25 Q100,5 175,25" stroke="#AA77FF" stroke-width="2" fill="none" stroke-dasharray="4 3"/><text x="100" y="18" text-anchor="middle" font-family="monospace" font-size="10" fill="#5533aa">FSPL</text><path d="M35,30 l-3,-3 l-3,3 z" fill="#AA77FF"/></svg>
-			</div>
-			<div class="cat-title">Link & Noise</div>
-			<div class="cat-desc">Friis equation, cascaded noise figure, and systematic link budget calculations.</div>
-			<div class="cat-count">3 tools</div>
-		</a>
+</div><!-- /hp-wrap -->
 
-		<a class="cat-card" href="SpiceSim.html">
-			<div class="cat-icon">
-<svg viewBox="0 0 200 50" width="200" height="50"><rect x="10" y="10" width="50" height="30" fill="#1e1e2e" stroke="#AA77FF" stroke-width="1" rx="3"/><text x="35" y="29" text-anchor="middle" font-family="monospace" font-size="10" fill="#a6e3a1">.SPICE</text><path d="M70,25 L190,25" stroke="#AA77FF" stroke-width="1.5"/><path d="M75,25 L80,15 L90,35 L100,10 L110,40 L120,15 L130,35 L140,20 L150,30 L160,22 L170,28 L180,25" stroke="#00ccff" stroke-width="1.5" fill="none"/></svg>
-			</div>
-			<div class="cat-title">Simulators</div>
-			<div class="cat-desc">RF circuit simulator (ABCD), SPICE engine (MNA), and embedded Falstad circuit simulator.</div>
-			<div class="cat-count">3 simulators</div>
-		</a>
+<footer style="text-align:center;padding:14px;font-family:monospace;font-size:11px;color:#888;border-top:1px solid #eee;margin-top:10px;">
+  RF Toolbox &nbsp;·&nbsp; All tools run client-side &nbsp;·&nbsp;
+  <a href="start-here.html" style="color:#AA77FF;">Start Here</a> &nbsp;·&nbsp;
+  <a href="wiki.html" style="color:#AA77FF;">Wiki</a> &nbsp;·&nbsp;
+  <a href="games.html" style="color:#AA77FF;">Games</a>
+</footer>
 
-		<a class="cat-card" href="wiki.html">
-			<div class="cat-icon">
-<svg viewBox="0 0 200 50" width="200" height="50"><rect x="10" y="12" width="180" height="26" fill="#f0eeff" stroke="#AA77FF" stroke-width="1" rx="3"/><line x1="20" y1="20" x2="150" y2="20" stroke="#AA77FF" stroke-width="1.5"/><line x1="20" y1="25" x2="170" y2="25" stroke="#888" stroke-width="1"/><line x1="20" y1="30" x2="140" y2="30" stroke="#888" stroke-width="1"/></svg>
-			</div>
-			<div class="cat-title">Wiki</div>
-			<div class="cat-desc">35 articles on EM theory, RF engineering, microwave design, and MRI physics.</div>
-			<div class="cat-count">5 categories</div>
-		</a>
+<script>
+// ── Category map for tab filtering ──────────────────────────────────────────
+var CAT_MAP = {
+  coils:    ['LC.html','CLC.html','CLI.html','CoilDesigner.html','SurfaceCoilDesigner.html','BirdcageCoil.html'],
+  tlines:   ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html'],
+  matching: ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','Wilkinson.html','LCBalun.html','CapacitorNetwork.html'],
+  filters:  ['FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html'],
+  antennas: ['Dipole.html','PatchAntenna.html','ArrayFactor.html'],
+  system:   ['Friis.html','NoiseFigure.html','LinkBudget.html','RadarRange.html','IP3Calc.html','PowerCombiner.html'],
+  utils:    ['dBmConverter.html','Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','PhaseNoiseJitter.html','TwoPortConverter.html','SParamPlotter.html'],
+  pcb:      ['BondWireVia.html'],
+  mri:      ['BirdcageCoil.html','SAREstimator.html','PhasedArrayDecoupling.html','SurfaceCoilDesigner.html','CoilDesigner.html'],
+  sims:     ['SmithChart.html','RFSimulator.html','SpiceSim.html','FalstadSim.html'],
+};
 
-		<a class="cat-card" href="games.html">
-			<div class="cat-icon">
-<svg viewBox="0 0 200 50" width="200" height="50"><circle cx="35" cy="25" r="11" fill="#AA77FF"/><circle cx="100" cy="25" r="11" fill="#00ccff"/><circle cx="165" cy="25" r="11" fill="#ff8800"/><rect x="25" y="40" width="20" height="3" fill="#333"/></svg>
-			</div>
-			<div class="cat-title">Games</div>
-			<div class="cat-desc">Take a break — Snake, Pong, Asteroids, resistor colour code trainer, and more.</div>
-			<div class="cat-count">7 games</div>
-		</a>
+var allCards = document.querySelectorAll('.tool-card');
+var allHeaders = document.querySelectorAll('.cat-header');
 
-	</div>
+function filterCat(cat, btn) {
+  // Update tab UI
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.getElementById('tool-search').value = '';
+  document.getElementById('search-count').textContent = '';
 
-	<!-- ══════════════════ FEATURED TOOLS ══════════════════ -->
-	<div class="sec-hdr">Featured Tools</div>
-	<div class="feat-grid">
+  if(cat === 'all') {
+    allCards.forEach(c => c.style.display = '');
+    allHeaders.forEach(h => h.style.display = '');
+  } else {
+    var allowed = (CAT_MAP[cat] || []).map(h => h.toLowerCase());
+    var visHeaders = new Set();
+    allCards.forEach(function(card) {
+      var href = card.getAttribute('href') || '';
+      var show = allowed.indexOf(href.toLowerCase()) !== -1;
+      card.style.display = show ? '' : 'none';
+      if(show) {
+        // Find preceding .cat-header
+        var prev = card.previousElementSibling;
+        while(prev && !prev.classList.contains('cat-header')) prev = prev.previousElementSibling;
+        if(prev) visHeaders.add(prev);
+        // Also check if inside a tool-grid — find the grid, then find its preceding header
+        var parent = card.parentElement;
+        if(parent && parent.classList.contains('tool-grid')) {
+          var ph = parent.previousElementSibling;
+          if(ph && ph.classList.contains('cat-header')) visHeaders.add(ph);
+        }
+      }
+    });
+    allHeaders.forEach(h => h.style.display = visHeaders.has(h) ? '' : 'none');
+  }
+}
 
-		<a class="feat-card" href="SmithChart.html">
-			<div class="feat-preview">
-<svg viewBox="0 0 240 120"><circle cx="120" cy="60" r="52" fill="#fafeff" stroke="#333" stroke-width="1.5"/><circle cx="148" cy="60" r="17" fill="none" stroke="#AA77FF" stroke-width="0.9"/><circle cx="134" cy="60" r="31" fill="none" stroke="#AA77FF" stroke-width="0.9"/><circle cx="172" cy="40" r="26" fill="none" stroke="#00aacc" stroke-width="0.9" opacity="0.6"/><circle cx="172" cy="80" r="26" fill="none" stroke="#00aacc" stroke-width="0.9" opacity="0.6"/><line x1="68" y1="60" x2="172" y2="60" stroke="#aaa" stroke-width="0.8"/><circle cx="148" cy="42" r="5" fill="#ff6644"/><circle cx="100" cy="70" r="5" fill="#00ccff"/></svg>
-			</div>
-			<div class="feat-body">
-				<div class="feat-title">Interactive Smith Chart</div>
-				<div class="feat-desc">Click anywhere on the chart to read off impedance, return loss, and VSWR. Plot multiple impedance points and visualise them against a full resistance/reactance grid.</div>
-			</div>
-		</a>
+function searchTools() {
+  var q = document.getElementById('tool-search').value.trim().toLowerCase();
+  // Reset tab
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('[data-cat="all"]').classList.add('active');
 
-		<a class="feat-card" href="SpiceSim.html">
-			<div class="feat-preview">
-<svg viewBox="0 0 240 120"><rect x="8" y="8" width="224" height="40" fill="#1e1e2e" rx="3"/><text x="18" y="22" font-family="monospace" font-size="8" fill="#cdd6f4">R1 in out 1k</text><text x="18" y="33" font-family="monospace" font-size="8" fill="#cdd6f4">C1 out 0 1n</text><text x="18" y="44" font-family="monospace" font-size="8" fill="#a6e3a1">.AC DEC 50 1k 1g</text><line x1="18" y1="105" x2="230" y2="105" stroke="#888"/><line x1="18" y1="55" x2="18" y2="105" stroke="#888"/><path d="M18,60 Q50,60 80,62 Q110,70 130,85 Q160,100 230,104" stroke="#AA77FF" stroke-width="2" fill="none"/><text x="200" y="70" font-family="monospace" font-size="9" fill="#AA77FF">S21</text></svg>
-			</div>
-			<div class="feat-body">
-				<div class="feat-title">SPICE Simulator</div>
-				<div class="feat-desc">Real SPICE engine in your browser using Modified Nodal Analysis. Run .AC, .DC, .OP, and .TRAN analyses with R, L, C, V, and I elements — no installs required.</div>
-			</div>
-		</a>
-
-		<a class="feat-card" href="RFSimulator.html">
-			<div class="feat-preview">
-<svg viewBox="0 0 240 120"><rect x="10" y="50" width="18" height="18" fill="#ffd0b0" stroke="#777" rx="2"/><text x="19" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#333">R</text><line x1="28" y1="59" x2="48" y2="59" stroke="#333"/><rect x="48" y="50" width="18" height="18" fill="#c8e8ff" stroke="#777" rx="2"/><text x="57" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#333">L</text><line x1="66" y1="59" x2="86" y2="59" stroke="#333"/><rect x="86" y="50" width="18" height="18" fill="#c8ffd8" stroke="#777" rx="2"/><text x="95" y="63" text-anchor="middle" font-family="monospace" font-size="9" fill="#333">C</text><line x1="104" y1="59" x2="120" y2="59" stroke="#333"/><circle cx="124" cy="59" r="4" fill="#00ccff"/><path d="M140,100 Q160,50 180,40 Q200,35 230,30" stroke="#AA77FF" stroke-width="2" fill="none"/><text x="220" y="25" font-family="monospace" font-size="9" fill="#AA77FF">S21</text></svg>
-			</div>
-			<div class="feat-body">
-				<div class="feat-title">RF Circuit Simulator</div>
-				<div class="feat-desc">Build ladder networks from R, L, C, and transmission line elements. Computes S-parameters, impedance, phase, group delay, and VSWR vs frequency using ABCD matrix analysis.</div>
-			</div>
-		</a>
-
-		<a class="feat-card" href="LinkBudget.html">
-			<div class="feat-preview">
-<svg viewBox="0 0 240 120"><rect x="8" y="20" width="60" height="30" fill="#f0eeff" stroke="#AA77FF" rx="3"/><text x="38" y="40" text-anchor="middle" font-family="monospace" font-size="10" fill="#5533aa" font-weight="bold">TX</text><path d="M68,35 Q120,8 172,35" stroke="#AA77FF" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><text x="120" y="22" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">FSPL</text><rect x="172" y="20" width="60" height="30" fill="#f0eeff" stroke="#AA77FF" rx="3"/><text x="202" y="40" text-anchor="middle" font-family="monospace" font-size="10" fill="#5533aa" font-weight="bold">RX</text><rect x="8" y="65" width="224" height="45" fill="#fafafa" stroke="#ddd" rx="3"/><text x="20" y="80" font-family="monospace" font-size="9" fill="#333">EIRP:    +22 dBm</text><text x="20" y="92" font-family="monospace" font-size="9" fill="#333">FSPL:    −100 dB</text><text x="20" y="104" font-family="monospace" font-size="9" fill="#007700" font-weight="bold">Margin: +12 dB ✓</text></svg>
-			</div>
-			<div class="feat-body">
-				<div class="feat-title">Link Budget Calculator</div>
-				<div class="feat-desc">End-to-end RF link analysis: TX power, path loss, noise floor, and SNR margin with colour-coded pass/fail output.</div>
-			</div>
-		</a>
-
-		<a class="feat-card" href="CoilDesigner.html">
-			<div class="feat-preview">
-<svg viewBox="0 0 240 120"><ellipse cx="120" cy="60" rx="70" ry="18" fill="none" stroke="#AA77FF" stroke-width="2"/><ellipse cx="120" cy="60" rx="70" ry="18" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(-20,0)"/><ellipse cx="120" cy="60" rx="70" ry="18" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(-40,0)"/><ellipse cx="120" cy="60" rx="70" ry="18" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(20,0)"/><ellipse cx="120" cy="60" rx="70" ry="18" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(40,0)"/><text x="120" y="105" text-anchor="middle" font-family="monospace" font-size="10" fill="#5533aa">N-turn solenoid coil</text></svg>
-			</div>
-			<div class="feat-body">
-				<div class="feat-title">Multi-Turn Coil Designer</div>
-				<div class="feat-desc">Wheeler formula inductance, tuning capacitor, wire resistance, and Q factor for helical RF coils — designed especially for MRI tuning.</div>
-			</div>
-		</a>
-
-		<a class="feat-card" href="FilterDesign.html">
-			<div class="feat-preview">
-<svg viewBox="0 0 240 120"><line x1="12" y1="100" x2="228" y2="100" stroke="#aaa" stroke-width="1"/><line x1="12" y1="12" x2="12" y2="100" stroke="#aaa" stroke-width="1"/><path d="M12,15 L110,15 Q135,15 140,50 Q145,95 228,95" stroke="#AA77FF" stroke-width="2" fill="none"/><path d="M12,22 Q70,22 90,25 Q115,50 135,80 Q155,95 228,97" stroke="#ff6644" stroke-width="2" fill="none"/><text x="40" y="35" font-family="monospace" font-size="10" fill="#AA77FF">Butterworth</text><text x="165" y="75" font-family="monospace" font-size="10" fill="#ff6644">Chebyshev</text><line x1="135" y1="12" x2="135" y2="100" stroke="#888" stroke-width="0.8" stroke-dasharray="2 2"/><text x="135" y="115" text-anchor="middle" font-family="monospace" font-size="9" fill="#888">fc</text></svg>
-			</div>
-			<div class="feat-body">
-				<div class="feat-title">LC Filter Designer</div>
-				<div class="feat-desc">Generate Butterworth or Chebyshev LC ladder component values up to 9th order. Low-pass or high-pass, with full bill of materials.</div>
-			</div>
-		</a>
-
-	</div>
-
-	<!-- ══════════════════ FROM THE WIKI ══════════════════ -->
-	<div class="sec-hdr">From the Wiki</div>
-	<div class="wiki-showcase">
-		<p style="font-family:monospace;font-size:12px;color:#555;margin-bottom:10px;">35 reference articles covering theory behind the tools. Each article is concise, equation-focused, and includes original diagrams.</p>
-		<div class="wiki-items">
-			<a class="wiki-item" href="wiki_maxwells.html">Maxwell's Equations</a>
-			<a class="wiki-item" href="wiki_sparam.html">S-Parameters</a>
-			<a class="wiki-item" href="wiki_impedance_matching.html">Impedance Matching</a>
-			<a class="wiki-item" href="wiki_noise.html">Noise in RF Systems</a>
-			<a class="wiki-item" href="wiki_filters.html">RF Filters</a>
-			<a class="wiki-item" href="wiki_antennas.html">Antenna Fundamentals</a>
-			<a class="wiki-item" href="wiki_transmission_lines.html">Transmission Lines</a>
-			<a class="wiki-item" href="wiki_waveguide.html">Waveguides</a>
-			<a class="wiki-item" href="wiki_nmr_basics.html">NMR Basics</a>
-			<a class="wiki-item" href="wiki_birdcage.html">Birdcage Coil</a>
-			<a class="wiki-item" href="wiki_parallel_imaging.html">Parallel Imaging</a>
-			<a class="wiki-item" href="wiki_mri_sequences.html">MRI Pulse Sequences</a>
-			<a class="wiki-item" href="wiki_oscillators.html">Oscillators &amp; PLLs</a>
-			<a class="wiki-item" href="wiki_radar.html">Radar Fundamentals</a>
-			<a class="wiki-item" href="wiki_mixers.html">Mixers</a>
-			<a class="wiki-item" href="wiki_modulation.html">Modulation Schemes</a>
-			<a class="wiki-item" href="wiki.html" style="background:#AA77FF;color:#fff;">Browse all 35 articles →</a>
-		</div>
-	</div>
-
-	<p class="updates">Site last updated: April 2026 &nbsp; · &nbsp; All tools run client-side in your browser &nbsp; · &nbsp; Built with ♡ for RF engineers and MRI physicists</p>
-
-</article>
-</section>
-<footer><p><a href="index.html">Home</a> . <a href="wiki.html">&#128210; Wiki</a> . <a href="games.html">Games</a></p></footer>
+  var visible = 0;
+  allCards.forEach(function(card) {
+    var name = (card.querySelector('.tool-card-name') || {}).textContent || '';
+    var desc = (card.querySelector('.tool-card-desc') || {}).textContent || '';
+    var match = !q || (name + desc).toLowerCase().includes(q);
+    card.style.display = match ? '' : 'none';
+    if(match) visible++;
+  });
+  // Show/hide headers based on whether their grid has visible cards
+  allHeaders.forEach(function(hdr) {
+    var grid = hdr.nextElementSibling;
+    if(!grid) return;
+    var anyVis = Array.from(grid.querySelectorAll('.tool-card')).some(c => c.style.display !== 'none');
+    hdr.style.display = anyVis ? '' : 'none';
+  });
+  document.getElementById('search-count').textContent = q ? visible + ' tool' + (visible===1?'':'s') : '';
+}
+</script>
 </body>
 </html>
