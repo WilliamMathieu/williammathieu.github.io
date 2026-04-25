@@ -260,6 +260,12 @@
     <div class="tool-card-name">Impedance Matching Network</div>
     <div class="tool-card-desc">L-network for complex Z<sub>S</sub>→Z<sub>L</sub> with Smith Chart trajectories.</div>
   </div>
+</a><a class="tool-card" href="Coupler.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="33" x2="185" y2="33" stroke="#5533aa" stroke-width="2.5"/><line x1="15" y1="57" x2="185" y2="57" stroke="#AA77FF" stroke-width="2.5"/><rect x="55" y="27" width="90" height="12" fill="#e8f0ff" stroke="#5533aa" stroke-width="1.5" rx="1"/><rect x="55" y="51" width="90" height="12" fill="#f0e8ff" stroke="#AA77FF" stroke-width="1.5" rx="1"/><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Coupler / 90° / 180° Hybrid</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Coupler &amp; Hybrid</div>
+    <div class="tool-card-desc">Coupled-line, branchline (90°), and rat-race (180°) hybrid design.</div>
+  </div>
 </a>
 </div>
 <div class="cat-header">🟡 Filters & Attenuators</div>
@@ -275,6 +281,12 @@
   <div class="tool-card-body">
     <div class="tool-card-name">Attenuator Designer</div>
     <div class="tool-card-desc">Pi, T, L-pad, and Bridged-T resistor values for any attenuation.</div>
+  </div>
+</a><a class="tool-card" href="SteppedImpedanceLPF.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="10" y1="45" x2="30" y2="45" stroke="#5533aa" stroke-width="2"/><rect x="30" y="40" width="18" height="10" fill="#e8f0ff" stroke="#5533aa" stroke-width="1.5" rx="1"/><rect x="48" y="30" width="24" height="30" fill="#f0e8ff" stroke="#AA77FF" stroke-width="1.5" rx="1"/><rect x="72" y="40" width="18" height="10" fill="#e8f0ff" stroke="#5533aa" stroke-width="1.5" rx="1"/><rect x="90" y="30" width="24" height="30" fill="#f0e8ff" stroke="#AA77FF" stroke-width="1.5" rx="1"/><rect x="114" y="40" width="18" height="10" fill="#e8f0ff" stroke="#5533aa" stroke-width="1.5" rx="1"/><line x1="132" y1="45" x2="190" y2="45" stroke="#5533aa" stroke-width="2"/><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Stepped-Z microstrip LPF</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Stepped-Z LPF</div>
+    <div class="tool-card-desc">Microstrip stepped-impedance LPF: Butterworth or Chebyshev, with trace dimensions.</div>
   </div>
 </a>
 </div>
@@ -552,8 +564,8 @@
 var CAT_MAP = {
   coils:    ['LC.html','BandpassCalc.html'],
   tlines:   ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html'],
-  matching: ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','Wilkinson.html','LCBalun.html','CapacitorNetwork.html','ImpedanceMatchingNetwork.html'],
-  filters:  ['FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html'],
+  matching: ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','Wilkinson.html','LCBalun.html','CapacitorNetwork.html','ImpedanceMatchingNetwork.html','Coupler.html'],
+  filters:  ['FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html'],
   antennas: ['Dipole.html','PatchAntenna.html','ArrayFactor.html'],
   system:   ['Friis.html','NoiseFigure.html','LinkBudget.html','RadarRange.html','IP3Calc.html','PowerCombiner.html'],
   utils:    ['dBmConverter.html','Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','PhaseNoiseJitter.html','TwoPortConverter.html','SParamPlotter.html','BondWireVia.html','ESeries.html'],
