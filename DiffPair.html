@@ -100,7 +100,7 @@ document.getElementById('dp2-btn').addEventListener('click', function(){
 });
 function drawDiagram(w,s,h,t,er,zdiff){
   if(!w){w=0.2;s=0.2;h=0.2;t=0.035;er=4.4;zdiff='—';}
-  var W=480,H=160,sc=Math.min(80,50/w);
+  var W=480,H=175,sc=Math.min(80,50/w);
   var wp=w*sc, sp=s*sc, hp=Math.min(40,h*sc*0.8);
   var cx=W/2, topY=55, gndY=topY+hp;
   var sv='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impedance Matching Network Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate L-network component values to match any two complex impedances. Shunt-series and series-shunt topologies with Smith Chart trajectory display.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/ImpedanceMatchingNetwork.html">
+  <meta property="og:title" content="Impedance Matching Network Calculator | RF Toolbox">
+  <meta property="og:description" content="Calculate L-network component values to match any two complex impedances. Shunt-series and series-shunt topologies with Smith Chart trajectory display.">
+  <meta property="og:url" content="https://rftoolbox.ca/ImpedanceMatchingNetwork.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #imn-results { display:none; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; margin-bottom:4px; }
+    .imn-canvas-wrap { display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; margin-top:6px; }
+    .imn-canvas-col canvas { display:block; border-radius:6px; border:1px solid #d0c8f0; max-width:100%; }
+    .imn-legend { margin-top:8px; font-size:11px; font-family:monospace; }
+    .imn-legend-row { display:flex; align-items:center; gap:6px; margin:3px 0; }
+    .imn-swatch { display:inline-block; width:24px; height:3px; border-radius:2px; }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Impedance Matching Network Calculator",
+    "description": "Calculate L-network component values to match any two complex impedances. Shunt-series and series-shunt topologies with Smith Chart trajectory display.",
+    "url": "https://rftoolbox.ca/ImpedanceMatchingNetwork.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Impedance Matching Network</h3>
+<div class="tool-concept">
+  <p>Designs a two-element L-network to match a complex source impedance Z<sub>S</sub> to a complex load impedance Z<sub>L</sub> at a single frequency. Up to four solutions (shunt-then-series and series-then-shunt, each with two sign choices) are computed. Matching trajectories are shown on the Smith Chart.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">
+  <strong>Topology A — Shunt across Z<sub>L</sub>, then series toward Z<sub>S</sub></strong><br>
+  \(B = -B_L \pm \sqrt{G_L\!\left(\tfrac{1}{R_S}-G_L\right)}, \quad X_s = -X_S - \tfrac{B_{\!L,\text{new}}}{G_L^2+B_{\!L,\text{new}}^2}\)<br>
+  Condition: \(R_S \le |Z_L|^2/R_L\)<br><br>
+  <strong>Topology B — Series into Z<sub>L</sub>, then shunt toward Z<sub>S</sub></strong><br>
+  \(X = -X_L \pm \sqrt{R_L\!\left(\tfrac{|Z_S|^2}{R_S}-R_L\right)}, \quad B = \tfrac{X_S}{|Z_S|^2}+\tfrac{X_L+X}{R_L^2+(X_L+X)^2}\)<br>
+  Condition: \(|Z_S|^2/R_S \ge R_L\)
+</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+  <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">Z<sub>S</sub></td><td style="padding:3px 0;">Source impedance R<sub>S</sub> + jX<sub>S</sub> (Ω). The network is designed to present Z<sub>S</sub>* to the source.</td></tr>
+  <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">Z<sub>L</sub></td><td style="padding:3px 0;">Load impedance R<sub>L</sub> + jX<sub>L</sub> (Ω). The network is driven into the load.</td></tr>
+  <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">f</td><td style="padding:3px 0;">Matching frequency. The L-network provides a conjugate match only at this frequency.</td></tr>
+  <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">Z₀</td><td style="padding:3px 0;">Reference impedance for Smith Chart display (does not affect component values).</td></tr>
+  <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">Q</td><td style="padding:3px 0;">Network Q ≈ √(R<sub>high</sub>/R<sub>low</sub>−1). Higher Q means narrower bandwidth.</td></tr>
+</table>
+</details>
+</div>
+
+<div class="sec-lbl">Source Impedance Z<sub>S</sub></div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Resistance, <span class="var">R<sub>S</sub></span></label>
+    <div class="inp-inline">
+      <input type="text" id="imn-rs" value="50" data-tip="Real part of source impedance. Must be > 0.">
+      <span class="inp-units">Ω</span>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Reactance, <span class="var">X<sub>S</sub></span></label>
+    <div class="inp-inline">
+      <input type="text" id="imn-xs" value="0" data-tip="Imaginary part of source impedance. Positive = inductive, negative = capacitive. Enter 0 for purely resistive source.">
+      <span class="inp-units">Ω</span>
+    </div>
+    <span class="inp-hint">+ inductive, − capacitive</span>
+  </div>
+</div>
+
+<div class="sec-lbl">Load Impedance Z<sub>L</sub></div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Resistance, <span class="var">R<sub>L</sub></span></label>
+    <div class="inp-inline">
+      <input type="text" id="imn-rl" placeholder="e.g. 200" data-tip="Real part of load impedance. Must be > 0.">
+      <span class="inp-units">Ω</span>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Reactance, <span class="var">X<sub>L</sub></span></label>
+    <div class="inp-inline">
+      <input type="text" id="imn-xl" value="0" data-tip="Imaginary part of load impedance. Enter 0 for a purely resistive load.">
+      <span class="inp-units">Ω</span>
+    </div>
+    <span class="inp-hint">+ inductive, − capacitive</span>
+  </div>
+</div>
+
+<div class="sec-lbl">Frequency &amp; Reference</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Frequency, <span class="var">f</span></label>
+    <div class="inp-inline">
+      <input type="text" id="imn-f" placeholder="value" data-tip="Matching frequency. The L-network is resonant only at this single frequency.">
+      <select id="imn-fu">
+        <option value="1e3">kHz</option>
+        <option value="1e6" selected>MHz</option>
+        <option value="1e9">GHz</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Reference impedance, <span class="var">Z₀</span></label>
+    <div class="inp-inline">
+      <input type="text" id="imn-z0" value="50" data-tip="Reference impedance for Smith Chart normalisation. Does not affect component values.">
+      <span class="inp-units">Ω</span>
+    </div>
+    <span class="inp-hint">For Smith Chart display</span>
+  </div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;">
+  <button class="calc-btn" id="imn-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'imn-rs':'50','imn-xs':'0','imn-rl':'200','imn-xl':'0','imn-f':'2450','imn-fu':'1e6','imn-z0':'50'})" title="Match 50 Ω source to 200 Ω load at 2.45 GHz">Load Example (50→200 Ω @ 2.45 GHz)</button>
+</div>
+<div id="imn-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+
+<div class="sec-lbl">Results</div>
+<div id="imn-results" class="res-grid"></div>
+
+<div class="sec-lbl">Smith Chart — Matching Trajectories</div>
+<div class="schematic-box" style="padding:12px;">
+  <div class="imn-canvas-wrap">
+    <div class="imn-canvas-col">
+      <canvas id="imn-canvas" width="320" height="320"></canvas>
+      <div id="imn-legend" class="imn-legend"></div>
+    </div>
+    <div style="flex:1;min-width:180px;font-size:11px;font-family:monospace;color:#555;line-height:1.7;">
+      <div style="font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;">Reading the diagram</div>
+      <div>● <strong>Square</strong> = Z<sub>S</sub>* (target)</div>
+      <div>● <strong>Triangle</strong> = Z<sub>L</sub> (start)</div>
+      <div>● <strong>Dashed arc</strong> = shunt element moves along a constant-conductance circle</div>
+      <div>● <strong>Solid arc</strong> = series element moves along a constant-resistance circle</div>
+      <div style="margin-top:8px;color:#888;">Each solution colour-coded. Moving <em>toward</em> the chart centre = better match.</div>
+    </div>
+  </div>
+</div>
+
+<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn the theory behind impedance matching →</a></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   Matching Network — Smith Chart diagram
+   ══════════════════════════════════════════════════════════ */
+
+var IMN = {
+  W: 320, H: 320,
+  cx: 160, cy: 160, R: 138,
+  colors: ['#AA77FF','#ff6644','#00aacc','#dd44aa']
+};
+
+function zToG(r, x) {
+  var dr = r+1, di = x, nr = r-1, ni = x, den = dr*dr + di*di;
+  return { re: (nr*dr+ni*di)/den, im: (ni*dr-nr*di)/den };
+}
+function gToXY(gRe, gIm) {
+  return { x: IMN.cx + IMN.R*gRe, y: IMN.cy - IMN.R*gIm };
+}
+
+function drawMatchingDiagram(solutions, Rs, Xs, Rl, Xl, Z0) {
+  var canvas = document.getElementById('imn-canvas');
+  if (!canvas) return;
+  var dpr = window.devicePixelRatio || 1;
+  canvas.width  = IMN.W * dpr;
+  canvas.height = IMN.H * dpr;
+  canvas.style.width  = IMN.W + 'px';
+  canvas.style.height = IMN.H + 'px';
+  var ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  var cx = IMN.cx, cy = IMN.cy, R = IMN.R;
+
+  // Background
+  ctx.fillStyle = '#faf9ff';
+  ctx.fillRect(0, 0, IMN.W, IMN.H);
+
+  // Clip to chart
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2*Math.PI); ctx.clip();
+
+  // Constant-R circles
+  [0, 0.2, 0.5, 1, 2, 5].forEach(function(r) {
+    var cr = R/(1+r), ccx = cx+R-cr;
+    ctx.strokeStyle = r===1 ? '#AA77FF' : r===0 ? '#bbb' : '#d8d0ef';
+    ctx.lineWidth   = r===1 ? 1.2 : 0.8;
+    ctx.beginPath(); ctx.arc(ccx, cy, cr, 0, 2*Math.PI); ctx.stroke();
+  });
+  // Constant-X arcs
+  [0.2, 0.5, 1, 2, 5].forEach(function(x) {
+    [x, -x].forEach(function(xi) {
+      var xr = R/Math.abs(xi), xcy = cy - R/xi;
+      ctx.strokeStyle = Math.abs(xi)===1 ? '#00aacc' : '#d8edf0';
+      ctx.lineWidth   = Math.abs(xi)===1 ? 1.0 : 0.7;
+      ctx.beginPath(); ctx.arc(cx+R, xcy, xr, 0, 2*Math.PI); ctx.stroke();
+    });
+  });
+  ctx.restore();
+
+  // Outer circle + real axis
+  ctx.strokeStyle = '#555'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, 2*Math.PI); ctx.stroke();
+  ctx.strokeStyle = '#ccc'; ctx.lineWidth = 0.7;
+  ctx.beginPath(); ctx.moveTo(cx-R, cy); ctx.lineTo(cx+R, cy); ctx.stroke();
+
+  var rs = Rs/Z0, xs = Xs/Z0, rl = Rl/Z0, xl = Xl/Z0;
+
+  // Draw matching trajectories for each solution (normalize B and Xseries to Z0)
+  solutions.forEach(function(sol, idx) {
+    if (idx >= IMN.colors.length) return;
+    var col = IMN.colors[idx];
+    var solNorm = {
+      topo: sol.topo,
+      B: sol.B * Z0,              // S → normalized susceptance (b = B·Z₀)
+      Xseries: sol.Xseries / Z0   // Ω → normalized reactance (x = X/Z₀)
+    };
+    drawTrajectory(ctx, solNorm, rs, xs, rl, xl, col);
+  });
+
+  // Draw target point Zs* (square marker)
+  var gTarget = zToG(rs, -xs);
+  var ptTarget = gToXY(gTarget.re, gTarget.im);
+  ctx.fillStyle = '#5533aa';
+  ctx.fillRect(ptTarget.x - 5, ptTarget.y - 5, 10, 10);
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(ptTarget.x - 3, ptTarget.y - 3, 6, 6);
+
+  // Draw load point ZL (triangle marker)
+  var gLoad = zToG(rl, xl);
+  var ptLoad = gToXY(gLoad.re, gLoad.im);
+  ctx.fillStyle = '#ff6644';
+  ctx.beginPath();
+  ctx.moveTo(ptLoad.x, ptLoad.y - 7);
+  ctx.lineTo(ptLoad.x + 6, ptLoad.y + 5);
+  ctx.lineTo(ptLoad.x - 6, ptLoad.y + 5);
+  ctx.closePath(); ctx.fill();
+
+  // Legend
+  var legend = document.getElementById('imn-legend');
+  if (legend) {
+    var html = '<div class="imn-legend-row"><span style="display:inline-block;width:10px;height:10px;background:#5533aa;margin-right:4px;"></span>Z<sub>S</sub>* — target (square)</div>';
+    html += '<div class="imn-legend-row"><span style="display:inline-block;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:10px solid #ff6644;margin-right:4px;"></span>Z<sub>L</sub> — load (triangle)</div>';
+    solutions.forEach(function(sol, idx) {
+      if (idx >= IMN.colors.length) return;
+      html += '<div class="imn-legend-row"><span class="imn-swatch" style="background:' + IMN.colors[idx] + '"></span>Sol. ' + (idx+1) + ' — ' + sol.label + '</div>';
+    });
+    legend.innerHTML = html;
+  }
+}
+
+function drawTrajectory(ctx, sol, rs, xs, rl, xl, col) {
+  var STEPS = 60;
+  ctx.lineWidth = 1.8;
+
+  if (sol.topo === 'A') {
+    // Step 1: shunt susceptance B across Zl — moves along constant-G circle
+    var Gl = rl/(rl*rl+xl*xl), Bl_orig = -xl/(rl*rl+xl*xl);
+    var B_target = sol.B;
+    ctx.strokeStyle = col; ctx.setLineDash([4,3]);
+    ctx.beginPath();
+    for (var i = 0; i <= STEPS; i++) {
+      var B = B_target * i / STEPS;
+      var Bl_cur = Bl_orig + B;
+      var den = Gl*Gl + Bl_cur*Bl_cur;
+      var rint = Gl/den, xint = -Bl_cur/den;
+      var g = zToG(rint, xint);
+      var p = gToXY(g.re, g.im);
+      if (i===0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+    }
+    ctx.stroke(); ctx.setLineDash([]);
+
+    // Step 2: series reactance — moves along constant-R circle
+    var Bl_final = Bl_orig + B_target;
+    var den_f = Gl*Gl + Bl_final*Bl_final;
+    var r_mid = Gl/den_f, x_mid = -Bl_final/den_f;
+    var X_target = sol.Xseries;
+    ctx.strokeStyle = col; ctx.setLineDash([]);
+    ctx.beginPath();
+    for (var i = 0; i <= STEPS; i++) {
+      var Xstep = x_mid + X_target * i / STEPS;
+      var g = zToG(r_mid, Xstep);
+      var p = gToXY(g.re, g.im);
+      if (i===0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+    }
+    ctx.stroke();
+
+  } else {
+    // Topology B: series first, then shunt
+    // Step 1: series reactance X added to Zl — constant-R circle
+    var X_target = sol.Xseries;
+    ctx.strokeStyle = col; ctx.setLineDash([]);
+    ctx.beginPath();
+    for (var i = 0; i <= STEPS; i++) {
+      var Xstep = xl + X_target * i / STEPS;
+      var g = zToG(rl, Xstep);
+      var p = gToXY(g.re, g.im);
+      if (i===0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+    }
+    ctx.stroke();
+
+    // Step 2: shunt susceptance B — constant-G circle
+    var x_mid2 = xl + X_target;
+    var den_m = rl*rl + x_mid2*x_mid2;
+    var Gl_m = rl/den_m, Bl_m = -x_mid2/den_m;
+    var B_target2 = sol.B;
+    ctx.strokeStyle = col; ctx.setLineDash([4,3]);
+    ctx.beginPath();
+    for (var i = 0; i <= STEPS; i++) {
+      var B = B_target2 * i / STEPS;
+      var Bl_cur = Bl_m + B;
+      var den2 = Gl_m*Gl_m + Bl_cur*Bl_cur;
+      var rint = Gl_m/den2, xint = -Bl_cur/den2;
+      var g = zToG(rint, xint);
+      var p = gToXY(g.re, g.im);
+      if (i===0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+    }
+    ctx.stroke(); ctx.setLineDash([]);
+  }
+}
+
+window.drawMatchingDiagram = drawMatchingDiagram;
+
+// Draw empty chart on load
+window.addEventListener('load', function() {
+  drawMatchingDiagram([], 50, 0, 200, 0, 50);
+});
+</script>
+
+<script src="ImpedanceMatchingNetwork.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

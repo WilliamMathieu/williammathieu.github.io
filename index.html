@@ -122,7 +122,7 @@
   <!-- Tab bar -->
   <div class="tab-bar" id="tab-bar">
     <button class="tab-btn active" data-cat="all" onclick="filterCat('all',this)">All Tools</button>
-    <button class="tab-btn" data-cat="coils" onclick="filterCat('coils',this)">Coils & Resonance</button>
+    <button class="tab-btn" data-cat="coils" onclick="filterCat('coils',this)">Resonance & LC</button>
     <button class="tab-btn" data-cat="tlines" onclick="filterCat('tlines',this)">Transmission Lines</button>
     <button class="tab-btn" data-cat="matching" onclick="filterCat('matching',this)">Matching</button>
     <button class="tab-btn" data-cat="filters" onclick="filterCat('filters',this)">Filters</button>
@@ -141,43 +141,19 @@
 
   <!-- Tool grid -->
   <div id="all-cards">
-<div class="cat-header">🔵 Coils & Resonance</div>
+<div class="cat-header">🔵 Resonance & LC</div>
 <div class="tool-grid">
 <a class="tool-card" href="LC.html">
   <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="20" y1="45" x2="50" y2="45" stroke="#5533aa" stroke-width="2"/><path d="M50,45 A6,6 0 0,1 62,45 A6,6 0 0,1 74,45 A6,6 0 0,1 86,45 A6,6 0 0,1 98,45" fill="none" stroke="#AA77FF" stroke-width="2.2"/><line x1="98" y1="45" x2="115" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="115" y1="32" x2="115" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="124" y1="32" x2="124" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="124" y1="45" x2="180" y2="45" stroke="#5533aa" stroke-width="2"/><text x="100" y="78" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">f₀ = 1/2π√LC</text></svg></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">LC Resonance</div>
-    <div class="tool-card-desc">f₀, Q, and component values for series/parallel LC tanks.</div>
+    <div class="tool-card-name">LC Circuit Solver</div>
+    <div class="tool-card-desc">Solve for L, C, or f₀ — fill any two, get the third.</div>
   </div>
-</a><a class="tool-card" href="CLC.html">
-  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="45" x2="40" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="40" y1="32" x2="40" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="49" y1="32" x2="49" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="49" y1="45" x2="75" y2="45" stroke="#5533aa" stroke-width="2"/><path d="M75,45 A6,6 0 0,1 87,45 A6,6 0 0,1 99,45 A6,6 0 0,1 111,45 A6,6 0 0,1 123,45" fill="none" stroke="#AA77FF" stroke-width="2.2"/><line x1="123" y1="45" x2="149" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="149" y1="32" x2="149" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="158" y1="32" x2="158" y2="58" stroke="#5533aa" stroke-width="3"/><line x1="158" y1="45" x2="183" y2="45" stroke="#5533aa" stroke-width="2"/><text x="100" y="78" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">C-L-C series resonator</text></svg></div>
+</a><a class="tool-card" href="BandpassCalc.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="75" x2="185" y2="75" stroke="#ccc" stroke-width="1"/><path d="M15,72 Q50,72 80,30 Q100,14 120,30 Q150,72 185,72" stroke="#AA77FF" stroke-width="2.5" fill="#f0eeff" opacity="0.6"/><line x1="100" y1="14" x2="100" y2="75" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/><text x="100" y="85" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">f₀</text><text x="100" y="10" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">Q = f₀/BW</text></svg></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">C in LC Circuit</div>
-    <div class="tool-card-desc">Find the tuning capacitor for a given coil and frequency.</div>
-  </div>
-</a><a class="tool-card" href="CLI.html">
-  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="100" cy="44" r="32" fill="none" stroke="#5533aa" stroke-width="2.5"/><circle cx="132" cy="44" r="3" fill="white" stroke="#5533aa" stroke-width="1.5"/><line x1="105" y1="12" x2="95" y2="12" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/><text x="72" y="47" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">D</text><line x1="100" y1="44" x2="132" y2="44" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Loop inductance</text></svg></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Loop Inductance</div>
-    <div class="tool-card-desc">Inductance of a single circular loop (Rosa formula).</div>
-  </div>
-</a><a class="tool-card" href="CoilDesigner.html">
-  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><ellipse cx="100" cy="45" rx="65" ry="16" fill="none" stroke="#AA77FF" stroke-width="2.5"/><ellipse cx="100" cy="45" rx="65" ry="16" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(-18,0)" opacity="0.7"/><ellipse cx="100" cy="45" rx="65" ry="16" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(18,0)" opacity="0.7"/><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">RF coil</text></svg></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Simple RF Coil Designer</div>
-    <div class="tool-card-desc">Wheeler inductance, wire resistance, Q, and tuning cap for solenoid coils.</div>
-  </div>
-</a><a class="tool-card" href="SurfaceCoilDesigner.html">
-  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="100" cy="42" r="34" fill="none" stroke="#AA77FF" stroke-width="3"/><line x1="134" y1="42" x2="155" y2="42" stroke="#5533aa" stroke-width="1.5"/><rect x="155" y="36" width="22" height="12" fill="#f0eeff" stroke="#5533aa" stroke-width="1.2" rx="2"/><text x="166" y="45" text-anchor="middle" font-family="monospace" font-size="7" fill="#5533aa">C</text><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Surface coil</text></svg></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Surface Coil Designer</div>
-    <div class="tool-card-desc">Complete MRI surface receive coil design with matching network.</div>
-  </div>
-</a><a class="tool-card" href="BirdcageCoil.html">
-  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="144" y1="45" x2="125" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="141" y1="62" x2="123" y2="55" stroke="#5533aa" stroke-width="2"/><line x1="131" y1="76" x2="118" y2="63" stroke="#5533aa" stroke-width="2"/><line x1="117" y1="86" x2="110" y2="68" stroke="#5533aa" stroke-width="2"/><line x1="100" y1="89" x2="100" y2="70" stroke="#5533aa" stroke-width="2"/><line x1="83" y1="86" x2="90" y2="68" stroke="#5533aa" stroke-width="2"/><line x1="69" y1="76" x2="82" y2="63" stroke="#5533aa" stroke-width="2"/><line x1="59" y1="62" x2="77" y2="55" stroke="#5533aa" stroke-width="2"/><line x1="56" y1="45" x2="75" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="59" y1="28" x2="77" y2="35" stroke="#5533aa" stroke-width="2"/><line x1="69" y1="14" x2="82" y2="27" stroke="#5533aa" stroke-width="2"/><line x1="83" y1="4" x2="90" y2="22" stroke="#5533aa" stroke-width="2"/><line x1="100" y1="1" x2="100" y2="20" stroke="#5533aa" stroke-width="2"/><line x1="117" y1="4" x2="110" y2="22" stroke="#5533aa" stroke-width="2"/><line x1="131" y1="14" x2="118" y2="27" stroke="#5533aa" stroke-width="2"/><line x1="141" y1="28" x2="123" y2="35" stroke="#5533aa" stroke-width="2"/><circle cx="100" cy="45" r="44" fill="none" stroke="#5533aa" stroke-width="2"/><circle cx="100" cy="45" r="25" fill="none" stroke="#AA77FF" stroke-width="1.5" stroke-dasharray="4,3"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Birdcage coil designer</text></svg></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Birdcage Coil</div>
-    <div class="tool-card-desc">LP/HP birdcage MRI volume coil: element values and mode frequencies.</div>
+    <div class="tool-card-name">Bandpass Calculator</div>
+    <div class="tool-card-desc">f₀, Q, and bandwidth from R, L, C for series or parallel RLC.</div>
   </div>
 </a>
 </div>
@@ -271,6 +247,12 @@
     <div class="tool-card-name">Capacitor Network</div>
     <div class="tool-card-desc">Total capacitance for series and parallel combinations.</div>
   </div>
+</a><a class="tool-card" href="ImpedanceMatchingNetwork.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="100" cy="43" r="36" fill="none" stroke="#333" stroke-width="1.2"/><circle cx="116" cy="43" r="20" fill="none" stroke="#AA77FF" stroke-width="0.9"/><circle cx="108" cy="43" r="28" fill="none" stroke="#AA77FF" stroke-width="0.7" opacity="0.5"/><line x1="64" y1="43" x2="136" y2="43" stroke="#ccc" stroke-width="0.7"/><path d="M136,43 Q120,20 100,18" stroke="#AA77FF" stroke-width="2" fill="none"/><path d="M100,18 Q80,20 100,43" stroke="#ff6644" stroke-width="2" fill="none" stroke-dasharray="4,2"/><circle cx="136" cy="43" r="3.5" fill="#ff6644"/><rect x="97" y="40" width="6" height="6" fill="#5533aa"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Complex Z matching</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Impedance Matching Network</div>
+    <div class="tool-card-desc">L-network for complex Z<sub>S</sub>→Z<sub>L</sub> with Smith Chart trajectories.</div>
+  </div>
 </a>
 </div>
 <div class="cat-header">🟡 Filters & Attenuators</div>
@@ -280,12 +262,6 @@
   <div class="tool-card-body">
     <div class="tool-card-name">LC Filter Designer</div>
     <div class="tool-card-desc">Butterworth/Chebyshev LP/HP up to 9th order with BOM.</div>
-  </div>
-</a><a class="tool-card" href="BandpassCalc.html">
-  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="75" x2="185" y2="75" stroke="#ccc" stroke-width="1"/><path d="M15,72 Q50,72 80,30 Q100,14 120,30 Q150,72 185,72" stroke="#AA77FF" stroke-width="2.5" fill="#f0eeff" opacity="0.6"/><line x1="100" y1="14" x2="100" y2="75" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/><text x="100" y="85" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">f₀</text><text x="100" y="10" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">Q = f₀/BW</text></svg></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Bandpass Calculator</div>
-    <div class="tool-card-desc">f₀, Q, and bandwidth from R, L, C for series or parallel RLC.</div>
   </div>
 </a><a class="tool-card" href="AttenuatorDesign.html">
   <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="15" y1="42" x2="185" y2="42" stroke="#5533aa" stroke-width="2"/><line x1="65" y1="42" x2="65" y2="58" stroke="#5533aa" stroke-width="2"/><rect x="51" y="58" width="28" height="18" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/><text x="65" y="70" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">R₁</text><rect x="83" y="31" width="34" height="22" fill="white" stroke="#AA77FF" stroke-width="2" rx="2"/><text x="100" y="45" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#AA77FF">R₂</text><line x1="135" y1="42" x2="135" y2="58" stroke="#5533aa" stroke-width="2"/><rect x="121" y="58" width="28" height="18" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/><text x="135" y="70" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">R₃</text><text x="100" y="88" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Pi / T / L-pad attenuator</text></svg></div>
@@ -401,11 +377,7 @@
     <div class="tool-card-name">S-Parameter Plotter</div>
     <div class="tool-card-desc">Plot Touchstone .s1p–.s4p files with Chart.js.</div>
   </div>
-</a>
-</div>
-<div class="cat-header">🟢 PCB & Parasitics</div>
-<div class="tool-grid">
-<a class="tool-card" href="BondWireVia.html">
+</a><a class="tool-card" href="BondWireVia.html">
   <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="20" y="55" width="55" height="15" fill="#e8e0ff" stroke="#5533aa" stroke-width="1.5" rx="2"/><rect x="125" y="55" width="55" height="15" fill="#e8e0ff" stroke="#5533aa" stroke-width="1.5" rx="2"/><path d="M75,63 Q100,22 125,63" fill="none" stroke="#AA77FF" stroke-width="3.5" stroke-linecap="round"/><text x="100" y="40" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">~1 nH/mm</text><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Bond wire / via inductance</text></svg></div>
   <div class="tool-card-body">
     <div class="tool-card-name">Bond Wire & Via</div>
@@ -413,9 +385,33 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🟣 MRI Tools</div>
+<div class="cat-header">🟣 MRI Coils & Tools</div>
 <div class="tool-grid">
-<a class="tool-card" href="SAREstimator.html">
+<a class="tool-card" href="CLI.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="100" cy="44" r="32" fill="none" stroke="#5533aa" stroke-width="2.5"/><circle cx="132" cy="44" r="3" fill="white" stroke="#5533aa" stroke-width="1.5"/><line x1="105" y1="12" x2="95" y2="12" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/><text x="72" y="47" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">D</text><line x1="100" y1="44" x2="132" y2="44" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Loop inductance</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Loop Inductance</div>
+    <div class="tool-card-desc">Inductance of a single circular loop (Rosa formula).</div>
+  </div>
+</a><a class="tool-card" href="CoilDesigner.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><ellipse cx="100" cy="45" rx="65" ry="16" fill="none" stroke="#AA77FF" stroke-width="2.5"/><ellipse cx="100" cy="45" rx="65" ry="16" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(-18,0)" opacity="0.7"/><ellipse cx="100" cy="45" rx="65" ry="16" fill="none" stroke="#AA77FF" stroke-width="2" transform="translate(18,0)" opacity="0.7"/><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">RF coil</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Simple RF Coil Designer</div>
+    <div class="tool-card-desc">Wheeler inductance, wire resistance, Q, and tuning cap for solenoid coils.</div>
+  </div>
+</a><a class="tool-card" href="SurfaceCoilDesigner.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><circle cx="100" cy="42" r="34" fill="none" stroke="#AA77FF" stroke-width="3"/><line x1="134" y1="42" x2="155" y2="42" stroke="#5533aa" stroke-width="1.5"/><rect x="155" y="36" width="22" height="12" fill="#f0eeff" stroke="#5533aa" stroke-width="1.2" rx="2"/><text x="166" y="45" text-anchor="middle" font-family="monospace" font-size="7" fill="#5533aa">C</text><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Surface coil</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Surface Coil Designer</div>
+    <div class="tool-card-desc">Complete MRI surface receive coil design with matching network.</div>
+  </div>
+</a><a class="tool-card" href="BirdcageCoil.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="144" y1="45" x2="125" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="141" y1="62" x2="123" y2="55" stroke="#5533aa" stroke-width="2"/><line x1="131" y1="76" x2="118" y2="63" stroke="#5533aa" stroke-width="2"/><line x1="117" y1="86" x2="110" y2="68" stroke="#5533aa" stroke-width="2"/><line x1="100" y1="89" x2="100" y2="70" stroke="#5533aa" stroke-width="2"/><line x1="83" y1="86" x2="90" y2="68" stroke="#5533aa" stroke-width="2"/><line x1="69" y1="76" x2="82" y2="63" stroke="#5533aa" stroke-width="2"/><line x1="59" y1="62" x2="77" y2="55" stroke="#5533aa" stroke-width="2"/><line x1="56" y1="45" x2="75" y2="45" stroke="#5533aa" stroke-width="2"/><line x1="59" y1="28" x2="77" y2="35" stroke="#5533aa" stroke-width="2"/><line x1="69" y1="14" x2="82" y2="27" stroke="#5533aa" stroke-width="2"/><line x1="83" y1="4" x2="90" y2="22" stroke="#5533aa" stroke-width="2"/><line x1="100" y1="1" x2="100" y2="20" stroke="#5533aa" stroke-width="2"/><line x1="117" y1="4" x2="110" y2="22" stroke="#5533aa" stroke-width="2"/><line x1="131" y1="14" x2="118" y2="27" stroke="#5533aa" stroke-width="2"/><line x1="141" y1="28" x2="123" y2="35" stroke="#5533aa" stroke-width="2"/><circle cx="100" cy="45" r="44" fill="none" stroke="#5533aa" stroke-width="2"/><circle cx="100" cy="45" r="25" fill="none" stroke="#AA77FF" stroke-width="1.5" stroke-dasharray="4,3"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Birdcage coil designer</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Birdcage Coil</div>
+    <div class="tool-card-desc">LP/HP birdcage MRI volume coil: element values and mode frequencies.</div>
+  </div>
+</a><a class="tool-card" href="SAREstimator.html">
   <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><ellipse cx="100" cy="43" r="42" ry="30" fill="#ffe8e8" stroke="#cc3333" stroke-width="1.5"/><ellipse cx="100" cy="43" r="28" ry="20" fill="#ffcccc" stroke="#cc3333" stroke-width="1"/><text x="100" y="40" text-anchor="middle" font-family="monospace" font-size="8.5" fill="#cc3333" font-weight="bold">SAR</text><text x="100" y="52" text-anchor="middle" font-family="monospace" font-size="8" fill="#cc3333">W/kg</text><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">MRI SAR estimator</text></svg></div>
   <div class="tool-card-body">
     <div class="tool-card-name">SAR Estimator</div>
@@ -531,15 +527,14 @@
 <script>
 // ── Category map for tab filtering ──────────────────────────────────────────
 var CAT_MAP = {
-  coils:    ['LC.html','CLC.html','CLI.html','CoilDesigner.html','SurfaceCoilDesigner.html','BirdcageCoil.html'],
+  coils:    ['LC.html','BandpassCalc.html'],
   tlines:   ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html'],
-  matching: ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','Wilkinson.html','LCBalun.html','CapacitorNetwork.html'],
+  matching: ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','Wilkinson.html','LCBalun.html','CapacitorNetwork.html','ImpedanceMatchingNetwork.html'],
   filters:  ['FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html'],
   antennas: ['Dipole.html','PatchAntenna.html','ArrayFactor.html'],
   system:   ['Friis.html','NoiseFigure.html','LinkBudget.html','RadarRange.html','IP3Calc.html','PowerCombiner.html'],
-  utils:    ['dBmConverter.html','Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','PhaseNoiseJitter.html','TwoPortConverter.html','SParamPlotter.html'],
-  pcb:      ['BondWireVia.html'],
-  mri:      ['BirdcageCoil.html','SAREstimator.html','PhasedArrayDecoupling.html','SurfaceCoilDesigner.html','CoilDesigner.html'],
+  utils:    ['dBmConverter.html','Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','PhaseNoiseJitter.html','TwoPortConverter.html','SParamPlotter.html','BondWireVia.html'],
+  mri:      ['CLI.html','CoilDesigner.html','SurfaceCoilDesigner.html','BirdcageCoil.html','SAREstimator.html','PhasedArrayDecoupling.html'],
   sims:     ['SmithChart.html','RFSimulator.html','SpiceSim.html','FalstadSim.html'],
 };
 
