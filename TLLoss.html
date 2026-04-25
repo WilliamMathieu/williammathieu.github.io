@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transmission Line Loss &amp; Delay Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate conductor loss, dielectric loss, insertion loss, and propagation delay for microstrip and coaxial transmission lines. Supports FR4, Rogers, PTFE, and custom substrates.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/TLLoss.html">
+  <meta property="og:title" content="Transmission Line Loss &amp; Delay Calculator | RF Toolbox">
+  <meta property="og:description" content="Calculate conductor loss, dielectric loss, insertion loss, and propagation delay for microstrip and coaxial transmission lines.">
+  <meta property="og:url" content="https://rftoolbox.ca/TLLoss.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Transmission Line Loss & Delay Calculator",
+    "description": "Calculate conductor loss, dielectric loss, insertion loss, and propagation delay for microstrip and coaxial transmission lines.",
+    "url": "https://rftoolbox.ca/TLLoss.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Transmission Line Loss &amp; Delay</h3>
+<div class="tool-concept">
+  <p>Calculates conductor loss, dielectric loss, total insertion loss, and propagation delay for microstrip traces and coaxial cables. Conductor loss is dominated by skin effect and scales as √f; dielectric loss scales linearly with f and loss tangent.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">
+    \(R_s = \sqrt{\dfrac{\pi f \mu_0}{\sigma}}\qquad \alpha_c = 8.686\,\dfrac{R_s}{Z_0\,w_{\rm eff}}\;\text{dB/m}\qquad \alpha_d = 8.686\,\dfrac{k_0\,\varepsilon_r(\varepsilon_{\rm eff}-1)\tan\delta}{2\sqrt{\varepsilon_{\rm eff}}\,(\varepsilon_r-1)}\;\text{dB/m}\)
+    \(t_d = \dfrac{L\sqrt{\varepsilon_{\rm eff}}}{c}\)
+  </div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">R<sub>s</sub></td><td>Surface resistance (Ω/sq) — sets skin-effect conductor loss</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">α<sub>c</sub></td><td>Conductor attenuation constant (dB/m)</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">α<sub>d</sub></td><td>Dielectric attenuation constant (dB/m); requires loss tangent tan δ &gt; 0</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">t<sub>d</sub></td><td>Propagation delay (s); v<sub>p</sub> = c/√ε<sub>eff</sub></td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">σ</td><td>Conductivity: copper 5.8×10⁷, gold 4.1×10⁷, aluminum 3.5×10⁷ S/m</td></tr>
+  </table>
+  <p style="font-size:11px;color:#777;margin-top:8px;">Microstrip: Hammerstad-Jensen ε<sub>eff</sub> and Z₀. Coaxial: both conductors assumed same σ; result is lower bound (braided/stranded cables have higher loss). Set tan δ = 0 for lossless dielectric.</p>
+  </details>
+</div>
+
+<div class="sec-lbl">Line Type</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Line type</label>
+    <div class="inp-inline">
+      <select id="tl-type" style="width:100%;">
+        <option value="mstrip" selected>Microstrip</option>
+        <option value="coax">Coaxial</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="sec-lbl">Common Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Frequency, <span class="var">f</span></label>
+    <div class="inp-inline">
+      <input type="text" id="tl-f" placeholder="value" data-tip="Signal frequency. Conductor loss scales as √f; dielectric loss scales linearly with f.">
+      <select id="tl-f-unit">
+        <option value="1e6">MHz</option>
+        <option value="1e9" selected>GHz</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Line length, <span class="var">L</span></label>
+    <div class="inp-inline">
+      <input type="text" id="tl-len" placeholder="value" data-tip="Physical length of the transmission line.">
+      <select id="tl-len-unit">
+        <option value="1e-3">mm</option>
+        <option value="1e-2" selected>cm</option>
+        <option value="1">m</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Microstrip inputs -->
+<div id="mstrip-section">
+<div class="sec-lbl">Microstrip Parameters</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Substrate εr</label>
+    <div class="inp-inline">
+      <input type="text" id="ms-er" placeholder="e.g. 4.4" data-tip="Relative permittivity. FR4 ≈ 4.4, Rogers 4003 ≈ 3.55, Rogers 4350 ≈ 3.66, PTFE ≈ 2.1.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Loss tangent, <span class="var">tan δ</span></label>
+    <div class="inp-inline">
+      <input type="text" id="ms-df" placeholder="e.g. 0.02 (0 = lossless)" data-tip="Dielectric loss tangent. FR4 ≈ 0.02, Rogers 4003 ≈ 0.0027, Rogers 4350 ≈ 0.0037, PTFE ≈ 0.0002. Enter 0 for lossless.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Trace width, <span class="var">w</span></label>
+    <div class="inp-inline">
+      <input type="text" id="ms-w" placeholder="value" data-tip="Width of the microstrip trace.">
+      <select id="ms-w-unit">
+        <option value="1e-6">µm</option>
+        <option value="1e-3" selected>mm</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Substrate height, <span class="var">h</span></label>
+    <div class="inp-inline">
+      <input type="text" id="ms-h" placeholder="value" data-tip="Height of the dielectric substrate (distance from trace to ground plane).">
+      <select id="ms-h-unit">
+        <option value="1e-6">µm</option>
+        <option value="1e-3" selected>mm</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Conductor thickness, <span class="var">t</span></label>
+    <div class="inp-inline">
+      <input type="text" id="ms-t" placeholder="35 (1 oz Cu)" data-tip="Conductor thickness. 1 oz copper = 35 µm, 2 oz = 70 µm. Default 35 µm if blank.">
+      <select id="ms-t-unit">
+        <option value="1e-6" selected>µm</option>
+        <option value="1e-3">mm</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Conductivity, <span class="var">σ</span></label>
+    <div class="inp-inline">
+      <input type="text" id="ms-sigma" placeholder="5.8e7 (copper)" data-tip="Conductor electrical conductivity in S/m. Copper: 5.8×10⁷, Gold: 4.1×10⁷, Aluminum: 3.5×10⁷, Silver: 6.3×10⁷.">
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Coaxial inputs -->
+<div id="coax-section" style="display:none;">
+<div class="sec-lbl">Coaxial Parameters</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Dielectric εr</label>
+    <div class="inp-inline">
+      <input type="text" id="cx-er" placeholder="e.g. 2.25" data-tip="Relative permittivity of the dielectric fill. PTFE/PE ≈ 2.25, foam PE ≈ 1.5, solid PE ≈ 2.25.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Loss tangent, <span class="var">tan δ</span></label>
+    <div class="inp-inline">
+      <input type="text" id="cx-df" placeholder="e.g. 0.0002 (0 = lossless)" data-tip="Dielectric loss tangent. PTFE ≈ 0.0002, PE ≈ 0.0003, foam PE ≈ 0.0001. Enter 0 for lossless.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Inner conductor dia., <span class="var">d</span></label>
+    <div class="inp-inline">
+      <input type="text" id="cx-d" placeholder="value" data-tip="Outer diameter of the center conductor.">
+      <select id="cx-d-unit">
+        <option value="1e-3" selected>mm</option>
+        <option value="1e-2">cm</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Outer conductor dia., <span class="var">D</span></label>
+    <div class="inp-inline">
+      <input type="text" id="cx-D" placeholder="value" data-tip="Inner diameter of the outer conductor (shield). Must be greater than d.">
+      <select id="cx-D-unit">
+        <option value="1e-3" selected>mm</option>
+        <option value="1e-2">cm</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Conductivity, <span class="var">σ</span></label>
+    <div class="inp-inline">
+      <input type="text" id="cx-sigma" placeholder="5.8e7 (copper)" data-tip="Conductor electrical conductivity in S/m. Applied to both inner and outer conductors.">
+    </div>
+  </div>
+</div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 6px;">
+  <button class="calc-btn" id="tl-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'tl-type':'mstrip','ms-er':'4.4','ms-df':'0.02','ms-w':'2','ms-w-unit':'1e-3','ms-h':'1','ms-h-unit':'1e-3','ms-t':'35','ms-t-unit':'1e-6','ms-sigma':'5.8e7','tl-f':'1','tl-f-unit':'1e9','tl-len':'10','tl-len-unit':'1e-2'})" title="FR4 microstrip 50Ω at 1 GHz, 10 cm">FR4 microstrip</button>
+  <button class="example-btn" onclick="loadExample({'tl-type':'coax','cx-er':'2.25','cx-df':'0.0002','cx-d':'0.9','cx-d-unit':'1e-3','cx-D':'2.95','cx-D-unit':'1e-3','cx-sigma':'5.8e7','tl-f':'1','tl-f-unit':'1e9','tl-len':'1','tl-len-unit':'1'}); document.getElementById('coax-section').style.display=''; document.getElementById('mstrip-section').style.display='none';" title="RG-58 equivalent coax at 1 GHz, 1 m">RG-58 coax</button>
+</div>
+
+<div id="tl-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="tl-results" class="res-grid"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram(res) {
+  var type = res ? res.type : document.getElementById('tl-type').value === 'coax' ? 'Coaxial' : 'Microstrip';
+  if (type === 'Coaxial') drawCoaxDiagram(res);
+  else drawMstripDiagram(res);
+}
+
+function drawMstripDiagram(res) {
+  var W=520, H=160;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Ground plane
+  s+='<rect x="60" y="110" width="400" height="16" fill="#b8922a" stroke="#7a5000" stroke-width="1.2" rx="1"/>';
+  s+='<text x="260" y="122" text-anchor="middle" font-size="10" fill="#5a3500">Ground Plane (σ)</text>';
+  // Substrate
+  s+='<rect x="60" y="62" width="400" height="48" fill="#d4f0d0" stroke="#4a8020" stroke-width="1.2" rx="1"/>';
+  s+='<text x="260" y="91" text-anchor="middle" font-size="11" fill="#2a5a00">Substrate  εr, tan δ</text>';
+  s+='<text x="260" y="104" text-anchor="middle" font-size="10" fill="#2a5a00">h</text>';
+  // Trace
+  s+='<rect x="195" y="47" width="130" height="15" fill="#b8922a" stroke="#7a5000" stroke-width="1.2" rx="1"/>';
+  s+='<text x="260" y="57" text-anchor="middle" font-size="10" fill="#5a3500">Trace (w, t)</text>';
+  // Dimension arrows
+  s+='<line x1="52" y1="62" x2="52" y2="110" stroke="#888" stroke-width="1.2" marker-end="url(#arr)" marker-start="url(#arr)"/>';
+  s+='<text x="46" y="90" text-anchor="middle" font-size="10" fill="#888" transform="rotate(-90 46 90)">h</text>';
+  s+='<line x1="195" y1="38" x2="325" y2="38" stroke="#888" stroke-width="1.2"/>';
+  s+='<text x="260" y="36" text-anchor="middle" font-size="10" fill="#888">w</text>';
+  // Z0 label
+  if (res) {
+    s+='<text x="260" y="20" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">Z₀ = '+res.Z0.toFixed(1)+' Ω  |  εeff = '+res.eeff.toFixed(3)+'</text>';
+    var C0=2.998e8;
+    s+='<text x="260" y="152" text-anchor="middle" font-size="11" fill="#5533aa">vp = '+(res.vp/C0*100).toFixed(1)+'% c  |  αc = '+res.alpha_c.toFixed(3)+' dB/m  |  αd = '+res.alpha_d.toFixed(3)+' dB/m</text>';
+  }
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+function drawCoaxDiagram(res) {
+  var W=400, H=180, cx=200, cy=90;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Outer conductor
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="62" fill="#c0b060" stroke="#7a6010" stroke-width="2.5"/>';
+  // Dielectric fill
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="56" fill="#d4f0d0" stroke="#4a8020" stroke-width="1.2"/>';
+  // Inner conductor
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="18" fill="#b8922a" stroke="#7a5000" stroke-width="2"/>';
+  // Labels
+  s+='<text x="'+cx+'" y="'+(cy+5)+'" text-anchor="middle" font-size="10" fill="#5a3500">d (inner)</text>';
+  s+='<text x="'+(cx+35)+'" y="'+(cy-25)+'" text-anchor="start" font-size="10" fill="#2a5a00">εr, tan δ</text>';
+  s+='<text x="'+(cx+60)+'" y="'+(cy+3)+'" text-anchor="start" font-size="10" fill="#5a3500">D (outer)</text>';
+  // Dimension lines
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+18)+'" y2="'+cy+'" stroke="#fff" stroke-width="1.5" stroke-dasharray="2,2"/>';
+  s+='<line x1="'+(cx-18)+'" y1="'+cy+'" x2="'+(cx-56)+'" y2="'+cy+'" stroke="#333" stroke-width="1.2" stroke-dasharray="2,2"/>';
+  s+='<line x1="'+(cx-56)+'" y1="'+cy+'" x2="'+(cx-62)+'" y2="'+cy+'" stroke="#c0b060" stroke-width="2.5"/>';
+  if (res) {
+    var C0=2.998e8;
+    s+='<text x="'+cx+'" y="170" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Z₀ = '+res.Z0.toFixed(1)+' Ω  |  vp = '+(res.vp/C0*100).toFixed(1)+'% c</text>';
+    s+='<text x="'+cx+'" y="15" text-anchor="middle" font-size="11" fill="#5533aa">αc = '+res.alpha_c.toFixed(4)+' dB/m  |  αd = '+res.alpha_d.toFixed(4)+' dB/m</text>';
+  }
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+
+<script src="TLLoss.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

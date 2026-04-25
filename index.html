@@ -130,6 +130,7 @@
     <button class="tab-btn" data-cat="system" onclick="filterCat('system',this)">System</button>
     <button class="tab-btn" data-cat="utils" onclick="filterCat('utils',this)">Utilities</button>
     <button class="tab-btn" data-cat="mri" onclick="filterCat('mri',this)">MRI</button>
+    <button class="tab-btn" data-cat="waveguide" onclick="filterCat('waveguide',this)">Waveguide</button>
     <button class="tab-btn" data-cat="sims" onclick="filterCat('sims',this)">Simulators</button>
   </div>
 
@@ -200,6 +201,12 @@
   <div class="tool-card-body">
     <div class="tool-card-name">Quarter-Wave Transformer</div>
     <div class="tool-card-desc">λ/4 impedance transformer Z and physical length.</div>
+  </div>
+</a><a class="tool-card" href="TLLoss.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="20" y="38" width="160" height="14" fill="#d4ecca" stroke="#4a8020" stroke-width="1"/><rect x="20" y="30" width="160" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/><rect x="20" y="52" width="160" height="8" fill="#b8922a" stroke="#7a5000" stroke-width="1"/><path d="M30,65 Q100,58 170,65" stroke="#AA77FF" stroke-width="2" fill="none" stroke-dasharray="4,2"/><text x="100" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">α = αc + αd  (dB/m)</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">TL Loss &amp; Delay</div>
+    <div class="tool-card-desc">Conductor + dielectric insertion loss and propagation delay for microstrip and coax.</div>
   </div>
 </a>
 </div>
@@ -383,6 +390,12 @@
     <div class="tool-card-name">Bond Wire & Via</div>
     <div class="tool-card-desc">Inductance of bond wires (Grover) and PCB vias with SRF.</div>
   </div>
+</a><a class="tool-card" href="ESeries.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="20" y1="50" x2="180" y2="50" stroke="#ddd" stroke-width="1.5"/><line x1="20" y1="50" x2="20" y2="42" stroke="#5533aa" stroke-width="1.5"/><line x1="55" y1="50" x2="55" y2="42" stroke="#5533aa" stroke-width="1.5"/><line x1="78" y1="50" x2="78" y2="38" stroke="#AA77FF" stroke-width="2.5"/><line x1="100" y1="50" x2="100" y2="42" stroke="#5533aa" stroke-width="1.5"/><line x1="122" y1="50" x2="122" y2="42" stroke="#5533aa" stroke-width="1.5"/><line x1="148" y1="50" x2="148" y2="42" stroke="#5533aa" stroke-width="1.5"/><line x1="180" y1="50" x2="180" y2="42" stroke="#5533aa" stroke-width="1.5"/><text x="78" y="34" text-anchor="middle" font-family="monospace" font-size="8" fill="#AA77FF">closest</text><text x="100" y="78" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">E6 / E12 / E24 / E96 / E192</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">E-Series Finder</div>
+    <div class="tool-card-desc">Nearest standard R, C, or L value in E6–E192 with % error.</div>
+  </div>
 </a>
 </div>
 <div class="cat-header">🟣 MRI Coils & Tools</div>
@@ -422,6 +435,16 @@
   <div class="tool-card-body">
     <div class="tool-card-name">Array Decoupling</div>
     <div class="tool-card-desc">Mutual inductance and overlap/capacitive/preamp decoupling.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">📡 Waveguide</div>
+<div class="tool-grid">
+<a class="tool-card" href="Waveguide.html">
+  <div class="tool-card-fig"><svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;max-height:74px;"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="25" y="22" width="120" height="52" fill="#e8f4ff" stroke="#5533aa" stroke-width="2" rx="1"/><rect x="35" y="14" width="120" height="52" fill="none" stroke="#aaa" stroke-width="1.2" stroke-dasharray="3,2" rx="1"/><line x1="25" y1="22" x2="35" y2="14" stroke="#aaa" stroke-width="1.2"/><line x1="145" y1="22" x2="155" y2="14" stroke="#aaa" stroke-width="1.2"/><line x1="25" y1="74" x2="35" y2="66" stroke="#aaa" stroke-width="1.2"/><line x1="145" y1="74" x2="155" y2="66" stroke="#aaa" stroke-width="1.2"/><line x1="60" y1="30" x2="60" y2="66" stroke="#AA77FF" stroke-width="1.5"/><line x1="85" y1="26" x2="85" y2="70" stroke="#AA77FF" stroke-width="2"/><line x1="110" y1="30" x2="110" y2="66" stroke="#AA77FF" stroke-width="1.5"/><text x="100" y="82" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">TE₁₀ mode  fc = c/2a</text></svg></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Rectangular Waveguide</div>
+    <div class="tool-card-desc">TE/TM mode cutoffs, guide wavelength, wave impedance, and conductor loss.</div>
   </div>
 </a>
 </div>
@@ -528,13 +551,14 @@
 // ── Category map for tab filtering ──────────────────────────────────────────
 var CAT_MAP = {
   coils:    ['LC.html','BandpassCalc.html'],
-  tlines:   ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html'],
+  tlines:   ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html'],
   matching: ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','Wilkinson.html','LCBalun.html','CapacitorNetwork.html','ImpedanceMatchingNetwork.html'],
   filters:  ['FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html'],
   antennas: ['Dipole.html','PatchAntenna.html','ArrayFactor.html'],
   system:   ['Friis.html','NoiseFigure.html','LinkBudget.html','RadarRange.html','IP3Calc.html','PowerCombiner.html'],
-  utils:    ['dBmConverter.html','Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','PhaseNoiseJitter.html','TwoPortConverter.html','SParamPlotter.html','BondWireVia.html'],
+  utils:    ['dBmConverter.html','Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','PhaseNoiseJitter.html','TwoPortConverter.html','SParamPlotter.html','BondWireVia.html','ESeries.html'],
   mri:      ['CLI.html','CoilDesigner.html','SurfaceCoilDesigner.html','BirdcageCoil.html','SAREstimator.html','PhasedArrayDecoupling.html'],
+  waveguide:['Waveguide.html'],
   sims:     ['SmithChart.html','RFSimulator.html','SpiceSim.html','FalstadSim.html'],
 };
 
