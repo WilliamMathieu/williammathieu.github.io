@@ -1,120 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LC Tuning Capacitor Calculator — Find C for Resonance | RF Toolbox</title>
-  <meta name="description" content="Calculate the capacitance needed to tune an inductor to a target resonant frequency. Essential for MRI coil tuning, filter design, and LC tank circuits.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://rftoolbox.ca/CLC.html">
-  <meta property="og:title" content="LC Tuning Capacitor Calculator — Find C for Resonance | RF Toolbox">
-  <meta property="og:description" content="Calculate the capacitance needed to tune an inductor to a target resonant frequency. Essential for MRI coil tuning, filter design, and LC tank circuits.">
-  <meta property="og:url" content="https://rftoolbox.ca/CLC.html">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="RF Toolbox">
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="MathJax.js"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  
-  <link rel="stylesheet" href="style.css">
-  
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "LC Tuning Capacitor Calculator — Find C for Resonance",
-    "description": "Calculate the capacitance needed to tune an inductor to a target resonant frequency. Essential for MRI coil tuning, filter design, and LC tank circuits.",
-    "url": "https://rftoolbox.ca/CLC.html",
-    "applicationCategory": "EngineeringApplication",
-    "operatingSystem": "Web",
-    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
-  }
-  </script>
+  <meta http-equiv="refresh" content="0;url=LC.html">
+  <link rel="canonical" href="https://rftoolbox.ca/LC.html">
+  <title>LC Tuning Capacitor Calculator | RF Toolbox</title>
+  <meta name="robots" content="noindex, follow">
 </head>
-<body class="no-nav">
-<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
-<section>
-<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
-<article>
-<h3>Capacitance in LC Circuit</h3>
-<div class="tool-concept">
-  <p>Given an inductor and a target resonant frequency, calculates the required tuning capacitor. This is the core calculation for tuning RF coils, building RF filters, and designing matching networks.</p>
-  <details style="margin-top:8px;">
-  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
-
-<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(C = \dfrac{1}{4\pi^2 f^2 L}\)</div>
-<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Existing inductor value.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Target resonant frequency (e.g. Larmor frequency for MRI).</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Required capacitance = 1/(4π²f²L).</td></tr></table>
-
-<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e0d8ff;"><div style="font-size:10px;font-weight:bold;color:#AA77FF;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;">Physical constants used</div><table style="font-size:12px;border-collapse:collapse;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr></table></div>
-</details>
-</div>
-<div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Inductance, <span class="var">L</span></label><div class="inp-inline"><input type="text" id="L" placeholder="value"  data-tip="Inductance of the coil or inductor element."><select id="L_dropdown"><option value="10">µH</option><option value="20" selected>nH</option><option value="30">pH</option></select></div></div><div class="inp-row"><label>Target frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="f" placeholder="value"  data-tip="Larmor frequency. ¹H: 64 MHz at 1.5T, 128 MHz at 3T, 298 MHz at 7T."><select id="f_dropdown"><option value="0">kHz</option><option value="1" selected>MHz</option><option value="2">GHz</option><option value="3">THz</option></select></div></div></div>
-<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;L&quot;: &quot;10&quot;, &quot;L_dropdown&quot;: &quot;20&quot;, &quot;f&quot;: &quot;2450&quot;, &quot;f_dropdown&quot;: &quot;1&quot;})" title="10 nH tuned to 2.45 GHz">Load Example</button></div>
-<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
-<div class="sec-lbl">Results</div>
-<div class="res-grid"><div class="res-card"><h4>Tuning</h4><div class="res-row"><span class="res-lbl">Required capacitance, C</span><span class="res-val " id="C">—</span></div></div></div>
-
-<div class="sec-lbl">Diagram</div>
-<div class="schematic-box"><div id="tool-diagram"></div></div>
-<script>
-
-function drawDiagram() {
-  var Cv = document.getElementById('C') ? document.getElementById('C').textContent : '—';
-  var Lv = (function(){
-    var L=parseFloat(document.getElementById('L')&&document.getElementById('L').value);
-    var Lu=document.getElementById('L_dropdown')&&document.getElementById('L_dropdown').value;
-    if(!isNaN(L)&&Lu) { var m={'10':1e-6,'20':1e-9,'30':1e-12}; var mul=m[Lu]||1e-9; return (L*mul*1e9).toFixed(1)+' nH'; }
-    return '—';
-  })();
-  var W=560,H=130;
-  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
-  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
-  // Series LC on a horizontal wire
-  var cy=62, lx=40, rx=W-40;
-  s+='<line x1="'+lx+'" y1="'+cy+'" x2="'+(lx+60)+'" y2="'+cy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  // Inductor
-  var ind0=lx+60, indbw=12, indN=4, indEnd=ind0+indbw*indN;
-  var indPath='M'+ind0+','+cy;
-  for(var k=0;k<indN;k++) indPath+=' A'+(indbw/2)+','+(indbw/2)+' 0 0,1 '+(ind0+(k+1)*indbw)+','+cy;
-  s+='<path d="'+indPath+'" fill="none" stroke="#AA77FF" stroke-width="2.2" stroke-linecap="round"/>';
-  s+='<text x="'+(ind0+indbw*indN/2)+'" y="'+(cy-12)+'" text-anchor="middle" font-size="11" fill="#AA77FF" font-weight="bold">L = '+Lv+'</text>';
-  // Wire between L and C
-  s+='<line x1="'+indEnd+'" y1="'+cy+'" x2="'+(indEnd+40)+'" y2="'+cy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  // Capacitor
-  var cx2=indEnd+40+10;
-  s+='<line x1="'+(cx2-10)+'" y1="'+(cy-12)+'" x2="'+(cx2-10)+'" y2="'+(cy+12)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-  s+='<line x1="'+(cx2+4)+'" y1="'+(cy-12)+'" x2="'+(cx2+4)+'" y2="'+(cy+12)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-  s+='<line x1="'+(cx2+4)+'" y1="'+cy+'" x2="'+rx+'" y2="'+cy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  s+='<text x="'+(cx2-3)+'" y="'+(cy+28)+'" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">C = '+Cv+'</text>';
-  // Terminal marks
-  s+='<circle cx="'+lx+'" cy="'+cy+'" r="4" fill="white" stroke="#5533aa" stroke-width="2"/>';
-  s+='<circle cx="'+rx+'" cy="'+cy+'" r="4" fill="white" stroke="#5533aa" stroke-width="2"/>';
-  s+='<text x="'+lx+'" y="'+(cy+20)+'" text-anchor="middle" font-size="10" fill="#888">+</text>';
-  s+='<text x="'+rx+'" y="'+(cy+20)+'" text-anchor="middle" font-size="10" fill="#888">−</text>';
-  s+='<text x="'+(W/2)+'" y="118" text-anchor="middle" font-size="11" fill="#888" font-style="italic">Series resonator: C tunes L to target frequency</text>';
-  s+='</svg>';
-  document.getElementById('tool-diagram').innerHTML=s;
-}
-
-</script>
-<div class="wiki-link-hint">📖 <a href="wiki_coil_design.html">Learn the theory behind this tool →</a></div>
-<script src="CLC.js"></script>
-</article>
-</section>
-<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
-
-<script src="tool-enhancements.js"></script>
-
+<body>
+  <p>This page has moved. <a href="LC.html">Go to LC Circuit Solver →</a></p>
+  <script>window.location.replace('LC.html');</script>
 </body>
 </html>

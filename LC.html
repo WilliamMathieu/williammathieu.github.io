@@ -6,12 +6,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LC Resonant Frequency Calculator | RF Toolbox</title>
-  <meta name="description" content="Calculate the resonant frequency of an LC circuit. Supports µH, nH, pH inductors and µF, nF, pF capacitors. Used for filter design, oscillators, and coil tuning.">
+  <title>LC Circuit Solver — Resonant Frequency, Inductance &amp; Capacitance | RF Toolbox</title>
+  <meta name="description" content="Solve for any one of L, C, or resonant frequency f₀ given the other two. Supports µH/nH/pH, µF/nF/pF, kHz/MHz/GHz. For filters, oscillators, and MRI coil tuning.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/LC.html">
-  <meta property="og:title" content="LC Resonant Frequency Calculator | RF Toolbox">
-  <meta property="og:description" content="Calculate the resonant frequency of an LC circuit. Supports µH, nH, pH inductors and µF, nF, pF capacitors. Used for filter design, oscillators, and coil tuning.">
+  <meta property="og:title" content="LC Circuit Solver — Resonant Frequency, Inductance &amp; Capacitance | RF Toolbox">
+  <meta property="og:description" content="Solve for any one of L, C, or resonant frequency f₀ given the other two.">
   <meta property="og:url" content="https://rftoolbox.ca/LC.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="RF Toolbox">
@@ -21,16 +21,15 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  
+
   <link rel="stylesheet" href="style.css">
-  
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "LC Resonant Frequency Calculator",
-    "description": "Calculate the resonant frequency of an LC circuit. Supports µH, nH, pH inductors and µF, nF, pF capacitors. Used for filter design, oscillators, and coil tuning.",
+    "name": "LC Circuit Solver — Resonant Frequency, Inductance & Capacitance",
+    "description": "Solve for any one of L, C, or resonant frequency f₀ given the other two. For filters, oscillators, and MRI coil tuning.",
     "url": "https://rftoolbox.ca/LC.html",
     "applicationCategory": "EngineeringApplication",
     "operatingSystem": "Web",
@@ -44,35 +43,81 @@
 <section>
 <div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
 <article>
-<h3>Resonant Frequency of LC Circuit</h3>
+<h3>LC Circuit Solver</h3>
 <div class="tool-concept">
-  <p>At resonance, the inductive and capacitive reactances are equal and cancel. The circuit draws no net reactive power and presents a purely resistive impedance. Used in filters, oscillators, and RF matching networks.</p>
+  <p>Fill in any two of the three variables — inductance L, capacitance C, or resonant frequency f₀ — and leave the third blank. The tool solves for the missing value. Used for filters, oscillators, RF coil tuning, and matching networks.</p>
   <details style="margin-top:8px;">
   <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
 
-<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(f_0 = \dfrac{1}{2\pi\sqrt{LC}}\)</div>
-<table style="font-size:12px;border-collapse:collapse;margin-top:6px;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Inductance. Stores energy in a magnetic field.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Capacitance. Stores energy in an electric field.</td></tr><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f₀</td><td style="padding:3px 0;">Resonant frequency = 1/(2π√LC). At this frequency ωL = 1/(ωC).</td></tr></table>
-
-<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e0d8ff;"><div style="font-size:10px;font-weight:bold;color:#AA77FF;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;">Physical constants used</div><table style="font-size:12px;border-collapse:collapse;"><tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">c</td><td>Speed of light = 2.998×10⁸ m/s</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ₀</td><td>Permeability of free space = 4π×10⁻⁷ H/m ≈ 1.2566×10⁻⁶ H/m</td></tr>
-          <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ε₀</td><td>Permittivity of free space = 8.854×10⁻¹² F/m</td></tr></table></div>
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">
+\(f_0 = \dfrac{1}{2\pi\sqrt{LC}}\qquad L = \dfrac{1}{4\pi^2 f_0^2\, C}\qquad C = \dfrac{1}{4\pi^2 f_0^2\, L}\)
+</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+  <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Inductance. Stores energy in a magnetic field.</td></tr>
+  <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Capacitance. Stores energy in an electric field.</td></tr>
+  <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f₀</td><td style="padding:3px 0;">Resonant frequency. At f₀ the inductive and capacitive reactances are equal and cancel: ωL = 1/(ωC).</td></tr>
+</table>
 </details>
 </div>
-<div class="sec-lbl">Inputs</div>
-<div class="inp-grid"><div class="inp-row"><label>Inductance, <span class="var">L</span></label><div class="inp-inline"><input type="text" id="L" placeholder="value"  data-tip="Inductance of the coil or inductor element."><select id="H_dropdown"><option value="1">µH</option><option value="2" selected>nH</option><option value="3">pH</option></select></div></div><div class="inp-row"><label>Capacitance, <span class="var">C</span></label><div class="inp-inline"><input type="text" id="C" placeholder="value"  data-tip="Capacitance. Leave blank to calculate the required C for a given L and f."><select id="F_dropdown"><option value="10">µF</option><option value="20">nF</option><option value="30" selected>pF</option></select></div></div></div>
-<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;L&quot;: &quot;50&quot;, &quot;H_dropdown&quot;: &quot;2&quot;, &quot;C&quot;: &quot;22&quot;, &quot;F_dropdown&quot;: &quot;30&quot;})" title="50 nH + 22 pF ≈ 152 MHz">Load Example</button></div>
-<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+
+<div class="sec-lbl">Inputs — fill any two, leave one blank</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Inductance, <span class="var">L</span></label>
+    <div class="inp-inline">
+      <input type="text" id="L" placeholder="blank = solve" data-tip="Inductance of the coil or inductor element. Leave blank to solve for L.">
+      <select id="L-unit">
+        <option value="1">µH</option>
+        <option value="2" selected>nH</option>
+        <option value="3">pH</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Capacitance, <span class="var">C</span></label>
+    <div class="inp-inline">
+      <input type="text" id="C" placeholder="blank = solve" data-tip="Capacitance of the tuning or tank capacitor. Leave blank to solve for C.">
+      <select id="C-unit">
+        <option value="1">µF</option>
+        <option value="2">nF</option>
+        <option value="3" selected>pF</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Resonant frequency, <span class="var">f₀</span></label>
+    <div class="inp-inline">
+      <input type="text" id="f" placeholder="blank = solve" data-tip="Target resonant frequency. Leave blank to solve for f₀.">
+      <select id="f-unit">
+        <option value="0">kHz</option>
+        <option value="1" selected>MHz</option>
+        <option value="2">GHz</option>
+        <option value="3">THz</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 6px;">
+  <button class="calc-btn" id="lc-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'L':'50','L-unit':'2','C':'22','C-unit':'3','f':'','f-unit':'1'})" title="50 nH + 22 pF → f₀ ≈ 152 MHz">Example: find f₀</button>
+  <button class="example-btn" onclick="loadExample({'L':'10','L-unit':'2','f':'2450','f-unit':'1','C':'','C-unit':'3'})" title="10 nH at 2.45 GHz → C ≈ 0.42 pF">Example: find C</button>
+  <button class="example-btn" onclick="loadExample({'C':'100','C-unit':'3','f':'100','f-unit':'1','L':'','L-unit':'2'})" title="100 pF at 100 MHz → L ≈ 25.3 nH">Example: find L</button>
+</div>
+
+<div id="lc-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
 <div class="sec-lbl">Results</div>
-<div class="res-grid"><div class="res-card"><h4>Resonance</h4><div class="res-row"><span class="res-lbl">Resonant frequency, f₀</span><span class="res-val " id="f">—</span></div></div></div>
+<div id="lc-results" class="res-grid"></div>
 
 <div class="sec-lbl">Diagram</div>
 <div class="schematic-box"><div id="tool-diagram"></div></div>
 <script>
 
-function drawDiagram() {
-  var fEl = document.getElementById('f');
-  var fv  = fEl ? fEl.textContent : '—';
-  var W=480, H=160, cx=W/2, cy=75;
+function drawDiagram(Lv, Cv, fv) {
+  var Ls = (Lv !== undefined) ? engFmt(Lv, 'H') : '—';
+  var Cs = (Cv !== undefined) ? engFmt(Cv, 'F') : '—';
+  var fs = (fv !== undefined) ? engFmt(fv, 'Hz') : '—';
+  var W=480, H=165, cx=W/2, cy=75;
   var lx=cx-100, rx=cx+100, ty=28, by=128;
   var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
@@ -95,16 +140,16 @@ function drawDiagram() {
   for(var k=0;k<nbumps;k++) ip+=' A'+(bsize/2)+','+(bsize/2)+' 0 0,0 '+ibx+','+(itop+(k+1)*bsize);
   s+='<path d="'+ip+'" fill="none" stroke="#AA77FF" stroke-width="2.4" stroke-linecap="round"/>';
   s+='<line x1="'+ibx+'" y1="'+ibot+'" x2="'+ibx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  s+='<text x="'+(ibx-14)+'" y="'+(cy+4)+'" text-anchor="end" font-size="13" fill="#AA77FF" font-weight="bold" font-style="italic">L</text>';
+  s+='<text x="'+(ibx-18)+'" y="'+(cy+4)+'" text-anchor="end" font-size="11" fill="#AA77FF" font-weight="bold" font-style="italic">L = '+Ls+'</text>';
   // Capacitor branch (right of centre, vertical)
   var cbx=cx+40;
   s+='<line x1="'+cbx+'" y1="'+ty+'" x2="'+cbx+'" y2="'+(cy-7)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
   s+='<line x1="'+(cbx-13)+'" y1="'+(cy-7)+'" x2="'+(cbx+13)+'" y2="'+(cy-7)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
   s+='<line x1="'+(cbx-13)+'" y1="'+(cy+3)+'" x2="'+(cbx+13)+'" y2="'+(cy+3)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
   s+='<line x1="'+cbx+'" y1="'+(cy+3)+'" x2="'+cbx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  s+='<text x="'+(cbx+16)+'" y="'+(cy+4)+'" text-anchor="start" font-size="13" fill="#5533aa" font-weight="bold" font-style="italic">C</text>';
+  s+='<text x="'+(cbx+16)+'" y="'+(cy+4)+'" text-anchor="start" font-size="11" fill="#5533aa" font-weight="bold" font-style="italic">C = '+Cs+'</text>';
   // Result label
-  s+='<text x="'+W/2+'" y="152" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">f₀ = '+fv+'</text>';
+  s+='<text x="'+W/2+'" y="157" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">f₀ = '+fs+'</text>';
   s+='</svg>';
   document.getElementById('tool-diagram').innerHTML=s;
 }
