@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rectangular Waveguide Calculator — Cutoff, Z, λg | RF Toolbox</title>
+  <meta name="description" content="Calculate cutoff frequencies for all TE and TM modes, guide wavelength, wave impedance, phase and group velocity, and conductor loss for rectangular waveguides.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/Waveguide.html">
+  <meta property="og:title" content="Rectangular Waveguide Calculator | RF Toolbox">
+  <meta property="og:description" content="Mode cutoff frequencies, guide wavelength, wave impedance, phase and group velocity for rectangular waveguides.">
+  <meta property="og:url" content="https://rftoolbox.ca/Waveguide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Rectangular Waveguide Calculator",
+    "description": "Calculate cutoff frequencies, guide wavelength, wave impedance, and conductor loss for rectangular waveguides.",
+    "url": "https://rftoolbox.ca/Waveguide.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Rectangular Waveguide Calculator</h3>
+<div class="tool-concept">
+  <p>Calculates the cutoff frequency for every TE<sub>mn</sub> and TM<sub>mn</sub> mode, the dominant TE<sub>10</sub> guide wavelength and wave impedance, phase and group velocities, and conductor loss at the operating frequency.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">
+    \(f_{c,mn} = \dfrac{c}{2\sqrt{\varepsilon_r}}\sqrt{\left(\dfrac{m}{a}\right)^2+\left(\dfrac{n}{b}\right)^2} \qquad \beta = \sqrt{k^2 - k_c^2} \qquad \lambda_g = \dfrac{2\pi}{\beta}\)
+    \(Z_{TE_{10}} = \dfrac{\omega\mu_0}{\beta} \qquad v_{ph} = \dfrac{\omega}{\beta} \qquad v_{gr} = \dfrac{\beta c^2}{\omega\varepsilon_r}\)
+  </div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">a</td><td>Broad-wall dimension (determines TE₁₀ cutoff: f_c = c/(2a√εr))</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">b</td><td>Narrow-wall dimension; typically b ≈ a/2 for standard waveguide</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">λ<sub>g</sub></td><td>Guide wavelength; longer than free-space λ (v<sub>ph</sub> > c)</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">Z<sub>TE</sub></td><td>Wave impedance; 377Ω at f → ∞, → ∞ as f → f_c</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">v<sub>ph</sub>·v<sub>gr</sub></td><td>Phase × group velocity = c²/εr (always)</td></tr>
+  </table>
+  <p style="font-size:11px;color:#777;margin-top:8px;">Standard waveguide bands: WR-90 (a=22.86mm, b=10.16mm, 8.2–12.4 GHz X-band), WR-42 (a=10.67mm, b=4.32mm, 18–26.5 GHz K-band), WR-28 (a=7.11mm, b=3.56mm, 26.5–40 GHz Ka-band).</p>
+  </details>
+</div>
+
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Broad wall, <span class="var">a</span></label>
+    <div class="inp-inline">
+      <input type="text" id="wg-a" placeholder="value" data-tip="Larger cross-section dimension. Controls dominant TE₁₀ cutoff frequency.">
+      <select id="wg-a-unit">
+        <option value="1e-3" selected>mm</option>
+        <option value="1e-2">cm</option>
+        <option value="1">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Narrow wall, <span class="var">b</span></label>
+    <div class="inp-inline">
+      <input type="text" id="wg-b" placeholder="value" data-tip="Smaller cross-section dimension. Standard waveguide: b ≈ a/2.">
+      <select id="wg-b-unit">
+        <option value="1e-3" selected>mm</option>
+        <option value="1e-2">cm</option>
+        <option value="1">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Operating frequency, <span class="var">f</span></label>
+    <div class="inp-inline">
+      <input type="text" id="wg-f" placeholder="value" data-tip="Operating frequency. Must be above the TE₁₀ cutoff for propagation.">
+      <select id="wg-f-unit">
+        <option value="1e9" selected>GHz</option>
+        <option value="1e6">MHz</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Fill dielectric, <span class="var">εr</span></label>
+    <div class="inp-inline">
+      <input type="text" id="wg-er" placeholder="1 (air)" data-tip="Relative permittivity of the waveguide fill. Default 1 for air. Dielectric fill lowers cutoff frequency by 1/√εr.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Loss tangent, <span class="var">tan δ</span></label>
+    <div class="inp-inline">
+      <input type="text" id="wg-tanD" placeholder="0 (lossless)" data-tip="Loss tangent of fill dielectric. 0 for air-filled waveguide.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Wall conductivity, <span class="var">σ</span></label>
+    <div class="inp-inline">
+      <input type="text" id="wg-sigma" placeholder="5.8e7 (copper)" data-tip="Conductivity of waveguide walls in S/m. Copper: 5.8×10⁷, Aluminum: 3.5×10⁷, Silver: 6.3×10⁷.">
+    </div>
+  </div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 6px;">
+  <button class="calc-btn" id="wg-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'wg-a':'22.86','wg-a-unit':'1e-3','wg-b':'10.16','wg-b-unit':'1e-3','wg-f':'10','wg-f-unit':'1e9','wg-er':'1','wg-tanD':'0','wg-sigma':'5.8e7'})" title="WR-90 X-band at 10 GHz">WR-90 (X-band)</button>
+  <button class="example-btn" onclick="loadExample({'wg-a':'10.67','wg-a-unit':'1e-3','wg-b':'4.32','wg-b-unit':'1e-3','wg-f':'24','wg-f-unit':'1e9','wg-er':'1','wg-tanD':'0','wg-sigma':'5.8e7'})" title="WR-42 K-band at 24 GHz">WR-42 (K-band)</button>
+  <button class="example-btn" onclick="loadExample({'wg-a':'28.5','wg-a-unit':'1e-3','wg-b':'12.6','wg-b-unit':'1e-3','wg-f':'6','wg-f-unit':'1e9','wg-er':'1','wg-tanD':'0','wg-sigma':'5.8e7'})" title="C-band waveguide at 6 GHz">C-band</button>
+</div>
+
+<div id="wg-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="wg-results" class="res-grid"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram(res) {
+  var W=500, H=180;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Draw 3D-ish waveguide cross section (2D front face + perspective lines)
+  var x0=80, y0=30, W2=220, H2=120, dx=40, dy=20;
+  // Back face
+  s+='<rect x="'+(x0+dx)+'" y="'+(y0-dy)+'" width="'+W2+'" height="'+H2+'" fill="none" stroke="#aaa" stroke-width="1.5" stroke-dasharray="4,3"/>';
+  // Front face
+  s+='<rect x="'+x0+'" y="'+y0+'" width="'+W2+'" height="'+H2+'" fill="#e8f4ff" stroke="#5533aa" stroke-width="2.2"/>';
+  // Perspective lines (corners)
+  [[x0,y0],[x0+W2,y0],[x0,y0+H2],[x0+W2,y0+H2]].forEach(function(pt){
+    s+='<line x1="'+pt[0]+'" y1="'+pt[1]+'" x2="'+(pt[0]+dx)+'" y2="'+(pt[1]-dy)+'" stroke="#aaa" stroke-width="1.5" stroke-dasharray="4,3"/>';
+  });
+  // TE10 E-field lines (half-sinusoid in x)
+  var cy = y0+H2/2, nlines=5;
+  for (var i=1; i<nlines; i++) {
+    var xp = x0 + i*(W2/nlines);
+    var amp = 18 * Math.sin(i*Math.PI/nlines);
+    s+='<line x1="'+xp+'" y1="'+(cy-amp)+'" x2="'+xp+'" y2="'+(cy+amp)+'" stroke="#AA77FF" stroke-width="1.5" opacity="0.8"/>';
+    if (amp>2) {
+      s+='<polygon points="'+xp+','+(cy-amp)+' '+(xp-3)+','+(cy-amp+6)+' '+(xp+3)+','+(cy-amp+6)+'" fill="#AA77FF" opacity="0.8"/>';
+    }
+  }
+  // Labels
+  s+='<text x="'+x0+'" y="'+(y0+H2+18)+'" text-anchor="start" font-size="11" fill="#5533aa">a = '+engFmt(res.a,'m')+'</text>';
+  s+='<line x1="'+x0+'" y1="'+(y0+H2+8)+'" x2="'+(x0+W2)+'" y2="'+(y0+H2+8)+'" stroke="#888" stroke-width="1.2"/>';
+  s+='<text x="'+(x0-22)+'" y="'+(y0+H2/2+4)+'" text-anchor="middle" font-size="11" fill="#5533aa" transform="rotate(-90 '+(x0-22)+' '+(y0+H2/2)+')">b = '+engFmt(res.b,'m')+'</text>';
+  // fc10 and operating freq bar
+  var C0=2.998e8;
+  var fc10str = engFmt(res.fc10,'Hz');
+  s+='<text x="'+(x0+W2+20)+'" y="55" font-size="11" fill="#5533aa">f<tspan font-size="9" dy="3">c10</tspan><tspan dy="-3"> = '+fc10str+'</tspan></text>';
+  if (res.beta !== undefined) {
+    s+='<text x="'+(x0+W2+20)+'" y="75" font-size="11" fill="#AA77FF">λ<tspan font-size="9" dy="3">g</tspan><tspan dy="-3"> = '+engFmt(res.lambda_g,'m')+'</tspan></text>';
+    s+='<text x="'+(x0+W2+20)+'" y="95" font-size="11" fill="#AA77FF">Z<tspan font-size="9" dy="3">w</tspan><tspan dy="-3"> = '+res.Zw.toFixed(1)+' Ω</tspan></text>';
+  }
+  s+='<text x="240" y="170" text-anchor="middle" font-size="10" fill="#888">↑ TE₁₀ E-field (half-sinusoid across a, uniform in b)</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML = s;
+}
+</script>
+
+<script src="Waveguide.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

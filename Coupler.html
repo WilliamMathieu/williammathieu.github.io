@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directional Coupler &amp; Hybrid Designer — Branchline, Rat-Race, Coupled-Line | RF Toolbox</title>
+  <meta name="description" content="Design coupled-line directional couplers, 90° branchline hybrids, and 180° rat-race hybrids. Calculates even/odd mode impedances, arm widths, and coupling coefficients.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/Coupler.html">
+  <meta property="og:title" content="Directional Coupler &amp; Hybrid Designer | RF Toolbox">
+  <meta property="og:description" content="Design coupled-line directional couplers, 90° branchline hybrids, and 180° rat-race hybrids.">
+  <meta property="og:url" content="https://rftoolbox.ca/Coupler.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Directional Coupler & Hybrid Designer",
+    "description": "Design coupled-line directional couplers, 90° branchline hybrids, and 180° rat-race hybrids.",
+    "url": "https://rftoolbox.ca/Coupler.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Directional Coupler &amp; Hybrid Designer</h3>
+<div class="tool-concept">
+  <p>Designs three fundamental coupler/hybrid topologies. <strong>Coupled-line</strong>: gives even/odd mode impedances for a target coupling level. <strong>Branchline (90° hybrid)</strong>: gives all four arm impedances for equal or unequal power split. <strong>Rat-race (180° hybrid)</strong>: gives ring impedance and dimensions for equal split sum/difference operation.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">
+    <strong>Coupled-line:</strong> \(Z_{oe}=Z_0\sqrt{\frac{1+C}{1-C}}\quad Z_{oo}=Z_0\sqrt{\frac{1-C}{1+C}}\quad C=10^{-C_{\rm dB}/20}\)<br>
+    <strong>Branchline:</strong> \(Z_{\rm series}=Z_0\quad Z_{\rm shunt}=Z_0/\sqrt{2}\) (equal split); all arms = λ/4<br>
+    <strong>Rat-race:</strong> \(Z_{\rm ring}=Z_0\sqrt{2}\quad \text{circumference}=3\lambda/2\)
+  </div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">Z<sub>oe</sub></td><td>Even-mode impedance (both lines driven in phase)</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">Z<sub>oo</sub></td><td>Odd-mode impedance (lines driven out of phase)</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">C</td><td>Coupling coefficient (linear). C=3 dB → C=0.707, Z<sub>oe</sub>≈120Ω, Z<sub>oo</sub>≈21Ω</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">λ/4</td><td>All arms are one quarter-wavelength long at the centre frequency</td></tr>
+  </table>
+  </details>
+</div>
+
+<div class="sec-lbl">Design Type</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Coupler type</label>
+    <div class="inp-inline">
+      <select id="coup-type" style="width:100%;">
+        <option value="coupled" selected>Coupled-line (directional coupler)</option>
+        <option value="branch">Branchline (90° hybrid)</option>
+        <option value="ratrace">Rat-race (180° hybrid)</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>System impedance, <span class="var">Z₀</span></label>
+    <div class="inp-inline">
+      <input type="text" id="coup-z0" placeholder="50" data-tip="Reference impedance of all ports. Typically 50 Ω.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Centre frequency, <span class="var">f</span></label>
+    <div class="inp-inline">
+      <input type="text" id="coup-f" placeholder="value" data-tip="Operating frequency for computing physical λ/4 lengths.">
+      <select id="coup-f-unit">
+        <option value="1e6">MHz</option>
+        <option value="1e9" selected>GHz</option>
+      </select>
+    </div>
+  </div>
+  <!-- Coupled-line: coupling in dB -->
+  <div class="inp-row" id="coup-db-row">
+    <label>Coupling, <span class="var">C</span></label>
+    <div class="inp-inline">
+      <input type="text" id="coup-C" placeholder="e.g. 10" data-tip="Desired coupling in dB (positive number). e.g. 10 dB = 10% power coupled. Common values: 3, 6, 10, 20 dB.">
+      <span style="padding:0 8px;line-height:32px;color:#888;font-size:13px;">dB</span>
+    </div>
+  </div>
+  <!-- Branchline: power split ratio -->
+  <div class="inp-row" id="coup-ratio-row" style="display:none;">
+    <label>Power split ratio, <span class="var">R</span></label>
+    <div class="inp-inline">
+      <input type="text" id="coup-ratio" placeholder="1 (equal = 3 dB)" data-tip="Power split ratio P_through/P_coupled. 1 = equal 3 dB split. 2 = 4.77 dB / 1.76 dB unequal split.">
+    </div>
+  </div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 6px;">
+  <button class="calc-btn" id="coup-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'coup-type':'coupled','coup-z0':'50','coup-f':'2.4','coup-f-unit':'1e9','coup-C':'10'})" title="10 dB directional coupler at 2.4 GHz">10 dB coupler</button>
+  <button class="example-btn" onclick="loadExample({'coup-type':'branch','coup-z0':'50','coup-f':'2.4','coup-f-unit':'1e9','coup-ratio':'1'}); document.getElementById('coup-db-row').style.display='none'; document.getElementById('coup-ratio-row').style.display='';" title="3 dB branchline at 2.4 GHz">3 dB branchline</button>
+  <button class="example-btn" onclick="loadExample({'coup-type':'ratrace','coup-z0':'50','coup-f':'2.4','coup-f-unit':'1e9'}); document.getElementById('coup-db-row').style.display='none'; document.getElementById('coup-ratio-row').style.display='none';" title="Rat-race hybrid at 2.4 GHz">Rat-race</button>
+</div>
+
+<div id="coup-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="coup-results" class="res-grid"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram(res, type) {
+  if (type === 'coupled')   drawCoupledDiagram(res);
+  else if (type === 'branch') drawBranchDiagram(res);
+  else                       drawRatraceDiagram(res);
+}
+
+function drawCoupledDiagram(res) {
+  var W=520, H=150;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Two parallel coupled lines
+  var lx=60, rx=460, ty=52, by=92;
+  s+='<line x1="20" y1="'+ty+'" x2="'+lx+'" y2="'+ty+'" stroke="#5533aa" stroke-width="2"/>';
+  s+='<rect x="'+lx+'" y="'+(ty-6)+'" width="'+(rx-lx)+'" height="12" fill="#e8f0ff" stroke="#5533aa" stroke-width="2" rx="2"/>';
+  s+='<line x1="'+rx+'" y1="'+ty+'" x2="500" y2="'+ty+'" stroke="#5533aa" stroke-width="2"/>';
+  s+='<line x1="20" y1="'+by+'" x2="'+lx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-dasharray="4,3"/>';
+  s+='<rect x="'+lx+'" y="'+(by-6)+'" width="'+(rx-lx)+'" height="12" fill="#f0e8ff" stroke="#AA77FF" stroke-width="2" rx="2"/>';
+  s+='<line x1="'+rx+'" y1="'+by+'" x2="500" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-dasharray="4,3"/>';
+  // Port labels
+  s+='<text x="15" y="'+(ty-8)+'" font-size="10" fill="#5533aa">Port 1 (input)</text>';
+  s+='<text x="505" y="'+(ty-8)+'" font-size="10" fill="#5533aa">Port 2 (through)</text>';
+  s+='<text x="15" y="'+(by+18)+'" font-size="10" fill="#888">Port 4 (isolated)</text>';
+  s+='<text x="505" y="'+(by+18)+'" font-size="10" fill="#AA77FF">Port 3 (coupled)</text>';
+  s+='<text x="260" y="'+(ty-14)+'" text-anchor="middle" font-size="11" fill="#5533aa">Z<tspan font-size="8" dy="3">oe</tspan><tspan dy="-3"> = '+res.Ze.toFixed(1)+' Ω</tspan></text>';
+  s+='<text x="260" y="'+(by+28)+'" text-anchor="middle" font-size="11" fill="#AA77FF">Z<tspan font-size="8" dy="3">oo</tspan><tspan dy="-3"> = '+res.Zo.toFixed(1)+' Ω</tspan></text>';
+  s+='<text x="260" y="140" text-anchor="middle" font-size="10" fill="#888">λ/4 = '+engFmt(res.lam4,'m')+'  |  Coupling = '+res.Cdb.toFixed(1)+' dB</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+function drawBranchDiagram(res) {
+  var W=360, H=200, cx=180, cy=100, r=65;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Four arms of branchline as square
+  var x1=cx-r, x2=cx+r, y1=cy-r, y2=cy+r;
+  // Draw the four arms
+  s+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y1+'" stroke="#5533aa" stroke-width="2.5"/>';
+  s+='<line x1="'+x1+'" y1="'+y2+'" x2="'+x2+'" y2="'+y2+'" stroke="#5533aa" stroke-width="2.5"/>';
+  s+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x1+'" y2="'+y2+'" stroke="#AA77FF" stroke-width="2.5"/>';
+  s+='<line x1="'+x2+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="#AA77FF" stroke-width="2.5"/>';
+  // Port stubs
+  var stubL=22;
+  s+='<line x1="'+(x1-stubL)+'" y1="'+y1+'" x2="'+x1+'" y2="'+y1+'" stroke="#5533aa" stroke-width="2"/>';
+  s+='<line x1="'+(x1-stubL)+'" y1="'+y2+'" x2="'+x1+'" y2="'+y2+'" stroke="#5533aa" stroke-width="2"/>';
+  s+='<line x1="'+x2+'" y1="'+y1+'" x2="'+(x2+stubL)+'" y2="'+y1+'" stroke="#5533aa" stroke-width="2"/>';
+  s+='<line x1="'+x2+'" y1="'+y2+'" x2="'+(x2+stubL)+'" y2="'+y2+'" stroke="#5533aa" stroke-width="2"/>';
+  // Port labels
+  s+='<text x="'+(x1-stubL-4)+'" y="'+(y1+4)+'" text-anchor="end" font-size="10" fill="#5533aa">1</text>';
+  s+='<text x="'+(x1-stubL-4)+'" y="'+(y2+4)+'" text-anchor="end" font-size="10" fill="#888">4 (iso)</text>';
+  s+='<text x="'+(x2+stubL+4)+'" y="'+(y1+4)+'" font-size="10" fill="#5533aa">2 (through)</text>';
+  s+='<text x="'+(x2+stubL+4)+'" y="'+(y2+4)+'" font-size="10" fill="#AA77FF">3 (coupled, −90°)</text>';
+  // Impedance labels
+  s+='<text x="'+cx+'" y="'+(y1-6)+'" text-anchor="middle" font-size="10" fill="#5533aa">Z='+res.Z_series.toFixed(1)+'Ω</text>';
+  s+='<text x="'+(x1-10)+'" y="'+cy+'" text-anchor="middle" font-size="10" fill="#AA77FF" transform="rotate(-90 '+(x1-10)+' '+cy+')">Z='+res.Z_through.toFixed(1)+'Ω</text>';
+  s+='<text x="'+(x2+10)+'" y="'+cy+'" text-anchor="middle" font-size="10" fill="#AA77FF" transform="rotate(90 '+(x2+10)+' '+cy+')">Z='+res.Z_coupled.toFixed(1)+'Ω</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+
+function drawRatraceDiagram(res) {
+  var W=300, H=200, cx=150, cy=100, r=65;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Ring
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="#5533aa" stroke-width="3"/>';
+  // Four ports at 0°, 90°, 180°, 270° (with gaps)
+  var ports = [
+    {angle:90,  label:'1', dx:-22, dy:-12, color:'#5533aa'},
+    {angle:0,   label:'2 (sum)',  dx:8,   dy:-12, color:'#5533aa'},
+    {angle:270, label:'3', dx:-28, dy:12,  color:'#AA77FF'},
+    {angle:180, label:'4 (diff)', dx:8,   dy:12,  color:'#AA77FF'}
+  ];
+  ports.forEach(function(p){
+    var rad = p.angle * Math.PI/180;
+    var px = cx + r*Math.cos(rad), py = cy - r*Math.sin(rad);
+    var stub = 22;
+    var ex = cx + (r+stub)*Math.cos(rad), ey = cy - (r+stub)*Math.sin(rad);
+    s+='<line x1="'+px+'" y1="'+py+'" x2="'+ex+'" y2="'+ey+'" stroke="'+p.color+'" stroke-width="2"/>';
+    s+='<text x="'+(ex+p.dx)+'" y="'+(ey+p.dy)+'" font-size="10" fill="'+p.color+'">'+p.label+'</text>';
+  });
+  s+='<text x="'+cx+'" y="'+(cy+5)+'" text-anchor="middle" font-size="11" fill="#5533aa">Z = '+res.Z_ring.toFixed(1)+' Ω</text>';
+  s+='<text x="'+cx+'" y="185" text-anchor="middle" font-size="10" fill="#888">3λ/2 = '+engFmt(res.ring_circ,'m')+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+
+<script src="Coupler.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

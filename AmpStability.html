@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amplifier Stability Factor — K, µ, MAG from S-Parameters | RF Toolbox</title>
+  <meta name="description" content="Calculate Rollett K-factor, µ-factor (Edwards-Sinsky), determinant magnitude, and maximum available gain (MAG) from two-port S-parameters.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/AmpStability.html">
+  <meta property="og:title" content="Amplifier Stability Calculator | RF Toolbox">
+  <meta property="og:description" content="K-factor, µ-factor, and MAG from S-parameters. Determine if a transistor or MMIC is unconditionally stable.">
+  <meta property="og:url" content="https://rftoolbox.ca/AmpStability.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Amplifier Stability Factor Calculator",
+    "description": "Calculate K-factor, µ-factor, and MAG from S-parameters to determine amplifier stability.",
+    "url": "https://rftoolbox.ca/AmpStability.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Amplifier Stability (K, µ, MAG)</h3>
+<div class="tool-concept">
+  <p>Enter the S-parameters of a transistor or MMIC at one frequency. The tool computes the Rollett K-factor and the µ-factor (Edwards-Sinsky) to determine if the device is unconditionally stable, and the maximum available gain (MAG) when stable. Use S-parameter data from a datasheet or VNA measurement.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">
+    \(K = \dfrac{1 - |S_{11}|^2 - |S_{22}|^2 + |\Delta|^2}{2|S_{12}||S_{21}|} \qquad \Delta = S_{11}S_{22} - S_{12}S_{21}\)
+    \(\mu = \dfrac{1-|S_{11}|^2}{|S_{22}-\Delta S_{11}^*|+|S_{12}S_{21}|}\)
+    \(\text{MAG} = \dfrac{|S_{21}|}{|S_{12}|}\left(K - \sqrt{K^2-1}\right)\)
+  </div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">K &gt; 1 and |Δ| &lt; 1</td><td>Both conditions required for unconditional stability</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">µ &gt; 1</td><td>Sufficient (and necessary) for unconditional stability; larger µ = more stable</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">MAG</td><td>Maximum achievable gain when simultaneously conjugate-matched at both ports</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">MSG</td><td>Maximum stable gain = |S₂₁/S₁₂|, defined at the K=1 boundary</td></tr>
+  </table>
+  </details>
+</div>
+
+<div class="sec-lbl">S-Parameter Inputs (magnitude + angle in degrees)</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>S₁₁ — input reflection</label>
+    <div class="inp-inline">
+      <input type="text" id="amp-s11m" placeholder="|S₁₁|" data-tip="Magnitude of S11 (linear, not dB). E.g. 0.85 means −1.4 dB return loss.">
+      <input type="text" id="amp-s11a" placeholder="∠° (0)" style="width:70px;" data-tip="Phase angle of S11 in degrees.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>S₁₂ — reverse isolation</label>
+    <div class="inp-inline">
+      <input type="text" id="amp-s12m" placeholder="|S₁₂|" data-tip="Magnitude of S12. Small for well-isolated amplifiers (e.g. 0.01–0.1).">
+      <input type="text" id="amp-s12a" placeholder="∠° (0)" style="width:70px;" data-tip="Phase angle of S12 in degrees.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>S₂₁ — forward gain</label>
+    <div class="inp-inline">
+      <input type="text" id="amp-s21m" placeholder="|S₂₁|" data-tip="Magnitude of S21. Greater than 1 for an amplifier (e.g. 3.16 = 10 dB gain).">
+      <input type="text" id="amp-s21a" placeholder="∠° (0)" style="width:70px;" data-tip="Phase angle of S21 in degrees.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>S₂₂ — output reflection</label>
+    <div class="inp-inline">
+      <input type="text" id="amp-s22m" placeholder="|S₂₂|" data-tip="Magnitude of S22. Typically similar magnitude to S11.">
+      <input type="text" id="amp-s22a" placeholder="∠° (0)" style="width:70px;" data-tip="Phase angle of S22 in degrees.">
+    </div>
+  </div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 6px;">
+  <button class="calc-btn" id="amp-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'amp-s11m':'0.85','amp-s11a':'-60','amp-s12m':'0.04','amp-s12a':'50','amp-s21m':'3.5','amp-s21a':'130','amp-s22m':'0.45','amp-s22a':'-55'})" title="Typical low-noise BJT/HEMT at ~2 GHz">Typical LNA</button>
+  <button class="example-btn" onclick="loadExample({'amp-s11m':'0.72','amp-s11a':'-120','amp-s12m':'0.18','amp-s12a':'30','amp-s21m':'2.5','amp-s21a':'60','amp-s22m':'0.82','amp-s22a':'-65'})" title="Potentially unstable device example">Potentially unstable</button>
+</div>
+
+<div id="amp-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="amp-results" class="res-grid"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram(res) {
+  var W=480, H=130;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Two-port box
+  s+='<rect x="155" y="30" width="170" height="70" fill="#f0eeff" stroke="#5533aa" stroke-width="2" rx="4"/>';
+  s+='<text x="240" y="60" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">Transistor</text>';
+  s+='<text x="240" y="76" text-anchor="middle" font-size="10" fill="#888">[S]</text>';
+  // Port lines
+  s+='<line x1="20" y1="65" x2="155" y2="65" stroke="#5533aa" stroke-width="2"/>';
+  s+='<line x1="325" y1="65" x2="460" y2="65" stroke="#5533aa" stroke-width="2"/>';
+  s+='<text x="85" y="58" text-anchor="middle" font-size="10" fill="#5533aa">Port 1</text>';
+  s+='<text x="390" y="58" text-anchor="middle" font-size="10" fill="#5533aa">Port 2</text>';
+  // Stability indicator
+  var color = res.uncond ? '#27ae60' : '#c0392b';
+  var label = res.uncond ? 'Unconditionally Stable' : 'Potentially Unstable';
+  s+='<text x="240" y="118" text-anchor="middle" font-size="12" fill="'+color+'" font-weight="bold">'+label+'</text>';
+  s+='<text x="240" y="22" text-anchor="middle" font-size="11" fill="#5533aa">K = '+res.K.toFixed(3)+'  µ = '+res.mu.toFixed(3)+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+
+<script src="AmpStability.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

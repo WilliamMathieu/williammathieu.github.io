@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Series Component Finder — Nearest Standard R, C, L Value | RF Toolbox</title>
+  <meta name="description" content="Find the nearest standard resistor, capacitor, or inductor value in E6, E12, E24, E48, E96, or E192 series. Shows top 5 candidates with percentage error.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/ESeries.html">
+  <meta property="og:title" content="E-Series Component Finder | RF Toolbox">
+  <meta property="og:description" content="Find the nearest standard resistor, capacitor, or inductor value in E6–E192 series.">
+  <meta property="og:url" content="https://rftoolbox.ca/ESeries.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "E-Series Standard Component Value Finder",
+    "description": "Find the nearest standard resistor, capacitor, or inductor value in E6, E12, E24, E48, E96, or E192 series.",
+    "url": "https://rftoolbox.ca/ESeries.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>E-Series Component Finder</h3>
+<div class="tool-concept">
+  <p>Enter a calculated target value and the tool finds the five closest standard values from the chosen E-series, with percentage error for each. Use E24 for general-purpose; E96 for precision resistors; E192 for tight-tolerance applications.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Series Guide ▸</summary>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">E6</td><td>6 values/decade — ±20% tolerance (legacy)</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">E12</td><td>12 values/decade — ±10% tolerance</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">E24</td><td>24 values/decade — ±5% tolerance; most common</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">E48</td><td>48 values/decade — ±2% tolerance</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">E96</td><td>96 values/decade — ±1% tolerance; standard precision resistors</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">E192</td><td>192 values/decade — 0.5% tolerance; high-precision</td></tr>
+  </table>
+  </details>
+</div>
+
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Target value</label>
+    <div class="inp-inline">
+      <input type="text" id="es-val" placeholder="value" data-tip="The calculated ideal component value. The tool finds the closest standard values.">
+      <select id="es-unit">
+        <optgroup label="Resistor">
+          <option value="ohm">Ω</option>
+          <option value="kohm" selected>kΩ</option>
+          <option value="Mohm">MΩ</option>
+        </optgroup>
+        <optgroup label="Capacitor">
+          <option value="pF">pF</option>
+          <option value="nF">nF</option>
+          <option value="uF">µF</option>
+        </optgroup>
+        <optgroup label="Inductor">
+          <option value="nH">nH</option>
+          <option value="uH">µH</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>E-series</label>
+    <div class="inp-inline">
+      <select id="es-series" style="width:100%;">
+        <option value="E6">E6 (±20%)</option>
+        <option value="E12">E12 (±10%)</option>
+        <option value="E24" selected>E24 (±5%)</option>
+        <option value="E48">E48 (±2%)</option>
+        <option value="E96">E96 (±1%)</option>
+        <option value="E192">E192 (0.5%)</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 6px;">
+  <button class="calc-btn" id="es-btn">Find Nearest</button>
+  <button class="example-btn" onclick="loadExample({'es-val':'4.7','es-unit':'kohm','es-series':'E24'})" title="4.7 kΩ resistor in E24">4.7 kΩ E24</button>
+  <button class="example-btn" onclick="loadExample({'es-val':'22.5','es-unit':'pF','es-series':'E96'})" title="22.5 pF capacitor in E96">22.5 pF E96</button>
+  <button class="example-btn" onclick="loadExample({'es-val':'1','es-unit':'kohm','es-series':'E192'})" title="1 kΩ in E192">1 kΩ E192</button>
+</div>
+
+<div id="es-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="es-results" class="res-grid"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram(series, n) {
+  var series_counts = {E6:6,E12:12,E24:24,E48:48,E96:96,E192:192};
+  var count = series_counts[series] || 24;
+  var W=480, H=100;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Draw a decade number line with tick marks
+  var lineY=50, lx=40, rx=440, lineW=rx-lx;
+  s+='<line x1="'+lx+'" y1="'+lineY+'" x2="'+rx+'" y2="'+lineY+'" stroke="#ccc" stroke-width="2"/>';
+  // Decade labels
+  s+='<text x="'+lx+'" y="70" text-anchor="middle" font-size="10" fill="#aaa">1×</text>';
+  s+='<text x="'+((lx+rx)/2)+'" y="70" text-anchor="middle" font-size="10" fill="#aaa">√10×</text>';
+  s+='<text x="'+rx+'" y="70" text-anchor="middle" font-size="10" fill="#aaa">10×</text>';
+  // Place tick marks for the series values in a single decade
+  var table_map = {E6:[1.0,1.5,2.2,3.3,4.7,6.8],
+    E12:[1.0,1.2,1.5,1.8,2.2,2.7,3.3,3.9,4.7,5.6,6.8,8.2],
+    E24:[1.0,1.1,1.2,1.3,1.5,1.6,1.8,2.0,2.2,2.4,2.7,3.0,3.3,3.6,3.9,4.3,4.7,5.1,5.6,6.2,6.8,7.5,8.2,9.1]};
+  var ticks = table_map[series];
+  if (ticks) {
+    ticks.forEach(function(v) {
+      var x = lx + (Math.log(v)/Math.LN10) * lineW;
+      var isSelected = (n > 0 && ticks.indexOf(v) < n);
+      s+='<line x1="'+x+'" y1="'+(lineY-10)+'" x2="'+x+'" y2="'+(lineY+10)+'" stroke="'+(isSelected?'#AA77FF':'#5533aa')+'" stroke-width="'+(isSelected?2.5:1.2)+'"/>';
+    });
+  } else {
+    // For E48/E96/E192, just show density indicator
+    var step = lineW / count;
+    for (var i=0;i<count;i++) {
+      var x=lx+i*step;
+      s+='<line x1="'+x+'" y1="'+(lineY-6)+'" x2="'+x+'" y2="'+(lineY+6)+'" stroke="#AA77FF" stroke-width="0.8" opacity="0.6"/>';
+    }
+  }
+  s+='<text x="240" y="20" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">'+series+' — '+count+' values per decade</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+
+<script src="ESeries.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

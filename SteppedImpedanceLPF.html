@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stepped-Impedance Microstrip LPF Designer | RF Toolbox</title>
+  <meta name="description" content="Design stepped-impedance microstrip low-pass filters. Butterworth or Chebyshev prototype converted to alternating high-Z and low-Z transmission line sections with physical dimensions.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/SteppedImpedanceLPF.html">
+  <meta property="og:title" content="Stepped-Impedance Microstrip LPF Designer | RF Toolbox">
+  <meta property="og:description" content="Design stepped-impedance microstrip low-pass filters with physical trace dimensions.">
+  <meta property="og:url" content="https://rftoolbox.ca/SteppedImpedanceLPF.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Stepped-Impedance Microstrip LPF Designer",
+    "description": "Design stepped-impedance microstrip low-pass filters (Butterworth or Chebyshev) with physical trace dimensions.",
+    "url": "https://rftoolbox.ca/SteppedImpedanceLPF.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Stepped-Impedance Microstrip LPF</h3>
+<div class="tool-concept">
+  <p>A stepped-impedance LPF replaces lumped L and C elements with short sections of high-impedance (narrow, inductor-like) and low-impedance (wide, capacitor-like) microstrip. Easier to fabricate than lumped filters above ~1 GHz; the tradeoff is a less sharp roll-off and spurious passbands at higher frequencies.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">
+    High-Z (series L): \(\beta\ell = g_k \dfrac{Z_0}{Z_H}\)<br>
+    Low-Z (shunt C): \(\beta\ell = g_k \dfrac{Z_L}{Z_0}\)<br>
+    \(\ell = \dfrac{\beta\ell}{\beta_{\rm sub}}\quad \beta_{\rm sub}=\dfrac{2\pi f}{c}\sqrt{\varepsilon_r}\)
+  </div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">Z<sub>H</sub></td><td>High-impedance line (narrow trace, acts as series inductor). Recommended: Z<sub>H</sub> = 100–150 Ω</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">Z<sub>L</sub></td><td>Low-impedance line (wide trace, acts as shunt capacitor). Recommended: Z<sub>L</sub> = 10–30 Ω</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">g<sub>k</sub></td><td>Prototype lowpass element values (Butterworth or Chebyshev)</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">β·ℓ</td><td>Electrical length of each section (radians at f<sub>c</sub>)</td></tr>
+  </table>
+  <p style="font-size:11px;color:#777;margin-top:8px;">Accuracy improves when Z<sub>H</sub>/Z<sub>L</sub> is large. Sections should remain electrically short (β·ℓ &lt; 45°) for good approximation to lumped behavior.</p>
+  </details>
+</div>
+
+<div class="sec-lbl">Filter Specification</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Filter order, <span class="var">n</span></label>
+    <div class="inp-inline">
+      <select id="silpf-n" style="width:100%;">
+        <option value="3" selected>3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Response</label>
+    <div class="inp-inline">
+      <select id="silpf-resp" style="width:100%;">
+        <option value="butter" selected>Butterworth (maximally flat)</option>
+        <option value="cheby">Chebyshev (0.5 dB ripple)</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Cutoff frequency, <span class="var">f<sub>c</sub></span></label>
+    <div class="inp-inline">
+      <input type="text" id="silpf-fc" placeholder="value" data-tip="3 dB cutoff frequency for Butterworth; ripple-band edge for Chebyshev.">
+      <select id="silpf-fc-unit">
+        <option value="1e6">MHz</option>
+        <option value="1e9" selected>GHz</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>System impedance, <span class="var">Z₀</span></label>
+    <div class="inp-inline">
+      <input type="text" id="silpf-z0" placeholder="50" data-tip="Source and load impedance. Typically 50 Ω.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>High-Z lines, <span class="var">Z<sub>H</sub></span></label>
+    <div class="inp-inline">
+      <input type="text" id="silpf-zh" placeholder="120" data-tip="Impedance of narrow (high-Z) sections, representing series inductors. Recommended 100–150 Ω.">
+      <span style="padding:0 8px;line-height:32px;color:#888;font-size:13px;">Ω</span>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Low-Z lines, <span class="var">Z<sub>L</sub></span></label>
+    <div class="inp-inline">
+      <input type="text" id="silpf-zl" placeholder="20" data-tip="Impedance of wide (low-Z) sections, representing shunt capacitors. Recommended 10–30 Ω.">
+      <span style="padding:0 8px;line-height:32px;color:#888;font-size:13px;">Ω</span>
+    </div>
+  </div>
+</div>
+
+<div class="sec-lbl">Substrate (for physical dimensions)</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Substrate εr</label>
+    <div class="inp-inline">
+      <input type="text" id="silpf-er" placeholder="4.4 (FR4)" data-tip="Substrate dielectric constant. FR4 ≈ 4.4, Rogers 4003 ≈ 3.55.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Substrate height, <span class="var">h</span></label>
+    <div class="inp-inline">
+      <input type="text" id="silpf-h" placeholder="1" data-tip="Height of dielectric substrate in mm. Used to compute trace widths from w/h ratios.">
+      <span style="padding:0 8px;line-height:32px;color:#888;font-size:13px;">mm</span>
+    </div>
+  </div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 6px;">
+  <button class="calc-btn" id="silpf-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'silpf-n':'5','silpf-resp':'butter','silpf-fc':'3','silpf-fc-unit':'1e9','silpf-z0':'50','silpf-zh':'120','silpf-zl':'20','silpf-er':'4.4','silpf-h':'1'})" title="5th-order Butterworth LPF at 3 GHz on FR4">5th Butterworth 3 GHz</button>
+  <button class="example-btn" onclick="loadExample({'silpf-n':'7','silpf-resp':'cheby','silpf-fc':'5','silpf-fc-unit':'1e9','silpf-z0':'50','silpf-zh':'120','silpf-zl':'20','silpf-er':'3.55','silpf-h':'0.8'})" title="7th-order Chebyshev LPF at 5 GHz on Rogers 4003">7th Cheby 5 GHz</button>
+</div>
+
+<div id="silpf-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="silpf-results" class="res-grid"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram(sections, Zh, Zl) {
+  if (!sections || sections.length === 0) return;
+  var W=500, H=120, sy=35, sh=50;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  var n = sections.length;
+  var totalW = 420, startX = 40;
+  var availW = totalW;
+  var totalEl = sections.reduce(function(a,sec){ return a + sec.beta_l_deg; }, 0);
+  var x = startX;
+  // Input line
+  s+='<line x1="10" y1="'+(sy+sh/2)+'" x2="'+startX+'" y2="'+(sy+sh/2)+'" stroke="#5533aa" stroke-width="2"/>';
+  sections.forEach(function(sec) {
+    var segW = Math.max(8, (sec.beta_l_deg / totalEl) * availW);
+    var isHigh = sec.type.indexOf('High') >= 0;
+    var segH = isHigh ? 16 : sh;   // narrow (high Z) or wide (low Z)
+    var segY = sy + (sh - segH)/2;
+    var fill = isHigh ? '#e8f0ff' : '#f0e8ff';
+    var stroke = isHigh ? '#5533aa' : '#AA77FF';
+    s+='<rect x="'+x+'" y="'+segY+'" width="'+segW+'" height="'+segH+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="1.8" rx="2"/>';
+    if (segW > 20) {
+      s+='<text x="'+(x+segW/2)+'" y="'+(segY+segH/2+4)+'" text-anchor="middle" font-size="8" fill="'+stroke+'">'+sec.Zk.toFixed(0)+'Ω</text>';
+    }
+    x += segW;
+  });
+  // Output line
+  s+='<line x1="'+(startX+availW)+'" y1="'+(sy+sh/2)+'" x2="490" y2="'+(sy+sh/2)+'" stroke="#5533aa" stroke-width="2"/>';
+  s+='<text x="250" y="108" text-anchor="middle" font-size="10" fill="#888">Narrow ('+Zh.toFixed(0)+'Ω) = inductor   Wide ('+Zl.toFixed(0)+'Ω) = capacitor</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+
+<script src="SteppedImpedanceLPF.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yagi-Uda Antenna Calculator — Gain, Elements &amp; Dimensions | RF Toolbox</title>
+  <meta name="description" content="Calculate gain, element lengths, and boom length for a Yagi-Uda antenna. Empirical NBS/Viezbicke tables for 2–9 element designs from 2–9 elements.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/YagiAntenna.html">
+  <meta property="og:title" content="Yagi-Uda Antenna Calculator | RF Toolbox">
+  <meta property="og:description" content="Gain, element lengths, boom length for 2–9 element Yagi-Uda antennas.">
+  <meta property="og:url" content="https://rftoolbox.ca/YagiAntenna.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Yagi-Uda Antenna Calculator",
+    "description": "Gain, element lengths, and boom dimensions for 2–9 element Yagi-Uda antennas using NBS/Viezbicke empirical tables.",
+    "url": "https://rftoolbox.ca/YagiAntenna.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Yagi-Uda Antenna</h3>
+<div class="tool-concept">
+  <p>The Yagi-Uda antenna achieves directional gain through a driven dipole, a reflector element, and one or more directors. Gain scales approximately as 10 log₁₀(N) for large arrays. This calculator uses the NBS/Viezbicke empirical tables (Tech Note 688) optimised for d/λ = 0.0085 element diameter.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">
+    \(\text{Gain (dBi)} = \text{Gain (dBd)} + 2.15 \quad Z_{in}\approx 25\,\Omega\text{ (straight driven)}\)
+  </div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">Reflector</td><td>Slightly longer than λ/2 (≈ 0.505λ), placed ~0.25λ behind driven element</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">Driven</td><td>≈ 0.47λ half-wave dipole; feed point impedance ~25 Ω in array environment</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">Directors</td><td>Slightly shorter than λ/2 (≈ 0.43–0.46λ), spaced 0.25–0.42λ ahead of driven</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">F/B ratio</td><td>Front-to-back ratio; improves with more elements but saturates above ~7</td></tr>
+  </table>
+  </details>
+</div>
+
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Frequency, <span class="var">f</span></label>
+    <div class="inp-inline">
+      <input type="text" id="yagi-f" placeholder="value" data-tip="Operating frequency.">
+      <select id="yagi-f-unit">
+        <option value="1e6" selected>MHz</option>
+        <option value="1e9">GHz</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Number of elements, <span class="var">N</span></label>
+    <div class="inp-inline">
+      <input type="text" id="yagi-n" placeholder="2–9" data-tip="Total element count including reflector and driven. Range: 2–9.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Element diameter, <span class="var">d</span></label>
+    <div class="inp-inline">
+      <input type="text" id="yagi-diam" placeholder="e.g. 6" data-tip="Element tube/rod outer diameter. Affects length correction. NBS table is optimised for d/λ = 0.0085.">
+      <select id="yagi-diam-unit">
+        <option value="1e-3" selected>mm</option>
+        <option value="1e-2">cm</option>
+        <option value="1">m</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 6px;">
+  <button class="calc-btn" id="yagi-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'yagi-f':'144','yagi-f-unit':'1e6','yagi-n':'5','yagi-diam':'6','yagi-diam-unit':'1e-3'})" title="5-element 2m amateur band Yagi">2m amateur (144 MHz, 5-el)</button>
+  <button class="example-btn" onclick="loadExample({'yagi-f':'437','yagi-f-unit':'1e6','yagi-n':'7','yagi-diam':'6','yagi-diam-unit':'1e-3'})" title="7-element 70cm satellite Yagi">70cm satellite (437 MHz, 7-el)</button>
+  <button class="example-btn" onclick="loadExample({'yagi-f':'2450','yagi-f-unit':'1e6','yagi-n':'9','yagi-diam':'2','yagi-diam-unit':'1e-3'})" title="9-element 2.4 GHz Yagi">2.4 GHz 9-element</button>
+</div>
+
+<div id="yagi-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="yagi-results" class="res-grid"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram(elements, boomLen, lam) {
+  var W = 500, H = 180;
+  var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s += '<rect width="' + W + '" height="' + H + '" fill="#faf9ff" rx="4"/>';
+
+  var margin = 40, cy = 90;
+  var xMin = elements[0].x_m;
+  var xMax = elements[elements.length-1].x_m;
+  var xRange = xMax - xMin || 1;
+  var maxLen = 0;
+  elements.forEach(function(el) { if (el.len_m > maxLen) maxLen = el.len_m; });
+
+  function toSvgX(xm) { return margin + (xm - xMin) / xRange * (W - 2*margin); }
+  function toSvgY(half) { return half / (maxLen/2) * 70; }
+
+  // Boom
+  s += '<line x1="' + margin + '" y1="' + cy + '" x2="' + (W-margin) + '" y2="' + cy + '" stroke="#aaa" stroke-width="3" stroke-linecap="round"/>';
+  // Arrow
+  s += '<polygon points="' + (W-margin) + ',' + (cy-4) + ' ' + (W-margin+8) + ',' + cy + ' ' + (W-margin) + ',' + (cy+4) + '" fill="#888"/>';
+  s += '<text x="' + (W-margin+12) + '" y="' + (cy+4) + '" font-size="10" fill="#888">→</text>';
+
+  elements.forEach(function(el) {
+    var sx = toSvgX(el.x_m);
+    var halfPx = toSvgY(el.len_m / 2);
+    var isRefl = el.name === 'Reflector';
+    var isDriv = el.name === 'Driven';
+    var color = isDriv ? '#AA77FF' : (isRefl ? '#5533aa' : '#888');
+    var sw = isDriv ? 3 : 2;
+    s += '<line x1="' + sx + '" y1="' + (cy - halfPx) + '" x2="' + sx + '" y2="' + (cy + halfPx) + '" stroke="' + color + '" stroke-width="' + sw + '" stroke-linecap="round"/>';
+
+    var lblY = cy - halfPx - 6;
+    var anchor = isDriv ? 'middle' : (sx < W/2 ? 'start' : 'end');
+    s += '<text x="' + sx + '" y="' + lblY + '" text-anchor="middle" font-size="9" fill="' + color + '">' + el.name + '</text>';
+  });
+
+  // Gain annotation
+  s += '<text x="' + (W/2) + '" y="' + (H-16) + '" text-anchor="middle" font-size="11" fill="#888">Boom: ' + engFmt(boomLen,'m') + '  |  λ = ' + engFmt(lam,'m') + '</text>';
+
+  s += '</svg>';
+  document.getElementById('tool-diagram').innerHTML = s;
+}
+</script>
+<script src="YagiAntenna.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>
