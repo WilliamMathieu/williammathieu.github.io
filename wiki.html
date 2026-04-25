@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>RF Toolbox Wiki</title>
-	<meta name="description" content="57 reference articles on RF engineering, microwave design, and MRI physics — with equations, diagrams, and links to related calculators.">
+	<meta name="description" content="64 reference articles on RF engineering, microwave design, and MRI physics — with equations, diagrams, and links to related calculators.">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://rftoolbox.ca/wiki.html">
 	<link rel="stylesheet" href="style.css">
@@ -42,7 +42,7 @@
 
 	<div class="wiki-hero">
 		<h1>📖 RF Toolbox Wiki</h1>
-		<p>57 reference articles on electromagnetics, RF engineering, microwave design, and MRI physics.</p>
+		<p>64 reference articles on electromagnetics, RF engineering, microwave design, and MRI physics.</p>
 		<div class="wiki-search">
 			<input type="text" id="wiki-search" placeholder="Search articles…" oninput="filterWiki()">
 		</div>
@@ -59,6 +59,7 @@
 			<a class="wiki-card" href="wiki_transmission_lines.html"><div class="wc-title">Transmission Line Theory</div><div class="wc-desc">Telegrapher's equations, reflections, and standing waves.</div></a>
 			<a class="wiki-card" href="wiki_skin_effect.html"><div class="wc-title">Skin Effect</div><div class="wc-desc">Current concentration at surfaces and its impact on RF resistance.</div></a>
 			<a class="wiki-card" href="wiki_dielectrics.html"><div class="wc-title">Dielectrics and Permittivity</div><div class="wc-desc">Dielectric constant, loss tangent, and substrate materials.</div></a>
+			<a class="wiki-card" href="wiki_tl_loss.html"><div class="wc-title">Transmission Line Loss</div><div class="wc-desc">Conductor and dielectric loss in microstrip and coax; propagation delay.</div></a>
 			<a class="wiki-card" href="wiki_magnetic_materials.html"><div class="wc-title">Magnetic Materials</div><div class="wc-desc">Permeability, ferrites, and magnetic cores in RF.</div></a>
 		</div>
 	</div>
@@ -75,8 +76,12 @@
 			<a class="wiki-card" href="wiki_impedance_matching.html"><div class="wc-title">Impedance Matching</div><div class="wc-desc">Why matching matters and the main techniques.</div></a>
 			<a class="wiki-card" href="wiki_attenuators.html"><div class="wc-title">RF Attenuators</div><div class="wc-desc">Pi, T, L-pad, and Bridged-T attenuator design equations.</div></a>
 			<a class="wiki-card" href="wiki_filters.html"><div class="wc-title">RF Filters</div><div class="wc-desc">Butterworth, Chebyshev, and LC ladder filter design.</div></a>
+			<a class="wiki-card" href="wiki_stepped_impedance.html"><div class="wc-title">Stepped-Impedance LPF</div><div class="wc-desc">Distributed low-pass filter using alternating high-Z and low-Z microstrip sections.</div></a>
+			<a class="wiki-card" href="wiki_coupled_resonators.html"><div class="wc-title">Coupled Resonators</div><div class="wc-desc">Mode splitting, BW = k·f₀, and critical coupling for LC tank pairs.</div></a>
+			<a class="wiki-card" href="wiki_eseries.html"><div class="wc-title">E-Series Component Values</div><div class="wc-desc">Standard resistor and capacitor values: E6 through E192.</div></a>
 			<a class="wiki-card" href="wiki_noise.html"><div class="wc-title">Noise in RF Systems</div><div class="wc-desc">Thermal noise, noise figure, and the Friis formula.</div></a>
 			<a class="wiki-card" href="wiki_amplifiers.html"><div class="wc-title">RF Amplifiers</div><div class="wc-desc">LNAs, PAs, gain, stability, and linearity (P1dB, IP3).</div></a>
+			<a class="wiki-card" href="wiki_amp_stability.html"><div class="wc-title">Amplifier Stability (K &amp; µ)</div><div class="wc-desc">Rollett K-factor, µ-factor, MAG/MSG from S-parameters.</div></a>
 			<a class="wiki-card" href="wiki_pa_design.html"><div class="wc-title">Power Amplifier Design</div><div class="wc-desc">PA classes A–F, efficiency, back-off, Doherty, and DPD.</div></a>
 			<a class="wiki-card" href="wiki_intermodulation.html"><div class="wc-title">Intermodulation & IP3</div><div class="wc-desc">IM3 products, IIP3/OIP3, IMD ratio, and cascaded IP3.</div></a>
 			<a class="wiki-card" href="wiki_power_dividers.html"><div class="wc-title">Power Dividers & Combiners</div><div class="wc-desc">Wilkinson divider, hybrid couplers, and N-way combining.</div></a>
@@ -100,6 +105,8 @@
 			<a class="wiki-card" href="wiki_coax_cable.html"><div class="wc-title">Coaxial Cable Reference</div><div class="wc-desc">RG-58, LMR-400, semi-rigid — attenuation, velocity factor, power ratings.</div></a>
 			<a class="wiki-card" href="wiki_connectors.html"><div class="wc-title">RF Connectors Reference</div><div class="wc-desc">SMA, N-type, BNC, 2.92 mm, 1.85 mm — frequency limits and torque specs.</div></a>
 			<a class="wiki-card" href="wiki_antennas.html"><div class="wc-title">Antenna Fundamentals</div><div class="wc-desc">Gain, directivity, polarisation, and radiation patterns.</div></a>
+			<a class="wiki-card" href="wiki_helical.html"><div class="wc-title">Helical Antenna</div><div class="wc-desc">Axial-mode helix: Kraus gain, HPBW, circular polarisation, and design.</div></a>
+			<a class="wiki-card" href="wiki_yagi.html"><div class="wc-title">Yagi-Uda Antenna</div><div class="wc-desc">Element roles, gain tables, feed impedance, and matching.</div></a>
 			<a class="wiki-card" href="wiki_polarisation.html"><div class="wc-title">Antenna Polarisation</div><div class="wc-desc">Linear, CP, axial ratio, mismatch loss, and reading radiation patterns.</div></a>
 			<a class="wiki-card" href="wiki_frequency_bands.html"><div class="wc-title">RF Frequency Bands</div><div class="wc-desc">ITU and IEEE band designations, key allocations, antenna size reference.</div></a>
 			<a class="wiki-card" href="wiki_waveguide.html"><div class="wc-title">Waveguides</div><div class="wc-desc">Rectangular waveguide modes, cutoff frequency, and applications.</div></a>
@@ -133,7 +140,7 @@
 	</div>
 
 	</div>
-	<p class="wiki-stats">57 articles &nbsp;·&nbsp; All articles include original SVG diagrams and links to related calculators</p>
+	<p class="wiki-stats">64 articles &nbsp;·&nbsp; All articles include original SVG diagrams and links to related calculators</p>
 </div>
 
 <footer>

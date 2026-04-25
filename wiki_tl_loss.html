@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Transmission Line Loss & Attenuation | RF Toolbox Wiki</title>
+  <meta name="description" content="Conductor loss, dielectric loss, and propagation delay in microstrip and coaxial lines. Skin-effect formulas, Pozar equations, and design guidelines.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_tl_loss.html">
+  <meta property="og:title" content="Transmission Line Loss & Attenuation | RF Toolbox Wiki">
+  <meta property="og:description" content="Conductor loss, dielectric loss, and propagation delay in microstrip and coaxial transmission lines.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_tl_loss.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
+	</style>
+</head>
+<body class="no-nav">
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Transmission Line Loss &amp; Attenuation</h3>
+			<div class="wa">
+
+				<p>Every real transmission line attenuates signals as they travel. Two independent mechanisms cause this loss: <b>conductor loss</b> (resistive heating in the metal) and <b>dielectric loss</b> (power absorbed in the substrate or insulator). Total attenuation α = αc + αd in Np/m; multiply by 8.686 to convert to dB/m.</p>
+
+				<h4>Conductor Loss &amp; Skin Effect</h4>
+				<p>At RF frequencies current crowds into a thin surface layer of thickness <span class="key">δs = √(1/πfµ₀σ)</span> — the skin depth. AC resistance rises as √f. The surface resistance (resistance per square) is:</p>
+				<div class="eq">\(R_s = \sqrt{\dfrac{\pi f \mu_0}{\sigma}}\;\;[\Omega/\square]\)</div>
+				<p>For a <b>coaxial line</b> with inner conductor radius <span class="key">a</span> and outer radius <span class="key">b</span>:</p>
+				<div class="eq">\(\alpha_c = \dfrac{R_s}{4\pi Z_0}\!\left(\dfrac{1}{a}+\dfrac{1}{b}\right)\;\;[\text{Np/m}]\)</div>
+				<p>For <b>microstrip</b> the conductor loss depends on the effective strip width w and involves a correction for current crowding at the edges; simplified for w/h &gt; 1:</p>
+				<div class="eq">\(\alpha_c \approx \dfrac{R_s}{Z_0\, w}\;\;[\text{Np/m}]\)</div>
+
+				<h4>Dielectric Loss</h4>
+				<p>The loss tangent <span class="key">tan δ</span> of the substrate causes power absorption proportional to frequency. For <b>microstrip</b> (Pozar, Microwave Engineering eq. 3.30):</p>
+				<div class="eq">\(\alpha_d = \dfrac{k_0\,\varepsilon_r\,(\varepsilon_{\rm eff}-1)\,\tan\delta}{2\sqrt{\varepsilon_{\rm eff}}\,(\varepsilon_r-1)}\;\;[\text{Np/m}]\)</div>
+				<p>where <span class="key">k₀ = 2πf/c</span> and εeff is the effective permittivity. For <b>coaxial</b> line:</p>
+				<div class="eq">\(\alpha_d = \dfrac{\pi f \sqrt{\varepsilon_r}}{c}\,\tan\delta\;\;[\text{Np/m}]\)</div>
+				<p>Dielectric loss is proportional to frequency and often dominates conductor loss at GHz frequencies in lossy substrates such as FR4 (tan δ ≈ 0.02).</p>
+
+				<h4>Total Loss &amp; Unit Conversion</h4>
+				<div class="eq">\(\alpha_{\rm total} = \alpha_c + \alpha_d\;\;[\text{Np/m}] \qquad \alpha_{\rm dB} = 8.686\,\alpha_{\rm total}\;\;[\text{dB/m}]\)</div>
+				<p>Insertion loss over a physical length <span class="key">L</span> is simply <span class="key">α_dB × L</span> dB. Both frequency and length increase loss linearly (for dB/m at fixed f, or for fixed length scaling with f).</p>
+
+				<h4>Propagation Delay</h4>
+				<p>Signals travel at the phase velocity <span class="key">vph = c/√εeff</span>, giving a time delay:</p>
+				<div class="eq">\(t_d = \dfrac{L\,\sqrt{\varepsilon_{\rm eff}}}{c}\;\;[\text{s}]\)</div>
+				<p>On FR4 microstrip (εeff ≈ 3.5), vph ≈ 0.53c — roughly 6 ps/mm of delay. Delay is independent of frequency for a non-dispersive TEM line.</p>
+
+				<div class="fig-row">
+					<figure>
+						<svg viewBox="0 0 200 105" width="200" height="105" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;">
+							<rect width="200" height="105" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="3"/>
+							<rect x="55" y="35" width="90" height="9" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>
+							<rect x="20" y="46" width="160" height="22" fill="#d4ecca" stroke="#5a9020" stroke-width="1"/>
+							<rect x="20" y="68" width="160" height="9" fill="#b8922a" stroke="#7a5000" stroke-width="1"/>
+							<text x="100" y="29" text-anchor="middle" font-size="8" fill="#AA77FF">trace  w</text>
+							<text x="100" y="59" text-anchor="middle" font-size="8" fill="#5533aa">εr, tan δ   h</text>
+							<text x="100" y="83" text-anchor="middle" font-size="7" fill="#7a5000">ground</text>
+							<text x="100" y="99" text-anchor="middle" font-size="8" fill="#888">Microstrip</text>
+						</svg>
+						<figcaption>Microstrip cross-section showing substrate height h, trace width w.</figcaption>
+					</figure>
+					<figure>
+						<svg viewBox="0 0 200 105" width="200" height="105" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;">
+							<rect width="200" height="105" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="3"/>
+							<circle cx="100" cy="52" r="36" fill="#d4ecca" stroke="#5a9020" stroke-width="1.5"/>
+							<circle cx="100" cy="52" r="38" fill="none" stroke="#b8922a" stroke-width="5"/>
+							<circle cx="100" cy="52" r="11" fill="#b8922a" stroke="#7a5000" stroke-width="1.5"/>
+							<line x1="100" y1="52" x2="137" y2="52" stroke="#888" stroke-width="0.8" stroke-dasharray="2,2"/>
+							<text x="115" y="49" font-size="8" fill="#888">b</text>
+							<text x="103" y="55" font-size="7" fill="white">a</text>
+							<text x="100" y="99" text-anchor="middle" font-size="8" fill="#888">Coaxial</text>
+						</svg>
+						<figcaption>Coax cross-section. Conductor loss from inner (a) and outer (b) conductors.</figcaption>
+					</figure>
+				</div>
+
+				<h4>Practical Values</h4>
+				<ul>
+					<li>FR4 microstrip 50 Ω, 1.6 mm substrate: ≈ 0.5 dB/cm at 10 GHz</li>
+					<li>Rogers RO4003C microstrip 50 Ω: ≈ 0.09 dB/cm at 10 GHz (tan δ = 0.0027)</li>
+					<li>RG-58 coax: ≈ 0.22 dB/m at 100 MHz; ≈ 1.1 dB/m at 2.4 GHz</li>
+					<li>LMR-400 coax: ≈ 0.068 dB/m at 1 GHz; ≈ 0.12 dB/m at 2.4 GHz</li>
+				</ul>
+
+			</div>
+
+  <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+    <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      <a href="TLLoss.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">TL Loss &amp; Delay →</a>
+      <a href="Microstrip.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Microstrip Calculator →</a>
+      <a href="Coaxial.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Coaxial Calculator →</a>
+      <a href="SkinDepth.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Skin Depth →</a>
+    </div>
+  </div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

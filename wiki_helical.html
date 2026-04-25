@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Helical Antenna — Axial Mode, Kraus Formulas &amp; Circular Polarisation | RF Toolbox Wiki</title>
+  <meta name="description" content="Axial-mode helical antenna theory: Kraus gain and HPBW formulas, optimal dimensions, input impedance, circular polarisation (RHCP/LHCP), and design procedure.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_helical.html">
+  <meta property="og:title" content="Helical Antenna — Axial Mode | RF Toolbox Wiki">
+  <meta property="og:description" content="Axial-mode helix gain, HPBW, input impedance, and circular polarisation using Kraus formulas.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_helical.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
+	</style>
+</head>
+<body class="no-nav">
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Helical Antenna — Axial Mode</h3>
+			<div class="wa">
+
+				<p>The helical antenna is a wire wound in a helix and fed at one end against a ground plane. Depending on the circumference-to-wavelength ratio it can operate in two distinct modes. The <b>axial mode</b> (end-fire) is the most useful for gain antennas — it produces a circularly polarised beam along the helix axis and is widely used in satellite ground stations, CubeSats, and amateur radio.</p>
+
+				<h4>Normal Mode vs Axial Mode</h4>
+				<ul>
+					<li><b>Normal mode</b>: circumference C ≪ λ; radiation broadside (perpendicular to axis); linearly polarised; low gain. Used as a compact antenna when space is limited.</li>
+					<li><b>Axial mode</b>: circumference C ≈ λ; radiation along the axis; circularly polarised; high gain. This is the practical gain antenna.</li>
+				</ul>
+
+				<h4>Axial-Mode Condition</h4>
+				<p>The helix operates in axial mode when:</p>
+				<div class="eq">\(0.75 &lt; \dfrac{C}{\lambda} &lt; 1.33 \quad \text{where } C = \pi D\)</div>
+				<p>The optimal pitch angle (angle of the helix wire relative to the horizontal plane) is approximately <span class="key">α ≈ 14°</span>, which corresponds to a turn spacing <span class="key">S ≈ λ/4</span> when C ≈ λ.</p>
+
+				<h4>Gain and Beamwidth (Kraus Formulas)</h4>
+				<div class="eq">\(G \approx 15\,N\!\left(\frac{C}{\lambda}\right)^{\!2}\!\frac{S}{\lambda} \quad \text{(linear, not dB)}\)</div>
+				<div class="eq">\(\text{HPBW} \approx \dfrac{52°}{\dfrac{C}{\lambda}\sqrt{N\dfrac{S}{\lambda}}}\)</div>
+				<p>where <span class="key">N</span> is the number of turns. Gain increases with N — a 10-turn helix at C = λ, S = λ/4 gives G ≈ 15×10×1×0.25 = 37.5 (≈ 15.7 dBi).</p>
+
+				<h4>Input Impedance</h4>
+				<p>The input impedance of the axial-mode helix is nearly resistive and approximated by:</p>
+				<div class="eq">\(Z_{\rm in} \approx 140\,\dfrac{C}{\lambda}\;\;[\Omega]\)</div>
+				<p>At the optimum C/λ = 1, Zin ≈ 140 Ω. A quarter-wave stripline transformer between the helix feed and the 50 Ω coax connector matches the impedance: the transformer impedance is <span class="key">Z_t = √(140 × 50) ≈ 84 Ω</span>.</p>
+
+				<figure>
+					<svg viewBox="0 0 380 100" width="380" height="100" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;">
+						<rect width="380" height="100" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="3"/>
+						<!-- Helix as sinusoidal path -->
+						<path d="M30,50 Q40,25 50,50 Q60,75 70,50 Q80,25 90,50 Q100,75 110,50 Q120,25 130,50 Q140,75 150,50 Q160,25 170,50 Q180,75 190,50 Q200,25 210,50 Q220,75 230,50" fill="none" stroke="#AA77FF" stroke-width="2.5" stroke-linecap="round"/>
+						<!-- Axis line -->
+						<line x1="20" y1="50" x2="250" y2="50" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>
+						<!-- Arrow -->
+						<polygon points="250,46 260,50 250,54" fill="#888"/>
+						<text x="265" y="54" font-size="9" fill="#888">axis</text>
+						<!-- Ground plane -->
+						<rect x="10" y="60" width="22" height="28" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>
+						<text x="21" y="80" text-anchor="middle" font-size="7" fill="white">GND</text>
+						<!-- D label -->
+						<line x1="210" y1="25" x2="210" y2="75" stroke="#5533aa" stroke-width="1" stroke-dasharray="2,2"/>
+						<text x="220" y="52" font-size="9" fill="#5533aa">D</text>
+						<!-- S label -->
+						<line x1="90" y1="82" x2="130" y2="82" stroke="#5533aa" stroke-width="1"/>
+						<text x="110" y="92" text-anchor="middle" font-size="8" fill="#5533aa">S (one turn)</text>
+						<!-- N label -->
+						<text x="130" y="18" text-anchor="middle" font-size="9" fill="#AA77FF">N turns  →  RHCP</text>
+					</svg>
+					<figcaption>Axial-mode helix: N turns of diameter D, turn spacing S, fed against a ground plane.</figcaption>
+				</figure>
+
+				<h4>Circular Polarisation</h4>
+				<p>The axial-mode helix produces circular polarisation naturally. The sense (RHCP or LHCP) is determined by the winding direction:</p>
+				<ul>
+					<li><b>Right-hand winding</b> (thumb along axis, fingers curl in direction of travel) → RHCP</li>
+					<li><b>Left-hand winding</b> → LHCP</li>
+				</ul>
+				<p>For satellite reception (LEO downlinks, GPS), RHCP is standard. The axial ratio of a well-designed axial-mode helix is typically better than 1 dB (very close to perfect circular polarisation) over the 3 dB beamwidth.</p>
+
+				<h4>Design Procedure</h4>
+				<ol>
+					<li>Choose target frequency <span class="key">f</span> → compute λ = c/f</li>
+					<li>Set <span class="key">D = λ/π</span> (so C = λ) and <span class="key">S = λ/4</span> for optimal pitch angle</li>
+					<li>Choose N for desired gain: G ≈ 15N×1×0.25 = 3.75N → e.g. N = 10 gives G ≈ 37.5 (15.7 dBi)</li>
+					<li>Compute Zin ≈ 140 Ω; design λ/4 transformer to 50 Ω (Z_t ≈ 84 Ω stripline)</li>
+					<li>Ground plane diameter should be at least 0.75λ to 1λ</li>
+				</ol>
+
+			</div>
+
+  <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+    <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      <a href="HelicalAntenna.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Helical Antenna Calculator →</a>
+      <a href="Dipole.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Dipole Antenna →</a>
+      <a href="ArrayFactor.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Array Factor Plotter →</a>
+    </div>
+  </div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

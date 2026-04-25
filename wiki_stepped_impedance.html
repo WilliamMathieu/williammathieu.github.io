@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Stepped-Impedance Low-Pass Filter — Distributed Microstrip LPF | RF Toolbox Wiki</title>
+  <meta name="description" content="Stepped-impedance low-pass filter theory: alternating high-Z and low-Z transmission line sections, prototype g-values, element mapping, and microstrip design.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_stepped_impedance.html">
+  <meta property="og:title" content="Stepped-Impedance Low-Pass Filter | RF Toolbox Wiki">
+  <meta property="og:description" content="Alternating high-Z and low-Z microstrip sections realize a distributed LPF. Element mapping, g-values, and design guidelines.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_stepped_impedance.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
+	</style>
+</head>
+<body class="no-nav">
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Stepped-Impedance Low-Pass Filter</h3>
+			<div class="wa">
+
+				<p>A stepped-impedance low-pass filter (SI-LPF) replaces the lumped inductors and capacitors of a conventional LC ladder with sections of high-impedance and low-impedance transmission line. This approach is practical on PCB microstrip where lumped components at GHz frequencies behave poorly, and no vias or discrete parts are needed.</p>
+
+				<h4>Operating Principle</h4>
+				<p>A short section of <b>high-impedance</b> line (narrow trace, small physical width) behaves as a series inductor because its shunt capacitance is small relative to its series reactance. A short section of <b>low-impedance</b> line (wide trace) behaves as a shunt capacitor. Alternating these sections realises the LC ladder prototype.</p>
+
+				<figure>
+					<svg viewBox="0 0 420 70" width="420" height="70" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;">
+						<rect width="420" height="70" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="3"/>
+						<!-- Port pads -->
+						<rect x="5" y="25" width="18" height="22" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>
+						<rect x="397" y="25" width="18" height="22" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>
+						<!-- High-Z (narrow) sections -->
+						<rect x="23" y="31" width="46" height="10" fill="#AA77FF" rx="1"/>
+						<rect x="117" y="31" width="46" height="10" fill="#AA77FF" rx="1"/>
+						<rect x="211" y="31" width="46" height="10" fill="#AA77FF" rx="1"/>
+						<rect x="305" y="31" width="46" height="10" fill="#AA77FF" rx="1"/>
+						<!-- Low-Z (wide) sections -->
+						<rect x="69" y="22" width="48" height="28" fill="#5533aa" rx="1" opacity="0.7"/>
+						<rect x="163" y="22" width="48" height="28" fill="#5533aa" rx="1" opacity="0.7"/>
+						<rect x="257" y="22" width="48" height="28" fill="#5533aa" rx="1" opacity="0.7"/>
+						<rect x="351" y="22" width="46" height="28" fill="#5533aa" rx="1" opacity="0.7"/>
+						<!-- Labels -->
+						<text x="46" y="56" text-anchor="middle" font-size="7" fill="#AA77FF">L (high Z)</text>
+						<text x="93" y="58" text-anchor="middle" font-size="7" fill="#d0aaff">C (low Z)</text>
+						<text x="140" y="56" text-anchor="middle" font-size="7" fill="#AA77FF">L</text>
+						<text x="187" y="58" text-anchor="middle" font-size="7" fill="#d0aaff">C</text>
+						<text x="234" y="56" text-anchor="middle" font-size="7" fill="#AA77FF">L</text>
+						<text x="281" y="58" text-anchor="middle" font-size="7" fill="#d0aaff">C</text>
+						<text x="328" y="56" text-anchor="middle" font-size="7" fill="#AA77FF">L</text>
+						<text x="374" y="58" text-anchor="middle" font-size="7" fill="#d0aaff">C</text>
+					</svg>
+					<figcaption>Top view of a stepped-impedance LPF: narrow (high-Z, purple) and wide (low-Z, dark) alternating sections.</figcaption>
+				</figure>
+
+				<h4>Element Mapping</h4>
+				<p>The prototype g-values are mapped to electrical lengths using the system impedance <span class="key">Z₀</span>, high-line impedance <span class="key">Zh</span>, and low-line impedance <span class="key">Zl</span>:</p>
+				<div class="eq">\(\beta\ell_{\rm high} = \dfrac{g_k\,Z_0}{Z_h}\qquad \text{(series inductor element)}\)</div>
+				<div class="eq">\(\beta\ell_{\rm low} = \dfrac{g_k\,Z_l}{Z_0}\qquad \text{(shunt capacitor element)}\)</div>
+				<p>Here <span class="key">βℓ</span> is the electrical length in radians, evaluated at the cutoff frequency <span class="key">fc</span>. The physical length is:</p>
+				<div class="eq">\(\ell = \dfrac{\beta\ell}{2\pi}\cdot\dfrac{c}{f_c\,\sqrt{\varepsilon_{\rm eff}}}\)</div>
+
+				<h4>Prototype g-Values</h4>
+				<p>Use standard Butterworth or Chebyshev low-pass prototype tables. For a 3rd-order Butterworth: g₁ = 1.0, g₂ = 2.0, g₃ = 1.0. For Chebyshev 0.5 dB ripple, 5th-order: g₁ = 1.7058, g₂ = 1.2296, g₃ = 2.5408, g₄ = 1.2296, g₅ = 1.7058. Higher order gives steeper roll-off but longer board area.</p>
+
+				<h4>Design Rules</h4>
+				<ul>
+					<li>Choose <span class="key">Zh/Z₀</span> as high as fabrication allows (typically Zh = 80–120 Ω for 50 Ω system)</li>
+					<li>Choose <span class="key">Zl</span> as low as practical (typically Zl = 15–30 Ω); limited by board width constraints</li>
+					<li>Higher Zh/Zl ratio → shorter sections → better approximation to lumped elements</li>
+					<li>All sections must have electrical lengths βℓ &lt; 45° at the cutoff frequency for the lumped-element approximation to be valid</li>
+					<li>Spurious passband appears at 2fc (or 4fc for symmetric designs); stepped-Z is not suitable above 2–3× cutoff</li>
+				</ul>
+
+				<h4>Microstrip Trace Width</h4>
+				<p>The required trace width for a target impedance Z on a substrate of thickness h and permittivity εr is found by the inverse Hammerstad-Jensen formulas (implemented in the Microstrip Calculator). As a rough guide: for 50 Ω on FR4 (εr ≈ 4.4, h = 1.6 mm), w ≈ 3 mm; for 100 Ω, w ≈ 0.5 mm; for 25 Ω, w ≈ 10 mm.</p>
+
+			</div>
+
+  <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+    <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      <a href="SteppedImpedanceLPF.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Stepped-Impedance LPF →</a>
+      <a href="FilterDesign.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">LC Filter Designer →</a>
+      <a href="Microstrip.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Microstrip Calculator →</a>
+    </div>
+  </div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>
