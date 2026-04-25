@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helical Antenna Calculator — Axial Mode Gain &amp; Dimensions | RF Toolbox</title>
+  <meta name="description" content="Calculate gain, beamwidth, and physical dimensions for an axial-mode helical antenna. Design mode gives optimal diameter and spacing; analysis mode evaluates a given geometry.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/HelicalAntenna.html">
+  <meta property="og:title" content="Helical Antenna Calculator | RF Toolbox">
+  <meta property="og:description" content="Gain, beamwidth, and dimensions for axial-mode helical antennas.">
+  <meta property="og:url" content="https://rftoolbox.ca/HelicalAntenna.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Helical Antenna Calculator",
+    "description": "Calculate gain, beamwidth, and physical dimensions for axial-mode helical antennas (Kraus formulas).",
+    "url": "https://rftoolbox.ca/HelicalAntenna.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Helical Antenna — Axial Mode</h3>
+<div class="tool-concept">
+  <p>The axial-mode helix radiates a circularly-polarised beam along its axis. It operates when the circumference C ≈ λ (pitch angle ~14°). Gain increases with number of turns N. Use <strong>Design</strong> mode to get optimal dimensions for a target frequency, or <strong>Analysis</strong> mode to evaluate a specific geometry.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">
+    \(G \approx 15N\!\left(\frac{C}{\lambda}\right)^{\!2}\!\frac{S}{\lambda} \quad \text{HPBW} \approx \frac{52°}{(C/\lambda)\sqrt{N\cdot S/\lambda}} \quad Z_{\rm in}\approx 140\,\frac{C}{\lambda}\,\Omega\)
+  </div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">C = πD</td><td>Helix circumference; axial mode: C ≈ λ (C/λ = 0.75–1.33)</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">S</td><td>Axial spacing per turn; optimal ≈ λ/4, pitch angle α ≈ 14°</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">N</td><td>Number of turns; more turns = higher gain</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">Z<sub>in</sub></td><td>Input impedance ≈ 140 C/λ Ω; use λ/4 transformer to match to 50 Ω</td></tr>
+  </table>
+  </details>
+</div>
+
+<div class="sec-lbl">Mode</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Calculation mode</label>
+    <div class="inp-inline">
+      <select id="helix-mode" style="width:100%;" onchange="helix_mode_change()">
+        <option value="design" selected>Design — compute optimal dimensions for frequency + N</option>
+        <option value="analyze">Analysis — evaluate a given geometry</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Frequency, <span class="var">f</span></label>
+    <div class="inp-inline">
+      <input type="text" id="helix-f" placeholder="value" data-tip="Operating frequency.">
+      <select id="helix-f-unit">
+        <option value="1e6">MHz</option>
+        <option value="1e9" selected>GHz</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Number of turns, <span class="var">N</span></label>
+    <div class="inp-inline">
+      <input type="text" id="helix-n" placeholder="e.g. 10" data-tip="Number of helical turns. More turns = higher gain. Typical: 6–20 turns.">
+    </div>
+  </div>
+  <!-- Analysis-only inputs -->
+  <div class="inp-row" id="helix-D-row" style="display:none;">
+    <label>Helix diameter, <span class="var">D</span></label>
+    <div class="inp-inline">
+      <input type="text" id="helix-D" placeholder="value" data-tip="Diameter of the helix coil.">
+      <select id="helix-D-unit">
+        <option value="1e-3" selected>mm</option>
+        <option value="1e-2">cm</option>
+        <option value="1">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row" id="helix-S-row" style="display:none;">
+    <label>Turn spacing, <span class="var">S</span></label>
+    <div class="inp-inline">
+      <input type="text" id="helix-S" placeholder="value" data-tip="Axial distance per turn (pitch).">
+      <select id="helix-S-unit">
+        <option value="1e-3" selected>mm</option>
+        <option value="1e-2">cm</option>
+        <option value="1">m</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 6px;">
+  <button class="calc-btn" id="helix-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'helix-mode':'design','helix-f':'2.4','helix-f-unit':'1e9','helix-n':'10'})" title="10-turn optimal helix at 2.4 GHz">2.4 GHz 10-turn</button>
+  <button class="example-btn" onclick="loadExample({'helix-mode':'design','helix-f':'437','helix-f-unit':'1e6','helix-n':'12'})" title="12-turn helix for 70 cm amateur satellite band">70 cm amateur (437 MHz)</button>
+</div>
+
+<div id="helix-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="helix-results" class="res-grid"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function helix_mode_change() {
+  var m = document.getElementById('helix-mode').value;
+  var show = m === 'analyze';
+  document.getElementById('helix-D-row').style.display = show ? '' : 'none';
+  document.getElementById('helix-S-row').style.display = show ? '' : 'none';
+}
+function drawDiagram(r) {
+  var W=460, H=160, cx=100, cy=80;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Draw helix as sinusoidal path
+  var nturns=Math.min(r.n||10,8), pitchPx=28, ampPx=28;
+  var hx=30;
+  var hpath='M'+hx+','+cy;
+  for (var t=0; t<nturns; t++) {
+    for (var p=0;p<=20;p++) {
+      var px = hx + t*pitchPx + p/20*pitchPx;
+      var py = cy + ampPx*Math.sin(p/20*2*Math.PI);
+      hpath += ' L'+px+','+py;
+    }
+  }
+  s+='<path d="'+hpath+'" fill="none" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/>';
+  // Axis arrow
+  s+='<line x1="'+(hx-10)+'" y1="'+cy+'" x2="'+(hx+nturns*pitchPx+20)+'" y2="'+cy+'" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>';
+  s+='<polygon points="'+(hx+nturns*pitchPx+20)+','+(cy-4)+' '+(hx+nturns*pitchPx+28)+','+cy+' '+(hx+nturns*pitchPx+20)+','+(cy+4)+'" fill="#888"/>';
+  // Labels
+  s+='<text x="'+(hx+nturns*pitchPx/2)+'" y="'+(cy-36)+'" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">D = '+engFmt(r.D,'m')+'  S = '+engFmt(r.S,'m')+'</text>';
+  s+='<text x="'+(hx+nturns*pitchPx+35)+'" y="'+(cy+4)+'" font-size="11" fill="#888">axis</text>';
+  // Gain annotation
+  s+='<text x="350" y="50" text-anchor="middle" font-size="13" fill="#AA77FF" font-weight="bold">'+r.Gain_db.toFixed(1)+' dBi</text>';
+  s+='<text x="350" y="66" text-anchor="middle" font-size="11" fill="#5533aa">HPBW = '+r.HPBW.toFixed(1)+'°</text>';
+  s+='<text x="350" y="82" text-anchor="middle" font-size="11" fill="#5533aa">Zin ≈ '+r.Z_in.toFixed(0)+' Ω</text>';
+  s+='<text x="350" y="98" text-anchor="middle" font-size="11" fill="#888">RHCP / LHCP</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<script src="HelicalAntenna.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

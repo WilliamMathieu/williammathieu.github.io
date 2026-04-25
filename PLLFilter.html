@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLL Loop Filter Designer — Type-2 3rd-Order Passive | RF Toolbox</title>
+  <meta name="description" content="Design a type-2 third-order passive loop filter for a charge-pump PLL. Enter VCO gain, charge pump current, divider ratio, loop bandwidth, and phase margin to get R and C values.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/PLLFilter.html">
+  <meta property="og:title" content="PLL Loop Filter Designer | RF Toolbox">
+  <meta property="og:description" content="Type-2 3rd-order passive loop filter for charge-pump PLLs: R and C values from loop bandwidth and phase margin.">
+  <meta property="og:url" content="https://rftoolbox.ca/PLLFilter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PLL Loop Filter Designer",
+    "description": "Type-2 3rd-order passive loop filter for charge-pump PLLs.",
+    "url": "https://rftoolbox.ca/PLLFilter.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>PLL Loop Filter Designer</h3>
+<div class="tool-concept">
+  <p>Designs the passive RC loop filter for a type-2, 3rd-order charge-pump PLL. Given the VCO gain, charge pump current, divider ratio, desired loop bandwidth, and phase margin, it calculates R, C₁, and C₂ values. The optional C₂ adds a 3rd pole to attenuate reference spurs.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">
+    \(G(s) = \dfrac{I_{cp}\cdot K_{vco}}{2\pi N\cdot s} \cdot F(s) \qquad F(s)=\dfrac{1+sRC_1}{sC_1(1+sRC_2)}\)<br>
+    \(T_2 = RC_1 = \dfrac{\sin\phi_m}{\omega_c(1-\sin\phi_m)} \quad T_1 = \dfrac{1}{\omega_c^2 T_2} \quad C_1 = \dfrac{I_{cp}K_{vco}}{2\pi N}\cdot\dfrac{\sqrt{1+(\omega_c T_2)^2}}{\omega_c^2 T_1}\)
+  </div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">I<sub>cp</sub></td><td>Charge pump current (A) — from PLL IC datasheet</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">K<sub>vco</sub></td><td>VCO sensitivity (MHz/V or GHz/V). The tool converts to rad/s/V internally.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">N</td><td>Total divide ratio (integer or fractional)</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">φ<sub>m</sub></td><td>Phase margin. 45–60° is typical; larger = more stable but slower locking</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">ω<sub>c</sub></td><td>Loop bandwidth (rad/s). 1/10 to 1/20 of reference frequency to minimize spurs.</td></tr>
+  </table>
+  </details>
+</div>
+
+<div class="sec-lbl">PLL Parameters</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Charge pump current, <span class="var">I<sub>cp</sub></span></label>
+    <div class="inp-inline">
+      <input type="text" id="pll-kd" placeholder="e.g. 5e-3" data-tip="Charge pump current in Amperes. Typical values: 1 mA to 20 mA.">
+      <span style="padding:0 8px;line-height:32px;color:#888;font-size:13px;">A</span>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>VCO gain, <span class="var">K<sub>vco</sub></span></label>
+    <div class="inp-inline">
+      <input type="text" id="pll-ko" placeholder="value" data-tip="VCO frequency sensitivity. Typical VCOs: 10–200 MHz/V.">
+      <select id="pll-ko-unit">
+        <option value="6283185">MHz/V (→ rad/s/V)</option>
+        <option value="6283185307">GHz/V (→ rad/s/V)</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Divider ratio, <span class="var">N</span></label>
+    <div class="inp-inline">
+      <input type="text" id="pll-n" placeholder="e.g. 100" data-tip="Total integer or fractional divide ratio N = f_VCO / f_ref.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Loop bandwidth, <span class="var">f<sub>c</sub></span></label>
+    <div class="inp-inline">
+      <input type="text" id="pll-bw" placeholder="value" data-tip="Open-loop unity-gain crossover frequency. Typically 1/10 to 1/20 of f_ref.">
+      <select id="pll-bw-unit">
+        <option value="1">Hz</option>
+        <option value="1e3" selected>kHz</option>
+        <option value="1e6">MHz</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Phase margin, <span class="var">φ<sub>m</sub></span></label>
+    <div class="inp-inline">
+      <input type="text" id="pll-pm" placeholder="45" data-tip="Phase margin in degrees. 45° is a common target; 60° gives more damping.">
+      <span style="padding:0 8px;line-height:32px;color:#888;font-size:13px;">°</span>
+    </div>
+  </div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 6px;">
+  <button class="calc-btn" id="pll-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'pll-kd':'5e-3','pll-ko':'50','pll-ko-unit':'6283185','pll-n':'100','pll-bw':'100','pll-bw-unit':'1e3','pll-pm':'45'})" title="5 mA Icp, Kvco=50 MHz/V, N=100, BW=100 kHz, PM=45°">Typical example</button>
+  <button class="example-btn" onclick="loadExample({'pll-kd':'2e-3','pll-ko':'200','pll-ko-unit':'6283185','pll-n':'500','pll-bw':'200','pll-bw-unit':'1e3','pll-pm':'55'})" title="2 mA, 200 MHz/V, N=500, BW=200 kHz, PM=55°">High-N example</button>
+</div>
+
+<div id="pll-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="pll-results" class="res-grid"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram(res) {
+  var W=520, H=150;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // CP output node
+  var cpx=60, ndy=70;
+  s+='<circle cx="'+cpx+'" cy="'+ndy+'" r="4" fill="#5533aa"/>';
+  s+='<text x="'+cpx+'" y="50" text-anchor="middle" font-size="10" fill="#5533aa">I<tspan font-size="8" dy="3">cp</tspan></text>';
+  s+='<line x1="'+cpx+'" y1="55" x2="'+cpx+'" y2="'+ndy+'" stroke="#5533aa" stroke-width="1.5"/>';
+  // Horizontal wire to VCO
+  var vnx=430;
+  s+='<line x1="'+cpx+'" y1="'+ndy+'" x2="'+vnx+'" y2="'+ndy+'" stroke="#5533aa" stroke-width="2"/>';
+  // R in series
+  var rx=110;
+  s+='<rect x="'+(rx-20)+'" y="'+(ndy-8)+'" width="40" height="16" fill="#fff" stroke="#5533aa" stroke-width="1.8" rx="2"/>';
+  s+='<text x="'+rx+'" y="'+(ndy+4)+'" text-anchor="middle" font-size="10" fill="#5533aa">R</text>';
+  s+='<text x="'+rx+'" y="'+(ndy-14)+'" text-anchor="middle" font-size="9" fill="#5533aa">'+engFmt(res.R,'Ω')+'</text>';
+  // C1 to ground
+  var c1x=200;
+  s+='<line x1="'+c1x+'" y1="'+ndy+'" x2="'+c1x+'" y2="'+(ndy+12)+'" stroke="#5533aa" stroke-width="1.5"/>';
+  s+='<line x1="'+(c1x-14)+'" y1="'+(ndy+12)+'" x2="'+(c1x+14)+'" y2="'+(ndy+12)+'" stroke="#5533aa" stroke-width="2.5"/>';
+  s+='<line x1="'+(c1x-14)+'" y1="'+(ndy+20)+'" x2="'+(c1x+14)+'" y2="'+(ndy+20)+'" stroke="#5533aa" stroke-width="2.5"/>';
+  s+='<line x1="'+c1x+'" y1="'+(ndy+20)+'" x2="'+c1x+'" y2="'+(ndy+35)+'" stroke="#5533aa" stroke-width="1.5"/>';
+  s+='<line x1="'+(c1x-10)+'" y1="'+(ndy+35)+'" x2="'+(c1x+10)+'" y2="'+(ndy+35)+'" stroke="#888" stroke-width="1.5"/>';
+  s+='<text x="'+(c1x+18)+'" y="'+(ndy+20)+'" font-size="9" fill="#5533aa">C₁  '+engFmt(res.C1,'F')+'</text>';
+  // C2 to ground (after R)
+  var c2x=300;
+  s+='<line x1="'+c2x+'" y1="'+ndy+'" x2="'+c2x+'" y2="'+(ndy+12)+'" stroke="#5533aa" stroke-width="1.5"/>';
+  s+='<line x1="'+(c2x-14)+'" y1="'+(ndy+12)+'" x2="'+(c2x+14)+'" y2="'+(ndy+12)+'" stroke="#5533aa" stroke-width="2.5"/>';
+  s+='<line x1="'+(c2x-14)+'" y1="'+(ndy+20)+'" x2="'+(c2x+14)+'" y2="'+(ndy+20)+'" stroke="#AA77FF" stroke-width="2.5"/>';
+  s+='<line x1="'+c2x+'" y1="'+(ndy+20)+'" x2="'+c2x+'" y2="'+(ndy+35)+'" stroke="#5533aa" stroke-width="1.5"/>';
+  s+='<line x1="'+(c2x-10)+'" y1="'+(ndy+35)+'" x2="'+(c2x+10)+'" y2="'+(ndy+35)+'" stroke="#888" stroke-width="1.5"/>';
+  s+='<text x="'+(c2x+18)+'" y="'+(ndy+20)+'" font-size="9" fill="#AA77FF">C₂  '+engFmt(res.C2,'F')+'</text>';
+  // VCO box
+  s+='<rect x="'+vnx+'" y="'+(ndy-16)+'" width="60" height="32" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8" rx="3"/>';
+  s+='<text x="'+(vnx+30)+'" y="'+(ndy+4)+'" text-anchor="middle" font-size="10" fill="#5533aa">VCO</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+
+<script src="PLLFilter.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>
