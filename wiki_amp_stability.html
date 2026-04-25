@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Amplifier Stability — K-Factor, µ-Factor &amp; MAG/MSG | RF Toolbox Wiki</title>
+  <meta name="description" content="Amplifier stability analysis using S-parameters: Rollett K-factor, Edwards-Sinsky µ-factor, maximum available gain MAG, and maximum stable gain MSG.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_amp_stability.html">
+  <meta property="og:title" content="Amplifier Stability: K-Factor &amp; µ-Factor | RF Toolbox Wiki">
+  <meta property="og:description" content="Rollett K-factor, µ-factor, MAG, and MSG from S-parameters for RF amplifier stability analysis.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_amp_stability.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
+	</style>
+</head>
+<body class="no-nav">
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Amplifier Stability: K-Factor &amp; µ-Factor</h3>
+			<div class="wa">
+
+				<p>An RF amplifier can oscillate if the reflection coefficient seen looking into either port exceeds unity magnitude for some source or load impedance. Stability analysis identifies whether this can happen using the device's S-parameters, without having to check every possible termination.</p>
+
+				<h4>S-Parameter Determinant (Δ)</h4>
+				<p>The first quantity to compute is the two-port determinant:</p>
+				<div class="eq">\(\Delta = S_{11}S_{22} - S_{12}S_{21}\)</div>
+				<p>This combines all four S-parameters into a single complex number whose magnitude appears in both the K-factor and µ-factor criteria.</p>
+
+				<h4>Rollett Stability Factor K</h4>
+				<p>The Rollett K-factor was the first widely adopted stability criterion (1962):</p>
+				<div class="eq">\(K = \dfrac{1 - |S_{11}|^2 - |S_{22}|^2 + |\Delta|^2}{2\,|S_{12}|\,|S_{21}|}\)</div>
+				<p>The device is <b>unconditionally stable</b> (stable for any passive source and load) when both:</p>
+				<div class="eq">\(K &gt; 1 \quad \text{AND} \quad |\Delta| &lt; 1\)</div>
+				<p>Both conditions must hold simultaneously. K &gt; 1 alone is necessary but not sufficient. When K &lt; 1 the device is only conditionally stable — it may oscillate with certain terminations.</p>
+
+				<h4>µ-Factor (Edwards-Sinsky)</h4>
+				<p>The µ-factor (1992) provides a single-parameter unconditional stability test that is both necessary and sufficient:</p>
+				<div class="eq">\(\mu = \dfrac{1 - |S_{11}|^2}{|S_{22} - \Delta\,S_{11}^*| + |S_{12}\,S_{21}|}\)</div>
+				<p>The device is unconditionally stable if and only if <span class="key">µ &gt; 1</span>. A larger µ indicates a greater stability margin. The output-port version µ' uses S22 in the numerator and S11 in the denominator symmetrically.</p>
+
+				<figure>
+					<svg viewBox="0 0 360 90" width="360" height="90" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;">
+						<rect width="360" height="90" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="3"/>
+						<line x1="20" y1="45" x2="100" y2="45" stroke="#5533aa" stroke-width="2"/>
+						<rect x="100" y="22" width="160" height="46" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8" rx="4"/>
+						<text x="180" y="42" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">[S]</text>
+						<text x="180" y="56" text-anchor="middle" font-size="9" fill="#888">S11 S12 S21 S22</text>
+						<line x1="260" y1="45" x2="340" y2="45" stroke="#5533aa" stroke-width="2"/>
+						<text x="60" y="38" text-anchor="middle" font-size="9" fill="#5533aa">Port 1</text>
+						<text x="300" y="38" text-anchor="middle" font-size="9" fill="#5533aa">Port 2</text>
+						<text x="180" y="82" text-anchor="middle" font-size="9" fill="#AA77FF">K &gt; 1  AND  |Δ| &lt; 1  →  unconditionally stable</text>
+					</svg>
+					<figcaption>Two-port device described by S-parameters. Stability is assessed from S11, S12, S21, S22 alone.</figcaption>
+				</figure>
+
+				<h4>Maximum Available Gain (MAG)</h4>
+				<p>When the device is unconditionally stable (K &gt; 1, |Δ| &lt; 1), there exists an optimal simultaneous conjugate match at both ports. The resulting maximum available gain is:</p>
+				<div class="eq">\(G_{\rm MAG} = \left|\dfrac{S_{21}}{S_{12}}\right|\left(K - \sqrt{K^2-1}\right)\)</div>
+
+				<h4>Maximum Stable Gain (MSG)</h4>
+				<p>When K &lt; 1 (conditionally stable), MAG is undefined. The maximum stable gain is the theoretical upper bound achievable by adding loss to bring K = 1:</p>
+				<div class="eq">\(G_{\rm MSG} = \left|\dfrac{S_{21}}{S_{12}}\right|\)</div>
+				<p>MSG is always higher than the achievable gain in practice — it is an optimistic upper bound used to compare devices before choosing stabilisation resistors.</p>
+
+				<h4>Practical Notes</h4>
+				<ul>
+					<li>S-parameters are frequency-dependent — check stability across the entire frequency range, not just the operating band</li>
+					<li>Low-noise transistors often have K &lt; 1 at low frequencies; add series or shunt resistors to stabilise out-of-band</li>
+					<li>Stability circles on the Smith Chart show the boundary of terminations that cause |Γin| = 1 or |Γout| = 1</li>
+					<li>A device with µ = 1.5 at a given frequency has 50% more stability margin than one with µ = 1.01</li>
+				</ul>
+
+			</div>
+
+  <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+    <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      <a href="AmpStability.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Amplifier Stability →</a>
+      <a href="NoiseFigure.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Cascaded Noise Figure →</a>
+    </div>
+  </div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

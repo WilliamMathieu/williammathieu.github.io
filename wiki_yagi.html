@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Yagi-Uda Antenna — Element Design, Gain &amp; Spacing | RF Toolbox Wiki</title>
+  <meta name="description" content="Yagi-Uda antenna theory: reflector, driven element, and director roles, gain vs element count, NBS design tables, feed impedance, and matching techniques.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_yagi.html">
+  <meta property="og:title" content="Yagi-Uda Antenna — Design &amp; Gain | RF Toolbox Wiki">
+  <meta property="og:description" content="Yagi-Uda antenna: element roles, gain vs element count, NBS empirical tables, feed impedance, and matching.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_yagi.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
+		.wa table{font-size:12px;border-collapse:collapse;margin:10px 0;}
+		.wa table th{background:#f0eeff;color:#5533aa;font-family:monospace;padding:4px 10px;border:1px solid #d0c8f0;}
+		.wa table td{padding:4px 10px;border:1px solid #e8e0ff;font-family:monospace;}
+	</style>
+</head>
+<body class="no-nav">
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Yagi-Uda Antenna</h3>
+			<div class="wa">
+
+				<p>The Yagi-Uda antenna (commonly called a Yagi) is a directional antenna composed of a fed dipole, a reflector behind it, and one or more directors in front. Only the driven element is connected to the feed line — the others are parasitic and couple electromagnetically. It is the dominant design for VHF/UHF terrestrial and amateur radio links and satellite ground stations.</p>
+
+				<h4>Element Roles</h4>
+				<ul>
+					<li><b>Reflector</b>: one element, positioned ~0.25λ behind the driven element. Slightly longer than λ/2 (≈ 0.505λ). Reflects energy forward, increasing F/B ratio.</li>
+					<li><b>Driven element</b>: the only fed element, ≈ 0.47–0.48λ long. Input impedance in the array is ~25 Ω (straight dipole) or ~200 Ω (folded dipole).</li>
+					<li><b>Directors</b>: shorter than λ/2 (≈ 0.43–0.46λ), spaced 0.25–0.42λ forward of the driven element. Each director adds roughly 1–2 dBd of gain. Gain saturates above ~9–10 elements.</li>
+				</ul>
+
+				<figure>
+					<svg viewBox="0 0 420 80" width="420" height="80" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;">
+						<rect width="420" height="80" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="3"/>
+						<!-- Boom -->
+						<line x1="20" y1="40" x2="400" y2="40" stroke="#aaa" stroke-width="3" stroke-linecap="round"/>
+						<!-- Arrow -->
+						<polygon points="400,36 410,40 400,44" fill="#888"/>
+						<text x="413" y="44" font-size="8" fill="#888">→</text>
+						<!-- Reflector (longest) -->
+						<line x1="38" y1="14" x2="38" y2="66" stroke="#5533aa" stroke-width="3" stroke-linecap="round"/>
+						<text x="38" y="75" text-anchor="middle" font-size="8" fill="#5533aa">Reflector</text>
+						<text x="38" y="10" text-anchor="middle" font-size="7" fill="#888">0.505λ</text>
+						<!-- Driven (highlighted) -->
+						<line x1="100" y1="10" x2="100" y2="70" stroke="#AA77FF" stroke-width="3.5" stroke-linecap="round"/>
+						<text x="100" y="78" text-anchor="middle" font-size="8" fill="#AA77FF">Driven</text>
+						<text x="100" y="6" text-anchor="middle" font-size="7" fill="#AA77FF">0.473λ</text>
+						<!-- Directors -->
+						<line x1="168" y1="16" x2="168" y2="64" stroke="#888" stroke-width="2" stroke-linecap="round"/>
+						<text x="168" y="73" text-anchor="middle" font-size="7" fill="#888">Dir 1</text>
+						<line x1="230" y1="18" x2="230" y2="62" stroke="#888" stroke-width="2" stroke-linecap="round"/>
+						<text x="230" y="73" text-anchor="middle" font-size="7" fill="#888">Dir 2</text>
+						<line x1="290" y1="19" x2="290" y2="61" stroke="#888" stroke-width="2" stroke-linecap="round"/>
+						<text x="290" y="73" text-anchor="middle" font-size="7" fill="#888">Dir 3</text>
+						<line x1="348" y1="20" x2="348" y2="60" stroke="#888" stroke-width="2" stroke-linecap="round"/>
+						<text x="348" y="73" text-anchor="middle" font-size="7" fill="#888">Dir 4</text>
+					</svg>
+					<figcaption>5-element Yagi: reflector (dark), driven element (purple, fed), and three directors (grey).</figcaption>
+				</figure>
+
+				<h4>Gain vs Element Count (NBS/Viezbicke Tables)</h4>
+				<p>The NBS Technical Note 688 (Viezbicke, 1976) tabulates optimised element lengths and spacings for maximum gain, derived from moment-method (NEC) calculations for element diameter d/λ = 0.0085.</p>
+				<table>
+					<tr><th>Elements</th><th>Gain (dBd)</th><th>Gain (dBi)</th><th>F/B (approx)</th></tr>
+					<tr><td>2</td><td>3.8</td><td>5.9</td><td>5 dB</td></tr>
+					<tr><td>3</td><td>5.9</td><td>8.1</td><td>10 dB</td></tr>
+					<tr><td>5</td><td>8.2</td><td>10.4</td><td>14 dB</td></tr>
+					<tr><td>7</td><td>10.0</td><td>12.2</td><td>18 dB</td></tr>
+					<tr><td>9</td><td>11.3</td><td>13.5</td><td>22 dB</td></tr>
+				</table>
+				<p>dBi = dBd + 2.15. Adding directors past ~9–10 elements yields diminishing returns (&lt;0.5 dB per element) for significant boom length cost.</p>
+
+				<h4>Feed Impedance and Matching</h4>
+				<p>The driven-element feed impedance is reduced from the free-space dipole value (~73 Ω) by the mutual coupling of adjacent elements:</p>
+				<ul>
+					<li><b>Straight dipole</b>: Zin ≈ 25–35 Ω in the array — requires a matching network (gamma match, beta match) to 50 Ω coax</li>
+					<li><b>Folded dipole</b>: naturally 4× higher impedance → Zin ≈ 200–300 Ω → use a 4:1 balun or λ/4 transformer to 50 Ω</li>
+				</ul>
+
+				<h4>Bandwidth and Scaling</h4>
+				<p>A well-optimised Yagi has an operating bandwidth of approximately 2–5% of the centre frequency — narrow enough that element length must be scaled accurately. To move a design to a new frequency, scale all dimensions by the ratio of the original wavelength to the new wavelength (f_old/f_new).</p>
+
+			</div>
+
+  <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+    <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      <a href="YagiAntenna.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Yagi-Uda Calculator →</a>
+      <a href="Dipole.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Dipole Antenna →</a>
+      <a href="ArrayFactor.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Array Factor Plotter →</a>
+    </div>
+  </div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Coupled Resonators — Bandpass Coupling, Mode Splitting &amp; Bandwidth | RF Toolbox Wiki</title>
+  <meta name="description" content="Coupled LC resonator theory: magnetic and capacitive coupling, mode splitting f±, bandwidth BW = k·f₀, critical coupling k_crit = 1/Q, and under/over-coupled regimes.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_coupled_resonators.html">
+  <meta property="og:title" content="Coupled Resonators — Mode Splitting &amp; Bandpass Coupling | RF Toolbox Wiki">
+  <meta property="og:description" content="Coupled LC tank theory: mode splitting, bandwidth BW = k·f₀, and critical coupling condition k_crit = 1/Q.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_coupled_resonators.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
+	</style>
+</head>
+<body class="no-nav">
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>Coupled Resonators &amp; Bandpass Coupling</h3>
+			<div class="wa">
+
+				<p>When two resonant LC circuits are brought near each other they exchange energy through mutual inductance or capacitive coupling. This splits the single resonant frequency into two modes and produces a characteristic double-peaked bandpass response. Understanding coupled resonators is essential for designing IF transformers, bandpass filters, and resonator-based sensors.</p>
+
+				<h4>Coupling Mechanisms</h4>
+				<ul>
+					<li><b>Magnetic (inductive)</b>: mutual inductance M between the two coils. k = M/L for identical resonators (M &lt; L, so 0 &lt; k &lt; 1). Dominant in IF transformers and wound coil pairs.</li>
+					<li><b>Electric (capacitive)</b>: a gap capacitor Cm between the two tanks. Used in high-Q cavity and ceramic resonator filters.</li>
+					<li><b>Mixed</b>: both mechanisms simultaneously; common in printed resonators.</li>
+				</ul>
+
+				<h4>Mode Splitting</h4>
+				<p>For two identical resonators (same L, C, resonant frequency f₀ = 1/(2π√LC)), coupling splits the resonant frequency into an even mode (lower, f₋) and an odd mode (upper, f₊):</p>
+				<div class="eq">\(f_{\pm} = \dfrac{f_0}{\sqrt{1 \mp k}}\)</div>
+				<p>The mode splitting <span class="key">Δf = f₊ − f₋</span> grows with coupling coefficient k. For small k: Δf ≈ k·f₀.</p>
+
+				<h4>Passband Bandwidth</h4>
+				<p>For high-Q resonators the −3 dB passband bandwidth of the coupled pair equals:</p>
+				<div class="eq">\(\text{BW} \approx k\cdot f_0 \qquad Q_{\rm loaded} = \dfrac{f_0}{\text{BW}} = \dfrac{1}{k}\)</div>
+				<p>A larger coupling coefficient k gives a wider, flatter passband; a smaller k gives a narrower passband with higher loaded Q.</p>
+
+				<h4>Critical Coupling</h4>
+				<p>The transfer response shape depends on the ratio of coupling to resonator loss. Define the <b>critical coupling coefficient</b>:</p>
+				<div class="eq">\(k_{\rm crit} = \dfrac{1}{Q}\qquad Q = \dfrac{\omega_0 L}{R}\text{ (unloaded Q)}\)</div>
+				<ul>
+					<li><b>Under-coupled</b> (k &lt; k_crit): single peaked response, insertion loss at f₀</li>
+					<li><b>Critically coupled</b> (k = k_crit): maximally flat single peak, maximum power transfer at f₀</li>
+					<li><b>Over-coupled</b> (k &gt; k_crit): double-peaked response, dip at f₀</li>
+				</ul>
+
+				<div class="fig-row">
+					<figure>
+						<svg viewBox="0 0 200 120" width="200" height="120" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;">
+							<rect width="200" height="120" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="3"/>
+							<!-- Axes -->
+							<line x1="20" y1="100" x2="190" y2="100" stroke="#888" stroke-width="1"/>
+							<line x1="20" y1="100" x2="20" y2="15" stroke="#888" stroke-width="1"/>
+							<text x="193" y="103" font-size="8" fill="#888">f</text>
+							<text x="14" y="13" font-size="8" fill="#888">|S21|</text>
+							<text x="105" y="110" text-anchor="middle" font-size="7" fill="#888">f₀</text>
+							<line x1="105" y1="98" x2="105" y2="102" stroke="#888" stroke-width="1"/>
+							<!-- Under-coupled: single low peak -->
+							<path d="M20,95 Q60,95 105,65 Q150,95 190,95" fill="none" stroke="#888" stroke-width="1.5" stroke-dasharray="4,2"/>
+							<!-- Critically coupled: single high peak -->
+							<path d="M20,95 Q60,95 105,25 Q150,95 190,95" fill="none" stroke="#5533aa" stroke-width="2"/>
+							<!-- Over-coupled: double peak -->
+							<path d="M20,95 Q50,95 80,30 Q105,60 130,30 Q160,95 190,95" fill="none" stroke="#AA77FF" stroke-width="2"/>
+							<text x="155" y="30" font-size="7" fill="#888">under</text>
+							<text x="155" y="42" font-size="7" fill="#5533aa">critical</text>
+							<text x="155" y="54" font-size="7" fill="#AA77FF">over</text>
+						</svg>
+						<figcaption>Transfer response shapes for three coupling regimes.</figcaption>
+					</figure>
+					<figure>
+						<svg viewBox="0 0 200 120" width="200" height="120" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;">
+							<rect width="200" height="120" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="3"/>
+							<!-- Two tank circuits schematic -->
+							<!-- Tank 1 -->
+							<path d="M40,70 A7,7 0 0,1 54,70 A7,7 0 0,1 68,70 A7,7 0 0,1 82,70" fill="none" stroke="#5533aa" stroke-width="2"/>
+							<line x1="61" y1="40" x2="61" y2="70" stroke="#5533aa" stroke-width="1.5"/>
+							<line x1="48" y1="40" x2="74" y2="40" stroke="#5533aa" stroke-width="2.5"/>
+							<line x1="48" y1="48" x2="74" y2="48" stroke="#5533aa" stroke-width="2.5"/>
+							<line x1="61" y1="48" x2="61" y2="58" stroke="#5533aa" stroke-width="1.5"/>
+							<line x1="61" y1="80" x2="61" y2="90" stroke="#5533aa" stroke-width="1.5"/>
+							<!-- M arrow -->
+							<text x="100" y="60" text-anchor="middle" font-size="12" fill="#AA77FF" font-weight="bold">M</text>
+							<line x1="85" y1="65" x2="115" y2="65" stroke="#AA77FF" stroke-width="1.5" stroke-dasharray="3,2"/>
+							<!-- Tank 2 -->
+							<path d="M118,70 A7,7 0 0,1 132,70 A7,7 0 0,1 146,70 A7,7 0 0,1 160,70" fill="none" stroke="#5533aa" stroke-width="2"/>
+							<line x1="139" y1="40" x2="139" y2="70" stroke="#5533aa" stroke-width="1.5"/>
+							<line x1="126" y1="40" x2="152" y2="40" stroke="#5533aa" stroke-width="2.5"/>
+							<line x1="126" y1="48" x2="152" y2="48" stroke="#5533aa" stroke-width="2.5"/>
+							<line x1="139" y1="48" x2="139" y2="58" stroke="#5533aa" stroke-width="1.5"/>
+							<line x1="139" y1="80" x2="139" y2="90" stroke="#5533aa" stroke-width="1.5"/>
+							<text x="100" y="108" text-anchor="middle" font-size="8" fill="#5533aa">k = M/L</text>
+							<text x="100" y="118" text-anchor="middle" font-size="7" fill="#888">f₀ common to both</text>
+						</svg>
+						<figcaption>Two magnetically coupled LC tanks with mutual inductance M.</figcaption>
+					</figure>
+				</div>
+
+				<h4>Bandpass Filter Design</h4>
+				<p>A two-resonator bandpass filter is designed by choosing k to achieve the desired bandwidth and response shape. For a maximally flat (Butterworth) 2-pole bandpass filter, critical coupling gives the flattest passband. Chebyshev response requires slight over-coupling. Multi-resonator filters chain additional coupled pairs, with each coupling coefficient <span class="key">k_{i,i+1}</span> set from the prototype g-values.</p>
+
+				<h4>IF Transformers</h4>
+				<p>The coupled resonator principle is the basis of the IF transformer found in superheterodyne receivers. The primary and secondary coils are wound on a shared ferrite core and are slightly over-coupled to achieve a flat-topped passband around the IF frequency (commonly 455 kHz or 10.7 MHz). Adjusting the core position changes the coupling coefficient and therefore the bandwidth.</p>
+
+			</div>
+
+  <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+    <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      <a href="CoupledResonators.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Coupled Resonators →</a>
+      <a href="BandpassCalc.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Bandpass Calculator →</a>
+      <a href="FilterDesign.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">LC Filter Designer →</a>
+    </div>
+  </div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>

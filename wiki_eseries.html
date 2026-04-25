@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>E-Series Standard Component Values — E6 to E192 | RF Toolbox Wiki</title>
+  <meta name="description" content="E-series resistor and capacitor standard values: E6, E12, E24, E48, E96, E192. Logarithmic spacing, tolerance assignment, and how to choose the right series.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_eseries.html">
+  <meta property="og:title" content="E-Series Standard Component Values | RF Toolbox Wiki">
+  <meta property="og:description" content="E-series standard values: E6 through E192. Logarithmic spacing, tolerance, and how to pick the nearest standard value.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_eseries.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script src="MathJax.js"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		.wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+		.wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+		.wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+		.wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+		.wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+		.wiki-back a{color:#AA77FF;}
+		.wa figure{margin:14px 0;text-align:center;}
+		.wa figure svg{max-width:100%;height:auto;display:inline-block;}
+		.wa figcaption{font-family:monospace;font-size:11px;color:#777;margin-top:5px;font-style:italic;}
+		.wa .fig-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:14px 0;}
+		.wa .fig-row figure{margin:0;flex:1;min-width:180px;}
+		.wa table{font-size:12px;border-collapse:collapse;margin:10px 0;}
+		.wa table th{background:#f0eeff;color:#5533aa;font-family:monospace;padding:4px 10px;border:1px solid #d0c8f0;}
+		.wa table td{padding:4px 10px;border:1px solid #e8e0ff;font-family:monospace;}
+	</style>
+</head>
+<body class="no-nav">
+	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+	<section>
+		<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+		<article>
+			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<h3>E-Series Standard Component Values</h3>
+			<div class="wa">
+
+				<p>Resistors, capacitors, and inductors are manufactured in standardised value sets called <b>E-series</b>, defined by IEC 60063. Rather than covering every decimal value, the series places values at logarithmically equal intervals so that any calculated value falls within a specified tolerance of the nearest standard value.</p>
+
+				<h4>Logarithmic Spacing</h4>
+				<p>An E-series with <span class="key">N</span> values per decade places mantissas at:</p>
+				<div class="eq">\(v_k = 10^{k/N}\quad k = 0, 1, \ldots, N-1\)</div>
+				<p>The ratio between consecutive values is always <span class="key">10^(1/N)</span>. This means worst-case error is at most half that ratio, or approximately <span class="key">1/(2N) × 100%</span> of a decade — which corresponds directly to the component tolerance.</p>
+
+				<h4>Series Summary</h4>
+				<table>
+					<tr><th>Series</th><th>Values/decade</th><th>Tolerance</th><th>Typical use</th></tr>
+					<tr><td>E6</td><td>6</td><td>±20%</td><td>General decoupling capacitors</td></tr>
+					<tr><td>E12</td><td>12</td><td>±10%</td><td>General-purpose resistors</td></tr>
+					<tr><td>E24</td><td>24</td><td>±5%</td><td>Most common resistor series</td></tr>
+					<tr><td>E48</td><td>48</td><td>±2%</td><td>Precision resistors</td></tr>
+					<tr><td>E96</td><td>96</td><td>±1%</td><td>Precision resistors, filter components</td></tr>
+					<tr><td>E192</td><td>192</td><td>±0.5%</td><td>High-precision networks</td></tr>
+				</table>
+
+				<h4>E6 and E12 Values (first decade)</h4>
+				<p>E6 mantissas: 1.0, 1.5, 2.2, 3.3, 4.7, 6.8</p>
+				<p>E12 mantissas (includes all E6): 1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2</p>
+				<p>E24 adds further interleaving: 1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0, 3.3, 3.6, 3.9, 4.3, 4.7, 5.1, 5.6, 6.2, 6.8, 7.5, 8.2, 9.1</p>
+
+				<h4>Reading E-Series Values</h4>
+				<p>Multiply any mantissa by a decade: a resistor marked <b>4.7 kΩ</b> uses mantissa 4.7 in the kΩ decade. A capacitor of <b>22 nF</b> uses mantissa 2.2 in the 10 nF decade. The E-series is the same for resistors, capacitors, and inductors — only the unit decade changes.</p>
+
+				<figure>
+					<svg viewBox="0 0 420 80" width="420" height="80" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;">
+						<rect width="420" height="80" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="3"/>
+						<!-- Log axis -->
+						<line x1="20" y1="42" x2="400" y2="42" stroke="#888" stroke-width="1.5"/>
+						<text x="20" y="55" text-anchor="middle" font-size="9" fill="#888">1</text>
+						<text x="400" y="55" text-anchor="middle" font-size="9" fill="#888">10</text>
+						<!-- E6 ticks (log positions) -->
+						<!-- log10(1.0)=0 → x=20, log10(1.5)=0.176 → x=82, log10(2.2)=0.342 → x=142, log10(3.3)=0.519 → x=211, log10(4.7)=0.672 → x=268, log10(6.8)=0.833 → x=320 -->
+						<line x1="20" y1="36" x2="20" y2="48" stroke="#AA77FF" stroke-width="2"/>
+						<line x1="82" y1="36" x2="82" y2="48" stroke="#AA77FF" stroke-width="2"/>
+						<line x1="142" y1="36" x2="142" y2="48" stroke="#AA77FF" stroke-width="2"/>
+						<line x1="211" y1="36" x2="211" y2="48" stroke="#AA77FF" stroke-width="2"/>
+						<line x1="268" y1="36" x2="268" y2="48" stroke="#AA77FF" stroke-width="2"/>
+						<line x1="320" y1="36" x2="320" y2="48" stroke="#AA77FF" stroke-width="2"/>
+						<text x="20" y="32" text-anchor="middle" font-size="8" fill="#AA77FF">1.0</text>
+						<text x="82" y="32" text-anchor="middle" font-size="8" fill="#AA77FF">1.5</text>
+						<text x="142" y="32" text-anchor="middle" font-size="8" fill="#AA77FF">2.2</text>
+						<text x="211" y="32" text-anchor="middle" font-size="8" fill="#AA77FF">3.3</text>
+						<text x="268" y="32" text-anchor="middle" font-size="8" fill="#AA77FF">4.7</text>
+						<text x="320" y="32" text-anchor="middle" font-size="8" fill="#AA77FF">6.8</text>
+						<!-- E12 extra ticks: 1.2→55, 1.8→108, 2.7→168, 3.9→235, 5.6→290, 8.2→347 -->
+						<line x1="55" y1="40" x2="55" y2="48" stroke="#5533aa" stroke-width="1.2"/>
+						<line x1="108" y1="40" x2="108" y2="48" stroke="#5533aa" stroke-width="1.2"/>
+						<line x1="168" y1="40" x2="168" y2="48" stroke="#5533aa" stroke-width="1.2"/>
+						<line x1="235" y1="40" x2="235" y2="48" stroke="#5533aa" stroke-width="1.2"/>
+						<line x1="290" y1="40" x2="290" y2="48" stroke="#5533aa" stroke-width="1.2"/>
+						<line x1="347" y1="40" x2="347" y2="48" stroke="#5533aa" stroke-width="1.2"/>
+						<text x="10" y="70" font-size="8" fill="#AA77FF">■ E6</text>
+						<text x="45" y="70" font-size="8" fill="#5533aa">■ E12 additions</text>
+					</svg>
+					<figcaption>Log-scale number line for one decade showing E6 (purple) and E12 (dark) value positions.</figcaption>
+				</figure>
+
+				<h4>Choosing a Series</h4>
+				<ul>
+					<li><b>E12</b>: adequate for bias resistors, pull-ups, and non-critical dividers</li>
+					<li><b>E24</b>: standard choice for RF filter component selection</li>
+					<li><b>E96 / E192</b>: use when the component value directly sets a frequency, gain, or impedance with &lt;1% accuracy requirement</li>
+					<li>Higher-N series cost more and have longer lead times — use only where the tolerance budget demands it</li>
+				</ul>
+
+				<h4>Finding the Nearest Value</h4>
+				<p>To find the nearest E-series value to a calculated target <span class="key">R_target</span>: (1) compute the decade exponent <span class="key">exp = floor(log₁₀(R_target))</span>, (2) extract the mantissa <span class="key">m = R_target / 10^exp</span>, (3) scan all N mantissas and pick the closest. The E-Series Finder calculator automates this for any R, C, or L target.</p>
+
+			</div>
+
+  <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+    <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      <a href="ESeries.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">E-Series Component Finder →</a>
+      <a href="FilterDesign.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">LC Filter Designer →</a>
+    </div>
+  </div>
+		</article>
+	</section>
+	<footer><p><a href="index.html">Home</a> . <a href="wiki.html">Wiki</a></p></footer>
+</body>
+</html>
