@@ -69,9 +69,11 @@
         <div class="sh-step-links">
           <a class="sh-link" href="Microstrip.html">🔧 Microstrip Calculator</a>
           <a class="sh-link" href="Coaxial.html">🔧 Coaxial Line Calculator</a>
+          <a class="sh-link" href="TLLoss.html">🔧 Transmission Line Loss</a>
           <a class="sh-link" href="QuarterWave.html">🔧 Quarter-Wave Transformer</a>
           <a class="sh-link" href="StubCalc.html">🔧 Stub Calculator</a>
           <a class="sh-link" href="wiki_microwave_lines.html">📖 Microwave Transmission Lines</a>
+          <a class="sh-link" href="wiki_tl_loss.html">📖 Transmission Line Loss & Attenuation</a>
         </div>
       </div>
     </div>
@@ -83,9 +85,12 @@
         <div class="sh-step-desc">Almost every RF circuit contains inductors and capacitors tuned to a specific frequency. The LC resonator is how filters, matching networks, and MRI coils all work. At resonance, the impedance of an LC circuit is purely resistive — this is why "tuning" matters so much. The Q factor tells you how selective (sharp) the resonance is.</div>
         <div class="sh-step-links">
           <a class="sh-link" href="LC.html">🔧 LC Resonance Calculator</a>
+          <a class="sh-link" href="BandpassCalc.html">🔧 Bandpass Filter Calculator</a>
+          <a class="sh-link" href="CoupledResonators.html">🔧 Coupled Resonators</a>
           <a class="sh-link" href="CLI.html">🔧 Loop Inductance</a>
           <a class="sh-link" href="SkinDepth.html">🔧 Skin Depth Calculator</a>
           <a class="sh-link" href="wiki_coil_design.html">📖 RF Coil Design</a>
+          <a class="sh-link" href="wiki_coupled_resonators.html">📖 Coupled Resonators & Bandpass Coupling</a>
           <a class="sh-link" href="wiki_skin_effect.html">📖 Skin Effect</a>
         </div>
       </div>
@@ -114,8 +119,10 @@
         <div class="sh-step-desc">RF filters block unwanted frequencies and pass the ones you want. Low-pass, high-pass, bandpass, and notch filters are all built from inductors and capacitors. The Filter Designer lets you generate complete Butterworth or Chebyshev ladders — you specify the order, cutoff, and topology, and it gives you every component value.</div>
         <div class="sh-step-links">
           <a class="sh-link" href="FilterDesign.html">🔧 LC Filter Designer</a>
-          <a class="sh-link" href="BandpassCalc.html">🔧 Bandpass Filter Calculator</a>
+          <a class="sh-link" href="SteppedImpedanceLPF.html">🔧 Stepped-Impedance LPF</a>
+          <a class="sh-link" href="AttenuatorDesign.html">🔧 Attenuator Designer</a>
           <a class="sh-link" href="wiki_filters.html">📖 RF Filters</a>
+          <a class="sh-link" href="wiki_stepped_impedance.html">📖 Stepped-Impedance Low-Pass Filter</a>
         </div>
       </div>
     </div>
@@ -124,12 +131,16 @@
       <div class="sh-num">7</div>
       <div class="sh-step-body">
         <div class="sh-step-title">Antennas — where the signal leaves the wire</div>
-        <div class="sh-step-desc">An antenna converts guided wave (in a cable) to free-space EM wave. The half-wave dipole is the reference: at resonance it presents 73 Ω impedance and has 2.15 dBi gain. Antenna gain is not amplification — it's directivity. The array factor tool shows you how multiple elements add up to create beam patterns.</div>
+        <div class="sh-step-desc">An antenna converts a guided wave (in a cable) to a free-space EM wave. The half-wave dipole is the reference: at resonance it presents 73 Ω and has 2.15 dBi gain. Gain is directivity, not amplification. Yagi-Uda arrays stack parasitic elements to focus the beam forward; helical antennas achieve circular polarisation in a compact form. The Array Factor tool shows how element phasing shapes the beam pattern.</div>
         <div class="sh-step-links">
           <a class="sh-link" href="Dipole.html">🔧 Dipole Calculator</a>
           <a class="sh-link" href="PatchAntenna.html">🔧 Patch Antenna Designer</a>
+          <a class="sh-link" href="YagiAntenna.html">🔧 Yagi-Uda Designer</a>
+          <a class="sh-link" href="HelicalAntenna.html">🔧 Helical Antenna</a>
           <a class="sh-link" href="ArrayFactor.html">🔧 Array Factor Plotter</a>
           <a class="sh-link" href="wiki_antennas.html">📖 Antenna Fundamentals</a>
+          <a class="sh-link" href="wiki_yagi.html">📖 Yagi-Uda Antenna</a>
+          <a class="sh-link" href="wiki_helical.html">📖 Helical Antenna — Axial Mode</a>
         </div>
       </div>
     </div>
@@ -171,7 +182,12 @@
 
     <a class="sh-card" href="wiki_filters.html">
       <div class="sh-card-title">🎚 Filter Design</div>
-      <div class="sh-card-desc">LC ladders, Butterworth vs Chebyshev, bandpass topologies. The Filter Designer and RF Simulator complement each other.</div>
+      <div class="sh-card-desc">LC ladders, Butterworth vs Chebyshev, bandpass topologies, stepped-impedance microstrip LPF. The Filter Designer and RF Simulator complement each other.</div>
+    </a>
+
+    <a class="sh-card" href="wiki_amp_stability.html">
+      <div class="sh-card-title">📈 Amplifier & Active Design</div>
+      <div class="sh-card-desc">Transistor/MMIC S-parameter analysis: Rollett K-factor, µ-factor stability, MAG/MSG, cascaded noise figure, and third-order intercept. Start with the Amplifier Stability calculator.</div>
     </a>
 
   </div>
