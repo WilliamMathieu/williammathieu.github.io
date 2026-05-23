@@ -17,12 +17,12 @@ function saveScore(gameId, name, score) {
   entries.push({ name: name.trim().slice(0, 20) || 'Anonymous', score: score, date: new Date().toLocaleDateString() });
   entries.sort(function(a, b) { return b.score - a.score; });
   entries = entries.slice(0, MAX_ENTRIES);
-  try { localStorage.setItem(SCORES_KEY_PREFIX + gameId, JSON.stringify(entries)); } catch(e) {}
+  try { localStorage.setItem(SCORES_KEY_PREFIX + gameId, JSON.stringify(entries)); } catch(e) { /* ignore quota/privacy errors */ }
   return entries;
 }
 
 function clearScores(gameId) {
-  try { localStorage.removeItem(SCORES_KEY_PREFIX + gameId); } catch(e) {}
+  try { localStorage.removeItem(SCORES_KEY_PREFIX + gameId); } catch(e) { /* ignore quota/privacy errors */ }
 }
 
 // Render a leaderboard table into a container element

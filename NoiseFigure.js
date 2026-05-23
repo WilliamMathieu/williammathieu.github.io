@@ -1,5 +1,6 @@
 
 var nfCount=3;
+// eslint-disable-next-line no-redeclare
 function nfBuild(){
     nfCount=parseInt(document.getElementById('nf-n').value)||3;
     var h='';
@@ -12,6 +13,7 @@ function nfBuild(){
     document.getElementById('nf-gain').textContent='\u2014';
     clearError();
 }
+// eslint-disable-next-line no-redeclare
 function nfCalc(){
     var gains=[],nfs=[];
     clearError();

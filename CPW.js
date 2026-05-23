@@ -38,6 +38,7 @@ document.getElementById('cpw-btn').addEventListener('click', function(){
   document.getElementById('cpw-lam').textContent=lam.toFixed(2)+' mm';
   if(window.drawDiagram) drawDiagram(w,s,h,er,Z0.toFixed(1),bg);
 });
+// eslint-disable-next-line no-redeclare
 function drawDiagram(w,s,h,er,Z0lbl,bg){
   if(!w){w=1;s=0.3;h=0.5;er=9.9;Z0lbl='—';bg=1;}
   var W=480,H=170,scale=Math.min(60,120/(w+2*s+2));

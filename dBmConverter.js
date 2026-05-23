@@ -10,6 +10,7 @@ function switchMode(m) {
 var ENG = function(v, unit) { return engFmt(v, unit || ''); };
 
 // ── dBm ↔ Power ───────────────────────────────────────────────────────────────
+// eslint-disable-next-line no-redeclare
 function updateDbm(src) {
     var dbmEl = document.getElementById('v-dbm');
     var wEl   = document.getElementById('v-watt');

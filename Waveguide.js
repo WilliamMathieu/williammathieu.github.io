@@ -44,9 +44,9 @@ function wg_calc() {
     }
   }
   // Add TM modes (require both m,n >= 1)
-  for (var m = 1; m <= 3; m++) {
-    for (var n = 1; n <= 3; n++) {
-      var fc = vp_med / 2 * Math.sqrt((m/a)*(m/a) + (n/b)*(n/b));
+  for (m = 1; m <= 3; m++) {
+    for (n = 1; n <= 3; n++) {
+      fc = vp_med / 2 * Math.sqrt((m/a)*(m/a) + (n/b)*(n/b));
       modes.push({ m:m, n:n, fc:fc, label:'TM'+m+n });
     }
   }
@@ -80,19 +80,13 @@ function wg_calc() {
 
     // Phase velocity and group velocity
     var vph = 2 * Math.PI * f / beta;
-    var vgr = beta * C0*C0 / (km * km / (2*Math.PI*f));  // simplified: vgr = c²/vph...
-    // More correctly: vgr = dω/dβ = c²β/(ω·er) for TE10 in dielectric-filled guide
-    vgr = (beta / (2*Math.PI*f)) * C0*C0 / er;
+    // vgr = dω/dβ = c²β/(ω·er) for TE10 in dielectric-filled guide
+    var vgr = (beta / (2*Math.PI*f)) * C0*C0 / er;
 
-    // Conductor loss for TE10 (α_c) [Np/m] — exact formula for TE10
+    // Conductor loss for TE10 (α_c) [Np/m] — Pozar eq 3.96
     var Rs = Math.sqrt(Math.PI * f * MU0 / sigmav);
-    var alpha_c_npm = Rs / (a*a*a*b*beta*2*Math.PI*f*MU0) * (2*b*Math.PI*Math.PI + a*a*a*beta*beta);
-    // Simplified Pozar form for TE10:
-    alpha_c_npm = Rs / (a*b*beta*2*Math.PI*f*MU0) * (2*b*Math.PI*Math.PI + a*a*a*(beta*beta));
-    // Even simpler standard result (Pozar eq 3.96):
-    // αc = Rs/(a³b·β·ωµ) × (2b·π² + a³·β²) — let me use the clean Pozar form
     var w = 2*Math.PI*f;
-    alpha_c_npm = Rs / (a*a*a * b * beta * w * MU0) * (2*b*Math.PI*Math.PI + a*a*a*beta*beta);
+    var alpha_c_npm = Rs / (a*a*a * b * beta * w * MU0) * (2*b*Math.PI*Math.PI + a*a*a*beta*beta);
     var alpha_c = 8.686 * alpha_c_npm;  // dB/m
 
     // Dielectric loss (if filled)
