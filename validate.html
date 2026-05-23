@@ -266,6 +266,141 @@
   <button id="wg-btn"></button>
   <div id="wg-results"></div>
   <div id="wg-error"></div>
+
+  <!-- DiffPair -->
+  <input id="dp2-w"><input id="dp2-s"><input id="dp2-h"><input id="dp2-t"><input id="dp2-er">
+  <button id="dp2-btn"></button>
+  <span id="dp2-z0single"></span><span id="dp2-zodd"></span><span id="dp2-zdiff"></span>
+  <span id="dp2-zeven"></span><span id="dp2-zcm"></span>
+
+  <!-- Wilkinson Divider -->
+  <input id="wk-z0"><input id="wk-k2"><input id="wk-f"><input id="wk-er">
+  <select id="wk-fu"><option value="1e6">MHz</option><option value="1e9">GHz</option></select>
+  <button id="wk-btn"></button>
+  <span id="wk-z1"></span><span id="wk-z2"></span><span id="wk-len"></span>
+  <span id="wk-s1"></span><span id="wk-s2"></span><span id="wk-r"></span>
+  <span id="wk-iso"></span><span id="wk-rl"></span>
+
+  <!-- RadarRange -->
+  <input id="rd-pt"><input id="rd-gt"><input id="rd-gr"><input id="rd-sigma">
+  <input id="rd-f"><input id="rd-pmin">
+  <select id="rd-fu"><option value="1e6">MHz</option><option value="1e9">GHz</option></select>
+  <button id="rd-btn"></button>
+  <span id="rd-rmax"></span><span id="rd-pr1k"></span><span id="rd-rangeatpmin"></span>
+  <span id="rd-lam"></span><span id="rd-eirp"></span><span id="rd-dbeq"></span>
+
+  <!-- PowerCombiner -->
+  <input id="pc-n"><input id="pc-p"><input id="pc-eta"><input id="pc-fail">
+  <button id="pc-btn"></button>
+  <span id="pc-pout"></span><span id="pc-pout-w"></span><span id="pc-cgain"></span>
+  <span id="pc-eloss"></span><span id="pc-pfail"></span><span id="pc-degrad"></span>
+  <span id="pc-surv"></span><span id="pc-pct"></span>
+
+  <!-- BondWireVia -->
+  <input id="bw-l"><input id="bw-d"><input id="bw-h">
+  <button id="bw-btn"></button>
+  <span id="bw-L"></span><span id="bw-X"></span><span id="bw-X10"></span>
+  <input id="via-h"><input id="via-d"><input id="via-D"><input id="via-er">
+  <button id="via-btn"></button>
+  <span id="via-L"></span><span id="via-C"></span><span id="via-srf"></span>
+  <span id="error2"></span>
+
+  <!-- PiTNetwork -->
+  <input id="pt-f"><input id="pt-r1"><input id="pt-r2"><input id="pt-q">
+  <select id="pt-fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select>
+  <select id="pt-topo">
+    <option value="pi-lp">Pi Low-pass</option><option value="pi-hp">Pi High-pass</option>
+    <option value="t-lp">T Low-pass</option><option value="t-hp">T High-pass</option>
+  </select>
+  <button id="pt-btn"></button>
+  <span id="pt-e1"></span><span id="pt-e2"></span><span id="pt-e3"></span>
+  <span id="pt-qv"></span><span id="pt-bw"></span><span id="pt-rv"></span>
+
+  <!-- LCBalun -->
+  <input id="bl-f"><input id="bl-zu"><input id="bl-zb">
+  <select id="bl-fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select>
+  <select id="bl-topo">
+    <option value="lattice">Lattice</option><option value="pi">Pi</option><option value="marchand">Marchand</option>
+  </select>
+  <button id="bl-btn"></button>
+  <span id="bl-r1"></span><span id="bl-r2"></span><span id="bl-r3"></span><span id="bl-r4"></span>
+  <span id="bl-ratio"></span><span id="bl-Q"></span>
+  <span id="bl-note"></span><div id="bl-eq"></div>
+  <div id="bl-r1-p"><span class="res-lbl"></span></div>
+  <div id="bl-r2-p"><span class="res-lbl"></span></div>
+  <div id="bl-r3-p"><span class="res-lbl"></span></div>
+  <div id="bl-r4-p"><span class="res-lbl"></span></div>
+
+  <!-- AmpStability -->
+  <input id="amp-s11m"><input id="amp-s11a"><input id="amp-s12m"><input id="amp-s12a">
+  <input id="amp-s21m"><input id="amp-s21a"><input id="amp-s22m"><input id="amp-s22a">
+  <button id="amp-btn"></button>
+  <div id="amp-results" class="res-grid"></div>
+  <span id="amp-error"></span>
+
+  <!-- Coupler -->
+  <input id="coup-f"><input id="coup-z0"><input id="coup-C"><input id="coup-ratio">
+  <select id="coup-type">
+    <option value="coupled" selected>Coupled-line</option>
+    <option value="branch">Branchline</option><option value="ratrace">Rat-race</option>
+  </select>
+  <select id="coup-f-unit"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select>
+  <button id="coup-btn"></button>
+  <div id="coup-results" class="res-grid"></div>
+  <span id="coup-error"></span>
+  <div id="coup-db-row"></div><div id="coup-ratio-row"></div>
+
+  <!-- YagiAntenna -->
+  <input id="yagi-f"><input id="yagi-n"><input id="yagi-diam">
+  <select id="yagi-f-unit"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select>
+  <select id="yagi-diam-unit"><option value="1e-3" selected>mm</option><option value="1e-2">cm</option></select>
+  <button id="yagi-btn"></button>
+  <div id="yagi-results" class="res-grid"></div>
+  <span id="yagi-error"></span>
+
+  <!-- HelicalAntenna -->
+  <input id="helix-f"><input id="helix-n"><input id="helix-D"><input id="helix-S">
+  <select id="helix-f-unit"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select>
+  <select id="helix-D-unit"><option value="1e-3" selected>mm</option></select>
+  <select id="helix-S-unit"><option value="1e-3" selected>mm</option></select>
+  <select id="helix-mode"><option value="design" selected>Design</option><option value="analyze">Analyze</option></select>
+  <button id="helix-btn"></button>
+  <div id="helix-results" class="res-grid"></div>
+  <span id="helix-error"></span>
+
+  <!-- CoupledResonators -->
+  <input id="cr-L"><input id="cr-C"><input id="cr-R"><input id="cr-k"><input id="cr-M">
+  <select id="cr-L-unit"><option value="1e-9">nH</option><option value="1e-6" selected>µH</option></select>
+  <select id="cr-C-unit"><option value="1e-12" selected>pF</option><option value="1e-9">nF</option></select>
+  <select id="cr-M-unit"><option value="1e-9">nH</option><option value="1e-6" selected>µH</option></select>
+  <button id="cr-btn"></button>
+  <div id="cr-results" class="res-grid"></div>
+  <span id="cr-error"></span>
+
+  <!-- PLLFilter -->
+  <input id="pll-kd"><input id="pll-ko"><input id="pll-n"><input id="pll-bw"><input id="pll-pm">
+  <select id="pll-ko-unit"><option value="6283185" selected>MHz/V</option></select>
+  <select id="pll-bw-unit"><option value="1e3" selected>kHz</option></select>
+  <button id="pll-btn"></button>
+  <div id="pll-results" class="res-grid"></div>
+  <span id="pll-error"></span>
+
+  <!-- SteppedImpedanceLPF -->
+  <input id="silpf-n"><input id="silpf-fc"><input id="silpf-zh"><input id="silpf-zl">
+  <input id="silpf-z0"><input id="silpf-er"><input id="silpf-h">
+  <select id="silpf-fc-unit"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select>
+  <select id="silpf-resp"><option value="butter" selected>Butterworth</option><option value="cheby">Chebyshev</option></select>
+  <button id="silpf-btn"></button>
+  <div id="silpf-results" class="res-grid"></div>
+  <span id="silpf-error"></span>
+
+  <!-- FilterDesign -->
+  <input id="fd-n"><input id="fd-fc"><input id="fd-r0"><input id="fd-ripple">
+  <select id="fd-type"><option value="lp" selected>Low-pass</option><option value="hp">High-pass</option></select>
+  <select id="fd-resp"><option value="butter" selected>Butterworth</option><option value="cheby">Chebyshev</option></select>
+  <select id="fd-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select>
+  <button id="fd-btn"></button>
+  <div id="fd-out"></div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -286,6 +421,546 @@
 <script src="PatchAntenna.js"></script>
 <script src="NoiseFigure.js"></script>
 <script src="dBmConverter.js"></script>
+<script src="LCBalun.js"></script>
+<script src="FilterDesign.js"></script>
+<script src="Coupler.js"></script>
+<!-- Inline scripts extracted from HTML-only tools -->
+<script>
+/* ── DiffPair (from DiffPair.html) ── */
+(function(){
+function msZ0(w,h,t,er){
+  var weff=w+(t/Math.PI)*(1+Math.log(2*h/t));
+  var u=weff/h;
+  var fu=6+(2*Math.PI-6)*Math.exp(-Math.pow(30.666/u,0.7528));
+  var Z0air=60*Math.log(fu/u+Math.sqrt(1+4/u/u));
+  var a=1+(1/49)*Math.log((Math.pow(u,4)+Math.pow(u/52,2))/(Math.pow(u,4)+0.432))+
+         (1/18.7)*Math.log(1+Math.pow(u/18.1,3));
+  var b=0.564*Math.pow((er-0.9)/(er+3),0.053);
+  var eeff=((er+1)/2+(er-1)/2*Math.pow(1+10/u,-a*b));
+  return{Z0:Z0air/Math.sqrt(eeff),eeff:eeff};
+}
+document.getElementById('dp2-btn').addEventListener('click',function(){
+  var w=parseFloat(document.getElementById('dp2-w').value);
+  var s=parseFloat(document.getElementById('dp2-s').value);
+  var h=parseFloat(document.getElementById('dp2-h').value);
+  var t=parseFloat(document.getElementById('dp2-t').value);
+  var er=parseFloat(document.getElementById('dp2-er').value);
+  if([w,s,h,t,er].some(isNaN)||[w,s,h].some(function(v){return v<=0;})) return;
+  var single=msZ0(w,h,t,er);
+  var Z0=single.Z0;
+  var Q=0.347*Math.exp(-2.655*s/h);
+  var Zodd=Z0*(1-Q);
+  var Zeven=Z0*(1+Q);
+  document.getElementById('dp2-z0single').textContent=Z0.toFixed(2)+' Ω';
+  document.getElementById('dp2-zodd').textContent=Zodd.toFixed(2)+' Ω';
+  document.getElementById('dp2-zdiff').textContent=(2*Zodd).toFixed(2)+' Ω';
+  document.getElementById('dp2-zeven').textContent=Zeven.toFixed(2)+' Ω';
+  document.getElementById('dp2-zcm').textContent=(Zeven/2).toFixed(2)+' Ω';
+});
+})();
+
+/* ── Wilkinson (from Wilkinson.html) ── */
+(function(){
+document.getElementById('wk-btn').addEventListener('click',function(){
+  var Z0=parseFloat(document.getElementById('wk-z0').value);
+  var K2=parseFloat(document.getElementById('wk-k2').value);
+  var f=parseFloat(document.getElementById('wk-f').value)*parseFloat(document.getElementById('wk-fu').value);
+  var er=parseFloat(document.getElementById('wk-er').value)||1;
+  if([Z0,K2,f].some(isNaN)||Z0<=0||K2<=0||f<=0) return;
+  var K=Math.sqrt(K2);
+  var Z1=Z0*Math.sqrt((1+K2)/Math.pow(K,3));
+  var Z2=Z0*Math.sqrt(K*(1+K2));
+  var Riso=Z0*(K+1/K);
+  var lam4=3e8/(4*f*Math.sqrt(er))*1000;
+  var s1_dB=10*Math.log10(1+1/K2);
+  var s2_dB=10*Math.log10(1+K2);
+  document.getElementById('wk-z1').textContent=Z1.toFixed(3)+' Ω';
+  document.getElementById('wk-z2').textContent=Z2.toFixed(3)+' Ω';
+  document.getElementById('wk-len').textContent=lam4.toFixed(2)+' mm (λ/4)';
+  document.getElementById('wk-s1').textContent='-'+s1_dB.toFixed(2)+' dB';
+  document.getElementById('wk-s2').textContent='-'+s2_dB.toFixed(2)+' dB';
+  document.getElementById('wk-r').textContent=Riso.toFixed(2)+' Ω';
+  document.getElementById('wk-iso').textContent='> 20 dB (ideal)';
+  document.getElementById('wk-rl').textContent='> 20 dB (ideal)';
+});
+})();
+
+/* ── RadarRange (from RadarRange.html) ── */
+(function(){
+document.getElementById('rd-btn').addEventListener('click',function(){
+  var Pt=parseFloat(document.getElementById('rd-pt').value);
+  var Gt=Math.pow(10,parseFloat(document.getElementById('rd-gt').value)/10);
+  var Gr=Math.pow(10,parseFloat(document.getElementById('rd-gr').value)/10);
+  var sig=parseFloat(document.getElementById('rd-sigma').value);
+  var f=parseFloat(document.getElementById('rd-f').value)*parseFloat(document.getElementById('rd-fu').value);
+  var Pmin_dBm=parseFloat(document.getElementById('rd-pmin').value);
+  if([Pt,Gt,Gr,sig,f,Pmin_dBm].some(isNaN)||Pt<=0||sig<=0||f<=0) return;
+  var lam=3e8/f;
+  var Pmin_W=1e-3*Math.pow(10,Pmin_dBm/10);
+  var Rmax=Math.pow(Pt*Gt*Gr*lam*lam*sig/Math.pow(4*Math.PI,3)/Pmin_W,0.25);
+  var Pr1k=Pt*Gt*Gr*lam*lam*sig/Math.pow(4*Math.PI,3)/Math.pow(1000,4);
+  var Pr1k_dBm=10*Math.log10(Pr1k/1e-3);
+  var EIRP_dBm=10*Math.log10(Pt/1e-3)+10*Math.log10(Gt);
+  document.getElementById('rd-rmax').textContent=engFmt(Rmax,'m');
+  document.getElementById('rd-pr1k').textContent=Pr1k_dBm.toFixed(1)+' dBm';
+  document.getElementById('rd-rangeatpmin').textContent=engFmt(Rmax,'m');
+  document.getElementById('rd-lam').textContent=engFmt(lam,'m');
+  document.getElementById('rd-eirp').textContent=EIRP_dBm.toFixed(1)+' dBm';
+  document.getElementById('rd-dbeq').textContent=(10*Math.log10(Pt)+10*Math.log10(Gt)+10*Math.log10(Gr)+20*Math.log10(lam)+10*Math.log10(sig)-30*Math.log10(4*Math.PI)).toFixed(1)+' dBm·m⁴';
+});
+})();
+
+/* ── PowerCombiner (from PowerCombiner.html) ── */
+(function(){
+document.getElementById('pc-btn').addEventListener('click',function(){
+  var N=parseInt(document.getElementById('pc-n').value);
+  var P=parseFloat(document.getElementById('pc-p').value);
+  var eta=parseFloat(document.getElementById('pc-eta').value);
+  var k=parseInt(document.getElementById('pc-fail').value)||0;
+  if(isNaN(N)||isNaN(P)||isNaN(eta)||N<1||eta<=0||eta>1||k<0||k>=N) return;
+  var Peach_W=1e-3*Math.pow(10,P/10);
+  var Ptotal_ideal_W=N*Peach_W;
+  var Pout_W=Ptotal_ideal_W*eta;
+  var Pout_dBm=10*Math.log10(Pout_W/1e-3);
+  var Cgain=Pout_dBm-P;
+  var Eloss_dB=-10*Math.log10(eta);
+  var surv=N-k;
+  var Pfail_W=Pout_W*(surv/N)*(surv/N);
+  var Pfail_dBm=10*Math.log10(Pfail_W/1e-3);
+  var degrad_dB=Pout_dBm-Pfail_dBm;
+  var pct_retained=(Pfail_W/Pout_W)*100;
+  document.getElementById('pc-pout').textContent=Pout_dBm.toFixed(2)+' dBm';
+  document.getElementById('pc-pout-w').textContent=engFmt(Pout_W,'W');
+  document.getElementById('pc-cgain').textContent='+'+Cgain.toFixed(1)+' dB';
+  document.getElementById('pc-eloss').textContent=Eloss_dB.toFixed(2)+' dB';
+  document.getElementById('pc-pfail').textContent=(k>0?Pfail_dBm.toFixed(2)+' dBm':'N/A (no failures)');
+  document.getElementById('pc-degrad').textContent=(k>0?'-'+degrad_dB.toFixed(1)+' dB':'0 dB');
+  document.getElementById('pc-surv').textContent=surv+' of '+N;
+  document.getElementById('pc-pct').textContent=(k>0?pct_retained.toFixed(0)+'%':'100%');
+});
+})();
+
+/* ── BondWireVia (from BondWireVia.html) ── */
+(function(){
+document.getElementById('bw-btn').addEventListener('click',function(){
+  var l=parseFloat(document.getElementById('bw-l').value);
+  var d=parseFloat(document.getElementById('bw-d').value);
+  var h=parseFloat(document.getElementById('bw-h').value);
+  if([l,d,h].some(isNaN)||l<=0||d<=0) return;
+  var L_nH=0.2*l*(Math.log(2*l/d)-0.75);
+  var X1GHz=2*Math.PI*1e9*L_nH*1e-9;
+  var X10GHz=2*Math.PI*10e9*L_nH*1e-9;
+  document.getElementById('bw-L').textContent=L_nH.toFixed(3)+' nH';
+  document.getElementById('bw-X').textContent=X1GHz.toFixed(1)+' Ω (1 GHz)';
+  document.getElementById('bw-X10').textContent=X10GHz.toFixed(1)+' Ω (10 GHz)';
+});
+document.getElementById('via-btn').addEventListener('click',function(){
+  var h=parseFloat(document.getElementById('via-h').value);
+  var d=parseFloat(document.getElementById('via-d').value);
+  var D=parseFloat(document.getElementById('via-D').value);
+  var er=parseFloat(document.getElementById('via-er').value);
+  if([h,d,D,er].some(isNaN)||h<=0||d<=0||D<=d) return;
+  var L_nH=0.2*h*Math.log(4*h/d);
+  var C_pF=1.41*er*h/Math.log(D/d);
+  var L_H=L_nH*1e-9, C_F=C_pF*1e-12;
+  var SRF=1/(2*Math.PI*Math.sqrt(L_H*C_F))/1e9;
+  document.getElementById('via-L').textContent=L_nH.toFixed(3)+' nH';
+  document.getElementById('via-C').textContent=C_pF.toFixed(3)+' pF';
+  document.getElementById('via-srf').textContent=SRF.toFixed(2)+' GHz';
+});
+})();
+
+/* ── PiTNetwork (from PiTNetwork.html) ── */
+(function(){
+document.getElementById('pt-btn').addEventListener('click',function(){
+  var f=parseFloat(document.getElementById('pt-f').value)*parseFloat(document.getElementById('pt-fu').value);
+  var R1=parseFloat(document.getElementById('pt-r1').value);
+  var R2=parseFloat(document.getElementById('pt-r2').value);
+  var Q=parseFloat(document.getElementById('pt-q').value);
+  var topo=document.getElementById('pt-topo').value;
+  if([f,R1,R2,Q].some(isNaN)||f<=0||R1<=0||R2<=0||Q<=0) return;
+  var w=2*Math.PI*f;
+  var Rh=Math.max(R1,R2), Rl=Math.min(R1,R2);
+  var Qmin=Math.sqrt(Rh/Rl-1);
+  if(Q<=Qmin) return;
+  var Rv, Q2, E1,E2,E3, lbl1,lbl2,lbl3;
+  if(topo==='pi-lp'||topo==='pi-hp'){
+    Rv=Rh/(Q*Q+1);
+    Q2=Math.sqrt(Rl/Rv-1);
+    if(topo==='pi-lp'){
+      E1=engFmt(Q/(w*Rh),'F'); lbl1='Shunt C₁';
+      E2=engFmt(Rv*(Q+Q2)/w,'H'); lbl2='Series L';
+      E3=engFmt(Q2/(w*Rl),'F'); lbl3='Shunt C₂';
+    } else {
+      E1=engFmt(Rh/(Q*w),'H'); lbl1='Shunt L₁';
+      E2=engFmt(1/(w*Rv*(Q+Q2)),'F'); lbl2='Series C';
+      E3=engFmt(Rl/(Q2*w),'H'); lbl3='Shunt L₂';
+    }
+  } else {
+    Rv=Rh*(Q*Q+1);
+    Q2=Math.sqrt(Rv/Rl-1);
+    if(topo==='t-lp'){
+      E1=engFmt(Q*Rh/w,'H'); lbl1='Series L₁';
+      E2=engFmt((Q+Q2)/(w*Rv),'F'); lbl2='Shunt C';
+      E3=engFmt(Q2*Rl/w,'H'); lbl3='Series L₂';
+    } else {
+      E1=engFmt(1/(Q*w*Rh),'F'); lbl1='Series C₁';
+      E2=engFmt(Rv/((Q+Q2)*w),'H'); lbl2='Shunt L';
+      E3=engFmt(1/(Q2*w*Rl),'F'); lbl3='Series C₂';
+    }
+  }
+  var BW=f/Q;
+  document.getElementById('pt-e1').textContent=lbl1+': '+E1;
+  document.getElementById('pt-e2').textContent=lbl2+': '+E2;
+  document.getElementById('pt-e3').textContent=lbl3+': '+E3;
+  document.getElementById('pt-qv').textContent=Q.toFixed(3);
+  document.getElementById('pt-bw').textContent=engFmt(BW,'Hz');
+  document.getElementById('pt-rv').textContent=engFmt(Rv,'Ω');
+});
+})();
+</script>
+<!-- IIFE-wrapped .js files that define showResults() — prevents global name collision -->
+<script>
+(function(){
+/* ── AmpStability.js ── */
+document.getElementById('amp-btn').addEventListener('click', amp_calc);
+function amp_calc() {
+  var s11m=parseFloat(document.getElementById('amp-s11m').value);
+  var s11a=parseFloat(document.getElementById('amp-s11a').value)||0;
+  var s12m=parseFloat(document.getElementById('amp-s12m').value);
+  var s12a=parseFloat(document.getElementById('amp-s12a').value)||0;
+  var s21m=parseFloat(document.getElementById('amp-s21m').value);
+  var s21a=parseFloat(document.getElementById('amp-s21a').value)||0;
+  var s22m=parseFloat(document.getElementById('amp-s22m').value);
+  var s22a=parseFloat(document.getElementById('amp-s22a').value)||0;
+  if(isNaN(s11m)||isNaN(s12m)||isNaN(s21m)||isNaN(s22m)) return;
+  var d2r=Math.PI/180;
+  var S11=polar(s11m,s11a*d2r), S12=polar(s12m,s12a*d2r);
+  var S21=polar(s21m,s21a*d2r), S22=polar(s22m,s22a*d2r);
+  var Delta=sub(mul(S11,S22),mul(S12,S21));
+  var Dmag=cabs(Delta);
+  var K=(1-s11m*s11m-s22m*s22m+Dmag*Dmag)/(2*s12m*s21m);
+  var DeltaS11conj=mul(Delta,conj(S11));
+  var mu=(1-s11m*s11m)/(cabs(sub(S22,DeltaS11conj))+s12m*s21m);
+  var DeltaS22conj=mul(Delta,conj(S22));
+  var mu2=(1-s22m*s22m)/(cabs(sub(S11,DeltaS22conj))+s12m*s21m);
+  var uncond=(K>1&&Dmag<1);
+  var S21_S12=s21m/s12m;
+  var MAG_db, MSG_db=10*Math.log10(S21_S12);
+  if(uncond) MAG_db=10*Math.log10(S21_S12)+10*Math.log10(K-Math.sqrt(K*K-1));
+  var S21_db=20*Math.log10(s21m), S11_db=20*Math.log10(s11m), S22_db=20*Math.log10(s22m);
+  amp_showResults({K:K,mu:mu,mu2:mu2,Dmag:Dmag,uncond:uncond,MAG_db:MAG_db,MSG_db:MSG_db,S21_db:S21_db,S11_db:S11_db,S22_db:S22_db});
+}
+function polar(r,t){return{re:r*Math.cos(t),im:r*Math.sin(t)};}
+function mul(a,b){return{re:a.re*b.re-a.im*b.im,im:a.re*b.im+a.im*b.re};}
+function sub(a,b){return{re:a.re-b.re,im:a.im-b.im};}
+function conj(a){return{re:a.re,im:-a.im};}
+function cabs(a){return Math.sqrt(a.re*a.re+a.im*a.im);}
+function amp_showResults(r) {
+  var container=document.getElementById('amp-results');
+  container.innerHTML=''; container.style.display='grid';
+  var verdict=r.uncond?'<span>Unconditionally stable</span>':'<span>Potentially unstable</span>';
+  var card=document.createElement('div'); card.className='res-card';
+  card.innerHTML='<h4>Stability Analysis</h4>'+
+    rr2('Verdict',verdict)+
+    rr2('Rollett K-factor',r.K.toFixed(4)+(r.K>1?' > 1 ✓':' < 1'),r.uncond)+
+    rr2('|Δ| (det magnitude)',r.Dmag.toFixed(4)+(r.Dmag<1?' < 1 ✓':' ≥ 1'))+
+    rr2('µ (input stability)',r.mu.toFixed(4)+(r.mu>1?' > 1 ✓':' ≤ 1'))+
+    rr2("µ′ (output stability)",r.mu2.toFixed(4)+(r.mu2>1?' > 1 ✓':' ≤ 1'));
+  var card2=document.createElement('div'); card2.className='res-card';
+  card2.innerHTML='<h4>Gain Parameters</h4>'+
+    rr2('|S₂₁| (forward gain)',r.S21_db.toFixed(2)+' dB')+
+    rr2('|S₁₁| (input return loss)',r.S11_db.toFixed(2)+' dB')+
+    rr2('|S₂₂| (output return loss)',r.S22_db.toFixed(2)+' dB')+
+    rr2('MSG (max stable gain)',r.MSG_db.toFixed(2)+' dB')+
+    (r.uncond?rr2('MAG (max available gain)',r.MAG_db.toFixed(2)+' dB',true):rr2('MAG','Undefined'));
+  container.appendChild(card); container.appendChild(card2);
+}
+function rr2(lbl,val,hi){
+  var s=hi?' style="font-weight:700;color:#AA77FF;"':'';
+  return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';
+}
+})();
+</script>
+<script>
+(function(){
+/* ── YagiAntenna.js ── */
+var C0_yagi=2.998e8;
+document.getElementById('yagi-btn').addEventListener('click', yagi_calc);
+function yagi_calc(){
+  var fv=parseFloat(document.getElementById('yagi-f').value);
+  var fmul=parseFloat(document.getElementById('yagi-f-unit').value);
+  var nEl=parseInt(document.getElementById('yagi-n').value)||3;
+  var dv=parseFloat(document.getElementById('yagi-diam').value)||1;
+  var dmul=parseFloat(document.getElementById('yagi-diam-unit').value);
+  if(!(fv>0)) return;
+  if(nEl<2||nEl>9) return;
+  var f=fv*fmul, lam=C0_yagi/f, d=dv*dmul;
+  var lengths_tbl={2:[.505,.473],3:[.505,.473,.451],4:[.505,.472,.451,.428],5:[.505,.472,.456,.436,.430],6:[.505,.472,.456,.436,.430,.430],7:[.505,.472,.456,.436,.430,.430,.430],8:[.505,.472,.456,.436,.430,.430,.430,.430],9:[.505,.472,.456,.436,.430,.430,.430,.430,.426]};
+  var spacing_tbl={2:[.25],3:[.25,.31],4:[.25,.31,.40],5:[.25,.31,.40,.42],6:[.25,.31,.40,.42,.42],7:[.25,.31,.40,.42,.42,.42],8:[.25,.31,.40,.42,.42,.42,.42],9:[.25,.31,.40,.42,.42,.42,.42,.42]};
+  var gain_tbl={2:3.8,3:5.9,4:7.1,5:8.2,6:9.2,7:10.0,8:10.7,9:11.3};
+  var fb_tbl={2:5,3:10,4:12,5:14,6:16,7:18,8:20,9:22};
+  var lengths=lengths_tbl[nEl], spacings=spacing_tbl[nEl];
+  var elements=[];
+  elements.push({name:'Reflector',lam_len:lengths[0],len_m:lengths[0]*lam,x_m:-0.25*lam});
+  elements.push({name:'Driven',lam_len:lengths[1],len_m:lengths[1]*lam,x_m:0});
+  for(var i=2;i<nEl;i++) elements.push({name:'Director '+(i-1),lam_len:lengths[i]||0.430,len_m:(lengths[i]||0.430)*lam,x_m:spacings[i-1]*lam});
+  var boomLen=elements[elements.length-1].x_m-elements[0].x_m;
+  var gain_dbi=gain_tbl[nEl]+2.15, fb_db=fb_tbl[nEl];
+  var HPBW_H=78/Math.sqrt(Math.pow(10,gain_dbi/10)/1.64);
+  yagi_showResults({elements:elements,boomLen:boomLen,lam:lam,f:f,nEl:nEl,gain_dbi:gain_dbi,gain_dbd:gain_tbl[nEl],fb_db:fb_db,Zin:25,HPBW_H:HPBW_H});
+}
+function yagi_showResults(r){
+  var container=document.getElementById('yagi-results');
+  container.innerHTML=''; container.style.display='grid';
+  var card=document.createElement('div'); card.className='res-card';
+  card.innerHTML='<h4>'+r.nEl+'-Element Yagi</h4>'+
+    rr3('Gain',r.gain_dbi.toFixed(1)+' dBi  ('+r.gain_dbd.toFixed(1)+' dBd)',true)+
+    rr3('Front-to-back ratio',r.fb_db.toFixed(0)+' dB (approx)')+
+    rr3('HPBW (H-plane)',r.HPBW_H.toFixed(0)+'°')+
+    rr3('Boom length',engFmt(r.boomLen,'m'),true)+
+    rr3('Input impedance','~'+r.Zin+' Ω')+
+    rr3('λ',engFmt(r.lam,'m'));
+  var card2=document.createElement('div'); card2.className='res-card';
+  card2.innerHTML='<h4>Element Lengths</h4>';
+  r.elements.forEach(function(el){
+    var hi=(el.name==='Driven');
+    card2.innerHTML+='<div class="res-row"><span class="res-lbl"'+(hi?' style="color:#AA77FF;"':'')+'>'+el.name+'</span><span class="res-val">'+engFmt(el.len_m,'m')+' | '+(el.x_m>=0?'+':'')+engFmt(el.x_m,'m')+'</span></div>';
+  });
+  container.appendChild(card); container.appendChild(card2);
+}
+function rr3(lbl,val,hi){var s=hi?' style="font-weight:700;color:#AA77FF;"':'';return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';}
+})();
+</script>
+<script>
+(function(){
+/* ── HelicalAntenna.js ── */
+var C0_helix=2.998e8;
+document.getElementById('helix-btn').addEventListener('click', helix_calc);
+function helix_calc(){
+  var fv=parseFloat(document.getElementById('helix-f').value);
+  var fmul=parseFloat(document.getElementById('helix-f-unit').value);
+  var n=parseFloat(document.getElementById('helix-n').value);
+  var Dv=parseFloat(document.getElementById('helix-D').value);
+  var Dmul=parseFloat(document.getElementById('helix-D-unit').value);
+  var Sv=parseFloat(document.getElementById('helix-S').value);
+  var Smul=parseFloat(document.getElementById('helix-S-unit').value);
+  var mode=document.getElementById('helix-mode').value;
+  if(!(fv>0)) return;
+  var f=fv*fmul, lam=C0_helix/f;
+  if(mode==='design'){
+    var n_use=n||10;
+    var D_opt=lam/Math.PI, S_opt=lam/4;
+    var alpha=Math.atan(S_opt/(Math.PI*D_opt))*180/Math.PI;
+    var C=Math.PI*D_opt;
+    var Gain_db=10*Math.log10(15*n_use*(C/lam)*(C/lam)*(S_opt/lam));
+    var HPBW=52/(C/lam*Math.sqrt(n_use*S_opt/lam));
+    var Z_in=140*(C/lam);
+    var L_total=n_use*Math.sqrt(C*C+S_opt*S_opt);
+    helix_showResults({D:D_opt,S:S_opt,alpha:alpha,n:n_use,lam:lam,Gain_db:Gain_db,HPBW:HPBW,Z_in:Z_in,L_total:L_total,f:f,mode:'design'});
+  } else {
+    if(!(n>0)||!(Dv>0)||!(Sv>0)) return;
+    var D=Dv*Dmul, S=Sv*Smul, C2=Math.PI*D;
+    var alpha2=Math.atan(S/C2)*180/Math.PI;
+    var ratio=C2/lam;
+    var Gain_db2=10*Math.log10(15*n*ratio*ratio*S/lam);
+    var HPBW2=52/(ratio*Math.sqrt(n*S/lam));
+    var Z_in2=140*ratio;
+    var L_total2=n*Math.sqrt(C2*C2+S*S);
+    helix_showResults({D:D,S:S,alpha:alpha2,n:n,lam:lam,Gain_db:Gain_db2,HPBW:HPBW2,Z_in:Z_in2,L_total:L_total2,f:f,mode:'analyze'});
+  }
+}
+function helix_showResults(r){
+  var container=document.getElementById('helix-results');
+  container.innerHTML=''; container.style.display='grid';
+  var card=document.createElement('div'); card.className='res-card';
+  card.innerHTML='<h4>Axial-Mode Helix</h4>'+
+    rr4('Frequency',engFmt(r.f,'Hz'))+
+    rr4('Free-space wavelength, λ',engFmt(r.lam,'m'))+
+    rr4('Helix diameter, D',engFmt(r.D,'m')+'  (C/λ = '+(Math.PI*r.D/r.lam).toFixed(3)+')')+
+    rr4('Turn spacing, S',engFmt(r.S,'m')+'  (S/λ = '+(r.S/r.lam).toFixed(3)+')')+
+    rr4('Pitch angle, α',r.alpha.toFixed(1)+'°  (optimal ≈ 14°)')+
+    rr4('Number of turns, N',r.n.toString())+
+    rr4('Total wire length',engFmt(r.L_total,'m'));
+  var card2=document.createElement('div'); card2.className='res-card';
+  card2.innerHTML='<h4>Performance</h4>'+
+    rr4('Directivity/Gain',r.Gain_db.toFixed(1)+' dBi',true)+
+    rr4('Half-power beamwidth',r.HPBW.toFixed(1)+'°',true)+
+    rr4('Input impedance',r.Z_in.toFixed(0)+' Ω');
+  container.appendChild(card); container.appendChild(card2);
+}
+function rr4(lbl,val,hi){var s=hi?' style="font-weight:700;color:#AA77FF;"':'';return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';}
+})();
+</script>
+<script>
+(function(){
+/* ── CoupledResonators.js ── */
+document.getElementById('cr-btn').addEventListener('click', cr_calc);
+function cr_calc(){
+  var Lv=parseFloat(document.getElementById('cr-L').value);
+  var Lmul=parseFloat(document.getElementById('cr-L-unit').value);
+  var Cv=parseFloat(document.getElementById('cr-C').value);
+  var Cmul=parseFloat(document.getElementById('cr-C-unit').value);
+  var Rv=parseFloat(document.getElementById('cr-R').value)||0;
+  var kv=parseFloat(document.getElementById('cr-k').value);
+  var Mv=parseFloat(document.getElementById('cr-M').value);
+  var Mv_u=parseFloat(document.getElementById('cr-M-unit').value);
+  if(!(Lv>0)||!(Cv>0)) return;
+  var L=Lv*Lmul, C=Cv*Cmul, R=Rv;
+  var f0=1/(2*Math.PI*Math.sqrt(L*C));
+  var w0=2*Math.PI*f0;
+  var Q=(R>0)?w0*L/R:Infinity;
+  var k;
+  if(!isNaN(kv)&&kv>0) k=kv;
+  else if(!isNaN(Mv)&&Mv>0) k=Mv*Mv_u/L;
+  else return;
+  if(k<=0||k>=1) return;
+  var f_plus=f0/Math.sqrt(1-k), f_minus=f0/Math.sqrt(1+k);
+  var BW=k*f0, Q_loaded=1/k;
+  var k_crit=(Q<Infinity)?1/Q:0;
+  var coupling_regime=(k<k_crit)?'Under-coupled':(k>k_crit?'Over-coupled':'Critically coupled');
+  cr_showResults({f0:f0,f_plus:f_plus,f_minus:f_minus,BW:BW,Q:Q,Q_loaded:Q_loaded,k:k,k_crit:k_crit,coupling_regime:coupling_regime});
+}
+function cr_showResults(r){
+  var container=document.getElementById('cr-results');
+  container.innerHTML=''; container.style.display='grid';
+  var QStr=isFinite(r.Q)?r.Q.toFixed(1):'∞ (lossless)';
+  var card=document.createElement('div'); card.className='res-card';
+  card.innerHTML='<h4>Coupled Resonator Response</h4>'+
+    rr5('Uncoupled resonant frequency, f₀',engFmt(r.f0,'Hz'))+
+    rr5('Unloaded Q (single resonator)',QStr)+
+    rr5('Coupling coefficient, k',r.k.toFixed(4))+
+    rr5('Critical coupling, k_crit',isFinite(r.k_crit)?r.k_crit.toFixed(4):'N/A')+
+    rr5('Coupling regime',r.coupling_regime);
+  var card2=document.createElement('div'); card2.className='res-card';
+  card2.innerHTML='<h4>Frequency Splitting</h4>'+
+    rr5('Even mode (lower), f₋',engFmt(r.f_minus,'Hz'),true)+
+    rr5('Odd mode (upper), f₊',engFmt(r.f_plus,'Hz'),true)+
+    rr5('Mode splitting, Δf',engFmt(r.f_plus-r.f_minus,'Hz'))+
+    rr5('Passband bandwidth',engFmt(r.BW,'Hz')+'  (= k·f₀)',true)+
+    rr5('Loaded Q',r.Q_loaded.toFixed(1)+'  (= 1/k)');
+  container.appendChild(card); container.appendChild(card2);
+}
+function rr5(lbl,val,hi){var s=hi?' style="font-weight:700;color:#AA77FF;"':'';return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';}
+})();
+</script>
+<script>
+(function(){
+/* ── PLLFilter.js ── */
+document.getElementById('pll-btn').addEventListener('click', pll_calc);
+function pll_calc(){
+  var Kd=parseFloat(document.getElementById('pll-kd').value);
+  var Ko=parseFloat(document.getElementById('pll-ko').value);
+  var Ko_u=parseFloat(document.getElementById('pll-ko-unit').value);
+  var N=parseFloat(document.getElementById('pll-n').value);
+  var bw=parseFloat(document.getElementById('pll-bw').value);
+  var bw_u=parseFloat(document.getElementById('pll-bw-unit').value);
+  var pm=parseFloat(document.getElementById('pll-pm').value);
+  if(!(Kd>0)||!(Ko>0)||!(N>0)||!(bw>0)||!(pm>0&&pm<90)) return;
+  var Kvco=Ko*Ko_u, wc=2*Math.PI*bw*bw_u, phi=pm*Math.PI/180;
+  var sinPhi=Math.sin(phi);
+  var T2=sinPhi/(wc*(1-sinPhi));
+  if(T2<=0) T2=1/wc;
+  var T1=1/(wc*wc*T2);
+  var C1=Kd*Kvco/(N*wc*wc*T1)*Math.sqrt(1+wc*wc*T2*T2);
+  var R=T2/C1;
+  var C2=0.1*C1, T3=R*C2;
+  pll_showResults({T1:T1,T2:T2,T3:T3,R:R,C1:C1,C2:C2,wc:wc,pm:pm,N:N,Kd:Kd,Kvco:Kvco});
+}
+function pll_showResults(r){
+  var container=document.getElementById('pll-results');
+  container.innerHTML=''; container.style.display='grid';
+  var card=document.createElement('div'); card.className='res-card';
+  card.innerHTML='<h4>Loop Filter Components</h4>'+
+    rr6('Series resistor, R',engFmt(r.R,'Ω'),true)+
+    rr6('Lead capacitor, C₁',engFmt(r.C1,'F'),true)+
+    rr6('Lag capacitor, C₂',engFmt(r.C2,'F'));
+  var card2=document.createElement('div'); card2.className='res-card';
+  card2.innerHTML='<h4>Design Verification</h4>'+
+    rr6('Zero frequency, f_z',engFmt(1/(2*Math.PI*r.T2),'Hz'))+
+    rr6('Pole frequency, f_p1',engFmt(1/(2*Math.PI*r.T1),'Hz'))+
+    rr6('3rd pole, f_p2',engFmt(1/(2*Math.PI*r.T3),'Hz'))+
+    rr6('Loop bandwidth',engFmt(r.wc/(2*Math.PI),'Hz'))+
+    rr6('Phase margin (design target)',r.pm.toFixed(1)+'°')+
+    rr6('Open-loop unity-gain at BW','By design ✓');
+  container.appendChild(card); container.appendChild(card2);
+}
+function rr6(lbl,val,hi){var s=hi?' style="font-weight:700;color:#AA77FF;"':'';return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';}
+})();
+</script>
+<script>
+(function(){
+/* ── SteppedImpedanceLPF.js ── */
+var C0_si=2.998e8;
+document.getElementById('silpf-btn').addEventListener('click', silpf_calc);
+function silpf_calc(){
+  var n=parseInt(document.getElementById('silpf-n').value)||3;
+  var fc_v=parseFloat(document.getElementById('silpf-fc').value);
+  var fc_mul=parseFloat(document.getElementById('silpf-fc-unit').value);
+  var Zh=parseFloat(document.getElementById('silpf-zh').value)||120;
+  var Zl=parseFloat(document.getElementById('silpf-zl').value)||20;
+  var Z0=parseFloat(document.getElementById('silpf-z0').value)||50;
+  var resp=document.getElementById('silpf-resp').value;
+  var er=parseFloat(document.getElementById('silpf-er').value)||4.4;
+  var h=parseFloat(document.getElementById('silpf-h').value)||1;
+  if(!(fc_v>0)||n<1||n>9||Zh<=Z0||Zl>=Z0) return;
+  var fc=fc_v*fc_mul;
+  var g=si_prototype(n,resp);
+  if(!g) return;
+  var lam_sub=C0_si/(fc*Math.sqrt(er));
+  var sections=[];
+  for(var i=0;i<n;i++){
+    var gk=g[i+1], isHigh=(i%2===0), Zk=isHigh?Zh:Zl;
+    var beta_l_rad=isHigh?(gk*Z0/Zh):(gk*Zl/Z0);
+    var beta_l_deg=beta_l_rad*180/Math.PI;
+    var length_m=(beta_l_rad/(2*Math.PI))*lam_sub;
+    var wh=si_zToW(Zk,er);
+    sections.push({idx:i+1,type:isHigh?'High-Z (series L)':'Low-Z (shunt C)',gk:gk,Zk:Zk,beta_l_deg:beta_l_deg,length_m:length_m,wh:wh});
+  }
+  si_showResults(sections,fc,Z0,Zh,Zl,er,h,resp,n);
+}
+function si_prototype(n,resp){
+  var butter={1:[1,2,1],2:[1,1.414,1.414,1],3:[1,1,2,1,1],4:[1,0.765,1.848,1.848,0.765,1],5:[1,0.618,1.618,2,1.618,0.618,1]};
+  var cheby={1:[1,0.6986,1],2:[1,1.4029,0.7071,1.9841],3:[1,1.5963,1.0967,1.5963,1],4:[1,1.6703,1.1926,2.3661,0.8419,1.9841],5:[1,1.7058,1.2296,2.5408,1.2296,1.7058,1]};
+  var tbl=(resp==='cheby')?cheby:butter;
+  if(!tbl[n]){
+    // fallback for n>5: use butter for simplicity
+    var fullButter={6:[1,0.518,1.414,1.932,1.932,1.414,0.518,1],7:[1,0.445,1.247,1.802,2,1.802,1.247,0.445,1],8:[1,0.390,1.111,1.663,1.962,1.962,1.663,1.111,0.390,1],9:[1,0.347,1,1.532,1.879,2,1.879,1.532,1,0.347,1]};
+    return fullButter[n]||null;
+  }
+  return tbl[n];
+}
+function si_zToW(Z,er){
+  var A=Z/60*Math.sqrt((er+1)/2)+(er-1)/(er+1)*(0.23+0.11/er);
+  var wh_n=8*Math.exp(A)/(Math.exp(2*A)-2);
+  var B=377*Math.PI/(2*Z*Math.sqrt(er));
+  var wh_w=2/Math.PI*(B-1-Math.log(2*B-1)+(er-1)/(2*er)*(Math.log(B-1)+0.39-0.61/er));
+  return (wh_n<2)?wh_n:wh_w;
+}
+function si_showResults(sections,fc,Z0,Zh,Zl,er,h,resp,n){
+  var container=document.getElementById('silpf-results');
+  container.innerHTML=''; container.style.display='grid';
+  var totalLen=sections.reduce(function(a,s){return a+s.length_m;},0);
+  var sum=document.createElement('div'); sum.className='res-card';
+  sum.innerHTML='<h4>Filter Summary</h4>'+
+    rr7('Response',resp==='cheby'?'Chebyshev 0.5 dB ripple':'Butterworth')+
+    rr7('Order',n)+
+    rr7('Cutoff f_c',engFmt(fc,'Hz'))+
+    rr7('High-Z lines',Zh.toFixed(0)+' Ω')+
+    rr7('Low-Z lines',Zl.toFixed(0)+' Ω')+
+    rr7('Total length',engFmt(totalLen,'m'),true);
+  container.appendChild(sum);
+  var card=document.createElement('div'); card.className='res-card';
+  card.innerHTML='<h4>Section Dimensions</h4>';
+  sections.forEach(function(s){
+    var w_mm=s.wh*h;
+    card.innerHTML+='<div class="res-row"><span class="res-lbl">'+s.idx+': '+s.type+'</span><span class="res-val">'+s.Zk.toFixed(0)+' Ω | '+s.beta_l_deg.toFixed(1)+'° | '+engFmt(s.length_m,'m')+' | w='+w_mm.toFixed(2)+'mm</span></div>';
+  });
+  container.appendChild(card);
+}
+function rr7(lbl,val,hi){var s=hi?' style="font-weight:700;color:#AA77FF;"':'';return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';}
+})();
+</script>
 <!-- LC.js and Waveguide.js both define showResults(); wrap each in an IIFE to prevent collision -->
 <script>
 (function() {
@@ -878,6 +1553,215 @@ const TESTS = [
     button:  'wg-btn',
     expect: {
       'wg-results@0': { label: 'fc10 (GHz)', value: 6.559, tol: 0.01 }
+    }
+  },
+
+  // ── DiffPair ─────────────────────────────────────────────────
+  {
+    group: 'Diff Pair',
+    name: 'w=0.2mm, s=0.2mm, h=0.2mm, t=0.035mm, εr=4.4',
+    ref: 'Hammerstad-Jensen: Z₀≈65.2Ω, Q=0.347·exp(−2.655)=0.024; Zodd≈63.6Ω, Zdiff=2·Zodd≈127.3Ω',
+    inputs:  { 'dp2-w': '0.2', 'dp2-s': '0.2', 'dp2-h': '0.2', 'dp2-t': '0.035', 'dp2-er': '4.4' },
+    button:  'dp2-btn',
+    expect: {
+      'dp2-zdiff': { label: 'Zdiff (Ω)', value: 127.3, tol: 2.0 },
+      'dp2-zodd':  { label: 'Zodd (Ω)',  value: 63.6,  tol: 1.0 }
+    }
+  },
+
+  // ── Wilkinson Divider ─────────────────────────────────────────
+  {
+    group: 'Wilkinson Divider',
+    name: 'Equal split (K²=1, Z₀=50Ω, f=1GHz, εr=1)',
+    ref: 'Z1=Z2=Z₀·√2=70.711Ω; Riso=Z₀·(K+1/K)=2·Z₀=100Ω',
+    inputs:  { 'wk-z0': '50', 'wk-k2': '1', 'wk-f': '1', 'wk-er': '1' },
+    selects: { 'wk-fu': '1e9' },
+    button:  'wk-btn',
+    expect: {
+      'wk-z1': { label: 'Z1 (Ω)',  value: 70.711, tol: 0.01 },
+      'wk-r':  { label: 'Riso (Ω)', value: 100.0,  tol: 0.01 }
+    }
+  },
+
+  // ── Radar Range Equation ─────────────────────────────────────
+  {
+    group: 'Radar Range',
+    name: 'Pt=1 kW, Gt=Gr=10 dB, σ=1 m², f=1 GHz',
+    ref: 'EIRP=60+10=70 dBm; Pr@1km=Pt·Gt·Gr·λ²·σ/(4π)³/R⁴=−83.4 dBm',
+    inputs:  { 'rd-pt': '1000', 'rd-gt': '10', 'rd-gr': '10', 'rd-sigma': '1', 'rd-f': '1', 'rd-pmin': '-90' },
+    selects: { 'rd-fu': '1e9' },
+    button:  'rd-btn',
+    expect: {
+      'rd-eirp':  { label: 'EIRP (dBm)',      value:  70.0,  tol: 0.1 },
+      'rd-pr1k':  { label: 'Pr @ 1km (dBm)',  value: -83.4,  tol: 0.2 }
+    }
+  },
+
+  // ── Power Combiner ───────────────────────────────────────────
+  {
+    group: 'Power Combiner',
+    name: 'N=4 sources @ 20 dBm each, η=1 (lossless)',
+    ref: 'Pout=N·Peach·η=4×0.1W=0.4W=26.02dBm; combining gain=6.02dB=10·log10(N)',
+    inputs:  { 'pc-n': '4', 'pc-p': '20', 'pc-eta': '1', 'pc-fail': '0' },
+    button:  'pc-btn',
+    expect: {
+      'pc-pout':  { label: 'Pout (dBm)',    value: 26.02, tol: 0.05 },
+      'pc-cgain': { label: 'Comb gain (dB)', value:  6.0,  tol: 0.1  }
+    }
+  },
+
+  // ── Bond Wire Inductance ─────────────────────────────────────
+  {
+    group: 'Bond Wire / Via',
+    name: 'Bond wire: l=1.5mm, d=0.025mm (25µm)',
+    ref: 'Greenhouse: L=0.2l·(ln(2l/d)−0.75)=0.3·(ln(120)−0.75)=0.3·4.038=1.211nH',
+    inputs:  { 'bw-l': '1.5', 'bw-d': '0.025', 'bw-h': '0.1' },
+    button:  'bw-btn',
+    expect: {
+      'bw-L': { label: 'L (nH)', value: 1.211, tol: 0.005 }
+    }
+  },
+
+  // ── Via Inductance / Capacitance ─────────────────────────────
+  {
+    group: 'Bond Wire / Via',
+    name: 'Via: h=1.6mm, d=0.3mm, D=0.6mm, εr=4.4',
+    ref: 'L=0.2h·ln(4h/d)=0.32·ln(21.33)=0.979nH; C=1.41·εr·h/ln(D/d)=9.93/ln(2)=14.32pF',
+    inputs:  { 'via-h': '1.6', 'via-d': '0.3', 'via-D': '0.6', 'via-er': '4.4' },
+    button:  'via-btn',
+    expect: {
+      'via-L': { label: 'L (nH)', value: 0.979, tol: 0.005 },
+      'via-C': { label: 'C (pF)', value: 14.32, tol: 0.05  }
+    }
+  },
+
+  // ── Pi/T Matching Network ─────────────────────────────────────
+  {
+    group: 'Pi/T Network',
+    name: 'Pi LP: R1=50Ω, R2=200Ω, Q=5, f=100MHz',
+    ref: 'Qmin=√3=1.73; Rv=Rh/(Q²+1)=200/26=7.692Ω; Q2=√(Rl/Rv−1)=√5.5=2.345',
+    inputs:  { 'pt-f': '100', 'pt-r1': '50', 'pt-r2': '200', 'pt-q': '5' },
+    selects: { 'pt-fu': '1e6', 'pt-topo': 'pi-lp' },
+    button:  'pt-btn',
+    expect: {
+      'pt-qv': { label: 'Q',       value: 5.000, tol: 0.001 },
+      'pt-rv': { label: 'Rv (Ω)',  value: 7.692, tol: 0.005 }
+    }
+  },
+
+  // ── LC Balun ─────────────────────────────────────────────────
+  {
+    group: 'LC Balun',
+    name: 'Lattice BALUN: f=100MHz, Zu=50Ω, Zb=200Ω',
+    ref: 'Zm=√(50·200)=100; L=Zm/ω=100/(2π·100e6)=159.15nH; Q=√(ratio/(ratio−1))=√(4/3)=1.155',
+    inputs:  { 'bl-f': '100', 'bl-zu': '50', 'bl-zb': '200' },
+    selects: { 'bl-fu': '1e6', 'bl-topo': 'lattice' },
+    button:  'bl-btn',
+    expect: {
+      'bl-r1': { label: 'L (nH)',   value: 159.15, tol: 0.1  },
+      'bl-Q':  { label: 'Q factor', value: 1.155,  tol: 0.002 }
+    }
+  },
+
+  // ── Amplifier Stability ──────────────────────────────────────
+  {
+    group: 'Amp Stability',
+    name: 'AT-41511 @ 2GHz: |S11|=0.38∠−155°, |S12|=0.09∠32°, |S21|=3.17∠68°, |S22|=0.47∠−48°',
+    ref: 'Pozar-style: Δ=S11·S22−S12·S21; K=(1−|S11|²−|S22|²+|Δ|²)/(2|S12||S21|)≈1.214; MAG≈12.68dB (unconditionally stable)',
+    inputs: {
+      'amp-s11m': '0.38', 'amp-s11a': '-155',
+      'amp-s12m': '0.09', 'amp-s12a': '32',
+      'amp-s21m': '3.17', 'amp-s21a': '68',
+      'amp-s22m': '0.47', 'amp-s22a': '-48'
+    },
+    button: 'amp-btn',
+    expect: {
+      'amp-results@1': { label: 'K-factor', value: 1.2136, tol: 0.005 },
+      'amp-results@9': { label: 'MAG (dB)', value: 12.68,  tol: 0.1   }
+    }
+  },
+
+  // ── Directional Coupler ──────────────────────────────────────
+  {
+    group: 'Directional Coupler',
+    name: 'Coupled-line: C=10dB, Z₀=50Ω, f=1GHz',
+    ref: 'C_lin=0.31623; Ze=50√((1+C)/(1−C))=69.37Ω; Zo=50√((1−C)/(1+C))=36.04Ω',
+    inputs:  { 'coup-f': '1', 'coup-z0': '50', 'coup-C': '10' },
+    selects: { 'coup-type': 'coupled', 'coup-f-unit': '1e9' },
+    button:  'coup-btn',
+    expect: {
+      'coup-results@1': { label: 'Ze (Ω)', value: 69.37, tol: 0.05 },
+      'coup-results@2': { label: 'Zo (Ω)', value: 36.04, tol: 0.05 }
+    }
+  },
+
+  // ── Coupled Resonators ───────────────────────────────────────
+  {
+    group: 'Coupled Resonators',
+    name: 'L=1µH, C=250pF, k=0.05, R=0 (lossless)',
+    ref: 'f₀=1/(2π√LC)=10.066MHz; Q_loaded=1/k=20; f±=f₀/√(1∓k)',
+    inputs:  { 'cr-L': '1', 'cr-C': '250', 'cr-R': '0', 'cr-k': '0.05', 'cr-M': '' },
+    selects: { 'cr-L-unit': '1e-6', 'cr-C-unit': '1e-12' },
+    button:  'cr-btn',
+    expect: {
+      'cr-results@0': { label: 'f₀ (MHz)',    value: 10.066, tol: 0.01 },
+      'cr-results@9': { label: 'Q_loaded',    value: 20.0,   tol: 0.1  }
+    }
+  },
+
+  // ── Yagi-Uda Antenna ─────────────────────────────────────────
+  {
+    group: 'Yagi Antenna',
+    name: '3-element Yagi at 144 MHz, 10mm elements',
+    ref: 'Viezbicke table: gain_dbd=5.9dB → gain_dbi=5.9+2.15=8.05dBi; boomLen=0.56λ≈1.166m',
+    inputs:  { 'yagi-f': '144', 'yagi-n': '3', 'yagi-diam': '10' },
+    selects: { 'yagi-f-unit': '1e6', 'yagi-diam-unit': '1e-3' },
+    button:  'yagi-btn',
+    expect: {
+      'yagi-results@0': { label: 'Gain (dBi)', value: 8.05,  tol: 0.3  },
+      'yagi-results@3': { label: 'Boom (m)',   value: 1.166, tol: 0.01 }
+    }
+  },
+
+  // ── Helical Antenna (Design mode) ────────────────────────────
+  {
+    group: 'Helical Antenna',
+    name: 'Design mode: f=2.45GHz, N=10 turns',
+    ref: 'Kraus axial-mode: D_opt=λ/π, S_opt=λ/4, C/λ=1; G=10·log10(15·N·(C/λ)²·S/λ)=15.7dBi; HPBW=52°/√(N·S/λ)=32.9°',
+    inputs:  { 'helix-f': '2.45', 'helix-n': '10' },
+    selects: { 'helix-f-unit': '1e9', 'helix-mode': 'design' },
+    button:  'helix-btn',
+    expect: {
+      'helix-results@7': { label: 'Gain (dBi)', value: 15.7, tol: 0.1 },
+      'helix-results@8': { label: 'HPBW (°)',   value: 32.9, tol: 0.5 }
+    }
+  },
+
+  // ── PLL Loop Filter ──────────────────────────────────────────
+  {
+    group: 'PLL Loop Filter',
+    name: 'Kd=1V/rad, Ko=10MHz/V, N=100, BW=100kHz, PM=45°',
+    ref: 'Type-2 3rd-order: wc=2π·100kHz; loop BW output should echo 100kHz; PM output echoes 45°',
+    inputs:  { 'pll-kd': '1', 'pll-ko': '10', 'pll-n': '100', 'pll-bw': '100', 'pll-pm': '45' },
+    selects: { 'pll-ko-unit': '6283185', 'pll-bw-unit': '1e3' },
+    button:  'pll-btn',
+    expect: {
+      'pll-results@6': { label: 'Loop BW (kHz)', value: 100.0, tol: 0.5 },
+      'pll-results@7': { label: 'Phase margin °', value: 45.0,  tol: 0.1 }
+    }
+  },
+
+  // ── Stepped Impedance LPF ────────────────────────────────────
+  {
+    group: 'Stepped Impedance LPF',
+    name: 'n=3 Butterworth, fc=1GHz, Zh=120Ω, Zl=20Ω, Z0=50Ω, εr=4.4',
+    ref: 'g=[1,2,1]; β·l|H=Z0/Zh=0.4167rad; β·l|L=2·Zl/Z0=0.8rad; totalLen≈37.1mm',
+    inputs:  { 'silpf-n': '3', 'silpf-fc': '1', 'silpf-zh': '120', 'silpf-zl': '20', 'silpf-z0': '50', 'silpf-er': '4.4', 'silpf-h': '1' },
+    selects: { 'silpf-fc-unit': '1e9', 'silpf-resp': 'butter' },
+    button:  'silpf-btn',
+    expect: {
+      'silpf-results@1': { label: 'Order',         value: 3.0,   tol: 0.1 },
+      'silpf-results@5': { label: 'Total len (mm)', value: 37.15, tol: 0.5 }
     }
   }
 ];
