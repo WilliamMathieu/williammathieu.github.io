@@ -49,17 +49,23 @@
      Must appear BEFORE the <script src> imports below.
      ═══════════════════════════════════════════════════════════════ -->
 <div id="test-dom">
+  <!-- Shared IDs used by multiple calculators -->
+  <span id="error"></span>
+  <div id="tool-diagram"></div>
+
   <!-- Microstrip -->
   <input id="ms-h"><input id="ms-w"><input id="ms-t"><input id="ms-er">
   <input id="ms-z0"><input id="ms-h2"><input id="ms-er2">
   <button id="ms-btn1"></button><button id="ms-btn2"></button>
   <span id="ms-z0-out"></span><span id="ms-eeff-out"></span><span id="ms-vp-out"></span>
   <span id="ms-err1"></span><span id="ms-w-out"></span><span id="ms-err2"></span>
+
   <!-- Coaxial -->
   <input id="cx-d"><input id="cx-D"><input id="cx-er">
   <button id="cx-btn"></button>
   <span id="cx-z0"></span><span id="cx-C"></span><span id="cx-L"></span>
   <span id="cx-vp"></span><span id="cx-fc"></span>
+
   <!-- Wavelength -->
   <input id="wl-f"><input id="wl-er">
   <select id="wl-fu">
@@ -69,6 +75,7 @@
   </select>
   <button id="wl-btn"></button>
   <span id="wl-lam"></span><span id="wl-half"></span><span id="wl-qtr"></span>
+
   <!-- SkinDepth -->
   <input id="sd-f"><input id="sd-sigma" disabled>
   <select id="sd-fu">
@@ -86,6 +93,7 @@
   </select>
   <button id="sd-btn"></button>
   <span id="sd-m"></span><span id="sd-um"></span>
+
   <!-- CPW -->
   <input id="cpw-w"><input id="cpw-s"><input id="cpw-h"><input id="cpw-er">
   <select id="cpw-bg">
@@ -95,9 +103,169 @@
   <button id="cpw-btn"></button>
   <span id="cpw-z0"></span><span id="cpw-eeff"></span>
   <span id="cpw-vp"></span><span id="cpw-lam"></span>
-  <!-- Shared IDs used by multiple calculators -->
-  <span id="error"></span>
-  <div id="tool-diagram"></div>
+
+  <!-- QuarterWave -->
+  <input id="qw-z1"><input id="qw-z2"><input id="qw-f"><input id="qw-er">
+  <select id="qw-fu">
+    <option value="1e3">kHz</option>
+    <option value="1e6">MHz</option>
+    <option value="1e9">GHz</option>
+  </select>
+  <button id="qw-btn"></button>
+  <span id="qw-zt"></span><span id="qw-len"></span>
+
+  <!-- Dipole -->
+  <input id="dp-f"><input id="dp-k">
+  <select id="dp-fu">
+    <option value="1e3">kHz</option>
+    <option value="1e6">MHz</option>
+    <option value="1e9">GHz</option>
+  </select>
+  <button id="dp-btn"></button>
+  <span id="dp-lam"></span><span id="dp-half"></span><span id="dp-arm"></span><span id="dp-mono"></span>
+
+  <!-- StubCalc -->
+  <input id="st-f"><input id="st-z0"><input id="st-B">
+  <select id="st-fu">
+    <option value="1e3">kHz</option>
+    <option value="1e6">MHz</option>
+    <option value="1e9">GHz</option>
+  </select>
+  <select id="st-type">
+    <option value="short">Short</option>
+    <option value="open">Open</option>
+  </select>
+  <button id="st-btn"></button>
+  <span id="st-el"></span><span id="st-pl"></span><span id="st-lam4"></span>
+
+  <!-- BandpassCalc -->
+  <input id="bp-L"><input id="bp-C"><input id="bp-R">
+  <select id="bp-Lu">
+    <option value="1e-6">µH</option>
+    <option value="1e-9">nH</option>
+    <option value="1e-12">pH</option>
+  </select>
+  <select id="bp-Cu">
+    <option value="1e-6">µF</option>
+    <option value="1e-9">nF</option>
+    <option value="1e-12">pF</option>
+  </select>
+  <select id="bp-config">
+    <option value="series">Series RLC</option>
+    <option value="parallel">Parallel RLC</option>
+  </select>
+  <button id="bp-btn"></button>
+  <span id="bp-f0"></span><span id="bp-bw"></span><span id="bp-Q"></span>
+  <span id="bp-f1"></span><span id="bp-f2"></span>
+
+  <!-- LNetwork -->
+  <input id="ln-f"><input id="ln-rs"><input id="ln-rl">
+  <select id="ln-fu">
+    <option value="1e3">kHz</option>
+    <option value="1e6">MHz</option>
+    <option value="1e9">GHz</option>
+  </select>
+  <button id="ln-btn"></button>
+  <span id="ln-Q"></span><span id="ln-C1"></span><span id="ln-L1"></span>
+  <span id="ln-C2"></span><span id="ln-L2"></span>
+
+  <!-- Friis -->
+  <input id="fr-pt"><input id="fr-gt"><input id="fr-gr"><input id="fr-d"><input id="fr-f">
+  <select id="fr-fu">
+    <option value="1e3">kHz</option>
+    <option value="1e6">MHz</option>
+    <option value="1e9">GHz</option>
+  </select>
+  <button id="fr-btn"></button>
+  <span id="fr-fspl"></span><span id="fr-pr-dbm"></span><span id="fr-pr-w"></span>
+
+  <!-- PatchAntenna -->
+  <input id="pa-f"><input id="pa-er"><input id="pa-h">
+  <select id="pa-fu">
+    <option value="1e3">kHz</option>
+    <option value="1e6">MHz</option>
+    <option value="1e9">GHz</option>
+  </select>
+  <button id="pa-btn"></button>
+  <span id="pa-W"></span><span id="pa-L"></span><span id="pa-eeff"></span><span id="pa-dL"></span>
+
+  <!-- NoiseFigure (nfBuild() called at script load — nf-stages must exist) -->
+  <input id="nf-n">
+  <div id="nf-stages"></div>
+  <span id="nf-nf"></span><span id="nf-gain"></span>
+
+  <!-- dBmConverter -->
+  <input id="v-dbm"><input id="v-watt">
+  <select id="v-wattu">
+    <option value="1">W</option>
+    <option value="1e-3">mW</option>
+    <option value="1e-6">µW</option>
+  </select>
+  <input id="v-dbpow"><input id="v-ratiopow">
+  <input id="v-dbamp"><input id="v-ratioamp">
+  <span id="out-w"></span><span id="out-mw"></span><span id="out-uw"></span>
+  <span id="out-dbm"></span><span id="out-dbw"></span>
+  <span id="out-pow-lin"></span><span id="out-pow-db"></span>
+  <span id="out-amp-lin"></span><span id="out-amp-db"></span>
+
+  <!-- VSWRConverter (inline JS below) -->
+  <input id="v-vswr"><input id="v-gamma"><input id="v-rl"><input id="v-ml">
+  <span id="ro-vswr"></span><span id="ro-gamma"></span><span id="ro-rl"></span>
+  <span id="ro-ml"></span><span id="ro-tx"></span>
+
+  <!-- Stripline (inline JS below) -->
+  <input id="sl-w"><input id="sl-b"><input id="sl-t"><input id="sl-er">
+  <button id="sl-btn"></button>
+  <span id="sl-z0"></span><span id="sl-vp"></span><span id="sl-c"></span><span id="sl-l"></span>
+
+  <!-- IP3Calc (inline JS below) -->
+  <input id="ip-iip3"><input id="ip-pin"><input id="ip-gain">
+  <button id="ip-btn"></button>
+  <span id="ip-pout"></span><span id="ip-oip3"></span><span id="ip-im3"></span>
+  <span id="ip-imd"></span><span id="ip-headroom"></span><span id="ip-oheadroom"></span><span id="ip-p1db"></span>
+
+  <!-- LC (uses bare IDs: L, C, f) -->
+  <input id="L"><input id="C"><input id="f">
+  <select id="L-unit">
+    <option value="1">µH</option>
+    <option value="2">nH</option>
+    <option value="3">pH</option>
+  </select>
+  <select id="C-unit">
+    <option value="1">µF</option>
+    <option value="2">nF</option>
+    <option value="3">pF</option>
+  </select>
+  <select id="f-unit">
+    <option value="0">kHz</option>
+    <option value="1">MHz</option>
+    <option value="2">GHz</option>
+    <option value="3">THz</option>
+  </select>
+  <button id="lc-btn"></button>
+  <div id="lc-results"></div>
+  <div id="lc-error"></div>
+
+  <!-- Waveguide -->
+  <input id="wg-a"><input id="wg-b"><input id="wg-f"><input id="wg-er">
+  <input id="wg-sigma"><input id="wg-tanD">
+  <select id="wg-a-unit">
+    <option value="1e-3">mm</option>
+    <option value="1e-2">cm</option>
+    <option value="1">m</option>
+  </select>
+  <select id="wg-b-unit">
+    <option value="1e-3">mm</option>
+    <option value="1e-2">cm</option>
+    <option value="1">m</option>
+  </select>
+  <select id="wg-f-unit">
+    <option value="1e6">MHz</option>
+    <option value="1e9">GHz</option>
+  </select>
+  <button id="wg-btn"></button>
+  <div id="wg-results"></div>
+  <div id="wg-error"></div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -109,6 +277,263 @@
 <script src="Wavelength.js"></script>
 <script src="SkinDepth.js"></script>
 <script src="CPW.js"></script>
+<script src="QuarterWave.js"></script>
+<script src="Dipole.js"></script>
+<script src="StubCalc.js"></script>
+<script src="BandpassCalc.js"></script>
+<script src="LNetwork.js"></script>
+<script src="Friis.js"></script>
+<script src="PatchAntenna.js"></script>
+<script src="NoiseFigure.js"></script>
+<script src="dBmConverter.js"></script>
+<!-- LC.js and Waveguide.js both define showResults(); wrap each in an IIFE to prevent collision -->
+<script>
+(function() {
+  document.getElementById('lc-btn').addEventListener('click', lc_solve);
+  var Lmul_map = {'1':1e-6,'2':1e-9,'3':1e-12};
+  var Cmul_map = {'1':1e-6,'2':1e-9,'3':1e-12};
+  var fmul_map = {'0':1e3,'1':1e6,'2':1e9,'3':1e12};
+  function lc_solve() {
+    clearError();
+    clearResults();
+    var Lstr = document.getElementById('L').value.trim();
+    var Cstr = document.getElementById('C').value.trim();
+    var fstr = document.getElementById('f').value.trim();
+    var LFilled = Lstr !== '';
+    var CFilled = Cstr !== '';
+    var fFilled = fstr !== '';
+    var filled = (LFilled ? 1 : 0) + (CFilled ? 1 : 0) + (fFilled ? 1 : 0);
+    if (filled < 2) { showError('Fill in any two fields; leave the third blank to solve for it.'); return; }
+    if (filled === 3) { showError('Leave one field blank — the tool solves for the missing variable.'); return; }
+    var Lmul = Lmul_map[document.getElementById('L-unit').value];
+    var Cmul = Cmul_map[document.getElementById('C-unit').value];
+    var fmul = fmul_map[document.getElementById('f-unit').value];
+    var Lv, Cv, fv, solved;
+    if (!fFilled) {
+      Lv = parseFloat(Lstr) * Lmul;
+      Cv = parseFloat(Cstr) * Cmul;
+      if (!(Lv > 0) || !(Cv > 0)) { showError('Enter valid positive values for L and C.'); return; }
+      fv = 1 / (2 * Math.PI * Math.sqrt(Lv * Cv));
+      solved = 'f';
+    } else if (!CFilled) {
+      Lv = parseFloat(Lstr) * Lmul;
+      fv = parseFloat(fstr) * fmul;
+      if (!(Lv > 0) || !(fv > 0)) { showError('Enter valid positive values for L and f.'); return; }
+      Cv = 1 / (4 * Math.PI * Math.PI * fv * fv * Lv);
+      solved = 'C';
+    } else {
+      Cv = parseFloat(Cstr) * Cmul;
+      fv = parseFloat(fstr) * fmul;
+      if (!(Cv > 0) || !(fv > 0)) { showError('Enter valid positive values for C and f.'); return; }
+      Lv = 1 / (4 * Math.PI * Math.PI * fv * fv * Cv);
+      solved = 'L';
+    }
+    showResults(Lv, Cv, fv, solved);
+    if (window.drawDiagram) window.drawDiagram(Lv, Cv, fv);
+  }
+  function showResults(L, C, f, solved) {
+    var container = document.getElementById('lc-results');
+    container.style.display = 'grid';
+    var highlight = 'font-weight:700;color:#AA77FF;';
+    var card = document.createElement('div');
+    card.className = 'res-card';
+    card.innerHTML =
+      '<h4>LC Resonance</h4>' +
+      resRow('Inductance, L',          engFmt(L, 'H'),              solved === 'L' ? highlight : '') +
+      resRow('Capacitance, C',         engFmt(C, 'F'),              solved === 'C' ? highlight : '') +
+      resRow('Resonant frequency, f₀', engFmt(f, 'Hz'),        solved === 'f' ? highlight : '') +
+      resRow('Angular frequency, ω₀', engFmt(2*Math.PI*f,'rad/s'), '');
+    container.appendChild(card);
+  }
+  function resRow(lbl, val, style) {
+    return '<div class="res-row"><span class="res-lbl">' + lbl + '</span>' +
+           '<span class="res-val" style="' + style + '">' + val + '</span></div>';
+  }
+  function clearResults() {
+    var container = document.getElementById('lc-results');
+    container.innerHTML = '';
+    container.style.display = '';
+  }
+  function showError(msg) { var el = document.getElementById('lc-error'); if (el) el.textContent = msg; }
+  function clearError()   { var el = document.getElementById('lc-error'); if (el) el.textContent = ''; }
+})();
+</script>
+<script>
+(function() {
+  var C0 = 2.998e8;
+  var MU0 = 4 * Math.PI * 1e-7;
+  var EPS0 = 8.854e-12;
+  document.getElementById('wg-btn').addEventListener('click', wg_calc);
+  function wg_calc() {
+    clearError();
+    var av  = parseFloat(document.getElementById('wg-a').value);
+    var amul = parseFloat(document.getElementById('wg-a-unit').value);
+    var bv  = parseFloat(document.getElementById('wg-b').value);
+    var bmul = parseFloat(document.getElementById('wg-b-unit').value);
+    var fv  = parseFloat(document.getElementById('wg-f').value);
+    var fmul = parseFloat(document.getElementById('wg-f-unit').value);
+    var er  = parseFloat(document.getElementById('wg-er').value) || 1;
+    var sigmav = parseFloat(document.getElementById('wg-sigma').value) || 5.8e7;
+    var tanD = parseFloat(document.getElementById('wg-tanD').value) || 0;
+    if (!(av > 0)) { showError('Enter a valid broad-wall dimension a.'); return; }
+    if (!(bv > 0)) { showError('Enter a valid narrow-wall dimension b.'); return; }
+    if (!(fv > 0)) { showError('Enter a valid operating frequency.'); return; }
+    var a = av * amul;
+    var b = bv * bmul;
+    var f = fv * fmul;
+    if (b >= a) { showError('b must be less than a (narrow wall < broad wall).'); return; }
+    var mu  = MU0;
+    var eps = er * EPS0;
+    var vp_med = 1 / Math.sqrt(mu * eps);
+    var modes = [];
+    for (var m = 0; m <= 3; m++) {
+      for (var n = 0; n <= 3; n++) {
+        if (m === 0 && n === 0) continue;
+        var fc = vp_med / 2 * Math.sqrt((m/a)*(m/a) + (n/b)*(n/b));
+        modes.push({ m:m, n:n, fc:fc, label:'TE'+m+n });
+      }
+    }
+    for (var m2 = 1; m2 <= 3; m2++) {
+      for (var n2 = 1; n2 <= 3; n2++) {
+        var fc2 = vp_med / 2 * Math.sqrt((m2/a)*(m2/a) + (n2/b)*(n2/b));
+        modes.push({ m:m2, n:n2, fc:fc2, label:'TM'+m2+n2 });
+      }
+    }
+    modes.sort(function(x,y){ return x.fc - y.fc; });
+    var seen = {}, uniqModes = [];
+    modes.forEach(function(mo) { if (!seen[mo.label]) { seen[mo.label]=true; uniqModes.push(mo); } });
+    modes = uniqModes.slice(0, 8);
+    var fc10 = vp_med / (2 * a);
+    var fc20 = vp_med / a;
+    var fc01 = vp_med / (2 * b);
+    var result = { a:a, b:b, f:f, fc10:fc10, fc20:fc20, fc01:fc01, er:er, modes:modes, sigma:sigmav, tanD:tanD };
+    if (f > fc10) {
+      var k0   = 2 * Math.PI * f / C0;
+      var km   = k0 * Math.sqrt(er);
+      var kc   = Math.PI / a;
+      var beta = Math.sqrt(km*km - kc*kc);
+      var lambda_g = 2 * Math.PI / beta;
+      var Zw   = (2 * Math.PI * f * MU0) / beta;
+      var vph  = 2 * Math.PI * f / beta;
+      var vgr  = (beta / (2*Math.PI*f)) * C0*C0 / er;
+      var Rs   = Math.sqrt(Math.PI * f * MU0 / sigmav);
+      var w2   = 2*Math.PI*f;
+      var alpha_c_npm = Rs / (a*a*a * b * beta * w2 * MU0) * (2*b*Math.PI*Math.PI + a*a*a*beta*beta);
+      var alpha_c = 8.686 * alpha_c_npm;
+      var alpha_d = (tanD > 0 && er > 1) ? 8.686 * km*km * tanD / (2*beta) : 0;
+      result.beta = beta; result.lambda_g = lambda_g; result.Zw = Zw;
+      result.vph = vph; result.vgr = vgr; result.alpha_c = alpha_c; result.alpha_d = alpha_d;
+    }
+    showResults(result);
+    if (window.drawDiagram) window.drawDiagram(result);
+  }
+  function showResults(res) {
+    var container = document.getElementById('wg-results');
+    container.innerHTML = '';
+    container.style.display = 'grid';
+    var fc10 = res.fc10;
+    var ratio = res.f / fc10;
+    var aboveCutoff = res.f > fc10;
+    var card1 = document.createElement('div');
+    card1.className = 'res-card';
+    card1.innerHTML = '<h4>TE₁₀ Dominant Mode</h4>' +
+      rr('TE₁₀ cutoff frequency, f<sub>c10</sub>', engFmt(fc10,'Hz')) +
+      rr('Operating frequency', engFmt(res.f,'Hz')) +
+      rr('f / f<sub>c10</sub>', ratio.toFixed(3) + (aboveCutoff ? ' — propagating' : ' — EVANESCENT'), false, true);
+    if (aboveCutoff) {
+      card1.innerHTML +=
+        rr('Guide wavelength, λ<sub>g</sub>', engFmt(res.lambda_g,'m')) +
+        rr('TE₁₀ wave impedance, Z<sub>w</sub>', res.Zw.toFixed(2)+' Ω') +
+        rr('Phase velocity, v<sub>ph</sub>', (res.vph/C0).toFixed(3)+' × c') +
+        rr('Group velocity, v<sub>gr</sub>', (res.vgr/C0).toFixed(3)+' × c') +
+        rr('Conductor loss, α<sub>c</sub>', res.alpha_c.toFixed(4)+' dB/m') +
+        rr('Dielectric loss, α<sub>d</sub>', res.alpha_d.toFixed(4)+' dB/m');
+    }
+    container.appendChild(card1);
+    var card2 = document.createElement('div');
+    card2.className = 'res-card';
+    card2.innerHTML = '<h4>Mode Cutoff Frequencies</h4>';
+    res.modes.forEach(function(mo) {
+      var propagates = res.f > mo.fc;
+      var style = propagates ? 'color:#AA77FF;font-weight:600;' : 'color:#aaa;';
+      card2.innerHTML += '<div class="res-row"><span class="res-lbl" style="' + style + '">' + mo.label + '</span>' +
+        '<span class="res-val" style="' + style + '">' + engFmt(mo.fc,'Hz') + (propagates ? ' ✓' : '') + '</span></div>';
+    });
+    container.appendChild(card2);
+  }
+  function rr(lbl, val, hi, raw) {
+    var s = hi ? ' style="font-weight:700;color:#AA77FF;"' : '';
+    return '<div class="res-row"><span class="res-lbl">' + lbl + '</span><span class="res-val"' + s + '>' + val + '</span></div>';
+  }
+  function showError(msg) { var el = document.getElementById('wg-error'); if (el) el.textContent = msg; }
+  function clearError()   { var el = document.getElementById('wg-error'); if (el) el.textContent = ''; }
+})();
+</script>
+
+<!-- Inline JS extracted from tool HTML files -->
+<script>
+/* ── VSWRConverter (from VSWRConverter.html) ── */
+function vswrUpdate(src) {
+  var vswr,gamma,rl,ml;
+  try {
+    if(src==='vswr')  { vswr =parseFloat(document.getElementById('v-vswr').value);  if(vswr<1)throw 1; gamma=(vswr-1)/(vswr+1); }
+    else if(src==='gamma') { gamma=parseFloat(document.getElementById('v-gamma').value); if(gamma<0||gamma>1)throw 1; vswr=(1+gamma)/(1-gamma); }
+    else if(src==='rl') { rl=parseFloat(document.getElementById('v-rl').value); if(rl<0)throw 1; gamma=Math.pow(10,-rl/20); vswr=(1+gamma)/(1-gamma); }
+    else { ml=parseFloat(document.getElementById('v-ml').value); if(ml<0)throw 1; gamma=Math.sqrt(1-Math.pow(10,-ml/10)); vswr=(1+gamma)/(1-gamma); }
+    if(!isFinite(vswr)||!isFinite(gamma)) throw 1;
+    rl  = -20*Math.log10(gamma);
+    ml  = -10*Math.log10(1-gamma*gamma);
+    var tx = (1-gamma*gamma)*100;
+    document.getElementById('ro-vswr').textContent  = vswr.toFixed(4);
+    document.getElementById('ro-gamma').textContent = gamma.toFixed(4);
+    document.getElementById('ro-rl').textContent    = (isFinite(rl)?rl.toFixed(2):'∞')+' dB';
+    document.getElementById('ro-ml').textContent    = ml.toFixed(4)+' dB';
+    document.getElementById('ro-tx').textContent    = tx.toFixed(2)+'%';
+    document.getElementById('error').textContent='';
+  } catch(e) { document.getElementById('error').textContent='Enter a valid value.'; }
+}
+
+/* ── Stripline (from Stripline.html) ── */
+document.getElementById('sl-btn').addEventListener('click', function(){
+  var w=parseFloat(document.getElementById('sl-w').value);
+  var b=parseFloat(document.getElementById('sl-b').value);
+  var t=parseFloat(document.getElementById('sl-t').value);
+  var er=parseFloat(document.getElementById('sl-er').value);
+  document.getElementById('error').textContent='';
+  if([w,b,t,er].some(isNaN)||w<=0||b<=0||t<=0||er<1){document.getElementById('error').textContent='Enter valid positive values.';return;}
+  if(t>=b){document.getElementById('error').textContent='Trace thickness t must be less than ground separation b.';return;}
+  var weff=w*(1-(t/b)*Math.log(2-t/b)/Math.PI);
+  var Z0=(60/Math.sqrt(er))*Math.log(4*b/(0.67*Math.PI*weff*(0.8+t/weff)));
+  var vp=3e8/Math.sqrt(er);
+  var C=er/Z0/vp*1e12;
+  var L=Z0/vp*1e9;
+  document.getElementById('sl-z0').textContent=Z0.toFixed(3)+' Ω';
+  document.getElementById('sl-vp').textContent=(vp/1e8).toFixed(3)+'×10⁸ m/s';
+  document.getElementById('sl-c').textContent=C.toFixed(2)+' pF/m';
+  document.getElementById('sl-l').textContent=L.toFixed(2)+' nH/m';
+});
+
+/* ── IP3Calc (from IP3Calc.html) ── */
+document.getElementById('ip-btn').addEventListener('click', function(){
+  var IIP3=parseFloat(document.getElementById('ip-iip3').value);
+  var Pin=parseFloat(document.getElementById('ip-pin').value);
+  var G=parseFloat(document.getElementById('ip-gain').value);
+  document.getElementById('error').textContent='';
+  if([IIP3,Pin,G].some(isNaN)){document.getElementById('error').textContent='Enter valid numeric values.';return;}
+  var OIP3=IIP3+G;
+  var Pout=Pin+G;
+  var IM3=3*Pin-2*IIP3+G;
+  var IMD=Pout-IM3;
+  var P1dB=IIP3-9.6;
+  document.getElementById('ip-pout').textContent=Pout.toFixed(1)+' dBm';
+  document.getElementById('ip-oip3').textContent=OIP3.toFixed(1)+' dBm';
+  document.getElementById('ip-im3').textContent=IM3.toFixed(1)+' dBm';
+  document.getElementById('ip-imd').textContent=IMD.toFixed(1)+' dBc';
+  document.getElementById('ip-headroom').textContent=(IIP3-Pin).toFixed(1)+' dB';
+  document.getElementById('ip-oheadroom').textContent=(OIP3-Pout).toFixed(1)+' dB';
+  document.getElementById('ip-p1db').textContent=P1dB.toFixed(1)+' dBm (input)';
+});
+</script>
 
 <!-- ═══════════════════════════════════════════════════════════════
      TEST RUNNER
@@ -118,7 +543,14 @@
 // expect values: the leading float from the output element's textContent.
 // e.g. "50.843 Ω" → 50.843,  "300.00 mm" → 300.00,  "2.090 µm" → 2.090
 // tol: allowed absolute difference in the same implied units.
+//
+// Special expect key syntax: "containerId@N" reads the Nth .res-val span
+// inside the named container div (0-indexed).
+//
+// setup: optional function called before inputs/button, for reactive tools
+// or calculators that require programmatic state (NoiseFigure stages).
 const TESTS = [
+  // ── Microstrip ──────────────────────────────────────────────
   {
     group: 'Microstrip',
     name: 'Wide trace (w/h=1.875, FR4)',
@@ -151,6 +583,8 @@ const TESTS = [
       'ms-w-out': { label: 'w (mm)', value: 3.07, tol: 0.15 }
     }
   },
+
+  // ── Coaxial ─────────────────────────────────────────────────
   {
     group: 'Coaxial',
     name: '50 Ω air-filled (d=1 mm, D=2.301 mm, εr=1)',
@@ -164,13 +598,15 @@ const TESTS = [
   {
     group: 'Coaxial',
     name: '75 Ω PTFE-filled (d=1 mm, D=6.122 mm, εr=2.1)',
-    ref: 'Z₀=60/√2.1·ln(6.122)=41.41·1.8116=75.0 Ω — checking εr fill correction',
+    ref: 'Z₀=60/√2.1·ln(6.122)=75.0 Ω — checking εr fill correction',
     inputs:  { 'cx-d': '1.0', 'cx-D': '6.122', 'cx-er': '2.1' },
     button:  'cx-btn',
     expect: {
       'cx-z0': { label: 'Z₀ (Ω)', value: 75.0, tol: 0.5 }
     }
   },
+
+  // ── Wavelength ──────────────────────────────────────────────
   {
     group: 'Wavelength',
     name: '1 GHz in air — λ=300 mm',
@@ -195,6 +631,8 @@ const TESTS = [
       'wl-lam': { label: 'λ (mm)', value: 58.37, tol: 0.1 }
     }
   },
+
+  // ── Skin Depth ──────────────────────────────────────────────
   {
     group: 'Skin Depth',
     name: 'Copper at 1 GHz — δ=2.090 µm',
@@ -217,6 +655,8 @@ const TESTS = [
       'sd-um': { label: 'δ (µm)', value: 6.609, tol: 0.05 }
     }
   },
+
+  // ── CPW ─────────────────────────────────────────────────────
   {
     group: 'CPW',
     name: 'CPW (no bottom ground) — w=1mm, s=0.3mm, h=0.635mm, εr=9.9',
@@ -240,70 +680,287 @@ const TESTS = [
       'cpw-z0':   { label: 'Z₀ (Ω)', value: 38.23, tol: 2.0 },
       'cpw-eeff': { label: 'εeff',   value: 7.444, tol: 0.05 }
     }
+  },
+
+  // ── Quarter-Wave Transformer ─────────────────────────────────
+  {
+    group: 'Quarter-Wave',
+    name: 'Z₁=50Ω → Z₂=200Ω at 1 GHz, εr=1',
+    ref: 'Zt=√(50×200)=100 Ω; len=c/(4f)=75.000 mm',
+    inputs:  { 'qw-z1': '50', 'qw-z2': '200', 'qw-f': '1', 'qw-er': '1' },
+    selects: { 'qw-fu': '1e9' },
+    button:  'qw-btn',
+    expect: {
+      'qw-zt':  { label: 'Zt (Ω)',  value: 100.0, tol: 0.01 },
+      'qw-len': { label: 'len (mm)', value: 75.0,  tol: 0.01 }
+    }
+  },
+
+  // ── Dipole ──────────────────────────────────────────────────
+  {
+    group: 'Dipole',
+    name: 'Half-wave dipole at 300 MHz, k=0.95',
+    ref: 'λ=1000mm; half=k×λ/2=475.00mm; arm=237.50mm',
+    inputs:  { 'dp-f': '300', 'dp-k': '0.95' },
+    selects: { 'dp-fu': '1e6' },
+    button:  'dp-btn',
+    expect: {
+      'dp-half': { label: 'half (mm)', value: 475.0,  tol: 0.01 },
+      'dp-arm':  { label: 'arm (mm)',  value: 237.5,  tol: 0.01 }
+    }
+  },
+
+  // ── Stub Calculator ──────────────────────────────────────────
+  {
+    group: 'Stub Calculator',
+    name: 'Short stub: f=1 GHz, Z₀=50Ω, B=Y₀=20 mS → 45° electrical length',
+    ref: 'betaL=atan2(Y₀,B)=atan2(0.02,0.02)=π/4=45°; lam4=75mm',
+    inputs:  { 'st-f': '1', 'st-z0': '50', 'st-B': '20' },
+    selects: { 'st-fu': '1e9', 'st-type': 'short' },
+    button:  'st-btn',
+    expect: {
+      'st-el':   { label: 'elec. len (°)', value: 45.0,  tol: 0.01 },
+      'st-pl':   { label: 'phys. len (mm)',value: 37.5,  tol: 0.01 },
+      'st-lam4': { label: 'λ/4 (mm)',      value: 75.0,  tol: 0.01 }
+    }
+  },
+
+  // ── Bandpass (Series RLC) ────────────────────────────────────
+  {
+    group: 'Bandpass Filter',
+    name: 'Series RLC: L=50 nH, C=100 pF, R=50 Ω',
+    ref: 'f₀=1/(2π√LC)=71.18 MHz; Q=ω₀L/R=0.4472; BW=R/(2πL)=159.15 MHz',
+    inputs:  { 'bp-L': '50', 'bp-C': '100', 'bp-R': '50' },
+    selects: { 'bp-Lu': '1e-9', 'bp-Cu': '1e-12', 'bp-config': 'series' },
+    button:  'bp-btn',
+    expect: {
+      'bp-Q':  { label: 'Q',        value: 0.4472,  tol: 0.001 },
+      'bp-f0': { label: 'f₀ (MHz)', value: 71.178,  tol: 0.05  }
+    }
+  },
+
+  // ── L-Network ────────────────────────────────────────────────
+  {
+    group: 'L-Network',
+    name: 'Rs=50Ω → RL=200Ω at 100 MHz',
+    ref: 'Q=√(RL/Rs−1)=√3=1.7321',
+    inputs:  { 'ln-f': '100', 'ln-rs': '50', 'ln-rl': '200' },
+    selects: { 'ln-fu': '1e6' },
+    button:  'ln-btn',
+    expect: {
+      'ln-Q': { label: 'Q', value: 1.7321, tol: 0.001 }
+    }
+  },
+
+  // ── Friis Transmission ───────────────────────────────────────
+  {
+    group: 'Friis Transmission',
+    name: '0 dBm, 0 dBi each, 1 GHz, 1 km — FSPL=92.44 dB',
+    ref: 'FSPL=20·log₁₀(4πdf/c)=20·log₁₀(4π×1000/0.3)=92.44 dB; Pr=−92.44 dBm',
+    inputs:  { 'fr-pt': '0', 'fr-gt': '0', 'fr-gr': '0', 'fr-d': '1000', 'fr-f': '1' },
+    selects: { 'fr-fu': '1e9' },
+    button:  'fr-btn',
+    expect: {
+      'fr-fspl':    { label: 'FSPL (dB)',  value:  92.44, tol: 0.05 },
+      'fr-pr-dbm':  { label: 'Pr (dBm)',   value: -92.44, tol: 0.05 }
+    }
+  },
+
+  // ── Patch Antenna ────────────────────────────────────────────
+  {
+    group: 'Patch Antenna',
+    name: '2.45 GHz patch on FR4 (εr=4.4, h=1.6 mm)',
+    ref: 'W=c/(2f)·√(2/(εr+1))≈37.26 mm; εeff≈4.081',
+    inputs:  { 'pa-f': '2.45', 'pa-er': '4.4', 'pa-h': '1.6' },
+    selects: { 'pa-fu': '1e9' },
+    button:  'pa-btn',
+    expect: {
+      'pa-W':    { label: 'W (mm)',  value: 37.26, tol: 0.10 },
+      'pa-eeff': { label: 'εeff',   value: 4.081, tol: 0.02  }
+    }
+  },
+
+  // ── Noise Figure (Friis cascade) ─────────────────────────────
+  {
+    group: 'Noise Figure',
+    name: '2-stage cascade: G₁=10dB/NF₁=3dB + G₂=10dB/NF₂=6dB',
+    ref: 'F=F₁+(F₂−1)/G₁=1.995+(2.981)/10=2.293; NF=10·log10(2.293)=3.604 dB; Gain=20 dB',
+    setup: function() {
+      document.getElementById('nf-n').value = '2';
+      nfBuild();
+      document.getElementById('nf-g1').value = '10';
+      document.getElementById('nf-f1').value = '3';
+      document.getElementById('nf-g2').value = '10';
+      document.getElementById('nf-f2').value = '6';
+      nfCalc();
+    },
+    expect: {
+      'nf-nf':   { label: 'NF (dB)',   value: 3.604, tol: 0.002 },
+      'nf-gain': { label: 'Gain (dB)', value: 20.0,  tol: 0.001 }
+    }
+  },
+
+  // ── dBm Converter ───────────────────────────────────────────
+  {
+    group: 'dBm Converter',
+    name: '10 dBm → 10.000 mW',
+    ref: 'P=10^(dBm/10)×1mW=10^1×1mW=10 mW',
+    setup: function() {
+      document.getElementById('v-dbm').value = '10';
+      updateDbm('dbm');
+    },
+    expect: {
+      'out-mw':  { label: 'P (mW)',  value: 10.0,  tol: 0.001 },
+      'out-dbm': { label: 'dBm out', value: 10.0,  tol: 0.001 }
+    }
+  },
+
+  // ── VSWR Converter ──────────────────────────────────────────
+  {
+    group: 'VSWR Converter',
+    name: 'VSWR=2.0 → Γ=0.3333, RL=9.54 dB',
+    ref: 'Γ=(VSWR−1)/(VSWR+1)=1/3; RL=−20·log10(1/3)=9.542 dB',
+    setup: function() {
+      document.getElementById('v-vswr').value = '2.0';
+      vswrUpdate('vswr');
+    },
+    expect: {
+      'ro-gamma': { label: 'Γ',       value: 0.3333, tol: 0.001 },
+      'ro-rl':    { label: 'RL (dB)', value: 9.542,  tol: 0.05  }
+    }
+  },
+
+  // ── Stripline ────────────────────────────────────────────────
+  {
+    group: 'Stripline',
+    name: 'w=1mm, b=3mm, t=0.035mm, εr=4.4',
+    ref: 'Z₀=(60/√εr)·ln(4b/(0.67π·weff·(0.8+t/weff)))≈55 Ω (FR4 stripline)',
+    inputs:  { 'sl-w': '1.0', 'sl-b': '3.0', 'sl-t': '0.035', 'sl-er': '4.4' },
+    button:  'sl-btn',
+    expect: {
+      'sl-z0': { label: 'Z₀ (Ω)', value: 55.0, tol: 1.5 }
+    }
+  },
+
+  // ── IP3 / Intermodulation ────────────────────────────────────
+  {
+    group: 'IP3 Calculator',
+    name: 'IIP3=20 dBm, Pin=0 dBm, Gain=20 dB',
+    ref: 'OIP3=IIP3+G=40 dBm; IM3=3·Pin−2·IIP3+G=−20 dBm',
+    inputs:  { 'ip-iip3': '20', 'ip-pin': '0', 'ip-gain': '20' },
+    button:  'ip-btn',
+    expect: {
+      'ip-oip3': { label: 'OIP3 (dBm)', value:  40.0, tol: 0.01 },
+      'ip-im3':  { label: 'IM3 (dBm)',  value: -20.0, tol: 0.01 }
+    }
+  },
+
+  // ── LC Resonance (container output) ─────────────────────────
+  {
+    group: 'LC Resonance',
+    name: 'L=1 µH, C=253.3 pF → f₀≈10 MHz (solve for f)',
+    ref: 'f₀=1/(2π√LC)=1/(2π×√(1e-6×253.3e-12))≈10.000 MHz',
+    inputs:  { 'L': '1', 'C': '253.3', 'f': '' },
+    selects: { 'L-unit': '1', 'C-unit': '3' },
+    button:  'lc-btn',
+    expect: {
+      'lc-results@2': { label: 'f₀ (MHz)', value: 10.0, tol: 0.05 }
+    }
+  },
+
+  // ── Waveguide (container output) ─────────────────────────────
+  {
+    group: 'Rectangular Waveguide',
+    name: 'WR-90: a=22.86mm, b=10.16mm, f=10 GHz, εr=1',
+    ref: 'fc10=c/(2a)=2.998e8/45.72e−3≈6.559 GHz; f>fc10 → propagating',
+    inputs:  { 'wg-a': '22.86', 'wg-b': '10.16', 'wg-f': '10', 'wg-er': '1', 'wg-sigma': '5.8e7', 'wg-tanD': '0' },
+    selects: { 'wg-a-unit': '1e-3', 'wg-b-unit': '1e-3', 'wg-f-unit': '1e9' },
+    button:  'wg-btn',
+    expect: {
+      'wg-results@0': { label: 'fc10 (GHz)', value: 6.559, tol: 0.01 }
+    }
   }
 ];
 
 // ── Test runner ─────────────────────────────────────────────────
+function readOutput(spec) {
+  if (spec.includes('@')) {
+    var parts = spec.split('@');
+    var containerId = parts[0], idx = parseInt(parts[1]);
+    var vals = document.querySelectorAll('#' + containerId + ' .res-val');
+    return vals[idx] ? vals[idx].textContent.trim() : '';
+  }
+  var el = document.getElementById(spec);
+  return el ? el.textContent.trim() : '';
+}
+
 function runTest(t) {
+  // Optional pre-test setup (reactive tools, NoiseFigure stages, etc.)
+  if (t.setup) { t.setup(); return checkOutputs(t); }
+
   // Set text inputs
-  for (const [id, val] of Object.entries(t.inputs || {})) {
-    const el = document.getElementById(id);
-    if (el) el.value = val;
+  for (var id in (t.inputs || {})) {
+    var el = document.getElementById(id);
+    if (el) el.value = t.inputs[id];
   }
   // Set selects
-  for (const [id, val] of Object.entries(t.selects || {})) {
-    const el = document.getElementById(id);
-    if (el) el.value = val;
+  for (var id in (t.selects || {})) {
+    var el = document.getElementById(id);
+    if (el) el.value = t.selects[id];
   }
   // Click the calculate button
-  const btn = document.getElementById(t.button);
+  var btn = document.getElementById(t.button);
   if (btn) btn.click();
-  // Read and compare outputs
-  const checks = [];
-  for (const [id, exp] of Object.entries(t.expect)) {
-    const el = document.getElementById(id);
-    const raw = el ? el.textContent.trim() : '';
-    const actual = parseFloat(raw);
-    const ok = isFinite(actual) && Math.abs(actual - exp.value) <= exp.tol;
-    checks.push({ id, label: exp.label, actual, expected: exp.value, tol: exp.tol, raw, ok });
+
+  return checkOutputs(t);
+}
+
+function checkOutputs(t) {
+  var checks = [];
+  for (var spec in t.expect) {
+    var exp = t.expect[spec];
+    var raw = readOutput(spec);
+    var actual = parseFloat(raw);
+    var ok = isFinite(actual) && Math.abs(actual - exp.value) <= exp.tol;
+    checks.push({ id: spec, label: exp.label, actual: actual, expected: exp.value, tol: exp.tol, raw: raw, ok: ok });
   }
   return checks;
 }
 
 // ── Renderer ────────────────────────────────────────────────────
 function renderResults(groups) {
-  let totalPass = 0, totalFail = 0;
-  // Flatten for summary count
-  for (const g of Object.values(groups))
-    for (const t of g)
-      for (const c of t.checks)
-        c.ok ? totalPass++ : totalFail++;
+  var totalPass = 0, totalFail = 0;
+  for (var g in groups)
+    for (var ti = 0; ti < groups[g].length; ti++)
+      for (var ci = 0; ci < groups[g][ti].checks.length; ci++)
+        groups[g][ti].checks[ci].ok ? totalPass++ : totalFail++;
 
-  const sumEl = document.getElementById('vld-summary');
-  const allPass = totalFail === 0;
+  var sumEl = document.getElementById('vld-summary');
+  var allPass = totalFail === 0;
   sumEl.innerHTML = '<div class="vld-summary ' + (allPass ? 'all-pass' : 'has-fail') + '">' +
     (allPass ? '✓ All ' + totalPass + ' checks passed' :
       '✗ ' + totalFail + ' of ' + (totalPass + totalFail) + ' checks failed') +
     '</div>';
 
-  const out = [];
-  for (const [grpName, tests] of Object.entries(groups)) {
+  var out = [];
+  for (var grpName in groups) {
+    var tests = groups[grpName];
     out.push('<div class="vld-group">');
     out.push('<div class="vld-group-title">' + grpName + '</div>');
     out.push('<table class="vld-table">');
     out.push('<tr><th>Test</th><th>Output</th><th>Expected</th><th>Actual</th><th>Δ</th><th>Result</th></tr>');
-    for (const t of tests) {
-      const anyFail = t.checks.some(c => !c.ok);
-      for (let i = 0; i < t.checks.length; i++) {
-        const c = t.checks[i];
-        const rowClass = c.ok ? 'pass' : 'fail';
+    for (var ti = 0; ti < tests.length; ti++) {
+      var t = tests[ti];
+      for (var ci = 0; ci < t.checks.length; ci++) {
+        var c = t.checks[ci];
+        var rowClass = c.ok ? 'pass' : 'fail';
         out.push('<tr class="' + rowClass + '">');
-        if (i === 0) {
+        if (ci === 0) {
           out.push('<td rowspan="' + t.checks.length + '">' +
             '<strong>' + t.name + '</strong>' +
             '<div class="ref-note">' + t.ref + '</div></td>');
         }
-        const delta = isFinite(c.actual) ? (c.actual - c.expected).toFixed(4) : 'NaN';
+        var delta = isFinite(c.actual) ? (c.actual - c.expected).toFixed(4) : 'NaN';
         out.push('<td>' + c.label + '</td>');
         out.push('<td>' + c.expected + ' ± ' + c.tol + '</td>');
         out.push('<td>' + (isFinite(c.actual) ? c.actual.toFixed(4) : '<span class="err-msg">NaN — raw: "' + c.raw + '"</span>') + '</td>');
@@ -319,11 +976,12 @@ function renderResults(groups) {
 
 // ── Run on load ──────────────────────────────────────────────────
 window.addEventListener('load', function () {
-  const groups = {};
-  for (const t of TESTS) {
-    const checks = runTest(t);
+  var groups = {};
+  for (var i = 0; i < TESTS.length; i++) {
+    var t = TESTS[i];
+    var checks = runTest(t);
     if (!groups[t.group]) groups[t.group] = [];
-    groups[t.group].push({ name: t.name, ref: t.ref, checks });
+    groups[t.group].push({ name: t.name, ref: t.ref, checks: checks });
   }
   renderResults(groups);
 });
