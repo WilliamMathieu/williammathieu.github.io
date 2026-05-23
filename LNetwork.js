@@ -1,3 +1,11 @@
+/*
+ * L-Network Impedance Matching — Pozar §5.1
+ *
+ *   Q      = √(Rhigh/Rlow − 1)
+ *   Xshunt = Rhigh / Q
+ *   Xseries = Q · Rlow
+ *   L = X/ω  (if X > 0);   C = 1/(ω·X)  (if X < 0)
+ */
 
 document.getElementById('ln-btn').addEventListener('click', function() {
     var f=parseFloat(document.getElementById('ln-f').value)*parseFloat(document.getElementById('ln-fu').value);

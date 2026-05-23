@@ -1,3 +1,10 @@
+/*
+ * Skin Depth — standard electromagnetic theory
+ *
+ *   δ = √(2/(ω·μ·σ)) = √(1/(π·f·μ₀·σ))   [m]
+ *   (non-magnetic conductor: μ = μ₀ = 4π×10⁻⁷ H/m)
+ *   Rs = 1/(σ·δ) = √(π·f·μ₀/σ)            (surface resistance [Ω/sq])
+ */
 
 document.getElementById('sd-mat').addEventListener('change',function(){
     document.getElementById('sd-sigma').disabled=this.value!=='custom';

@@ -1,4 +1,12 @@
-/* Amplifier Stability Factor Calculator (K, µ, MAG/MSG from S-parameters) */
+/* Amplifier Stability Factor Calculator — Pozar §11.5
+ *
+ *   Δ    = S₁₁·S₂₂ − S₁₂·S₂₁
+ *   K    = (1 − |S₁₁|² − |S₂₂|² + |Δ|²) / (2·|S₁₂|·|S₂₁|)
+ *   μ    = (1 − |S₁₁|²) / (|S₂₂ − Δ·S₁₁*| + |S₁₂·S₂₁|)   [Edwards-Sinsky]
+ *   MAG  = |S₂₁|/|S₁₂| · (K − √(K²−1))    [only if unconditionally stable]
+ *   MSG  = |S₂₁|/|S₁₂|                      [maximum stable gain, K = 1 boundary]
+ *   Unconditionally stable iff K > 1 AND |Δ| < 1
+ */
 
 document.getElementById('amp-btn').addEventListener('click', amp_calc);
 

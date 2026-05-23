@@ -1,3 +1,10 @@
+/*
+ * Cascaded Noise Figure — Friis 1944
+ *
+ *   F_total = F₁ + (F₂−1)/G₁ + (F₃−1)/(G₁·G₂) + ...
+ *   (F = linear noise factor = 10^(NF_dB/10);  G = linear gain = 10^(G_dB/10))
+ *   G_total = G₁·G₂·G₃·...
+ */
 
 var nfCount=3;
 // eslint-disable-next-line no-redeclare

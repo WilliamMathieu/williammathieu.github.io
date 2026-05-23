@@ -1,4 +1,10 @@
-/* Circular Loop Inductance */
+/* Circular Loop Inductance — Neumann formula (Wheeler 1928)
+ *
+ *   L = μ₀·(D/2) · [ln(8·D/d) − 2]
+ *
+ *   D = loop diameter, d = wire diameter, μ₀ = 4π×10⁻⁷ H/m
+ *   Valid for D >> d (single-turn air-core loop)
+ */
 var btn = document.getElementById("btn");
 btn.addEventListener('click', function() {
   var d = parseFloat(document.getElementById("d").value);

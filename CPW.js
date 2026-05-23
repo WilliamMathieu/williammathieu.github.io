@@ -1,3 +1,13 @@
+/*
+ * Coplanar Waveguide (CPW) — Schneider 1969 / Pozar §3.8
+ *
+ *   k   = w / (w + 2s),   k' = √(1 − k²)
+ *   Open CPW:   k₁ = sinh(π·w/4h) / sinh(π·(w+2s)/4h)
+ *   GCPW:       k₁ = tanh(π·w/4h) / tanh(π·(w+2s)/4h)
+ *   εeff = 1 + (εr−1)/2 · [K(k₁)/K(k₁')] / [K(k')/K(k)]
+ *   Z₀   = 30π/√εeff · K(k')/K(k)
+ *   K(k) = π / (2·AGM(1, √(1−k²)))     (complete elliptic integral via AGM)
+ */
 
 // Complete elliptic integral K(k) via AGM
 function ellipK(k){

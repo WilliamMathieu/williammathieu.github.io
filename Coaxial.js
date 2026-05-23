@@ -1,3 +1,14 @@
+/*
+ * Coaxial Transmission Line (TEM mode) — Pozar §2.2
+ *
+ *   Z₀  = (60/√εr) · ln(D/d)             (characteristic impedance)
+ *   C   = 2π·ε₀·εr / ln(D/d)             [F/m]
+ *   L   = (μ₀/2π) · ln(D/d)              [H/m]
+ *   vp  = c/√εr
+ *   fc  = vp / (π·(D+d)/2)               (first higher-order mode cutoff)
+ *
+ *   d = inner conductor diameter, D = outer conductor inner diameter
+ */
 
 document.getElementById('cx-btn').addEventListener('click', function() {
     var d=parseFloat(document.getElementById('cx-d').value);

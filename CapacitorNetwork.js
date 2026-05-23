@@ -1,3 +1,10 @@
+/*
+ * Capacitor Network — series and parallel combinations
+ *
+ *   Parallel: C_total = C₁ + C₂ + ... + Cₙ
+ *   Series:   1/C_total = 1/C₁ + 1/C₂ + ... + 1/Cₙ
+ */
+
 var numCapacitors = 2;
 
 function buildInputs() {

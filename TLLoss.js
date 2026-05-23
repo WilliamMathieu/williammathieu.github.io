@@ -1,4 +1,17 @@
-/* Transmission Line Loss & Propagation Delay */
+/* Transmission Line Loss & Propagation Delay — Pozar §3.4
+ *
+ *  Microstrip (Hammerstad-Jensen εeff, Z₀):
+ *   Rs    = √(π·f·μ₀/σ)                 (surface resistance [Ω/sq])
+ *   αc    = 8.686·Rs/(Z₀·w_eff)  [dB/m, w/h > 1]  (Pozar eq 3.91)
+ *   αd    = 8.686·k₀·εr·(εeff−1)·tan(δ) / (2·√εeff·(εr−1))  [dB/m]
+ *
+ *  Coaxial (a = d/2, b = D/2):
+ *   Z₀    = (138/√εr)·log₁₀(b/a)
+ *   αc    = 8.686·Rs/(4π·Z₀)·(1/a + 1/b)   [dB/m]
+ *   αd    = 8.686·π·f·√εr·tan(δ)/c          [dB/m]
+ *
+ *  Total insertion loss: (αc + αd)·ℓ  [dB]
+ */
 
 var MU0 = 4 * Math.PI * 1e-7;
 var C0  = 2.998e8;

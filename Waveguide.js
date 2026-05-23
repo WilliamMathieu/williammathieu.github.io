@@ -1,4 +1,13 @@
-/* Rectangular Waveguide Calculator */
+/* Rectangular Waveguide Calculator — Pozar §3.3
+ *
+ *   vp    = c/√εr  (medium phase velocity)
+ *   fc,mn = vp/2 · √((m/a)² + (n/b)²)        (TE/TM mode cutoff frequencies)
+ *   β     = √(km² − kc²);  km = k₀·√εr;  kc = π/a  (TE₁₀)
+ *   λg    = 2π/β;   Zw = ω·μ₀/β              (guide wavelength; TE₁₀ wave impedance)
+ *   vph   = ω/β;    vgr = β·c²/(ω·εr)        (phase and group velocity)
+ *   αc    = Rs/(a³·b·β·ω·μ₀)·(2b·π² + a³·β²) [Np/m, Pozar eq 3.96]
+ *   αd    = km²·tan(δ)/(2β)                    [Np/m]
+ */
 
 var C0 = 2.998e8;
 var MU0 = 4 * Math.PI * 1e-7;

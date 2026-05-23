@@ -1,4 +1,11 @@
-/* Helical Antenna (Axial Mode) Calculator */
+/* Helical Antenna (Axial Mode) Calculator — Kraus "Antennas" §8.4
+ *
+ *   Axial mode condition: 3/4 < C/λ < 4/3  (C = π·D = helix circumference)
+ *   G    = 15·N·(C/λ)²·(S/λ)              [linear gain → dBi = 10·log₁₀(G)]
+ *   HPBW = 52 / (C/λ · √(N·S/λ))          [degrees]
+ *   Zin  ≈ 140·(C/λ)                       [Ω]
+ *   Optimal design: C ≈ λ, S ≈ λ/4 (pitch angle α ≈ 14°)
+ */
 
 var C0 = 2.998e8;
 var PI = Math.PI;

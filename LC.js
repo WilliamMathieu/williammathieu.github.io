@@ -1,4 +1,9 @@
-/* LC Circuit Solver — bidirectional: given any two of {L, C, f₀}, solve for the third */
+/* LC Circuit Solver — bidirectional: given any two of {L, C, f₀}, solve for the third
+ *
+ *   f₀ = 1 / (2π·√(L·C))
+ *   C  = 1 / (4π²·f₀²·L)
+ *   L  = 1 / (4π²·f₀²·C)
+ */
 document.getElementById('lc-btn').addEventListener('click', lc_solve);
 
 var Lmul_map = {'1':1e-6,'2':1e-9,'3':1e-12};

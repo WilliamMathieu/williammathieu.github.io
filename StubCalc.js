@@ -1,3 +1,11 @@
+/*
+ * Single-Stub Tuner — Pozar §5.2
+ *
+ *   Y₀  = 1/Z₀;   λ = c/f   (free-space wavelength)
+ *   Short stub: Yin = j·Y₀·cot(βℓ) = jB  →  βℓ = atan2(Y₀, B)
+ *   Open  stub: Yin = −j·Y₀·cot(βℓ) = jB  →  βℓ = atan2(−Y₀, B)
+ *   Physical length: ℓ = βℓ/(2π) · λ
+ */
 
 document.getElementById('st-btn').addEventListener('click', function() {
     var f=parseFloat(document.getElementById('st-f').value)*parseFloat(document.getElementById('st-fu').value);

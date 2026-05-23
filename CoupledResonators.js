@@ -1,4 +1,13 @@
-/* Coupled LC Resonators Calculator */
+/* Coupled LC Resonators Calculator — Matthaei §8
+ *
+ *   f₀  = 1 / (2π·√(L·C))               (uncoupled resonant frequency)
+ *   k   = M / L                          (coupling coefficient, 0 < k < 1)
+ *   f₊  = f₀ / √(1−k)                   (odd mode — higher frequency)
+ *   f₋  = f₀ / √(1+k)                   (even mode — lower frequency)
+ *   BW  = k · f₀                         (passband bandwidth ≈ −3 dB)
+ *   QL  = 1/k                            (loaded Q)
+ *   k_crit = 1/Q_unloaded               (critical coupling condition)
+ */
 
 var PI = Math.PI;
 

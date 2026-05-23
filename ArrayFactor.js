@@ -1,3 +1,10 @@
+/*
+ * Array Factor (uniform linear array) — Balanis §6.4
+ *
+ *   ψ     = k·d·cosθ + β        (k = 2π/λ, d = element spacing, β = progressive phase)
+ *   AF(θ) = sin(N·ψ/2) / sin(ψ/2)   (normalised peak = N at main lobe θ₀)
+ *   Main lobe at ψ = 0  →  cosθ₀ = −β/(k·d)
+ */
 
 document.getElementById('af-btn').addEventListener('click', function() {
     var N=parseInt(document.getElementById('af-n').value);

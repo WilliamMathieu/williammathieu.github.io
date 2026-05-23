@@ -1,3 +1,18 @@
+/*
+ * Microstrip Transmission Line — Hammerstad-Jensen / Pozar §3.8
+ *
+ *   u = w_eff/h  (w_eff = w with conductor thickness correction)
+ *
+ *   u ≤ 1:  εeff = (εr+1)/2 + (εr−1)/2·(1+10/u)^(−A·B)
+ *           Z₀   = (60/√εeff)·ln(8/u + u/4)
+ *   u > 1:  εeff = (εr+1)/2 + (εr−1)/2·(1+12/u)^(−½)
+ *           Z₀   = 120π / (√εeff·(u + 1.393 + 0.667·ln(u+1.444)))
+ *
+ *   Synthesis (Z₀ → w/h):
+ *     A = Z₀/60·√((εr+1)/2) + (εr−1)/(εr+1)·(0.23 + 0.11/εr)
+ *     B = 377π / (2·Z₀·√εr)
+ *     w/h = 8·exp(A)/(exp(2A)−2)  [narrow];  or  2/π·(B−1−ln(2B−1)+...)  [wide]
+ */
 
 document.getElementById('ms-btn1').addEventListener('click', function() {
     var h=parseFloat(document.getElementById('ms-h').value);

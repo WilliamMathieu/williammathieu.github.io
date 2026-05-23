@@ -1,4 +1,14 @@
-/* Charge-Pump PLL Type-2 3rd-Order Passive Loop Filter */
+/* Charge-Pump PLL Type-2 3rd-Order Passive Loop Filter — Banerjee / ADI AN-1865
+ *
+ *   Open-loop: G(s) = Kd·Kvco·F(s) / (N·s)
+ *   Filter:    F(s) = (1 + s·T₂) / (s·C₁·(1 + s·T₃))
+ *
+ *   Design at ωc (loop BW) and phase margin φ:
+ *   T₂ = sin(φ) / (ωc·(1 − sin(φ)))
+ *   T₁ = 1 / (ωc²·T₂)
+ *   C₁ = Kd·Kvco / (N·ωc²·T₁) · √(1 + (ωc·T₂)²)
+ *   R  = T₂/C₁;   C₂ = 0.1·C₁   (3rd pole at ωp = 1/(R·C₂))
+ */
 
 document.getElementById('pll-btn').addEventListener('click', pll_calc);
 
