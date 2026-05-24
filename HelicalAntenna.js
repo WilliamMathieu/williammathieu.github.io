@@ -1,4 +1,11 @@
-/* Helical Antenna (Axial Mode) Calculator */
+/* Helical Antenna (Axial Mode) Calculator — Kraus "Antennas" §8.4
+ *
+ *   Axial mode condition: 3/4 < C/λ < 4/3  (C = π·D = helix circumference)
+ *   G    = 15·N·(C/λ)²·(S/λ)              [linear gain → dBi = 10·log₁₀(G)]
+ *   HPBW = 52 / (C/λ · √(N·S/λ))          [degrees]
+ *   Zin  ≈ 140·(C/λ)                       [Ω]
+ *   Optimal design: C ≈ λ, S ≈ λ/4 (pitch angle α ≈ 14°)
+ */
 
 var C0 = 2.998e8;
 var PI = Math.PI;
@@ -46,8 +53,8 @@ function helix_calc() {
 
     var D = Dv * Dmul;
     var S = Sv * Smul;
-    var C = PI * D;
-    var alpha = Math.atan(S / C) * 180 / PI;
+    C = PI * D;
+    alpha = Math.atan(S / C) * 180 / PI;
 
     // Check axial-mode condition: 3/4 < C/λ < 4/3
     var ratio = C / lam;
@@ -57,10 +64,10 @@ function helix_calc() {
     }
 
     // Kraus gain formula
-    var Gain_db = 10*Math.log10(15 * n * ratio*ratio * S/lam);
-    var HPBW = 52 / (ratio * Math.sqrt(n * S/lam));
-    var Z_in = 140 * ratio;
-    var L_total = n * Math.sqrt(C*C + S*S);
+    Gain_db = 10*Math.log10(15 * n * ratio*ratio * S/lam);
+    HPBW = 52 / (ratio * Math.sqrt(n * S/lam));
+    Z_in = 140 * ratio;
+    L_total = n * Math.sqrt(C*C + S*S);
 
     showResults({D:D, S:S, alpha:alpha, n:n, lam:lam,
                  Gain_db:Gain_db, HPBW:HPBW, Z_in:Z_in, L_total:L_total, f:f, mode:'analyze', warning:warning});

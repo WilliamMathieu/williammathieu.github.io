@@ -1,4 +1,10 @@
-/* Yagi-Uda Antenna Calculator (NEC-based empirical, Viezbicke/Oppenheim tables) */
+/* Yagi-Uda Antenna Calculator — Viezbicke (NBS Tech Note 688) empirical tables
+ *
+ *   Element lengths and director spacings tabulated for d/λ = 0.0085.
+ *   Gain from table: G[dBi] = G_table[dBd] + 2.15
+ *   HPBW ≈ 78 / √(G_linear/1.64)             [degrees, H-plane approximation]
+ *   Zin  ≈ 25 Ω (straight driven); ≈ 200 Ω (folded dipole)
+ */
 
 var C0 = 2.998e8;
 var PI = Math.PI;

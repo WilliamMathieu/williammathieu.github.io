@@ -1,4 +1,8 @@
-/* Capacitance in LC */
+/* Capacitance in LC — resonance formula
+ *
+ *   f₀ = 1 / (2π·√(L·C))
+ *   C  = 1 / (4π²·f₀²·L)    (given f₀ and L)
+ */
 var btn = document.getElementById("btn");
 btn.addEventListener('click', function() {
   var f = parseFloat(document.getElementById("f").value);

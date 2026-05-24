@@ -1,3 +1,11 @@
+/*
+ * Bandpass / Bandstop LC Resonator — standard
+ *
+ *   f₀      = 1 / (2π·√(L·C))                (resonant frequency)
+ *   Series:   Q = ω₀·L/R;   BW = R/(2π·L) = f₀/Q
+ *   Parallel: Q = R/(ω₀·L); BW = 1/(2π·R·C) = f₀/Q
+ *   f₁, f₂  = f₀ ± BW/2                      (−3 dB band edges)
+ */
 
 document.getElementById('bp-btn').addEventListener('click', function() {
     var L=parseFloat(document.getElementById('bp-L').value)*parseFloat(document.getElementById('bp-Lu').value);

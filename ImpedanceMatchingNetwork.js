@@ -1,4 +1,17 @@
-/* Impedance Matching Network Calculator */
+/* Impedance Matching Network Calculator — Pozar §5.1
+ *
+ *   Q = √(Rhigh/Rlow − 1)     (matching network quality factor)
+ *
+ *   Topology A (shunt across Zl, then series toward source):
+ *     B_shunt = −Bl ± √(Gl·(1/Rs − Gl))
+ *     X_series = −Xs − Im(Zint)
+ *
+ *   Topology B (series added to Zl, then shunt toward source):
+ *     X_series = −Xl ± √(Rl·(|Zs|²/Rs − Rl))
+ *     B_shunt  = Xs/|Zs|² + (Xl+X)/(Rl²+(Xl+X)²)
+ *
+ *   Element values: X > 0 → L = X/ω;   X < 0 → C = −1/(ω·X)
+ */
 
 document.getElementById('imn-btn').addEventListener('click', calculate);
 

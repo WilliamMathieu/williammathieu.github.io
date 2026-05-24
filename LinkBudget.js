@@ -1,3 +1,13 @@
+/*
+ * RF Link Budget — Friis transmission equation
+ *
+ *   λ     = c / f
+ *   FSPL  = 20·log₁₀(4π·d/λ)              [dB]
+ *   EIRP  = Pt − Ltx + Gt                  [dBm]
+ *   Pr    = EIRP − FSPL − Lmisc + Gr − Lrx [dBm]
+ *   N     = −174 + 10·log₁₀(BW) + NF       [dBm]  (thermal noise floor)
+ *   SNR   = Pr − N;   margin = SNR − SNR_min [dB]
+ */
 
 document.getElementById('lb-btn').addEventListener('click', function() {
     var Pt=parseFloat(document.getElementById('lb-pt').value);

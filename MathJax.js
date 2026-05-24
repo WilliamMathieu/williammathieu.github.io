@@ -1,3 +1,4 @@
+   // eslint-disable-next-line no-redeclare
    var MathJax = {
         tex: {
           inlineMath: [

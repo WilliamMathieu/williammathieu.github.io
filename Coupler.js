@@ -1,4 +1,13 @@
-/* Directional Coupler / Hybrid Calculator */
+/* Directional Coupler / Hybrid Calculator — Pozar §7.5
+ *
+ *  Coupled-line:   C [lin] = 10^(−Cdb/20)
+ *                  Z₀e = Z₀·√((1+C)/(1−C))   Z₀o = Z₀·√((1−C)/(1+C))
+ *
+ *  Branchline (90° hybrid):   Z_series = Z₀;  Z_shunt = Z₀/√(1+R)
+ *                              (R = power split ratio P₂/P₃; R=1 for equal split)
+ *
+ *  Rat-race (180° hybrid):    Z_ring = Z₀·√2;  circumference = 3λ/2
+ */
 
 var C0 = 2.998e8;
 

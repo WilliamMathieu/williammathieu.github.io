@@ -1,3 +1,10 @@
+/*
+ * Friis Transmission Equation — Friis 1946
+ *
+ *   λ    = c / f
+ *   FSPL = 20·log₁₀(4π·d/λ)           (free-space path loss [dB])
+ *   Pr   = Pt + Gt + Gr − FSPL         (all values in dB or dBm)
+ */
 
 document.getElementById('fr-btn').addEventListener('click', function() {
     var Pt=parseFloat(document.getElementById('fr-pt').value);

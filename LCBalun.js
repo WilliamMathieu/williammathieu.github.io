@@ -1,4 +1,11 @@
-/* LC BALUN Calculator */
+/* LC BALUN Calculator — Ruthroff / Guanella / Marchand
+ *
+ *   Zm = √(Zunbal · Zbal)              (geometric mean impedance)
+ *
+ *   Lattice BALUN:     L = Zm/ω;   C = 1/(ω·Zm)   (±45° phase per arm)
+ *   π BALUN:           L = Zm/ω;   C_shunt = 1/(ω·Zm)   (same formula)
+ *   Marchand (lumped): Z₀ = Zm;    Ls = Z₀/ω;  Cp = 1/(ω·Z₀)
+ */
 
 var TOPO_NOTES = {
     lattice:  'Lattice BALUN: uses 2 inductors and 2 capacitors. Works for any impedance ratio. Provides ±45° phase shift on each balanced output (90° total split). The impedance transformation ratio equals (Zbal/Zunbal).',

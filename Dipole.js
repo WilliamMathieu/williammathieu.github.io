@@ -1,3 +1,10 @@
+/*
+ * Dipole / Monopole Antenna — Balanis §4.4
+ *
+ *   λ   = c / f                          (free-space wavelength)
+ *   L   = k · λ/2                        (total half-wave dipole length; k = velocity factor)
+ *   arm = L/2                            (each arm; = monopole length)
+ */
 
 document.getElementById('dp-btn').addEventListener('click', function() {
     var f=parseFloat(document.getElementById('dp-f').value)*parseFloat(document.getElementById('dp-fu').value);

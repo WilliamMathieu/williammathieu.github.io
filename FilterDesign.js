@@ -1,3 +1,17 @@
+/*
+ * LC Ladder Filter Design — Pozar §8.3 / Williams "Electronic Filter Design Handbook"
+ *
+ *  Butterworth prototype (maximally flat):
+ *   gₖ = 2·sin((2k−1)·π/(2n)),  k = 1..n;   g_{n+1} = 1
+ *
+ *  Chebyshev prototype (equiripple ripple Lr dB):
+ *   β = ln(1/tanh(Lr/17.37));  γ = sinh(β/(2n))
+ *   g₁ = 2a₁/γ;   gₖ = 4·aₖ₋₁·aₖ / (bₖ₋₁·gₖ₋₁),  k = 2..n
+ *
+ *  Denormalisation to fc and R₀:
+ *   LP series L:  Lₖ = gₖ·R₀/ωc;   LP shunt C: Cₖ = gₖ/(ωc·R₀)
+ *   HP series C:  Cₖ = 1/(gₖ·ωc·R₀); HP shunt L: Lₖ = R₀/(gₖ·ωc)
+ */
 
 document.getElementById('fd-btn').addEventListener('click', function() {
     var typ=document.getElementById('fd-type').value;

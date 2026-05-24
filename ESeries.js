@@ -1,4 +1,9 @@
-/* E-Series Standard Component Value Finder */
+/* E-Series Standard Component Value Finder — IEC 60063
+ *
+ *   Preferred values: Rₙ = 10^(n/N) · 10^decade,  n = 0..N−1
+ *   E6→N=6, E12→N=12, E24→N=24, E48→N=48, E96→N=96, E192→N=192
+ *   Nearest value found by minimum absolute error across ±1 decade.
+ */
 
 var E_SERIES = {
   E6:  [1.0, 1.5, 2.2, 3.3, 4.7, 6.8],

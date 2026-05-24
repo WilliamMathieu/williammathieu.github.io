@@ -6,6 +6,7 @@
  */
 
 // ── Metric prefix formatter ───────────────────────────────────────────────
+// eslint-disable-next-line no-redeclare
 function engFmt(value, unit) {
   if (!isFinite(value)) return '∞ ' + (unit || '');
   if (value === 0)      return '0 ' + (unit || '');

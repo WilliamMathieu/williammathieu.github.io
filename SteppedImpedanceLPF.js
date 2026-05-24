@@ -1,4 +1,11 @@
-/* Stepped-Impedance Microstrip Low-Pass Filter */
+/* Stepped-Impedance Microstrip Low-Pass Filter — Pozar §8.6
+ *
+ *   Prototype element values gₖ from Butterworth or Chebyshev 0.5 dB tables.
+ *   Electrical length of each section at ωc:
+ *     High-Z (series L):  βℓ = gₖ · Z₀/Zh   [rad]
+ *     Low-Z  (shunt C):   βℓ = gₖ · Zl/Z₀   [rad]
+ *   Physical length: ℓ = (βℓ/2π) · λ_sub;   λ_sub = c/(fc·√εr)
+ */
 
 var C0 = 2.998e8;
 var MU0 = 4 * Math.PI * 1e-7;

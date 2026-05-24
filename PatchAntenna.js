@@ -1,3 +1,11 @@
+/*
+ * Rectangular Patch Antenna — Bahl & Trivedi 1977 / Pozar §14.2
+ *
+ *   W    = c/(2f) · √(2/(εr+1))
+ *   εeff = (εr+1)/2 + (εr−1)/2 · (1 + 12h/W)^(−½)
+ *   ΔL   = 0.412·h · (εeff+0.3)·(W/h+0.264) / ((εeff−0.258)·(W/h+0.8))
+ *   L    = c/(2f·√εeff) − 2·ΔL
+ */
 
 document.getElementById('pa-btn').addEventListener('click', function() {
     var f=parseFloat(document.getElementById('pa-f').value)*parseFloat(document.getElementById('pa-fu').value);

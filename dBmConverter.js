@@ -1,4 +1,10 @@
-/* Unified dB/dBm Converter */
+/* Unified dB/dBm Converter — standard definitions
+ *
+ *   dBm ↔ Power:      P[W]  = 10^(dBm/10) × 10⁻³
+ *                     dBm   = 10·log₁₀(P/10⁻³)
+ *   Power ratio:      dB    = 10·log₁₀(P₂/P₁)
+ *   Amplitude ratio:  dB    = 20·log₁₀(A₂/A₁)
+ */
 
 function switchMode(m) {
     document.querySelectorAll('.mode-tab').forEach(function(t){ t.classList.remove('active'); });
@@ -10,6 +16,7 @@ function switchMode(m) {
 var ENG = function(v, unit) { return engFmt(v, unit || ''); };
 
 // ── dBm ↔ Power ───────────────────────────────────────────────────────────────
+// eslint-disable-next-line no-redeclare
 function updateDbm(src) {
     var dbmEl = document.getElementById('v-dbm');
     var wEl   = document.getElementById('v-watt');

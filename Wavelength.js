@@ -1,3 +1,10 @@
+/*
+ * Wavelength in Free Space or Dielectric Medium
+ *
+ *   λ   = c / (f·√εr)    (c = 3×10⁸ m/s)
+ *   λ/2 = c / (2·f·√εr)
+ *   λ/4 = c / (4·f·√εr)
+ */
 
 document.getElementById('wl-btn').addEventListener('click', function() {
     var f=parseFloat(document.getElementById('wl-f').value)*parseFloat(document.getElementById('wl-fu').value);

@@ -1,4 +1,10 @@
-/* RF Coil Designer */
+/* RF Coil Designer — Neumann loop formula + LC resonance
+ *
+ *   L   = μ₀·(D/2) · [ln(8·D/d) − 2]    (single-turn circular loop inductance)
+ *   C   = 1 / (4π²·f₀²·L)               (resonant capacitor at Larmor frequency f₀)
+ *
+ *   D = loop diameter, d = wire diameter, μ₀ = 4π×10⁻⁷ H/m
+ */
 var btn = document.getElementById("btn");
 btn.addEventListener('click', function() {
   var d = parseFloat(document.getElementById("d").value);

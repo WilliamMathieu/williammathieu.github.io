@@ -1,4 +1,14 @@
-/* Charge-Pump PLL Type-2 3rd-Order Passive Loop Filter */
+/* Charge-Pump PLL Type-2 3rd-Order Passive Loop Filter — Banerjee / ADI AN-1865
+ *
+ *   Open-loop: G(s) = Kd·Kvco·F(s) / (N·s)
+ *   Filter:    F(s) = (1 + s·T₂) / (s·C₁·(1 + s·T₃))
+ *
+ *   Design at ωc (loop BW) and phase margin φ:
+ *   T₂ = sin(φ) / (ωc·(1 − sin(φ)))
+ *   T₁ = 1 / (ωc²·T₂)
+ *   C₁ = Kd·Kvco / (N·ωc²·T₁) · √(1 + (ωc·T₂)²)
+ *   R  = T₂/C₁;   C₂ = 0.1·C₁   (3rd pole at ωp = 1/(R·C₂))
+ */
 
 document.getElementById('pll-btn').addEventListener('click', pll_calc);
 
@@ -40,25 +50,15 @@ function pll_calc() {
 
   // Use the Perrott/Banerjee iterative-free formula for type-2 3rd-order:
   // Step 1: compute T2 from phase margin
-  var sinPhi = Math.sin(phi), cosPhi = Math.cos(phi);
-  var T2 = (sinPhi + Math.sqrt(sinPhi*sinPhi + 4*cosPhi*cosPhi)) / (2 * wc * cosPhi) * cosPhi / cosPhi;
-  // Simpler direct: T2 = (1/wc) * (tan(pm) + sqrt(1 + tan(pm)^2))  — this is for 2nd order
-  // For type-2 3rd order, use empirical T2 ≈ (2·sin(pm)) / (wc · (1 - sin(pm)))
-  // Actually use the standard linearized formula:
-  T2 = (sinPhi) / (wc * (1 - sinPhi));
+  var sinPhi = Math.sin(phi);
+  // Type-2 3rd-order linearized formula: T2 = sin(pm) / (wc · (1 - sin(pm)))
+  var T2 = sinPhi / (wc * (1 - sinPhi));
   if (T2 <= 0) T2 = 1/wc;  // fallback
 
   var T1 = 1 / (wc * wc * T2);  // ensures phase contribution
 
-  // Required open-loop gain magnitude at wc:
-  //   |G(jwc)| = Kd·Kvco / (N·wc) · |F(jwc)| = 1
-  //   |F(jwc)| for RC filter F = (1+s·T2)/(s·T1·(1+s·T2)) at high freq ≈ T2/T1
-  //   |F(jwc)| = sqrt(1+(wc·T2)^2) / (wc·T1)
-  var Fmag = Math.sqrt(1 + (wc*T2)*(wc*T2)) / (wc * T1);
-  var C1 = Kd * Kvco * Fmag / (N * wc);
-
-  // C1 from unity gain requirement:
-  C1 = Kd * Kvco / (N * wc * wc * T1) * Math.sqrt(1 + wc*wc*T2*T2);
+  // C1 from unity open-loop gain at wc: |G(jwc)| = Kd·Kvco·|F(jwc)| / (N·wc) = 1
+  var C1 = Kd * Kvco / (N * wc * wc * T1) * Math.sqrt(1 + wc*wc*T2*T2);
 
   // R from T2 = R·C1
   var R = T2 / C1;
@@ -67,12 +67,6 @@ function pll_calc() {
   var C2_factor = 0.1;
   var C2 = C2_factor * C1;
   var T3 = R * C2;  // 3rd-order pole time constant
-
-  // Reference spur attenuation at fref (estimate): |F(j·2π·fref)| attenuation
-  // We'll compute open-loop gain |G| at the loop bandwidth as a sanity check
-  var G_at_wc_db = 20*Math.log10(Kd * Kvco / N / wc * Math.sqrt(1+(wc*T2)*(wc*T2)) / (wc*T1*(1)));
-  // Approx phase at wc: arg(G) = -180 + pm (by design)
-  var actual_pm_deg = pm;  // by construction
 
   showResults({T1:T1, T2:T2, T3:T3, R:R, C1:C1, C2:C2,
                wc:wc, pm:pm, N:N, Kd:Kd, Kvco:Kvco});

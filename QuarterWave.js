@@ -1,3 +1,9 @@
+/*
+ * Quarter-Wave Transformer — Pozar §5.7
+ *
+ *   Zt = √(Z₁ · Z₂)             (transformer characteristic impedance)
+ *   ℓ  = c / (4·f·√εr)          (physical length = λ/4 in medium)
+ */
 
 document.getElementById('qw-btn').addEventListener('click', function() {
     var Z1=parseFloat(document.getElementById('qw-z1').value);
