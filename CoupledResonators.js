@@ -68,7 +68,7 @@ function cr_calc() {
 
   showResults({f0:f0, f_plus:f_plus, f_minus:f_minus, BW:BW, Q:Q, Q_loaded:Q_loaded,
                k:k, k_crit:k_crit, coupling_regime:coupling_regime, L:L, C:C, R:R});
-  if (window.drawDiagram) window.drawDiagram({f_minus:f_minus, f_plus:f_plus, f0:f0, BW:BW});
+  if (window.drawDiagram) window.drawDiagram({f_minus:f_minus, f_plus:f_plus, f0:f0, BW:BW, k:k});
 }
 
 function showResults(r) {

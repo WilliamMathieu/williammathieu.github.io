@@ -30,11 +30,11 @@ document.getElementById('pa2-btn').addEventListener('click', function(){
   var M=neumann_M(r,r,d);
   var k_coup=M/L;
   var iso_dB=-20*Math.log10(Math.abs(k_coup));
-  // Optimal overlap: M=0 when d ≈ 1.54*r (empirical for circular loops)
-  var d_overlap=1.54*r;
-  var overlap_dist=2*r-d_overlap;
-  var ovfrac=overlap_dist/(2*r)*100;
-  // Capacitive decoupling: C_d cancels mutual reactance jωM → C_d = 1/(ω²M)... 
+  // Optimal overlap: M=0 when c-to-c ≈ 1.54*r (empirical for circular loops, always 23% of diameter)
+  var d_overlap=1.54*r; // optimal c-to-c for zero M
+  var current_overlap_mm=Math.max(0,(2*r-d)*1e3);
+  var current_ovfrac=d<2*r?(2*r-d)/(2*r)*100:0;
+  // Capacitive decoupling: C_d cancels mutual reactance jωM → C_d = 1/(ω²M)...
   // Actually: C_d chosen so Z_d = 1/(jωC_d) cancels the mutual coupling term
   var C_d=1/(w*w*Math.abs(M));
   // Preamplifier decoupling
@@ -42,12 +42,17 @@ document.getElementById('pa2-btn').addEventListener('click', function(){
   var lam4=3e8*vf/(4*f);
   var Zhigh=Z0*Z0/Zp;
   var dec_dB=20*Math.log10(1+Zhigh/(w*L));
+  var onote;
+  if(d>=2*r){onote='No overlap — move to '+(d_overlap*1e3).toFixed(1)+' mm c-to-c for zero M';}
+  else if(Math.abs(d-d_overlap)<0.05*r){onote='Near-optimal overlap — M ≈ 0 ✓';}
+  else if(d<d_overlap){onote='Past zero-M point — increase to '+(d_overlap*1e3).toFixed(1)+' mm c-to-c';}
+  else{onote='In overlap range — decrease to '+(d_overlap*1e3).toFixed(1)+' mm c-to-c for zero M';}
   document.getElementById('pa2-M').textContent=engFmt(M,'H');
   document.getElementById('pa2-k').textContent=k_coup.toFixed(4)+(Math.abs(k_coup)<0.02?' (low ✓)':' (significant)');
   document.getElementById('pa2-iso0').textContent=iso_dB.toFixed(1)+' dB';
-  document.getElementById('pa2-overlap').textContent=(d_overlap*1e3).toFixed(1)+' mm (c-to-c)';
-  document.getElementById('pa2-ovfrac').textContent=Math.max(0,ovfrac).toFixed(1)+'% of diameter';
-  document.getElementById('pa2-onote').textContent=d*1e3<d_overlap*1e3?'Current spacing allows overlap decoupling':'Increase spacing to enable overlap';
+  document.getElementById('pa2-overlap').textContent=current_overlap_mm.toFixed(1)+' mm  (optimal: '+(d_overlap*1e3).toFixed(1)+' mm)';
+  document.getElementById('pa2-ovfrac').textContent=current_ovfrac.toFixed(1)+'%  (optimal: 23.0%)';
+  document.getElementById('pa2-onote').textContent=onote;
   document.getElementById('pa2-Cd').textContent=engFmt(C_d,'F');
   document.getElementById('pa2-Cil').textContent='< 0.5 dB (typical)';
   document.getElementById('pa2-clen').textContent=(lam4*100).toFixed(1)+' cm';

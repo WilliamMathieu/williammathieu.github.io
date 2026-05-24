@@ -58,8 +58,8 @@ function drawDiagram(w,s,h,er,Z0lbl,bg){
   s2+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
   s2+='<rect x="'+(cx-wp/2-sp*2-20)+'" y="'+topY+'" width="'+(wp+sp*4+40)+'" height="'+hp+'" fill="#d4ecca" stroke="#5a9020" stroke-width="1" rx="1"/>';
   s2+='<text x="'+(cx+wp/4)+'" y="'+(topY+hp/2+4)+'" font-size="9.5" fill="#3a6010">εᵣ = '+er+'</text>';
-  s2+='<rect x="'+(cx-wp/2-sp*2-20)+'" y="'+(topY-10)+'" width="'+(sp*2)+'" height="10" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
-  s2+='<rect x="'+(cx+wp/2+sp)+'" y="'+(topY-10)+'" width="'+(sp*2+20)+'" height="10" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  s2+='<rect x="'+(cx-wp/2-sp*2-20)+'" y="'+(topY-10)+'" width="'+(sp+20)+'" height="10" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  s2+='<rect x="'+(cx+wp/2+sp)+'" y="'+(topY-10)+'" width="'+(sp+20)+'" height="10" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
   s2+='<rect x="'+(cx-wp/2-sp)+'" y="'+(topY-10)+'" width="'+sp+'" height="10" fill="#faf9ff" stroke="#e0d8ff" stroke-width="0.5"/>';
   s2+='<rect x="'+(cx+wp/2)+'" y="'+(topY-10)+'" width="'+sp+'" height="10" fill="#faf9ff" stroke="#e0d8ff" stroke-width="0.5"/>';
   s2+='<rect x="'+(cx-wp/2)+'" y="'+(topY-10)+'" width="'+wp+'" height="10" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
