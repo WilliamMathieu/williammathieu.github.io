@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="90" fill="#faf9ff" rx="3"/><line x1="100" y1="12" x2="100" y2="78" stroke="#AA77FF" stroke-width="4"/><path d="M100,45 Q55,45 65,22 Q100,8 100,45 Q100,8 135,22 Q145,45 100,45 Q145,45 135,68 Q100,82 100,45 Q100,82 65,68 Q55,45 100,45" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.2" opacity="0.7"/><text x="100" y="88" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">Half-wave dipole</text></svg>
