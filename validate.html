@@ -401,813 +401,205 @@
   <select id="fd-fu"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select>
   <button id="fd-btn"></button>
   <div id="fd-out"></div>
+
+  <!-- ═══ Added for expanded audit coverage ═══ -->
+  <!-- CLI / CoilDesigner (Circular-Loop Inductance) — reuse existing L, C, f -->
+  <input id="d"><input id="D"><button id="btn"></button>
+  <select id="f_dropdown"><option value="0">kHz</option><option value="1" selected>MHz</option><option value="2">GHz</option><option value="3">THz</option></select>
+
+  <!-- ESeries -->
+  <input id="es-val"><button id="es-btn"></button><div id="es-results"></div><span id="es-error"></span>
+  <select id="es-unit"><option value="ohm">ohm</option><option value="kohm" selected>kohm</option><option value="Mohm">Mohm</option><option value="pF">pF</option><option value="nF">nF</option><option value="uF">uF</option><option value="nH">nH</option><option value="uH">uH</option></select>
+  <select id="es-series"><option value="E6">E6</option><option value="E12">E12</option><option value="E24" selected>E24</option><option value="E48">E48</option><option value="E96">E96</option><option value="E192">E192</option></select>
+
+  <!-- TLLoss (ms-er/ms-w/ms-h/ms-t and cx-er/cx-d/cx-D already exist) -->
+  <select id="tl-type"><option value="mstrip" selected>mstrip</option><option value="coax">coax</option></select>
+  <input id="tl-f"><select id="tl-f-unit"><option value="1e6">MHz</option><option value="1e9" selected>GHz</option></select>
+  <input id="tl-len"><select id="tl-len-unit"><option value="1e-3">mm</option><option value="1e-2" selected>cm</option><option value="1">m</option></select>
+  <input id="ms-df"><input id="ms-sigma">
+  <select id="ms-w-unit"><option value="1e-6">um</option><option value="1e-3" selected>mm</option></select>
+  <select id="ms-h-unit"><option value="1e-6">um</option><option value="1e-3" selected>mm</option></select>
+  <select id="ms-t-unit"><option value="1e-6" selected>um</option><option value="1e-3">mm</option></select>
+  <input id="cx-df"><input id="cx-sigma">
+  <select id="cx-d-unit"><option value="1e-3" selected>mm</option><option value="1e-2">cm</option></select>
+  <select id="cx-D-unit"><option value="1e-3" selected>mm</option><option value="1e-2">cm</option></select>
+  <div id="mstrip-section"></div><div id="coax-section"></div><div id="tl-results"></div><span id="tl-error"></span><button id="tl-btn"></button>
+
+  <!-- LinkBudget -->
+  <input id="lb-pt"><input id="lb-ltx"><input id="lb-gt"><input id="lb-gr"><input id="lb-lrx"><input id="lb-lmisc"><input id="lb-d"><input id="lb-f"><input id="lb-nf"><input id="lb-snr"><input id="lb-bw"><button id="lb-btn"></button><div id="lb-out"></div>
+  <select id="lb-fu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select>
+  <select id="lb-bwu"><option value="1">Hz</option><option value="1e3" selected>kHz</option><option value="1e6">MHz</option></select>
+
+  <!-- AttenuatorDesign (tool-diagram already exists) -->
+  <input id="at-atten"><input id="at-z0"><input id="at-zs"><input id="at-zl"><button id="at-btn"></button><span id="at-r1"></span><span id="at-r2"></span><span id="at-r3"></span><span id="at-atten-check"></span><span id="at-rl"></span><div id="at-lpad-row"></div>
+  <select id="at-topo"><option value="pi" selected>pi</option><option value="t">t</option><option value="l">l</option><option value="bridged">bridged</option></select>
+
+  <!-- BirdcageCoil -->
+  <input id="bc-n"><input id="bc-r"><input id="bc-l"><input id="bc-d"><input id="bc-f"><button id="bc-btn"></button><span id="bc-Lleg"></span><span id="bc-Larc"></span><span id="bc-C"></span><span id="bc-cplace"></span><span id="bc-f1"></span><span id="bc-f2"></span><span id="bc-msep"></span><span id="bc-Q"></span>
+  <select id="bc-type"><option value="lp" selected>lp</option><option value="hp">hp</option></select>
+
+  <!-- TwoPortConverter -->
+  <input id="tp-z0"><input id="tp-11r"><input id="tp-11i"><input id="tp-12r"><input id="tp-12i"><input id="tp-21r"><input id="tp-21i"><input id="tp-22r"><input id="tp-22i"><button id="tp-btn"></button><div id="tp-out"></div>
+  <select id="tp-type"><option value="s" selected>s</option><option value="z">z</option><option value="y">y</option><option value="abcd">abcd</option></select>
+
+  <!-- FreqEnergyConverter (shared #error) -->
+  <input id="fe-f"><input id="fe-lam"><input id="fe-T"><input id="fe-E"><span id="fe-of"></span><span id="fe-olam"></span><span id="fe-oT"></span><span id="fe-ok"></span><span id="fe-ow"></span><span id="fe-oE"></span><span id="fe-oEJ"></span><span id="fe-oB0"></span><span id="fe-oband"></span>
+  <select id="fe-fu"><option value="1">Hz</option><option value="1e3">kHz</option><option value="1e6" selected>MHz</option><option value="1e9">GHz</option><option value="1e12">THz</option></select>
+  <select id="fe-lamu"><option value="1">m</option><option value="1e-3" selected>mm</option></select>
+  <select id="fe-tu"><option value="1e-9" selected>ns</option><option value="1">s</option></select>
+
+  <!-- CapacitorNetwork (shared #error) -->
+  <input id="numCaps" value="2"><div id="inputs-area"></div><span id="C_out"></span>
+  <select id="mode"><option value="series" selected>series</option><option value="parallel">parallel</option></select>
+  <select id="defaultUnit"><option value="uF" selected>uF</option><option value="nF">nF</option><option value="pF">pF</option></select>
+
+  <!-- PhasedArrayDecoupling (shared #error) -->
+  <input id="pa2-r"><input id="pa2-d"><input id="pa2-f"><input id="pa2-z0"><input id="pa2-zp"><button id="pa2-btn"></button><span id="pa2-M"></span><span id="pa2-k"></span><span id="pa2-iso0"></span><span id="pa2-overlap"></span><span id="pa2-ovfrac"></span><span id="pa2-onote"></span><span id="pa2-Cd"></span><span id="pa2-Cil"></span><span id="pa2-clen"></span><span id="pa2-Zhigh"></span><span id="pa2-pdec"></span>
+
+  <!-- SAREstimator (load-clean; not asserted — see audit notes) -->
+  <input id="sar-b1"><input id="sar-f"><input id="sar-sigma"><input id="sar-rho"><input id="sar-dc"><button id="sar-btn"></button><span id="sar-peak"></span><span id="sar-avg"></span><span id="sar-wb"></span><span id="sar-head"></span><span id="sar-e"></span><span id="sar-wb1"></span><span id="sar-b1lim"></span><span id="sar-margin"></span>
+  <select id="sar-tissue"><option value="muscle" selected>muscle</option><option value="custom">custom</option></select>
+
+  <!-- ArrayFactor (canvas smoke) -->
+  <input id="af-n"><input id="af-d"><input id="af-theta"><button id="af-btn"></button><canvas id="af-canvas" width="480" height="480"></canvas>
+
+  <!-- ImpedanceMatchingNetwork (load-clean) -->
+  <input id="imn-rs"><input id="imn-xs"><input id="imn-rl"><input id="imn-xl"><input id="imn-f"><input id="imn-z0"><button id="imn-btn"></button><div id="imn-results"></div>
+  <select id="imn-fu"><option value="1e6" selected>MHz</option></select>
+
+  <!-- PhaseNoiseJitter -->
+  <div id="pn-rows"></div><input id="pn-fc"><select id="pn-fcu"><option value="1e6" selected>MHz</option><option value="1e9">GHz</option></select><input id="pn-flow"><input id="pn-fhigh"><button id="pn-btn"></button><span id="pn-rms"></span><span id="pn-pp"></span><span id="pn-int"></span><span id="pn-fc-out"></span><span id="pn-band"></span><span id="pn-at1k"></span>
+
+  <!-- SParamPlotter (load-clean; file upload tool, no numeric assertions) -->
+  <div id="drop-zone"></div><input type="file" id="file-input"><span id="sp-error"></span><div id="controls-wrap"></div><div id="charts-wrap"></div><div id="param-checks"></div><span id="file-info"></span>
+
+  <!-- Sim/viz init DOM so self-initializing tools load without throwing -->
+  <select id="comp-type"></select><input id="comp-val"><select id="comp-unit"></select><div id="comp-val-row"></div><div id="comp-tl-row"></div><div id="comp-list"></div><div id="schematic"></div>
+  <textarea id="netlist-editor"></textarea><div id="spice-log"></div>
+  <div class="preset-btn" id="btn-rc_lpf"></div><span id="circuit-title"></span><span id="circuit-text"></span><a id="open-link"></a>
+  <span id="smoke-smith"></span><span id="smoke-sparam-vswr"></span><span id="smoke-sparam-db"></span><span id="smoke-spice"></span><span id="smoke-rf"></span><span id="smoke-falstad"></span>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════
      CALCULATOR SCRIPTS — loaded after DOM so getElementById works
      ═══════════════════════════════════════════════════════════════ -->
 <script src="tool-enhancements.js"></script>
-<script src="Microstrip.js"></script>
-<script src="Coaxial.js"></script>
-<script src="Wavelength.js"></script>
-<script src="SkinDepth.js"></script>
-<script src="CPW.js"></script>
-<script src="QuarterWave.js"></script>
-<script src="Dipole.js"></script>
-<script src="StubCalc.js"></script>
-<script src="BandpassCalc.js"></script>
-<script src="LNetwork.js"></script>
-<script src="Friis.js"></script>
-<script src="PatchAntenna.js"></script>
-<script src="NoiseFigure.js"></script>
-<script src="dBmConverter.js"></script>
-<script src="LCBalun.js"></script>
-<script src="FilterDesign.js"></script>
-<script src="Coupler.js"></script>
-<!-- Inline scripts extracted from HTML-only tools -->
+<!-- ═══════════════════════════════════════════════════════════════
+     ISOLATED CALCULATOR LOADER
+     Each calculator .js is fetched and executed inside its own function
+     scope via new Function(src). This runs the REAL shipped code (no inline
+     copies → zero drift) while keeping each file's top-level helpers
+     (showResults, rr, showError, drawDiagram, …) local — avoiding the
+     global-name collisions that otherwise prevent loading every calculator
+     together with plain <script src>. A few reactive tools are driven from
+     test setup() hooks via global entry points, so those names are
+     re-exported onto window after the file runs.
+     ═══════════════════════════════════════════════════════════════ -->
 <script>
-/* ── DiffPair (from DiffPair.html) ── */
-(function(){
-function msZ0(w,h,t,er){
-  var weff=w+(t/Math.PI)*(1+Math.log(2*h/t));
-  var u=weff/h;
-  var fu=6+(2*Math.PI-6)*Math.exp(-Math.pow(30.666/u,0.7528));
-  var Z0air=60*Math.log(fu/u+Math.sqrt(1+4/u/u));
-  var a=1+(1/49)*Math.log((Math.pow(u,4)+Math.pow(u/52,2))/(Math.pow(u,4)+0.432))+
-         (1/18.7)*Math.log(1+Math.pow(u/18.1,3));
-  var b=0.564*Math.pow((er-0.9)/(er+3),0.053);
-  var eeff=((er+1)/2+(er-1)/2*Math.pow(1+10/u,-a*b));
-  return{Z0:Z0air/Math.sqrt(eeff),eeff:eeff};
-}
-document.getElementById('dp2-btn').addEventListener('click',function(){
-  var w=parseFloat(document.getElementById('dp2-w').value);
-  var s=parseFloat(document.getElementById('dp2-s').value);
-  var h=parseFloat(document.getElementById('dp2-h').value);
-  var t=parseFloat(document.getElementById('dp2-t').value);
-  var er=parseFloat(document.getElementById('dp2-er').value);
-  if([w,s,h,t,er].some(isNaN)||[w,s,h].some(function(v){return v<=0;})) return;
-  var single=msZ0(w,h,t,er);
-  var Z0=single.Z0;
-  var Q=0.347*Math.exp(-2.655*s/h);
-  var Zodd=Z0*(1-Q);
-  var Zeven=Z0*(1+Q);
-  document.getElementById('dp2-z0single').textContent=Z0.toFixed(2)+' Ω';
-  document.getElementById('dp2-zodd').textContent=Zodd.toFixed(2)+' Ω';
-  document.getElementById('dp2-zdiff').textContent=(2*Zodd).toFixed(2)+' Ω';
-  document.getElementById('dp2-zeven').textContent=Zeven.toFixed(2)+' Ω';
-  document.getElementById('dp2-zcm').textContent=(Zeven/2).toFixed(2)+' Ω';
-});
-})();
-
-/* ── Wilkinson (from Wilkinson.html) ── */
-(function(){
-document.getElementById('wk-btn').addEventListener('click',function(){
-  var Z0=parseFloat(document.getElementById('wk-z0').value);
-  var K2=parseFloat(document.getElementById('wk-k2').value);
-  var f=parseFloat(document.getElementById('wk-f').value)*parseFloat(document.getElementById('wk-fu').value);
-  var er=parseFloat(document.getElementById('wk-er').value)||1;
-  if([Z0,K2,f].some(isNaN)||Z0<=0||K2<=0||f<=0) return;
-  var K=Math.sqrt(K2);
-  var Z1=Z0*Math.sqrt((1+K2)/Math.pow(K,3));
-  var Z2=Z0*Math.sqrt(K*(1+K2));
-  var Riso=Z0*(K+1/K);
-  var lam4=3e8/(4*f*Math.sqrt(er))*1000;
-  var s1_dB=10*Math.log10(1+1/K2);
-  var s2_dB=10*Math.log10(1+K2);
-  document.getElementById('wk-z1').textContent=Z1.toFixed(3)+' Ω';
-  document.getElementById('wk-z2').textContent=Z2.toFixed(3)+' Ω';
-  document.getElementById('wk-len').textContent=lam4.toFixed(2)+' mm (λ/4)';
-  document.getElementById('wk-s1').textContent='-'+s1_dB.toFixed(2)+' dB';
-  document.getElementById('wk-s2').textContent='-'+s2_dB.toFixed(2)+' dB';
-  document.getElementById('wk-r').textContent=Riso.toFixed(2)+' Ω';
-  document.getElementById('wk-iso').textContent='> 20 dB (ideal)';
-  document.getElementById('wk-rl').textContent='> 20 dB (ideal)';
-});
-})();
-
-/* ── RadarRange (from RadarRange.html) ── */
-(function(){
-document.getElementById('rd-btn').addEventListener('click',function(){
-  var Pt=parseFloat(document.getElementById('rd-pt').value);
-  var Gt=Math.pow(10,parseFloat(document.getElementById('rd-gt').value)/10);
-  var Gr=Math.pow(10,parseFloat(document.getElementById('rd-gr').value)/10);
-  var sig=parseFloat(document.getElementById('rd-sigma').value);
-  var f=parseFloat(document.getElementById('rd-f').value)*parseFloat(document.getElementById('rd-fu').value);
-  var Pmin_dBm=parseFloat(document.getElementById('rd-pmin').value);
-  if([Pt,Gt,Gr,sig,f,Pmin_dBm].some(isNaN)||Pt<=0||sig<=0||f<=0) return;
-  var lam=3e8/f;
-  var Pmin_W=1e-3*Math.pow(10,Pmin_dBm/10);
-  var Rmax=Math.pow(Pt*Gt*Gr*lam*lam*sig/Math.pow(4*Math.PI,3)/Pmin_W,0.25);
-  var Pr1k=Pt*Gt*Gr*lam*lam*sig/Math.pow(4*Math.PI,3)/Math.pow(1000,4);
-  var Pr1k_dBm=10*Math.log10(Pr1k/1e-3);
-  var EIRP_dBm=10*Math.log10(Pt/1e-3)+10*Math.log10(Gt);
-  document.getElementById('rd-rmax').textContent=engFmt(Rmax,'m');
-  document.getElementById('rd-pr1k').textContent=Pr1k_dBm.toFixed(1)+' dBm';
-  document.getElementById('rd-rangeatpmin').textContent=engFmt(Rmax,'m');
-  document.getElementById('rd-lam').textContent=engFmt(lam,'m');
-  document.getElementById('rd-eirp').textContent=EIRP_dBm.toFixed(1)+' dBm';
-  document.getElementById('rd-dbeq').textContent=(10*Math.log10(Pt)+10*Math.log10(Gt)+10*Math.log10(Gr)+20*Math.log10(lam)+10*Math.log10(sig)-30*Math.log10(4*Math.PI)).toFixed(1)+' dBm·m⁴';
-});
-})();
-
-/* ── PowerCombiner (from PowerCombiner.html) ── */
-(function(){
-document.getElementById('pc-btn').addEventListener('click',function(){
-  var N=parseInt(document.getElementById('pc-n').value);
-  var P=parseFloat(document.getElementById('pc-p').value);
-  var eta=parseFloat(document.getElementById('pc-eta').value);
-  var k=parseInt(document.getElementById('pc-fail').value)||0;
-  if(isNaN(N)||isNaN(P)||isNaN(eta)||N<1||eta<=0||eta>1||k<0||k>=N) return;
-  var Peach_W=1e-3*Math.pow(10,P/10);
-  var Ptotal_ideal_W=N*Peach_W;
-  var Pout_W=Ptotal_ideal_W*eta;
-  var Pout_dBm=10*Math.log10(Pout_W/1e-3);
-  var Cgain=Pout_dBm-P;
-  var Eloss_dB=-10*Math.log10(eta);
-  var surv=N-k;
-  var Pfail_W=Pout_W*(surv/N)*(surv/N);
-  var Pfail_dBm=10*Math.log10(Pfail_W/1e-3);
-  var degrad_dB=Pout_dBm-Pfail_dBm;
-  var pct_retained=(Pfail_W/Pout_W)*100;
-  document.getElementById('pc-pout').textContent=Pout_dBm.toFixed(2)+' dBm';
-  document.getElementById('pc-pout-w').textContent=engFmt(Pout_W,'W');
-  document.getElementById('pc-cgain').textContent='+'+Cgain.toFixed(1)+' dB';
-  document.getElementById('pc-eloss').textContent=Eloss_dB.toFixed(2)+' dB';
-  document.getElementById('pc-pfail').textContent=(k>0?Pfail_dBm.toFixed(2)+' dBm':'N/A (no failures)');
-  document.getElementById('pc-degrad').textContent=(k>0?'-'+degrad_dB.toFixed(1)+' dB':'0 dB');
-  document.getElementById('pc-surv').textContent=surv+' of '+N;
-  document.getElementById('pc-pct').textContent=(k>0?pct_retained.toFixed(0)+'%':'100%');
-});
-})();
-
-/* ── BondWireVia (from BondWireVia.html) ── */
-(function(){
-document.getElementById('bw-btn').addEventListener('click',function(){
-  var l=parseFloat(document.getElementById('bw-l').value);
-  var d=parseFloat(document.getElementById('bw-d').value);
-  var h=parseFloat(document.getElementById('bw-h').value);
-  if([l,d,h].some(isNaN)||l<=0||d<=0) return;
-  var L_nH=0.2*l*(Math.log(2*l/d)-0.75);
-  var X1GHz=2*Math.PI*1e9*L_nH*1e-9;
-  var X10GHz=2*Math.PI*10e9*L_nH*1e-9;
-  document.getElementById('bw-L').textContent=L_nH.toFixed(3)+' nH';
-  document.getElementById('bw-X').textContent=X1GHz.toFixed(1)+' Ω (1 GHz)';
-  document.getElementById('bw-X10').textContent=X10GHz.toFixed(1)+' Ω (10 GHz)';
-});
-document.getElementById('via-btn').addEventListener('click',function(){
-  var h=parseFloat(document.getElementById('via-h').value);
-  var d=parseFloat(document.getElementById('via-d').value);
-  var D=parseFloat(document.getElementById('via-D').value);
-  var er=parseFloat(document.getElementById('via-er').value);
-  if([h,d,D,er].some(isNaN)||h<=0||d<=0||D<=d) return;
-  var L_nH=0.2*h*Math.log(4*h/d);
-  var C_pF=1.41*er*h/Math.log(D/d);
-  var L_H=L_nH*1e-9, C_F=C_pF*1e-12;
-  var SRF=1/(2*Math.PI*Math.sqrt(L_H*C_F))/1e9;
-  document.getElementById('via-L').textContent=L_nH.toFixed(3)+' nH';
-  document.getElementById('via-C').textContent=C_pF.toFixed(3)+' pF';
-  document.getElementById('via-srf').textContent=SRF.toFixed(2)+' GHz';
-});
-})();
-
-/* ── PiTNetwork (from PiTNetwork.html) ── */
-(function(){
-document.getElementById('pt-btn').addEventListener('click',function(){
-  var f=parseFloat(document.getElementById('pt-f').value)*parseFloat(document.getElementById('pt-fu').value);
-  var R1=parseFloat(document.getElementById('pt-r1').value);
-  var R2=parseFloat(document.getElementById('pt-r2').value);
-  var Q=parseFloat(document.getElementById('pt-q').value);
-  var topo=document.getElementById('pt-topo').value;
-  if([f,R1,R2,Q].some(isNaN)||f<=0||R1<=0||R2<=0||Q<=0) return;
-  var w=2*Math.PI*f;
-  var Rh=Math.max(R1,R2), Rl=Math.min(R1,R2);
-  var Qmin=Math.sqrt(Rh/Rl-1);
-  if(Q<=Qmin) return;
-  var Rv, Q2, E1,E2,E3, lbl1,lbl2,lbl3;
-  if(topo==='pi-lp'||topo==='pi-hp'){
-    Rv=Rh/(Q*Q+1);
-    Q2=Math.sqrt(Rl/Rv-1);
-    if(topo==='pi-lp'){
-      E1=engFmt(Q/(w*Rh),'F'); lbl1='Shunt C₁';
-      E2=engFmt(Rv*(Q+Q2)/w,'H'); lbl2='Series L';
-      E3=engFmt(Q2/(w*Rl),'F'); lbl3='Shunt C₂';
-    } else {
-      E1=engFmt(Rh/(Q*w),'H'); lbl1='Shunt L₁';
-      E2=engFmt(1/(w*Rv*(Q+Q2)),'F'); lbl2='Series C';
-      E3=engFmt(Rl/(Q2*w),'H'); lbl3='Shunt L₂';
-    }
-  } else {
-    Rv=Rh*(Q*Q+1);
-    Q2=Math.sqrt(Rv/Rl-1);
-    if(topo==='t-lp'){
-      E1=engFmt(Q*Rh/w,'H'); lbl1='Series L₁';
-      E2=engFmt((Q+Q2)/(w*Rv),'F'); lbl2='Shunt C';
-      E3=engFmt(Q2*Rl/w,'H'); lbl3='Series L₂';
-    } else {
-      E1=engFmt(1/(Q*w*Rh),'F'); lbl1='Series C₁';
-      E2=engFmt(Rv/((Q+Q2)*w),'H'); lbl2='Shunt L';
-      E3=engFmt(1/(Q2*w*Rl),'F'); lbl3='Series C₂';
-    }
-  }
-  var BW=f/Q;
-  document.getElementById('pt-e1').textContent=lbl1+': '+E1;
-  document.getElementById('pt-e2').textContent=lbl2+': '+E2;
-  document.getElementById('pt-e3').textContent=lbl3+': '+E3;
-  document.getElementById('pt-qv').textContent=Q.toFixed(3);
-  document.getElementById('pt-bw').textContent=engFmt(BW,'Hz');
-  document.getElementById('pt-rv').textContent=engFmt(Rv,'Ω');
-});
-})();
-</script>
-<!-- IIFE-wrapped .js files that define showResults() — prevents global name collision -->
-<script>
-(function(){
-/* ── AmpStability.js ── */
-document.getElementById('amp-btn').addEventListener('click', amp_calc);
-function amp_calc() {
-  var s11m=parseFloat(document.getElementById('amp-s11m').value);
-  var s11a=parseFloat(document.getElementById('amp-s11a').value)||0;
-  var s12m=parseFloat(document.getElementById('amp-s12m').value);
-  var s12a=parseFloat(document.getElementById('amp-s12a').value)||0;
-  var s21m=parseFloat(document.getElementById('amp-s21m').value);
-  var s21a=parseFloat(document.getElementById('amp-s21a').value)||0;
-  var s22m=parseFloat(document.getElementById('amp-s22m').value);
-  var s22a=parseFloat(document.getElementById('amp-s22a').value)||0;
-  if(isNaN(s11m)||isNaN(s12m)||isNaN(s21m)||isNaN(s22m)) return;
-  var d2r=Math.PI/180;
-  var S11=polar(s11m,s11a*d2r), S12=polar(s12m,s12a*d2r);
-  var S21=polar(s21m,s21a*d2r), S22=polar(s22m,s22a*d2r);
-  var Delta=sub(mul(S11,S22),mul(S12,S21));
-  var Dmag=cabs(Delta);
-  var K=(1-s11m*s11m-s22m*s22m+Dmag*Dmag)/(2*s12m*s21m);
-  var DeltaS11conj=mul(Delta,conj(S11));
-  var mu=(1-s11m*s11m)/(cabs(sub(S22,DeltaS11conj))+s12m*s21m);
-  var DeltaS22conj=mul(Delta,conj(S22));
-  var mu2=(1-s22m*s22m)/(cabs(sub(S11,DeltaS22conj))+s12m*s21m);
-  var uncond=(K>1&&Dmag<1);
-  var S21_S12=s21m/s12m;
-  var MAG_db, MSG_db=10*Math.log10(S21_S12);
-  if(uncond) MAG_db=10*Math.log10(S21_S12)+10*Math.log10(K-Math.sqrt(K*K-1));
-  var S21_db=20*Math.log10(s21m), S11_db=20*Math.log10(s11m), S22_db=20*Math.log10(s22m);
-  amp_showResults({K:K,mu:mu,mu2:mu2,Dmag:Dmag,uncond:uncond,MAG_db:MAG_db,MSG_db:MSG_db,S21_db:S21_db,S11_db:S11_db,S22_db:S22_db});
-}
-function polar(r,t){return{re:r*Math.cos(t),im:r*Math.sin(t)};}
-function mul(a,b){return{re:a.re*b.re-a.im*b.im,im:a.re*b.im+a.im*b.re};}
-function sub(a,b){return{re:a.re-b.re,im:a.im-b.im};}
-function conj(a){return{re:a.re,im:-a.im};}
-function cabs(a){return Math.sqrt(a.re*a.re+a.im*a.im);}
-function amp_showResults(r) {
-  var container=document.getElementById('amp-results');
-  container.innerHTML=''; container.style.display='grid';
-  var verdict=r.uncond?'<span>Unconditionally stable</span>':'<span>Potentially unstable</span>';
-  var card=document.createElement('div'); card.className='res-card';
-  card.innerHTML='<h4>Stability Analysis</h4>'+
-    rr2('Verdict',verdict)+
-    rr2('Rollett K-factor',r.K.toFixed(4)+(r.K>1?' > 1 ✓':' < 1'),r.uncond)+
-    rr2('|Δ| (det magnitude)',r.Dmag.toFixed(4)+(r.Dmag<1?' < 1 ✓':' ≥ 1'))+
-    rr2('µ (input stability)',r.mu.toFixed(4)+(r.mu>1?' > 1 ✓':' ≤ 1'))+
-    rr2("µ′ (output stability)",r.mu2.toFixed(4)+(r.mu2>1?' > 1 ✓':' ≤ 1'));
-  var card2=document.createElement('div'); card2.className='res-card';
-  card2.innerHTML='<h4>Gain Parameters</h4>'+
-    rr2('|S₂₁| (forward gain)',r.S21_db.toFixed(2)+' dB')+
-    rr2('|S₁₁| (input return loss)',r.S11_db.toFixed(2)+' dB')+
-    rr2('|S₂₂| (output return loss)',r.S22_db.toFixed(2)+' dB')+
-    rr2('MSG (max stable gain)',r.MSG_db.toFixed(2)+' dB')+
-    (r.uncond?rr2('MAG (max available gain)',r.MAG_db.toFixed(2)+' dB',true):rr2('MAG','Undefined'));
-  container.appendChild(card); container.appendChild(card2);
-}
-function rr2(lbl,val,hi){
-  var s=hi?' style="font-weight:700;color:#AA77FF;"':'';
-  return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';
-}
-})();
-</script>
-<script>
-(function(){
-/* ── YagiAntenna.js ── */
-var C0_yagi=2.998e8;
-document.getElementById('yagi-btn').addEventListener('click', yagi_calc);
-function yagi_calc(){
-  var fv=parseFloat(document.getElementById('yagi-f').value);
-  var fmul=parseFloat(document.getElementById('yagi-f-unit').value);
-  var nEl=parseInt(document.getElementById('yagi-n').value)||3;
-  var dv=parseFloat(document.getElementById('yagi-diam').value)||1;
-  var dmul=parseFloat(document.getElementById('yagi-diam-unit').value);
-  if(!(fv>0)) return;
-  if(nEl<2||nEl>9) return;
-  var f=fv*fmul, lam=C0_yagi/f, d=dv*dmul;
-  var lengths_tbl={2:[.505,.473],3:[.505,.473,.451],4:[.505,.472,.451,.428],5:[.505,.472,.456,.436,.430],6:[.505,.472,.456,.436,.430,.430],7:[.505,.472,.456,.436,.430,.430,.430],8:[.505,.472,.456,.436,.430,.430,.430,.430],9:[.505,.472,.456,.436,.430,.430,.430,.430,.426]};
-  var spacing_tbl={2:[.25],3:[.25,.31],4:[.25,.31,.40],5:[.25,.31,.40,.42],6:[.25,.31,.40,.42,.42],7:[.25,.31,.40,.42,.42,.42],8:[.25,.31,.40,.42,.42,.42,.42],9:[.25,.31,.40,.42,.42,.42,.42,.42]};
-  var gain_tbl={2:3.8,3:5.9,4:7.1,5:8.2,6:9.2,7:10.0,8:10.7,9:11.3};
-  var fb_tbl={2:5,3:10,4:12,5:14,6:16,7:18,8:20,9:22};
-  var lengths=lengths_tbl[nEl], spacings=spacing_tbl[nEl];
-  var elements=[];
-  elements.push({name:'Reflector',lam_len:lengths[0],len_m:lengths[0]*lam,x_m:-0.25*lam});
-  elements.push({name:'Driven',lam_len:lengths[1],len_m:lengths[1]*lam,x_m:0});
-  for(var i=2;i<nEl;i++) elements.push({name:'Director '+(i-1),lam_len:lengths[i]||0.430,len_m:(lengths[i]||0.430)*lam,x_m:spacings[i-1]*lam});
-  var boomLen=elements[elements.length-1].x_m-elements[0].x_m;
-  var gain_dbi=gain_tbl[nEl]+2.15, fb_db=fb_tbl[nEl];
-  var HPBW_H=78/Math.sqrt(Math.pow(10,gain_dbi/10)/1.64);
-  yagi_showResults({elements:elements,boomLen:boomLen,lam:lam,f:f,nEl:nEl,gain_dbi:gain_dbi,gain_dbd:gain_tbl[nEl],fb_db:fb_db,Zin:25,HPBW_H:HPBW_H});
-}
-function yagi_showResults(r){
-  var container=document.getElementById('yagi-results');
-  container.innerHTML=''; container.style.display='grid';
-  var card=document.createElement('div'); card.className='res-card';
-  card.innerHTML='<h4>'+r.nEl+'-Element Yagi</h4>'+
-    rr3('Gain',r.gain_dbi.toFixed(1)+' dBi  ('+r.gain_dbd.toFixed(1)+' dBd)',true)+
-    rr3('Front-to-back ratio',r.fb_db.toFixed(0)+' dB (approx)')+
-    rr3('HPBW (H-plane)',r.HPBW_H.toFixed(0)+'°')+
-    rr3('Boom length',engFmt(r.boomLen,'m'),true)+
-    rr3('Input impedance','~'+r.Zin+' Ω')+
-    rr3('λ',engFmt(r.lam,'m'));
-  var card2=document.createElement('div'); card2.className='res-card';
-  card2.innerHTML='<h4>Element Lengths</h4>';
-  r.elements.forEach(function(el){
-    var hi=(el.name==='Driven');
-    card2.innerHTML+='<div class="res-row"><span class="res-lbl"'+(hi?' style="color:#AA77FF;"':'')+'>'+el.name+'</span><span class="res-val">'+engFmt(el.len_m,'m')+' | '+(el.x_m>=0?'+':'')+engFmt(el.x_m,'m')+'</span></div>';
-  });
-  container.appendChild(card); container.appendChild(card2);
-}
-function rr3(lbl,val,hi){var s=hi?' style="font-weight:700;color:#AA77FF;"':'';return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';}
-})();
-</script>
-<script>
-(function(){
-/* ── HelicalAntenna.js ── */
-var C0_helix=2.998e8;
-document.getElementById('helix-btn').addEventListener('click', helix_calc);
-function helix_calc(){
-  var fv=parseFloat(document.getElementById('helix-f').value);
-  var fmul=parseFloat(document.getElementById('helix-f-unit').value);
-  var n=parseFloat(document.getElementById('helix-n').value);
-  var Dv=parseFloat(document.getElementById('helix-D').value);
-  var Dmul=parseFloat(document.getElementById('helix-D-unit').value);
-  var Sv=parseFloat(document.getElementById('helix-S').value);
-  var Smul=parseFloat(document.getElementById('helix-S-unit').value);
-  var mode=document.getElementById('helix-mode').value;
-  if(!(fv>0)) return;
-  var f=fv*fmul, lam=C0_helix/f;
-  if(mode==='design'){
-    var n_use=n||10;
-    var D_opt=lam/Math.PI, S_opt=lam/4;
-    var alpha=Math.atan(S_opt/(Math.PI*D_opt))*180/Math.PI;
-    var C=Math.PI*D_opt;
-    var Gain_db=10*Math.log10(15*n_use*(C/lam)*(C/lam)*(S_opt/lam));
-    var HPBW=52/(C/lam*Math.sqrt(n_use*S_opt/lam));
-    var Z_in=140*(C/lam);
-    var L_total=n_use*Math.sqrt(C*C+S_opt*S_opt);
-    helix_showResults({D:D_opt,S:S_opt,alpha:alpha,n:n_use,lam:lam,Gain_db:Gain_db,HPBW:HPBW,Z_in:Z_in,L_total:L_total,f:f,mode:'design'});
-  } else {
-    if(!(n>0)||!(Dv>0)||!(Sv>0)) return;
-    var D=Dv*Dmul, S=Sv*Smul, C2=Math.PI*D;
-    var alpha2=Math.atan(S/C2)*180/Math.PI;
-    var ratio=C2/lam;
-    var Gain_db2=10*Math.log10(15*n*ratio*ratio*S/lam);
-    var HPBW2=52/(ratio*Math.sqrt(n*S/lam));
-    var Z_in2=140*ratio;
-    var L_total2=n*Math.sqrt(C2*C2+S*S);
-    helix_showResults({D:D,S:S,alpha:alpha2,n:n,lam:lam,Gain_db:Gain_db2,HPBW:HPBW2,Z_in:Z_in2,L_total:L_total2,f:f,mode:'analyze'});
-  }
-}
-function helix_showResults(r){
-  var container=document.getElementById('helix-results');
-  container.innerHTML=''; container.style.display='grid';
-  var card=document.createElement('div'); card.className='res-card';
-  card.innerHTML='<h4>Axial-Mode Helix</h4>'+
-    rr4('Frequency',engFmt(r.f,'Hz'))+
-    rr4('Free-space wavelength, λ',engFmt(r.lam,'m'))+
-    rr4('Helix diameter, D',engFmt(r.D,'m')+'  (C/λ = '+(Math.PI*r.D/r.lam).toFixed(3)+')')+
-    rr4('Turn spacing, S',engFmt(r.S,'m')+'  (S/λ = '+(r.S/r.lam).toFixed(3)+')')+
-    rr4('Pitch angle, α',r.alpha.toFixed(1)+'°  (optimal ≈ 14°)')+
-    rr4('Number of turns, N',r.n.toString())+
-    rr4('Total wire length',engFmt(r.L_total,'m'));
-  var card2=document.createElement('div'); card2.className='res-card';
-  card2.innerHTML='<h4>Performance</h4>'+
-    rr4('Directivity/Gain',r.Gain_db.toFixed(1)+' dBi',true)+
-    rr4('Half-power beamwidth',r.HPBW.toFixed(1)+'°',true)+
-    rr4('Input impedance',r.Z_in.toFixed(0)+' Ω');
-  container.appendChild(card); container.appendChild(card2);
-}
-function rr4(lbl,val,hi){var s=hi?' style="font-weight:700;color:#AA77FF;"':'';return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';}
-})();
-</script>
-<script>
-(function(){
-/* ── CoupledResonators.js ── */
-document.getElementById('cr-btn').addEventListener('click', cr_calc);
-function cr_calc(){
-  var Lv=parseFloat(document.getElementById('cr-L').value);
-  var Lmul=parseFloat(document.getElementById('cr-L-unit').value);
-  var Cv=parseFloat(document.getElementById('cr-C').value);
-  var Cmul=parseFloat(document.getElementById('cr-C-unit').value);
-  var Rv=parseFloat(document.getElementById('cr-R').value)||0;
-  var kv=parseFloat(document.getElementById('cr-k').value);
-  var Mv=parseFloat(document.getElementById('cr-M').value);
-  var Mv_u=parseFloat(document.getElementById('cr-M-unit').value);
-  if(!(Lv>0)||!(Cv>0)) return;
-  var L=Lv*Lmul, C=Cv*Cmul, R=Rv;
-  var f0=1/(2*Math.PI*Math.sqrt(L*C));
-  var w0=2*Math.PI*f0;
-  var Q=(R>0)?w0*L/R:Infinity;
-  var k;
-  if(!isNaN(kv)&&kv>0) k=kv;
-  else if(!isNaN(Mv)&&Mv>0) k=Mv*Mv_u/L;
-  else return;
-  if(k<=0||k>=1) return;
-  var f_plus=f0/Math.sqrt(1-k), f_minus=f0/Math.sqrt(1+k);
-  var BW=k*f0, Q_loaded=1/k;
-  var k_crit=(Q<Infinity)?1/Q:0;
-  var coupling_regime=(k<k_crit)?'Under-coupled':(k>k_crit?'Over-coupled':'Critically coupled');
-  cr_showResults({f0:f0,f_plus:f_plus,f_minus:f_minus,BW:BW,Q:Q,Q_loaded:Q_loaded,k:k,k_crit:k_crit,coupling_regime:coupling_regime});
-}
-function cr_showResults(r){
-  var container=document.getElementById('cr-results');
-  container.innerHTML=''; container.style.display='grid';
-  var QStr=isFinite(r.Q)?r.Q.toFixed(1):'∞ (lossless)';
-  var card=document.createElement('div'); card.className='res-card';
-  card.innerHTML='<h4>Coupled Resonator Response</h4>'+
-    rr5('Uncoupled resonant frequency, f₀',engFmt(r.f0,'Hz'))+
-    rr5('Unloaded Q (single resonator)',QStr)+
-    rr5('Coupling coefficient, k',r.k.toFixed(4))+
-    rr5('Critical coupling, k_crit',isFinite(r.k_crit)?r.k_crit.toFixed(4):'N/A')+
-    rr5('Coupling regime',r.coupling_regime);
-  var card2=document.createElement('div'); card2.className='res-card';
-  card2.innerHTML='<h4>Frequency Splitting</h4>'+
-    rr5('Even mode (lower), f₋',engFmt(r.f_minus,'Hz'),true)+
-    rr5('Odd mode (upper), f₊',engFmt(r.f_plus,'Hz'),true)+
-    rr5('Mode splitting, Δf',engFmt(r.f_plus-r.f_minus,'Hz'))+
-    rr5('Passband bandwidth',engFmt(r.BW,'Hz')+'  (= k·f₀)',true)+
-    rr5('Loaded Q',r.Q_loaded.toFixed(1)+'  (= 1/k)');
-  container.appendChild(card); container.appendChild(card2);
-}
-function rr5(lbl,val,hi){var s=hi?' style="font-weight:700;color:#AA77FF;"':'';return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';}
-})();
-</script>
-<script>
-(function(){
-/* ── PLLFilter.js ── */
-document.getElementById('pll-btn').addEventListener('click', pll_calc);
-function pll_calc(){
-  var Kd=parseFloat(document.getElementById('pll-kd').value);
-  var Ko=parseFloat(document.getElementById('pll-ko').value);
-  var Ko_u=parseFloat(document.getElementById('pll-ko-unit').value);
-  var N=parseFloat(document.getElementById('pll-n').value);
-  var bw=parseFloat(document.getElementById('pll-bw').value);
-  var bw_u=parseFloat(document.getElementById('pll-bw-unit').value);
-  var pm=parseFloat(document.getElementById('pll-pm').value);
-  if(!(Kd>0)||!(Ko>0)||!(N>0)||!(bw>0)||!(pm>0&&pm<90)) return;
-  var Kvco=Ko*Ko_u, wc=2*Math.PI*bw*bw_u, phi=pm*Math.PI/180;
-  var sinPhi=Math.sin(phi);
-  var T2=sinPhi/(wc*(1-sinPhi));
-  if(T2<=0) T2=1/wc;
-  var T1=1/(wc*wc*T2);
-  var C1=Kd*Kvco/(N*wc*wc*T1)*Math.sqrt(1+wc*wc*T2*T2);
-  var R=T2/C1;
-  var C2=0.1*C1, T3=R*C2;
-  pll_showResults({T1:T1,T2:T2,T3:T3,R:R,C1:C1,C2:C2,wc:wc,pm:pm,N:N,Kd:Kd,Kvco:Kvco});
-}
-function pll_showResults(r){
-  var container=document.getElementById('pll-results');
-  container.innerHTML=''; container.style.display='grid';
-  var card=document.createElement('div'); card.className='res-card';
-  card.innerHTML='<h4>Loop Filter Components</h4>'+
-    rr6('Series resistor, R',engFmt(r.R,'Ω'),true)+
-    rr6('Lead capacitor, C₁',engFmt(r.C1,'F'),true)+
-    rr6('Lag capacitor, C₂',engFmt(r.C2,'F'));
-  var card2=document.createElement('div'); card2.className='res-card';
-  card2.innerHTML='<h4>Design Verification</h4>'+
-    rr6('Zero frequency, f_z',engFmt(1/(2*Math.PI*r.T2),'Hz'))+
-    rr6('Pole frequency, f_p1',engFmt(1/(2*Math.PI*r.T1),'Hz'))+
-    rr6('3rd pole, f_p2',engFmt(1/(2*Math.PI*r.T3),'Hz'))+
-    rr6('Loop bandwidth',engFmt(r.wc/(2*Math.PI),'Hz'))+
-    rr6('Phase margin (design target)',r.pm.toFixed(1)+'°')+
-    rr6('Open-loop unity-gain at BW','By design ✓');
-  container.appendChild(card); container.appendChild(card2);
-}
-function rr6(lbl,val,hi){var s=hi?' style="font-weight:700;color:#AA77FF;"':'';return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';}
-})();
-</script>
-<script>
-(function(){
-/* ── SteppedImpedanceLPF.js ── */
-var C0_si=2.998e8;
-document.getElementById('silpf-btn').addEventListener('click', silpf_calc);
-function silpf_calc(){
-  var n=parseInt(document.getElementById('silpf-n').value)||3;
-  var fc_v=parseFloat(document.getElementById('silpf-fc').value);
-  var fc_mul=parseFloat(document.getElementById('silpf-fc-unit').value);
-  var Zh=parseFloat(document.getElementById('silpf-zh').value)||120;
-  var Zl=parseFloat(document.getElementById('silpf-zl').value)||20;
-  var Z0=parseFloat(document.getElementById('silpf-z0').value)||50;
-  var resp=document.getElementById('silpf-resp').value;
-  var er=parseFloat(document.getElementById('silpf-er').value)||4.4;
-  var h=parseFloat(document.getElementById('silpf-h').value)||1;
-  if(!(fc_v>0)||n<1||n>9||Zh<=Z0||Zl>=Z0) return;
-  var fc=fc_v*fc_mul;
-  var g=si_prototype(n,resp);
-  if(!g) return;
-  var lam_sub=C0_si/(fc*Math.sqrt(er));
-  var sections=[];
-  for(var i=0;i<n;i++){
-    var gk=g[i+1], isHigh=(i%2===0), Zk=isHigh?Zh:Zl;
-    var beta_l_rad=isHigh?(gk*Z0/Zh):(gk*Zl/Z0);
-    var beta_l_deg=beta_l_rad*180/Math.PI;
-    var length_m=(beta_l_rad/(2*Math.PI))*lam_sub;
-    var wh=si_zToW(Zk,er);
-    sections.push({idx:i+1,type:isHigh?'High-Z (series L)':'Low-Z (shunt C)',gk:gk,Zk:Zk,beta_l_deg:beta_l_deg,length_m:length_m,wh:wh});
-  }
-  si_showResults(sections,fc,Z0,Zh,Zl,er,h,resp,n);
-}
-function si_prototype(n,resp){
-  var butter={1:[1,2,1],2:[1,1.414,1.414,1],3:[1,1,2,1,1],4:[1,0.765,1.848,1.848,0.765,1],5:[1,0.618,1.618,2,1.618,0.618,1]};
-  var cheby={1:[1,0.6986,1],2:[1,1.4029,0.7071,1.9841],3:[1,1.5963,1.0967,1.5963,1],4:[1,1.6703,1.1926,2.3661,0.8419,1.9841],5:[1,1.7058,1.2296,2.5408,1.2296,1.7058,1]};
-  var tbl=(resp==='cheby')?cheby:butter;
-  if(!tbl[n]){
-    // fallback for n>5: use butter for simplicity
-    var fullButter={6:[1,0.518,1.414,1.932,1.932,1.414,0.518,1],7:[1,0.445,1.247,1.802,2,1.802,1.247,0.445,1],8:[1,0.390,1.111,1.663,1.962,1.962,1.663,1.111,0.390,1],9:[1,0.347,1,1.532,1.879,2,1.879,1.532,1,0.347,1]};
-    return fullButter[n]||null;
-  }
-  return tbl[n];
-}
-function si_zToW(Z,er){
-  var A=Z/60*Math.sqrt((er+1)/2)+(er-1)/(er+1)*(0.23+0.11/er);
-  var wh_n=8*Math.exp(A)/(Math.exp(2*A)-2);
-  var B=377*Math.PI/(2*Z*Math.sqrt(er));
-  var wh_w=2/Math.PI*(B-1-Math.log(2*B-1)+(er-1)/(2*er)*(Math.log(B-1)+0.39-0.61/er));
-  return (wh_n<2)?wh_n:wh_w;
-}
-function si_showResults(sections,fc,Z0,Zh,Zl,er,h,resp,n){
-  var container=document.getElementById('silpf-results');
-  container.innerHTML=''; container.style.display='grid';
-  var totalLen=sections.reduce(function(a,s){return a+s.length_m;},0);
-  var sum=document.createElement('div'); sum.className='res-card';
-  sum.innerHTML='<h4>Filter Summary</h4>'+
-    rr7('Response',resp==='cheby'?'Chebyshev 0.5 dB ripple':'Butterworth')+
-    rr7('Order',n)+
-    rr7('Cutoff f_c',engFmt(fc,'Hz'))+
-    rr7('High-Z lines',Zh.toFixed(0)+' Ω')+
-    rr7('Low-Z lines',Zl.toFixed(0)+' Ω')+
-    rr7('Total length',engFmt(totalLen,'m'),true);
-  container.appendChild(sum);
-  var card=document.createElement('div'); card.className='res-card';
-  card.innerHTML='<h4>Section Dimensions</h4>';
-  sections.forEach(function(s){
-    var w_mm=s.wh*h;
-    card.innerHTML+='<div class="res-row"><span class="res-lbl">'+s.idx+': '+s.type+'</span><span class="res-val">'+s.Zk.toFixed(0)+' Ω | '+s.beta_l_deg.toFixed(1)+'° | '+engFmt(s.length_m,'m')+' | w='+w_mm.toFixed(2)+'mm</span></div>';
-  });
-  container.appendChild(card);
-}
-function rr7(lbl,val,hi){var s=hi?' style="font-weight:700;color:#AA77FF;"':'';return '<div class="res-row"><span class="res-lbl">'+lbl+'</span><span class="res-val"'+s+'>'+val+'</span></div>';}
-})();
-</script>
-<!-- LC.js and Waveguide.js both define showResults(); wrap each in an IIFE to prevent collision -->
-<script>
-(function() {
-  document.getElementById('lc-btn').addEventListener('click', lc_solve);
-  var Lmul_map = {'1':1e-6,'2':1e-9,'3':1e-12};
-  var Cmul_map = {'1':1e-6,'2':1e-9,'3':1e-12};
-  var fmul_map = {'0':1e3,'1':1e6,'2':1e9,'3':1e12};
-  function lc_solve() {
-    clearError();
-    clearResults();
-    var Lstr = document.getElementById('L').value.trim();
-    var Cstr = document.getElementById('C').value.trim();
-    var fstr = document.getElementById('f').value.trim();
-    var LFilled = Lstr !== '';
-    var CFilled = Cstr !== '';
-    var fFilled = fstr !== '';
-    var filled = (LFilled ? 1 : 0) + (CFilled ? 1 : 0) + (fFilled ? 1 : 0);
-    if (filled < 2) { showError('Fill in any two fields; leave the third blank to solve for it.'); return; }
-    if (filled === 3) { showError('Leave one field blank — the tool solves for the missing variable.'); return; }
-    var Lmul = Lmul_map[document.getElementById('L-unit').value];
-    var Cmul = Cmul_map[document.getElementById('C-unit').value];
-    var fmul = fmul_map[document.getElementById('f-unit').value];
-    var Lv, Cv, fv, solved;
-    if (!fFilled) {
-      Lv = parseFloat(Lstr) * Lmul;
-      Cv = parseFloat(Cstr) * Cmul;
-      if (!(Lv > 0) || !(Cv > 0)) { showError('Enter valid positive values for L and C.'); return; }
-      fv = 1 / (2 * Math.PI * Math.sqrt(Lv * Cv));
-      solved = 'f';
-    } else if (!CFilled) {
-      Lv = parseFloat(Lstr) * Lmul;
-      fv = parseFloat(fstr) * fmul;
-      if (!(Lv > 0) || !(fv > 0)) { showError('Enter valid positive values for L and f.'); return; }
-      Cv = 1 / (4 * Math.PI * Math.PI * fv * fv * Lv);
-      solved = 'C';
-    } else {
-      Cv = parseFloat(Cstr) * Cmul;
-      fv = parseFloat(fstr) * fmul;
-      if (!(Cv > 0) || !(fv > 0)) { showError('Enter valid positive values for C and f.'); return; }
-      Lv = 1 / (4 * Math.PI * Math.PI * fv * fv * Cv);
-      solved = 'L';
-    }
-    showResults(Lv, Cv, fv, solved);
-    if (window.drawDiagram) window.drawDiagram(Lv, Cv, fv);
-  }
-  function showResults(L, C, f, solved) {
-    var container = document.getElementById('lc-results');
-    container.style.display = 'grid';
-    var highlight = 'font-weight:700;color:#AA77FF;';
-    var card = document.createElement('div');
-    card.className = 'res-card';
-    card.innerHTML =
-      '<h4>LC Resonance</h4>' +
-      resRow('Inductance, L',          engFmt(L, 'H'),              solved === 'L' ? highlight : '') +
-      resRow('Capacitance, C',         engFmt(C, 'F'),              solved === 'C' ? highlight : '') +
-      resRow('Resonant frequency, f₀', engFmt(f, 'Hz'),        solved === 'f' ? highlight : '') +
-      resRow('Angular frequency, ω₀', engFmt(2*Math.PI*f,'rad/s'), '');
-    container.appendChild(card);
-  }
-  function resRow(lbl, val, style) {
-    return '<div class="res-row"><span class="res-lbl">' + lbl + '</span>' +
-           '<span class="res-val" style="' + style + '">' + val + '</span></div>';
-  }
-  function clearResults() {
-    var container = document.getElementById('lc-results');
-    container.innerHTML = '';
-    container.style.display = '';
-  }
-  function showError(msg) { var el = document.getElementById('lc-error'); if (el) el.textContent = msg; }
-  function clearError()   { var el = document.getElementById('lc-error'); if (el) el.textContent = ''; }
-})();
-</script>
-<script>
-(function() {
-  var C0 = 2.998e8;
-  var MU0 = 4 * Math.PI * 1e-7;
-  var EPS0 = 8.854e-12;
-  document.getElementById('wg-btn').addEventListener('click', wg_calc);
-  function wg_calc() {
-    clearError();
-    var av  = parseFloat(document.getElementById('wg-a').value);
-    var amul = parseFloat(document.getElementById('wg-a-unit').value);
-    var bv  = parseFloat(document.getElementById('wg-b').value);
-    var bmul = parseFloat(document.getElementById('wg-b-unit').value);
-    var fv  = parseFloat(document.getElementById('wg-f').value);
-    var fmul = parseFloat(document.getElementById('wg-f-unit').value);
-    var er  = parseFloat(document.getElementById('wg-er').value) || 1;
-    var sigmav = parseFloat(document.getElementById('wg-sigma').value) || 5.8e7;
-    var tanD = parseFloat(document.getElementById('wg-tanD').value) || 0;
-    if (!(av > 0)) { showError('Enter a valid broad-wall dimension a.'); return; }
-    if (!(bv > 0)) { showError('Enter a valid narrow-wall dimension b.'); return; }
-    if (!(fv > 0)) { showError('Enter a valid operating frequency.'); return; }
-    var a = av * amul;
-    var b = bv * bmul;
-    var f = fv * fmul;
-    if (b >= a) { showError('b must be less than a (narrow wall < broad wall).'); return; }
-    var mu  = MU0;
-    var eps = er * EPS0;
-    var vp_med = 1 / Math.sqrt(mu * eps);
-    var modes = [];
-    for (var m = 0; m <= 3; m++) {
-      for (var n = 0; n <= 3; n++) {
-        if (m === 0 && n === 0) continue;
-        var fc = vp_med / 2 * Math.sqrt((m/a)*(m/a) + (n/b)*(n/b));
-        modes.push({ m:m, n:n, fc:fc, label:'TE'+m+n });
+window.CALC_FILES = [
+  'Microstrip.js',
+  'Coaxial.js',
+  'Wavelength.js',
+  'SkinDepth.js',
+  'CPW.js',
+  'QuarterWave.js',
+  'Dipole.js',
+  'StubCalc.js',
+  'BandpassCalc.js',
+  'LNetwork.js',
+  'Friis.js',
+  'PatchAntenna.js',
+  'NoiseFigure.js',
+  'dBmConverter.js',
+  'LCBalun.js',
+  'FilterDesign.js',
+  'Coupler.js',
+  'DiffPair.js',
+  'Wilkinson.js',
+  'RadarRange.js',
+  'PowerCombiner.js',
+  'BondWireVia.js',
+  'PiTNetwork.js',
+  'VSWRConverter.js',
+  'Stripline.js',
+  'IP3Calc.js',
+  'AmpStability.js',
+  'YagiAntenna.js',
+  'HelicalAntenna.js',
+  'CoupledResonators.js',
+  'PLLFilter.js',
+  'SteppedImpedanceLPF.js',
+  'LC.js',
+  'Waveguide.js',
+  'LinkBudget.js',
+  'ArrayFactor.js',
+  'AttenuatorDesign.js',
+  'BirdcageCoil.js',
+  'CLC.js',
+  'CapacitorNetwork.js',
+  'CoilDesigner.js',
+  'CLI.js',
+  'ESeries.js',
+  'FreqEnergyConverter.js',
+  'ImpedanceMatchingNetwork.js',
+  'PhaseNoiseJitter.js',
+  'PhasedArrayDecoupling.js',
+  'SAREstimator.js',
+  'SurfaceCoilDesigner.js',
+  'TLLoss.js',
+  'TwoPortConverter.js',
+  'SmithChart.js',
+  'SParamPlotter.js',
+  'SpiceSim.js',
+  'RFSimulator.js',
+  'FalstadSim.js'
+];
+window.CALC_EXPORTS = {
+  'NoiseFigure.js':  ['nfBuild', 'nfCalc'],
+  'dBmConverter.js': ['updateDbm'],
+  'VSWRConverter.js':['vswrUpdate'],
+  'FreqEnergyConverter.js': ['feUpdate'],
+  'CapacitorNetwork.js':    ['buildInputs', 'calculate'],
+  'SmithChart.js':   ['zToGamma', 'gammaToZ'],
+  'SParamPlotter.js':['toVSWR', 'toMagDB'],
+  'SpiceSim.js':     ['parseSuffix'],
+  'RFSimulator.js':  ['cmag', 'C', 'cmul'],
+  'FalstadSim.js':   ['encodeCct']
+};
+window.__loadErrors = {};
+window.preloadCalculators = async function () {
+  for (var i = 0; i < window.CALC_FILES.length; i++) {
+    var f = window.CALC_FILES[i];
+    try {
+      var src = await (await fetch(f)).text();
+      var exp = window.CALC_EXPORTS[f];
+      if (exp) {
+        for (var j = 0; j < exp.length; j++) {
+          var n = exp[j];
+          src += '\n;try{window[' + JSON.stringify(n) + ']=' + n + ';}catch(e){}';
+        }
       }
+      (new Function(src))();
+    } catch (e) {
+      window.__loadErrors[f] = String((e && e.message) || e);
+      console.error('[load] ' + f, e);
     }
-    for (var m2 = 1; m2 <= 3; m2++) {
-      for (var n2 = 1; n2 <= 3; n2++) {
-        var fc2 = vp_med / 2 * Math.sqrt((m2/a)*(m2/a) + (n2/b)*(n2/b));
-        modes.push({ m:m2, n:n2, fc:fc2, label:'TM'+m2+n2 });
-      }
-    }
-    modes.sort(function(x,y){ return x.fc - y.fc; });
-    var seen = {}, uniqModes = [];
-    modes.forEach(function(mo) { if (!seen[mo.label]) { seen[mo.label]=true; uniqModes.push(mo); } });
-    modes = uniqModes.slice(0, 8);
-    var fc10 = vp_med / (2 * a);
-    var fc20 = vp_med / a;
-    var fc01 = vp_med / (2 * b);
-    var result = { a:a, b:b, f:f, fc10:fc10, fc20:fc20, fc01:fc01, er:er, modes:modes, sigma:sigmav, tanD:tanD };
-    if (f > fc10) {
-      var k0   = 2 * Math.PI * f / C0;
-      var km   = k0 * Math.sqrt(er);
-      var kc   = Math.PI / a;
-      var beta = Math.sqrt(km*km - kc*kc);
-      var lambda_g = 2 * Math.PI / beta;
-      var Zw   = (2 * Math.PI * f * MU0) / beta;
-      var vph  = 2 * Math.PI * f / beta;
-      var vgr  = (beta / (2*Math.PI*f)) * C0*C0 / er;
-      var Rs   = Math.sqrt(Math.PI * f * MU0 / sigmav);
-      var w2   = 2*Math.PI*f;
-      var alpha_c_npm = Rs / (a*a*a * b * beta * w2 * MU0) * (2*b*Math.PI*Math.PI + a*a*a*beta*beta);
-      var alpha_c = 8.686 * alpha_c_npm;
-      var alpha_d = (tanD > 0 && er > 1) ? 8.686 * km*km * tanD / (2*beta) : 0;
-      result.beta = beta; result.lambda_g = lambda_g; result.Zw = Zw;
-      result.vph = vph; result.vgr = vgr; result.alpha_c = alpha_c; result.alpha_d = alpha_d;
-    }
-    showResults(result);
-    if (window.drawDiagram) window.drawDiagram(result);
   }
-  function showResults(res) {
-    var container = document.getElementById('wg-results');
-    container.innerHTML = '';
-    container.style.display = 'grid';
-    var fc10 = res.fc10;
-    var ratio = res.f / fc10;
-    var aboveCutoff = res.f > fc10;
-    var card1 = document.createElement('div');
-    card1.className = 'res-card';
-    card1.innerHTML = '<h4>TE₁₀ Dominant Mode</h4>' +
-      rr('TE₁₀ cutoff frequency, f<sub>c10</sub>', engFmt(fc10,'Hz')) +
-      rr('Operating frequency', engFmt(res.f,'Hz')) +
-      rr('f / f<sub>c10</sub>', ratio.toFixed(3) + (aboveCutoff ? ' — propagating' : ' — EVANESCENT'), false, true);
-    if (aboveCutoff) {
-      card1.innerHTML +=
-        rr('Guide wavelength, λ<sub>g</sub>', engFmt(res.lambda_g,'m')) +
-        rr('TE₁₀ wave impedance, Z<sub>w</sub>', res.Zw.toFixed(2)+' Ω') +
-        rr('Phase velocity, v<sub>ph</sub>', (res.vph/C0).toFixed(3)+' × c') +
-        rr('Group velocity, v<sub>gr</sub>', (res.vgr/C0).toFixed(3)+' × c') +
-        rr('Conductor loss, α<sub>c</sub>', res.alpha_c.toFixed(4)+' dB/m') +
-        rr('Dielectric loss, α<sub>d</sub>', res.alpha_d.toFixed(4)+' dB/m');
-    }
-    container.appendChild(card1);
-    var card2 = document.createElement('div');
-    card2.className = 'res-card';
-    card2.innerHTML = '<h4>Mode Cutoff Frequencies</h4>';
-    res.modes.forEach(function(mo) {
-      var propagates = res.f > mo.fc;
-      var style = propagates ? 'color:#AA77FF;font-weight:600;' : 'color:#aaa;';
-      card2.innerHTML += '<div class="res-row"><span class="res-lbl" style="' + style + '">' + mo.label + '</span>' +
-        '<span class="res-val" style="' + style + '">' + engFmt(mo.fc,'Hz') + (propagates ? ' ✓' : '') + '</span></div>';
-    });
-    container.appendChild(card2);
+  // Smoke checks: exercise exposed numeric primitives of the
+  // visualization/simulation tools and write results to spans so the
+  // standard numeric runner can assert them.
+  function setSmoke(id, fn) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    try { el.textContent = String(fn()); } catch (e) { el.textContent = 'ERR:' + e; }
   }
-  function rr(lbl, val, hi, raw) {
-    var s = hi ? ' style="font-weight:700;color:#AA77FF;"' : '';
-    return '<div class="res-row"><span class="res-lbl">' + lbl + '</span><span class="res-val"' + s + '>' + val + '</span></div>';
-  }
-  function showError(msg) { var el = document.getElementById('wg-error'); if (el) el.textContent = msg; }
-  function clearError()   { var el = document.getElementById('wg-error'); if (el) el.textContent = ''; }
-})();
-</script>
-
-<!-- Inline JS extracted from tool HTML files -->
-<script>
-/* ── VSWRConverter (from VSWRConverter.html) ── */
-function vswrUpdate(src) {
-  var vswr,gamma,rl,ml;
-  try {
-    if(src==='vswr')  { vswr =parseFloat(document.getElementById('v-vswr').value);  if(vswr<1)throw 1; gamma=(vswr-1)/(vswr+1); }
-    else if(src==='gamma') { gamma=parseFloat(document.getElementById('v-gamma').value); if(gamma<0||gamma>1)throw 1; vswr=(1+gamma)/(1-gamma); }
-    else if(src==='rl') { rl=parseFloat(document.getElementById('v-rl').value); if(rl<0)throw 1; gamma=Math.pow(10,-rl/20); vswr=(1+gamma)/(1-gamma); }
-    else { ml=parseFloat(document.getElementById('v-ml').value); if(ml<0)throw 1; gamma=Math.sqrt(1-Math.pow(10,-ml/10)); vswr=(1+gamma)/(1-gamma); }
-    if(!isFinite(vswr)||!isFinite(gamma)) throw 1;
-    rl  = -20*Math.log10(gamma);
-    ml  = -10*Math.log10(1-gamma*gamma);
-    var tx = (1-gamma*gamma)*100;
-    document.getElementById('ro-vswr').textContent  = vswr.toFixed(4);
-    document.getElementById('ro-gamma').textContent = gamma.toFixed(4);
-    document.getElementById('ro-rl').textContent    = (isFinite(rl)?rl.toFixed(2):'∞')+' dB';
-    document.getElementById('ro-ml').textContent    = ml.toFixed(4)+' dB';
-    document.getElementById('ro-tx').textContent    = tx.toFixed(2)+'%';
-    document.getElementById('error').textContent='';
-  } catch(e) { document.getElementById('error').textContent='Enter a valid value.'; }
-}
-
-/* ── Stripline (from Stripline.html) ── */
-document.getElementById('sl-btn').addEventListener('click', function(){
-  var w=parseFloat(document.getElementById('sl-w').value);
-  var b=parseFloat(document.getElementById('sl-b').value);
-  var t=parseFloat(document.getElementById('sl-t').value);
-  var er=parseFloat(document.getElementById('sl-er').value);
-  document.getElementById('error').textContent='';
-  if([w,b,t,er].some(isNaN)||w<=0||b<=0||t<=0||er<1){document.getElementById('error').textContent='Enter valid positive values.';return;}
-  if(t>=b){document.getElementById('error').textContent='Trace thickness t must be less than ground separation b.';return;}
-  var weff=w*(1-(t/b)*Math.log(2-t/b)/Math.PI);
-  var Z0=(60/Math.sqrt(er))*Math.log(4*b/(0.67*Math.PI*weff*(0.8+t/weff)));
-  var vp=3e8/Math.sqrt(er);
-  var C=er/Z0/vp*1e12;
-  var L=Z0/vp*1e9;
-  document.getElementById('sl-z0').textContent=Z0.toFixed(3)+' Ω';
-  document.getElementById('sl-vp').textContent=(vp/1e8).toFixed(3)+'×10⁸ m/s';
-  document.getElementById('sl-c').textContent=C.toFixed(2)+' pF/m';
-  document.getElementById('sl-l').textContent=L.toFixed(2)+' nH/m';
-});
-
-/* ── IP3Calc (from IP3Calc.html) ── */
-document.getElementById('ip-btn').addEventListener('click', function(){
-  var IIP3=parseFloat(document.getElementById('ip-iip3').value);
-  var Pin=parseFloat(document.getElementById('ip-pin').value);
-  var G=parseFloat(document.getElementById('ip-gain').value);
-  document.getElementById('error').textContent='';
-  if([IIP3,Pin,G].some(isNaN)){document.getElementById('error').textContent='Enter valid numeric values.';return;}
-  var OIP3=IIP3+G;
-  var Pout=Pin+G;
-  var IM3=3*Pin-2*IIP3+G;
-  var IMD=Pout-IM3;
-  var P1dB=IIP3-9.6;
-  document.getElementById('ip-pout').textContent=Pout.toFixed(1)+' dBm';
-  document.getElementById('ip-oip3').textContent=OIP3.toFixed(1)+' dBm';
-  document.getElementById('ip-im3').textContent=IM3.toFixed(1)+' dBm';
-  document.getElementById('ip-imd').textContent=IMD.toFixed(1)+' dBc';
-  document.getElementById('ip-headroom').textContent=(IIP3-Pin).toFixed(1)+' dB';
-  document.getElementById('ip-oheadroom').textContent=(OIP3-Pout).toFixed(1)+' dB';
-  document.getElementById('ip-p1db').textContent=P1dB.toFixed(1)+' dBm (input)';
-});
+  setSmoke('smoke-smith',       function () { return window.zToGamma(2, 0).re; });          // z=2 → Γ=1/3
+  setSmoke('smoke-sparam-vswr', function () { return window.toVSWR({ re: 1/3, im: 0 }); });  // |Γ|=1/3 → VSWR 2
+  setSmoke('smoke-sparam-db',   function () { return window.toMagDB({ re: 0.5, im: 0 }); }); // 20log10(0.5)
+  setSmoke('smoke-spice',       function () { return window.parseSuffix('1k'); });           // 1000
+  setSmoke('smoke-rf',          function () { return window.cmag(window.C(3, 4)); });         // 5
+  setSmoke('smoke-falstad',     function () { return window.__loadErrors['FalstadSim.js'] ? 0 : 1; });
+};
 </script>
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -1763,11 +1155,279 @@ const TESTS = [
       'silpf-results@1': { label: 'Order',         value: 3.0,   tol: 0.1 },
       'silpf-results@5': { label: 'Total len (mm)', value: 37.15, tol: 0.5 }
     }
+  },
+
+  // ── Circular-Loop Inductance (CLI / CoilDesigner) ────────────
+  {
+    group: 'Loop Inductance (CLI/CoilDesigner)',
+    name: 'D=100mm, d=2mm loop; resonant C at 63.87 MHz',
+    ref: 'L=µ₀(D/2)[ln(8D/d)−2]=250.8 nH; C=1/(4π²f₀²L)=24.76 pF',
+    inputs:  { 'd': '2', 'D': '100', 'f': '63.87' },
+    selects: { 'f_dropdown': '1' },
+    button:  'btn',
+    expect: {
+      'L': { label: 'L (nH)', value: 250.8, tol: 2.0 },
+      'C': { label: 'C (pF)', value: 24.76, tol: 0.4 }
+    }
+  },
+
+  // ── E-Series ─────────────────────────────────────────────────
+  {
+    group: 'E-Series',
+    name: '4.7 kΩ in E24 → exact standard value (0% error)',
+    ref: '4.7 is an E24 preferred value; nearest-match error = 0.00%',
+    inputs:  { 'es-val': '4.7' },
+    selects: { 'es-unit': 'kohm', 'es-series': 'E24' },
+    button:  'es-btn',
+    expect: {
+      'es-results@1': { label: 'Nearest error (%)', value: 0.0, tol: 0.05 }
+    }
+  },
+
+  // ── TL Loss ──────────────────────────────────────────────────
+  {
+    group: 'TL Loss',
+    name: 'Microstrip FR4 w=3 h=1.6 t=35µm, 10 GHz, tanδ=0.02',
+    ref: 'Hammerstad Z₀=50.82Ω; Pozar αc=1.457 dB/m; αtot=31.49 dB/m',
+    inputs:  { 'tl-f': '10', 'tl-len': '1', 'ms-er': '4.4', 'ms-df': '0.02',
+               'ms-w': '3', 'ms-h': '1.6', 'ms-t': '35', 'ms-sigma': '5.8e7' },
+    selects: { 'tl-type': 'mstrip', 'tl-f-unit': '1e9', 'tl-len-unit': '1',
+               'ms-w-unit': '1e-3', 'ms-h-unit': '1e-3', 'ms-t-unit': '1e-6' },
+    button:  'tl-btn',
+    expect: {
+      'tl-results@0': { label: 'Z₀ (Ω)',        value: 50.82, tol: 1.0 },
+      'tl-results@3': { label: 'αc (dB/m)',      value: 1.457, tol: 0.1 },
+      'tl-results@5': { label: 'αtot (dB/m)',    value: 31.49, tol: 0.6 }
+    }
+  },
+  {
+    group: 'TL Loss',
+    name: 'Coax εr=2.1, d=0.9 D=2.95 mm, 1 GHz, tanδ=2e-4',
+    ref: 'Z₀=138/√εr·log(b/a)=49.10Ω; αc=0.337 dB/m; αtot=0.363 dB/m',
+    inputs:  { 'tl-f': '1', 'tl-len': '1', 'cx-er': '2.1', 'cx-df': '0.0002',
+               'cx-d': '0.9', 'cx-D': '2.95', 'cx-sigma': '5.8e7' },
+    selects: { 'tl-type': 'coax', 'tl-f-unit': '1e9', 'tl-len-unit': '1',
+               'cx-d-unit': '1e-3', 'cx-D-unit': '1e-3' },
+    button:  'tl-btn',
+    expect: {
+      'tl-results@0': { label: 'Z₀ (Ω)',     value: 49.10, tol: 0.5 },
+      'tl-results@3': { label: 'αc (dB/m)',   value: 0.337, tol: 0.02 },
+      'tl-results@5': { label: 'αtot (dB/m)', value: 0.363, tol: 0.02 }
+    }
+  },
+
+  // ── Link Budget ──────────────────────────────────────────────
+  {
+    group: 'Link Budget',
+    name: '915 MHz, 1 km, Pt=14 Gt=Gr=2 dBi, NF=6, BW=125 kHz',
+    ref: 'EIRP=16 dBm; FSPL=91.67 dB; margin=Pr−N−SNRreq=33.36 dB',
+    inputs:  { 'lb-pt': '14', 'lb-ltx': '0', 'lb-gt': '2', 'lb-gr': '2',
+               'lb-lrx': '0', 'lb-lmisc': '0', 'lb-d': '1000', 'lb-f': '915',
+               'lb-nf': '6', 'lb-snr': '10', 'lb-bw': '125' },
+    selects: { 'lb-fu': '1e6', 'lb-bwu': '1e3' },
+    button:  'lb-btn',
+    expect: {
+      'lb-out': { label: 'EIRP (dBm)',  value: 16.0,  tol: 0.1, re: /EIRP(-?[\d.]+)/ },
+      'lb-out ': { label: 'FSPL (dB)',  value: 91.67, tol: 0.1, re: /FSPL(-?[\d.]+)/ }
+    }
+  },
+  {
+    group: 'Link Budget',
+    name: 'Same link — margin row renders (regression: ASI bug)',
+    ref: 'Link margin = 33.36 dB; verifies result table renders fully',
+    inputs:  { 'lb-pt': '14', 'lb-ltx': '0', 'lb-gt': '2', 'lb-gr': '2',
+               'lb-lrx': '0', 'lb-lmisc': '0', 'lb-d': '1000', 'lb-f': '915',
+               'lb-nf': '6', 'lb-snr': '10', 'lb-bw': '125' },
+    selects: { 'lb-fu': '1e6', 'lb-bwu': '1e3' },
+    button:  'lb-btn',
+    expect: {
+      'lb-out': { label: 'Margin (dB)', value: 33.36, tol: 0.1, re: /margin(-?[\d.]+)/ }
+    }
+  },
+
+  // ── Attenuator Design ────────────────────────────────────────
+  {
+    group: 'Attenuator',
+    name: 'Pi-pad, 6 dB, Z₀=50 Ω',
+    ref: 'K=10^(6/20); R1=Z₀(K+1)/(K−1)=150.5Ω; R2=Z₀(K²−1)/2K=37.35Ω',
+    inputs:  { 'at-atten': '6', 'at-z0': '50' },
+    selects: { 'at-topo': 'pi' },
+    button:  'at-btn',
+    expect: {
+      'at-r1': { label: 'R1 (Ω)', value: 150.5, tol: 1.0 },
+      'at-r2': { label: 'R2 (Ω)', value: 37.35, tol: 0.3 }
+    }
+  },
+  {
+    group: 'Attenuator',
+    name: 'T-pad, 6 dB, Z₀=50 Ω',
+    ref: 'R1=Z₀(K−1)/(K+1)=16.61Ω; R2=2Z₀K/(K²−1)=66.93Ω',
+    inputs:  { 'at-atten': '6', 'at-z0': '50' },
+    selects: { 'at-topo': 't' },
+    button:  'at-btn',
+    expect: {
+      'at-r1': { label: 'R1 (Ω)', value: 16.61, tol: 0.3 },
+      'at-r2': { label: 'R2 (Ω)', value: 66.93, tol: 0.4 }
+    }
+  },
+
+  // ── Birdcage Coil ────────────────────────────────────────────
+  {
+    group: 'Birdcage Coil',
+    name: 'N=16 LP, r=150 l=300 d=5 mm, 128 MHz',
+    ref: 'C solved so mode m=1 resonates at f₀; f₁=128.0 MHz; C≈12.75 pF',
+    inputs:  { 'bc-n': '16', 'bc-r': '150', 'bc-l': '300', 'bc-d': '5', 'bc-f': '128' },
+    selects: { 'bc-type': 'lp' },
+    button:  'bc-btn',
+    expect: {
+      'bc-f1': { label: 'f₁ (MHz)', value: 128.0, tol: 0.2 },
+      'bc-C':  { label: 'C (pF)',   value: 12.75, tol: 0.4 }
+    }
+  },
+
+  // ── Two-Port Converter ───────────────────────────────────────
+  {
+    group: 'Two-Port Converter',
+    name: 'S→Z: S11=0.1−0.8j … Z₀=50 Ω',
+    ref: 'Z=Z₀(I+S)(I−S)⁻¹; Re(Z₁₁)=13.77 Ω (independent 2×2 inversion)',
+    inputs:  { 'tp-z0': '50', 'tp-11r': '0.1', 'tp-11i': '-0.8', 'tp-12r': '0.05',
+               'tp-12i': '0.02', 'tp-21r': '0.5', 'tp-21i': '0.6', 'tp-22r': '0.08',
+               'tp-22i': '-0.7' },
+    selects: { 'tp-type': 's' },
+    button:  'tp-btn',
+    expect: {
+      'tp-out': { label: 'Re(Z₁₁) Ω', value: 13.77, tol: 0.1, re: /Z₁₁ = (-?[\d.]+)/ }
+    }
+  },
+
+  // ── Frequency / Energy Converter ─────────────────────────────
+  {
+    group: 'Freq / Energy',
+    name: '100 MHz → λ=2.998 m, B₀(¹H)=2.349 T',
+    ref: 'λ=c/f=2.998 m; B₀=f/42.577 MHz/T=2.349 T',
+    setup: function () {
+      document.getElementById('fe-f').value = '100';
+      document.getElementById('fe-fu').value = '1e6';
+      feUpdate('f');
+    },
+    expect: {
+      'fe-olam': { label: 'λ (m)',  value: 2.998,  tol: 0.005 },
+      'fe-oB0':  { label: 'B₀ (T)', value: 2.3487, tol: 0.001 }
+    }
+  },
+
+  // ── Capacitor Network ────────────────────────────────────────
+  {
+    group: 'Capacitor Network',
+    name: 'Two 10 µF in series → 5 µF',
+    ref: '1/C = 1/10µ + 1/10µ → C = 5 µF',
+    setup: function () {
+      document.getElementById('numCaps').value = '2';
+      buildInputs();
+      document.getElementById('cv-1').value = '10'; document.getElementById('cu-1').value = 'uF';
+      document.getElementById('cv-2').value = '10'; document.getElementById('cu-2').value = 'uF';
+      document.getElementById('mode').value = 'series';
+      calculate();
+    },
+    expect: { 'C_out': { label: 'C series (µF)', value: 5.0, tol: 0.01 } }
+  },
+  {
+    group: 'Capacitor Network',
+    name: 'Two 10 µF in parallel → 20 µF',
+    ref: 'C = 10µ + 10µ = 20 µF',
+    setup: function () {
+      document.getElementById('numCaps').value = '2';
+      buildInputs();
+      document.getElementById('cv-1').value = '10'; document.getElementById('cu-1').value = 'uF';
+      document.getElementById('cv-2').value = '10'; document.getElementById('cu-2').value = 'uF';
+      document.getElementById('mode').value = 'parallel';
+      calculate();
+    },
+    expect: { 'C_out': { label: 'C parallel (µF)', value: 20.0, tol: 0.01 } }
+  },
+
+  // ── Phased-Array Decoupling ──────────────────────────────────
+  {
+    group: 'Phased-Array Decoupling',
+    name: 'r=75 mm loops, d=120 mm c-to-c, 128 MHz',
+    ref: 'overlap=2r−d=30 mm; ov.frac=(2r−d)/2r=20%; k=M/L≈−0.0008',
+    inputs:  { 'pa2-r': '75', 'pa2-d': '120', 'pa2-f': '128', 'pa2-z0': '50', 'pa2-zp': '2' },
+    button:  'pa2-btn',
+    expect: {
+      'pa2-overlap': { label: 'Overlap (mm)',     value: 30.0,    tol: 0.5 },
+      'pa2-ovfrac':  { label: 'Overlap frac (%)', value: 20.0,    tol: 0.5 },
+      'pa2-k':       { label: 'k coupling',       value: -0.0008, tol: 0.001 }
+    }
+  },
+
+  // ── Filter Design ────────────────────────────────────────────
+  {
+    group: 'Filter Design',
+    name: 'Butterworth n=5 LP, fc=1 GHz, R₀=50 Ω',
+    ref: 'g=[.618,1.618,2,1.618,.618]; L1=g1·R0/ωc=4.918 nH; C2=g2/(ωc·R0)=5.150 pF',
+    inputs:  { 'fd-n': '5', 'fd-fc': '1', 'fd-r0': '50', 'fd-ripple': '0.5' },
+    selects: { 'fd-type': 'lp', 'fd-resp': 'butter', 'fd-fu': '1e9' },
+    button:  'fd-btn',
+    expect: {
+      'fd-out':  { label: 'L1 (nH)', value: 4.918, tol: 0.03, re: /Series L = ([\d.]+)/ },
+      'fd-out ': { label: 'C2 (pF)', value: 5.150, tol: 0.03, re: /Shunt C = ([\d.]+)/ }
+    }
+  },
+
+  // ── Phase Noise / Jitter ─────────────────────────────────────
+  {
+    group: 'PhaseNoiseJitter',
+    name: 'Default 5-point mask, 100 MHz carrier, 1 kHz–10 MHz integration',
+    ref: 'Numerical trapezoid integration of L(f) linear on log-freq grid; σ_t=√(2∫L)/2πfc; ref node.js gives 7.12 ps RMS, −50.0 dBc',
+    inputs:  { 'pn-fc': '100', 'pn-flow': '1e3', 'pn-fhigh': '1e7' },
+    selects: { 'pn-fcu': '1e6' },
+    button:  'pn-btn',
+    expect: {
+      'pn-rms': { label: 'RMS jitter (ps)', value: 7.12, tol: 0.1 },
+      'pn-int': { label: 'Integrated PN (dBc)', value: -50.0, tol: 0.3 }
+    }
+  },
+
+  // ── Visualization / Simulation smoke tests ───────────────────
+  {
+    group: 'Sim/Viz Smoke',
+    name: 'SmithChart zToGamma(z=2) → Γ=1/3',
+    ref: 'Γ=(z−1)/(z+1)=1/3 for normalized z=2',
+    setup: function () {},
+    expect: { 'smoke-smith': { label: 'Re(Γ)', value: 0.3333, tol: 0.001 } }
+  },
+  {
+    group: 'Sim/Viz Smoke',
+    name: 'SParamPlotter toVSWR(|Γ|=1/3)=2, toMagDB(0.5)=−6.02',
+    ref: 'VSWR=(1+|Γ|)/(1−|Γ|); dB=20·log₁₀|S|',
+    setup: function () {},
+    expect: {
+      'smoke-sparam-vswr': { label: 'VSWR',   value: 2.0,    tol: 0.01 },
+      'smoke-sparam-db':   { label: 'mag dB', value: -6.021, tol: 0.01 }
+    }
+  },
+  {
+    group: 'Sim/Viz Smoke',
+    name: 'SpiceSim parseSuffix("1k")=1000 · RFSimulator cmag(3+4j)=5',
+    ref: 'verifies both tools load+init without JS errors and core math works',
+    setup: function () {},
+    expect: {
+      'smoke-spice': { label: 'parseSuffix', value: 1000, tol: 0.5 },
+      'smoke-rf':    { label: 'cmag',        value: 5,    tol: 0.001 }
+    }
+  },
+  {
+    group: 'Sim/Viz Smoke',
+    name: 'FalstadSim loads & initializes without errors',
+    ref: 'encodeCct/selectPreset run on load against init DOM (1 = no error)',
+    setup: function () {},
+    expect: { 'smoke-falstad': { label: 'loaded', value: 1, tol: 0.1 } }
   }
 ];
 
 // ── Test runner ─────────────────────────────────────────────────
 function readOutput(spec) {
+  spec = spec.trim();  // allow 'id ' duplicate keys to read one element with multiple regexes
   if (spec.includes('@')) {
     var parts = spec.split('@');
     var containerId = parts[0], idx = parseInt(parts[1]);
@@ -1804,7 +1464,14 @@ function checkOutputs(t) {
   for (var spec in t.expect) {
     var exp = t.expect[spec];
     var raw = readOutput(spec);
-    var actual = parseFloat(raw);
+    var actual;
+    if (exp.re) {
+      // Extract a labelled number from free-form text output (innerHTML tables)
+      var mm = raw.match(exp.re);
+      actual = mm ? parseFloat(mm[1]) : NaN;
+    } else {
+      actual = parseFloat(raw);
+    }
     var ok = isFinite(actual) && Math.abs(actual - exp.value) <= exp.tol;
     checks.push({ id: spec, label: exp.label, actual: actual, expected: exp.value, tol: exp.tol, raw: raw, ok: ok });
   }
@@ -1859,7 +1526,8 @@ function renderResults(groups) {
 }
 
 // ── Run on load ──────────────────────────────────────────────────
-window.addEventListener('load', function () {
+window.addEventListener('load', async function () {
+  await window.preloadCalculators();
   var groups = {};
   for (var i = 0; i < TESTS.length; i++) {
     var t = TESTS[i];
