@@ -1,3 +1,4 @@
+/* exported feUpdate */
 var C=2.998e8, H=6.626e-34, E_CHARGE=1.602e-19;
 function feUpdate(src){
   var f;

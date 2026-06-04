@@ -5,6 +5,8 @@
  *   Series:   1/C_total = 1/C₁ + 1/C₂ + ... + 1/Cₙ
  */
 
+/* exported buildInputs, calculate */
+
 var numCapacitors = 2;
 
 function buildInputs() {

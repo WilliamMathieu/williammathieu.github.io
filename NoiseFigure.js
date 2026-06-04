@@ -1,3 +1,4 @@
+/* exported nfBuild, nfCalc, nfLoadExample */
 /*
  * Cascaded Noise Figure — Friis 1944
  *

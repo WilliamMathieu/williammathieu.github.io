@@ -1,3 +1,5 @@
+/* exported copyCircuit, encodeCct */
+
 var CIRCUITS = {
 
 rc_lpf: {

@@ -82,8 +82,6 @@ document.getElementById('bl-btn').addEventListener('click', function() {
         // Lattice BALUN: L = Zm/w, C = 1/(w*Zm) for each arm
         var L = Zm / w;
         var C = 1 / (w * Zm);
-        // Q ≈ Zm / (series resistance) — ideal here so just show bandwidth estimate
-        var Q = Math.sqrt(ratio) * 0.5 * (1 / Math.sqrt(ratio - 1 + 1e-9));
         document.getElementById('bl-r1').textContent = engFmt(L,'H');
         document.getElementById('bl-r2').textContent = engFmt(C,'F');
         document.getElementById('bl-r3').textContent = engFmt(L,'H');

@@ -4,6 +4,8 @@
    multiplication. S-parameters are derived from the total ABCD matrix.
    ────────────────────────────────────────────────────────────────────────── */
 
+/* exported simulate, switchTab, addComponent, loadPreset, cmag, C, cmul */
+
 var components = [];    // [{type, topo, val, unit, z0tl, len, f0tl}]
 var chartInstances = {};
 
@@ -18,7 +20,6 @@ function cdiv(a, b) {
 }
 function cmag(a) { return Math.sqrt(a.re*a.re + a.im*a.im); }
 function cphase(a) { return Math.atan2(a.im, a.re) * 180/Math.PI; }
-function cconj(a) { return C(a.re, -a.im); }
 function cj(x) { return C(0, x); }  // purely imaginary
 
 // ── 2×2 complex matrix multiplication ────────────────────────────────────────
@@ -50,7 +51,6 @@ function abcdShunt(Y) {
 function abcdTL(Z0, betaL) {
     // Lossless transmission line
     var cosbl = C(Math.cos(betaL), 0);
-    var sinbl = C(Math.sin(betaL), 0);
     var jZ0sinbl  = cj(Z0  * Math.sin(betaL));
     var jsinblZ0  = cj(     Math.sin(betaL) / Z0);
     return [
@@ -62,7 +62,7 @@ function abcdTL(Z0, betaL) {
 // ── Build ABCD for one component at frequency f (Hz) ─────────────────────────
 function componentABCD(comp, f) {
     var w = 2 * Math.PI * f;
-    var Z, Y;
+    var Z;
     switch (comp.type) {
         case 'R':
             Z = C(comp.val, 0);
@@ -289,18 +289,6 @@ function addComponent() {
     drawSchematic();
 }
 
-function removeComponent(i) {
-    components.splice(i, 1);
-    renderList(); drawSchematic();
-}
-
-function moveComponent(i, dir) {
-    var j = i + dir;
-    if (j < 0 || j >= components.length) return;
-    var tmp = components[i]; components[i] = components[j]; components[j] = tmp;
-    renderList(); drawSchematic();
-}
-
 function renderList() {
     var el = document.getElementById('comp-list');
     if (components.length === 0) {
@@ -341,7 +329,6 @@ function drawSchematic() {
         MID = 50, // vertical midline
         SHUNT_H = 28; // depth of shunt elements below midline
 
-    var seriesCount = components.filter(function(c){ return c.topo!=='shunt'; }).length;
     var shuntCount  = components.filter(function(c){ return c.topo==='shunt'; }).length;
     var totalW = PAD + components.length * (CW + 16) + PAD;
     var totalH = shuntCount > 0 ? MID + SHUNT_H + 24 : MID + 20;

@@ -1,3 +1,4 @@
+/* exported loadExample, engFmt */
 /**
  * tool-enhancements.js
  * - engFmt(value, unit)   metric prefix formatter

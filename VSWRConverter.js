@@ -25,7 +25,7 @@ function vswrUpdate(src) {
 // eslint-disable-next-line no-redeclare
 function drawDiagram(g) {
   if(g===undefined){var rl=parseFloat(document.getElementById('v-rl').value)||20;g=Math.pow(10,-rl/20);}
-  var W=480,H=130,wy=65;
+  var W=480,H=130;
   var tx_len=Math.round((1-g)*240+20), ref_len=Math.round(g*240);
   var col=g<0.1?'#1a8a1a':g<0.316?'#aa6600':'#cc2222';
   var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';

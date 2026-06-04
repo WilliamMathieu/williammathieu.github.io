@@ -48,7 +48,6 @@ function wg_calc() {
     for (var n = 0; n <= 3; n++) {
       if (m === 0 && n === 0) continue;
       var fc = vp_med / 2 * Math.sqrt((m/a)*(m/a) + (n/b)*(n/b));
-      var modeType = (m > 0 && n > 0) ? 'TE/TM' : (n === 0 ? 'TE' : 'TE');
       modes.push({ m:m, n:n, fc:fc, label:'TE'+m+n });
     }
   }

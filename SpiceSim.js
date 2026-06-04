@@ -5,6 +5,8 @@
    Analyses:  .OP, .DC sweep, .AC (LIN/DEC), .TRAN
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* exported runSpice, replot, parseSuffix */
+
 // ── Complex number library ────────────────────────────────────────────────────
 var J = {
     c:    function(re,im){ return [re||0, im||0]; },

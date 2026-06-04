@@ -463,8 +463,8 @@
   <!-- ArrayFactor (canvas smoke) -->
   <input id="af-n"><input id="af-d"><input id="af-theta"><button id="af-btn"></button><canvas id="af-canvas" width="480" height="480"></canvas>
 
-  <!-- ImpedanceMatchingNetwork (load-clean) -->
-  <input id="imn-rs"><input id="imn-xs"><input id="imn-rl"><input id="imn-xl"><input id="imn-f"><input id="imn-z0"><button id="imn-btn"></button><div id="imn-results"></div>
+  <!-- ImpedanceMatchingNetwork -->
+  <input id="imn-rs"><input id="imn-xs"><input id="imn-rl"><input id="imn-xl"><input id="imn-f"><input id="imn-z0"><button id="imn-btn"></button><div id="imn-results"></div><span id="imn-error"></span>
   <select id="imn-fu"><option value="1e6" selected>MHz</option></select>
 
   <!-- PhaseNoiseJitter -->
@@ -1249,13 +1249,13 @@ const TESTS = [
   {
     group: 'Attenuator',
     name: 'Pi-pad, 6 dB, Z₀=50 Ω',
-    ref: 'K=10^(6/20); R1=Z₀(K+1)/(K−1)=150.5Ω; R2=Z₀(K²−1)/2K=37.35Ω',
+    ref: 'K=10^(6/20); R1=Z₀(K+1)/(K−1)=150.476Ω; R2=Z₀(K²−1)/2K=37.352Ω; closed-form exact',
     inputs:  { 'at-atten': '6', 'at-z0': '50' },
     selects: { 'at-topo': 'pi' },
     button:  'at-btn',
     expect: {
-      'at-r1': { label: 'R1 (Ω)', value: 150.5, tol: 1.0 },
-      'at-r2': { label: 'R2 (Ω)', value: 37.35, tol: 0.3 }
+      'at-r1': { label: 'R1 (Ω)', value: 150.476, tol: 0.01 },
+      'at-r2': { label: 'R2 (Ω)', value: 37.352,  tol: 0.01 }
     }
   },
   {
@@ -1371,6 +1371,34 @@ const TESTS = [
     expect: {
       'fd-out':  { label: 'L1 (nH)', value: 4.918, tol: 0.03, re: /Series L = ([\d.]+)/ },
       'fd-out ': { label: 'C2 (pF)', value: 5.150, tol: 0.03, re: /Shunt C = ([\d.]+)/ }
+    }
+  },
+
+  // ── SAR Estimator ────────────────────────────────────────────
+  {
+    group: 'SAREstimator',
+    name: 'B1=20µT, 128 MHz, muscle tissue, DC=1.0',
+    ref: 'E=ω·B1·r/2=804.25 V/m (Faraday rotating-field); SAR_peak=σE²/2ρ=237.17 W/kg (muscle σ=0.77,ρ=1050); B1_lim=(2/r)√(ρ·2/(σω²))=1.30µT',
+    inputs:  { 'sar-b1': '20', 'sar-f': '128', 'sar-sigma': '0.77', 'sar-rho': '1050', 'sar-dc': '1' },
+    selects: { 'sar-tissue': 'custom' },
+    button:  'sar-btn',
+    expect: {
+      'sar-peak':  { label: 'SAR peak (W/kg)', value: 237.17, tol: 0.5 },
+      'sar-b1lim': { label: 'B1 limit (µT)',   value: 1.30,   tol: 0.02, re: /([\d.]+)\s*µT/ }
+    }
+  },
+
+  // ── Impedance Matching Network ───────────────────────────────
+  {
+    group: 'ImpedanceMatchingNetwork',
+    name: 'L-network Rs=50Ω→Rl=100Ω pure-real, 100 MHz',
+    ref: 'Q=√(100/50−1)=1.000; Shunt→Series: shunt C=1/(ω×100)=15.92 pF, series L=50/(ω)=79.58 nH; Pozar §5.1',
+    inputs:  { 'imn-rs': '50', 'imn-xs': '0', 'imn-rl': '100', 'imn-xl': '0', 'imn-f': '100', 'imn-z0': '50' },
+    selects: { 'imn-fu': '1e6' },
+    button:  'imn-btn',
+    expect: {
+      'imn-results':  { label: 'Network Q',   value: 1.000, tol: 0.002,  re: /Network Q[\s\S]*?([\d.]+)/ },
+      'imn-results ': { label: 'shunt C (pF)', value: 15.915, tol: 0.05, re: /Shunt element 1([\d.]+) pF/ }
     }
   },
 

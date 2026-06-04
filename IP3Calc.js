@@ -28,9 +28,8 @@ function drawDiagram(Pin,IIP3,G,OIP3,Pout,IM3,P1dB){
   var gw=gx2-gx1, gh=gy2-gy1;
   var xscale=gw/(pts_max-pts_min);
   // Output range: from Pin slope output to IM3 slope
-  var pout_min=pts_min+G, pout_max=OIP3;
+  var pout_max=OIP3;
   var yscale=gh/(pout_max-(pts_min+G-20));
-  var ybase=pout_max-(pts_min+G-20);
   function px(p){return gx1+(p-pts_min)*xscale;}
   function py(p){return gy2-(p-(pts_min+G-20))*yscale;}
   var sv='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';

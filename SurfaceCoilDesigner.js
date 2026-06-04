@@ -56,7 +56,6 @@ function eng(val, unit) {
   const d=Math.abs(s)>=100?1:Math.abs(s)>=10?2:3;
   return `${s.toFixed(d)} ${p}${unit}`;
 }
-function fmt2(v){ return isFinite(v)&&!isNaN(v)?v.toFixed(2):'—'; }
 function fmt1(v){ return isFinite(v)&&!isNaN(v)?v.toFixed(1):'—'; }
 function fmt0(v){ return isFinite(v)&&!isNaN(v)?Math.round(v).toString():'—'; }
 
@@ -76,8 +75,8 @@ function showTissueChip(key, fMHz) {
 }
 function showErr(m){const e=document.getElementById('err-msg');e.textContent=m;e.style.display='block';}
 function clearErr(){const e=document.getElementById('err-msg');e.textContent='';e.style.display='none';}
+/* exported applyWire, applyFreq, onSampleChange */
 function setTxt(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
-function setHtml(id,v){const e=document.getElementById(id);if(e)e.innerHTML=v;}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // MAIN CALCULATION

@@ -28,6 +28,7 @@ document.getElementById('at-btn').addEventListener('click', function() {
   document.getElementById('at-rl').textContent='>'+Math.max(20,A*2).toFixed(0)+' dB (ideal)';
   if(window.drawDiagram) drawDiagram();
 });
+/* exported atTopoChange */
 function atTopoChange(){
   var topo=document.getElementById('at-topo').value;
   document.getElementById('at-lpad-row').style.display=(topo==='l')?'':'none';

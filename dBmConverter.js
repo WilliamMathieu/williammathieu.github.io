@@ -6,14 +6,14 @@
  *   Amplitude ratio:  dB    = 20·log₁₀(A₂/A₁)
  */
 
+/* exported switchMode, updateDbm, updatePow, updateAmp */
+
 function switchMode(m) {
     document.querySelectorAll('.mode-tab').forEach(function(t){ t.classList.remove('active'); });
     document.querySelectorAll('.mode-panel').forEach(function(p){ p.classList.remove('active'); });
     event.target.classList.add('active');
     document.getElementById('panel-'+m).classList.add('active');
 }
-
-var ENG = function(v, unit) { return engFmt(v, unit || ''); };
 
 // ── dBm ↔ Power ───────────────────────────────────────────────────────────────
 // eslint-disable-next-line no-redeclare

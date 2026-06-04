@@ -1,3 +1,4 @@
+/* exported toVSWR, toMagDB */
 /* S-Parameter Plotter — Touchstone file parser and Chart.js renderer */
 
 var parsedData = null; // { freqHz[], nPorts, params: { 'S11': [{re,im},...], ... } }
