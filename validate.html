@@ -477,7 +477,7 @@
   <select id="comp-type"></select><input id="comp-val"><select id="comp-unit"></select><div id="comp-val-row"></div><div id="comp-tl-row"></div><div id="comp-list"></div><div id="schematic"></div>
   <textarea id="netlist-editor"></textarea><div id="spice-log"></div>
   <div class="preset-btn" id="btn-rc_lpf"></div><span id="circuit-title"></span><span id="circuit-text"></span><a id="open-link"></a>
-  <span id="smoke-smith"></span><span id="smoke-sparam-vswr"></span><span id="smoke-sparam-db"></span><span id="smoke-spice"></span><span id="smoke-rf"></span><span id="smoke-falstad"></span>
+  <span id="smoke-smith"></span><span id="smoke-sparam-vswr"></span><span id="smoke-sparam-db"></span><span id="smoke-spice"></span><span id="smoke-rf"></span>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -551,8 +551,7 @@ window.CALC_FILES = [
   'SmithChart.js',
   'SParamPlotter.js',
   'SpiceSim.js',
-  'RFSimulator.js',
-  'FalstadSim.js'
+  'RFSimulator.js'
 ];
 window.CALC_EXPORTS = {
   'NoiseFigure.js':  ['nfBuild', 'nfCalc'],
@@ -563,8 +562,7 @@ window.CALC_EXPORTS = {
   'SmithChart.js':   ['zToGamma', 'gammaToZ'],
   'SParamPlotter.js':['toVSWR', 'toMagDB'],
   'SpiceSim.js':     ['parseSuffix'],
-  'RFSimulator.js':  ['cmag', 'C', 'cmul'],
-  'FalstadSim.js':   ['encodeCct']
+  'RFSimulator.js':  ['cmag', 'C', 'cmul']
 };
 window.__loadErrors = {};
 window.preloadCalculators = async function () {
@@ -598,7 +596,6 @@ window.preloadCalculators = async function () {
   setSmoke('smoke-sparam-db',   function () { return window.toMagDB({ re: 0.5, im: 0 }); }); // 20log10(0.5)
   setSmoke('smoke-spice',       function () { return window.parseSuffix('1k'); });           // 1000
   setSmoke('smoke-rf',          function () { return window.cmag(window.C(3, 4)); });         // 5
-  setSmoke('smoke-falstad',     function () { return window.__loadErrors['FalstadSim.js'] ? 0 : 1; });
 };
 </script>
 
@@ -1443,13 +1440,6 @@ const TESTS = [
       'smoke-spice': { label: 'parseSuffix', value: 1000, tol: 0.5 },
       'smoke-rf':    { label: 'cmag',        value: 5,    tol: 0.001 }
     }
-  },
-  {
-    group: 'Sim/Viz Smoke',
-    name: 'FalstadSim loads & initializes without errors',
-    ref: 'encodeCct/selectPreset run on load against init DOM (1 = no error)',
-    setup: function () {},
-    expect: { 'smoke-falstad': { label: 'loaded', value: 1, tol: 0.1 } }
   }
 ];
 
