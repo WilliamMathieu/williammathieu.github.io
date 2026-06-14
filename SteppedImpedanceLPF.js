@@ -8,7 +8,6 @@
  */
 
 var C0 = 2.998e8;
-var MU0 = 4 * Math.PI * 1e-7;
 
 document.getElementById('silpf-btn').addEventListener('click', silpf_calc);
 
@@ -31,7 +30,6 @@ function silpf_calc() {
   if (Zl >= Z0)  { showError('Low impedance Zl must be less than Z0.'); return; }
 
   var fc = fc_v * fc_mul;
-  var wc = 2 * Math.PI * fc;
 
   // Prototype element values (Butterworth or Chebyshev 0.5 dB ripple)
   var g = get_prototype(n, resp);
@@ -47,8 +45,6 @@ function silpf_calc() {
   //   Low-Z (capacitor): β·l = g_k · Zl / Z0  (in radians at ωc)
 
   var sections = [];
-  var lambda4_m = C0 / (4 * fc * Math.sqrt(er));  // λ/4 at fc in substrate
-
   for (var i = 0; i < n; i++) {
     var gk   = g[i + 1];  // prototype element (g1..gn, skip g0)
     var isHigh = (i % 2 === 0);  // odd elements: series L → high Z

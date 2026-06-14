@@ -1,6 +1,14 @@
-const { chromium } = require('/opt/node22/lib/node_modules/playwright');
+// Resolve Playwright: prefer a global install (local dev sandbox ships browsers
+// pre-downloaded), and fall back to the project's node_modules in CI, where the
+// global path is absent and browsers are fetched via `npx playwright install`.
+let chromium;
+try {
+  ({ chromium } = require('/opt/node22/lib/node_modules/playwright'));
+// eslint-disable-next-line no-unused-vars
+} catch (_e) {
+  ({ chromium } = require('playwright'));
+}
 const { spawn } = require('child_process');
-const path = require('path');
 
 (async () => {
   const server = spawn('python3', ['-m', 'http.server', '8765', '--directory', __dirname],

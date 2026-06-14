@@ -53,7 +53,6 @@ document.getElementById('pn-btn').addEventListener('click', function(){
   var sigma_t=Math.sqrt(2*integral)/(2*Math.PI*fc);
   var sigma_ps=sigma_t*1e12;
   var intdBc=10*Math.log10(integral);
-  var l1k=pts[0][1]; // first point
   document.getElementById('pn-rms').textContent=sigma_ps.toFixed(2)+' ps RMS';
   document.getElementById('pn-pp').textContent=(6*sigma_ps).toFixed(1)+' ps (6σ)';
   document.getElementById('pn-int').textContent=intdBc.toFixed(1)+' dBc';

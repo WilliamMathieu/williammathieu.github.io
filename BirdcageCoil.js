@@ -73,7 +73,6 @@ function drawDiagram(N,r,type){
   for(var i=0;i<disp;i++){
     var ang=2*Math.PI*i/disp-Math.PI/2;
     var x1=cx+R*Math.cos(ang), y1=cy+R*Math.sin(ang);
-    var ang2=2*Math.PI*(i+0.5)/disp-Math.PI/2;
     // Rung (leg)
     var innerR=R*0.55;
     var x2=cx+innerR*Math.cos(ang), y2=cy+innerR*Math.sin(ang);

@@ -1,3 +1,4 @@
+/* exported scAddPoint, scClear, zToGamma, gammaToZ */
 /* Interactive Smith Chart */
 var SC = {
     canvas: null, ctx: null,

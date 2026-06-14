@@ -7,7 +7,6 @@
  */
 
 var C0 = 2.998e8;
-var PI = Math.PI;
 
 document.getElementById('yagi-btn').addEventListener('click', yagi_calc);
 
@@ -17,15 +16,12 @@ function yagi_calc() {
   var fv   = parseFloat(document.getElementById('yagi-f').value);
   var fmul = parseFloat(document.getElementById('yagi-f-unit').value);
   var nEl  = parseInt(document.getElementById('yagi-n').value)  || 3;
-  var dv   = parseFloat(document.getElementById('yagi-diam').value) || 1;
-  var dmul = parseFloat(document.getElementById('yagi-diam-unit').value);
 
   if (!(fv > 0)) { showError('Enter a valid frequency.'); return; }
   if (nEl < 2 || nEl > 9) { showError('Number of elements must be 2–9.'); return; }
 
   var f   = fv * fmul;
   var lam = C0 / f;
-  var d   = dv * dmul;  // element diameter in metres
 
   // Empirical tables based on Viezbicke (NBS Tech Note 688) for d/λ = 0.0085
   // Gain and director spacings scaled to actual d/λ via small correction
@@ -59,11 +55,6 @@ function yagi_calc() {
 
   var lengths = lengths_tbl[nEl];
   var spacings = spacing_tbl[nEl];  // spacings from driven element (positive = toward reflector side is -0.25λ)
-
-  // Length correction for actual d/λ (Thiele formula, small correction)
-  var dLam = d / lam;
-  var dLam_ref = 0.0085;
-  var len_corr = 0;  // simplified; for accurate design use NEC
 
   // Physical element lengths
   var elements = [];

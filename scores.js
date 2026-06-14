@@ -1,3 +1,4 @@
+/* exported clearScores, showScoreEntry */
 // ── RF Toolbox shared score system ──────────────────────────────────────────
 // Uses localStorage. Each game key stores an array of {name, score, date}.
 // Max 10 entries per game, sorted descending by score.

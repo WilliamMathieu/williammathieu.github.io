@@ -33,12 +33,12 @@ document.getElementById('lb-btn').addEventListener('click', function() {
     var color=margin>=0?'#007700':'#cc0000';
     function row(l,v,u){return '<tr><td style="padding:2px 12px 2px 0;">'+l+'</td><td style="text-align:right;padding:2px 6px;">'+v.toFixed(2)+'</td><td>'+u+'</td></tr>';}
     document.getElementById('lb-out').innerHTML='<table style="font-family:monospace;font-size:13px;">'
-    if(window.drawDiagram) window.drawDiagram();
         +row('EIRP',EIRP,'dBm')+row('FSPL',FSPL,'dB')+row('Add. losses',Lmisc,'dB')
         +row('Received power',Pr,'dBm')+row('Noise floor',N_dBm,'dBm')
         +row('Achieved SNR',SNR,'dB')+row('Required SNR',SNR_req,'dB')
         +'<tr><td colspan="3" style="border-top:1px solid #ccc;padding-top:4px;"></td></tr>'
         +'<tr><td style="padding:2px 12px 2px 0;"><b>Link margin</b></td><td style="text-align:right;padding:2px 6px;color:'+color+';"><b>'+margin.toFixed(2)+'</b></td><td>dB</td></tr></table>';
+    if(window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg){var el=document.getElementById('error');if(el)el.textContent=msg;}

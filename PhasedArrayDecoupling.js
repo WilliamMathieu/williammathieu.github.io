@@ -5,7 +5,7 @@ function neumann_M(r1,r2,d){
   // k² = 4r1r2/((r1+r2)²+d²)
   // Here r1=r2=r
   var k2=4*r1*r1/((2*r1)*(2*r1)+d*d);
-  var k=Math.sqrt(k2), kp=Math.sqrt(1-k2);
+  var k=Math.sqrt(k2);
   // Complete elliptic integrals via AGM
   function K(k2){var a=1,b=Math.sqrt(1-k2);for(var i=0;i<30;i++){var a1=(a+b)/2;b=Math.sqrt(a*b);a=a1;}return Math.PI/(2*a);}
   function E(k2){var a=1,b=Math.sqrt(1-k2),c=k2/2;for(var i=0;i<30;i++){var a1=(a+b)/2,b1=Math.sqrt(a*b);c-=Math.pow(2,i)*(a1-b1)*(a1-b1);a=a1;b=b1;}return Math.PI/(2*a)*(1-c);}

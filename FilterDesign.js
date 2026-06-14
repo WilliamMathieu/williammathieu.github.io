@@ -14,8 +14,8 @@
  */
 
 document.getElementById('fd-btn').addEventListener('click', function() {
-    var typ=document.getElementById('fd-type').value;
-    var resp=document.getElementById('fd-resp').value;
+    var typ=document.getElementById('fd-resp').value;   // butter / cheby (approximation)
+    var resp=document.getElementById('fd-type').value;  // lp / hp (filter kind)
     var n=parseInt(document.getElementById('fd-n').value);
     var fc=parseFloat(document.getElementById('fd-fc').value)*parseFloat(document.getElementById('fd-fu').value);
     var R0=parseFloat(document.getElementById('fd-r0').value);
