@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circular Waveguide Calculator — Cutoff, Z, λg | RF Toolbox</title>
+  <meta name="description" content="Calculate cutoff frequencies for TE and TM modes, guide wavelength, wave impedance, phase and group velocity, and conductor loss for circular waveguides.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/CircularWaveguide.html">
+  <meta property="og:title" content="Circular Waveguide Calculator | RF Toolbox">
+  <meta property="og:description" content="Mode cutoff frequencies, guide wavelength, wave impedance, and conductor loss for circular waveguides.">
+  <meta property="og:url" content="https://rftoolbox.ca/CircularWaveguide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Circular Waveguide Calculator",
+    "description": "Calculate cutoff frequencies for TE and TM modes, guide wavelength, wave impedance, and conductor loss for circular waveguides.",
+    "url": "https://rftoolbox.ca/CircularWaveguide.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Circular Waveguide Calculator</h3>
+<div class="tool-concept">
+  <p>Calculates the cutoff frequency for every TE<sub>mn</sub> and TM<sub>mn</sub> mode (using tabulated Bessel function zeros), the dominant TE<sub>11</sub> guide wavelength and wave impedance, phase and group velocities, and conductor loss at the operating frequency.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">
+    \(f_{c,mn}^{\mathrm{TE}} = \dfrac{x'_{mn}\,c}{2\pi a\sqrt{\varepsilon_r}}, \quad f_{c,mn}^{\mathrm{TM}} = \dfrac{x_{mn}\,c}{2\pi a\sqrt{\varepsilon_r}}\)
+    \(\beta = \sqrt{k^2 - k_c^2}, \quad \lambda_g = \dfrac{2\pi}{\beta}, \quad Z_{\mathrm{TE}_{11}} = \dfrac{\omega\mu_0}{\beta}\)
+    \(\alpha_c^{\mathrm{TE}_{mn}} = \dfrac{R_s}{a\eta\sqrt{1-(f_c/f)^2}}\!\left[\!\left(\frac{f_c}{f}\right)^{\!2}\!+\dfrac{m^2}{x_{mn}^{\prime\,2}-m^2}\right]\)
+  </div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">a</td><td>Inner radius of the waveguide</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">x'<sub>mn</sub></td><td>n-th root of J'<sub>m</sub>(x) = 0 (TE modes); e.g. x'<sub>11</sub> = 1.8412</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">x<sub>mn</sub></td><td>n-th root of J<sub>m</sub>(x) = 0 (TM modes); e.g. x<sub>01</sub> = 2.4048</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">TE<sub>11</sub></td><td>Dominant mode. Single-mode bandwidth: f<sub>c,TE₁₁</sub> to 1.307 × f<sub>c,TE₁₁</sub> (TM₀₁ cutoff)</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">TE<sub>01</sub></td><td>m = 0 → no m²/(x'²−m²) term; conductor loss decreases with frequency. Used in mm-wave transmission.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;">v<sub>ph</sub>·v<sub>gr</sub></td><td>Phase × group velocity = c²/εr (always)</td></tr>
+  </table>
+  <p style="font-size:11px;color:#777;margin-top:8px;">Note: the TE<sub>11</sub> mode is degenerate (two orthogonal polarisations). Circular waveguide is less common than rectangular due to its narrower single-mode bandwidth (~31% vs ~100% for standard WR), but is used for rotating joints, TE<sub>01</sub> mm-wave links, and MRI bore liners.</p>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>M. Pozar, <em>Microwave Engineering</em>, 4th ed., §3.4 (Wiley, 2012)</div>
+  </details>
+</div>
+
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Inner radius, <span class="var">a</span></label>
+    <div class="inp-inline">
+      <input type="text" id="cwg-a" placeholder="value" data-tip="Inner radius of the circular waveguide. Determines all mode cutoff frequencies via fc = x·c/(2π·a·√εr).">
+      <select id="cwg-a-unit">
+        <option value="1e-3" selected>mm</option>
+        <option value="1e-2">cm</option>
+        <option value="1">m</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Operating frequency, <span class="var">f</span></label>
+    <div class="inp-inline">
+      <input type="text" id="cwg-f" placeholder="value" data-tip="Operating frequency. Must be above TE₁₁ cutoff for propagation.">
+      <select id="cwg-f-unit">
+        <option value="1e9" selected>GHz</option>
+        <option value="1e6">MHz</option>
+      </select>
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Fill dielectric, <span class="var">εr</span></label>
+    <div class="inp-inline">
+      <input type="text" id="cwg-er" placeholder="1 (air)" data-tip="Relative permittivity of the fill medium. Default 1 for air-filled. Dielectric fill scales all cutoffs by 1/√εr.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Loss tangent, <span class="var">tan δ</span></label>
+    <div class="inp-inline">
+      <input type="text" id="cwg-tanD" placeholder="0 (lossless)" data-tip="Dielectric loss tangent of fill medium. 0 for air-filled waveguide.">
+    </div>
+  </div>
+  <div class="inp-row">
+    <label>Wall conductivity, <span class="var">σ</span></label>
+    <div class="inp-inline">
+      <input type="text" id="cwg-sigma" placeholder="5.8e7 (copper)" data-tip="Conductivity of waveguide wall in S/m. Copper: 5.8×10⁷, Aluminum: 3.5×10⁷, Silver: 6.3×10⁷.">
+    </div>
+  </div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 6px;">
+  <button class="calc-btn" id="cwg-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'cwg-a':'29.1','cwg-a-unit':'1e-3','cwg-f':'4','cwg-f-unit':'1e9','cwg-er':'1','cwg-tanD':'0','cwg-sigma':'5.8e7'})" title="a=29.1 mm, C-band 4 GHz">C-band (4 GHz)</button>
+  <button class="example-btn" onclick="loadExample({'cwg-a':'12.4','cwg-a-unit':'1e-3','cwg-f':'12','cwg-f-unit':'1e9','cwg-er':'1','cwg-tanD':'0','cwg-sigma':'5.8e7'})" title="a=12.4 mm, Ku-band 12 GHz">Ku-band (12 GHz)</button>
+  <button class="example-btn" onclick="loadExample({'cwg-a':'4.0','cwg-a-unit':'1e-3','cwg-f':'60','cwg-f-unit':'1e9','cwg-er':'1','cwg-tanD':'0','cwg-sigma':'5.8e7'})" title="a=4.0 mm, 60 GHz V-band TE₀₁">V-band TE₀₁ (60 GHz)</button>
+</div>
+
+<div id="cwg-error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div id="cwg-results" class="res-grid"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram(res) {
+  var W = 500, H = 200;
+  var s = '<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s += '<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+
+  var cx = 100, cy = 100, R = 78;
+
+  // Outer wall (thick circle)
+  s += '<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="#e8f4ff" stroke="#5533aa" stroke-width="2.5"/>';
+
+  // TE₁₁ E-field pattern: y-polarized dipole-like pattern
+  // Draw a grid of vertical arrows inside the circle; amplitude ∝ J₁'(kc·r)·cos²φ + J₁(kc·r)/(kc·r)·sin²φ
+  // Approximate: use a cosine roll-off in both x and r
+  var nx = 7, ny = 5;
+  var x1mn = 1.8412;
+  for (var ix = 0; ix < nx; ix++) {
+    for (var iy = 0; iy < ny; iy++) {
+      var px = cx + (ix - (nx-1)/2) * (R*1.7/(nx));
+      var py = cy + (iy - (ny-1)/2) * (R*1.6/(ny));
+      var dx = px - cx, dy2 = py - cy;
+      var rho = Math.sqrt(dx*dx + dy2*dy2) / R;  // 0..1
+      if (rho >= 0.92) continue;  // outside circle
+      // Approximate TE₁₁ Ey field magnitude
+      var amp = 22 * Math.cos(rho * x1mn * 0.8);
+      if (amp < 2) continue;
+      // Arrow from (px, py+amp) to (px, py-amp)
+      s += '<line x1="'+px.toFixed(1)+'" y1="'+(py+amp*0.9).toFixed(1)+'" x2="'+px.toFixed(1)+'" y2="'+(py-amp*0.9).toFixed(1)+'" stroke="#AA77FF" stroke-width="1.5" opacity="0.85"/>';
+      // Arrowhead
+      s += '<polygon points="'+px.toFixed(1)+','+(py-amp*0.9).toFixed(1)+' '+(px-3).toFixed(1)+','+(py-amp*0.9+6).toFixed(1)+' '+(px+3).toFixed(1)+','+(py-amp*0.9+6).toFixed(1)+'" fill="#AA77FF" opacity="0.85"/>';
+    }
+  }
+
+  // Radius dimension line
+  s += '<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R)+'" y2="'+cy+'" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/>';
+  s += '<text x="'+(cx+R/2)+'" y="'+(cy-5)+'" text-anchor="middle" font-size="11" fill="#5533aa">a = '+engFmt(res.a,'m')+'</text>';
+
+  // Right-side annotations
+  var xl = cx + R + 20;
+  s += '<text x="'+xl+'" y="50" font-size="11" fill="#5533aa">f<tspan font-size="9" dy="3">c,TE₁₁</tspan><tspan dy="-3"> = '+engFmt(res.te11.fc,'Hz')+'</tspan></text>';
+  if (res.beta !== undefined) {
+    s += '<text x="'+xl+'" y="70" font-size="11" fill="#AA77FF">λ<tspan font-size="9" dy="3">g</tspan><tspan dy="-3"> = '+engFmt(res.lambda_g,'m')+'</tspan></text>';
+    s += '<text x="'+xl+'" y="90" font-size="11" fill="#AA77FF">Z<tspan font-size="9" dy="3">TE₁₁</tspan><tspan dy="-3"> = '+res.Zw.toFixed(1)+' Ω</tspan></text>';
+  }
+
+  s += '<text x="'+cx+'" y="'+(cy+R+16)+'" text-anchor="middle" font-size="10" fill="#888">↑ TE₁₁ E-field (y-polarised)</text>';
+  s += '</svg>';
+  document.getElementById('tool-diagram').innerHTML = s;
+}
+</script>
+
+<script src="CircularWaveguide.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>
