@@ -4,9 +4,10 @@
  *   Filter:    F(s) = (1 + s·T₂) / (s·C₁·(1 + s·T₃))
  *
  *   Design at ωc (loop BW) and phase margin φ:
+ *   Kφ = Icp/(2π)   (charge-pump phase-detector gain, A/rad)
  *   T₂ = sin(φ) / (ωc·(1 − sin(φ)))
  *   T₁ = 1 / (ωc²·T₂)
- *   C₁ = Kd·Kvco / (N·ωc²·T₁) · √(1 + (ωc·T₂)²)
+ *   C₁ = (Kφ·Kvco / (N·ωc²)) · √((1 + (ωc·T₂)²) / (1 + (ωc·T₁)²))   (|G(jωc)| = 1)
  *   R  = T₂/C₁;   C₂ = 0.1·C₁   (3rd pole at ωp = 1/(R·C₂))
  */
 
@@ -40,27 +41,24 @@ function pll_calc() {
   // Using the simplified design equations for 3rd-order type-2:
   //   T1 = 1/wc * tan(pm + arctan(wc·T2) - pi/2) ... iterative, but closed form exists:
   //
-  // Direct formula (Banerjee / ADI):
-  //   T2 = (tan(phi) + sqrt(tan(phi)^2 + 1)) / wc  (places one zero at wc/sqrt(T2·T1+1))
-  //   T1 = 1 / (wc^2 · T2)
-  //   C1 = Kd·Kvco·T2 / (N·wc^2·T1·(1 + wc^2·T2^2)^0.5)  (from |G(jwc)|=1)
-
-  // Simplified: place zero at wc/a, pole at a·wc (a > 1 chosen from phase margin)
-  // a = tan(pm/2 + pi/4) for a single-zero type-1... type-2 requires different approach
+  // Charge-pump phase-detector gain (A/rad). Kd is entered as the pump current Icp.
+  var Kphi = Kd / (2 * Math.PI);
 
   // Use the Perrott/Banerjee iterative-free formula for type-2 3rd-order:
-  // Step 1: compute T2 from phase margin
+  // Step 1: compute T2 (zero) and T1 (pole) from phase margin and loop bandwidth
   var sinPhi = Math.sin(phi);
   // Type-2 3rd-order linearized formula: T2 = sin(pm) / (wc · (1 - sin(pm)))
   var T2 = sinPhi / (wc * (1 - sinPhi));
   if (T2 <= 0) T2 = 1/wc;  // fallback
 
-  var T1 = 1 / (wc * wc * T2);  // ensures phase contribution
+  var T1 = 1 / (wc * wc * T2);  // pole time constant (places extra phase lag)
 
-  // C1 from unity open-loop gain at wc: |G(jwc)| = Kd·Kvco·|F(jwc)| / (N·wc) = 1
-  var C1 = Kd * Kvco / (N * wc * wc * T1) * Math.sqrt(1 + wc*wc*T2*T2);
+  // C1 (main integrating cap) from unity open-loop gain at wc:
+  //   |G(jwc)| = (Kphi·Kvco / (N·wc²·C1)) · √((1+(wc·T2)²)/(1+(wc·T1)²)) = 1
+  var C1 = (Kphi * Kvco) / (N * wc * wc) *
+           Math.sqrt((1 + wc*wc*T2*T2) / (1 + wc*wc*T1*T1));
 
-  // R from T2 = R·C1
+  // R from the zero time constant T2 = R·C1
   var R = T2 / C1;
 
   // C2 (3rd pole) — typically 0.1–0.2 × C1 to minimize peaking
