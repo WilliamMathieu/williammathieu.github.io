@@ -4,6 +4,8 @@ All 55 calculators on rftoolbox.ca.
 
 ---
 
+## Numeric Calculators
+
 | # | Calculator | Inputs | Outputs |
 |---|-----------|--------|---------|
 | 1 | **dBmConverter** | Power level (dBm) | Power (mW), Power (dBW) |
@@ -26,11 +28,11 @@ All 55 calculators on rftoolbox.ca.
 | 18 | **LCBalun** | Frequency, Topology (lattice / pi), Unbalanced impedance Zu (Ω), Balanced impedance Zb (Ω) | Inductor value (H), Capacitor value (F) |
 | 19 | **LNetwork** | Source resistance Rs (Ω), Load resistance Rl (Ω), Frequency | Quality factor Q, Element 1 value (H or F), Element 2 value (H or F) |
 | 20 | **PiTNetwork** | R₁ (Ω), R₂ (Ω), Desired Q, Frequency, Topology (Pi-LP / Pi-HP / T-LP / T-HP) | Three element values (H and/or F) |
-| 21 | **ImpedanceMatchingNetwork** | Source Rs + jXs (Ω), Load Rl + jXl (Ω), Frequency, Z₀ (normalization) | Up to 4 L-network solutions, each with topology label and two element values (H or F) |
+| 21 | **ImpedanceMatchingNetwork** | Source Rs + jXs (Ω), Load Rl + jXl (Ω), Frequency, Z₀ (normalization) | Up to 4 L-network solutions, each with network Q, topology label, and two element values (H or F) |
 | 22 | **Coupler** | Type (edge-coupled / branch-line), Frequency, Z₀, Coupling C (dB) or power ratio | Line impedances (Ω), Electrical lengths (°) |
 | 23 | **Wilkinson** | Frequency, Reference impedance Z₀ (Ω), εᵣ | Branch impedance Z₁ = Z₀√2 (Ω), Isolation resistor R = 2Z₀ (Ω), Physical length (mm) |
 | 24 | **PowerCombiner** | Number of ports N, Input power Pᵢₙ (dBm), Combiner efficiency η, Number of failed ports | Combined output power Pₒᵤₜ (dBm), Combining gain (dB) |
-| 25 | **StubCalc** | Stub type (open / short), Frequency, Z₀ (Ω), Target susceptance B (mS) | Electrical length (°), Physical length (mm, free space) |
+| 25 | **StubCalc** | Stub type (open / short), Frequency, Z₀ (Ω), Target susceptance B (mS) | Electrical length (°), Physical length (mm, free space), λ/4 reference (mm) |
 | 26 | **AmpStability** | S₁₁, S₁₂, S₂₁, S₂₂ (magnitude + angle, degrees) | Rollett stability factor K, |Δ|, Stability circles (source/load), stability verdict |
 | 27 | **NoiseFigure** | Number of stages n; per stage: NF (dB), Gain (dB) | Cascaded noise figure (Friis formula) NF_total (dB) |
 | 28 | **IP3Calc** | Input power Pᵢₙ (dBm), Gain G (dB), Input IP3 IIP3 (dBm) | Output power Pₒᵤₜ (dBm), Output IP3 OIP3 (dBm) |
@@ -51,20 +53,22 @@ All 55 calculators on rftoolbox.ca.
 | 43 | **ESeries** | Target value, E-series (E6 / E12 / E24 / E48 / E96) | Nearest lower value, Nearest higher value, Closest value (Ω / F / H) |
 | 44 | **BondWireVia** | Wire length l (mm), Wire diameter d (mm), Height above ground h (mm) | Inductance L (nH) via Grover formula |
 | 45 | **DiffPair** | εᵣ, Substrate height h, Trace width w, Trace separation s, Trace thickness t (all mm) | Differential impedance Zdiff (Ω), Common-mode impedance Zcm (Ω) |
+| 46 | **SmithChart** | Z₀ (Ω), R (Ω), X (Ω), optional line length; click points on chart | Per point: Z = R + jX (Ω), \|Γ\|, Return loss (dB), VSWR |
+| 47 | **TLLoss** | Line type (microstrip / coax / …), Frequency, Line length, plus per-type geometry (εᵣ, loss tangent, trace width, substrate height, conductor thickness, conductivity / inner & outer diameter) | Characteristic impedance Z₀ (Ω), Effective permittivity ε_eff, Phase velocity (% of c), Conductor loss (dB/m), Dielectric loss (dB/m), Total attenuation (dB/m), Total insertion loss (dB) |
+| 48 | **RFSimulator** | Schematic components (R / L / C values, topology), frequency sweep | S21 range (dB), S11 minimum (dB), Insertion loss (dB), plus S-parameter plots |
+| 49 | **SpiceSim** | SPICE netlist (text), analysis type (op / transient / AC / DC) | Operating-point node voltages, transient / AC / DC waveforms |
+| 50 | **SurfaceCoilDesigner** | Wire diameter / preset, Larmor frequency / preset, Sample type, Loop geometry | Inductance L, Skin depth δ (Cu), Sample-limited flag, λ/4 cable length, Estimated decoupling, Bandwidth (−3 dB), Suggested cable type |
+| 51 | **CapacitorNetwork** | Number of capacitors, Configuration (series / parallel), Default unit, Individual capacitor values | Total capacitance C_total |
+| 52 | **CoilDesigner** | Wire diameter, Loop diameter, Larmor frequency | Self-inductance L (H), Tuning capacitor C (F) |
+| 53 | **CLI** | Command-driven (e.g. loop diameter, wire diameter) | Self-inductance L (H) and other per-command numeric results |
 
 ---
 
-## Interactive / Graphical Tools (no calculated numeric output)
+## Graphical / Plot-Only Tools
 
-| # | Tool | Description |
-|---|------|-------------|
-| 46 | **SmithChart** | Interactive Smith chart — plot and manipulate impedance points |
-| 47 | **TLLoss** | Transmission line loss vs. frequency chart for common cable types |
-| 48 | **SParamPlotter** | Upload Touchstone (.s2p) files and plot S-parameters |
-| 49 | **ArrayFactor** | Interactive phased-array pattern calculator and polar plot |
-| 50 | **SpiceSim** | In-browser SPICE circuit simulator (text netlist → transient/AC/DC plots) |
-| 51 | **RFSimulator** | Schematic-entry RF circuit simulator with S-parameter display |
-| 52 | **SurfaceCoilDesigner** | MRI surface coil design wizard with geometry and inductance estimates |
-| 53 | **CapacitorNetwork** | Series/parallel capacitor network solver with total capacitance |
-| 54 | **CoilDesigner** | Multi-layer air-core coil inductance designer |
-| 55 | **CLI** | Command-line interface for RF calculations |
+These two genuinely produce a plot rather than discrete numeric result fields (values appear only as on-hover chart readouts).
+
+| # | Tool | Inputs | Output |
+|---|------|--------|--------|
+| 54 | **ArrayFactor** | Number of elements N, Element spacing d (λ), Steering angle θ₀ | Polar array-factor radiation pattern plot |
+| 55 | **SParamPlotter** | Uploaded Touchstone file (.s1p/.s2p…), Plot type, Frequency axis (lin/log) | Magnitude / phase / group-delay plots of the uploaded S-parameters |
