@@ -825,6 +825,204 @@ async function runDiffPair(page, rng) {
   }
 }
 
+// ── 46. SmithChart ───────────────────────────────────────────────────────────
+// Pin R+jX points and verify RL = -20·log10(|Γ|), where |Γ|² = ((R-Z₀)²+X²)/((R+Z₀)²+X²)
+async function runSmithChart(page, rng) {
+  await page.goto(`${BASE}/SmithChart.html`);
+  await page.fill('#sc-z0', '50');
+  for (let i = 0; i < N; i++) {
+    const R = rng.range(1, 500);
+    const X = rng.range(-300, 300);
+    await page.fill('#sc-r', R.toFixed(2));
+    await page.fill('#sc-x', X.toFixed(2));
+    await page.click('#sc-plot-btn');
+    const Z0 = 50;
+    const mag2 = ((R - Z0) ** 2 + X * X) / ((R + Z0) ** 2 + X * X);
+    const mag = Math.sqrt(mag2);
+    const expRL = -20 * Math.log10(mag);
+    const result = await page.evaluate(function() {
+      var Z0 = SC.z0;
+      var pt  = SC.points[SC.points.length - 1];
+      if (!pt) return null;
+      var g   = zToGamma(pt.r / Z0, pt.x / Z0);
+      var m   = Math.sqrt(g.re * g.re + g.im * g.im);
+      return m > 0 ? -20 * Math.log10(m) : null;
+    });
+    if (result !== null) {
+      check(`SC[${i}] RL`, result, expRL, 0.003);
+    } else {
+      FAIL.push(`SC[${i}]: no point returned`);
+    }
+  }
+}
+
+// ── 47. TLLoss ───────────────────────────────────────────────────────────────
+// Coax: Z₀ = 138/√εr · log₁₀(D/d).  Microstrip: presence check for 'dB'.
+async function runTLLoss(page, rng) {
+  await page.goto(`${BASE}/TLLoss.html`);
+  await page.selectOption('#tl-f-unit', '1e9');
+  await page.selectOption('#tl-len-unit', '1e-2');
+  // 50 coax numeric checks
+  await page.selectOption('#tl-type', 'coax');
+  await page.evaluate(() => tl_type_change());
+  for (let i = 0; i < 50; i++) {
+    const er = rng.range(1, 4);
+    const d  = rng.range(0.5, 3);
+    const D  = d + rng.range(1, 10);
+    await page.fill('#tl-f',   rng.range(0.1, 10).toFixed(3));
+    await page.fill('#tl-len', rng.range(1, 100).toFixed(1));
+    await page.fill('#cx-er',  er.toFixed(3));
+    await page.fill('#cx-df',  '0');
+    await page.fill('#cx-d',   d.toFixed(3));
+    await page.fill('#cx-D',   D.toFixed(3));
+    await page.fill('#cx-sigma', '5.8e7');
+    await page.click('#tl-btn');
+    const expZ0 = 138 / Math.sqrt(er) * Math.log10(D / d);
+    check(`TL[${i}] coax Z0`, await getNum(page, '#tl-results'), expZ0, 0.005);
+  }
+  // 50 microstrip presence checks
+  await page.selectOption('#tl-type', 'mstrip');
+  await page.evaluate(() => tl_type_change());
+  for (let i = 0; i < 50; i++) {
+    await page.fill('#tl-f',   rng.range(0.1, 10).toFixed(3));
+    await page.fill('#tl-len', rng.range(1, 100).toFixed(1));
+    await page.fill('#ms-er',  rng.range(2, 12).toFixed(3));
+    await page.fill('#ms-df',  '0');
+    await page.fill('#ms-w',   rng.range(0.1, 5).toFixed(3));
+    await page.fill('#ms-h',   rng.range(0.1, 3).toFixed(3));
+    await page.fill('#ms-t',   '35');
+    await page.fill('#ms-sigma', '5.8e7');
+    await page.click('#tl-btn');
+    checkPresent(`TL_ms[${i}] dB`, await getTxt(page, '#tl-results'), 'dB');
+  }
+}
+
+// ── 48. RFSimulator ──────────────────────────────────────────────────────────
+// Load each built-in preset, simulate, verify sim-summary shows dB values.
+// Chart.js can't load from CDN in headless mode — inject a minimal stub.
+async function runRFSim(page, rng) {
+  await page.goto(`${BASE}/RFSimulator.html`);
+  await page.evaluate(() => {
+    if (typeof Chart === 'undefined')
+      window.Chart = function() { this.destroy = function() {}; };
+  });
+  const presets = ['lpf3', 'hpf3', 'bpf', 'lmatch', 'qw', 'stub'];
+  for (let i = 0; i < N; i++) {
+    const preset = rng.pick(presets);
+    await page.evaluate((p) => { loadPreset(p); }, preset);
+    await page.evaluate(() => simulate());
+    checkPresent(`RFSim[${i}] ${preset}`, await getTxt(page, '#sim-summary'), 'dB');
+  }
+}
+
+// ── 49. SpiceSim ─────────────────────────────────────────────────────────────
+// Load presets and run; verify the log reports completion.
+// Chart.js can't load from CDN in headless mode — inject a minimal stub.
+async function runSpiceSim(page, rng) {
+  await page.goto(`${BASE}/SpiceSim.html`);
+  await page.evaluate(() => {
+    if (typeof Chart === 'undefined')
+      window.Chart = function() { this.destroy = function() {}; };
+  });
+  const presets = ['rc_lpf', 'rlc_series', 'lc_tank', 'rl_lpf', 'pi_filter', 'dc_divider', 'rc_tran', 'rlc_tran'];
+  for (let i = 0; i < N; i++) {
+    const preset = rng.pick(presets);
+    await page.evaluate((p) => { loadPreset(p); }, preset);
+    await page.evaluate(() => runSpice());
+    checkPresent(`Spice[${i}] ${preset}`, await getTxt(page, '#spice-log'), 'complete');
+  }
+}
+
+// ── 50. SurfaceCoilDesigner ──────────────────────────────────────────────────
+// Inductance formula: L = μ₀·r·(ln(8r/a) − 2), r = D/2, a = d/2 (SI)
+// MathJax.typeset() is called after calculate() but typeset never loads from CDN.
+async function runSurfaceCoil(page, rng) {
+  await page.goto(`${BASE}/SurfaceCoilDesigner.html`);
+  await page.evaluate(() => {
+    if (window.MathJax && typeof MathJax.typeset !== 'function')
+      MathJax.typeset = function() {};
+  });
+  const MU0 = 4 * Math.PI * 1e-7;
+  for (let i = 0; i < N; i++) {
+    const D_mm = rng.range(20, 200);
+    const d_mm = rng.range(0.5, Math.min(D_mm * 0.2, 8));
+    const f    = rng.range(10, 500);
+    const h    = rng.range(0, 50);
+    await page.fill('#D', D_mm.toFixed(1));
+    await page.fill('#d', d_mm.toFixed(2));
+    await page.fill('#f', f.toFixed(2));
+    await page.fill('#h', h.toFixed(1));
+    await page.selectOption('#sample', 'muscle');
+    await page.evaluate(() => calculate());
+    const r = D_mm * 0.5e-3, a = d_mm * 0.5e-3;
+    const expL = MU0 * r * (Math.log(8 * r / a) - 2);
+    const gotL = await getNumEng(page, '#r_L');
+    check(`SCD[${i}] L`, gotL, expL, 0.003);
+  }
+}
+
+// ── 51. CapacitorNetwork ─────────────────────────────────────────────────────
+// parallel: Σ Ci;  series: 1/Σ(1/Ci)
+async function runCapNetwork(page, rng) {
+  await page.goto(`${BASE}/CapacitorNetwork.html`);
+  for (let i = 0; i < N; i++) {
+    const n    = rng.irange(2, 4);
+    const mode = rng.pick(['series', 'parallel']);
+    const caps = Array.from({ length: n }, () => rng.range(1, 10000)); // pF values
+    await page.fill('#numCaps', String(n));
+    await page.selectOption('#defaultUnit', 'pF');
+    await page.selectOption('#mode', mode);
+    await page.evaluate((n) => { document.getElementById('numCaps').value = n; buildInputs(); }, n);
+    for (let j = 1; j <= n; j++) {
+      await page.fill(`#cv-${j}`, caps[j - 1].toFixed(3));
+      // unit already defaulted to pF by buildInputs
+    }
+    await page.evaluate(() => calculate());
+    const expPF = mode === 'parallel'
+      ? caps.reduce((s, c) => s + c, 0)
+      : 1 / caps.reduce((s, c) => s + 1 / c, 0);
+    const gotF = await getNumEng(page, '#C_out');
+    check(`Cap[${i}] ${mode} n=${n}`, gotF, expPF * 1e-12, 0.002);
+  }
+}
+
+// ── 52. CoilDesigner ─────────────────────────────────────────────────────────
+// L = μ₀·(D/2)·(ln(8D/d) − 2),  D and d in metres
+async function runCoilDesigner(page, rng) {
+  await page.goto(`${BASE}/CoilDesigner.html`);
+  const MU0 = 4 * Math.PI * 1e-7;
+  for (let i = 0; i < N; i++) {
+    const D_mm = rng.range(20, 300);
+    const d_mm = rng.range(0.3, Math.min(D_mm * 0.15, 5));
+    const f    = rng.range(10, 500);
+    await page.fill('#D', D_mm.toFixed(2));
+    await page.fill('#d', d_mm.toFixed(3));
+    await page.fill('#f', f.toFixed(2));
+    await page.selectOption('#f_dropdown', '1');  // MHz
+    await page.click('#btn');
+    const DSI = D_mm * 1e-3, dSI = d_mm * 1e-3;
+    const expL = MU0 * (DSI / 2) * (Math.log(8 * DSI / dSI) - 2);
+    check(`CD[${i}] L`, await getNumEng(page, '#L'), expL, 0.003);
+  }
+}
+
+// ── 53. CLI (Circular Loop Inductance) ───────────────────────────────────────
+// Same Neumann formula as CoilDesigner (no frequency input)
+async function runCLI(page, rng) {
+  await page.goto(`${BASE}/CLI.html`);
+  const MU0 = 4 * Math.PI * 1e-7;
+  for (let i = 0; i < N; i++) {
+    const D_mm = rng.range(20, 500);
+    const d_mm = rng.range(0.3, Math.min(D_mm * 0.15, 10));
+    await page.fill('#D', D_mm.toFixed(2));
+    await page.fill('#d', d_mm.toFixed(3));
+    await page.click('#btn');
+    const DSI = D_mm * 1e-3, dSI = d_mm * 1e-3;
+    const expL = MU0 * (DSI / 2) * (Math.log(8 * DSI / dSI) - 2);
+    check(`CLI[${i}] L`, await getNumEng(page, '#L'), expL, 0.003);
+  }
+}
+
 // ── Visual-only (load once) ───────────────────────────────────────────────────
 async function runVisual(page, name, url, needle) {
   await page.goto(`${BASE}/${url}`);
@@ -890,16 +1088,16 @@ async function runVisual(page, name, url, needle) {
     ['ESeries',               () => runESeries(page, rng)],
     ['BondWireVia',           () => runBondWire(page, rng)],
     ['DiffPair',              () => runDiffPair(page, rng)],
-    ['SmithChart',       () => runVisual(page, 'SmithChart',       'SmithChart.html',       'Smith')],
-    ['TLLoss',           () => runVisual(page, 'TLLoss',           'TLLoss.html',           'Loss')],
-    ['SParamPlotter',    () => runVisual(page, 'SParamPlotter',    'SParamPlotter.html',    'Touchstone')],
-    ['ArrayFactor',      () => runVisual(page, 'ArrayFactor',      'ArrayFactor.html',      'Array')],
-    ['SpiceSim',         () => runVisual(page, 'SpiceSim',         'SpiceSim.html',         'SPICE')],
-    ['RFSimulator',      () => runVisual(page, 'RFSimulator',      'RFSimulator.html',      'Simulator')],
-    ['SurfaceCoilDesigner', () => runVisual(page, 'SurfaceCoilDesigner', 'SurfaceCoilDesigner.html', 'coil')],
-    ['CapacitorNetwork', () => runVisual(page, 'CapacitorNetwork', 'CapacitorNetwork.html', 'apacit')],
-    ['CoilDesigner',     () => runVisual(page, 'CoilDesigner',     'CoilDesigner.html',     'coil')],
-    ['CLI',              () => runVisual(page, 'CLI',              'CLI.html',              'RF')],
+    ['SmithChart',          () => runSmithChart(page, rng)],
+    ['TLLoss',              () => runTLLoss(page, rng)],
+    ['SParamPlotter',       () => runVisual(page, 'SParamPlotter',    'SParamPlotter.html',    'Touchstone')],
+    ['ArrayFactor',         () => runVisual(page, 'ArrayFactor',      'ArrayFactor.html',      'Array')],
+    ['SpiceSim',            () => runSpiceSim(page, rng)],
+    ['RFSimulator',         () => runRFSim(page, rng)],
+    ['SurfaceCoilDesigner', () => runSurfaceCoil(page, rng)],
+    ['CapacitorNetwork',    () => runCapNetwork(page, rng)],
+    ['CoilDesigner',        () => runCoilDesigner(page, rng)],
+    ['CLI',                 () => runCLI(page, rng)],
   ];
 
   console.log(`Running ${N} random input sets per calculator (${calcs.length} calculators)…\n`);
