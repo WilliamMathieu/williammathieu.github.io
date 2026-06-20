@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="90" fill="#faf9ff" rx="3"/>
+  <!-- Circular cross-section -->
+  <circle cx="55" cy="45" r="36" fill="#e8f4ff" stroke="#5533aa" stroke-width="2"/>
+  <!-- TE₁₁ E-field arrows (vertical, dipole-like) -->
+  <line x1="33" y1="52" x2="33" y2="38" stroke="#AA77FF" stroke-width="1.5"/>
+  <polygon points="33,38 30,44 36,44" fill="#AA77FF"/>
+  <line x1="46" y1="57" x2="46" y2="33" stroke="#AA77FF" stroke-width="2"/>
+  <polygon points="46,33 43,39 49,39" fill="#AA77FF"/>
+  <line x1="55" y1="58" x2="55" y2="32" stroke="#AA77FF" stroke-width="2"/>
+  <polygon points="55,32 52,38 58,38" fill="#AA77FF"/>
+  <line x1="64" y1="57" x2="64" y2="33" stroke="#AA77FF" stroke-width="2"/>
+  <polygon points="64,33 61,39 67,39" fill="#AA77FF"/>
+  <line x1="77" y1="52" x2="77" y2="38" stroke="#AA77FF" stroke-width="1.5"/>
+  <polygon points="77,38 74,44 80,44" fill="#AA77FF"/>
+  <!-- Radius label -->
+  <line x1="55" y1="45" x2="91" y2="45" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="73" y="41" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">a</text>
+  <!-- Mode label -->
+  <text x="55" y="88" text-anchor="middle" font-family="monospace" font-size="8" fill="#5533aa">TE₁₁ dominant mode</text>
+  <!-- Right side info -->
+  <text x="105" y="30" font-family="monospace" font-size="8" fill="#5533aa">fc = x'₁₁·c/(2πa)</text>
+  <text x="105" y="44" font-family="monospace" font-size="8" fill="#5533aa">x'₁₁ = 1.8412</text>
+  <text x="105" y="58" font-family="monospace" font-size="8" fill="#888">TE₀₁: loss ↓ with f</text>
+</svg>

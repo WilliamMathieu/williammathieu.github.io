@@ -4,7 +4,8 @@
  *   f₀      = 1 / (2π·√(L·C))                (resonant frequency)
  *   Series:   Q = ω₀·L/R;   BW = R/(2π·L) = f₀/Q
  *   Parallel: Q = R/(ω₀·L); BW = 1/(2π·R·C) = f₀/Q
- *   f₁, f₂  = f₀ ± BW/2                      (−3 dB band edges)
+ *   f₁, f₂  = f₀·(√(1+1/(4Q²)) ∓ 1/(2Q))    (exact −3 dB band edges)
+ *             → reduces to f₀ ± BW/2 for high Q; stays positive for Q < 0.5
  */
 
 document.getElementById('bp-btn').addEventListener('click', function() {
@@ -21,8 +22,11 @@ document.getElementById('bp-btn').addEventListener('click', function() {
     document.getElementById('bp-f0').textContent=engFmt(f0,'Hz');
     document.getElementById('bp-bw').textContent=engFmt(BW_Hz,'Hz');
     document.getElementById('bp-Q').textContent=Q.toFixed(4);
-    document.getElementById('bp-f1').textContent=engFmt(f0-BW_Hz/2,'Hz');
-    document.getElementById('bp-f2').textContent=engFmt(f0+BW_Hz/2,'Hz');
+    // Exact −3 dB edges: f1,2 = f0·(√(1+1/(4Q²)) ∓ 1/(2Q)). Always positive
+    // (the f0±BW/2 approximation goes negative for Q < 0.5), and f1·f2 = f0².
+    var half=1/(2*Q), mid=Math.sqrt(1+half*half);
+    document.getElementById('bp-f1').textContent=engFmt(f0*(mid-half),'Hz');
+    document.getElementById('bp-f2').textContent=engFmt(f0*(mid+half),'Hz');
     if(window.drawDiagram) window.drawDiagram();
 });
 

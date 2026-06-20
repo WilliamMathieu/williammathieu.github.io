@@ -23,14 +23,15 @@ document.getElementById('sar-btn').addEventListener('click', function(){
   // Faraday-induced E-field in a cylinder of radius r under a rotating B₁ (MRI birdcage model):
   //   E_peak = ω·B₁·r/2   [V/m]  — Pozar / IEC 60601-2-33 §29.201
   // SAR_peak = σ·E²/(2ρ) = σ·ω²·B₁²·r²/(8ρ)
-  // B₁+ safety limit from SAR_avg ≤ 2 W/kg (whole-body, IEC 60601-2-33):
-  //   B₁_lim = √(2·ρ·2/(σ·(ω·r/2)²)) = 2/r · √(ρ/(σ·ω²))
+  // B₁+ safety limit from the time-averaged SAR ≤ 2 W/kg (whole-body, IEC 60601-2-33):
+  //   SAR_avg = σ·ω²·B₁²·r²·DC/(8ρ) = 2  →  B₁_lim = (1/r)·√(16·ρ/(σ·ω²·DC))
+  var SAR_LIMIT=2.0; // W/kg, whole-body normal mode
   var r_eff=0.10; // 10 cm typical for head/body
   var E_est=w*B1*r_eff/2; // V/m (Faraday induction, rotating B1)
   var SAR_peak=sig*E_est*E_est/(2*rho);
   var SAR_avg=SAR_peak*dc;
-  // B1+ limit for 2 W/kg (whole body)
-  var B1_lim=(2/r_eff)*Math.sqrt(rho*2.0/(sig*w*w));
+  // B1+ limit such that the time-averaged SAR equals SAR_LIMIT at this duty cycle
+  var B1_lim=(1/r_eff)*Math.sqrt(8*rho*SAR_LIMIT/(sig*w*w*dc));
   var margin_dB=20*Math.log10(B1_lim/(B1/1e-6)*1e6);
   var wb_status=SAR_avg<=2?'✓ Within limit ('+SAR_avg.toFixed(2)+' / 2.0 W/kg)':'⚠ EXCEEDS LIMIT';
   var head_status=SAR_avg<=3.2?'✓ Within limit':'⚠ EXCEEDS LIMIT';

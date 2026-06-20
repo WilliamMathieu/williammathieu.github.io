@@ -1375,13 +1375,13 @@ const TESTS = [
   {
     group: 'SAREstimator',
     name: 'B1=20µT, 128 MHz, muscle tissue, DC=1.0',
-    ref: 'E=ω·B1·r/2=804.25 V/m (Faraday rotating-field); SAR_peak=σE²/2ρ=237.17 W/kg (muscle σ=0.77,ρ=1050); B1_lim=(2/r)√(ρ·2/(σω²))=1.30µT',
+    ref: 'E=ω·B1·r/2=804.25 V/m (Faraday rotating-field, r=0.1m); SAR_peak=σE²/2ρ=237.17 W/kg (muscle σ=0.77,ρ=1050); B1_lim at SAR_avg=2W/kg, DC=1: (1/r)√(8ρ·2/(σω²))=1.84µT (displays 1.8, toFixed(1))',
     inputs:  { 'sar-b1': '20', 'sar-f': '128', 'sar-sigma': '0.77', 'sar-rho': '1050', 'sar-dc': '1' },
     selects: { 'sar-tissue': 'custom' },
     button:  'sar-btn',
     expect: {
       'sar-peak':  { label: 'SAR peak (W/kg)', value: 237.17, tol: 0.5 },
-      'sar-b1lim': { label: 'B1 limit (µT)',   value: 1.30,   tol: 0.02, re: /([\d.]+)\s*µT/ }
+      'sar-b1lim': { label: 'B1 limit (µT)',   value: 1.8,    tol: 0.05, re: /([\d.]+)\s*µT/ }
     }
   },
 
