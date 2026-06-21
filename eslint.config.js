@@ -8,7 +8,7 @@ module.exports = [
   // ── Browser calculator scripts ──────────────────────────────────────────
   {
     files: ['*.js'],
-    ignores: ['validate-run.js'],
+    ignores: ['validate-run.js', 'audit3.js', 'generate-values.js'],
     languageOptions: {
       ecmaVersion: 2020,
       sourceType: 'script',
@@ -33,17 +33,34 @@ module.exports = [
     },
   },
 
-  // ── Node.js headless test runner ────────────────────────────────────────
+  // ── Node.js headless test runners ───────────────────────────────────────
   {
-    files: ['validate-run.js'],
+    files: ['validate-run.js', 'audit3.js', 'generate-values.js'],
     languageOptions: {
       ecmaVersion: 2020,
       sourceType: 'commonjs',
-      globals: { ...globals.node },
+      globals: {
+        ...globals.node,
+        // Page-scope globals referenced inside Playwright page.evaluate() callbacks
+        window: 'readonly',
+        document: 'readonly',
+        Chart: 'readonly',
+        MathJax: 'readonly',
+        SC: 'readonly',
+        zToGamma: 'readonly',
+        tl_type_change: 'readonly',
+        loadPreset: 'readonly',
+        simulate: 'readonly',
+        runSpice: 'readonly',
+        calculate: 'readonly',
+        buildInputs: 'readonly',
+      },
     },
     rules: {
       ...js.configs.recommended.rules,
       'no-unused-vars': ['warn', { args: 'none' }],
+      // Empty catch blocks are intentional (best-effort optional fills)
+      'no-empty': ['error', { allowEmptyCatch: true }],
     },
   },
 ];
