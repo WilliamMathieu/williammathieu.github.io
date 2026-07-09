@@ -117,39 +117,40 @@ function drawDiagram(Lv, Cv, fv) {
   var Ls = (Lv !== undefined) ? engFmt(Lv, 'H') : '—';
   var Cs = (Cv !== undefined) ? engFmt(Cv, 'F') : '—';
   var fs = (fv !== undefined) ? engFmt(fv, 'Hz') : '—';
-  var W=480, H=165, cx=W/2, cy=75;
-  var lx=cx-100, rx=cx+100, ty=28, by=128;
+  var W=460, H=186;
+  var nax=155, nbx=305;          // the two node buses = the tank's two terminals
+  var ty=54, by=134, cy=(ty+by)/2, pcx=(nax+nbx)/2;
   var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
-  // Top and bottom rails
-  s+='<line x1="'+lx+'" y1="'+ty+'" x2="'+rx+'" y2="'+ty+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  s+='<line x1="'+lx+'" y1="'+by+'" x2="'+rx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  // Left side bus
-  s+='<line x1="'+lx+'" y1="'+ty+'" x2="'+lx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  // Right side bus
-  s+='<line x1="'+rx+'" y1="'+ty+'" x2="'+rx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  // Input/output terminals
-  s+='<line x1="'+(lx-30)+'" y1="'+cy+'" x2="'+lx+'" y2="'+cy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  s+='<line x1="'+rx+'" y1="'+cy+'" x2="'+(rx+30)+'" y2="'+cy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  s+='<circle cx="'+(lx-30)+'" cy="'+cy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
-  s+='<circle cx="'+(rx+30)+'" cy="'+cy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
-  // Inductor branch (left of centre, vertical)
-  var ibx=cx-40, itop=ty+6, ibot=by-6, nbumps=4, bsize=(ibot-itop)/nbumps;
-  s+='<line x1="'+ibx+'" y1="'+ty+'" x2="'+ibx+'" y2="'+itop+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  var ip='M'+ibx+','+itop;
-  for(var k=0;k<nbumps;k++) ip+=' A'+(bsize/2)+','+(bsize/2)+' 0 0,0 '+ibx+','+(itop+(k+1)*bsize);
+  // Two vertical node buses (NOT joined to each other — that would short the tank)
+  s+='<line x1="'+nax+'" y1="'+ty+'" x2="'+nax+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<line x1="'+nbx+'" y1="'+ty+'" x2="'+nbx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  // Terminals off each bus
+  s+='<line x1="36" y1="'+cy+'" x2="'+nax+'" y2="'+cy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<line x1="'+nbx+'" y1="'+cy+'" x2="'+(W-36)+'" y2="'+cy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<circle cx="36" cy="'+cy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+  s+='<circle cx="'+(W-36)+'" cy="'+cy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
+  // Inductor branch (top) — horizontal coil bridging the two buses
+  var nb=4, bw=16, il=pcx-(nb*bw)/2, ir=pcx+(nb*bw)/2;
+  s+='<line x1="'+nax+'" y1="'+ty+'" x2="'+il+'" y2="'+ty+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  var ip='M'+il+','+ty;
+  for(var k=0;k<nb;k++) ip+=' A'+(bw/2)+','+(bw/2)+' 0 0,1 '+(il+(k+1)*bw)+','+ty;
   s+='<path d="'+ip+'" fill="none" stroke="#AA77FF" stroke-width="2.4" stroke-linecap="round"/>';
-  s+='<line x1="'+ibx+'" y1="'+ibot+'" x2="'+ibx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  s+='<text x="'+(ibx-18)+'" y="'+(cy+4)+'" text-anchor="end" font-size="11" fill="#AA77FF" font-weight="bold" font-style="italic">L = '+Ls+'</text>';
-  // Capacitor branch (right of centre, vertical)
-  var cbx=cx+40;
-  s+='<line x1="'+cbx+'" y1="'+ty+'" x2="'+cbx+'" y2="'+(cy-7)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  s+='<line x1="'+(cbx-13)+'" y1="'+(cy-7)+'" x2="'+(cbx+13)+'" y2="'+(cy-7)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-  s+='<line x1="'+(cbx-13)+'" y1="'+(cy+3)+'" x2="'+(cbx+13)+'" y2="'+(cy+3)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-  s+='<line x1="'+cbx+'" y1="'+(cy+3)+'" x2="'+cbx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-  s+='<text x="'+(cbx+16)+'" y="'+(cy+4)+'" text-anchor="start" font-size="11" fill="#5533aa" font-weight="bold" font-style="italic">C = '+Cs+'</text>';
-  // Result label
-  s+='<text x="'+W/2+'" y="157" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">f₀ = '+fs+'</text>';
+  s+='<line x1="'+ir+'" y1="'+ty+'" x2="'+nbx+'" y2="'+ty+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  // Capacitor branch (bottom) — horizontal plates bridging the two buses
+  var p1=pcx-8, p2=pcx+8;
+  s+='<line x1="'+nax+'" y1="'+by+'" x2="'+p1+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<line x1="'+p1+'" y1="'+(by-13)+'" x2="'+p1+'" y2="'+(by+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+  s+='<line x1="'+p2+'" y1="'+(by-13)+'" x2="'+p2+'" y2="'+(by+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+  s+='<line x1="'+p2+'" y1="'+by+'" x2="'+nbx+'" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  // Junction dots where branches meet the buses
+  [[nax,ty],[nbx,ty],[nax,by],[nbx,by]].forEach(function(p){
+    s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="2.6" fill="#5533aa"/>';
+  });
+  // Labels — centred between the buses, clear of the terminals
+  s+='<text x="'+pcx+'" y="'+(ty-16)+'" text-anchor="middle" font-size="11" fill="#AA77FF" font-weight="bold" font-style="italic">L = '+Ls+'</text>';
+  s+='<text x="'+pcx+'" y="'+(by+30)+'" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold" font-style="italic">C = '+Cs+'</text>';
+  s+='<text x="'+(W/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">f₀ = '+fs+'</text>';
   s+='</svg>';
   document.getElementById('tool-diagram').innerHTML=s;
 }

@@ -91,16 +91,18 @@ function drawDiagram() {
   if(mode==='series'){
     // Caps in series on horizontal wire
     var totalWidth=n*50+(n-1)*30, startX=(W-totalWidth)/2;
-    s+='<line x1="30" y1="'+wy+'" x2="'+startX+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="30" y1="'+wy+'" x2="'+(startX+9)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
     for(var i=0;i<n;i++){
       var cx2=startX+i*80+25;
+      // connect this cap to the previous one
+      if(i>0) s+='<line x1="'+(startX+(i-1)*80+49)+'" y1="'+wy+'" x2="'+(cx2-16)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
       s+='<line x1="'+(cx2-16)+'" y1="'+wy+'" x2="'+(cx2-6)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
       s+='<line x1="'+(cx2-6)+'" y1="'+(wy-12)+'" x2="'+(cx2-6)+'" y2="'+(wy+12)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
       s+='<line x1="'+(cx2+6)+'" y1="'+(wy-12)+'" x2="'+(cx2+6)+'" y2="'+(wy+12)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
       s+='<line x1="'+(cx2+6)+'" y1="'+wy+'" x2="'+(cx2+24)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
       s+='<text x="'+cx2+'" y="'+(wy+26)+'" text-anchor="middle" font-size="9.5" fill="#5533aa">C'+(i+1)+'</text>';
     }
-    s+='<line x1="'+(startX+n*80-10)+'" y1="'+wy+'" x2="'+(W-30)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+(startX+(n-1)*80+49)+'" y1="'+wy+'" x2="'+(W-30)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
     s+='<circle cx="30" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
     s+='<circle cx="'+(W-30)+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
   } else {

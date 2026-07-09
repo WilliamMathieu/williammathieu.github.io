@@ -124,7 +124,8 @@ function drawDiagram() {
         s+='<text x="'+(cx2+cw)+'" y="'+(wy+26)+'" text-anchor="middle" font-size="8.5" fill="#5533aa">'+item.label+'</text>';
       }
     } else {
-      // Shunt element
+      // Shunt element — draw the through-rail across the slot so neighbours connect
+      s+='<line x1="'+slotX+'" y1="'+wy+'" x2="'+(slotX+slotW)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
       s+='<line x1="'+(slotX+slotW/2)+'" y1="'+wy+'" x2="'+(slotX+slotW/2)+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
       s+='<circle cx="'+(slotX+slotW/2)+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
       if(item.type==='C') {
