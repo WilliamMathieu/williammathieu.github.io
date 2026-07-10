@@ -88,7 +88,7 @@ function drawDiagram() {
   var erv= parseFloat(document.getElementById('ms-er')&&document.getElementById('ms-er').value)||4.4;
   // Scale for display
   var scale=18, hpx=Math.min(40, hv*scale), wpx=Math.min(120, wv*scale);
-  var W=560,H=160,gndY=120,subTop=gndY-hpx,traceY=subTop-8;
+  var W=560,H=172,gndY=120,subTop=gndY-hpx,traceY=subTop-8;
   var cx=W/2;
   var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
@@ -105,14 +105,15 @@ function drawDiagram() {
   s+='<line x1="60" y1="'+subTop+'" x2="60" y2="'+gndY+'" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/>';
   s+='<line x1="54" y1="'+subTop+'" x2="66" y2="'+subTop+'" stroke="#888" stroke-width="1.2"/>';
   s+='<line x1="54" y1="'+gndY+'" x2="66" y2="'+gndY+'" stroke="#888" stroke-width="1.2"/>';
-  s+='<text x="48" y="'+(subTop+hpx/2+4)+'" text-anchor="end" font-size="9.5" fill="#888">h = '+hv+' mm</text>';
+  var hMidY=(subTop+gndY)/2;
+  s+='<text x="46" y="'+hMidY+'" text-anchor="middle" font-size="9.5" fill="#888" transform="rotate(-90 46 '+hMidY+')">h = '+hv+' mm</text>';
   // w dimension arrow
   s+='<line x1="'+tx+'" y1="20" x2="'+(tx+wpx)+'" y2="20" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/>';
   s+='<line x1="'+tx+'" y1="15" x2="'+tx+'" y2="25" stroke="#888" stroke-width="1.2"/>';
   s+='<line x1="'+(tx+wpx)+'" y1="15" x2="'+(tx+wpx)+'" y2="25" stroke="#888" stroke-width="1.2"/>';
   s+='<text x="'+cx+'" y="14" text-anchor="middle" font-size="9.5" fill="#888">w = '+wv+' mm</text>';
   // Z0 result
-  s+='<text x="'+W/2+'" y="150" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">Z₀ = '+z0+'</text>';
+  s+='<text x="'+W/2+'" y="165" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">Z₀ = '+z0+'</text>';
   // Field lines (simple arcs)
   for(var fi=0;fi<5;fi++){
     var fr=(fi+0.5)*wpx/5+tx, fry=subTop-1, frad=8+fi*7;

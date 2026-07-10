@@ -41,7 +41,7 @@ function drawDiagram(N,k,Pout,Peach){
   // Output
   sv+='<line x1="'+(jx+30)+'" y1="'+cy+'" x2="'+(W-20)+'" y2="'+cy+'" stroke="#5533aa" stroke-width="2.5" stroke-linecap="round"/>';
   sv+='<circle cx="'+(W-20)+'" cy="'+cy+'" r="4" fill="white" stroke="#5533aa" stroke-width="2"/>';
-  sv+='<text x="'+(W-20)+'" y="'+(cy-12)+'" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">'+Pout+' dBm</text>';
+  sv+='<text x="'+(W-8)+'" y="'+(cy-12)+'" text-anchor="end" font-size="10" fill="#5533aa" font-weight="bold">'+Pout+' dBm</text>';
   // Input amplifier modules
   for(var i=0;i<Math.min(N,8);i++){
     var iy=H/(N+1)*(i+1);

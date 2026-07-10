@@ -57,7 +57,7 @@ function drawDiagram(w,s,h,er,Z0lbl,bg){
   var s2='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
   s2+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
   s2+='<rect x="'+(cx-wp/2-sp*2-20)+'" y="'+topY+'" width="'+(wp+sp*4+40)+'" height="'+hp+'" fill="#d4ecca" stroke="#5a9020" stroke-width="1" rx="1"/>';
-  s2+='<text x="'+(cx+wp/4)+'" y="'+(topY+hp/2+4)+'" font-size="9.5" fill="#3a6010">εᵣ = '+er+'</text>';
+  s2+='<text x="'+cx+'" y="'+(topY+hp/2+4)+'" text-anchor="middle" font-size="9.5" fill="#3a6010">εᵣ = '+er+'</text>';
   s2+='<rect x="'+(cx-wp/2-sp*2-20)+'" y="'+(topY-10)+'" width="'+(sp+20)+'" height="10" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
   s2+='<rect x="'+(cx+wp/2+sp)+'" y="'+(topY-10)+'" width="'+(sp+20)+'" height="10" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
   s2+='<rect x="'+(cx-wp/2-sp)+'" y="'+(topY-10)+'" width="'+sp+'" height="10" fill="#faf9ff" stroke="#e0d8ff" stroke-width="0.5"/>';
@@ -68,7 +68,7 @@ function drawDiagram(w,s,h,er,Z0lbl,bg){
   s2+='<text x="'+cx+'" y="'+(topY+hp+36)+'" text-anchor="middle" font-size="9.5" fill="#888">w = '+w+' mm</text>';
   s2+='<line x1="'+(cx+wp/2)+'" y1="'+(topY+hp+22)+'" x2="'+(cx+wp/2+sp)+'" y2="'+(topY+hp+22)+'" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/>';
   s2+='<text x="'+(cx+wp/2+sp/2)+'" y="'+(topY+hp+16)+'" text-anchor="middle" font-size="9" fill="#888">s</text>';
-  s2+='<text x="'+(cx-wp/2-sp*2-4)+'" y="'+(topY+hp/2+4)+'" text-anchor="end" font-size="9.5" fill="#888">h='+h+'mm</text>';
+  s2+='<text x="'+(cx-wp/2-sp*2-24)+'" y="'+(topY+hp/2+4)+'" text-anchor="end" font-size="9.5" fill="#888">h='+h+'mm</text>';
   s2+='<text x="'+W/2+'" y="162" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">Z₀ = '+Z0lbl+' Ω</text>';
   s2+='</svg>';
   document.getElementById('tool-diagram').innerHTML=s2;
