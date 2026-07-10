@@ -106,6 +106,7 @@ async function runWavelength(page, rng) {
     await page.click('#wl-btn');
     const lam  = await getNum(page, '#wl-lam');
     const half = await getNum(page, '#wl-half');
+    const qtr  = await getNum(page, '#wl-qtr');
     const el   = 300 / (f * Math.sqrt(er));
     check(`WL[${i}] λ`,   lam,          el,     0.003);
     check(`WL[${i}] λ/2`, half,         el / 2, 0.003);
