@@ -36,20 +36,6 @@
     "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
   }
   </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "LC Filter Designer — Butterworth & Chebyshev Calculator",
-    "description": "Generate LC ladder component values for Butterworth or Chebyshev filters up to 9th order. Low-pass or high-pass. Full bill of materials with L and C values.",
-    "url": "https://rftoolbox.ca/FilterDesign.html",
-    "applicationCategory": "EngineeringApplication",
-    "operatingSystem": "Web",
-    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
-  }
-  </script>
 </head>
 <body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
@@ -138,7 +124,8 @@ function drawDiagram() {
         s+='<text x="'+(cx2+cw)+'" y="'+(wy+26)+'" text-anchor="middle" font-size="8.5" fill="#5533aa">'+item.label+'</text>';
       }
     } else {
-      // Shunt element
+      // Shunt element — draw the through-rail across the slot so neighbours connect
+      s+='<line x1="'+slotX+'" y1="'+wy+'" x2="'+(slotX+slotW)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
       s+='<line x1="'+(slotX+slotW/2)+'" y1="'+wy+'" x2="'+(slotX+slotW/2)+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
       s+='<circle cx="'+(slotX+slotW/2)+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
       if(item.type==='C') {

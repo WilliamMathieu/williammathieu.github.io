@@ -56,7 +56,7 @@ function drawDiagram(){
       s+='<circle cx="'+jx+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
       s+='<line x1="'+jx+'" y1="'+wy+'" x2="'+jx+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
       s+='<rect x="'+(parseInt(jx)-16)+'" y="'+(wy+18)+'" width="32" height="20" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/>';
-      s+='<text x="'+jx+'" y="'+(wy+32)+'" text-anchor="middle" font-size="9" fill="#5533aa">'+Rv+'</text>';
+      s+='<text x="'+(parseInt(jx)+20)+'" y="'+(wy+32)+'" font-size="9" fill="#5533aa">'+Rv+'</text>';
       s+='<line x1="'+jx+'" y1="'+(wy+38)+'" x2="'+jx+'" y2="'+gnd+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
       s+='<line x1="'+(parseInt(jx)-10)+'" y1="'+gnd+'" x2="'+(parseInt(jx)+10)+'" y2="'+gnd+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
       s+='<line x1="'+(parseInt(jx)-6)+'" y1="'+(gnd+5)+'" x2="'+(parseInt(jx)+6)+'" y2="'+(gnd+5)+'" stroke="#444" stroke-width="1.4" stroke-linecap="round"/>';
@@ -84,7 +84,7 @@ function drawDiagram(){
     s+='<circle cx="'+jm+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
     s+='<line x1="'+jm+'" y1="'+wy+'" x2="'+jm+'" y2="'+(wy+18)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
     s+='<rect x="'+(jm-16)+'" y="'+(wy+18)+'" width="32" height="20" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/>';
-    s+='<text x="'+jm+'" y="'+(wy+32)+'" text-anchor="middle" font-size="9" fill="#5533aa">'+R2+'</text>';
+    s+='<text x="'+(jm+20)+'" y="'+(wy+32)+'" font-size="9" fill="#5533aa">'+R2+'</text>';
     s+='<line x1="'+jm+'" y1="'+(wy+38)+'" x2="'+jm+'" y2="'+gnd+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
     s+='<line x1="'+(jm-10)+'" y1="'+gnd+'" x2="'+(jm+10)+'" y2="'+gnd+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
     s+='<line x1="'+(jm-6)+'" y1="'+(gnd+5)+'" x2="'+(jm+6)+'" y2="'+(gnd+5)+'" stroke="#444" stroke-width="1.4" stroke-linecap="round"/>';

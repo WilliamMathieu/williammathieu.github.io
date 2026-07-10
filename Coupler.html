@@ -144,9 +144,9 @@ function drawCoupledDiagram(res) {
   s+='<line x1="'+rx+'" y1="'+by+'" x2="500" y2="'+by+'" stroke="#5533aa" stroke-width="2" stroke-dasharray="4,3"/>';
   // Port labels
   s+='<text x="15" y="'+(ty-8)+'" font-size="10" fill="#5533aa">Port 1 (input)</text>';
-  s+='<text x="505" y="'+(ty-8)+'" font-size="10" fill="#5533aa">Port 2 (through)</text>';
+  s+='<text x="505" y="'+(ty-8)+'" text-anchor="end" font-size="10" fill="#5533aa">Port 2 (through)</text>';
   s+='<text x="15" y="'+(by+18)+'" font-size="10" fill="#888">Port 4 (isolated)</text>';
-  s+='<text x="505" y="'+(by+18)+'" font-size="10" fill="#AA77FF">Port 3 (coupled)</text>';
+  s+='<text x="505" y="'+(by+18)+'" text-anchor="end" font-size="10" fill="#AA77FF">Port 3 (coupled)</text>';
   s+='<text x="260" y="'+(ty-14)+'" text-anchor="middle" font-size="11" fill="#5533aa">Z<tspan font-size="8" dy="3">oe</tspan><tspan dy="-3"> = '+res.Ze.toFixed(1)+' Ω</tspan></text>';
   s+='<text x="260" y="'+(by+28)+'" text-anchor="middle" font-size="11" fill="#AA77FF">Z<tspan font-size="8" dy="3">oo</tspan><tspan dy="-3"> = '+res.Zo.toFixed(1)+' Ω</tspan></text>';
   s+='<text x="260" y="140" text-anchor="middle" font-size="10" fill="#888">λ/4 = '+engFmt(res.lam4,'m')+'  |  Coupling = '+res.Cdb.toFixed(1)+' dB</text>';
@@ -155,7 +155,7 @@ function drawCoupledDiagram(res) {
 }
 
 function drawBranchDiagram(res) {
-  var W=360, H=200, cx=180, cy=100, r=65;
+  var W=430, H=200, cx=180, cy=100, r=65;
   var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
   // Four arms of branchline as square

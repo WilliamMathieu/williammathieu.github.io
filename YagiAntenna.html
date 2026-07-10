@@ -135,8 +135,9 @@ function drawDiagram(elements, boomLen, lam) {
     s += '<line x1="' + sx + '" y1="' + (cy - halfPx) + '" x2="' + sx + '" y2="' + (cy + halfPx) + '" stroke="' + color + '" stroke-width="' + sw + '" stroke-linecap="round"/>';
 
     var lblY = cy - halfPx - 6;
-    var anchor = isDriv ? 'middle' : (sx < W/2 ? 'start' : 'end');
-    s += '<text x="' + sx + '" y="' + lblY + '" text-anchor="middle" font-size="9" fill="' + color + '">' + el.name + '</text>';
+    // Abbreviate "Director N" -> "DN" so closely-spaced director labels don't collide
+    var disp = el.name.indexOf('Director') === 0 ? 'D' + el.name.replace(/\D+/g, '') : el.name;
+    s += '<text x="' + sx + '" y="' + lblY + '" text-anchor="middle" font-size="9" fill="' + color + '">' + disp + '</text>';
   });
 
   // Gain annotation

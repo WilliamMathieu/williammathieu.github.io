@@ -35,21 +35,21 @@ function drawDiagram(Z1,Z2,R,len){
   // Split node
   sv+='<circle cx="'+px+'" cy="'+py+'" r="4" fill="#5533aa"/>';
   // Upper arm to port 2
-  var p2y=50, p2x=W-40;
+  var p2y=50, p2x=W-58;
   sv+='<path d="M'+px+','+py+' Q'+(cx)+','+p2y+' '+p2x+','+p2y+'" fill="none" stroke="#AA77FF" stroke-width="2.5" stroke-dasharray="6,3" stroke-linecap="round"/>';
   sv+='<text x="'+cx+'" y="'+(p2y-8)+'" text-anchor="middle" font-size="9.5" fill="#AA77FF">Z_arm1 = '+Z1+' Ω  (λ/4 = '+len+' mm)</text>';
   sv+='<circle cx="'+p2x+'" cy="'+p2y+'" r="4" fill="white" stroke="#5533aa" stroke-width="2"/>';
-  sv+='<text x="'+(p2x+18)+'" y="'+(p2y+4)+'" font-size="10" fill="#5533aa" font-weight="bold">Port 2</text>';
+  sv+='<text x="'+(p2x+10)+'" y="'+(p2y+4)+'" font-size="10" fill="#5533aa" font-weight="bold">Port 2</text>';
   // Lower arm to port 3
-  var p3y=110, p3x=W-40;
+  var p3y=110, p3x=W-58;
   sv+='<path d="M'+px+','+py+' Q'+cx+','+p3y+' '+p3x+','+p3y+'" fill="none" stroke="#AA77FF" stroke-width="2.5" stroke-dasharray="6,3" stroke-linecap="round"/>';
   sv+='<text x="'+cx+'" y="'+(p3y+18)+'" text-anchor="middle" font-size="9.5" fill="#AA77FF">Z_arm2 = '+Z2+' Ω</text>';
   sv+='<circle cx="'+p3x+'" cy="'+p3y+'" r="4" fill="white" stroke="#5533aa" stroke-width="2"/>';
-  sv+='<text x="'+(p3x+18)+'" y="'+(p3y+4)+'" font-size="10" fill="#5533aa" font-weight="bold">Port 3</text>';
+  sv+='<text x="'+(p3x+10)+'" y="'+(p3y+4)+'" font-size="10" fill="#5533aa" font-weight="bold">Port 3</text>';
   // Isolation resistor between port 2 and port 3
   sv+='<line x1="'+p2x+'" y1="'+p2y+'" x2="'+p2x+'" y2="'+(p2y+24)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
   sv+='<rect x="'+(p2x-16)+'" y="'+(p2y+24)+'" width="32" height="22" fill="white" stroke="#5533aa" stroke-width="1.8" rx="2"/>';
-  sv+='<text x="'+p2x+'" y="'+(p2y+39)+'" text-anchor="middle" font-size="9.5" fill="#5533aa">'+R+' Ω</text>';
+  sv+='<text x="'+(p2x-20)+'" y="'+(p2y+39)+'" text-anchor="end" font-size="9.5" fill="#5533aa">'+R+' Ω</text>';
   sv+='<line x1="'+p2x+'" y1="'+(p2y+46)+'" x2="'+p2x+'" y2="'+p3y+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
   sv+='<text x="'+W/2+'" y="175" text-anchor="middle" font-size="10.5" fill="#888" font-style="italic">λ/4 arms + isolation resistor — all ports matched simultaneously</text>';
   sv+='</svg>';

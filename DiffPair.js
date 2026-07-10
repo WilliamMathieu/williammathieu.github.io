@@ -50,10 +50,8 @@ function drawDiagram(w,s,h,t,er,zdiff){
   // Labels
   sv+='<text x="'+(tx1+wp/2)+'" y="'+(topY-14)+'" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">+</text>';
   sv+='<text x="'+(tx2+wp/2)+'" y="'+(topY-14)+'" text-anchor="middle" font-size="10" fill="#cc3333" font-weight="bold">−</text>';
-  // w annotation
-  sv+='<text x="'+(tx1+wp/2)+'" y="150" text-anchor="middle" font-size="9.5" fill="#888">w='+w+'mm</text>';
-  sv+='<text x="'+cx+'" y="150" text-anchor="middle" font-size="9.5" fill="#888">s='+s+'mm</text>';
-  sv+='<text x="'+(cx+wp*1.5+sp/2+10)+'" y="'+(topY+hp/2+4)+'" font-size="9.5" fill="#888">h='+h+'mm</text>';
+  // Dimension legend (single line avoids w/s/h label collisions on narrow traces)
+  sv+='<text x="'+(W/2)+'" y="148" text-anchor="middle" font-size="9.5" fill="#888">w = '+w+'  ·  s = '+s+'  ·  h = '+h+' mm</text>';
   sv+='<text x="'+W/2+'" y="165" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">Z_diff = '+zdiff+' Ω</text>';
   sv+='</svg>';
   document.getElementById('tool-diagram').innerHTML=sv;
