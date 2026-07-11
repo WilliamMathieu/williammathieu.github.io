@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
-  <meta name="description" content="55 free online RF engineering calculators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
+  <meta name="description" content="55 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/">
   <meta property="og:title" content="RF Toolbox — Free Online RF & Microwave Engineering Calculators">
@@ -100,17 +100,16 @@
   <div class="hero-row">
     <div>
       <h1>RF &amp; Microwave Engineering Calculators</h1>
-      <p>56 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
+      <p>55 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
       <div class="hero-stats">
-        <div class="hero-stat"><span class="num">56</span><span class="lbl">Calculators</span></div>
-        <div class="hero-stat"><span class="num">3</span><span class="lbl">Simulators</span></div>
+        <div class="hero-stat"><span class="num">53</span><span class="lbl">Calculators</span></div>
+        <div class="hero-stat"><span class="num">2</span><span class="lbl">Simulators</span></div>
         <div class="hero-stat"><span class="num">64</span><span class="lbl">Wiki Articles</span></div>
         <div class="hero-stat"><span class="num">7</span><span class="lbl">Games</span></div>
       </div>
       <div class="hero-links">
         <a class="hero-link solid" href="start-here.html">🗺 Start Here</a>
         <a class="hero-link outline" href="wiki.html">📖 Wiki</a>
-        <a class="hero-link outline" href="games.html">🎮 Games</a>
         <a class="hero-link outline" href="SmithChart.html">Smith Chart</a>
       </div>
     </div>
@@ -276,7 +275,13 @@
 </div>
 <div class="cat-header">🟡 Filters & Attenuators</div>
 <div class="tool-grid">
-<a class="tool-card" href="FilterDesign.html">
+<a class="tool-card" href="RCFilter.html">
+  <div class="tool-card-fig"><img src="thumbnails/RCFilter.svg" width="200" height="90" alt="RCFilter"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">First-Order Filter</div>
+    <div class="tool-card-desc">RC &amp; RL low-pass / high-pass: cutoff frequency, τ, and roll-off.</div>
+  </div>
+</a><a class="tool-card" href="FilterDesign.html">
   <div class="tool-card-fig"><img src="thumbnails/FilterDesign.svg" width="200" height="90" alt="FilterDesign"></div>
   <div class="tool-card-body">
     <div class="tool-card-name">LC Filter Designer</div>
@@ -452,7 +457,7 @@
   <div class="tool-card-fig"><img src="thumbnails/CoilDesigner.svg" width="200" height="90" alt="CoilDesigner"></div>
   <div class="tool-card-body">
     <div class="tool-card-name">Simple RF Coil Designer</div>
-    <div class="tool-card-desc">Wheeler inductance, wire resistance, Q, and tuning cap for solenoid coils.</div>
+    <div class="tool-card-desc">Single-turn loop inductance L and the tuning capacitor C for resonance at f.</div>
   </div>
 </a><a class="tool-card" href="SurfaceCoilDesigner.html">
   <div class="tool-card-fig"><img src="thumbnails/SurfaceCoilDesigner.svg" width="200" height="90" alt="SurfaceCoilDesigner"></div>
@@ -576,17 +581,17 @@
       <a class="wiki-pill" href="wiki_mri_contrast.html">MRI Contrast</a>
       <a class="wiki-pill" href="wiki_mri_artifacts.html">MRI Artefacts</a>
       <a class="wiki-pill" href="wiki_parallel_imaging.html">Parallel Imaging</a>
-      <a class="wiki-pill all" href="wiki.html">Browse all 57 →</a>
+      <a class="wiki-pill all" href="wiki.html">Browse all 64 →</a>
     </div>
   </div>
 
 </div><!-- /hp-wrap -->
 
-<footer style="text-align:center;padding:14px;font-family:monospace;font-size:11px;color:#888;border-top:1px solid #eee;margin-top:10px;">
+<footer style="text-align:center;padding:14px;font-family:monospace;font-size:11px;color:#fff;margin-top:10px;">
   RF Toolbox &nbsp;·&nbsp; All tools run client-side &nbsp;·&nbsp;
-  <a href="start-here.html" style="color:#AA77FF;">Start Here</a> &nbsp;·&nbsp;
-  <a href="wiki.html" style="color:#AA77FF;">Wiki</a> &nbsp;·&nbsp;
-  <a href="games.html" style="color:#AA77FF;">Games</a>
+  <a href="start-here.html" style="color:#fff;text-decoration:underline;">Start Here</a> &nbsp;·&nbsp;
+  <a href="wiki.html" style="color:#fff;text-decoration:underline;">Wiki</a> &nbsp;·&nbsp;
+  <a href="games.html" style="color:#fff;text-decoration:underline;">Games</a>
 </footer>
 
 <script>
@@ -595,7 +600,7 @@ var CAT_MAP = {
   coils:    ['LC.html','BandpassCalc.html','CoupledResonators.html'],
   tlines:   ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html'],
   matching: ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','Wilkinson.html','LCBalun.html','CapacitorNetwork.html','ImpedanceMatchingNetwork.html','Coupler.html'],
-  filters:  ['FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html'],
+  filters:  ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html'],
   antennas: ['Dipole.html','PatchAntenna.html','ArrayFactor.html','HelicalAntenna.html','YagiAntenna.html'],
   system:   ['Friis.html','NoiseFigure.html','LinkBudget.html','RadarRange.html','IP3Calc.html','PowerCombiner.html','AmpStability.html','PLLFilter.html'],
   utils:    ['dBmConverter.html','Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','PhaseNoiseJitter.html','TwoPortConverter.html','SParamPlotter.html','BondWireVia.html','ESeries.html'],

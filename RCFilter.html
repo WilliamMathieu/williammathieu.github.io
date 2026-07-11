@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First-Order RC / RL Filter Calculator — Low-Pass & High-Pass | RF Toolbox</title>
+  <meta name="description" content="Simple first-order RC and RL low-pass / high-pass filter calculator. Enter R and C (or L) to get the cutoff frequency f_c, time constant, and roll-off, with a series/shunt schematic.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/RCFilter.html">
+  <meta property="og:title" content="First-Order RC / RL Filter Calculator — Low-Pass & High-Pass | RF Toolbox">
+  <meta property="og:description" content="Simple first-order RC and RL low-pass / high-pass filter calculator. Enter R and C (or L) to get the cutoff frequency f_c, time constant, and roll-off, with a series/shunt schematic.">
+  <meta property="og:url" content="https://rftoolbox.ca/RCFilter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "First-Order RC / RL Filter Calculator — Low-Pass & High-Pass",
+    "description": "Simple first-order RC and RL low-pass / high-pass filter calculator. Enter R and C (or L) to get the cutoff frequency, time constant, and roll-off, with a series/shunt schematic.",
+    "url": "https://rftoolbox.ca/RCFilter.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>First-Order Filter Calculator (RC / RL)</h3>
+<div class="tool-concept">
+  <p>The simplest passive filter: one resistor plus one reactive element. A <strong>series</strong> element and a <strong>shunt</strong> element form a single-pole low-pass or high-pass with a −3 dB corner at the cutoff frequency and a gentle 20 dB/decade roll-off. Pick RC or RL, enter the two component values, and read the cutoff.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(f_c^{RC} = \dfrac{1}{2\pi RC}\qquad f_c^{RL} = \dfrac{R}{2\pi L}\qquad \tau_{RC}=RC,\ \ \tau_{RL}=\dfrac{L}{R}\)</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">Response</td><td>Low-pass passes DC and blocks high frequencies; high-pass does the reverse.</td></tr>
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">RC / RL</td><td>Choose a resistor–capacitor or resistor–inductor pair.</td></tr>
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">f_c</td><td>Cutoff (−3 dB corner) frequency. RC: 1/(2πRC). RL: R/(2πL).</td></tr>
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">τ</td><td>Time constant. RC: RC. RL: L/R. Related to f_c by f_c = 1/(2πτ).</td></tr>
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;">Roll-off</td><td>A single pole gives 20 dB/decade (6 dB/octave) in the stopband.</td></tr>
+    </table>
+<div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Note: </span>f_c assumes an ideal source and open-circuit (unloaded) output. Source and load resistance shift the corner.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row">
+    <label>Response</label>
+    <select id="rc-type"><option value="lp">Low-pass</option><option value="hp">High-pass</option></select>
+  </div>
+  <div class="inp-row">
+    <label>Topology</label>
+    <select id="rc-topo" onchange="rcTopo()"><option value="RC">RC (resistor + capacitor)</option><option value="RL">RL (resistor + inductor)</option></select>
+  </div>
+  <div class="inp-row">
+    <label>Resistance, <span class="var">R</span></label>
+    <div class="inp-inline">
+      <input type="text" id="rc-R" value="1" data-tip="Resistance. RC: f_c = 1/(2πRC). RL: f_c = R/(2πL).">
+      <select id="rc-Ru"><option value="1">Ω</option><option value="1e3" selected>kΩ</option><option value="1e6">MΩ</option></select>
+    </div>
+  </div>
+  <div class="inp-row" id="rc-row-C">
+    <label>Capacitance, <span class="var">C</span></label>
+    <div class="inp-inline">
+      <input type="text" id="rc-C" value="10" data-tip="Capacitor value. Larger C → lower cutoff frequency.">
+      <select id="rc-Cu"><option value="1e-6">µF</option><option value="1e-9" selected>nF</option><option value="1e-12">pF</option></select>
+    </div>
+  </div>
+  <div class="inp-row" id="rc-row-L" style="display:none;">
+    <label>Inductance, <span class="var">L</span></label>
+    <div class="inp-inline">
+      <input type="text" id="rc-L" value="100" data-tip="Inductor value. Larger L → lower cutoff frequency.">
+      <select id="rc-Lu"><option value="1e-9">nH</option><option value="1e-6" selected>µH</option><option value="1e-3">mH</option></select>
+    </div>
+  </div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;">
+  <button class="calc-btn" id="rc-btn">Calculate</button>
+  <button class="example-btn" onclick="loadExample({'rc-type':'lp','rc-topo':'RC','rc-R':'1','rc-Ru':'1e3','rc-C':'10','rc-Cu':'1e-9'})" title="RC low-pass, 1 kΩ + 10 nF → f_c ≈ 15.9 kHz">Load Example</button>
+</div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card">
+    <h4>Cutoff</h4>
+    <div class="res-row"><span class="res-lbl">Cutoff frequency, f_c</span><span class="res-val" id="rc-fc">—</span></div>
+    <div class="res-row"><span class="res-lbl">Angular cutoff, ω_c</span><span class="res-val" id="rc-wc">—</span></div>
+    <div class="res-row"><span class="res-lbl">Time constant, τ</span><span class="res-val" id="rc-tau">—</span></div>
+  </div>
+  <div class="res-card">
+    <h4>Response</h4>
+    <div class="res-row"><span class="res-lbl">Topology</span><span class="res-val" id="rc-desc">—</span></div>
+    <div class="res-row"><span class="res-lbl">Stopband slope</span><span class="res-val" id="rc-slope">—</span></div>
+    <div class="res-row"><span class="res-lbl">Gain at corner</span><span class="res-val" id="rc-atten">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+
+function drawDiagram() {
+  var type = document.getElementById('rc-type') ? document.getElementById('rc-type').value : 'lp';
+  var topo = document.getElementById('rc-topo') ? document.getElementById('rc-topo').value : 'RC';
+  var fcv  = document.getElementById('rc-fc')   ? document.getElementById('rc-fc').textContent : '—';
+
+  // Which element is in series, which is the shunt (output taken across the shunt)
+  var seriesEl, shuntEl;
+  if (topo === 'RC') { if (type === 'lp') { seriesEl = 'R'; shuntEl = 'C'; } else { seriesEl = 'C'; shuntEl = 'R'; } }
+  else               { if (type === 'lp') { seriesEl = 'L'; shuntEl = 'R'; } else { seriesEl = 'R'; shuntEl = 'L'; } }
+
+  var W = 520, H = 190, wy = 62, gndY = 150, lx = 42, rx = 478, nx = 340;
+  var PUR = '#5533aa', ACC = '#AA77FF';
+  function wire(a, b, c, d) { return '<line x1="' + a + '" y1="' + b + '" x2="' + c + '" y2="' + d + '" stroke="' + PUR + '" stroke-width="2" stroke-linecap="round"/>'; }
+  function txt(x, y, t, col, anc) { return '<text x="' + x + '" y="' + y + '" text-anchor="' + (anc || 'middle') + '" font-size="12" fill="' + col + '" font-style="italic">' + t + '</text>'; }
+
+  var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s += '<rect width="' + W + '" height="' + H + '" fill="#faf9ff" rx="4"/>';
+  s += '<text x="' + (W / 2) + '" y="18" text-anchor="middle" font-size="11" fill="' + PUR + '" font-weight="bold">f_c = ' + fcv + '</text>';
+
+  // Series element occupies x = 120..210 on the top rail; node at nx
+  var sx0 = 120, sx1 = 210, mid = (sx0 + sx1) / 2;
+  s += wire(lx, wy, sx0, wy);
+  if (seriesEl === 'R') {
+    var w = 46, bx = mid - w / 2;
+    s += '<rect x="' + bx + '" y="' + (wy - 11) + '" width="' + w + '" height="22" fill="white" stroke="' + PUR + '" stroke-width="2" rx="2"/>';
+    s += wire(bx + w, wy, sx1, wy) + txt(mid, wy - 16, 'R', PUR);
+  } else if (seriesEl === 'C') {
+    var g = 7;
+    s += wire(sx0 + 22, wy, mid - g, wy);
+    s += '<line x1="' + (mid - g) + '" y1="' + (wy - 13) + '" x2="' + (mid - g) + '" y2="' + (wy + 13) + '" stroke="' + PUR + '" stroke-width="2.8" stroke-linecap="round"/>';
+    s += '<line x1="' + (mid + g) + '" y1="' + (wy - 13) + '" x2="' + (mid + g) + '" y2="' + (wy + 13) + '" stroke="' + PUR + '" stroke-width="2.8" stroke-linecap="round"/>';
+    s += wire(mid + g, wy, sx1, wy) + txt(mid, wy - 16, 'C', PUR);
+  } else {
+    var cw = 60, c0 = mid - cw / 2, nb = 4, bw = cw / nb, ip = 'M' + c0 + ',' + wy;
+    for (var k = 0; k < nb; k++) ip += ' A' + (bw / 2) + ',' + (bw / 2) + ' 0 0,1 ' + (c0 + (k + 1) * bw) + ',' + wy;
+    s += wire(sx0 + 12, wy, c0, wy);
+    s += '<path d="' + ip + '" fill="none" stroke="' + ACC + '" stroke-width="2.4" stroke-linecap="round"/>';
+    s += wire(c0 + cw, wy, sx1, wy) + txt(mid, wy - 16, 'L', ACC);
+  }
+  s += wire(sx1, wy, rx, wy);                 // rail through node to output terminal
+  s += '<circle cx="' + nx + '" cy="' + wy + '" r="3" fill="' + PUR + '"/>';
+
+  // Shunt element from node down to ground rail
+  var midY = (wy + gndY) / 2;
+  if (shuntEl === 'R') {
+    var h = 40, ry = midY - h / 2;
+    s += wire(nx, wy, nx, ry);
+    s += '<rect x="' + (nx - 11) + '" y="' + ry + '" width="22" height="' + h + '" fill="white" stroke="' + PUR + '" stroke-width="2" rx="2"/>';
+    s += wire(nx, ry + h, nx, gndY) + txt(nx + 20, midY + 4, 'R', PUR, 'start');
+  } else if (shuntEl === 'C') {
+    var g2 = 7;
+    s += wire(nx, wy, nx, midY - g2);
+    s += '<line x1="' + (nx - 13) + '" y1="' + (midY - g2) + '" x2="' + (nx + 13) + '" y2="' + (midY - g2) + '" stroke="' + PUR + '" stroke-width="2.8" stroke-linecap="round"/>';
+    s += '<line x1="' + (nx - 13) + '" y1="' + (midY + g2) + '" x2="' + (nx + 13) + '" y2="' + (midY + g2) + '" stroke="' + PUR + '" stroke-width="2.8" stroke-linecap="round"/>';
+    s += wire(nx, midY + g2, nx, gndY) + txt(nx + 18, midY + 4, 'C', PUR, 'start');
+  } else {
+    var cw2 = 40, cc0 = midY - cw2 / 2, nb2 = 4, bw2 = cw2 / nb2, ip2 = 'M' + nx + ',' + cc0;
+    for (var k2 = 0; k2 < nb2; k2++) ip2 += ' A' + (bw2 / 2) + ',' + (bw2 / 2) + ' 0 0,0 ' + nx + ',' + (cc0 + (k2 + 1) * bw2);
+    s += wire(nx, wy, nx, cc0);
+    s += '<path d="' + ip2 + '" fill="none" stroke="' + ACC + '" stroke-width="2.4" stroke-linecap="round"/>';
+    s += wire(nx, cc0 + cw2, nx, gndY) + txt(nx + 18, midY + 4, 'L', ACC, 'start');
+  }
+
+  // Ground return rail + terminals
+  s += wire(lx, gndY, rx, gndY);
+  s += '<line x1="' + (nx - 9) + '" y1="' + (gndY + 6) + '" x2="' + (nx + 9) + '" y2="' + (gndY + 6) + '" stroke="#444" stroke-width="1.6" stroke-linecap="round"/>';
+  s += '<line x1="' + (nx - 5) + '" y1="' + (gndY + 10) + '" x2="' + (nx + 5) + '" y2="' + (gndY + 10) + '" stroke="#444" stroke-width="1.3" stroke-linecap="round"/>';
+  ['V_in', 'V_out'].forEach(function (lbl, i) {
+    var x = i === 0 ? lx : rx;
+    s += '<circle cx="' + x + '" cy="' + wy + '" r="4" fill="white" stroke="' + PUR + '" stroke-width="1.8"/>';
+    s += '<circle cx="' + x + '" cy="' + gndY + '" r="4" fill="white" stroke="' + PUR + '" stroke-width="1.8"/>';
+    s += '<text x="' + x + '" y="' + (wy - 12) + '" text-anchor="middle" font-size="10" fill="#888">' + lbl + '</text>';
+  });
+  s += '</svg>';
+  document.getElementById('tool-diagram').innerHTML = s;
+}
+
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_filters.html">Learn the theory behind this tool →</a></div>
+<script src="RCFilter.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
