@@ -82,23 +82,36 @@ function drawDiagram() {
   var Lv = document.getElementById('L') ? document.getElementById('L').textContent : '—';
   var Cv = document.getElementById('C') ? document.getElementById('C').textContent : '—';
   var Dv = document.getElementById('D') ? (parseFloat(document.getElementById('D').value)||0) : 0;
+  var dv = document.getElementById('d') ? (parseFloat(document.getElementById('d').value)||0) : 0;
   var W=560,H=190,cx=200,cy=85,R=65;
   var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
-  // Loop
-  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#5533aa" stroke-width="3" stroke-linecap="round"/>';
-  // Feed/tuning cap gap at right
+  // Loop wire — translucent underlay visualises the wire diameter d
+  var wireR=Math.max(3,Math.min(10, dv*1.5));
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#AA77FF" stroke-width="'+(wireR*2)+'" opacity="0.22"/>';
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#5533aa" stroke-width="'+Math.max(2,wireR)+'" stroke-linecap="round"/>';
+  // Tuning capacitor — break the loop at 3 o'clock; plates perpendicular to the wire
   var gx=cx+R;
-  s+='<line x1="'+(gx-1)+'" y1="'+(cy-8)+'" x2="'+(gx-1)+'" y2="'+(cy-2)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-  s+='<line x1="'+(gx+5)+'" y1="'+(cy-8)+'" x2="'+(gx+5)+'" y2="'+(cy-2)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-  s+='<line x1="'+(gx-1)+'" y1="'+(cy+2)+'" x2="'+(gx-1)+'" y2="'+(cy+8)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-  s+='<line x1="'+(gx+5)+'" y1="'+(cy+2)+'" x2="'+(gx+5)+'" y2="'+(cy+8)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
-  s+='<text x="'+(gx+18)+'" y="'+(cy+4)+'" text-anchor="start" font-size="10" fill="#5533aa">C</text>';
+  s+='<rect x="'+(gx-wireR-4)+'" y="'+(cy-14)+'" width="'+(2*wireR+8)+'" height="28" fill="#faf9ff"/>';
+  s+='<line x1="'+gx+'" y1="'+(cy-13)+'" x2="'+gx+'" y2="'+(cy-3.5)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<line x1="'+gx+'" y1="'+(cy+3.5)+'" x2="'+gx+'" y2="'+(cy+13)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<line x1="'+(gx-9)+'" y1="'+(cy-3.5)+'" x2="'+(gx+9)+'" y2="'+(cy-3.5)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+  s+='<line x1="'+(gx-9)+'" y1="'+(cy+3.5)+'" x2="'+(gx+9)+'" y2="'+(cy+3.5)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
+  s+='<text x="'+(gx+16)+'" y="'+(cy+4)+'" text-anchor="start" font-size="11" fill="#5533aa" font-style="italic">C</text>';
   // L label inside loop
   s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" font-size="14" fill="#AA77FF" font-weight="bold" font-style="italic">L</text>';
-  // D arrow
-  s+='<line x1="'+(cx-R)+'" y1="'+(cy+R+10)+'" x2="'+(cx+R)+'" y2="'+(cy+R+10)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
-  s+='<text x="'+cx+'" y="'+(cy+R+24)+'" text-anchor="middle" font-size="9.5" fill="#888">D'+(Dv?' = '+Dv+' mm':'')+'</text>';
+  // Wire-diameter callout (cross-section of the conductor)
+  if(dv>0){
+    var xd=cx-R*0.72, yd=cy-R*0.72;
+    s+='<circle cx="'+xd+'" cy="'+yd+'" r="'+wireR+'" fill="#faf9ff" stroke="#AA77FF" stroke-width="1.2" stroke-dasharray="2,2"/>';
+    s+='<text x="'+(xd-wireR-4)+'" y="'+(yd+4)+'" text-anchor="end" font-size="9" fill="#888">d'+(dv?' = '+dv+' mm':'')+'</text>';
+  }
+  // D dimension — double-headed arrow below the loop
+  var ddy=cy+R+12;
+  s+='<line x1="'+(cx-R)+'" y1="'+ddy+'" x2="'+(cx+R)+'" y2="'+ddy+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<polygon points="'+(cx-R)+','+ddy+' '+(cx-R+7)+','+(ddy-3)+' '+(cx-R+7)+','+(ddy+3)+'" fill="#888"/>';
+  s+='<polygon points="'+(cx+R)+','+ddy+' '+(cx+R-7)+','+(ddy-3)+' '+(cx+R-7)+','+(ddy+3)+'" fill="#888"/>';
+  s+='<text x="'+cx+'" y="'+(ddy+14)+'" text-anchor="middle" font-size="9.5" fill="#888">D'+(Dv?' = '+Dv+' mm':'')+'</text>';
   // Results panel
   var rx2=330;
   s+='<rect x="'+rx2+'" y="25" width="210" height="120" fill="white" stroke="#d0c8f0" stroke-width="1" rx="4"/>';
