@@ -142,18 +142,19 @@ function drawDiagram() {
   s += wire(lx, wy, sx0, wy);
   if (seriesEl === 'R') {
     var w = 46, bx = mid - w / 2;
+    s += wire(sx0, wy, bx, wy);
     s += '<rect x="' + bx + '" y="' + (wy - 11) + '" width="' + w + '" height="22" fill="white" stroke="' + PUR + '" stroke-width="2" rx="2"/>';
     s += wire(bx + w, wy, sx1, wy) + txt(mid, wy - 16, 'R', PUR);
   } else if (seriesEl === 'C') {
     var g = 7;
-    s += wire(sx0 + 22, wy, mid - g, wy);
+    s += wire(sx0, wy, mid - g, wy);
     s += '<line x1="' + (mid - g) + '" y1="' + (wy - 13) + '" x2="' + (mid - g) + '" y2="' + (wy + 13) + '" stroke="' + PUR + '" stroke-width="2.8" stroke-linecap="round"/>';
     s += '<line x1="' + (mid + g) + '" y1="' + (wy - 13) + '" x2="' + (mid + g) + '" y2="' + (wy + 13) + '" stroke="' + PUR + '" stroke-width="2.8" stroke-linecap="round"/>';
     s += wire(mid + g, wy, sx1, wy) + txt(mid, wy - 16, 'C', PUR);
   } else {
     var cw = 60, c0 = mid - cw / 2, nb = 4, bw = cw / nb, ip = 'M' + c0 + ',' + wy;
     for (var k = 0; k < nb; k++) ip += ' A' + (bw / 2) + ',' + (bw / 2) + ' 0 0,1 ' + (c0 + (k + 1) * bw) + ',' + wy;
-    s += wire(sx0 + 12, wy, c0, wy);
+    s += wire(sx0, wy, c0, wy);
     s += '<path d="' + ip + '" fill="none" stroke="' + ACC + '" stroke-width="2.4" stroke-linecap="round"/>';
     s += wire(c0 + cw, wy, sx1, wy) + txt(mid, wy - 16, 'L', ACC);
   }
