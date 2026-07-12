@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCB Via Inductance &amp; Capacitance Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate PCB plated-through-hole via parasitics: inductance, antipad capacitance, and self-resonant frequency from via height, drill diameter, antipad, and substrate εr.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/PCBVia.html">
+  <meta property="og:title" content="PCB Via Inductance & Capacitance Calculator | RF Toolbox">
+  <meta property="og:description" content="PCB via parasitics: inductance, antipad capacitance, and self-resonant frequency from via geometry and substrate εr.">
+  <meta property="og:url" content="https://rftoolbox.ca/PCBVia.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PCB Via Inductance & Capacitance Calculator",
+    "description": "Calculate PCB plated-through-hole via parasitics: inductance, antipad capacitance, and self-resonant frequency.",
+    "url": "https://rftoolbox.ca/PCBVia.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>PCB Via Parasitics Calculator</h3>
+<div class="tool-concept">
+  <p>A plated-through-hole via has series inductance (from its height and barrel diameter) and shunt capacitance (from the antipad clearance in the surrounding ground planes). Together they set a self-resonant frequency that limits high-speed and RF performance. For die/package bond wires, see the <a href="BondWire.html">Bond Wire calculator</a>.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(L_{via}=0.2\,h\ln\!\left(\tfrac{4h}{d}\right)\text{nH}\quad C_{via}=\tfrac{1.41\,\varepsilon_r\,h}{\ln(D/d)}\text{pF}\quad f_{SRF}=\tfrac{1}{2\pi\sqrt{LC}}\)</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">h</td><td>Via height (mm) = substrate thickness the via passes through.</td></tr>
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td>Via (drill / barrel) diameter (mm).</td></tr>
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">D</td><td>Antipad diameter (mm) — the clearance hole in the ground plane. Larger D → less capacitance.</td></tr>
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">εᵣ</td><td>Substrate dielectric constant. FR4 ≈ 4.4.</td></tr>
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f_SRF</td><td>Self-resonant frequency of the L–C pair; keep operation well below it.</td></tr>
+    </table>
+<div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>IPC-2141A §4.3 (via capacitance); standard cylindrical-conductor via inductance model</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Via height, <span class="var">h</span></label><div class="inp-inline"><input type="text" id="via-h" value="1.6" data-tip="Substrate thickness the via spans."><span class="inp-units">mm</span></div><span class="inp-hint">substrate thickness</span></div>
+  <div class="inp-row"><label>Via diameter, <span class="var">d</span></label><div class="inp-inline"><input type="text" id="via-d" value="0.3" data-tip="Drill / barrel diameter."><span class="inp-units">mm</span></div><span class="inp-hint">drill diameter</span></div>
+  <div class="inp-row"><label>Antipad diameter, <span class="var">D</span></label><div class="inp-inline"><input type="text" id="via-D" value="0.6" data-tip="Clearance hole in the ground plane. Must be larger than d."><span class="inp-units">mm</span></div><span class="inp-hint">clearance hole in ground plane</span></div>
+  <div class="inp-row"><label>Substrate <span class="var">εᵣ</span></label><div class="inp-inline"><input type="text" id="via-er" value="4.4" data-tip="Dielectric constant. FR4 ≈ 4.4."></div><span class="inp-hint">FR4 ≈ 4.4</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="via-btn">Calculate</button> <button class="example-btn" onclick="loadExample({'via-h':'1.6','via-d':'0.3','via-D':'0.6','via-er':'4.4'})" title="Standard FR4 via">Load Example</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Via Parasitics</h4>
+  <div class="res-row"><span class="res-lbl">Inductance, L_via</span><span class="res-val" id="via-L">—</span></div>
+  <div class="res-row"><span class="res-lbl">Capacitance, C_via</span><span class="res-val" id="via-C">—</span></div>
+  <div class="res-row"><span class="res-lbl">Self-resonant frequency</span><span class="res-val" id="via-srf">—</span></div>
+</div></div>
+<div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram(){
+  var h=parseFloat(document.getElementById('via-h').value)||0;
+  var d=parseFloat(document.getElementById('via-d').value)||0;
+  var D=parseFloat(document.getElementById('via-D').value)||0;
+  var er=parseFloat(document.getElementById('via-er').value)||4.4;
+  var L=(h>0&&d>0)?0.2*h*Math.log(4*h/d):0;
+  var C=(h>0&&D>d&&d>0)?1.41*er*h/Math.log(D/d):0;
+  var W=520,H=164,cx=W/2,topY=38,botY=120,hp=botY-topY;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Substrate
+  s+='<rect x="150" y="'+topY+'" width="220" height="'+hp+'" fill="#d4ecca" stroke="#5a9020" stroke-width="1"/>';
+  s+='<text x="'+(cx+50)+'" y="'+(topY+hp/2+4)+'" text-anchor="middle" font-size="9.5" fill="#3a6010">εᵣ = '+er+'</text>';
+  // Ground planes (top & bottom copper) with antipad clearance gaps
+  var vw=Math.min(64,Math.max(12,(d/h)*100));
+  var ap=D>0&&d>0?Math.min(vw*3,(D/d)*vw):vw*2;
+  s+='<rect x="100" y="'+(topY-9)+'" width="'+((cx-ap/2)-100)+'" height="9" fill="#b8922a" stroke="#7a5000" stroke-width="1"/>';
+  s+='<rect x="'+(cx+ap/2)+'" y="'+(topY-9)+'" width="'+(420-(cx+ap/2))+'" height="9" fill="#b8922a" stroke="#7a5000" stroke-width="1"/>';
+  s+='<rect x="100" y="'+botY+'" width="'+((cx-ap/2)-100)+'" height="9" fill="#b8922a" stroke="#7a5000" stroke-width="1"/>';
+  s+='<rect x="'+(cx+ap/2)+'" y="'+botY+'" width="'+(420-(cx+ap/2))+'" height="9" fill="#b8922a" stroke="#7a5000" stroke-width="1"/>';
+  // Via barrel
+  s+='<rect x="'+(cx-vw/2)+'" y="'+(topY-9)+'" width="'+vw+'" height="'+(hp+18)+'" fill="#b8922a" stroke="#7a5000" stroke-width="1" rx="1"/>';
+  // Antipad label (above the top ground plane)
+  s+='<text x="'+cx+'" y="'+(topY-15)+'" text-anchor="middle" font-size="9.5" fill="#888">antipad D = '+D+' mm</text>';
+  s+='<text x="'+cx+'" y="'+(botY+22)+'" text-anchor="middle" font-size="9.5" fill="#888">d = '+d+' mm   h = '+h+' mm</text>';
+  s+='<text x="'+cx+'" y="'+(H-8)+'" text-anchor="middle" font-size="12" font-weight="bold" fill="#5533aa">L = '+L.toFixed(3)+' nH   C = '+C.toFixed(3)+' pF</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_pcb_rf.html">Learn the theory behind this tool →</a></div>
+<script src="PCBVia.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>
