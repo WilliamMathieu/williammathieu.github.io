@@ -127,27 +127,29 @@ function drawDiagram() {
   s+='<text x="'+W/2+'" y="16" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">f₀ = '+f0v+'   Q = '+Qv+'   BW = '+bwv+'</text>';
 
   if(cfg==='series') {
-    // Series R–L–C on horizontal wire
+    // Series R–L–C, centred between the terminals
     var lx=30, rx=W-30;
+    var rw=44, gapRL=18, indbw=14, indN=4, gapLC=14, cg=7;
+    var contentW=rw+gapRL+indN*indbw+gapLC+2*cg;
+    var rb=(lx+rx)/2 - contentW/2;               // centred R-box start
     // Input wire to R
-    s+='<line x1="'+lx+'" y1="'+wy+'" x2="'+(lx+55)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    // R box (fixed width 44)
-    var rw=44, rb=lx+55;
+    s+='<line x1="'+lx+'" y1="'+wy+'" x2="'+rb+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // R box
     s+='<rect x="'+rb+'" y="'+(wy-11)+'" width="'+rw+'" height="22" fill="white" stroke="#5533aa" stroke-width="2" rx="2"/>';
     s+='<text x="'+(rb+rw/2)+'" y="'+(wy+4)+'" text-anchor="middle" font-size="11" fill="#5533aa">R</text>';
     // Wire R to L
     var rl_start=rb+rw;
-    s+='<line x1="'+rl_start+'" y1="'+wy+'" x2="'+(rl_start+18)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+rl_start+'" y1="'+wy+'" x2="'+(rl_start+gapRL)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
     // L (inductor bumps)
-    var ind0=rl_start+18, indbw=14, indN=4, indEnd=ind0+indbw*indN;
+    var ind0=rl_start+gapRL, indEnd=ind0+indN*indbw;
     var ip='M'+ind0+','+wy;
     for(var k=0;k<indN;k++) ip+=' A'+(indbw/2)+','+(indbw/2)+' 0 0,1 '+(ind0+(k+1)*indbw)+','+wy;
     s+='<path d="'+ip+'" fill="none" stroke="#AA77FF" stroke-width="2.4" stroke-linecap="round"/>';
     s+='<text x="'+(ind0+indN*indbw/2)+'" y="'+(wy-14)+'" text-anchor="middle" font-size="11" fill="#AA77FF" font-style="italic">L</text>';
-    // Wire L to C
-    s+='<line x1="'+indEnd+'" y1="'+wy+'" x2="'+(indEnd+18)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    // C (vertical plates)
-    var cv=indEnd+18, cg=7;
+    // C (vertical plates); left plate at cv-cg
+    var cv=indEnd+gapLC+cg;
+    // Wire L to the C left plate (stops at the plate, not the gap)
+    s+='<line x1="'+indEnd+'" y1="'+wy+'" x2="'+(cv-cg)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
     s+='<line x1="'+(cv-cg)+'" y1="'+(wy-13)+'" x2="'+(cv-cg)+'" y2="'+(wy+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
     s+='<line x1="'+(cv+cg)+'" y1="'+(wy-13)+'" x2="'+(cv+cg)+'" y2="'+(wy+13)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
     s+='<text x="'+cv+'" y="'+(wy+28)+'" text-anchor="middle" font-size="11" fill="#5533aa" font-style="italic">C</text>';
