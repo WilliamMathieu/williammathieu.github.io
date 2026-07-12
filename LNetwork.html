@@ -85,8 +85,9 @@ function drawDiagram() {
   function drawTopo(type, Cv, Lv, label, xOff) {
     var out='';
     var wy=90, lx=xOff+20, rx=xOff+230, jx=lx+70, gndY=140;
-    // Input wire
-    out+='<line x1="'+lx+'" y1="'+wy+'" x2="'+jx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Input wire (stops at the series cap's left plate for the high-pass)
+    var inEnd=(type==='lp')?jx:(jx-6);
+    out+='<line x1="'+lx+'" y1="'+wy+'" x2="'+inEnd+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
     // Output wire
     out+='<line x1="'+(jx+56)+'" y1="'+wy+'" x2="'+rx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
     if(type==='lp') {
@@ -111,6 +112,8 @@ function drawDiagram() {
       out+='<line x1="'+(jx-6)+'" y1="'+(wy-12)+'" x2="'+(jx-6)+'" y2="'+(wy+12)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
       out+='<line x1="'+(jx+6)+'" y1="'+(wy-12)+'" x2="'+(jx+6)+'" y2="'+(wy+12)+'" stroke="#5533aa" stroke-width="2.8" stroke-linecap="round"/>';
       out+='<text x="'+jx+'" y="'+(wy+28)+'" text-anchor="middle" font-size="10" fill="#5533aa">C = '+Cv+'</text>';
+      // Top rail from the series cap through the shunt junction to the output
+      out+='<line x1="'+(jx+6)+'" y1="'+wy+'" x2="'+(jx+56)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
       // Shunt L
       var lsx=jx+50;
       out+='<line x1="'+lsx+'" y1="'+wy+'" x2="'+lsx+'" y2="'+(wy+20)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
@@ -119,7 +122,10 @@ function drawDiagram() {
       for(var k2=0;k2<inN;k2++) indPath2+=' A'+(ibw/2)+','+(ibw/2)+' 0 0,0 '+lsx+','+(wy+20+(k2+1)*ibw);
       out+='<path d="'+indPath2+'" fill="none" stroke="#AA77FF" stroke-width="2.2" stroke-linecap="round"/>';
       out+='<line x1="'+lsx+'" y1="'+(wy+20+inN*ibw)+'" x2="'+lsx+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+      // Ground symbol (matches the low-pass)
       out+='<line x1="'+(lsx-10)+'" y1="'+gndY+'" x2="'+(lsx+10)+'" y2="'+gndY+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
+      out+='<line x1="'+(lsx-6)+'" y1="'+(gndY+5)+'" x2="'+(lsx+6)+'" y2="'+(gndY+5)+'" stroke="#444" stroke-width="1.5" stroke-linecap="round"/>';
+      out+='<line x1="'+(lsx-2)+'" y1="'+(gndY+10)+'" x2="'+(lsx+2)+'" y2="'+(gndY+10)+'" stroke="#444" stroke-width="1" stroke-linecap="round"/>';
       out+='<text x="'+(lsx+14)+'" y="'+(wy+42)+'" font-size="10" fill="#AA77FF">L = '+Lv+'</text>';
     }
     // Port labels
