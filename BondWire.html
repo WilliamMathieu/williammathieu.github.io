@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bond Wire Inductance Calculator — Grover Formula | RF Toolbox</title>
+  <meta name="description" content="Calculate the parasitic inductance and reactance of a bond wire from its length and diameter using the Grover formula. For RF die, package, and MMIC layout.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/BondWire.html">
+  <meta property="og:title" content="Bond Wire Inductance Calculator — Grover Formula | RF Toolbox">
+  <meta property="og:description" content="Calculate the parasitic inductance and reactance of a bond wire from its length and diameter using the Grover formula.">
+  <meta property="og:url" content="https://rftoolbox.ca/BondWire.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Bond Wire Inductance Calculator — Grover Formula",
+    "description": "Calculate the parasitic inductance and reactance of a bond wire from its length and diameter using the Grover formula.",
+    "url": "https://rftoolbox.ca/BondWire.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Bond Wire Inductance Calculator</h3>
+<div class="tool-concept">
+  <p>Bond wires connecting a die to its package are an unavoidable series parasitic inductance — roughly 1 nH/mm. At GHz frequencies even a short wire has significant reactance, causing impedance transformation and gain roll-off. Estimate it before committing to a layout. For plated-through-hole parasitics, see the <a href="PCBVia.html">PCB Via calculator</a>.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(L_{wire}=0.2\,\ell\left[\ln\!\left(\tfrac{2\ell}{d}\right)-0.75\right]\ \text{nH}\qquad X=2\pi f L\)</div>
+<table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ℓ</td><td>Wire length (mm) — centre-to-centre arc length between bond pads.</td></tr>
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td>Wire diameter (mm). Gold: 0.018–0.033 mm, aluminium: 0.025–0.125 mm.</td></tr>
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">h</td><td>Loop height above the pads (mm) — affects the exact value; shown for reference.</td></tr>
+      <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L_wire</td><td>Grover formula, ℓ and d in mm. Exact value also depends on loop shape and nearby conductors.</td></tr>
+    </table>
+<div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>F. W. Grover, <em>Inductance Calculations</em>, §15 (Dover, 1946)</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Wire length, <span class="var">ℓ</span></label><div class="inp-inline"><input type="text" id="bw-l" value="1.5" data-tip="Centre-to-centre arc length of the bond wire."><span class="inp-units">mm</span></div><span class="inp-hint">centre-to-centre arc length</span></div>
+  <div class="inp-row"><label>Wire diameter, <span class="var">d</span></label><div class="inp-inline"><input type="text" id="bw-d" value="0.025" data-tip="Conductor diameter. Gold 0.018–0.033 mm, Al 0.025–0.125 mm."><span class="inp-units">mm</span></div><span class="inp-hint">gold: 0.018–0.033 mm, Al: 0.025–0.125 mm</span></div>
+  <div class="inp-row"><label>Loop height, <span class="var">h</span></label><div class="inp-inline"><input type="text" id="bw-h" value="0.3" data-tip="Loop height above the bond pads (reference only)."><span class="inp-units">mm</span></div><span class="inp-hint">loop height above bond pads</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="bw-btn">Calculate</button> <button class="example-btn" onclick="loadExample({'bw-l':'1.5','bw-d':'0.025','bw-h':'0.3'})" title="Typical gold bond wire">Load Example</button></div>
+<div id="error" style="color:#c0392b;font-size:12px;min-height:16px;margin-bottom:6px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid"><div class="res-card"><h4>Bond Wire</h4>
+  <div class="res-row"><span class="res-lbl">Inductance, L_wire</span><span class="res-val" id="bw-L">—</span></div>
+  <div class="res-row"><span class="res-lbl">Reactance at 1 GHz</span><span class="res-val" id="bw-X">—</span></div>
+  <div class="res-row"><span class="res-lbl">Reactance at 10 GHz</span><span class="res-val" id="bw-X10">—</span></div>
+</div></div>
+<div class="sec-lbl">Diagram</div><div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram(){
+  var l=parseFloat(document.getElementById('bw-l').value)||0;
+  var d=parseFloat(document.getElementById('bw-d').value)||0;
+  var h=parseFloat(document.getElementById('bw-h').value)||0;
+  var L=(l>0&&d>0)?0.2*l*(Math.log(2*l/d)-0.75):0;
+  var W=520,H=150;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  var x1=80,x2=440,y1=115,arc=60;
+  s+='<rect x="30" y="105" width="100" height="22" fill="#e8e0ff" stroke="#5533aa" stroke-width="1.5" rx="3"/>';
+  s+='<text x="80" y="120" text-anchor="middle" font-size="9.5" fill="#5533aa">Bond pad</text>';
+  s+='<rect x="390" y="105" width="100" height="22" fill="#e8e0ff" stroke="#5533aa" stroke-width="1.5" rx="3"/>';
+  s+='<text x="440" y="120" text-anchor="middle" font-size="9.5" fill="#5533aa">Bond pad</text>';
+  s+='<path d="M'+x1+','+y1+' Q'+(W/2)+','+(y1-arc)+' '+x2+','+y1+'" fill="none" stroke="#AA77FF" stroke-width="3.5" stroke-linecap="round"/>';
+  s+='<text x="'+(W/2)+'" y="'+(y1-arc-10)+'" text-anchor="middle" font-size="13" font-weight="bold" fill="#5533aa">L = '+L.toFixed(3)+' nH</text>';
+  s+='<text x="'+(W/2)+'" y="'+(y1-arc+8)+'" text-anchor="middle" font-size="10" fill="#888">ℓ='+l+'mm  d='+d+'mm  h='+h+'mm</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_microwave_components.html">Learn the theory behind this tool →</a></div>
+<script src="BondWire.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+<script src="tool-enhancements.js"></script>
+</body>
+</html>

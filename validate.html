@@ -437,8 +437,8 @@
   <select id="at-topo"><option value="pi" selected>pi</option><option value="t">t</option><option value="l">l</option><option value="bridged">bridged</option></select>
 
   <!-- BirdcageCoil -->
-  <input id="bc-n"><input id="bc-r"><input id="bc-l"><input id="bc-d"><input id="bc-f"><button id="bc-btn"></button><span id="bc-Lleg"></span><span id="bc-Larc"></span><span id="bc-C"></span><span id="bc-cplace"></span><span id="bc-f1"></span><span id="bc-f2"></span><span id="bc-msep"></span><span id="bc-Q"></span>
-  <select id="bc-type"><option value="lp" selected>lp</option><option value="hp">hp</option></select>
+  <input id="bc-n"><input id="bc-r"><input id="bc-l"><input id="bc-d"><input id="bc-f"><input id="bc-cring"><button id="bc-btn"></button><span id="bc-Lleg"></span><span id="bc-Larc"></span><span id="bc-Cleg"></span><span id="bc-Cring"></span><span id="bc-f1"></span><span id="bc-f2"></span><span id="bc-msep"></span><span id="bc-Q"></span>
+  <select id="bc-type"><option value="lp" selected>lp</option><option value="hp">hp</option><option value="bp">bp</option></select>
 
   <!-- TwoPortConverter -->
   <input id="tp-z0"><input id="tp-11r"><input id="tp-11i"><input id="tp-12r"><input id="tp-12i"><input id="tp-21r"><input id="tp-21i"><input id="tp-22r"><input id="tp-22i"><button id="tp-btn"></button><div id="tp-out"></div>
@@ -520,7 +520,8 @@ window.CALC_FILES = [
   'Wilkinson.js',
   'RadarRange.js',
   'PowerCombiner.js',
-  'BondWireVia.js',
+  'BondWire.js',
+  'PCBVia.js',
   'PiTNetwork.js',
   'VSWRConverter.js',
   'Stripline.js',
@@ -1274,13 +1275,13 @@ const TESTS = [
   {
     group: 'Birdcage Coil',
     name: 'N=16 LP, r=150 l=300 d=5 mm, 128 MHz',
-    ref: 'C solved so mode m=1 resonates at f₀; f₁=128.0 MHz; C≈12.75 pF',
+    ref: 'C_leg solved so mode m=1 resonates at f₀; f₁=128.0 MHz; C_leg≈6.27 pF',
     inputs:  { 'bc-n': '16', 'bc-r': '150', 'bc-l': '300', 'bc-d': '5', 'bc-f': '128' },
     selects: { 'bc-type': 'lp' },
     button:  'bc-btn',
     expect: {
-      'bc-f1': { label: 'f₁ (MHz)', value: 128.0, tol: 0.2 },
-      'bc-C':  { label: 'C (pF)',   value: 12.75, tol: 0.4 }
+      'bc-f1':   { label: 'f₁ (MHz)',   value: 128.0, tol: 0.2 },
+      'bc-Cleg': { label: 'C_leg (pF)', value: 6.27,  tol: 0.05 }
     }
   },
 
