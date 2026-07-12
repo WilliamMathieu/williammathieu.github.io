@@ -159,22 +159,19 @@ function drawDiagram() {
     s+='<circle cx="'+rx+'" cy="'+wy+'" r="4" fill="white" stroke="#5533aa" stroke-width="1.8"/>';
     s+='<text x="'+W/2+'" y="160" text-anchor="middle" font-size="10" fill="#888" font-style="italic">Series RLC — minimum impedance at resonance</text>';
   } else {
-    // Parallel R‖L‖C between two rails
-    var lx2=30, rx2=W-30, jlx=lx2+55, jrx=rx2-55;
-    // Top rail
-    s+='<line x1="'+lx2+'" y1="'+wy+'" x2="'+jrx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    // Left and right bus connections
-    s+='<line x1="'+jlx+'" y1="'+wy+'" x2="'+jlx+'" y2="'+(wy+16)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    s+='<line x1="'+jrx+'" y1="'+wy+'" x2="'+jrx+'" y2="'+(wy+16)+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    // Bottom bus
-    s+='<line x1="'+jlx+'" y1="'+gndY+'" x2="'+jrx+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    // Left wire
-    s+='<line x1="'+lx2+'" y1="'+wy+'" x2="'+jlx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    s+='<line x1="'+jlx+'" y1="'+gndY+'" x2="'+lx2+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    s+='<line x1="'+lx2+'" y1="'+wy+'" x2="'+lx2+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    // Right wire
-    s+='<line x1="'+jrx+'" y1="'+gndY+'" x2="'+rx2+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
-    s+='<line x1="'+rx2+'" y1="'+wy+'" x2="'+rx2+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Parallel R‖L‖C shunt: top rail = signal (in↔out), bottom rail = ground.
+    // NB: the rails must connect ONLY through R, L and C — no end wires, or the
+    // tank would be shorted to ground.
+    var lx2=30, rx2=W-30;
+    // Top (signal) rail — in to out
+    s+='<line x1="'+lx2+'" y1="'+wy+'" x2="'+rx2+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Bottom (ground) rail — spans the branch bottoms only
+    s+='<line x1="'+(cx-70)+'" y1="'+gndY+'" x2="'+(cx+70)+'" y2="'+gndY+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+    // Ground symbol
+    s+='<line x1="'+cx+'" y1="'+gndY+'" x2="'+cx+'" y2="'+(gndY+4)+'" stroke="#444" stroke-width="1.6" stroke-linecap="round"/>';
+    s+='<line x1="'+(cx-10)+'" y1="'+(gndY+4)+'" x2="'+(cx+10)+'" y2="'+(gndY+4)+'" stroke="#444" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line x1="'+(cx-6)+'" y1="'+(gndY+8)+'" x2="'+(cx+6)+'" y2="'+(gndY+8)+'" stroke="#444" stroke-width="1.5" stroke-linecap="round"/>';
+    s+='<line x1="'+(cx-2)+'" y1="'+(gndY+12)+'" x2="'+(cx+2)+'" y2="'+(gndY+12)+'" stroke="#444" stroke-width="1" stroke-linecap="round"/>';
     // R branch
     var rbx=cx-70; var rh=38;
     s+='<circle cx="'+rbx+'" cy="'+wy+'" r="3" fill="#5533aa"/>';
