@@ -133,7 +133,7 @@
 <div class="schematic-box"><div id="tool-diagram"></div></div>
 <script>
 function drawDiagram(res) {
-  var W=500, H=180;
+  var W=500, H=196;
   var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
   // Draw 3D-ish waveguide cross section (2D front face + perspective lines)
@@ -168,7 +168,7 @@ function drawDiagram(res) {
     s+='<text x="'+(x0+W2+20)+'" y="75" font-size="11" fill="#AA77FF">λ<tspan font-size="9" dy="3">g</tspan><tspan dy="-3"> = '+engFmt(res.lambda_g,'m')+'</tspan></text>';
     s+='<text x="'+(x0+W2+20)+'" y="95" font-size="11" fill="#AA77FF">Z<tspan font-size="9" dy="3">w</tspan><tspan dy="-3"> = '+res.Zw.toFixed(1)+' Ω</tspan></text>';
   }
-  s+='<text x="240" y="170" text-anchor="middle" font-size="10" fill="#888">↑ TE₁₀ E-field (half-sinusoid across a, uniform in b)</text>';
+  s+='<text x="240" y="188" text-anchor="middle" font-size="10" fill="#888">↑ TE₁₀ E-field (half-sinusoid across a, uniform in b)</text>';
   s+='</svg>';
   document.getElementById('tool-diagram').innerHTML = s;
 }

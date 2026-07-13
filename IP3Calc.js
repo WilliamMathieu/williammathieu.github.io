@@ -34,20 +34,21 @@ function drawDiagram(Pin,IIP3,G,OIP3,Pout,IM3,P1dB){
   function py(p){return gy2-(p-(pts_min+G-20))*yscale;}
   var sv='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
   sv+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  sv+='<clipPath id="ip-box"><rect x="'+gx1+'" y="'+gy1+'" width="'+gw+'" height="'+gh+'"/></clipPath>';
   // Axes
   sv+='<line x1="'+gx1+'" y1="'+gy1+'" x2="'+gx1+'" y2="'+gy2+'" stroke="#ccc" stroke-width="1"/>';
   sv+='<line x1="'+gx1+'" y1="'+gy2+'" x2="'+gx2+'" y2="'+gy2+'" stroke="#ccc" stroke-width="1"/>';
-  sv+='<text x="'+((gx1+gx2)/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="9.5" fill="#888">Input power (dBm)</text>';
+  sv+='<text x="'+((gx1+gx2)/2)+'" y="'+(H-24)+'" text-anchor="middle" font-size="9.5" fill="#888">Input power (dBm)</text>';
   sv+='<text x="14" y="'+((gy1+gy2)/2)+'" text-anchor="middle" font-size="9.5" fill="#888" transform="rotate(-90 14 '+((gy1+gy2)/2)+')">Output power (dBm)</text>';
   // Signal output line (slope 1)
   var ps1=pts_min, pe1=Math.min(IIP3,pts_max);
-  sv+='<line x1="'+px(ps1)+'" y1="'+py(ps1+G)+'" x2="'+px(pe1)+'" y2="'+py(pe1+G)+'" stroke="#5533aa" stroke-width="2.2" stroke-linecap="round"/>';
+  sv+='<line x1="'+px(ps1)+'" y1="'+py(ps1+G)+'" x2="'+px(pe1)+'" y2="'+py(pe1+G)+'" clip-path="url(#ip-box)" stroke="#5533aa" stroke-width="2.2" stroke-linecap="round"/>';
   sv+='<text x="'+px(pts_min+5)+'" y="'+py(pts_min+G+6)+'" font-size="9.5" fill="#5533aa">Desired output (slope 1)</text>';
   // IM3 line (slope 3)
   var IM3_at_min=3*pts_min-2*IIP3+G;
   var ps3=pts_min, pe3=Math.min(IIP3,pts_max);
-  sv+='<line x1="'+px(ps3)+'" y1="'+py(IM3_at_min)+'" x2="'+px(pe3)+'" y2="'+py(OIP3)+'" stroke="#cc3333" stroke-width="2.2" stroke-linecap="round"/>';
-  sv+='<text x="'+px(pts_min+5)+'" y="'+py(IM3_at_min+4)+'" font-size="9.5" fill="#cc3333">IM3 (slope 3)</text>';
+  sv+='<line x1="'+px(ps3)+'" y1="'+py(IM3_at_min)+'" x2="'+px(pe3)+'" y2="'+py(OIP3)+'" clip-path="url(#ip-box)" stroke="#cc3333" stroke-width="2.2" stroke-linecap="round"/>';
+  sv+='<text x="'+px(pts_min+5)+'" y="'+(py(pts_min+G+6)+16)+'" font-size="9.5" fill="#cc3333">IM3 (slope 3)</text>';
   // IP3 point
   if(IIP3>=pts_min&&IIP3<=pts_max){
     sv+='<circle cx="'+px(IIP3)+'" cy="'+py(OIP3)+'" r="5" fill="#AA77FF"/>';

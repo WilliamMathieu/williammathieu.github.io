@@ -107,6 +107,7 @@ document.getElementById('bl-btn').addEventListener('click', function() {
     }
 
     document.getElementById('bl-ratio').textContent = ratio.toFixed(3) + ':1 (' + Zu + '\u03a9 \u2192 ' + Zb + '\u03a9)';
+    if (window.drawDiagram) window.drawDiagram();
 });
 
 function showError(msg) { document.getElementById('error').textContent = msg; }
