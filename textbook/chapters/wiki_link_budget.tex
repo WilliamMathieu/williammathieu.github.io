@@ -1,0 +1,59 @@
+% chapter: wiki_link_budget
+\chapter{Link Budgets}\label{ch:wiki_link_budget}
+
+A link budget is a systematic accounting of all gains and losses in a communication system from transmitter to receiver. It determines whether a link will achieve adequate signal-to-noise ratio under specified conditions, and by how much margin.
+
+				
+
+\section{Link Budget Equation}
+
+				
+
+\noindent\hspace*{1.2em}\textit{$P_r = P_t + G_t - L_{tx} - FSPL - L_{misc} + G_r - L_{rx}$   (dBm)}
+
+				
+
+Then compare received power to the minimum detectable signal (MDS):
+
+\rffig{wiki_link_budget_1.pdf}{Link budget bar chart: TX power flows through gains and losses. Green margin bar = working link.}
+
+				
+
+\noindent\hspace*{1.2em}\textit{$MDS = kTB + NF + SNR_{min}$   (dBm)}
+
+				
+
+Link margin = $P_r - MDS$. A positive margin means the link works; typical design margins are 3–20 dB depending on the fade margin required.
+
+				
+
+\section{Free-Space Path Loss}
+
+				
+
+\rffig{wiki_link_budget_2.pdf}{Link budget chain: each block contributes gains (antennas) or losses (cables, path loss). The sum determines received power vs noise floor.}
+
+				
+\[FSPL = 20\log_{10}(d) + 20\log_{10}(f) + 20\log_{10}\!\left(\dfrac{4\pi}{c}\right)\]
+
+				
+
+At 2.4 GHz, FSPL over 100 m ≈ 80 dB. FSPL grows with distance² and frequency² — doubling distance adds 6 dB; doubling frequency adds 6 dB.
+
+				
+
+\section{Additional Loss Mechanisms}
+
+				
+\begin{itemize}
+
+					\item \textbf{Multipath fading} — reflections cause constructive/destructive interference. Fast fading margin: 20–30 dB for 99.9\% link reliability.
+
+					\item \textbf{Rain attenuation} — significant above 10 GHz; up to several dB/km in heavy rain.
+
+					\item \textbf{Atmospheric absorption} — oxygen absorption peak at 60 GHz (15 dB/km) limits this band to short-range applications.
+
+					\item \textbf{Polarisation mismatch} — misaligned transmit/receive polarisations cause 0–∞ dB loss.
+
+				
+\end{itemize}

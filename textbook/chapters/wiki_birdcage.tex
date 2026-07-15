@@ -1,0 +1,49 @@
+% chapter: wiki_birdcage
+\chapter{The Birdcage Coil}\label{ch:wiki_birdcage}
+
+The birdcage coil is a cylindrical resonator consisting of a set of parallel conducting rungs connecting two circular end rings. Driven in quadrature (two ports 90° apart in space and in phase), it produces a highly uniform, circularly polarised B1 field ideal for both transmit and receive in MRI. It was proposed by Hayes et al. in 1985 and remains the dominant head and extremity coil design.
+
+				
+
+\section{Resonant Modes}
+
+				
+
+\rffig{wiki_birdcage_1.pdf}{High-pass birdcage coil (N=8 rungs). Capacitors (cyan) on end rings. Rungs (purple) carry sinusoidal current distribution.}
+
+				
+
+A birdcage with N rungs supports N resonant modes. The lowest frequency mode (mode 1) produces the sinusoidal current distribution required for field homogeneity. For an N-rung birdcage, the useful mode resonates at:
+
+\rffig{wiki_birdcage_2.pdf}{Birdcage resonant mode frequencies vs mode number m. Mode m=1 is the imaging mode (uniform field). Higher modes are spurious.}
+
+				
+\[f_0 \approx \dfrac{1}{2\pi\sqrt{L_{rung}\cdot C_{eff}}}\]
+
+				
+
+where $L_{rung}$ is the rung inductance and $C_{eff}$ is determined by the capacitor placement.
+
+				
+
+\section{Low-Pass vs High-Pass Configurations}
+
+				
+\begin{itemize}
+
+					\item \textbf{Low-pass}: capacitors on the rungs, end rings are continuous. Rungs look like capacitors at low frequency → resonance at low end of mode spectrum.
+
+					\item \textbf{High-pass}: capacitors on the end rings, rungs are continuous inductors. Preferred at high field (3 T and above) because the desired mode is the highest frequency mode, further from spurious modes.
+
+					\item \textbf{Band-pass}: capacitors on both rungs and end rings. Wider bandwidth and used in volume coils for body imaging.
+
+				
+\end{itemize}
+
+				
+
+\section{Quadrature Drive}
+
+				
+
+Driving two ports 90° apart in space and phase creates circular polarisation, producing B1⁺ field in the rotating frame that efficiently tips magnetisation. This gives √2 (3 dB) SNR improvement over linear excitation for the same deposited power, or equivalently halves the required transmit power for the same flip angle.

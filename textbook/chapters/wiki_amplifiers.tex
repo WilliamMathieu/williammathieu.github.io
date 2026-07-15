@@ -1,0 +1,42 @@
+% chapter: wiki_amplifiers
+\chapter{RF Amplifiers}\label{ch:wiki_amplifiers}
+
+RF amplifiers increase signal power. Key specifications include gain, noise figure, output power, linearity, and stability. Different applications demand very different tradeoffs: a receiver LNA optimises noise figure; a transmit PA optimises efficiency and output power.
+
+				
+
+\section{Low-Noise Amplifier (LNA)}
+
+				
+
+\rffig{wiki_amplifiers_1.pdf}{Common-emitter NPN amplifier. RC = collector load; voltage divider sets quiescent base current.}
+
+				
+
+The first active stage in a receiver chain. Its noise figure dominates the overall system NF (Friis formula), so minimising LNA NF is critical. The input matching network is designed for noise match rather than power match. Typical specifications: NF = 0.3–1.5 dB, gain = 15–25 dB.
+
+\rffig{wiki_amplifiers_2.pdf}{LNA tradeoff: minimum NF and maximum gain are different operating points. For first-stage LNA, prioritise NF.}
+
+				
+
+\section{Power Amplifier (PA)}
+
+				
+
+The final stage of a transmitter. PA efficiency (PAE — power added efficiency) is critical for battery life in mobile devices. Class A amplifiers have low distortion but poor efficiency (\textasciitilde{}25–30\%). Class B/AB amplifiers improve efficiency (\textasciitilde{}50–60\%). Class E/F switching amplifiers can achieve theoretical efficiencies above 90\%.
+
+				
+
+\section{Gain and Stability}
+
+				
+
+Transistor amplifiers are potentially unstable at certain frequencies due to internal feedback. The Rollett stability factor $K > 1$ (and \textbackslash{}(|\textbackslash{}Delta| \textless{} 1\textbackslash{})) is the condition for unconditional stability. Amplifiers are often stabilised using resistive loading or feedback networks.
+
+				
+
+\section{Linearity: P1dB and IP3}
+
+				
+
+The 1 dB compression point (P1dB) is the input power at which the gain has dropped by 1 dB from its small-signal value. The third-order intercept point (IP3) characterises intermodulation distortion — the spurious mixing products generated when two closely spaced signals both enter the amplifier. As a rule of thumb, $IIP3 \approx P1dB + 10$ dBm.

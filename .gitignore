@@ -1,3 +1,16 @@
 node_modules/
 .claude/
 scratch-shots/
+
+# LaTeX build artifacts (textbook sources are kept; compiled output is regenerated)
+textbook/*.aux
+textbook/*.log
+textbook/*.out
+textbook/*.toc
+textbook/*.fls
+textbook/*.fdb_latexmk
+textbook/*.synctex.gz
+textbook/main.pdf
+textbook/pass1.log
+textbook/build.log
+textbook/chapters/*.aux

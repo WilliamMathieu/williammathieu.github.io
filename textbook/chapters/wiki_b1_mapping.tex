@@ -1,0 +1,42 @@
+% chapter: wiki_b1_mapping
+\chapter{B1 Field Mapping}\label{ch:wiki_b1_mapping}
+
+B1 mapping refers to measuring the spatial distribution of the RF transmit field (B1⁺) inside the subject. At 3 T and above, wavelength effects cause significant B1⁺ inhomogeneity, which manifests as flip angle variations across the image. B1 maps are used for quantitative MRI, SAR estimation, and parallel transmit calibration.
+
+				
+
+\section{Why B1 Mapping Matters at High Field}
+
+				
+
+\rffig{wiki_b1_mapping_1.pdf}{Simulated B1+ maps: 1.5 T (left, uniform) vs 7 T (right, central brightening due to constructive EM interference).}
+
+				
+
+At 3 T (128 MHz), the wavelength in tissue (\textasciitilde{}25 cm) becomes comparable to body dimensions, causing constructive and destructive interference of the RF field. A nominal 90° pulse may deliver 70° in some regions and 110° in others. Quantitative MRI techniques (T1 mapping, T2 mapping, MR spectroscopy) require accurate flip angles for valid results.
+
+\rffig{wiki_b1_mapping_2.pdf}{B₁⁺ field map simulation at 3T. Constructive interference of RF waves creates a bright central spot in the phantom.}
+
+				
+
+\section{Double Angle Method (DAM)}
+
+				
+
+Two spin-echo images are acquired with the same TR but with nominal flip angles α and 2α. The signal ratio gives: $|S(2\alpha)/S(\alpha)| = 2\cos(\alpha_{actual})$, from which the actual flip angle can be calculated pixel-by-pixel. Simple but slow (requires long TR for T1 recovery).
+
+				
+
+\section{Actual Flip Angle Imaging (AFI)}
+
+				
+
+Two interleaved acquisitions with different TRs (TR1 ≪ TR2) but the same flip angle. The signal ratio depends only on flip angle and the TR ratio (not T1 for reasonable conditions), allowing fast B1 mapping.
+
+				
+
+\section{Parallel Transmit (pTx)}
+
+				
+
+At 7 T, multiple transmit channels (typically 8) each drive a separate coil element. By controlling the amplitude and phase of each channel, the B1⁺ distribution can be shaped (RF shimming) to improve uniformity or focus power. B1 maps for each channel are a prerequisite for pTx calibration.

@@ -1,0 +1,50 @@
+% chapter: wiki_coil_design
+\chapter{RF Coil Design for MRI}\label{ch:wiki_coil_design}
+
+Designing an MRI RF coil requires careful attention to resonance, matching, decoupling, and coil Q. The goal is to maximise SNR while maintaining safety and compatibility with the scanner's RF system.
+
+				
+
+\section{Tuning to Resonance}
+
+				
+
+The coil must resonate at the Larmor frequency of the target nucleus. For a single-loop coil of inductance L, a tuning capacitor C\_tune = 1/(ω²L) brings the coil to resonance. Fixed or variable capacitors (trimmers) are used. The tuning is sensitive to nearby conductive or dielectric objects (loading), so provision for fine adjustment near the sample is necessary.
+
+\rffig{wiki_coil_design_1.pdf}{RF coil tuning: parallel capacitor C\_tune resonates loop inductance L. Matching network presents 50 Ω to the coaxial cable.}
+
+				
+
+\section{Matching to 50 Ω}
+
+				
+
+\rffig{wiki_coil_design_2.pdf}{Coil tuning and matching circuit: C\_tune resonates the coil at f\_Larmor; C\_match transforms impedance to 50 Ω.}
+
+				
+
+The coil's radiation resistance is much lower than 50 Ω (typically 0.1–10 Ω for small surface coils). A matching network transforms this to 50 Ω to maximise power transfer between the coil and the preamplifier. Common approaches: capacitive tap on the tuning capacitor, additional shunt matching capacitor, or a transformer.
+
+				
+
+\section{Quality Factor Q}
+
+				
+
+The unloaded Q (Q\_u) is determined by the coil's own resistance. The loaded Q (Q\_L) includes sample losses. For receive coils, SNR is maximised when Q\_L is dominated by sample noise (Q\_L ≈ Q\_u/2), not coil resistance. High-conductivity conductor (copper, silver), thick wire, and minimising resistive losses are key. At 3 T, typical unloaded Q for a 10 cm surface coil: 200–500; loaded Q: 30–80.
+
+				
+
+\section{Decoupling}
+
+				
+
+In phased array coils, adjacent elements must be decoupled to prevent inductive coupling from degrading noise performance. Methods include: overlap decoupling (geometrically overlapping adjacent loops to cancel mutual inductance), capacitive decoupling networks, and preamplifier decoupling (presenting high impedance to the coil current using a low-input-impedance preamp with an additional inductance).
+
+				
+
+\section{Active Detuning}
+
+				
+
+During RF transmission, receive coils must be detuned (switched off) to prevent them from disturbing the transmit field and from experiencing potentially damaging induced voltages. Active detuning circuits use PIN diodes to insert a large inductance or short circuit that shifts the resonant frequency away from f₀ during the transmit phase.

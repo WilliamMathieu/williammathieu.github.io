@@ -1,0 +1,113 @@
+% chapter: wiki_fmcw_radar
+\chapter{FMCW and Pulsed Radar}\label{ch:wiki_fmcw_radar}
+
+The radar equation gives the received signal power, but the waveform determines how accurately range and velocity can be measured. The three main radar waveform families — pulsed, CW, and FMCW — each make a different tradeoff between range resolution, velocity measurement capability, and hardware complexity.
+
+      
+
+\section{Pulsed Radar}
+
+      
+
+A pulsed radar transmits short bursts of RF energy and measures the round-trip travel time to determine range. The transmitter is silent while the receiver listens for echoes:
+
+      
+\[R = \dfrac{c \cdot \tau}{2} \qquad \Delta R = \dfrac{c}{2B}\]
+
+      
+
+where τ is the pulse round-trip time, and ΔR is the range resolution set by the signal bandwidth B (not the pulse duration, for pulse-compressed systems). A 1 µs pulse → 150 m range resolution. A 10 MHz bandwidth (pulse-compressed or stepped frequency) → 15 m resolution.
+
+      
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}}
+\hline
+\textbf{Parameter} & \textbf{Formula} & \textbf{Notes} \\
+\hline
+Max unambiguous range & R\_max = c/(2·PRF) & PRF = pulse repetition frequency \\
+Range resolution & ΔR = c/(2B) & B = bandwidth; 150 m/µs for CW pulse \\
+Duty cycle & DC = τ·PRF & Typically 0.001–0.1 for pulsed systems \\
+Average power & P\_avg = P\_peak · DC & Sets detection range via SNR \\
+\hline
+\end{longtable}}
+
+      
+
+\section{CW Radar}
+
+      
+
+Continuous wave radar transmits a single frequency continuously. It cannot measure range (no time reference) but measures velocity extremely well via the Doppler shift:
+
+      
+\[f_D = \dfrac{2v_r f_0}{c} = \dfrac{2v_r}{\lambda}\]
+
+      
+
+where v\_r is the radial velocity (positive = approaching). A 10 GHz radar and 100 km/h target: f\_D = 2 × 27.8 / 0.03 = 1.85 kHz. Police speed guns and simple motion detectors use CW radar.
+
+      
+
+\section{FMCW Radar}
+
+      
+
+Frequency-modulated CW (FMCW) combines range and velocity measurement by sweeping the transmit frequency linearly. The echo from a target at range R arrives with a time delay τ = 2R/c, creating a constant "beat frequency" f\_b between the current transmit frequency and the received echo:
+
+\rffig{wiki_fmcw_radar_1.pdf}{FMCW: TX sweeps from f\_low to f\_high; echo arrives delayed by τ=2R/c; beat frequency f\_b ∝ range.}
+
+      
+\[f_b = \dfrac{2R \cdot S}{c} \qquad S = \dfrac{B}{T_{sweep}}\]
+
+      
+
+where S is the frequency sweep rate (Hz/s), B the sweep bandwidth, and T\_sweep the sweep duration. By measuring f\_b with an FFT, range is determined directly. Modern automotive radar (77 GHz, 4 GHz bandwidth) achieves ΔR = c/(2×4GHz) = 3.75 cm range resolution.
+
+      
+
+\section{Range-Doppler Matrix}
+
+      
+
+A moving target creates both a range displacement and a Doppler frequency. In FMCW, velocity causes a phase rotation of the beat signal between sweeps. By taking a 2D FFT (range FFT per sweep, then Doppler FFT across sweeps), the range-Doppler matrix simultaneously shows all targets' range and velocity:
+
+\rffig{wiki_fmcw_radar_2.pdf}{Range-Doppler matrix from 2D FFT. Range (vertical axis) and velocity (horizontal) resolved simultaneously.}
+
+      
+\[\Delta v = \dfrac{\lambda}{2 N T_{sweep}}\qquad v_{max} = \dfrac{\lambda}{4 T_{sweep}}\]
+
+      
+
+where N is the number of sweeps in the coherent processing interval (CPI).
+
+      
+
+\section{Ambiguity Function}
+
+      
+
+The radar ambiguity function χ(τ, f\_D) describes the range-Doppler response of a waveform — how much a target at (range τ₀, Doppler f\_D₀) leaks into adjacent range-Doppler cells. A perfect ambiguity function has a single narrow spike at the origin and zero everywhere else (impossible). The uncertainty principle of radar states: ΔR × Δv ≥ λc/4. Short pulses give good range resolution but poor velocity resolution; long CPI gives good velocity but requires coherence across many sweeps.
+
+      
+
+\section{FMCW Applications}
+
+      
+\begin{itemize}
+
+        \item \textbf{Automotive radar (77 GHz)}: 4 GHz sweep, 3.75 cm range resolution, ±200 km/h velocity, 200 m range. Used for adaptive cruise control, AEB, blind-spot detection.
+
+        \item \textbf{Level measurement}: Industrial FMCW sensors measure tank fill level to mm accuracy over tens of metres.
+
+        \item \textbf{Ground-penetrating radar (GPR)}: 100 MHz–3 GHz sweep through soil to detect buried utilities, unexploded ordnance, or archaeological features.
+
+        \item \textbf{Indoor positioning}: 60 GHz UWB FMCW can locate people to \textless{} 10 cm accuracy.
+
+      
+\end{itemize}

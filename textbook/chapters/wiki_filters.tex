@@ -1,0 +1,66 @@
+% chapter: wiki_filters
+\chapter{RF Filters}\label{ch:wiki_filters}
+
+RF filters are two-port networks that pass signals in certain frequency bands while attenuating others. They are fundamental in every RF system for channel selection, harmonic suppression, and image rejection.
+
+				
+
+\section{Filter Types}
+
+				
+\begin{itemize}
+
+					\item \textbf{Low-pass (LPF)} — passes below cutoff fc; used for harmonic suppression, anti-aliasing
+
+					\item \textbf{High-pass (HPF)} — passes above fc; used to block DC or low-frequency interference
+
+					\item \textbf{Band-pass (BPF)} — passes a band centred on f₀; used for channel selection
+
+					\item \textbf{Band-stop / Notch} — rejects a specific band; used to suppress interferers
+
+				
+\end{itemize}
+
+				
+
+\section{Butterworth Response}
+
+				
+
+\rffig{wiki_filters_1.pdf}{n=3 low-pass filter responses: Butterworth (flat passband, purple) vs Chebyshev (steeper roll-off, orange).}
+
+				
+
+Maximally flat magnitude in the passband — no ripple. The magnitude response is:
+
+\rffig{wiki_filters_2.pdf}{Butterworth LP pole-zero plot. n=4 poles equally spaced on the left half of the unit circle in the s-plane.}
+
+				
+\[|H(j\omega)| = \dfrac{1}{\sqrt{1+(\omega/\omega_c)^{2n}}}\]
+
+				
+
+Roll-off: 20n dB/decade beyond $\omega_c$. Gentle transition band.
+
+				
+
+\section{Chebyshev Response}
+
+				
+
+Allows equiripple in the passband in exchange for a steeper transition band. For the same order, Chebyshev gives more attenuation in the stopband than Butterworth. The ripple (dB) is a design parameter.
+
+				
+
+\section{LC Ladder Synthesis}
+
+				
+
+\rffig{wiki_filters_3.pdf}{3rd-order LC ladder low-pass filter between source and load impedances.}
+
+				
+
+Prototype low-pass filter element values $g_k$ are tabulated for Butterworth and Chebyshev responses. These normalised values are frequency- and impedance-scaled to the target cutoff frequency and port impedance using:
+
+				
+\[L_k = \dfrac{g_k R_0}{\omega_c}\quad C_k = \dfrac{g_k}{R_0 \omega_c}\]

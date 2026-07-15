@@ -1,0 +1,113 @@
+% chapter: wiki_smith_chart_tutorial
+\chapter{The Smith Chart}\label{ch:wiki_smith_chart_tutorial}
+
+The Smith Chart is a polar plot of the reflection coefficient Γ with constant-resistance circles and constant-reactance arcs overlaid. Every point on the chart represents a unique normalised impedance z = Z/Z₀. Once you understand its structure, the chart makes impedance matching design immediate and visual.
+
+      
+
+\section{Chart Structure}
+
+      
+
+The chart is a circle of radius 1 (the |Γ| = 1 boundary, representing total reflection). The centre is the perfect match point (z = 1, Γ = 0). The right-most point is an open circuit (z = ∞). The left-most point is a short circuit (z = 0).
+
+\rffig{wiki_smith_chart_tutorial_1.pdf}{Smith Chart: constant-resistance circles (purple) and constant-reactance arcs (teal). Upper half = inductive; lower half = capacitive.}
+
+      
+\begin{itemize}
+
+        \item \textbf{Constant-resistance circles} (drawn in purple on the RF Toolbox chart): Circles tangent to the right side. The r = 1 circle passes through the centre and represents all impedances with real part equal to Z₀.
+
+        \item \textbf{Constant-reactance arcs} (drawn in teal): Arcs emanating from the right-most point. Upper half = inductive (positive X), lower half = capacitive (negative X). The real axis (X = 0) represents purely resistive impedances.
+
+      
+\end{itemize}
+
+      
+
+\section{Reading an Impedance}
+
+      
+
+To plot Z = 75 + j50 Ω in a 50 Ω system, first normalise: z = (75 + j50)/50 = 1.5 + j1.0. Find the intersection of the r = 1.5 circle and the x = +1.0 arc. That point is in the upper half of the chart (inductive).
+
+      
+
+\section{Moving Along a Transmission Line}
+
+      
+
+Moving along a \emph{lossless} transmission line toward the generator rotates the impedance point \emph{clockwise} around the centre of the chart. The radius stays constant (|Γ| is constant because the line has no loss). One full revolution = λ/2 of travel. Moving λ/4 toward the generator rotates 180°.
+
+\rffig{wiki_smith_chart_tutorial_2.pdf}{Transmission line moves impedance clockwise on a constant-|Γ| circle. A λ/4 section rotates 180°.}
+
+      
+\[\Gamma_{in} = \Gamma_L \cdot e^{-j2\beta\ell}\]
+
+      
+
+This is the basis of the quarter-wave transformer: rotate 180°, and impedance Z\_L becomes Z₀²/Z\_L at the input.
+
+      
+
+\section{Reading |Γ|, Return Loss, and VSWR}
+
+      
+
+The radius of the point from the chart centre equals |Γ|. The dashed constant-|Γ| circle that passes through the operating point is the "VSWR circle" — the VSWR equals (1 + |Γ|)/(1 − |Γ|). Return loss = −20 log₁₀|Γ| dB. A point right at the centre has |Γ| = 0, VSWR = 1, RL = ∞ dB (perfect match).
+
+      
+
+\section{Admittance: The Rotated Chart}
+
+      
+
+The admittance Smith Chart is identical to the impedance chart but rotated 180° around the centre. On a combined Z/Y chart, the admittance of any impedance point is found by rotating that point 180° through the centre. This is useful for adding shunt (parallel) elements — on the admittance chart, adding a shunt susceptance moves the point along a constant-conductance circle.
+
+      
+
+\section{Matching Network Design — Step by Step}
+
+      
+
+To match Z\_L = 25 − j30 Ω to 50 Ω using an L-network:
+
+      
+\begin{enumerate}
+
+        \item Normalise: z\_L = (25 − j30)/50 = 0.5 − j0.6. Plot this point.
+
+        \item Adding a series inductor moves the point clockwise along the constant r = 0.5 circle (toward more positive X). Add series L until you reach the r = 1 circle.
+
+        \item The new point is on r = 1 with some positive X. Now add a shunt capacitor: switch to the admittance chart (rotate 180°), move along constant g = 1 circle to the centre by adding susceptance. Read off the capacitor value.
+
+        \item Alternatively, use the RF Toolbox L-Network calculator to get exact values, then verify on the Smith Chart.
+
+      
+\end{enumerate}
+
+      
+
+\section{Stub Matching}
+
+      
+
+A shunt stub matching network uses a transmission line stub to add the right susceptance to cancel the load's reactive part, bringing the point to the real axis, then a series line section to rotate it to the centre. On the Smith Chart this is done graphically: move along the constant-|Γ| circle until you hit the g = 1 circle (for shunt matching), then add stub susceptance to reach the centre.
+
+      
+
+\section{Practical Tips}
+
+      
+\begin{itemize}
+
+        \item An impedance that sweeps a clockwise circle on the Smith Chart as frequency increases is dominated by transmission line behaviour.
+
+        \item A small anticlockwise hook in the sweep indicates a series resonance.
+
+        \item The upper half of the chart = inductive = store energy in magnetic field. Lower half = capacitive = store energy in electric field.
+
+        \item The outer rim (|Γ| = 1) represents lossless reactive terminations: shorts, opens, and purely reactive loads.
+
+      
+\end{itemize}

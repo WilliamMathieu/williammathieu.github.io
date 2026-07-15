@@ -1,0 +1,136 @@
+% chapter: wiki_pll
+\chapter{Phase-Locked Loops and Frequency Synthesis}\label{ch:wiki_pll}
+
+A phase-locked loop (PLL) is a feedback system that synchronises an oscillator to a reference signal in both frequency and phase. PLLs are ubiquitous in RF systems: they generate the local oscillator frequency in every radio receiver and transmitter, provide clock recovery in serial data links, and clean up noisy frequency sources.
+
+      
+
+\section{PLL Building Blocks}
+
+      
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}}
+\hline
+\textbf{Block} & \textbf{Function} & \textbf{Key parameter} \\
+\hline
+Phase detector (PD) / PFD & Compares phase of reference and divided VCO output. Generates error signal. & Gain K\_φ (A/rad or V/rad) \\
+Charge pump (CP) & Converts PFD pulses to current. Charges loop filter. & Current I\_CP (µA–mA) \\
+Loop filter (LF) & Integrates CP output. Sets loop bandwidth and stability. & Bandwidth f\_n, phase margin \\
+VCO & Voltage-controlled oscillator. Output frequency ∝ control voltage. & Gain K\_VCO (MHz/V) \\
+Divider ÷N & Divides VCO frequency by N to match reference. N sets output frequency. & Division ratio N \\
+\hline
+\end{longtable}}
+
+      
+
+\section{How It Works}
+
+      
+
+The PFD compares the phase of the reference (f\_ref) to the divided VCO output (f\_VCO/N). When they match, the loop is locked and f\_VCO = N × f\_ref. If the VCO drifts high, the PFD generates a correction signal that reduces the control voltage, pulling the frequency back. The loop bandwidth determines how fast this correction happens.
+
+\rffig{wiki_pll_1.pdf}{PLL block diagram: PFD compares f\_ref to f\_VCO/N; loop filter drives VCO to lock frequency and phase.}
+
+      
+
+\section{Open-Loop Transfer Function}
+
+      
+\[G(s) = \dfrac{K_\phi I_{CP}}{2\pi}\cdot F(s)\cdot\dfrac{K_{VCO}}{s}\cdot\dfrac{1}{N}\]
+
+      
+
+where F(s) is the loop filter transfer function. The loop bandwidth f\_n is approximately where |G(jω)| = 1. Phase margin should be 45–60° for stable, well-damped response.
+
+      
+
+\section{Lock Time and Bandwidth Tradeoff}
+
+      
+
+The loop bandwidth controls a fundamental tradeoff:
+
+      
+\begin{itemize}
+
+        \item \textbf{Wide bandwidth}: Fast lock time, good VCO noise suppression, poor reference spur rejection, more reference noise passes through.
+
+        \item \textbf{Narrow bandwidth}: Slow lock time, poor VCO noise suppression at close-in offsets, excellent reference spur rejection.
+
+      
+\end{itemize}
+
+      
+
+Typical loop bandwidths: 1–100 kHz for frequency synthesisers, 1–10 MHz for fast-hopping systems.
+
+      
+
+\section{Phase Noise in a PLL}
+
+      
+
+Inside the loop bandwidth, the PLL output tracks the reference and the output phase noise follows the reference noise amplified by 20·log₁₀(N). Outside the loop bandwidth, the output phase noise equals the free-running VCO phase noise. The total output phase noise is the worst of the two at each offset:
+
+\rffig{wiki_pll_2.pdf}{PLL output phase noise: inside loop BW = reference noise × N². Outside = free-running VCO noise. Total = worst of the two.}
+
+      
+\[\mathcal{L}_{out}(f_m) \approx \begin{cases}\mathcal{L}_{ref}(f_m) + 20\log_{10}N & f_m \ll f_n \\ \mathcal{L}_{VCO}(f_m) & f_m \gg f_n\end{cases}\]
+
+      
+
+\section{Integer-N vs Fractional-N}
+
+      
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Architecture} & \textbf{Channel spacing} & \textbf{Phase noise} & \textbf{Reference spurs} \\
+\hline
+Integer-N & = f\_ref & 20·log(N) above reference noise & Low \\
+Fractional-N (Σ-Δ) & \textless{} f\_ref (any) & Higher N → worse noise; Σ-Δ adds quantisation noise & Fractional spurs \\
+\hline
+\end{longtable}}
+
+      
+
+Integer-N synthesis requires f\_ref = channel spacing. For a 200 kHz GSM channel with a 200 kHz reference, the division ratio N can be 4000–9000 for 800–1800 MHz output — the 20·log₁₀(N) penalty is 72–79 dB above the reference noise. Fractional-N uses a Σ-Δ modulator to rapidly switch between integer values of N, achieving fractional average division ratios and allowing wider f\_ref for better phase noise.
+
+      
+
+\section{Reference Spurs}
+
+      
+
+Reference spurs are discrete spectral lines in the VCO output at offsets of ±f\_ref (and harmonics) from the carrier. They arise from imperfect charge pump matching — leakage current causes small periodic control voltage ripples at the reference rate. Typical specification: \textless{} −70 dBc. Reference spurs cause interference to adjacent channels.
+
+      
+
+\section{Practical PLL Design Steps}
+
+      
+\begin{enumerate}
+
+        \item Choose f\_ref = GCD of all required output frequencies (integer-N) or use fractional-N for fine frequency resolution.
+
+        \item Select VCO with adequate tuning range, low K\_VCO (for low sensitivity to supply noise), and target phase noise.
+
+        \item Choose loop bandwidth: 1/10 of f\_ref as a starting point to reject reference spurs.
+
+        \item Design a 3rd or 4th order loop filter (2 poles, 1–2 zeros) for 50° phase margin.
+
+        \item Simulate phase noise, lock time, and spur levels before fabricating.
+
+      
+\end{enumerate}

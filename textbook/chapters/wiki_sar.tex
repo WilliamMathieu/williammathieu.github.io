@@ -1,0 +1,70 @@
+% chapter: wiki_sar
+\chapter{SAR and RF Safety in MRI}\label{ch:wiki_sar}
+
+The interaction of RF electromagnetic fields with biological tissue at MRI frequencies deposits energy as heat. Safety standards limit this deposition to protect patients from tissue heating. SAR (Specific Absorption Rate) is the primary metric.
+
+				
+
+\section{Specific Absorption Rate (SAR)}
+
+				
+
+SAR is the RF power absorbed per unit mass of tissue:
+
+\rffig{wiki_sar_1.pdf}{Local SAR grows with B₁⁺ squared and with frequency squared. Managing SAR is the key challenge at ultra-high field (7T+).}
+
+				
+
+\noindent\hspace*{1.2em}\textit{$SAR = \dfrac{\sigma |E|^2}{2\rho}$   (W/kg)}
+
+				
+
+where $\sigma$ is tissue conductivity, $E$ the electric field amplitude, and $\rho$ tissue density. IEC and FDA limits for clinical MRI:
+
+				
+\begin{itemize}
+
+					\item Whole-body average: 2 W/kg (normal), 4 W/kg (first level)
+
+					\item Head: 3.2 W/kg; local (any 10 g): 10 W/kg
+
+				
+\end{itemize}
+
+				
+
+\section{B1+ Field}
+
+				
+
+\rffig{wiki_sar_2.pdf}{B1+ field maps at 1.5 T (uniform, left) and 7 T (inhomogeneous, right), illustrating how wavelength effects create SAR hotspots at high field.}
+
+				
+
+The rotating component of the RF magnetic field that drives spin excitation is B1⁺. At higher field strengths (≥3 T), wavelength effects cause inhomogeneous B1⁺ distribution in the body, leading to non-uniform flip angles. At 7 T (300 MHz), the wavelength in tissue (\textasciitilde{}12 cm) is comparable to body dimensions, causing significant B1⁺ non-uniformity and hotspots in SAR.
+
+				
+
+\section{Implant Safety}
+
+				
+
+Conductive implants (pacemaker leads, orthopaedic implants, surgical clips) can act as RF antennas, concentrating the induced electric field and causing local tissue heating far exceeding whole-body SAR limits. MRI-conditional implants are tested and labelled with specific conditions (field strength, coil type, SAR limits) under which they are safe.
+
+				
+
+\section{SAR Reduction Strategies}
+
+				
+\begin{itemize}
+
+					\item Reducing flip angle (lower SAR ∝ flip²)
+
+					\item Increasing TR to allow pulse duty cycle reduction
+
+					\item Parallel transmit (pTx) — using multiple transmit channels to shape B1⁺ and reduce local SAR hotspots
+
+					\item Lower field strength systems for implant patients
+
+				
+\end{itemize}

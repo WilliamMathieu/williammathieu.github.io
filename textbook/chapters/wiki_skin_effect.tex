@@ -1,0 +1,68 @@
+% chapter: wiki_skin_effect
+\chapter{Skin Effect}\label{ch:wiki_skin_effect}
+
+The skin effect is the tendency of alternating electric current to flow primarily near the surface of a conductor. At higher frequencies, the current density decreases exponentially with depth from the surface, concentrating in a thin layer called the skin depth.
+
+				
+
+\section{Skin Depth Formula}
+
+				
+\[\delta = \sqrt{\dfrac{2}{\omega\mu\sigma}} = \sqrt{\dfrac{1}{\pi f\mu\sigma}}\]
+
+				
+
+where $\omega = 2\pi f$ is angular frequency, $\mu$ is permeability, and $\sigma$ is conductivity. Current density falls to $1/e \approx 37\%$ of its surface value at depth $\delta$.
+
+\rffig{wiki_skin_effect_1.pdf}{Current density decays exponentially with depth. At depth = δ, J has fallen to 1/e ≈ 37\% of its surface value.}
+
+				
+
+\section{Values for Common Conductors at 100 MHz}
+
+				
+
+\rffig{wiki_skin_effect_2.pdf}{Current density J vs depth d. At one skin depth δ, J falls to 1/e ≈ 37\% of its surface value.}
+
+				
+\begin{itemize}
+
+					\item Copper ($\sigma = 5.8\times10^7$ S/m): $\delta \approx 6.6$ µm
+
+					\item Aluminium ($\sigma = 3.8\times10^7$ S/m): $\delta \approx 8.2$ µm
+
+					\item Silver ($\sigma = 6.3\times10^7$ S/m): $\delta \approx 6.3$ µm
+
+				
+\end{itemize}
+
+				
+
+\section{Impact on RF Resistance}
+
+				
+
+Because current only flows in a thin annulus near the surface, the effective cross-sectional area of the conductor is reduced, increasing resistance compared to DC. The AC resistance of a round wire of radius $r \gg \delta$ is approximately:
+
+				
+\[R_{AC} \approx R_{DC}\cdot\dfrac{r}{2\delta}\]
+
+				
+
+For a 1 mm diameter copper wire at 100 MHz, $R_{AC}/R_{DC} \approx 38$. This is why multi-strand (Litz) wire is used in high-Q inductors at lower RF frequencies — many thin strands, each smaller than the skin depth, provide more effective conductor area.
+
+				
+
+\section{Design Implications}
+
+				
+\begin{itemize}
+
+					\item Conductor thickness in PCBs should be at least 3–5 skin depths to minimise resistive loss.
+
+					\item Silver plating adds only marginal benefit over copper above \textasciitilde{}100 MHz (skin depth \textasciitilde{}6 µm) as long as the copper is thicker than a few skin depths.
+
+					\item In MRI coils at 128 MHz (3 T), copper tubing (thick wall) is preferred over solid wire for high-Q resonators.
+
+				
+\end{itemize}

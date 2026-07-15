@@ -1,0 +1,104 @@
+% chapter: wiki_amp_stability
+\chapter{Amplifier Stability}\label{ch:wiki_amp_stability}
+
+An RF amplifier can oscillate if the reflection coefficient seen looking into either port exceeds unity magnitude for some source or load impedance. Stability analysis identifies whether this can happen using the device's S-parameters, without having to check every possible termination.
+
+				
+
+\section{S-Parameter Determinant (Δ)}
+
+				
+
+The first quantity to compute is the two-port determinant:
+
+				
+\[\Delta = S_{11}S_{22} - S_{12}S_{21}\]
+
+				
+
+This combines all four S-parameters into a single complex number whose magnitude appears in both the K-factor and µ-factor criteria.
+
+				
+
+\section{Rollett Stability Factor K}
+
+				
+
+The Rollett K-factor was the first widely adopted stability criterion (1962):
+
+				
+\[K = \dfrac{1 - |S_{11}|^2 - |S_{22}|^2 + |\Delta|^2}{2\,|S_{12}|\,|S_{21}|}\]
+
+				
+
+The device is \textbf{unconditionally stable} (stable for any passive source and load) when both:
+
+				
+\[K > 1 \quad \text{AND} \quad |\Delta| < 1\]
+
+				
+
+Both conditions must hold simultaneously. K \textgreater{} 1 alone is necessary but not sufficient. When K \textless{} 1 the device is only conditionally stable — it may oscillate with certain terminations.
+
+				
+
+\section{µ-Factor (Edwards-Sinsky)}
+
+				
+
+The µ-factor (1992) provides a single-parameter unconditional stability test that is both necessary and sufficient:
+
+				
+\[\mu = \dfrac{1 - |S_{11}|^2}{|S_{22} - \Delta\,S_{11}^*| + |S_{12}\,S_{21}|}\]
+
+				
+
+The device is unconditionally stable if and only if µ \textgreater{} 1. A larger µ indicates a greater stability margin. The output-port version µ' uses S22 in the numerator and S11 in the denominator symmetrically.
+
+				
+
+\rffig{wiki_amp_stability_1.pdf}{Two-port device described by S-parameters. Stability is assessed from S11, S12, S21, S22 alone.}
+
+				
+
+\section{Maximum Available Gain (MAG)}
+
+				
+
+When the device is unconditionally stable (K \textgreater{} 1, |Δ| \textless{} 1), there exists an optimal simultaneous conjugate match at both ports. The resulting maximum available gain is:
+
+				
+\[G_{\rm MAG} = \left|\dfrac{S_{21}}{S_{12}}\right|\left(K - \sqrt{K^2-1}\right)\]
+
+				
+
+\section{Maximum Stable Gain (MSG)}
+
+				
+
+When K \textless{} 1 (conditionally stable), MAG is undefined. The maximum stable gain is the theoretical upper bound achievable by adding loss to bring K = 1:
+
+				
+\[G_{\rm MSG} = \left|\dfrac{S_{21}}{S_{12}}\right|\]
+
+				
+
+MSG is always higher than the achievable gain in practice — it is an optimistic upper bound used to compare devices before choosing stabilisation resistors.
+
+				
+
+\section{Practical Notes}
+
+				
+\begin{itemize}
+
+					\item S-parameters are frequency-dependent — check stability across the entire frequency range, not just the operating band
+
+					\item Low-noise transistors often have K \textless{} 1 at low frequencies; add series or shunt resistors to stabilise out-of-band
+
+					\item Stability circles on the Smith Chart show the boundary of terminations that cause |Γin| = 1 or |Γout| = 1
+
+					\item A device with µ = 1.5 at a given frequency has 50\% more stability margin than one with µ = 1.01
+
+				
+\end{itemize}

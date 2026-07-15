@@ -1,0 +1,128 @@
+% chapter: wiki_phase_noise
+\chapter{Phase Noise and Jitter}\label{ch:wiki_phase_noise}
+
+Phase noise and jitter are two equivalent descriptions of timing uncertainty in an oscillator or clock signal. Phase noise describes instability in the frequency domain — the spectral purity of an oscillator. Jitter describes it in the time domain — the variation of edge transitions from their ideal positions. They are related by an integral transformation.
+
+      
+
+\section{Phase Noise Definition}
+
+      
+
+The single-sideband (SSB) phase noise L(f) is defined as the ratio of power in a 1 Hz bandwidth at offset f from the carrier to the total carrier power:
+
+\rffig{wiki_phase_noise_1.pdf}{Phase noise L(f) showing three regions: 1/f³ (flicker FM), 1/f² (white FM / Leeson), and flat (white phase noise floor).}
+
+      
+\[\mathcal{L}(f) = \dfrac{P_{noise,SSB}(f_0+f,\,1\text{ Hz BW})}{P_{carrier}}\quad[\text{dBc/Hz}]\]
+
+      
+
+Phase noise is plotted on a log-log scale. Typical regions:
+
+      
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}}
+\hline
+\textbf{Offset region} & \textbf{Slope} & \textbf{Dominant mechanism} \\
+\hline
+Very close-in (\textless{} 10 Hz) & 1/f³ (−30 dB/decade) & Flicker FM noise \\
+Close-in (10 Hz – 10 kHz) & 1/f² (−20 dB/decade) & White FM, Leeson's model \\
+Far-from-carrier & Flat (0 dB/decade) & White phase noise (thermal) \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Leeson's Model}
+
+      
+
+For a feedback oscillator with resonator Q factor and noise figure F:
+
+      
+\[\mathcal{L}(f_m) = 10\log_{10}\!\left[\dfrac{2FkT}{P_s}\!\left(\dfrac{f_0}{2Q_L f_m}\right)^2\right]\]
+
+      
+
+where $f_m$ is the offset frequency, $f_0$ is the carrier frequency, $Q_L$ is the loaded Q, $P_s$ is the signal power, F is the amplifier noise figure (linear), k = 1.38×10⁻²³ J/K (Boltzmann), and T is the temperature in Kelvin. Higher Q and higher signal power both reduce phase noise.
+
+      
+
+\section{Phase Noise to Jitter Conversion}
+
+      
+
+RMS jitter integrates the phase noise over a bandwidth from $f_1$ to $f_2$:
+
+\rffig{wiki_phase_noise_2.pdf}{RMS jitter equals the square root of twice the integrated phase noise (linear) over the specified bandwidth.}
+
+      
+\[\sigma_t = \dfrac{1}{2\pi f_0}\sqrt{2\int_{f_1}^{f_2}\mathcal{L}(f)\,df}\quad[\text{s RMS}]\]
+
+      
+
+where L(f) is in linear units (not dBc/Hz). The factor 2 accounts for double-sideband power. The integration limits define what jitter you care about — typically the Nyquist band for a data converter application, or the loop bandwidth for a PLL.
+
+      
+
+\section{Typical Values}
+
+      
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Oscillator type} & \textbf{Phase noise @ 1 kHz} & \textbf{Phase noise @ 1 MHz} & \textbf{RMS jitter} \\
+\hline
+MEMS oscillator & −120 dBc/Hz & −160 dBc/Hz & 200–500 fs \\
+TCXO (100 MHz) & −130 dBc/Hz & −165 dBc/Hz & 50–200 fs \\
+OCXO (100 MHz) & −150 dBc/Hz & −170 dBc/Hz & 10–50 fs \\
+LC VCO (2.4 GHz) & −85 dBc/Hz & −135 dBc/Hz & 1–5 ps \\
+Ring oscillator (1 GHz) & −50 dBc/Hz & −100 dBc/Hz & 10–50 ps \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Jitter Types}
+
+      
+\begin{itemize}
+
+        \item \textbf{Period jitter}: Variation of consecutive clock periods. Relevant for digital setup/hold timing.
+
+        \item \textbf{Cycle-to-cycle jitter}: Difference between adjacent periods. Related to close-in phase noise.
+
+        \item \textbf{Long-term jitter (accumulated)}: Deviation over many cycles. Related to far-from-carrier noise.
+
+        \item \textbf{RMS jitter}: Standard deviation σ. Peak-to-peak jitter ≈ 6σ to 7σ at 10⁻¹² BER.
+
+      
+\end{itemize}
+
+      
+
+\section{Practical Impact}
+
+      
+
+For an ADC sampling at frequency $f_s$, phase noise causes an SNR limit called the \emph{aperture jitter limit}:
+
+      
+\[\text{SNR}_{jitter} = -20\log_{10}(2\pi f_{in}\,\sigma_t)\]
+
+      
+
+At f\_in = 1 GHz with σ\_t = 100 fs, the jitter-limited SNR is only 24 dB — equivalent to a 4-bit ADC. This is why high-frequency ADC clock sources must have sub-100 fs jitter.

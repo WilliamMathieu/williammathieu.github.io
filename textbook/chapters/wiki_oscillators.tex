@@ -1,0 +1,49 @@
+% chapter: wiki_oscillators
+\chapter{Oscillators}\label{ch:wiki_oscillators}
+
+An oscillator generates a periodic signal without an external input. In RF systems, oscillators provide the local oscillator (LO) signal for frequency conversion and the carrier signal for transmitters. Phase noise (short-term frequency instability) is the key quality metric.
+
+				
+
+\section{Oscillation Conditions}
+
+				
+
+The Barkhausen criterion: a feedback amplifier oscillates when loop gain $|A\beta| = 1$ and loop phase shift is 0° (or 360°). Common topologies: Colpitts (capacitive voltage divider), Hartley (inductive divider), Clapp, Pierce (crystal oscillators).
+
+\rffig{wiki_oscillators_1.pdf}{Leeson's model: phase noise L(f\_m) for oscillators with different Q factors. Higher Q = lower noise at all offsets.}
+
+				
+
+\section{Phase Noise}
+
+				
+
+Phase noise $\mathcal{L}(f_m)$ (dBc/Hz) describes the spectral purity of an oscillator — the noise power in a 1 Hz bandwidth at offset $f_m$ from the carrier, relative to the carrier power. The Leeson model:
+
+				
+\[\mathcal{L}(f_m) = 10\log\left[\dfrac{2FkT}{P_s}\left(1+\dfrac{f_0^2}{4Q_L^2 f_m^2}\right)\right]\]
+
+				
+
+Phase noise decreases with increasing loaded Q ($Q_L$) and oscillator power ($P_s$).
+
+				
+
+\section{Voltage-Controlled Oscillator (VCO)}
+
+				
+
+A VCO is an oscillator whose frequency is tuned by a control voltage, via a varactor diode (voltage-variable capacitor). Tuning sensitivity $K_v$ (MHz/V) characterises the VCO. Higher $K_v$ increases frequency range but also increases phase noise sensitivity to supply noise.
+
+				
+
+\section{Phase-Locked Loop (PLL)}
+
+				
+
+\rffig{wiki_oscillators_2.pdf}{PLL block diagram: VCO locked to reference crystal via phase-frequency detector and loop filter.}
+
+				
+
+A PLL phase-locks a VCO to a stable reference oscillator (usually a crystal), allowing the VCO's tunable frequency range with the reference's spectral purity. Components: phase-frequency detector (PFD), charge pump, loop filter, VCO, frequency divider (÷N). Within the loop bandwidth, VCO phase noise is suppressed to near the reference noise floor.

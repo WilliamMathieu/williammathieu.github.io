@@ -1,0 +1,179 @@
+% chapter: wiki_db_dbm
+\chapter{Decibels, dBm and RF Power Units}\label{ch:wiki_db_dbm}
+
+The decibel (dB) is the most important unit in RF engineering. It turns multiplication into addition, making cascade analysis practical. Once you're fluent in dB arithmetic, working with gain, loss, and power levels becomes fast and intuitive.
+
+      
+
+\section{Why Logarithmic Scales?}
+
+      
+
+A receiver handles signals ranging from 10⁻¹⁵ W (noise floor) to 10⁻³ W (nearby transmitter) — a range of 10¹². Writing and plotting these on a linear scale is impractical. Logarithms compress that 10¹² ratio to a 120 dB range that fits on a graph. More importantly, a cascade of gain and loss stages multiplies powers together — in dB you just add.
+
+\rffig{wiki_db_dbm_1.pdf}{The dB scale compresses a million-fold power range into readable 10 dB steps.}
+
+      
+
+\section{The Decibel (dB)}
+
+      
+
+The decibel expresses a \emph{ratio} between two power values:
+
+      
+\[\text{ratio (dB)} = 10\log_{10}\!\left(\dfrac{P_2}{P_1}\right)\]
+
+      
+
+For voltage or current ratios (into the same impedance), the factor is 20 instead of 10 because power is proportional to voltage squared:
+
+      
+\[\text{ratio (dB)} = 20\log_{10}\!\left(\dfrac{V_2}{V_1}\right)\]
+
+      
+
+Key values to memorise:
+
+      
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Power ratio} & \textbf{Voltage ratio} & \textbf{dB} & \textbf{Memory aid} \\
+\hline
+10× & 3.16× & +10 dB & One order of magnitude \\
+2× & 1.41× & +3 dB & Double the power \\
+1.26× & 1.12× & +1 dB & Smallest audible difference \\
+1× & 1× & 0 dB & No change \\
+0.5× & 0.71× & −3 dB & Half the power \\
+0.1× & 0.316× & −10 dB & One tenth \\
+0.001× & 0.0316× & −30 dB & One thousandth \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Absolute Power: dBm and dBW}
+
+      
+
+dB alone is a ratio — it needs a reference to become an absolute level. \textbf{dBm} uses 1 milliwatt as the reference:
+
+      
+\[P_{\text{dBm}} = 10\log_{10}\!\left(\dfrac{P_{\text{watts}}}{1\text{ mW}}\right)\]
+
+      
+
+\textbf{dBW} uses 1 watt. The conversion: P(dBm) = P(dBW) + 30.
+
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Power} & \textbf{dBm} & \textbf{dBW} & \textbf{Context} \\
+\hline
+1 kW & +60 dBm & +30 dBW & AM broadcast transmitter \\
+10 W & +40 dBm & +10 dBW & Handheld radio TX \\
+1 W & +30 dBm & 0 dBW & Bluetooth TX max \\
+100 mW & +20 dBm & −10 dBW & Wi-Fi typical \\
+1 mW & 0 dBm & −30 dBW & Reference level \\
+1 µW & −30 dBm & −60 dBW & Strong receiver input \\
+1 nW & −60 dBm & −90 dBW & Typical receiver input \\
+−100 dBm & −100 dBm & −130 dBW & Near noise floor \\
+10⁻¹⁵ W = 1 fW & −120 dBm & −150 dBW & Thermal noise floor, 1 MHz BW, room temperature \\
+\hline
+\end{longtable}}
+
+      
+
+\section{dB Arithmetic in Cascades}
+
+      
+
+This is where dB pays off. A system with a 20 dB LNA, a 7 dB cable loss, a 10 dB mixer loss, and 30 dB of IF gain, driven by a −90 dBm signal:
+
+\rffig{wiki_db_dbm_2.pdf}{In dB arithmetic, cascade gain/loss is simple addition. No need to multiply or divide linear values.}
+
+      
+\[P_{out} = -90 + 20 - 7 - 10 + 30 = -57\text{ dBm}\]
+
+      
+
+Compare doing this in linear: 10⁻¹² × 100 × 0.2 × 0.1 × 1000 = 2×10⁻¹² W. Much harder to get right mentally.
+
+      
+
+\section{Other dB Variants}
+
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}}
+\hline
+\textbf{Unit} & \textbf{Reference} & \textbf{Use} \\
+\hline
+dBm & 1 mW & Absolute RF power, transmitters and receivers \\
+dBW & 1 W & Satellite EIRP specifications \\
+dBc & Carrier power & Relative: spurious, harmonics, phase noise \\
+dBi & Isotropic antenna & Antenna gain (absolute) \\
+dBd & Half-wave dipole & Antenna gain (relative to dipole). 0 dBd = 2.15 dBi \\
+dBµV & 1 µV & EMC and receiver sensitivity specifications in Europe \\
+dBµV/m & 1 µV/m & Field strength in EMC measurements \\
+dBFS & Full scale & Digital audio and ADC levels (always ≤ 0 dBFS) \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Noise Floor and kTB}
+
+      
+
+Thermal noise power available from a resistor at temperature T in bandwidth B:
+
+      
+\[P_{noise} = kTB \approx -174\text{ dBm/Hz at } 290\text{ K}\]
+
+      
+
+In a bandwidth B (Hz): $P_{noise} = -174 + 10\log_{10}(B)$ dBm. In 1 MHz bandwidth: −174 + 60 = −114 dBm. In 20 MHz (Wi-Fi): −174 + 73 = −101 dBm. Add the receiver noise figure to get the actual noise floor.
+
+      
+
+\section{Converting Back to Linear}
+
+      
+\[P_{\text{watts}} = 10^{P_{dBm}/10} \times 10^{-3}\text{ W}\]
+
+      
+
+Shortcut: 0 dBm = 1 mW, every +10 dB multiplies by 10, every +3 dB doubles.

@@ -1,0 +1,50 @@
+% chapter: wiki_coil_types
+\chapter{MRI Coil Types}\label{ch:wiki_coil_types}
+
+RF coils are the antennas of the MRI scanner. The receive coil must be placed as close as possible to the anatomy of interest to maximise the filling factor (the fraction of coil inductance filled by the sample) and thus the SNR.
+
+				
+
+\section{Volume Coils}
+
+				
+
+Surround the anatomy completely, providing a uniform B1 field. The birdcage coil is the most common volume coil — a cylindrical structure with rungs and end rings, driven in quadrature to produce circular polarisation (improving SNR by √2). Used for head, knee, and wrist imaging.
+
+\rffig{wiki_coil_types_1.pdf}{MRI coil type comparison. Each represents a different tradeoff between SNR, coverage, and homogeneity.}
+
+				
+
+\section{Surface Coils}
+
+				
+
+\rffig{wiki_coil_types_2.pdf}{Left: surface coil — high local SNR, non-uniform. Right: birdcage volume coil — uniform B₁ throughout volume.}
+
+				
+
+A single loop placed directly on the skin surface. Excellent SNR near the coil but very non-uniform sensitivity — SNR drops rapidly with depth. The depth of sensitivity is roughly equal to the coil radius. Ideal for superficial structures: spine, shoulder, temporomandibular joint.
+
+				
+
+\section{Phased Array Coils}
+
+				
+
+Multiple receive elements arranged around the anatomy, each with its own preamplifier and receive channel. Combines the high local SNR of surface coils with wider coverage. Also enables parallel imaging (SENSE, GRAPPA) where k-space undersampling is corrected using the spatial sensitivity profiles of the individual elements, reducing scan time.
+
+				
+
+\section{Birdcage Coil}
+
+				
+
+A cylindrical resonator with multiple rungs connecting two end rings. Driven in two quadrature ports (90° phase offset), it produces a highly uniform rotating B1⁺ field ideal for transmit. Available in low-pass, high-pass, and band-pass configurations. The high-pass birdcage is preferred at high field (\textgreater{}3 T) as its capacitors are on the end rings rather than the rungs.
+
+				
+
+\section{Transceiver vs Separate Tx/Rx}
+
+				
+
+Some coils both transmit and receive (transceiver or T/R coil). Others use a separate body coil for transmit and a surface/array coil for receive. The receive-only configuration allows the receive coil to be optimised purely for sensitivity while the transmit coil provides uniform excitation.

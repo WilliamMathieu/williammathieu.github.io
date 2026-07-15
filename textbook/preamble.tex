@@ -1,0 +1,136 @@
+% ============================================================
+%  RF Toolbox Textbook — shared preamble
+%  Compiles with pdflatex (utf8). Figures are PDFs from rsvg-convert.
+% ============================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec}
+\usepackage{sectsty}
+\usepackage{newunicodechar}
+\usepackage{textcomp}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=true,linkcolor=rfpurple,urlcolor=rfaccent,citecolor=rfpurple,
+  pdftitle={RF and Microwave Engineering — An Interactive Textbook},
+  pdfauthor={RF Toolbox (rftoolbox.ca)}}
+
+% ---- theme colours (match the site) ----
+\definecolor{rfpurple}{HTML}{5533AA}
+\definecolor{rfaccent}{HTML}{AA77FF}
+\definecolor{rffill}{HTML}{F0EEFF}
+\definecolor{rffill2}{HTML}{F8F6FF}
+\definecolor{rfamber}{HTML}{CC8800}
+\definecolor{rfamberfill}{HTML}{FFFBEE}
+
+% ---- part / chapter / section styling ----
+\allsectionsfont{\sffamily}
+\chapterfont{\sffamily\color{rfpurple}}
+\titleformat{\section}{\sffamily\large\bfseries\color{rfpurple}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\sffamily\bfseries\color{rfpurple!85}}{\thesubsection}{0.6em}{}
+
+% ============================================================
+%  Unicode -> LaTeX mappings (covers every non-ASCII char in the corpus)
+% ============================================================
+\newunicodechar{—}{\textemdash}
+\newunicodechar{–}{\textendash}
+\newunicodechar{·}{\ensuremath{\cdot}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{÷}{\ensuremath{\div}}
+\newunicodechar{±}{\ensuremath{\pm}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≪}{\ensuremath{\ll}}
+\newunicodechar{≠}{\ensuremath{\neq}}
+\newunicodechar{∝}{\ensuremath{\propto}}
+\newunicodechar{∞}{\ensuremath{\infty}}
+\newunicodechar{√}{\ensuremath{\surd}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{∑}{\ensuremath{\textstyle\sum}}
+\newunicodechar{°}{\ensuremath{{}^{\circ}}}
+\newunicodechar{µ}{\ensuremath{\mu}}
+\newunicodechar{ℓ}{\ensuremath{\ell}}
+\newunicodechar{è}{\`e}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{γ}{\ensuremath{\gamma}}
+\newunicodechar{δ}{\ensuremath{\delta}}
+\newunicodechar{ε}{\ensuremath{\varepsilon}}
+\newunicodechar{η}{\ensuremath{\eta}}
+\newunicodechar{θ}{\ensuremath{\theta}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\newunicodechar{μ}{\ensuremath{\mu}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{τ}{\ensuremath{\tau}}
+\newunicodechar{φ}{\ensuremath{\varphi}}
+\newunicodechar{χ}{\ensuremath{\chi}}
+\newunicodechar{ω}{\ensuremath{\omega}}
+\newunicodechar{Γ}{\ensuremath{\Gamma}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{Π}{\ensuremath{\Pi}}
+\newunicodechar{Σ}{\ensuremath{\Sigma}}
+\newunicodechar{Ω}{\ensuremath{\Omega}}
+\newunicodechar{¹}{\textsuperscript{1}}
+\newunicodechar{²}{\textsuperscript{2}}
+\newunicodechar{³}{\textsuperscript{3}}
+\newunicodechar{⁴}{\textsuperscript{4}}
+\newunicodechar{⁵}{\textsuperscript{5}}
+\newunicodechar{⁺}{\textsuperscript{+}}
+\newunicodechar{⁻}{\textsuperscript{$-$}}
+\newunicodechar{₀}{\textsubscript{0}}
+\newunicodechar{₁}{\textsubscript{1}}
+\newunicodechar{₂}{\textsubscript{2}}
+\newunicodechar{₃}{\textsubscript{3}}
+\newunicodechar{₄}{\textsubscript{4}}
+\newunicodechar{₅}{\textsubscript{5}}
+\newunicodechar{₊}{\textsubscript{+}}
+\newunicodechar{₋}{\textsubscript{$-$}}
+\newunicodechar{ₚ}{\textsubscript{p}}
+\newunicodechar{ᵣ}{\textsubscript{r}}
+
+% ============================================================
+%  Pedagogical environments
+% ============================================================
+\newtcolorbox{objectives}{colback=rffill,colframe=rfaccent,boxrule=0pt,
+  leftrule=3pt,arc=2pt,left=10pt,right=10pt,top=6pt,bottom=6pt,
+  title={\sffamily\bfseries\footnotesize\MakeUppercase{Learning Objectives}},
+  coltitle=rfpurple,fonttitle=\bfseries}
+
+\newtcolorbox{keytakeaways}{colback=rfamberfill,colframe=rfamber,boxrule=0pt,
+  leftrule=3pt,arc=2pt,left=10pt,right=10pt,top=6pt,bottom=6pt,
+  title={\sffamily\bfseries\footnotesize\MakeUppercase{Key Takeaways}},
+  coltitle=rfamber!80!black,fonttitle=\bfseries}
+
+\newtcolorbox{workedexample}[1][Worked Example]{colback=white,colframe=rfpurple!55,
+  boxrule=0.6pt,arc=2pt,left=10pt,right=10pt,top=6pt,bottom=6pt,
+  title={\sffamily\bfseries\footnotesize\MakeUppercase{#1}},coltitle=white,
+  colbacktitle=rfpurple,fonttitle=\bfseries}
+
+\newtcolorbox{conceptcheck}{colback=rffill2,colframe=rfaccent,boxrule=0.6pt,arc=2pt,
+  left=10pt,right=10pt,top=6pt,bottom=6pt,
+  title={\sffamily\bfseries\footnotesize\MakeUppercase{Concept Check}},
+  coltitle=rfpurple,fonttitle=\bfseries}
+
+\newenvironment{exercises}{\subsection*{Exercises}\begin{enumerate}[leftmargin=1.6em,itemsep=4pt]}{\end{enumerate}}
+\newtcolorbox{answer}{colback=rffill2,colframe=rfaccent,boxrule=0pt,leftrule=2.5pt,
+  arc=1pt,left=8pt,right=8pt,top=3pt,bottom=3pt,before skip=3pt,after skip=6pt,
+  fontupper=\small}
+
+% figure helper: keep figures within the text block, cap height
+\newcommand{\rffig}[2]{%
+  \begin{figure}[htbp]\centering
+  \includegraphics[max width=\linewidth,max totalheight=0.42\textheight]{#1}%
+  \ifx\relax#2\relax\else\caption{#2}\fi
+  \end{figure}}

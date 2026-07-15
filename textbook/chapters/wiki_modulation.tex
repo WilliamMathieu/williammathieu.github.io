@@ -1,0 +1,50 @@
+% chapter: wiki_modulation
+\chapter{Modulation Schemes}\label{ch:wiki_modulation}
+
+Modulation encodes information onto a carrier wave by varying its amplitude, frequency, or phase. The choice of modulation scheme involves tradeoffs between spectral efficiency (bits/Hz), power efficiency (Eb/N0 required), and robustness to noise and interference.
+
+				
+
+\section{Amplitude Modulation (AM)}
+
+				
+
+The carrier amplitude varies with the message signal. Simple to demodulate but spectrally inefficient and susceptible to amplitude noise. Double-sideband suppressed carrier (DSB-SC) removes the carrier for power efficiency; single-sideband (SSB) halves the bandwidth.
+
+\rffig{wiki_modulation_1.pdf}{Constellation diagrams. More dots per unit area = higher spectral efficiency but requires better SNR.}
+
+				
+
+\section{Frequency Modulation (FM)}
+
+				
+
+The carrier frequency varies with the message. Provides noise immunity above the FM threshold but requires wider bandwidth than AM. Used in broadcast radio (±75 kHz deviation) and VHF voice communications.
+
+				
+
+\section{Phase-Shift Keying (PSK)}
+
+				
+
+\rffig{wiki_modulation_2.pdf}{QPSK (4 symbols, 2 bits/sym) and 16-QAM (16 symbols, 4 bits/sym) constellation diagrams.}
+
+				
+
+Digital data is encoded as discrete phase shifts. BPSK (2 phases, 1 bit/symbol) is robust; QPSK (4 phases, 2 bits/symbol) doubles spectral efficiency. Higher orders (8-PSK, 16-PSK) pack more bits per symbol but require higher SNR.
+
+				
+
+\section{Quadrature Amplitude Modulation (QAM)}
+
+				
+
+Combines amplitude and phase modulation. 16-QAM carries 4 bits/symbol; 64-QAM carries 6 bits/symbol; 256-QAM carries 8 bits/symbol. Used extensively in LTE, 5G, WiFi (802.11ax uses 1024-QAM), and cable TV. Higher QAM orders require much higher SNR and are sensitive to phase noise and nonlinearity.
+
+				
+
+\section{OFDM}
+
+				
+
+Orthogonal Frequency Division Multiplexing splits the channel into many narrow subcarriers, each modulated with QAM. The cyclic prefix guards against multipath inter-symbol interference. OFDM is the basis of WiFi (802.11a/g/n/ac/ax), LTE, 5G NR, and digital broadcast (DVB-T, DAB).

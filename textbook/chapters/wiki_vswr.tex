@@ -1,0 +1,107 @@
+% chapter: wiki_vswr
+\chapter{VSWR, Return Loss and Reflection Coefficient}\label{ch:wiki_vswr}
+
+VSWR, return loss, reflection coefficient, and mismatch loss are four equivalent ways to describe the same physical phenomenon: how well two impedances are matched. They are all simple algebraic transformations of each other. Understanding all four is essential for RF work because different instruments and standards use different conventions.
+
+      
+
+\section{Reflection Coefficient Γ}
+
+      
+
+When a travelling wave encounters a discontinuity — a change in impedance — some energy is reflected. The complex voltage reflection coefficient at the load is:
+
+      
+\[\Gamma = \dfrac{Z_L - Z_0}{Z_L + Z_0}\]
+
+      
+
+where $Z_0$ is the reference (usually 50 Ω) and $Z_L$ is the load impedance. |Γ| ranges from 0 (perfect match) to 1 (total reflection). The angle of Γ gives the phase of the reflection.
+
+      
+
+\section{Return Loss (RL)}
+
+      
+
+Return loss is the magnitude of the reflection expressed in dB, always as a positive number for a passive load:
+
+\rffig{wiki_vswr_1.pdf}{The match quality spectrum from perfect (green) to total reflection (red).}
+
+      
+\[RL = -20\log_{10}|\Gamma|\text{ dB}\]
+
+      
+
+Higher return loss means a better match. Typical design targets:
+
+      
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}}
+\hline
+\textbf{Return Loss} & \textbf{|Γ|} & \textbf{VSWR} & \textbf{Mismatch Loss} & \textbf{Context} \\
+\hline
+∞ dB & 0 & 1.00:1 & 0 dB & Perfect match (theoretical) \\
+20 dB & 0.100 & 1.22:1 & 0.04 dB & Good — typical antenna target \\
+14 dB & 0.200 & 1.50:1 & 0.18 dB & Acceptable for many systems \\
+10 dB & 0.316 & 1.93:1 & 0.46 dB & Minimum acceptable for most RF \\
+6 dB & 0.500 & 3.00:1 & 1.25 dB & Poor — significant power loss \\
+0 dB & 1.000 & ∞ & ∞ dB & Total reflection (open or short) \\
+\hline
+\end{longtable}}
+
+      
+
+\section{VSWR — Voltage Standing Wave Ratio}
+
+      
+
+When forward and reflected waves coexist on a transmission line, they superimpose to create a standing wave pattern. The ratio of the maximum to minimum voltage amplitude along the line is the VSWR:
+
+\rffig{wiki_vswr_2.pdf}{Voltage amplitude along a mismatched line. VSWR = ratio of maximum to minimum voltage.}
+
+      
+\[\text{VSWR} = \dfrac{1+|\Gamma|}{1-|\Gamma|}\]
+
+      
+
+A VSWR of 1 means no standing waves (perfect match). VSWR is measured with a slotted line or a VNA. It is always ≥ 1.
+
+      
+
+\section{Mismatch Loss}
+
+      
+
+Even without any dissipative loss, a mismatch causes a reduction in delivered power because some fraction of the incident power is reflected and not absorbed by the load:
+
+      
+\[ML = -10\log_{10}(1-|\Gamma|^2)\text{ dB}\]
+
+      
+
+This is also called the \emph{transmission coefficient} $T = 1 - |\Gamma|^2$. At RL = 10 dB, mismatch loss is only 0.46 dB — often acceptable. But at RL = 6 dB (|Γ| = 0.5), 25\% of the power is reflected and mismatch loss reaches 1.25 dB.
+
+      
+
+\section{The S₁₁ Connection}
+
+      
+
+On a VNA, S₁₁ is the complex reflection coefficient Γ measured at port 1. Its magnitude in dB equals the negative of the return loss: |S₁₁|\_dB = −RL. A Smith Chart plots Γ directly in the complex plane.
+
+      
+
+\section{Physical Interpretation}
+
+      
+
+The standing wave on a mismatched line creates voltage maxima and minima that can exceed the incident amplitude. At VSWR = 2 the peak voltage is twice the matched case — this matters for power handling, dielectric breakdown, and cable ratings. High-power transmitters specify maximum allowed VSWR to protect their output stages.

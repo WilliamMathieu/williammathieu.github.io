@@ -1,0 +1,93 @@
+% chapter: wiki_connectors
+\chapter{RF Connectors}\label{ch:wiki_connectors}
+
+Connector choice often determines system performance at microwave frequencies. Every connector junction contributes insertion loss, a small impedance discontinuity (which worsens with frequency), and a potential point of failure. Choosing the right connector requires balancing frequency range, power handling, mechanical robustness, and cost.
+
+      
+
+\section{Connector Comparison Table}
+
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.153\linewidth}>{\raggedright\arraybackslash}p{0.153\linewidth}>{\raggedright\arraybackslash}p{0.153\linewidth}>{\raggedright\arraybackslash}p{0.153\linewidth}>{\raggedright\arraybackslash}p{0.153\linewidth}>{\raggedright\arraybackslash}p{0.153\linewidth}}
+\hline
+\textbf{Connector} & \textbf{Max frequency} & \textbf{Impedance} & \textbf{Power (CW)} & \textbf{Torque spec} & \textbf{Notes} \\
+\hline
+BNC & 4 GHz & 50 Ω / 75 Ω & 80 W @ 1 GHz & Bayonet lock & Quick-connect; RF lab, oscilloscopes, video (75 Ω) \\
+TNC & 12 GHz & 50 Ω / 75 Ω & 100 W & 1.13 N·m & BNC with threaded coupling; more rugged \\
+N-type & 18 GHz & 50 Ω / 75 Ω & 300 W @ 1 GHz & 1.36 N·m & Workhorse for VHF/UHF/microwave; weatherproof versions \\
+SMA & 18 GHz (26 GHz semi-precision) & 50 Ω & 100 W @ 1 GHz & 0.9 N·m & Most common RF connector; keep to 12 GHz in production \\
+SMB & 4 GHz & 50 Ω & 25 W & Snap-on & Compact snap-on; consumer electronics \\
+MMCX & 6 GHz & 50 Ω & 50 W & Snap-on & Miniature; Wi-Fi modules, GPS receivers \\
+U.FL / IPEX & 6 GHz & 50 Ω & 10 W & Snap-on & Very small; \textless{} 30 insertion cycles; PCB to antenna pigtail \\
+2.92 mm (K) & 40 GHz & 50 Ω & 10 W & 0.9 N·m & SMA-compatible mating; 26–40 GHz range \\
+2.4 mm & 50 GHz & 50 Ω & 8 W & 0.9 N·m & Fragile; Ka-band test and mmWave \\
+1.85 mm (V) & 67 GHz & 50 Ω & 5 W & 0.9 N·m & Very fragile; V-band measurements \\
+1.0 mm & 110 GHz & 50 Ω & 2 W & 0.45 N·m & W-band; lab use only \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Insertion Loss Rules of Thumb}
+
+      
+
+Every connector pair (male + female) contributes roughly:
+
+\rffig{wiki_connectors_1.pdf}{RF connector maximum frequency vs physical size. Smaller connectors enable higher frequencies but are more fragile.}
+
+      
+\begin{itemize}
+
+        \item SMA pair: 0.1 dB at 10 GHz, 0.2 dB at 18 GHz
+
+        \item N-type pair: 0.05 dB at 10 GHz
+
+        \item 2.92 mm pair: 0.15 dB at 30 GHz, 0.3 dB at 40 GHz
+
+        \item Each adapter (e.g. SMA-to-N): doubles the connector insertion loss
+
+      
+\end{itemize}
+
+      
+
+In a 10-connector measurement path at 18 GHz, connector losses alone can exceed 2 dB — easily dominating the DUT's own loss.
+
+      
+
+\section{Torque and Connector Longevity}
+
+      
+
+Over-torquing damages centre pin contacts. Under-torquing causes intermittent connections and unpredictable impedance discontinuities. Always use a torque wrench for precision measurements. SMA connectors are rated for \textasciitilde{}500 mating cycles; precision SMA (0.9 N·m spec) for \textasciitilde{}2000 cycles. 2.4 mm and 1.85 mm connectors are easily damaged by cross-threading — always align carefully before tightening.
+
+      
+
+\section{PCB Launch Connectors}
+
+      
+
+The transition from a PCB trace to a connector is a discontinuity. Edge-launch SMA connectors must be carefully matched — the launch geometry, board thickness, and connector pin dimension must all be designed together. At 20+ GHz, a poorly designed SMA launch can add 0.5–1 dB of loss and create a visible ripple in S₁₁ measurements. Some vendors provide field-solver-optimised footprints for their connectors at specific frequencies.
+
+      
+
+\section{75 Ω Systems}
+
+      
+
+Cable television, broadcast video, and some telecommunications infrastructure use 75 Ω impedance (derived from the impedance of a centre-loaded dipole in free space). BNC-75, TNC-75, N-75, and F-connectors are used. Never mate 50 Ω and 75 Ω connectors — the impedance mismatch causes a permanent reflection, and physically incompatible types (N-50 vs N-75) can be damaged if forced.

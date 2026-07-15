@@ -1,0 +1,73 @@
+% chapter: wiki_stepped_impedance
+\chapter{Stepped-Impedance Low-Pass Filters}\label{ch:wiki_stepped_impedance}
+
+A stepped-impedance low-pass filter (SI-LPF) replaces the lumped inductors and capacitors of a conventional LC ladder with sections of high-impedance and low-impedance transmission line. This approach is practical on PCB microstrip where lumped components at GHz frequencies behave poorly, and no vias or discrete parts are needed.
+
+				
+
+\section{Operating Principle}
+
+				
+
+A short section of \textbf{high-impedance} line (narrow trace, small physical width) behaves as a series inductor because its shunt capacitance is small relative to its series reactance. A short section of \textbf{low-impedance} line (wide trace) behaves as a shunt capacitor. Alternating these sections realises the LC ladder prototype.
+
+				
+
+\rffig{wiki_stepped_impedance_1.pdf}{Top view of a stepped-impedance LPF: narrow (high-Z, purple) and wide (low-Z, dark) alternating sections.}
+
+				
+
+\section{Element Mapping}
+
+				
+
+The prototype g-values are mapped to electrical lengths using the system impedance Z₀, high-line impedance Zh, and low-line impedance Zl:
+
+				
+\[\beta\ell_{\rm high} = \dfrac{g_k\,Z_0}{Z_h}\qquad \text{(series inductor element)}\]
+
+				
+\[\beta\ell_{\rm low} = \dfrac{g_k\,Z_l}{Z_0}\qquad \text{(shunt capacitor element)}\]
+
+				
+
+Here βℓ is the electrical length in radians, evaluated at the cutoff frequency fc. The physical length is:
+
+				
+\[\ell = \dfrac{\beta\ell}{2\pi}\cdot\dfrac{c}{f_c\,\sqrt{\varepsilon_{\rm eff}}}\]
+
+				
+
+\section{Prototype g-Values}
+
+				
+
+Use standard Butterworth or Chebyshev low-pass prototype tables. For a 3rd-order Butterworth: g₁ = 1.0, g₂ = 2.0, g₃ = 1.0. For Chebyshev 0.5 dB ripple, 5th-order: g₁ = 1.7058, g₂ = 1.2296, g₃ = 2.5408, g₄ = 1.2296, g₅ = 1.7058. Higher order gives steeper roll-off but longer board area.
+
+				
+
+\section{Design Rules}
+
+				
+\begin{itemize}
+
+					\item Choose Zh/Z₀ as high as fabrication allows (typically Zh = 80–120 Ω for 50 Ω system)
+
+					\item Choose Zl as low as practical (typically Zl = 15–30 Ω); limited by board width constraints
+
+					\item Higher Zh/Zl ratio → shorter sections → better approximation to lumped elements
+
+					\item All sections must have electrical lengths βℓ \textless{} 45° at the cutoff frequency for the lumped-element approximation to be valid
+
+					\item Spurious passband appears at 2fc (or 4fc for symmetric designs); stepped-Z is not suitable above 2–3× cutoff
+
+				
+\end{itemize}
+
+				
+
+\section{Microstrip Trace Width}
+
+				
+
+The required trace width for a target impedance Z on a substrate of thickness h and permittivity εr is found by the inverse Hammerstad-Jensen formulas (implemented in the Microstrip Calculator). As a rough guide: for 50 Ω on FR4 (εr ≈ 4.4, h = 1.6 mm), w ≈ 3 mm; for 100 Ω, w ≈ 0.5 mm; for 25 Ω, w ≈ 10 mm.

@@ -1,0 +1,42 @@
+% chapter: wiki_mri_sequences
+\chapter{MRI Pulse Sequences}\label{ch:wiki_mri_sequences}
+
+A pulse sequence is the pattern of RF pulses and gradient waveforms used to acquire MRI data. Different sequences exploit T1, T2, and proton density contrast to highlight different tissue properties.
+
+				
+
+\section{Spin Echo (SE)}
+
+				
+
+\rffig{wiki_mri_sequences_1.pdf}{Spin echo pulse sequence: 90° excitation, 180° refocus at TE/2, echo at TE. TR sets T1 weighting.}
+
+				
+
+A 90° excitation pulse followed by a 180° refocusing pulse after time TE/2 creates an echo at time TE. The 180° pulse reverses static field inhomogeneity dephasing but not true T2 decay, making SE sensitive to tissue T2. Repetition time TR controls T1 weighting. SE is robust to B0 inhomogeneity.
+
+\rffig{wiki_mri_sequences_2.pdf}{Spin echo: 90° excitation creates FID (purple); 180° refocusing pulse at TE/2 forms a spin echo at TE (cyan).}
+
+				
+
+\section{Gradient Echo (GRE)}
+
+				
+
+Uses a flip angle \textless{} 90° and a gradient reversal (instead of 180° RF pulse) to form the echo. Faster than SE but sensitive to B0 inhomogeneity (T2* rather than T2). Used for fast imaging, functional MRI (BOLD), and angiography.
+
+				
+
+\section{Inversion Recovery (IR)}
+
+				
+
+A 180° inversion pulse followed by a delay TI before a spin-echo acquisition. By choosing TI = T1·ln(2) for a tissue, its signal is nulled. FLAIR (Fluid Attenuated Inversion Recovery) nulls CSF to improve lesion conspicuity. STIR nulls fat.
+
+				
+
+\section{k-Space}
+
+				
+
+MRI data is acquired in the spatial frequency domain (k-space). Each data point corresponds to a different spatial frequency component of the image. The image is reconstructed by a 2D Fourier transform. Low spatial frequencies (near k-space centre) determine image contrast; high frequencies (periphery) determine edge sharpness. Trajectories through k-space define the acquisition strategy: Cartesian, radial, spiral, EPI, etc.

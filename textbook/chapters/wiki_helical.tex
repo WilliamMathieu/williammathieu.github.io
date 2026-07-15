@@ -1,0 +1,108 @@
+% chapter: wiki_helical
+\chapter{Helical Antennas}\label{ch:wiki_helical}
+
+The helical antenna is a wire wound in a helix and fed at one end against a ground plane. Depending on the circumference-to-wavelength ratio it can operate in two distinct modes. The \textbf{axial mode} (end-fire) is the most useful for gain antennas — it produces a circularly polarised beam along the helix axis and is widely used in satellite ground stations, CubeSats, and amateur radio.
+
+				
+
+\section{Normal Mode vs Axial Mode}
+
+				
+\begin{itemize}
+
+					\item \textbf{Normal mode}: circumference C ≪ λ; radiation broadside (perpendicular to axis); linearly polarised; low gain. Used as a compact antenna when space is limited.
+
+					\item \textbf{Axial mode}: circumference C ≈ λ; radiation along the axis; circularly polarised; high gain. This is the practical gain antenna.
+
+				
+\end{itemize}
+
+				
+
+\section{Axial-Mode Condition}
+
+				
+
+The helix operates in axial mode when:
+
+				
+\[0.75 < \dfrac{C}{\lambda} < 1.33 \quad \text{where } C = \pi D\]
+
+				
+
+The optimal pitch angle (angle of the helix wire relative to the horizontal plane) is approximately α ≈ 14°, which corresponds to a turn spacing S ≈ λ/4 when C ≈ λ.
+
+				
+
+\section{Gain and Beamwidth (Kraus Formulas)}
+
+				
+\[G \approx 15\,N\!\left(\frac{C}{\lambda}\right)^{\!2}\!\frac{S}{\lambda} \quad \text{(linear, not dB)}\]
+
+				
+\[\text{HPBW} \approx \dfrac{52°}{\dfrac{C}{\lambda}\sqrt{N\dfrac{S}{\lambda}}}\]
+
+				
+
+where N is the number of turns. Gain increases with N — a 10-turn helix at C = λ, S = λ/4 gives G ≈ 15×10×1×0.25 = 37.5 (≈ 15.7 dBi).
+
+				
+
+\section{Input Impedance}
+
+				
+
+The input impedance of the axial-mode helix is nearly resistive and approximated by:
+
+				
+\[Z_{\rm in} \approx 140\,\dfrac{C}{\lambda}\;\;[\Omega]\]
+
+				
+
+At the optimum C/λ = 1, Zin ≈ 140 Ω. A quarter-wave stripline transformer between the helix feed and the 50 Ω coax connector matches the impedance: the transformer impedance is Z\_t = √(140 × 50) ≈ 84 Ω.
+
+				
+
+\rffig{wiki_helical_1.pdf}{Axial-mode helix: N turns of diameter D, turn spacing S, fed against a ground plane.}
+
+				
+
+\section{Circular Polarisation}
+
+				
+
+The axial-mode helix produces circular polarisation naturally. The sense (RHCP or LHCP) is determined by the winding direction:
+
+				
+\begin{itemize}
+
+					\item \textbf{Right-hand winding} (thumb along axis, fingers curl in direction of travel) → RHCP
+
+					\item \textbf{Left-hand winding} → LHCP
+
+				
+\end{itemize}
+
+				
+
+For satellite reception (LEO downlinks, GPS), RHCP is standard. The axial ratio of a well-designed axial-mode helix is typically better than 1 dB (very close to perfect circular polarisation) over the 3 dB beamwidth.
+
+				
+
+\section{Design Procedure}
+
+				
+\begin{enumerate}
+
+					\item Choose target frequency f → compute λ = c/f
+
+					\item Set D = λ/π (so C = λ) and S = λ/4 for optimal pitch angle
+
+					\item Choose N for desired gain: G ≈ 15N×1×0.25 = 3.75N → e.g. N = 10 gives G ≈ 37.5 (15.7 dBi)
+
+					\item Compute Zin ≈ 140 Ω; design λ/4 transformer to 50 Ω (Z\_t ≈ 84 Ω stripline)
+
+					\item Ground plane diameter should be at least 0.75λ to 1λ
+
+				
+\end{enumerate}

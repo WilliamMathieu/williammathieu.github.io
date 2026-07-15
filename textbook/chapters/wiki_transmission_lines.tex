@@ -1,0 +1,70 @@
+% chapter: wiki_transmission_lines
+\chapter{Transmission Line Theory}\label{ch:wiki_transmission_lines}
+
+A transmission line is a structure that guides electromagnetic waves from one point to another. At RF frequencies, ordinary wire connections behave as transmission lines — understanding this is essential for signal integrity and impedance matching.
+
+				
+
+\section{Telegrapher's Equations}
+
+				
+
+\rffig{wiki_transmission_lines_1.pdf}{Distributed-element model: series L, shunt C per unit length Δz.}
+
+				
+
+A transmission line is modelled as a ladder network of distributed resistance R, inductance L, capacitance C, and conductance G per unit length. The resulting wave equations are:
+
+\rffig{wiki_transmission_lines_2.pdf}{Standing wave on a mismatched line: V\_max/V\_min = VSWR = 3 for |Γ|=0.5.}
+
+				
+\[\dfrac{\partial V}{\partial z} = -(R+j\omega L)I \qquad \dfrac{\partial I}{\partial z} = -(G+j\omega C)V\]
+
+				
+
+\section{Characteristic Impedance}
+
+				
+\[Z_0 = \sqrt{\dfrac{R+j\omega L}{G+j\omega C}} \xrightarrow{\text{lossless}} \sqrt{\dfrac{L}{C}}\]
+
+				
+
+Coax with 50 Ω characteristic impedance: $Z_0 = (60/\sqrt{\varepsilon_r})\ln(D/d)$.
+
+				
+
+\section{Reflection Coefficient}
+
+				
+
+When a wave hits a load impedance $Z_L \neq Z_0$, some power is reflected. The voltage reflection coefficient is:
+
+				
+\[\Gamma = \dfrac{Z_L - Z_0}{Z_L + Z_0}\]
+
+				
+
+Return loss $= -20\log_{10}|\Gamma|$ dB. VSWR $= (1+|\Gamma|)/(1-|\Gamma|)$.
+
+				
+
+\section{Standing Waves}
+
+				
+
+The superposition of forward and reflected waves creates a standing wave pattern on the line. The voltage varies with position; the ratio of maximum to minimum voltage is the VSWR. A matched load (Γ = 0) has VSWR = 1 and no standing waves.
+
+				
+
+\section{Input Impedance}
+
+				
+
+A transmission line of length $\ell$ terminated in $Z_L$ presents input impedance:
+
+				
+\[Z_{in} = Z_0 \dfrac{Z_L + jZ_0\tan(\beta\ell)}{Z_0 + jZ_L\tan(\beta\ell)}\]
+
+				
+
+Special cases: $\ell = \lambda/4$ → $Z_{in} = Z_0^2/Z_L$ (quarter-wave transformer); $\ell = \lambda/2$ → $Z_{in} = Z_L$ (half-wave section is transparent).

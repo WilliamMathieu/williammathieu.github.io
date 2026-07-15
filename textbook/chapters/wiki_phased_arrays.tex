@@ -1,0 +1,52 @@
+% chapter: wiki_phased_arrays
+\chapter{Phased-Array Coils}\label{ch:wiki_phased_arrays}
+
+A phased array is an antenna system consisting of multiple radiating elements whose relative phases (and sometimes amplitudes) are controlled electronically. By varying the phase distribution, the combined beam can be steered in any direction without mechanical movement.
+
+				
+
+\section{Beam Steering}
+
+				
+
+\rffig{wiki_phased_arrays_1.pdf}{Phased array uses progressive phase shifts (implemented by phase shifters) to steer the main beam electronically.}
+
+				
+
+To steer the main beam to angle $\theta_0$, a progressive phase shift $\psi = kd\sin\theta_0$ is applied across the array, where $k = 2\pi/\lambda$ and $d$ is element spacing. Phase shifters (analog or digital) implement this delay electronically. Beam switching speed: microseconds, compared to seconds for mechanical steering.
+
+\rffig{wiki_phased_arrays_2.pdf}{Overlapping coil decoupling: optimal overlap distance (≈15\% of diameter) sets mutual inductance M = 0.}
+
+				
+
+\section{Grating Lobes}
+
+				
+
+When element spacing $d > \lambda/2$, additional main beams (grating lobes) appear at angles other than $\theta_0$. Standard design rule: $d \leq \lambda/2$ for grating-lobe-free scanning to ±90°.
+
+				
+
+\section{Beamforming}
+
+				
+
+Digital beamforming (DBF) processes the signals from individual array elements digitally, allowing simultaneous multiple beams, adaptive null steering (pointing nulls toward interference sources), and MIMO operation. 5G base stations use digital beamforming with massive MIMO (64–256 elements) for spatial multiplexing of many users.
+
+				
+
+\section{Applications}
+
+				
+\begin{itemize}
+
+					\item Military: AESA (Active Electronically Scanned Array) radar — simultaneous multi-function operation
+
+					\item Satellite communications: electronically steered flat-panel antennas (e.g. Starlink terminals)
+
+					\item 5G NR mmWave: compact phased array modules at 28/39 GHz for beamforming
+
+					\item MRI: RF phased array transmitters for parallel transmission (pTx) at 7 T
+
+				
+\end{itemize}

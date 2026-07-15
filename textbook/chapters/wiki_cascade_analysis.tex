@@ -1,0 +1,117 @@
+% chapter: wiki_cascade_analysis
+\chapter{Receiver Cascade Analysis}\label{ch:wiki_cascade_analysis}
+
+A receiver chain is a sequence of amplifiers, filters, and frequency converters from antenna to digital output. The system noise figure determines sensitivity, the gain distribution determines dynamic range, and the IP3 cascade determines linearity. These three analyses — Friis NF, gain chain, and cascaded IP3 — must be done together to optimise the receiver architecture.
+
+      
+
+\section{The Three-Parameter Cascade}
+
+      
+
+For each stage, you need three numbers: gain G (dB), noise figure NF (dB), and input-referred IP3 (IIP3, dBm). From these, the cascaded quantities are computed.
+
+\rffig{wiki_cascade_analysis_1.pdf}{Cumulative noise figure stabilises after the LNA. First stage and its gain dominate the system NF.}
+
+      
+
+\section{Friis Formula for Cascaded Noise Figure}
+
+      
+\[F_{sys} = F_1 + \dfrac{F_2-1}{G_1} + \dfrac{F_3-1}{G_1 G_2} + \cdots\]
+
+      
+
+where F = 10\textasciicircum{}(NF/10) (linear). The first stage dominates if G₁ is large. A low-NF, high-gain LNA first is critical.
+
+      
+
+\section{Cascaded IIP3}
+
+      
+\[\dfrac{1}{IIP3_{sys}} = \dfrac{1}{IIP3_1} + \dfrac{G_1}{IIP3_2} + \dfrac{G_1 G_2}{IIP3_3} + \cdots\]
+
+      
+
+(all in linear watts, not dBm). The last high-gain stage dominates linearity — opposite to noise figure.
+
+      
+
+\section{Worked Example: 2.4 GHz Receiver}
+
+      
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.153\linewidth}>{\raggedright\arraybackslash}p{0.153\linewidth}>{\raggedright\arraybackslash}p{0.153\linewidth}>{\raggedright\arraybackslash}p{0.153\linewidth}>{\raggedright\arraybackslash}p{0.153\linewidth}>{\raggedright\arraybackslash}p{0.153\linewidth}}
+\hline
+\textbf{Stage} & \textbf{G (dB)} & \textbf{NF (dB)} & \textbf{IIP3 (dBm)} & \textbf{Cumul. NF} & \textbf{Cumul. IIP3} \\
+\hline
+RF filter (insertion loss) & −2 & 2 & ∞ & 2.0 dB & — \\
+LNA & +18 & 1.5 & +10 & 3.5 dB & +8.5 dBm \\
+Image rejection filter & −2 & 2 & ∞ & 3.5 dB & +8.5 dBm \\
+Mixer & −8 & 10 & +20 & 4.3 dB & +4.5 dBm \\
+IF amplifier & +30 & 3 & +25 & 4.3 dB & −6.3 dBm \\
+\hline
+\end{longtable}}
+
+      
+
+The cumulative noise figure stabilises at 4.3 dB after the LNA — the LNA gain means all downstream stages add negligible noise. The IIP3 degrades to −6.3 dBm due to the high IF amplifier gain — if this is insufficient, the IF gain must be spread across more stages or reduced.
+
+      
+
+\section{Minimum Detectable Signal}
+
+      
+\[MDS = -174 + NF_{sys} + 10\log_{10}(BW) + SNR_{min}\quad[\text{dBm}]\]
+
+      
+
+For the example above with 5 MHz bandwidth and 10 dB minimum SNR: MDS = −174 + 4.3 + 67 + 10 = −92.7 dBm.
+
+\rffig{wiki_cascade_analysis_2.pdf}{Each stage's marginal contribution to cascaded NF (linear units). Later stages contribute nearly nothing after a high-gain LNA.}
+
+      
+
+\section{Spurious-Free Dynamic Range}
+
+      
+\[SFDR = \tfrac{2}{3}(IIP3_{sys} - MDS)\]
+
+      
+
+With IIP3 = −6.3 dBm and MDS = −92.7 dBm: SFDR = 2/3 × 86.4 = 57.6 dB. This means the receiver can handle a 57.6 dB range of input signal levels without the IM3 products exceeding the noise floor.
+
+      
+
+\section{Gain Distribution Rules of Thumb}
+
+      
+\begin{itemize}
+
+        \item Place the LNA as early as possible (after only necessary filtering) to establish noise figure.
+
+        \item Total front-end gain before the ADC should be enough that ADC noise is irrelevant: typically 60–90 dB total gain for a −100 dBm sensitivity target into an ADC with −70 dBm full scale.
+
+        \item Distribute gain across multiple stages to keep no single stage near compression. Each high-gain stage needs correspondingly high IIP3.
+
+        \item Use variable gain amplifiers (VGAs) to handle the signal range: the AGC loop keeps the ADC input level constant regardless of received signal power.
+
+        \item Don't forget the ADC itself: its ENOB and input full-scale power set the final SNR.
+
+      
+\end{itemize}
+
+      
+
+\section{AGC and Automatic Gain Control}
+
+      
+
+An AGC loop monitors the signal level (usually after the IF filter) and adjusts attenuators or VGAs to keep the ADC input at a constant level. Good AGC design requires: fast attack time (handles sudden strong signals before saturation), slow decay time (prevents noise pumping), and sufficient control range (\textgreater{} dynamic range of expected input signals).

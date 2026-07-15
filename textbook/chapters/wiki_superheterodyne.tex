@@ -1,0 +1,116 @@
+% chapter: wiki_superheterodyne
+\chapter{The Superheterodyne Receiver}\label{ch:wiki_superheterodyne}
+
+The superheterodyne receiver, invented by Edwin Armstrong in 1918, translates the received RF signal to an intermediate frequency (IF) where filtering and amplification are more practical. It remains the dominant architecture in virtually every radio, cellular phone, and test instrument made today.
+
+      
+
+\section{Block Diagram Signal Flow}
+
+      
+
+The signal path from antenna to baseband:
+
+\rffig{wiki_superheterodyne_1.pdf}{Superheterodyne receiver signal flow. The RF filter sets image rejection; the IF filter provides channel selectivity.}
+
+      
+\begin{enumerate}
+
+        \item \textbf{Antenna} → receives signal + noise + interference across all frequencies.
+
+        \item \textbf{RF bandpass filter (BPF)} → passes the desired RF band, rejects out-of-band signals. Critical for preventing image interference and protecting the LNA.
+
+        \item \textbf{Low-noise amplifier (LNA)} → first amplification stage. Dominates system noise figure (Friis: first stage matters most). Typically 15–25 dB gain, 1–3 dB NF.
+
+        \item \textbf{Image rejection filter} → rejects the image frequency f\_image = f\_LO − f\_IF (for low-side injection). Must be placed before the mixer.
+
+        \item \textbf{Mixer} → multiplies RF by local oscillator (LO), producing sum and difference frequencies. Desired output is |f\_RF − f\_LO| = f\_IF.
+
+        \item \textbf{IF bandpass filter} → selects the IF and provides adjacent-channel rejection. This is where most selectivity comes from — fixed-frequency filters are practical at IF.
+
+        \item \textbf{IF amplifier} → provides most of the system gain at IF (easier to build stable high-gain amplifiers at lower frequencies).
+
+        \item \textbf{Demodulator / ADC} → extracts information from the IF signal.
+
+      
+\end{enumerate}
+
+      
+
+\section{The Image Frequency Problem}
+
+      
+
+The mixer responds to two input frequencies — the desired signal at f\_RF and an "image" at f\_image = f\_LO ± f\_IF. Noise or interference at the image frequency is also downconverted to the IF and corrupts the desired signal. Image rejection is the ratio (in dB) of how much the receiver attenuates the image relative to the desired frequency:
+
+\rffig{wiki_superheterodyne_2.pdf}{The image frequency f\_image = f\_LO − f\_IF (low-side injection) produces the same IF as the desired signal.}
+
+      
+\[f_{image} = f_{RF} \pm 2f_{IF}\]
+
+      
+
+Higher IF → image is further from f\_RF → easier to filter. This motivates the choice of IF. A high first IF (e.g. 70 MHz or 1.4 GHz) gives good image rejection; a second lower IF can then improve channel selectivity.
+
+      
+
+\section{Noise Figure Through the Chain}
+
+      
+
+Using the Friis formula, the cascaded noise figure:
+
+      
+\[F_{sys} = F_{filter} + \dfrac{F_{LNA}-1}{G_{filter}} + \dfrac{F_{mixer}-1}{G_{filter}G_{LNA}} + \cdots\]
+
+      
+
+A passive RF filter before the LNA (e.g. with 2 dB insertion loss) adds directly to the noise figure: F\_filter = 1 + loss(linear) = 1 + (L−1)/L. This is why a low-noise LNA must come as early in the chain as possible, and why surface-mount filters with high insertion loss degrade sensitivity.
+
+      
+
+\section{Dynamic Range}
+
+      
+
+The receiver must handle signals from the noise floor (−100 to −120 dBm) to strong in-band signals that could be 80 dB stronger. Two limits define the dynamic range:
+
+      
+\begin{itemize}
+
+        \item \textbf{Minimum detectable signal (MDS)}: noise floor + minimum required SNR. Determined by noise figure and bandwidth.
+
+        \item \textbf{Blocking / desensitisation}: strong off-channel signals that compress the LNA or generate intermodulation products that mask the desired signal. Determined by IIP3 and P₁dB.
+
+      
+\end{itemize}
+
+      
+\[\text{Dynamic Range} = P_{1dB,input} - \text{MDS}\quad[\text{dB}]\]
+
+      
+
+\section{Superheterodyne vs Direct Conversion (Zero-IF)}
+
+      
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}}
+\hline
+\textbf{Feature} & \textbf{Superheterodyne} & \textbf{Direct conversion (zero-IF)} \\
+\hline
+IF frequency & Fixed non-zero value & 0 Hz (baseband I/Q output) \\
+Image rejection & Achieved by RF filter & No image problem (I/Q cancellation) \\
+Channel filtering & Fixed IF filter (ceramic, SAW) & Baseband low-pass filter (active) \\
+Integration & Harder — off-chip IF filters needed & Easier — fully on-chip in CMOS \\
+Key problems & Image, LO harmonics, IF filter & DC offset, IQ imbalance, 1/f noise \\
+Used in & Test instruments, broadcast receivers & Smartphones, SDR, Wi-Fi, Bluetooth \\
+\hline
+\end{longtable}}

@@ -1,0 +1,41 @@
+% chapter: wiki_preamplifier_decoupling
+\chapter{Preamplifier Decoupling}\label{ch:wiki_preamplifier_decoupling}
+
+In phased array receive coils, adjacent elements must be isolated from each other to prevent mutual inductive coupling from increasing correlated noise and degrading combined SNR. Preamplifier decoupling is the most effective and widely used technique for achieving this isolation.
+
+				
+
+\section{The Problem: Mutual Inductance}
+
+				
+
+Two adjacent coil loops have mutual inductance M. If one coil carries current (as part of a resonant circuit), it induces a voltage in its neighbour. This reduces the SNR of both coils and is equivalent to adding correlated noise between array channels.
+
+\rffig{wiki_preamplifier_decoupling_1.pdf}{Preamplifier decoupling circuit. λ/4 cable transforms 2 Ω LNA input to 1250 Ω high series impedance in the coil loop.}
+
+				
+
+\section{The Technique}
+
+				
+
+\rffig{wiki_preamplifier_decoupling_2.pdf}{Preamplifier decoupling: L\_add resonates with C\_match, transforming the low preamp Zin to high impedance at the coil loop, suppressing inter-coil coupling.}
+
+				
+
+A low-input-impedance preamplifier, together with a series inductor $L_{add}$ at the coil port, presents a very high impedance to current flowing in the coil loop at the resonant frequency. This "preamplifier decoupling" suppresses the induced current in each coil, effectively eliminating mutual coupling without requiring geometric overlap or additional decoupling networks.
+
+				
+\[Z_{preamplifier\ decoupling} = \dfrac{(\omega L_{add})^2}{Z_{in,preamp}}\]
+
+				
+
+If $Z_{in,preamp}$ is very low (\textasciitilde{}2–5 Ω) and $L_{add}$ is chosen such that $\omega L_{add} = 1/(\omega C_m)$ (resonates with the matching capacitor), the impedance presented to coil current becomes very high (\textgreater{}1000 Ω), suppressing currents and hence coupling.
+
+				
+
+\section{Geometric Overlap Decoupling}
+
+				
+
+An alternative for nearest-neighbour elements is to physically overlap adjacent loops until their mutual inductance is zero (the induced flux from one loop through the other sums to zero due to partial cancellation). About 15–20\% overlap is typical. Used in combination with preamplifier decoupling for arrays with many elements.

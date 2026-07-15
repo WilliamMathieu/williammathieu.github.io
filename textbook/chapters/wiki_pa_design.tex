@@ -1,0 +1,113 @@
+% chapter: wiki_pa_design
+\chapter{Power Amplifier Design}\label{ch:wiki_pa_design}
+
+Power amplifiers (PAs) are among the most challenging RF circuits to design because efficiency and linearity pull in opposite directions. A perfectly linear PA wastes most of its supply power as heat. A highly efficient PA distorts the signal. Modern PA design — especially for cellular and wireless standards — is the art of managing this tradeoff.
+
+      
+
+\section{PA Classes}
+
+      
+
+PA classes are defined by the transistor's conduction angle — the fraction of the RF cycle during which the device conducts current:
+
+\rffig{wiki_pa_design_1.pdf}{Drain current waveforms by amplifier class. Less conduction → higher efficiency but more distortion.}
+
+      
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}}
+\hline
+\textbf{Class} & \textbf{Conduction angle} & \textbf{Max efficiency} & \textbf{Linearity} & \textbf{Use} \\
+\hline
+A & 360° (always on) & 50\% & Excellent & Small-signal, wideband, instrumentation \\
+AB & 180°–360° & 50–78\% & Good & Most practical linear RF PAs (LTE, Wi-Fi) \\
+B & 180° & 78.5\% & Moderate & Push-pull audio and some RF \\
+C & \textless{} 180° & \textgreater{} 78.5\% & Poor & Narrowband constant-envelope (FM, CW radar) \\
+D & Switch & 100\% (ideal) & Needs filtering & Audio switching amplifiers, some RF \\
+E & Switch + resonant & 100\% (ideal) & Needs filtering & High efficiency narrowband RF \\
+F & Resonant harmonics & 100\% (ideal) & Narrowband & High efficiency RF (mobile base stations) \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Drain Efficiency vs Power-Added Efficiency (PAE)}
+
+      
+\[\eta_{drain} = \dfrac{P_{out}}{P_{DC}} \qquad \text{PAE} = \dfrac{P_{out} - P_{in}}{P_{DC}}\]
+
+      
+
+PAE is the more meaningful figure for RF PAs because it accounts for the drive power required. For a PA with 15 dB gain, the difference between the two is small. For a PA with only 6 dB gain (common at mmWave), PAE is significantly lower than drain efficiency.
+
+\rffig{wiki_pa_design_2.pdf}{PA output power (blue) and efficiency (orange) vs input drive. P₁dB marks onset of compression.}
+
+      
+
+\section{1-dB Compression and Saturation}
+
+      
+
+As input power increases, the output eventually saturates. The \textbf{P₁dB} (1-dB compression point) is where the gain has dropped by 1 dB from its small-signal value. Above P₁dB the device is nonlinear and generates harmonics and intermodulation products. For linear operation, PAs are backed off from P₁dB by 6–10 dB, accepting lower efficiency.
+
+      
+
+\section{Linearity Requirements by Modulation}
+
+      
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Modulation} & \textbf{PAPR} & \textbf{Typical back-off} & \textbf{Notes} \\
+\hline
+CW / FM & 0 dB & 0 dB & Constant envelope — no linearity needed \\
+BPSK/QPSK & 3–4 dB & 3–6 dB & Low PAPR, tolerates moderate nonlinearity \\
+16-QAM & 6–7 dB & 6–8 dB & Moderate requirements \\
+64-QAM & 8–9 dB & 8–10 dB & LTE typical; high back-off needed \\
+OFDM (Wi-Fi/5G) & 10–12 dB & 10–12 dB & High PAPR; DPD or Doherty needed for efficiency \\
+\hline
+\end{longtable}}
+
+      
+
+PAPR = Peak-to-Average Power Ratio.
+
+      
+
+\section{Doherty Architecture}
+
+      
+
+The Doherty PA is the dominant architecture for modern base station and handset PAs because it maintains high efficiency at back-off. It uses two amplifiers — a "main" (carrier) PA that operates in class AB/B, and a "peaking" PA that only turns on near peak power. At back-off, only the main PA operates (high efficiency). At peak power, both combine, restoring efficiency. A Doherty PA can achieve \textgreater{} 50\% efficiency at 6 dB back-off, compared to 12–15\% for a class A PA.
+
+      
+
+\section{Digital Predistortion (DPD)}
+
+      
+
+DPD applies an inverse of the PA's nonlinearity digitally, before the signal reaches the PA, so that the output is linear. It requires a feedback path to measure and adapt to the PA's actual behaviour. DPD allows a PA to operate closer to compression (higher efficiency) while meeting EVM and spectral mask requirements. It is standard in modern cellular base stations.
+
+      
+
+\section{Output Matching}
+
+      
+
+PA transistors are typically low-impedance devices that need an output matching network to present the optimal load impedance for maximum power and efficiency. The load line resistance $R_{opt} = V_{dd}^2 / (2 P_{out})$ sets the ideal load for a class A stage. For a 28 V, 10 W PA: $R_{opt} = 784/20 = 39.2$ Ω — conveniently near 50 Ω, which is why GaN on 28 V supply is so popular for base station PAs.

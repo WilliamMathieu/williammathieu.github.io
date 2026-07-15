@@ -1,0 +1,104 @@
+% chapter: wiki_attenuators
+\chapter{RF Attenuators}\label{ch:wiki_attenuators}
+
+An attenuator is a passive network that reduces signal power by a precise, frequency-independent amount. Unlike a simple resistive divider, a well-designed attenuator maintains its characteristic impedance at all ports across a wide frequency range. Attenuators are used to set signal levels, improve source or load impedance, isolate stages from reflections, and calibrate measurement systems.
+
+      
+
+\section{Key Parameters}
+
+      
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}}
+\hline
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Typical values} \\
+\hline
+Attenuation & A (dB) & 1–40 dB in 1 dB steps for switched pads; fixed values for inline pads \\
+Characteristic impedance & Z₀ & 50 Ω (RF/microwave), 75 Ω (cable TV/video) \\
+Power rating & P\_max (W) & 0.1–50 W for most SMD/connectorised types \\
+Frequency range & DC–f\_max & DC to 18 GHz for SMA types; 40+ GHz for 2.92 mm types \\
+VSWR &  & Typically \textless{} 1.2:1 across rated bandwidth \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Pi (Π) Attenuator}
+
+      
+
+The Pi pad uses two equal shunt resistors flanking a series resistor. It is the most common topology for RF PCBs. For attenuation A dB with system impedance Z₀:
+
+\rffig{wiki_attenuators_1.pdf}{Pi attenuator (shunt-series-shunt) and T attenuator (series-shunt-series). K = 10\textasciicircum{}(A/20).}
+
+      
+\[K = 10^{A/20}, \quad R_{shunt} = Z_0\dfrac{K+1}{K-1}, \quad R_{series} = Z_0\dfrac{K^2-1}{2K}\]
+
+      
+
+\section{T Attenuator}
+
+      
+
+The T pad uses two equal series resistors with a shunt resistor to ground at the midpoint. Better suited for cable assemblies where both conductors need to be attenuated symmetrically:
+
+      
+\[R_{series} = Z_0\dfrac{K-1}{K+1}, \quad R_{shunt} = \dfrac{2Z_0 K}{K^2-1}\]
+
+      
+
+\section{L-pad (Impedance-Matching Attenuator)}
+
+      
+
+An L-pad matches two different source and load impedances while also providing attenuation. Unlike the Pi and T, the L-pad is inherently asymmetric. The attenuation is fixed once the impedances are set; it cannot be chosen independently. One series resistor and one shunt resistor are needed:
+
+      
+\[R_{series} = \sqrt{Z_S Z_L}\,\dfrac{\sqrt{Z_S/Z_L}-1}{1}, \quad R_{shunt} = \dfrac{Z_S Z_L}{R_{series}+Z_S}\]
+
+      
+
+(exact formula depends on which port is the high-Z side).
+
+      
+
+\section{Bridged-T Attenuator}
+
+      
+
+The Bridged-T uses the system impedance Z₀ as one of its elements, making it efficient for large attenuation values with fewer components. With a bridging resistor $R_1 = Z_0(K-1)$ and a shunt resistor $R_2 = Z_0/(K-1)$ plus two Z₀ arms.
+
+      
+
+\section{Temperature and Power Dissipation}
+
+      
+
+Each resistor in the attenuator dissipates a fraction of the incident power. For high-power attenuators, the power in each element must be calculated from the impedance equations. The series element in a Pi pad dissipates $(1 - 1/K^2)$ of the input power.
+
+\rffig{wiki_attenuators_2.pdf}{Standard Pi attenuator values. R\_shunt = Z₀(K+1)/(K−1), R\_series = Z₀(K²−1)/2K.}
+
+      
+
+\section{Practical Notes}
+
+      
+\begin{itemize}
+
+        \item Standard RF attenuator values: 1, 2, 3, 6, 10, 20, 30 dB.
+
+        \item Switched attenuators in LNAs and signal generators use PIN diode or MEMS switching to change attenuation state.
+
+        \item Surface-mount 0402/0603 resistors are used up to \textasciitilde{}6 GHz; above that, thin-film chip attenuators are preferred.
+
+        \item Place bypass capacitors on the shunt resistors to maintain flat response into high frequencies.
+
+      
+\end{itemize}

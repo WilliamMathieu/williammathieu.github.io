@@ -1,0 +1,50 @@
+% chapter: wiki_microwave_components
+\chapter{Microwave Passive Components}\label{ch:wiki_microwave_components}
+
+Beyond transmission lines and filters, a range of passive components are essential in microwave systems: couplers, dividers, circulators, and attenuators.
+
+				
+
+\section{Directional Couplers}
+
+				
+
+\rffig{wiki_microwave_components_1.pdf}{A directional coupler is a 4-port device — extending the 2-port S-matrix concept to include forward and reverse coupled ports.}
+
+				
+
+A directional coupler samples a fraction of the forward or reverse traveling wave on a transmission line without significantly disturbing it. Key parameters: coupling factor (C, dB), directivity (D, dB), and insertion loss. Used for power monitoring, signal sampling, and reflectometer circuits in VNAs.
+
+\rffig{wiki_microwave_components_2.pdf}{Directional coupler: power flows port 1→2 (through, ≈0 dB loss) and 1→3 (coupled, −C dB). Port 4 is isolated.}
+
+				
+
+\section{Power Dividers / Combiners}
+
+				
+
+A Wilkinson power divider splits input power equally into two output ports (−3 dB each) while maintaining isolation between the two outputs. The isolation resistor absorbs any power imbalance between ports. Used in antenna arrays, balanced amplifiers, and mixer feeds.
+
+				
+
+\section{Circulator}
+
+				
+
+A three-port non-reciprocal device: power entering port 1 exits port 2; power entering port 2 exits port 3; power entering port 3 exits port 1. Uses magnetised ferrite. Critical applications: isolating a PA from antenna reflections, separating transmit and receive paths (T/R switch replacement), and protecting LNAs from high-power pulses in radar.
+
+				
+
+\section{Attenuators}
+
+				
+
+Fixed attenuators (pads) reduce signal power by a known amount while maintaining Z₀ impedance. Pi and T resistive networks are common topologies. Used for impedance bridging, reducing reflections, and setting test signal levels. Accuracy and flatness with frequency are key specifications.
+
+				
+
+\section{PIN Diode Switches}
+
+				
+
+PIN diodes operate as variable resistors at RF: forward biased → low resistance (ON); reverse biased → high resistance (OFF). Used for fast antenna switching, T/R switching in radar, and variable attenuators. Switching speed: nanoseconds to microseconds depending on carrier lifetime.

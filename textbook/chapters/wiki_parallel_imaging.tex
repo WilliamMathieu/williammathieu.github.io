@@ -1,0 +1,42 @@
+% chapter: wiki_parallel_imaging
+\chapter{Parallel Imaging}\label{ch:wiki_parallel_imaging}
+
+Parallel imaging uses the spatial sensitivity profiles of multiple receive array elements to recover images from undersampled k-space data, allowing faster acquisition without image quality penalty (at the cost of some SNR).
+
+				
+
+\section{The Basic Principle}
+
+				
+
+\rffig{wiki_parallel_imaging_1.pdf}{k-space: full acquisition (left) vs R=2 undersampled (right). Parallel imaging recovers missing lines from coil sensitivities.}
+
+				
+
+If k-space is undersampled by an acceleration factor R (only every Rth phase-encode line is acquired), the Nyquist criterion is violated and aliasing (fold-over artifacts) occurs in the image. However, if multiple receive channels are available, each with a different spatial sensitivity, the aliased signals from different locations can be separated using the known sensitivity patterns.
+
+\rffig{wiki_parallel_imaging_2.pdf}{Parallel imaging: every 2nd k-space line acquired (R=2), GRAPPA reconstructs missing lines using multi-coil data.}
+
+				
+
+\section{SENSE}
+
+				
+
+Sensitivity Encoding (SENSE) operates in image space. The aliased image from each channel is combined using a matrix inversion based on the measured coil sensitivity maps. Requires explicit sensitivity calibration and produces a noise amplification characterised by the geometry factor (g-factor).
+
+				
+
+\section{GRAPPA}
+
+				
+
+GeneRalised Autocalibrating Partial Parallel Acquisition (GRAPPA) operates in k-space. Missing k-space lines are synthesised from acquired lines using calibration coefficients estimated from a central fully-sampled auto-calibration signal (ACS) region. More robust to motion between calibration and imaging than SENSE.
+
+				
+
+\section{SNR and g-Factor}
+
+				
+
+Parallel imaging reduces scan time by factor R but always reduces SNR by at least $\sqrt{R}$ (less data = more noise). The g-factor (geometry factor) $\geq 1$ further penalises SNR due to the conditioning of the unaliasing matrix. $SNR_{PI} = SNR_{full} / (g\sqrt{R})$. High-field MRI (7 T) benefits most from parallel imaging because the SNR advantage at high field partially compensates for the $\sqrt{R}$ SNR loss.

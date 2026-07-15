@@ -1,0 +1,50 @@
+% chapter: wiki_balun
+\chapter{BALUNs and Hybrids}\label{ch:wiki_balun}
+
+A BALUN (BALanced-UNbalanced) converts between single-ended (coaxial) and balanced (differential) connections. Hybrids are 4-port networks that split power with a defined phase relationship. Both are critical building blocks in RF systems.
+
+				
+
+\section{Why BALUNs are Needed}
+
+				
+
+A dipole antenna is a balanced structure (symmetric about its feed point). Connecting it directly to coaxial cable (unbalanced) allows current to flow on the cable outer conductor, distorting the radiation pattern and causing interference. A BALUN prevents this by presenting high common-mode impedance.
+
+\rffig{wiki_balun_1.pdf}{BALUN circuit symbol. Impedance ratio n²:1 allows simultaneous conversion and impedance transformation.}
+
+				
+
+\section{LC BALUN}
+
+				
+
+\rffig{wiki_balun_2.pdf}{L-network as a BALUN building block. Two reactive elements provide impedance transformation and unbalanced-to-balanced conversion.}
+
+				
+
+Uses inductors and capacitors to provide the balanced-to-unbalanced conversion with impedance transformation. The lattice topology uses four elements in a bridge circuit, providing ±45° phase shift on the two balanced outputs and excellent amplitude balance over a moderate bandwidth.
+
+				
+
+\section{Marchand BALUN}
+
+				
+
+Two coupled quarter-wave resonators provide wideband balun action (often 2-3 octaves). The open-circuited stubs resonate at f₀ and present the appropriate impedance transformation. Widely used in wideband power amplifiers, mixers, and antenna feeds.
+
+				
+
+\section{90° Hybrid (Branch-Line)}
+
+				
+
+A 4-port network where power splits equally between two output ports with a 90° phase difference. Used in quadrature modulators, I/Q signal processing, and phased array feed networks. Implemented as a square of four λ/4 transmission line sections.
+
+				
+
+\section{180° Hybrid (Rat-Race / Magic-T)}
+
+				
+
+Splits power equally with 0° or 180° phase shift. Used in balanced amplifiers, mixers, and Butler matrices for phased array beamforming.

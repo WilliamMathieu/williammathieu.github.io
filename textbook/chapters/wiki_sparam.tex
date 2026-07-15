@@ -1,0 +1,53 @@
+% chapter: wiki_sparam
+\chapter{S-Parameters}\label{ch:wiki_sparam}
+
+S-parameters (scattering parameters) describe how RF signals are scattered by a network. Unlike Z or Y parameters, S-parameters are measured with all ports terminated in a reference impedance Z₀ (typically 50 Ω), making them practical to measure with a vector network analyser (VNA) at microwave frequencies.
+
+				
+
+\section{Definition}
+
+				
+
+\rffig{wiki_sparam_1.pdf}{2-port S-parameter definitions. All ports terminated in Z₀ during measurement.}
+
+				
+
+For a 2-port network, S-parameters relate incident (a) and reflected/transmitted (b) wave amplitudes:
+
+				
+\[\begin{pmatrix}b_1\\b_2\end{pmatrix} = \begin{pmatrix}S_{11}&S_{12}\\S_{21}&S_{22}\end{pmatrix}\begin{pmatrix}a_1\\a_2\end{pmatrix}\]
+
+				
+\begin{itemize}
+
+					\item S₁₁ — input reflection coefficient (return loss at port 1)
+
+					\item S₂₁ — forward transmission (insertion loss or gain)
+
+					\item S₁₂ — reverse isolation
+
+					\item S₂₂ — output reflection coefficient
+
+				
+\end{itemize}
+
+				
+
+\section{Smith Chart}
+
+				
+
+\rffig{wiki_sparam_2.pdf}{Smith Chart: constant-resistance circles (purple), constant-reactance arcs (blue). Example load shown as orange dot.}
+
+				
+
+The Smith Chart maps the complex reflection coefficient Γ onto a plot of normalised impedance. Constant-resistance circles are in the horizontal centre; constant-reactance arcs run vertically. Moving clockwise along a constant-|Γ| circle corresponds to adding transmission line length toward the generator.
+
+				
+
+\section{Touchstone Files}
+
+				
+
+Measured S-parameters are stored in Touchstone format (.s1p, .s2p, etc.). Each line contains a frequency point followed by pairs of values encoding each Sij in MA (magnitude-angle), RI (real-imaginary), or DB (dB-angle) format.

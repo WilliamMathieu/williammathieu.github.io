@@ -1,0 +1,95 @@
+% chapter: wiki_mri_gradients
+\chapter{MRI Gradient Coils}\label{ch:wiki_mri_gradients}
+
+Gradient coils are the mechanism by which MRI encodes spatial information into the NMR signal. They produce linear spatial variations in the B₀ field (dB\_z/dx, dB\_z/dy, dB\_z/dz) that allow slice selection, frequency encoding, and phase encoding. Their performance — gradient strength and switching speed — directly determines image resolution, scan time, and what pulse sequences are possible.
+
+      
+
+\section{Why Gradients Are Needed}
+
+      
+
+In a uniform B₀ field, all protons resonate at the same Larmor frequency f₀ = γB₀. To determine where a signal comes from, we need to make f₀ vary with position. A gradient G\_z adds a field increment G\_z·z, so protons at position z resonate at f = γ(B₀ + G\_z·z). By sweeping the gradient and detecting the frequency spectrum, we reconstruct the 1D spin distribution — repeated in three directions gives 3D imaging.
+
+\rffig{wiki_mri_gradients_1.pdf}{Gradient fields make Larmor frequency position-dependent. FFT of the NMR signal then maps frequencies to spatial positions.}
+
+      
+
+\section{Key Performance Metrics}
+
+      
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Typical values} & \textbf{Impact} \\
+\hline
+Gradient strength & G\_max & 20–80 mT/m & Minimum slice thickness, resolution, diffusion b-value \\
+Slew rate & SR = dG/dt & 100–200 T/m/s & Echo time (TE), echo spacing, sequence speed \\
+Rise time & t\_rise = G\_max/SR & 0.3–1 ms & Gradient echo timing \\
+Linearity & \% deviation from ideal & \textless{} 5\% over DSV & Geometric distortion in images \\
+Efficiency & η = G\_max/I\_max & 5–30 mT/m/A & Power amplifier requirements \\
+DSV (diameter spherical volume) &  & 40–50 cm & Field of view with acceptable linearity \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Coil Geometries}
+
+      
+\begin{itemize}
+
+        \item \textbf{Maxwell pair}: Two circular loops with opposing currents, separated by √3·r. Produces a uniform dB\_z/dz gradient along the bore axis (z-gradient). Used in early resistive MRI systems.
+
+        \item \textbf{Golay coil (saddle coil)}: Four curved conductor arcs producing transverse gradients (x or y). The Golay geometry minimises higher-order field terms by careful choice of arc angle (120°) and axial spacing.
+
+        \item \textbf{Fingerprint / distributed winding}: Modern gradients are designed numerically (target field method or streamline method) to optimise uniformity, efficiency, and acoustic noise simultaneously.
+
+      
+\end{itemize}
+
+      
+
+\section{Eddy Currents}
+
+      
+
+Rapidly switching gradient fields induce eddy currents in the cryostat bore, former, and any nearby conducting structures. These eddy currents create opposing fields that distort the desired gradient waveform — causing B₀ field errors (shift of resonance frequency), gradient pre-emphasis distortion, and image artefacts (ghosting, distortion in EPI). Solutions:
+
+\rffig{wiki_mri_gradients_2.pdf}{Trapezoidal gradient waveform. Rise time t\_rise = G\_max/SR limits shortest achievable echo time.}
+
+      
+\begin{itemize}
+
+        \item \textbf{Actively shielded gradients}: A second "shielding" winding around the primary gradient cancels the field outside the gradient coil set, dramatically reducing eddy currents in the cryostat.
+
+        \item \textbf{Gradient pre-emphasis}: The gradient amplifier applies a pre-distorted drive waveform that compensates for the expected eddy current decay.
+
+        \item \textbf{Slotted/segmented formers}: Break conducting paths to reduce eddy current loops.
+
+      
+\end{itemize}
+
+      
+
+\section{Peripheral Nerve Stimulation (PNS)}
+
+      
+
+Very fast gradient switching induces electric fields in the patient's body (by Faraday's law: E ∝ dB/dt). At high enough dB/dt, these induced fields can directly stimulate peripheral nerves, causing uncomfortable or painful muscular twitching. IEC 60601-2-33 defines PNS limits based on the rheobase (minimum current for stimulation with infinite pulse duration) and the chronaxie (pulse duration for 2× rheobase threshold). Modern scanners monitor dB/dt in real time and limit gradient slew rates to stay within PNS limits, which constrains fast pulse sequences like EPI and diffusion.
+
+      
+
+\section{Acoustic Noise}
+
+      
+
+Gradient coils experience Lorentz forces (F = IL × B₀) when current flows through them in the main field. Rapidly switching these forces at audio frequencies (typically 1–4 kHz for EPI) causes the coil former to vibrate, generating the characteristic loud banging noise of MRI. Modern scanners use acoustic dampening foam, vacuum-bonded coil formers, and specific pulse sequence designs to reduce peak sound pressure levels below the IEC limit of 140 dB(A) at the patient's ears.

@@ -1,0 +1,107 @@
+% chapter: wiki_intermodulation
+\chapter{Intermodulation Distortion and IP3}\label{ch:wiki_intermodulation}
+
+When two or more signals pass through a nonlinear device (an amplifier, mixer, or any component with a nonlinear transfer function), new frequency components are created. These intermodulation (IM) products can fall within the passband of the system and cannot be removed by filtering. Third-order intermodulation (IM3) is the dominant concern in most RF receivers and transmitters.
+
+      
+
+\section{Why Nonlinearity Matters}
+
+      
+
+A perfectly linear device produces outputs only at its input frequencies. A nonlinear device with input $x(t) = a_1\cos(\omega_1 t) + a_2\cos(\omega_2 t)$ produces output terms at frequencies $n\omega_1 \pm m\omega_2$ for all integers n, m. The third-order products at $2\omega_1 - \omega_2$ and $2\omega_2 - \omega_1$ are close to the original signals and fall in-band.
+
+      
+
+\section{Third-Order Intercept Point (IP3)}
+
+      
+
+In a two-tone test, both the desired output and the IM3 products are plotted as a function of input power. On a log-log scale, the desired output has slope 1 (1 dB output per 1 dB input); the IM3 products have slope 3 (3 dB output per 1 dB input). Extrapolating these two lines, they intersect at the \textbf{IP3 point}.
+
+\rffig{wiki_intermodulation_1.pdf}{Output power vs input power. Signal: slope 1. IM3 products: slope 3. They extrapolate to the IP3 intercept point.}
+
+      
+\[P_{IM3,out} = 3P_{in} - 2\cdot IIP3 + G \qquad OIP3 = IIP3 + G\]
+
+      
+
+where all powers are in dBm and G is the gain in dB. The OIP3 is typically 10–15 dB above the 1 dB compression point.
+
+      
+
+\section{Input and Output IP3}
+
+      
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Parameter} & \textbf{Symbol} & \textbf{Typical values} & \textbf{Notes} \\
+\hline
+Input IP3 & IIP3 & −10 to +40 dBm & Referred to device input \\
+Output IP3 & OIP3 & 0 to +50 dBm & OIP3 = IIP3 + Gain \\
+1 dB compression & P₁dB & ≈ IIP3 − 9.6 dB & Empirical approximation \\
+Low-noise amplifier & IIP3 & 0 to +15 dBm & Trades with noise figure \\
+Power amplifier & OIP3 & P₁dB + 10 dB & Backed off from saturation \\
+Passive mixer & IIP3 & +15 to +25 dBm & Higher than active \\
+\hline
+\end{longtable}}
+
+      
+
+\section{IMD Ratio \& Dynamic Range}
+
+      
+
+The intermodulation distortion ratio (IMD) is the power difference between the desired signal and the IM3 product at the output:
+
+\rffig{wiki_intermodulation_2.pdf}{Two-tone test: input tones f₁ and f₂ (purple) generate IM3 products at 2f₁−f₂ and 2f₂−f₁ (red) close to the passband.}
+
+      
+\[\text{IMD} = 2(IIP3 - P_{in}) \text{ dBc}\]
+
+      
+
+The spurious-free dynamic range (SFDR) is the input power range over which the system can operate without IM3 products exceeding the noise floor:
+
+      
+\[\text{SFDR} = \tfrac{2}{3}(IIP3 - P_{noise})\]
+
+      
+
+\section{Cascaded IP3}
+
+      
+
+For a chain of stages, the cascaded IIP3 is dominated by later stages (because the signal is amplified). The reciprocal rule gives:
+
+      
+\[\dfrac{1}{IIP3_{total}} = \dfrac{1}{IIP3_1} + \dfrac{G_1}{IIP3_2} + \dfrac{G_1 G_2}{IIP3_3} + \cdots\]
+
+      
+
+where all quantities are in linear (not dB) units. This is why the last high-gain stage in a receiver chain typically limits linearity.
+
+      
+
+\section{Practical Implications}
+
+      
+\begin{itemize}
+
+        \item \textbf{LNA IIP3}: typically +5 to +15 dBm. Must handle the full received signal range without generating IM3 products that mask weak desired signals.
+
+        \item \textbf{PA linearity}: power amplifiers operate backed off from their P₁dB to maintain acceptable IM3. ACPR (adjacent channel power ratio) is the PA equivalent of IMD.
+
+        \item \textbf{Mixer IIP3}: passive mixers (diode or FET ring) have higher IP3 than active mixers but higher conversion loss.
+
+      
+\end{itemize}

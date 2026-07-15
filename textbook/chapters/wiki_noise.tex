@@ -1,0 +1,60 @@
+% chapter: wiki_noise
+\chapter{Noise in RF Systems}\label{ch:wiki_noise}
+
+Noise ultimately limits the sensitivity of any RF receiver. Understanding noise sources, how they combine in a cascaded system, and how to minimise their contribution is fundamental to receiver design.
+
+				
+
+\section{Thermal (Johnson-Nyquist) Noise}
+
+				
+
+Any resistor at temperature T generates noise power due to thermal agitation of electrons. The available noise power in bandwidth B is:
+
+				
+\[P_n = kTB\]
+
+				
+
+At room temperature (290 K): $kT = -174$ dBm/Hz. This is the noise floor of any passive system at room temperature.
+
+				
+
+\section{Noise Figure}
+
+				
+
+Noise Figure (NF) is the degradation of SNR through a component, referenced to a 290 K source:
+
+\rffig{wiki_noise_1.pdf}{Noise figure quantifies how much a device degrades SNR. A 3 dB NF device adds as much noise as a matched resistor at 290 K.}
+
+				
+
+\noindent\hspace*{1.2em}\textit{$NF = SNR_{in} - SNR_{out}$ (dB)}
+
+				
+
+A perfect noiseless amplifier has NF = 0 dB. A 50 Ω resistive attenuator of X dB has NF = X dB.
+
+				
+
+\section{Friis Formula for Cascaded Systems}
+
+				
+
+\rffig{wiki_noise_2.pdf}{Cascaded receiver chain. LNA noise figure dominates because later stages are divided by preceding gains.}
+
+				
+\[F_{total} = F_1 + \dfrac{F_2-1}{G_1} + \dfrac{F_3-1}{G_1 G_2} + \cdots\]
+
+				
+
+The first stage dominates. This is why an LNA with low NF and high gain at the front of a receive chain is critical. Lossy elements (cables, switches) before the LNA directly add to system NF.
+
+				
+
+\section{System Noise Temperature}
+
+				
+
+Equivalent noise temperature $T_e = (F-1) \times 290$ K. Useful for low-noise systems such as radio telescopes and satellite receivers where temperatures of a few kelvin are achieved.

@@ -1,0 +1,59 @@
+% chapter: wiki_dielectrics
+\chapter{Dielectrics and Permittivity}\label{ch:wiki_dielectrics}
+
+A dielectric is an insulating material that, when placed in an electric field, stores energy by polarising its molecules. The key RF properties of a dielectric are its relative permittivity (dielectric constant) and loss tangent.
+
+				
+
+\section{Relative Permittivity ($\varepsilon_r$)}
+
+				
+
+The dielectric constant $\varepsilon_r$ relates the permittivity of the material to that of free space: $\varepsilon = \varepsilon_r\varepsilon_0$. It determines how much wavelengths are shortened in the material: $\lambda = \lambda_0/\sqrt{\varepsilon_r}$.
+
+\rffig{wiki_dielectrics_1.pdf}{PCB substrate map. FR4 is cheapest but lossy; Rogers and PTFE offer much lower tan δ for microwave applications.}
+
+				
+
+\section{Loss Tangent ($\tan\delta$)}
+
+				
+
+A real dielectric also dissipates energy. The loss tangent represents the ratio of the imaginary to real part of the complex permittivity:
+
+				
+\[\tan\delta = \dfrac{\varepsilon_r''}{\varepsilon_r'}\]
+
+				
+
+Lower $\tan\delta$ means lower dielectric loss. Attenuation in a transmission line increases with loss tangent and frequency.
+
+				
+
+\section{Common PCB Substrate Materials}
+
+				
+
+\rffig{wiki_dielectrics_2.pdf}{Microstrip cross-section. Field lines extend partly into air above the trace, giving εeff \textless{} εr.}
+
+				
+\begin{itemize}
+
+					\item FR4 — $\varepsilon_r \approx 4.4$, $\tan\delta \approx 0.02$. Standard PCB material, adequate to \textasciitilde{}5 GHz.
+
+					\item Rogers 4003C — $\varepsilon_r = 3.55$, $\tan\delta = 0.0027$. Low loss, stable with temperature, suitable to 77 GHz.
+
+					\item PTFE (Teflon) — $\varepsilon_r \approx 2.1$, \textbackslash{}(\textbackslash{}tan\textbackslash{}delta \textless{} 0.001\textbackslash{}). Excellent high-frequency performance, used in coaxial cable dielectrics.
+
+					\item Alumina (Al₂O₃) — $\varepsilon_r \approx 9.8$, $\tan\delta \approx 0.001$. Used in MMIC substrates.
+
+				
+\end{itemize}
+
+				
+
+\section{Frequency Dependence}
+
+				
+
+Both $\varepsilon_r$ and $\tan\delta$ vary with frequency. For PCB design above 1 GHz, always use substrate data measured at the operating frequency rather than the low-frequency value printed on datasheets.

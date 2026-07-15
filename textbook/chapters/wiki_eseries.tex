@@ -1,0 +1,100 @@
+% chapter: wiki_eseries
+\chapter{E-Series Standard Component Values}\label{ch:wiki_eseries}
+
+Resistors, capacitors, and inductors are manufactured in standardised value sets called \textbf{E-series}, defined by IEC 60063. Rather than covering every decimal value, the series places values at logarithmically equal intervals so that any calculated value falls within a specified tolerance of the nearest standard value.
+
+				
+
+\section{Logarithmic Spacing}
+
+				
+
+An E-series with N values per decade places mantissas at:
+
+				
+\[v_k = 10^{k/N}\quad k = 0, 1, \ldots, N-1\]
+
+				
+
+The ratio between consecutive values is always 10\textasciicircum{}(1/N). This means worst-case error is at most half that ratio, or approximately 1/(2N) × 100\% of a decade — which corresponds directly to the component tolerance.
+
+				
+
+\section{Series Summary}
+
+				
+					
+					
+					
+					
+					
+					
+					
+				
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Series} & \textbf{Values/decade} & \textbf{Tolerance} & \textbf{Typical use} \\
+\hline
+E6 & 6 & ±20\% & General decoupling capacitors \\
+E12 & 12 & ±10\% & General-purpose resistors \\
+E24 & 24 & ±5\% & Most common resistor series \\
+E48 & 48 & ±2\% & Precision resistors \\
+E96 & 96 & ±1\% & Precision resistors, filter components \\
+E192 & 192 & ±0.5\% & High-precision networks \\
+\hline
+\end{longtable}}
+
+				
+
+\section{E6 and E12 Values (first decade)}
+
+				
+
+E6 mantissas: 1.0, 1.5, 2.2, 3.3, 4.7, 6.8
+
+				
+
+E12 mantissas (includes all E6): 1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2
+
+				
+
+E24 adds further interleaving: 1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0, 3.3, 3.6, 3.9, 4.3, 4.7, 5.1, 5.6, 6.2, 6.8, 7.5, 8.2, 9.1
+
+				
+
+\section{Reading E-Series Values}
+
+				
+
+Multiply any mantissa by a decade: a resistor marked \textbf{4.7 kΩ} uses mantissa 4.7 in the kΩ decade. A capacitor of \textbf{22 nF} uses mantissa 2.2 in the 10 nF decade. The E-series is the same for resistors, capacitors, and inductors — only the unit decade changes.
+
+				
+
+\rffig{wiki_eseries_1.pdf}{Log-scale number line for one decade showing E6 (purple) and E12 (dark) value positions.}
+
+				
+
+\section{Choosing a Series}
+
+				
+\begin{itemize}
+
+					\item \textbf{E12}: adequate for bias resistors, pull-ups, and non-critical dividers
+
+					\item \textbf{E24}: standard choice for RF filter component selection
+
+					\item \textbf{E96 / E192}: use when the component value directly sets a frequency, gain, or impedance with \textless{}1\% accuracy requirement
+
+					\item Higher-N series cost more and have longer lead times — use only where the tolerance budget demands it
+
+				
+\end{itemize}
+
+				
+
+\section{Finding the Nearest Value}
+
+				
+
+To find the nearest E-series value to a calculated target R\_target: (1) compute the decade exponent exp = floor(log₁₀(R\_target)), (2) extract the mantissa m = R\_target / 10\textasciicircum{}exp, (3) scan all N mantissas and pick the closest. The E-Series Finder calculator automates this for any R, C, or L target.

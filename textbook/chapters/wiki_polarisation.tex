@@ -1,0 +1,112 @@
+% chapter: wiki_polarisation
+\chapter{Antenna Polarisation}\label{ch:wiki_polarisation}
+
+Polarisation describes the orientation of the electric field vector of the radiated electromagnetic wave. Mismatched polarisation between transmit and receive antennas causes signal loss, regardless of alignment. In MRI, the transmit/receive coil polarisation determines imaging efficiency.
+
+      
+
+\section{Linear Polarisation}
+
+      
+
+A half-wave dipole radiates a wave whose E-field oscillates in a fixed plane. A vertical dipole is vertically polarised. A horizontal dipole is horizontally polarised. Two dipoles at right angles with the same signal but 0° phase difference are co-polarised along their common axis; with 90° phase difference they produce circular polarisation.
+
+      
+
+\section{Circular Polarisation (CP)}
+
+      
+
+In circular polarisation, the E-field vector rotates at the carrier frequency. The rotation can be right-hand (RHCP — E rotates clockwise looking in the direction of propagation) or left-hand (LHCP). CP antennas are used for satellite links (independent of receiver orientation), GPS (RHCP), and MRI body coils (CP mode gives √2 more B₁ efficiency than linear).
+
+\rffig{wiki_polarisation_1.pdf}{RHCP: E-field rotates clockwise (CW) when viewed looking in direction of propagation. LHCP: counter-clockwise.}
+
+      
+\[\text{Axial ratio (AR)} = \dfrac{|E_{major}|}{|E_{minor}|}\]
+
+      
+
+Perfect circular polarisation: AR = 1 (0 dB). Linear polarisation: AR = ∞. Typical CP antenna spec: AR \textless{} 3 dB. A RHCP antenna rejects LHCP signals by the cross-polarisation isolation — ideally infinite, practically 20–30 dB.
+
+      
+
+\section{Polarisation Mismatch Loss}
+
+      
+
+When the polarisation of the incident wave does not match the antenna, received power is reduced. The polarisation mismatch loss (or polarisation efficiency ηₚ):
+
+\rffig{wiki_polarisation_2.pdf}{Polarisation mismatch loss for common antenna orientation combinations.}
+
+      
+\[\eta_p = |\hat{\rho}_{\text{ant}} \cdot \hat{\rho}_{\text{wave}}|^2\]
+
+      
+
+For linear/circular mismatch: 3 dB loss (worst case). For RHCP/LHCP: theoretically infinite loss. Vertical/horizontal linear: infinite loss at 90° cross-polarisation.
+
+      
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}}
+\hline
+\textbf{TX polarisation} & \textbf{RX polarisation} & \textbf{Mismatch loss} \\
+\hline
+Vertical linear & Vertical linear & 0 dB \\
+Vertical linear & Horizontal linear & ∞ dB (no coupling) \\
+RHCP & RHCP & 0 dB \\
+RHCP & LHCP & ∞ dB (ideal) \\
+RHCP & Vertical linear & 3 dB \\
+45° slant linear & Vertical linear & 3 dB \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Reading Radiation Pattern Plots}
+
+      
+
+A radiation pattern shows antenna gain or field intensity as a function of angle, typically in a polar plot. Key features:
+
+      
+\begin{itemize}
+
+        \item \textbf{Main lobe}: Direction of maximum radiation. Peak value is the antenna gain.
+
+        \item \textbf{−3 dB beamwidth (HPBW)}: Angular width where gain is within 3 dB of the peak. Narrower = more directive.
+
+        \item \textbf{Sidelobe level (SLL)}: Gain of the strongest sidelobe relative to main lobe. Specified in dBc.
+
+        \item \textbf{Front-to-back ratio (F/B)}: Gain of main lobe vs gain directly behind. Important for interference rejection.
+
+        \item \textbf{Null}: Direction of minimum radiation. Can be steered for interference cancellation.
+
+      
+\end{itemize}
+
+      
+
+\section{Gain, Directivity and Efficiency}
+
+      
+\[G = \eta_r \cdot D \qquad D = \dfrac{4\pi}{\Omega_A}\]
+
+      
+
+where ηᵣ is radiation efficiency (0–1) and Ω\_A is the beam solid angle in steradians. Gain differs from directivity by the radiation efficiency — a highly directive antenna with 50\% efficiency has 3 dB less gain than its directivity. An isotropic radiator (theoretical, impossible to build) has D = 1 = 0 dBi.
+
+      
+
+\section{Polarisation in MRI}
+
+      
+
+MRI uses circularly polarised B₁ fields. A linearly polarised coil couples to only one sense of rotation — half the available RF power is wasted driving the "wrong" CP mode. A quadrature (CP) coil uses two orthogonal loops fed 90° apart in phase, coupling efficiently to both the transmit field and the NMR signal. This gives √2 improvement in SNR and requires half the transmit power for the same flip angle.

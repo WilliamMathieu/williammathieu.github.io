@@ -1,0 +1,151 @@
+% chapter: wiki_emc_shielding
+\chapter{EMC Shielding Effectiveness}\label{ch:wiki_emc_shielding}
+
+Shielding effectiveness (SE) quantifies how much an enclosure or barrier reduces the electromagnetic field at a point. It is expressed in dB as the ratio of the field without the shield to the field with it. Good shielding is essential for meeting regulatory limits (FCC Part 15, CE/ETSI), preventing interference between circuits, and protecting sensitive receivers from external interference.
+
+      
+
+\section{Shielding Mechanisms}
+
+      
+
+A metallic shield attenuates fields by three mechanisms:
+
+\rffig{wiki_emc_shielding_1.pdf}{Shielding effectiveness components for 1 mm copper: reflection (blue), absorption (purple), and aperture limit (grey).}
+
+      
+\[SE = R + A + B \quad [\text{dB}]\]
+
+      
+\begin{itemize}
+
+        \item \textbf{Reflection (R)}: At the air-metal interface, impedance mismatch reflects waves. Significant even for thin shields. Dominant at low frequencies for electric fields.
+
+        \item \textbf{Absorption (A)}: Energy is dissipated as the wave propagates through the metal. A = 20·log₁₀(e) × t/δ = 8.686 × t/δ (dB), where t is shield thickness and δ is skin depth. Increases with frequency.
+
+        \item \textbf{Multiple reflections (B)}: For thin shields (t \textless{} δ), waves bounce between the two surfaces, reducing the net absorption. B is negative and usually negligible when A \textgreater{} 15 dB.
+
+      
+\end{itemize}
+
+      
+
+\section{Shielding Effectiveness vs Frequency}
+
+      
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}}
+\hline
+\textbf{Frequency} & \textbf{δ (Cu)} & \textbf{A (1mm Cu)} & \textbf{R (plane wave)} & \textbf{Total SE (1 mm Cu)} \\
+\hline
+1 kHz & 2.1 mm & 4 dB & 132 dB & \textasciitilde{}136 dB \\
+100 kHz & 0.21 mm & 40 dB & 112 dB & \textasciitilde{}152 dB \\
+1 MHz & 66 µm & 131 dB & 102 dB & \textgreater{}200 dB (limited by seams) \\
+1 GHz & 2.1 µm & \textgreater{}400 dB & 62 dB & Limited by apertures \\
+\hline
+\end{longtable}}
+
+      
+
+Above \textasciitilde{}10 MHz, even a very thin copper sheet is electromagnetically opaque — the limitation is \emph{apertures} (holes, slots, seams), not the metal itself.
+
+      
+
+\section{Aperture Leakage}
+
+      
+
+Holes and slots in shielding enclosures are the dominant leakage path at high frequencies. A rectangular aperture of length L acts as a half-wave resonant slot antenna at f = c/(2L). Below resonance, SE decreases by 20 dB/decade as frequency increases:
+
+\rffig{wiki_emc_shielding_2.pdf}{Aperture resonant frequency = c/(2L). Smaller holes give better HF shielding at the cost of airflow.}
+
+      
+\[SE_{aperture} \approx 20\log_{10}\!\left(\dfrac{\lambda}{2L}\right)\text{ dB}\quad (f \ll c/2L)\]
+
+      
+
+Practical consequences:
+
+      
+\begin{itemize}
+
+        \item A 30 cm slot (ventilation opening) resonates at 500 MHz — completely transparent above that.
+
+        \item A 3 mm slot resonates at 50 GHz — fine for cellular but useless at mmWave.
+
+        \item Replace single large holes with many small holes of the same total area: N holes of diameter d instead of one hole of diameter D=d√N gives \textasciitilde{}20·log₁₀(√N) more SE.
+
+        \item Honeycomb waveguide below cutoff arrays provide ventilation with \textgreater{}100 dB SE.
+
+      
+\end{itemize}
+
+      
+
+\section{Seams and Joints}
+
+      
+
+The weakest point of most shields is where panels join. A seam with periodic fasteners (screws every L mm) acts like an array of slots of length L. For good HF shielding, seams must be:
+
+      
+\begin{itemize}
+
+        \item Soldered or welded for maximum conductivity
+
+        \item EMI gaskets (beryllium copper finger stock, wire mesh, conductive foam) for removable panels
+
+        \item Screws spaced to λ/10 at the highest frequency of concern
+
+        \item Conductive paint or plating on plastic enclosures (provides 30–50 dB SE)
+
+      
+\end{itemize}
+
+      
+
+\section{Cable Shield Transfer Impedance}
+
+      
+
+Cable shields leak energy through their transfer impedance Z\_T (Ω/m) — the ratio of voltage induced on the inner conductor to the current flowing on the outer shield:
+
+      
+\[Z_T = \dfrac{V_{induced}/\text{unit length}}{I_{shield}}\quad [\Omega/\text{m}]\]
+
+      
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}}
+\hline
+\textbf{Cable type} & \textbf{Z\_T @ 10 MHz} & \textbf{SE @ 10 MHz} \\
+\hline
+RG-58 (single braid) & 10–50 mΩ/m & 50–60 dB \\
+RG-214 (double braid) & 1–5 mΩ/m & 70–80 dB \\
+Semi-rigid coax & \textless{} 0.1 mΩ/m & \textgreater{} 100 dB \\
+Foil + braid & 2–10 mΩ/m & 60–75 dB \\
+\hline
+\end{longtable}}
+
+      
+
+Always connect cable shields at both ends for RF shielding. Single-end grounding (for audio hum prevention) leaves the shield as an antenna above a few kHz.
+
+      
+
+\section{PCB Shielding Cans}
+
+      
+
+Stamped metal shielding cans solder directly to a PCB ground pour to isolate sensitive circuits (RF front-ends, oscillators). Key design rules: no gaps \textgreater{} λ/20 at the highest frequency; soldered continuously or with fences of vias spaced \textless{} λ/20; include a test access point (small hole or removable lid) for production testing.

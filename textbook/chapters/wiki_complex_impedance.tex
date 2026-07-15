@@ -1,0 +1,121 @@
+% chapter: wiki_complex_impedance
+\chapter{Complex Impedance and Reactance}\label{ch:wiki_complex_impedance}
+
+At DC, resistance is the only opposition to current flow. At RF, inductors and capacitors also oppose current — but in a frequency-dependent and phase-shifting way. The complete description requires complex numbers: impedance Z = R + jX, where the imaginary part X is the reactance.
+
+      
+
+\section{Phasors and Sinusoidal Steady State}
+
+      
+
+In a circuit driven by a sinusoidal source at frequency f, all voltages and currents are sinusoids at the same frequency. We represent them as phasors — complex numbers whose magnitude gives amplitude and whose angle gives phase. Multiplying a phasor by j rotates it 90° (a quarter cycle), which is exactly what an inductor does: it makes current lag voltage by 90°.
+
+      
+
+\section{Reactance}
+
+      
+
+Reactance X is the imaginary part of impedance. It stores and releases energy without dissipating it:
+
+\rffig{wiki_complex_impedance_1.pdf}{Impedance Z = R + jX as a phasor in the complex plane. R is resistance, X is reactance.}
+
+      
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Component} & \textbf{Impedance Z} & \textbf{Reactance X} & \textbf{Phase} \\
+\hline
+Resistor R & R & 0 & V and I in phase \\
+Inductor L & jωL & +ωL = +2πfL & I lags V by 90° \\
+Capacitor C & 1/(jωC) & −1/(ωC) = −1/(2πfC) & I leads V by 90° \\
+\hline
+\end{longtable}}
+
+      
+
+At resonance (ωL = 1/ωC), the inductive and capacitive reactances cancel and the impedance is purely resistive.
+
+      
+
+\section{Admittance Y = 1/Z}
+
+      
+
+For parallel circuit analysis, admittance Y = G + jB is more convenient than impedance. G is the conductance (1/R) and B is the susceptance (−1/X for an inductor, +1/X for a capacitor — note the sign flip). On a Smith Chart, the admittance chart is the impedance chart rotated 180°.
+
+      
+\[Y = \dfrac{1}{Z} = \dfrac{1}{R+jX} = \dfrac{R}{R^2+X^2} - j\dfrac{X}{R^2+X^2} = G + jB\]
+
+      
+
+\section{Series vs Parallel Equivalents}
+
+      
+
+A real inductor has both inductance L and series resistance R\_s. It can be represented equivalently as a parallel combination of L\_p and R\_p, where the two representations are equivalent at one frequency. This conversion matters when designing matching networks:
+
+      
+\[Q = \dfrac{X_s}{R_s} = \dfrac{R_p}{X_p} \qquad R_p = R_s(1+Q^2) \qquad X_p = X_s\dfrac{Q^2+1}{Q^2}\]
+
+      
+
+\section{Quality Factor Q}
+
+      
+
+The Q factor of a reactive element describes how "ideal" it is — the ratio of energy stored to energy lost per cycle:
+
+      
+\[Q = \dfrac{|X|}{R} = \dfrac{\omega_0 L}{R_s} = \dfrac{1}{\omega_0 C R_s}\]
+
+      
+
+High Q means low loss. A typical SMD inductor at 100 MHz has Q = 30–80. A quartz crystal resonator has Q = 10,000–100,000. Q also sets bandwidth: $BW = f_0/Q$.
+
+      
+
+\section{Frequency Dependence}
+
+      
+
+At higher frequencies, parasitics dominate. A real capacitor has series inductance (ESL) that causes it to become inductive above its self-resonant frequency (SRF). A real inductor has inter-winding capacitance that causes it to self-resonate. Always check the SRF of a component against your operating frequency:
+
+\rffig{wiki_complex_impedance_2.pdf}{Series RLC: minimum impedance at resonance. Parallel RLC: maximum impedance at resonance.}
+
+      
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}}
+\hline
+\textbf{Component value} & \textbf{Typical SRF} & \textbf{Notes} \\
+\hline
+10 µF electrolytic & 500 kHz & Useless for RF bypassing \\
+100 nF ceramic (0402) & 50 MHz & Good for audio, limited at RF \\
+10 nF ceramic (0402) & 200 MHz & OK for HF/VHF bypassing \\
+100 pF ceramic (0402) & 2 GHz & Good RF bypass to \textasciitilde{}1 GHz \\
+10 pF ceramic (0402) & 8 GHz & Good for microwave matching \\
+1 pF ceramic (0402) & 20+ GHz & Usable at mmWave \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Impedance vs Frequency: What to Expect}
+
+      
+
+A 50 Ω transmission line port expects 50 + j0 Ω. Impedance that deviates from this causes reflections. The Smith Chart provides an intuitive visual representation of complex impedance across frequency — a single-frequency impedance is a point, and an impedance varying with frequency traces a curve. Understanding complex impedance is the prerequisite for reading and using the Smith Chart.

@@ -1,0 +1,54 @@
+% chapter: wiki_magnetic_materials
+\chapter{Magnetic Materials}\label{ch:wiki_magnetic_materials}
+
+Magnetic materials are used in RF and power electronics to make inductors, transformers, ferrite beads, and circulators. Understanding their properties is essential for choosing the right core material.
+
+				
+
+\section{Relative Permeability ($\mu_r$)}
+
+				
+
+Permeability $\mu_r$ relates the magnetic flux density to the applied field: $B = \mu_r\mu_0 H$. High $\mu_r$ increases inductance but also limits useful frequency range (permeability drops at high frequencies).
+
+\rffig{wiki_magnetic_materials_1.pdf}{Ferrite permeability: µ' falls above resonance; µ'' (loss) peaks at resonance. Use below resonance for low-loss performance.}
+
+				
+
+\section{Ferrites}
+
+				
+
+Ferrites are ceramic magnetic materials with high resistivity (minimising eddy current losses at RF). They are used in:
+
+				
+\begin{itemize}
+
+					\item \textbf{Ferrite beads} — suppress high-frequency noise on power lines and signal traces by presenting high impedance above a target frequency.
+
+					\item \textbf{Ferrite cores} — increase inductance of RF chokes and RF transformers, particularly below 50 MHz.
+
+					\item \textbf{Circulators and isolators} — exploit the non-reciprocal properties of magnetised ferrite (Faraday rotation) to route signals directionally.
+
+				
+\end{itemize}
+
+				
+
+\section{Core Saturation}
+
+				
+
+At high flux densities, magnetic cores saturate — $\mu_r$ collapses, inducing harmonics and power loss. Always verify that peak flux density is below the saturation flux density $B_{sat}$ of the chosen material under worst-case conditions.
+
+				
+
+\section{Core Loss}
+
+				
+
+\rffig{wiki_magnetic_materials_2.pdf}{Hysteresis loop. Area enclosed = energy dissipated as heat per cycle.}
+
+				
+
+Core loss (hysteresis + eddy current losses) is characterised by the complex permeability $\mu = \mu' - j\mu''$. The loss factor $\mu''/\mu'$ (analogous to $\tan\delta$) increases with frequency. Ferrite materials are categorised by their intended frequency range (e.g. MnZn ferrites for \textless{}5 MHz, NiZn for 1–100 MHz).

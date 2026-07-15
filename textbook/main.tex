@@ -1,0 +1,80 @@
+\documentclass[11pt,openany]{book}
+\input{preamble}
+\graphicspath{{figures/}}
+
+\begin{document}
+\frontmatter
+
+% ------------------------------------------------ title page
+\begin{titlepage}
+\centering
+\vspace*{2.2cm}
+{\color{rfpurple}\rule{\linewidth}{2pt}}\\[10pt]
+{\sffamily\Huge\bfseries\color{rfpurple} RF \& Microwave Engineering}\\[10pt]
+{\sffamily\LARGE An Interactive Textbook}\\[6pt]
+{\sffamily\large with MRI Physics \& Coil Engineering}\\[8pt]
+{\color{rfpurple}\rule{\linewidth}{2pt}}\\[26pt]
+{\sffamily\large 10 Parts \quad\textbullet\quad 64 Chapters \quad\textbullet\quad 119 figures}\\[4pt]
+{\sffamily\normalsize with companion interactive calculators}\\[3cm]
+{\sffamily\Large\bfseries RF Toolbox}\\[4pt]
+{\sffamily\normalsize\href{https://rftoolbox.ca}{rftoolbox.ca}}\\[1.2cm]
+{\sffamily\small Compiled from the RF Toolbox reference library.}
+\vfill
+\end{titlepage}
+
+% ------------------------------------------------ front matter
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+This book collects the RF Toolbox reference library — sixty-four illustrated
+articles on radio-frequency engineering, microwave design, and magnetic-resonance
+imaging — into a single, sequenced volume. Each topic began as a standalone web
+article at \href{https://rftoolbox.ca}{rftoolbox.ca}; here they are re-ordered into
+a foundations-to-advanced progression, grouped into ten Parts, and typeset with
+their original diagrams.
+
+The material spans classical electromagnetism, transmission-line theory and
+impedance matching, guided-wave structures, passive components and filters, noise
+and amplifier design, signal generation and frequency conversion, antennas,
+complete RF systems, electromagnetic compatibility, and a full treatment of MRI
+physics and RF coil engineering. Every chapter is paired online with an
+interactive calculator that lets you put its equations to work with your own
+numbers.
+
+\chapter*{How to Use This Book}
+\addcontentsline{toc}{chapter}{How to Use This Book}
+The ten Parts are arranged so that each builds on the last, but chapters are also
+written to stand alone for reference. If you are new to RF engineering, read Parts
+I and II in order — waves, decibels, transmission lines, VSWR, the Smith chart, and
+matching are the vocabulary everything else uses. Practitioners can jump directly to
+the chapter they need.
+
+Displayed equations are boxed set-off results; symbols follow the conventions in the
+Notation section below. Wherever this book shows a formula, the online edition offers
+a live calculator for it: for example, the VSWR / return-loss converter, the Smith
+chart, the cascaded noise-figure and IP3 tools, the antenna calculators, and the MRI
+coil and SAR estimators. Visit \href{https://rftoolbox.ca}{rftoolbox.ca} to use them.
+
+\chapter*{Notation}
+\addcontentsline{toc}{chapter}{Notation}
+\begin{tabbing}
+\hspace{3.2cm}\=\kill
+$Z_0$ \> Characteristic impedance (ohms), typically 50 or 75~$\Omega$.\\
+$\Gamma$ \> Voltage reflection coefficient, $\Gamma=(Z_L-Z_0)/(Z_L+Z_0)$.\\
+VSWR \> Voltage standing-wave ratio, $(1+|\Gamma|)/(1-|\Gamma|)$.\\
+$\lambda$ \> Wavelength; $\beta=2\pi/\lambda$ is the phase constant.\\
+$f,\ \omega$ \> Frequency (Hz) and angular frequency $\omega=2\pi f$.\\
+$S_{ij}$ \> Scattering parameters (S-parameters).\\
+NF, $F$ \> Noise figure (dB) and noise factor (linear).\\
+$B_0,\ B_1$ \> MRI static field and RF transmit field.\\
+$\gamma$ \> Gyromagnetic ratio (MRI); also used for propagation constant in line theory.\\
+\end{tabbing}
+\noindent Decibel quantities: dBm is power referenced to 1~milliwatt; dBc is
+relative to a carrier; dBi is antenna gain relative to an isotropic radiator.
+
+\tableofcontents
+
+% ------------------------------------------------ body
+\mainmatter
+\input{_book_body}
+
+\end{document}

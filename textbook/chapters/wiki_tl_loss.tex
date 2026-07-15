@@ -1,0 +1,106 @@
+% chapter: wiki_tl_loss
+\chapter{Transmission Line Loss and Attenuation}\label{ch:wiki_tl_loss}
+
+Every real transmission line attenuates signals as they travel. Two independent mechanisms cause this loss: \textbf{conductor loss} (resistive heating in the metal) and \textbf{dielectric loss} (power absorbed in the substrate or insulator). Total attenuation α = αc + αd in Np/m; multiply by 8.686 to convert to dB/m.
+
+				
+
+\section{Conductor Loss \& Skin Effect}
+
+				
+
+At RF frequencies current crowds into a thin surface layer of thickness δs = √(1/πfµ₀σ) — the skin depth. AC resistance rises as √f. The surface resistance (resistance per square) is:
+
+				
+\[R_s = \sqrt{\dfrac{\pi f \mu_0}{\sigma}}\;\;[\Omega/\square]\]
+
+				
+
+For a \textbf{coaxial line} with inner conductor radius a and outer radius b:
+
+				
+\[\alpha_c = \dfrac{R_s}{4\pi Z_0}\!\left(\dfrac{1}{a}+\dfrac{1}{b}\right)\;\;[\text{Np/m}]\]
+
+				
+
+For \textbf{microstrip} the conductor loss depends on the effective strip width w and involves a correction for current crowding at the edges; simplified for w/h \textgreater{} 1:
+
+				
+\[\alpha_c \approx \dfrac{R_s}{Z_0\, w}\;\;[\text{Np/m}]\]
+
+				
+
+\section{Dielectric Loss}
+
+				
+
+The loss tangent tan δ of the substrate causes power absorption proportional to frequency. For \textbf{microstrip} (Pozar, Microwave Engineering eq. 3.30):
+
+				
+\[\alpha_d = \dfrac{k_0\,\varepsilon_r\,(\varepsilon_{\rm eff}-1)\,\tan\delta}{2\sqrt{\varepsilon_{\rm eff}}\,(\varepsilon_r-1)}\;\;[\text{Np/m}]\]
+
+				
+
+where k₀ = 2πf/c and εeff is the effective permittivity. For \textbf{coaxial} line:
+
+				
+\[\alpha_d = \dfrac{\pi f \sqrt{\varepsilon_r}}{c}\,\tan\delta\;\;[\text{Np/m}]\]
+
+				
+
+Dielectric loss is proportional to frequency and often dominates conductor loss at GHz frequencies in lossy substrates such as FR4 (tan δ ≈ 0.02).
+
+				
+
+\section{Total Loss \& Unit Conversion}
+
+				
+\[\alpha_{\rm total} = \alpha_c + \alpha_d\;\;[\text{Np/m}] \qquad \alpha_{\rm dB} = 8.686\,\alpha_{\rm total}\;\;[\text{dB/m}]\]
+
+				
+
+Insertion loss over a physical length L is simply α\_dB × L dB. Both frequency and length increase loss linearly (for dB/m at fixed f, or for fixed length scaling with f).
+
+				
+
+\section{Propagation Delay}
+
+				
+
+Signals travel at the phase velocity vph = c/√εeff, giving a time delay:
+
+				
+\[t_d = \dfrac{L\,\sqrt{\varepsilon_{\rm eff}}}{c}\;\;[\text{s}]\]
+
+				
+
+On FR4 microstrip (εeff ≈ 3.5), vph ≈ 0.53c — roughly 6 ps/mm of delay. Delay is independent of frequency for a non-dispersive TEM line.
+
+				
+					
+
+\rffig{wiki_tl_loss_1.pdf}{Microstrip cross-section showing substrate height h, trace width w.}
+
+					
+
+\rffig{wiki_tl_loss_2.pdf}{Coax cross-section. Conductor loss from inner (a) and outer (b) conductors.}
+
+				
+
+				
+
+\section{Practical Values}
+
+				
+\begin{itemize}
+
+					\item FR4 microstrip 50 Ω, 1.6 mm substrate: ≈ 0.5 dB/cm at 10 GHz
+
+					\item Rogers RO4003C microstrip 50 Ω: ≈ 0.09 dB/cm at 10 GHz (tan δ = 0.0027)
+
+					\item RG-58 coax: ≈ 0.22 dB/m at 100 MHz; ≈ 1.1 dB/m at 2.4 GHz
+
+					\item LMR-400 coax: ≈ 0.068 dB/m at 1 GHz; ≈ 0.12 dB/m at 2.4 GHz
+
+				
+\end{itemize}

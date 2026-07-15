@@ -1,0 +1,139 @@
+% chapter: wiki_rf_safety
+\chapter{RF Safety and Human Exposure}\label{ch:wiki_rf_safety}
+
+RF electromagnetic fields are non-ionising: their photon energies (eV scale at microwave frequencies) are far too low to break chemical bonds or directly damage DNA. However, they can heat tissue through resistive losses, and at high power densities near high-power transmitters, this heating is the primary safety concern.
+
+      
+
+\section{Exposure Limits: ICNIRP and FCC}
+
+      
+
+Two sets of exposure guidelines dominate internationally:
+
+      
+\begin{itemize}
+
+        \item \textbf{ICNIRP (International Commission on Non-Ionizing Radiation Protection)}: Used in Europe and most of the world. Sets reference levels in terms of power density (W/m²) and electric field strength (V/m).
+
+        \item \textbf{FCC OET-65 (US)}: Used in the United States. Defines Maximum Permissible Exposure (MPE) for both occupational/controlled and general public/uncontrolled environments.
+
+      
+\end{itemize}
+
+      
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}}
+\hline
+\textbf{Frequency} & \textbf{ICNIRP general public (W/m²)} & \textbf{FCC uncontrolled (W/m²)} \\
+\hline
+100 MHz & 2 & 0.2 \\
+400 MHz & 2 & 0.57 \\
+1 GHz & 5 & 1.0 \\
+2.45 GHz & 10 & 1.0 \\
+10 GHz & 10 (up to 300 GHz) & 5 \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Specific Absorption Rate (SAR)}
+
+      
+
+SAR measures the rate at which RF energy is absorbed per unit mass of tissue:
+
+      
+\[SAR = \dfrac{\sigma |E|^2}{\rho}\quad [\text{W/kg}]\]
+
+      
+
+Whole-body average SAR limits:
+
+      
+\begin{itemize}
+
+        \item ICNIRP / IEEE: 0.08 W/kg whole-body (general public); 0.4 W/kg (occupational)
+
+        \item Localised head/torso SAR: 2 W/kg averaged over any 10 g of tissue
+
+        \item Localised limbs: 4 W/kg averaged over any 10 g of tissue
+
+      
+\end{itemize}
+
+      
+
+Mobile phones are tested against a 1.6 W/kg limit (FCC) or 2.0 W/kg limit (ICNIRP) averaged over 10 g of tissue. These limits include a safety factor of \textasciitilde{}50× relative to the threshold for measurable biological effects from heating.
+
+      
+
+\section{Minimum Safe Distance from Transmitters}
+
+      
+
+In the far field, power density decreases as 1/R². The minimum safe distance for an EIRP of P\_EIRP watts to achieve power density S (W/m²) at the limit:
+
+\rffig{wiki_rf_safety_1.pdf}{Power density falls as 1/R² in the far field. For 100 W EIRP at 900 MHz, the ICNIRP 2 W/m² limit is reached at \textasciitilde{}2 m.}
+
+      
+\[R_{min} = \sqrt{\dfrac{P_{EIRP}}{4\pi S}}\]
+
+      
+
+For a 100 W EIRP omnidirectional transmitter at 900 MHz (ICNIRP 2 W/m² limit): R\_min = √(100/(4π×2)) = 2.0 m. For a high-gain antenna system with 1 kW EIRP: R\_min = 6.3 m.
+
+      
+
+\section{Near-Field vs Far-Field Exposure}
+
+      
+
+The transition from near field to far field occurs at the Fraunhofer distance: R\_ff = 2D²/λ (D = antenna aperture). In the near field, power density does not follow the 1/R² law — it can be higher or lower depending on the antenna. Near-field SAR calculations require full EM simulation (FDTD or FEM), not the simple far-field formula.
+
+      
+
+Practical near-field exposure situations:
+
+      
+\begin{itemize}
+
+        \item Holding a mobile phone against the head (3–10 mm from antenna)
+
+        \item Wearing a smartwatch or fitness tracker
+
+        \item Working near a base station antenna at maintenance distance
+
+        \item Industrial RF heating equipment (RF sealers, dielectric heaters)
+
+      
+\end{itemize}
+
+      
+
+\section{Practical RF Safety Guidelines}
+
+      
+\begin{itemize}
+
+        \item Never stand in the main beam of a high-gain antenna within the minimum safe distance — be aware that gain increases the EIRP dramatically.
+
+        \item RF safety limits apply to time-averaged power over 6 minutes (ICNIRP) or 30 minutes (FCC). Pulsed or intermittent transmitters use their duty cycle to calculate the average.
+
+        \item Reflective surfaces can increase local power density above the direct beam level — consider reflected paths in safety assessments.
+
+        \item No safety concern at Wi-Fi, Bluetooth, or mobile phone power levels at normal use distances (metres from the source).
+
+        \item Implanted medical devices (pacemakers, cochlear implants) may be sensitive to strong RF fields at specific frequencies — maintain 20–30 cm distance from transmitters and check device specifications.
+
+      
+\end{itemize}
+
+      Note: This page covers general RF exposure. For MRI-specific SAR limits and the body coil SAR calculation, see the \href{https://rftoolbox.ca/wiki_sar.html}{MRI SAR article}.

@@ -1,0 +1,104 @@
+% chapter: wiki_power_dividers
+\chapter{Power Dividers and Combiners}\label{ch:wiki_power_dividers}
+
+Power dividers split one signal into two or more outputs. Power combiners do the reverse: sum multiple signals into one output. The Wilkinson divider is the classic design because it achieves simultaneous matching, isolation, and lossless operation using only transmission line sections and a single resistor.
+
+      
+
+\section{Wilkinson Power Divider}
+
+      
+
+The equal-split Wilkinson divider uses two λ/4 transmission line arms of impedance $Z_0\sqrt{2}$ (≈ 70.7 Ω in a 50 Ω system) and an isolation resistor $R = 2Z_0$ between the two output ports:
+
+\rffig{wiki_power_dividers_1.pdf}{Equal-split Wilkinson divider: two λ/4 arms at Z₀√2 ≈ 70.7 Ω, isolation resistor 2Z₀ = 100 Ω (for 50 Ω system).}
+
+      
+\[Z_{arm} = Z_0\sqrt{2}, \quad R_{iso} = 2Z_0\]
+
+      
+
+Key properties: all three ports are simultaneously matched; the output ports are isolated from each other (signals applied to port 2 are absorbed by R and do not appear at port 3); the divider is lossless when port 2 and port 3 signals are in phase (the isolation resistor carries no current).
+
+      
+
+\section{Unequal-Split Wilkinson}
+
+      
+
+For a power split ratio $K^2:1$ (port 2 gets $K^2$ times more power than port 3):
+
+      
+\[Z_1 = Z_0\sqrt{\dfrac{1+K^2}{K^3}}, \quad Z_2 = Z_0\sqrt{K(1+K^2)}, \quad R_{iso} = Z_0\!\left(K + \dfrac{1}{K}\right)\]
+
+      
+
+For K=1 (equal split): $Z_1 = Z_2 = Z_0\sqrt{2}$, $R = 2Z_0$. For K=2 (6 dB more to port 2): $Z_1 ≈ 35.4$ Ω, $Z_2 ≈ 112$ Ω, $R = 125$ Ω (in 50 Ω system).
+
+      
+
+\section{N-Way Dividers}
+
+      
+
+An N-way Wilkinson divider can be built by cascading 2-way sections or using a star junction with N arms. The N-way lumped design uses N λ/4 arms of impedance $Z_0\sqrt{N}$ and isolation resistors $NZ_0$ between adjacent output ports.
+
+      
+
+\section{Hybrid Couplers}
+
+      
+
+A 90° hybrid (branch-line coupler) is a four-port device where the two outputs are 90° apart in phase. It is used in balanced amplifiers and I/Q mixers. A 180° hybrid (rat-race or magic T) gives outputs that are either in-phase or anti-phase, used for sum-difference networks and balanced mixers.
+
+\rffig{wiki_power_dividers_2.pdf}{Comparison of common RF power divider and hybrid coupler types.}
+
+      
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Device} & \textbf{Phase split} & \textbf{Bandwidth} & \textbf{Use} \\
+\hline
+Wilkinson divider & 0° (in-phase) & Moderate (\textasciitilde{}20\%) & Power splitting, combining \\
+90° hybrid coupler & 0°/90° & \textasciitilde{}20\% & Balanced amps, I/Q mixers \\
+180° rat-race & 0°/180° & \textasciitilde{}20\% & Balanced mixers, sum/difference \\
+Lange coupler & 0°/90° (3 dB) & Wide (octave) & Wideband balanced amps \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Coherent Power Combining}
+
+      
+
+When N amplifiers feed a combining network, the combined output power is:
+
+      
+\[P_{out} = \eta N P_{each}\]
+
+      
+
+where η is the combining efficiency (0.93–0.98 for corporate networks). The gain over a single amplifier is $10\log_{10}(N) + 10\log_{10}(\eta)$ dB. If \emph{k} amplifiers fail, coherent combining means power drops as $(N-k)^2/N^2$ of the full output — graceful degradation rather than total failure.
+
+      
+
+\section{Physical Implementation}
+
+      
+\begin{itemize}
+
+        \item \textbf{PCB microstrip}: The most common implementation. λ/4 at 2.45 GHz on FR4 (εᵣ ≈ 4.4) is about 18–20 mm long.
+
+        \item \textbf{Lumped element}: Below \textasciitilde{}1 GHz, LC equivalents replace transmission line sections, saving board space.
+
+        \item \textbf{SMD Wilkinson}: Available as pre-packaged components from manufacturers at fixed frequencies.
+
+      
+\end{itemize}

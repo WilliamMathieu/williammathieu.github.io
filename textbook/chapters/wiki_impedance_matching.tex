@@ -1,0 +1,60 @@
+% chapter: wiki_impedance_matching
+\chapter{Impedance Matching}\label{ch:wiki_impedance_matching}
+
+Maximum power transfer from source to load occurs when the load impedance is the complex conjugate of the source impedance. Impedance matching is the process of inserting a network between source and load to achieve this condition at the desired frequency.
+
+				
+
+\section{Why Matching Matters}
+
+				
+\begin{itemize}
+
+					\item Maximises power transfer to the load
+
+					\item Minimises reflections and standing waves
+
+					\item Prevents damage from reflected power in high-power systems
+
+					\item Optimises noise figure in low-noise amplifiers (noise match ≠ power match)
+
+				
+\end{itemize}
+
+				
+
+\section{L-Network}
+
+				
+
+\rffig{wiki_impedance_matching_1.pdf}{L-network topologies. Left: low-pass (shunt C + series L). Right: high-pass (series C + shunt L).}
+
+				
+
+Two reactive elements (one series, one shunt) form the simplest matching network. The Q factor is fixed by the impedance ratio: $Q = \sqrt{R_{high}/R_{low} - 1}$. Only one frequency can be matched; the fractional bandwidth $\approx 1/Q$.
+
+\rffig{wiki_impedance_matching_2.pdf}{Smith Chart matching path: L\_load (blue) → λ/4 rotation (orange) → matched (green).}
+
+				
+
+\section{Pi and T Networks}
+
+				
+
+Three-element networks allow Q to be chosen independently of the impedance ratio. A Pi network has two shunt elements; a T network has two series elements. Higher Q gives better harmonic suppression but narrower bandwidth.
+
+				
+
+\section{Quarter-Wave Transformer}
+
+				
+
+A $\lambda/4$ transmission line section with $Z_0 = \sqrt{Z_1 Z_2}$ matches two real impedances at the design frequency. Bandwidth is typically 10–20\% for VSWR \textless{} 2.
+
+				
+
+\section{Stub Matching}
+
+				
+
+A shorted or open transmission line stub in shunt with the main line presents a pure susceptance. Single-stub matching can match any load, but requires moving the stub to the correct point on the line (found using the Smith Chart).

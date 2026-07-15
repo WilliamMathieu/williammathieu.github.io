@@ -1,0 +1,56 @@
+% chapter: wiki_antennas
+\chapter{Antenna Fundamentals}\label{ch:wiki_antennas}
+
+An antenna is a transducer that converts between guided electromagnetic waves (in a transmission line) and free-space radiation. Every antenna has a reciprocal receive and transmit behaviour described by the same parameters.
+
+				
+
+\section{Key Parameters}
+
+				
+\begin{itemize}
+
+					\item \textbf{Gain (G)} — ratio of radiation intensity in the peak direction to that of an isotropic radiator, measured in dBi.
+
+					\item \textbf{Directivity (D)} — same as gain but ignoring losses. G = η·D where η is radiation efficiency.
+
+					\item \textbf{Beamwidth (HPBW)} — angular width of the main beam between half-power (−3 dB) points.
+
+					\item \textbf{Bandwidth} — frequency range over which VSWR \textless{} 2 (or another specification).
+
+					\item \textbf{Polarisation} — orientation of the E-field: linear, circular, or elliptical.
+
+					\item \textbf{Radiation resistance} — equivalent resistance that would dissipate the same power as is radiated.
+
+				
+\end{itemize}
+
+				
+
+\section{Half-Wave Dipole}
+
+				
+
+\rffig{wiki_antennas_1.pdf}{Left: dipole E-plane figure-8 radiation pattern (gain ≈ 2.15 dBi). Right: rectangular patch antenna geometry.}
+
+				
+
+The reference antenna. Total length ≈ λ/2 (slightly less due to end effects). Gain = 2.15 dBi. Radiation resistance ≈ 73 Ω. Omnidirectional in the plane perpendicular to its axis.
+
+\rffig{wiki_antennas_2.pdf}{Dipole radiation pattern: maximum at broadside (90°), nulls at 0° and 180°.}
+
+				
+
+\section{Patch (Microstrip) Antenna}
+
+				
+
+A rectangular conductor on a PCB substrate, resonant when the patch length L ≈ λ/(2√εreff). Gain ≈ 5–8 dBi, bandwidth 2–5\% (can be increased with thicker substrates). Widely used in GPS, WiFi, and cellular handsets due to its flat, PCB-compatible form factor.
+
+				
+
+\section{Array Factor}
+
+				
+
+When N identical elements are arranged in a line with spacing d and progressive phase shift δ, the combined pattern is the element pattern multiplied by the array factor AF(θ). The main beam can be steered electronically by changing δ without physically moving the array — the principle of phased array radar and 5G beamforming.

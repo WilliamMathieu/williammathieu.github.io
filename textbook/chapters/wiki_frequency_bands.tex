@@ -1,0 +1,138 @@
+% chapter: wiki_frequency_bands
+\chapter{RF Frequency Bands}\label{ch:wiki_frequency_bands}
+
+The electromagnetic spectrum from 3 Hz to 300 GHz is divided into named bands by the ITU. Each band has characteristic propagation behaviour, regulatory allocations, and typical applications. This page is a compact reference for the most important RF and microwave bands.
+
+      
+
+\section{ITU Frequency Band Designations}
+
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}}
+\hline
+\textbf{Band} & \textbf{Name} & \textbf{Frequency} & \textbf{Wavelength} & \textbf{Propagation} \\
+\hline
+ELF & Extremely Low Frequency & 3–30 Hz & 10,000–100,000 km & Penetrates seawater; submarine communications \\
+SLF & Super Low Frequency & 30–300 Hz & 1,000–10,000 km & Power grid frequency; submarine comms \\
+LF & Low Frequency & 30–300 kHz & 1–10 km & Ground wave; LORAN, DECCA navigation, AM longwave \\
+MF & Medium Frequency & 300 kHz–3 MHz & 100 m–1 km & Ground wave + night-time skywave; AM broadcast \\
+HF & High Frequency & 3–30 MHz & 10–100 m & Ionospheric skywave; intercontinental amateur, shortwave broadcast, OTHR \\
+VHF & Very High Frequency & 30–300 MHz & 1–10 m & Line of sight + troposcatter; FM radio, TV, aviation, land mobile \\
+UHF & Ultra High Frequency & 300 MHz–3 GHz & 10 cm–1 m & Line of sight; cellular, Wi-Fi, GPS, DVB-T, radar \\
+SHF & Super High Frequency & 3–30 GHz & 1–10 cm & Line of sight (rain scatter); satellite, microwave links, 5G, radar \\
+EHF & Extremely High Frequency & 30–300 GHz & 1–10 mm & Line of sight (rain/O₂ absorption); mmWave 5G, automotive radar, imaging \\
+\hline
+\end{longtable}}
+
+      
+
+\section{IEEE Radar / Microwave Band Letters}
+
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}>{\raggedright\arraybackslash}p{0.307\linewidth}}
+\hline
+\textbf{Band} & \textbf{Frequency} & \textbf{Applications} \\
+\hline
+L & 1–2 GHz & GPS (1.575 GHz), cellular 4G/5G, ATC radar, satellite \\
+S & 2–4 GHz & Wi-Fi 2.4 GHz, Bluetooth, weather radar, cellular \\
+C & 4–8 GHz & Satellite communications, C-band radar, Wi-Fi 5 GHz \\
+X & 8–12 GHz & Airborne/marine radar, SAR, satellite TV, PCB measurement \\
+Ku & 12–18 GHz & Satellite broadcast (DBS), VSAT, Ku-band radar \\
+K & 18–27 GHz & Automotive radar (24 GHz) \\
+Ka & 27–40 GHz & Satellite broadband, 5G mmWave, imaging radar \\
+V & 40–75 GHz & 60 GHz WiGig, automotive radar (77 GHz) \\
+W & 75–110 GHz & Automotive radar (79 GHz), imaging, atmospheric \\
+mm & 110–300 GHz & THz imaging, spectroscopy, 5G future bands \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Key Frequency Allocations}
+
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.460\linewidth}>{\raggedright\arraybackslash}p{0.460\linewidth}}
+\hline
+\textbf{Frequency} & \textbf{Allocation / Service} \\
+\hline
+433.92 MHz & ISM band (EU): wireless sensors, key fobs, LoRa \\
+868 MHz & ISM band (EU): LoRa, Zigbee, smart meters \\
+915 MHz & ISM band (US/AU): LoRa, RFID \\
+1.575 GHz & GPS L1 (BPSK, C/A code) \\
+1.227 GHz & GPS L2 (military P-code) \\
+2.400–2.4835 GHz & ISM: Wi-Fi (802.11b/g/n), Bluetooth, ZigBee, microwave ovens \\
+5.150–5.850 GHz & U-NII: Wi-Fi (802.11a/n/ac/ax) \\
+5.8 GHz & ISM band: cordless phones, some Wi-Fi \\
+24 GHz & ISM band: short-range radar, motion sensors \\
+60 GHz & ISM band: 802.11ad/ay WiGig, high-speed short-range links \\
+77 GHz & Automotive radar (long-range) \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Antenna Size Reference}
+
+      
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Frequency} & \textbf{λ/2 dipole} & \textbf{λ/4 monopole} & \textbf{Patch (in FR4)} \\
+\hline
+433 MHz & 346 mm & 173 mm & \textasciitilde{}82 mm \\
+868 MHz & 173 mm & 86 mm & \textasciitilde{}41 mm \\
+915 MHz & 164 mm & 82 mm & \textasciitilde{}39 mm \\
+2.45 GHz & 61 mm & 31 mm & \textasciitilde{}14.5 mm \\
+5.8 GHz & 26 mm & 13 mm & \textasciitilde{}6.1 mm \\
+24 GHz & 6.2 mm & 3.1 mm & \textasciitilde{}1.5 mm \\
+77 GHz & 2.0 mm & 1.0 mm & \textasciitilde{}0.47 mm \\
+\hline
+\end{longtable}}

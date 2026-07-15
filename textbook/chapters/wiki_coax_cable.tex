@@ -1,0 +1,94 @@
+% chapter: wiki_coax_cable
+\chapter{Coaxial Cable}\label{ch:wiki_coax_cable}
+
+Coaxial cable is the primary transmission line for RF signals above a few MHz. Choosing the wrong cable — even for a short run — can add significant insertion loss, degrade shielding, or limit power handling. This page is a quick reference for the most common types.
+
+      
+
+\section{Cable Comparison Table}
+
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.131\linewidth}>{\raggedright\arraybackslash}p{0.131\linewidth}>{\raggedright\arraybackslash}p{0.131\linewidth}>{\raggedright\arraybackslash}p{0.131\linewidth}>{\raggedright\arraybackslash}p{0.131\linewidth}>{\raggedright\arraybackslash}p{0.131\linewidth}>{\raggedright\arraybackslash}p{0.131\linewidth}}
+\hline
+\textbf{Type} & \textbf{OD (mm)} & \textbf{Z₀} & \textbf{Vel. factor} & \textbf{Atten. @ 1 GHz} & \textbf{Max power} & \textbf{Best use} \\
+\hline
+RG-174 & 2.8 & 50 Ω & 0.66 & 1.5 dB/m & 25 W & Pigtails, U.FL connections, very flexible low-power \\
+RG-316 & 2.6 & 50 Ω & 0.69 & 1.3 dB/m & 30 W & PTFE insulation; flexible, low loss vs RG-174 \\
+RG-58 (C/U) & 5.0 & 50 Ω & 0.66 & 0.55 dB/m & 200 W & General RF cable, lab use, instrumentation up to \textasciitilde{}500 MHz \\
+RG-59 & 6.1 & 75 Ω & 0.66 & 0.6 dB/m & 200 W & Video, CATV, 75 Ω systems \\
+RG-213 (U) & 10.3 & 50 Ω & 0.66 & 0.28 dB/m & 1 kW & Base station feedlines, amateur radio HF/VHF \\
+LMR-195 & 4.95 & 50 Ω & 0.80 & 0.43 dB/m & 250 W & Low-loss flexible for short runs, jumpers \\
+LMR-400 & 10.3 & 50 Ω & 0.85 & 0.135 dB/m & 1.1 kW & Low-loss runs to 1 GHz; antenna feedlines \\
+LMR-600 & 15.9 & 50 Ω & 0.87 & 0.087 dB/m & 2.5 kW & Long runs, base station, cellular infrastructure \\
+Semi-rigid UT-085 & 2.2 & 50 Ω & 0.695 & 0.84 dB/m & 100 W & PCB-to-PCB, MMIC, excellent shielding, non-flexible \\
+Semi-rigid UT-141 & 3.6 & 50 Ω & 0.695 & 0.44 dB/m & 300 W & Microwave benching, test fixtures \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Attenuation Scaling with Frequency}
+
+      
+
+Coaxial cable attenuation increases approximately as √f (due to skin effect in the conductors) plus a smaller f-dependent term from dielectric loss:
+
+\rffig{wiki_coax_cable_1.pdf}{Coaxial cable attenuation increases as √f. LMR-400 has 5× less loss than RG-174 at the same frequency.}
+
+      
+\[\alpha \approx \alpha_1\sqrt{f} + \alpha_2 f \quad [\text{dB/m}]\]
+
+      
+
+At 100 MHz, LMR-400 has \textasciitilde{}0.044 dB/m. At 2.4 GHz it's \textasciitilde{}0.22 dB/m. A 10-metre run at 2.4 GHz loses 2.2 dB — worth using LMR-600 or a tower-mounted LNA for long runs.
+
+      
+
+\section{Velocity Factor and Electrical Length}
+
+      
+
+The velocity factor (VF) is the ratio of signal propagation speed in the cable to the speed of light. VF depends on the dielectric: solid PE ≈ 0.66, foam PE ≈ 0.78–0.88, PTFE ≈ 0.69. Electrical length = physical length / VF × 360° per wavelength. A 1-metre RG-58 cable at 300 MHz is one electrical wavelength long (0.66 × 1 m / 1 m = 0.66λ — 237°).
+
+      
+
+\section{Power Handling Limits}
+
+      
+
+Two limits apply: \textbf{thermal} (conductor heating → insulation damage, typically rated at 40°C ambient) and \textbf{voltage breakdown} (at peak voltage, the dielectric arcs over). For most cables the thermal limit is lower. Power derating at high temperatures: reduce rated power by \textasciitilde{}1\% per °C above 40°C. At altitude (lower air pressure), the breakdown voltage decreases — critical for airborne equipment.
+
+      
+
+\section{Practical Selection Guide}
+
+      
+\begin{itemize}
+
+        \item \textbf{0–30 MHz, any run length}: RG-213 or LMR-400. Loss is not critical.
+
+        \item \textbf{VHF/UHF, \textless{} 3 m}: RG-58 or LMR-195. Adequate loss, easy to handle.
+
+        \item \textbf{VHF/UHF, \textgreater{} 10 m}: LMR-400 or LMR-600 to keep feedline loss below 1–2 dB.
+
+        \item \textbf{Microwave, \textgreater{} 2 GHz, critical loss budget}: LMR-400 or semi-rigid.
+
+        \item \textbf{Pigtails and internal connections}: RG-316 or UT-085 semi-rigid.
+
+        \item \textbf{High power (\textgreater{} 500 W)}: LMR-600 or larger hardline; ensure good connector torque.
+
+      
+\end{itemize}

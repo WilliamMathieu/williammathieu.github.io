@@ -1,0 +1,61 @@
+% chapter: wiki_maxwells
+\chapter{Maxwell's Equations}\label{ch:wiki_maxwells}
+
+Maxwell's equations are the four partial differential equations that completely describe classical electromagnetism. They were formulated by James Clerk Maxwell in 1865 and unified electricity, magnetism, and optics into a single theoretical framework.
+
+				
+
+\section{The Four Equations}
+
+				
+
+\noindent\hspace*{1.2em}\textit{$\nabla \cdot \mathbf{E} = \dfrac{\rho}{\varepsilon_0}$   — Gauss's Law: electric field diverges from charges.}
+
+				
+
+\noindent\hspace*{1.2em}\textit{$\nabla \cdot \mathbf{B} = 0$   — Gauss's Law for Magnetism: no magnetic monopoles.}
+
+				
+
+\noindent\hspace*{1.2em}\textit{$\nabla \times \mathbf{E} = -\dfrac{\partial \mathbf{B}}{\partial t}$   — Faraday's Law: a changing magnetic field induces an electric field.}
+
+				
+
+\noindent\hspace*{1.2em}\textit{$\nabla \times \mathbf{B} = \mu_0\mathbf{J} + \mu_0\varepsilon_0\dfrac{\partial \mathbf{E}}{\partial t}$   — Ampère–Maxwell Law: currents and changing electric fields create magnetic fields.}
+
+				
+
+\section{Displacement Current}
+
+				
+
+Maxwell's key insight was adding the displacement current term $\varepsilon_0 \partial\mathbf{E}/\partial t$ to Ampère's law. This predicts that a time-varying electric field produces a magnetic field even in the absence of physical current — allowing electromagnetic waves to propagate through a vacuum.
+
+\rffig{wiki_maxwells_1.pdf}{Maxwell's equations in integral form. Together they are the complete foundation of classical electromagnetism.}
+
+				
+
+\section{Electromagnetic Wave Speed}
+
+				
+
+\rffig{wiki_maxwells_2.pdf}{Transverse EM wave: E (red) and B (blue dashed) oscillate perpendicular to each other and to the propagation direction z.}
+
+				
+
+Taking the curl of Faraday's law and substituting Ampère–Maxwell gives a wave equation. The wave speed is:
+
+				
+\[c = \dfrac{1}{\sqrt{\mu_0 \varepsilon_0}} \approx 2.998 \times 10^8 \text{ m/s}\]
+
+				
+
+Maxwell recognised this as the speed of light, demonstrating that light is an electromagnetic wave.
+
+				
+
+\section{In Materials}
+
+				
+
+In a dielectric medium with relative permittivity $\varepsilon_r$ and relative permeability $\mu_r$, the wave speed becomes $v = c/\sqrt{\varepsilon_r \mu_r}$. This slowing is why wavelengths in PCB substrates are shorter than in free space.

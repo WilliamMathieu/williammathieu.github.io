@@ -1,0 +1,83 @@
+% chapter: wiki_yagi
+\chapter{Yagi-Uda Antennas}\label{ch:wiki_yagi}
+
+The Yagi-Uda antenna (commonly called a Yagi) is a directional antenna composed of a fed dipole, a reflector behind it, and one or more directors in front. Only the driven element is connected to the feed line — the others are parasitic and couple electromagnetically. It is the dominant design for VHF/UHF terrestrial and amateur radio links and satellite ground stations.
+
+				
+
+\section{Element Roles}
+
+				
+\begin{itemize}
+
+					\item \textbf{Reflector}: one element, positioned \textasciitilde{}0.25λ behind the driven element. Slightly longer than λ/2 (≈ 0.505λ). Reflects energy forward, increasing F/B ratio.
+
+					\item \textbf{Driven element}: the only fed element, ≈ 0.47–0.48λ long. Input impedance in the array is \textasciitilde{}25 Ω (straight dipole) or \textasciitilde{}200 Ω (folded dipole).
+
+					\item \textbf{Directors}: shorter than λ/2 (≈ 0.43–0.46λ), spaced 0.25–0.42λ forward of the driven element. Each director adds roughly 1–2 dBd of gain. Gain saturates above \textasciitilde{}9–10 elements.
+
+				
+\end{itemize}
+
+				
+
+\rffig{wiki_yagi_1.pdf}{5-element Yagi: reflector (dark), driven element (purple, fed), and three directors (grey).}
+
+				
+
+\section{Gain vs Element Count (NBS/Viezbicke Tables)}
+
+				
+
+The NBS Technical Note 688 (Viezbicke, 1976) tabulates optimised element lengths and spacings for maximum gain, derived from moment-method (NEC) calculations for element diameter d/λ = 0.0085.
+
+				
+					
+					
+					
+					
+					
+					
+				
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Elements} & \textbf{Gain (dBd)} & \textbf{Gain (dBi)} & \textbf{F/B (approx)} \\
+\hline
+2 & 3.8 & 5.9 & 5 dB \\
+3 & 5.9 & 8.1 & 10 dB \\
+5 & 8.2 & 10.4 & 14 dB \\
+7 & 10.0 & 12.2 & 18 dB \\
+9 & 11.3 & 13.5 & 22 dB \\
+\hline
+\end{longtable}}
+
+				
+
+dBi = dBd + 2.15. Adding directors past \textasciitilde{}9–10 elements yields diminishing returns (\textless{}0.5 dB per element) for significant boom length cost.
+
+				
+
+\section{Feed Impedance and Matching}
+
+				
+
+The driven-element feed impedance is reduced from the free-space dipole value (\textasciitilde{}73 Ω) by the mutual coupling of adjacent elements:
+
+				
+\begin{itemize}
+
+					\item \textbf{Straight dipole}: Zin ≈ 25–35 Ω in the array — requires a matching network (gamma match, beta match) to 50 Ω coax
+
+					\item \textbf{Folded dipole}: naturally 4× higher impedance → Zin ≈ 200–300 Ω → use a 4:1 balun or λ/4 transformer to 50 Ω
+
+				
+\end{itemize}
+
+				
+
+\section{Bandwidth and Scaling}
+
+				
+
+A well-optimised Yagi has an operating bandwidth of approximately 2–5\% of the centre frequency — narrow enough that element length must be scaled accurately. To move a design to a new frequency, scale all dimensions by the ratio of the original wavelength to the new wavelength (f\_old/f\_new).

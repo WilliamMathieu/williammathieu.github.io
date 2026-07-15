@@ -1,0 +1,50 @@
+% chapter: wiki_mri_hardware
+\chapter{MRI Hardware}\label{ch:wiki_mri_hardware}
+
+An MRI scanner is a complex system combining superconducting magnet technology, precision gradient electronics, and RF engineering. Each subsystem must work in concert to produce a diagnostic image.
+
+				
+
+\section{Main Magnet}
+
+				
+
+Modern clinical MRI scanners use superconducting solenoid magnets operating at liquid helium temperature (4 K) to achieve field strengths of 1.5–3 T (clinical) or 7–14 T (research). The magnet must have exceptional homogeneity — typically \textless{}1 ppm over the imaging volume — achieved by shimming with additional coils or ferromagnetic pieces.
+
+\rffig{wiki_mri_hardware_1.pdf}{MRI system: superconducting magnet, gradient amplifiers, RF transmit power amp, LNA receiver, and digital reconstruction.}
+
+				
+
+\section{Gradient Coils}
+
+				
+
+Three sets of gradient coils (Gx, Gy, Gz) superimpose linear magnetic field gradients on B₀. This makes the Larmor frequency spatially dependent, encoding spatial information. Gradient switching generates the characteristic loud knocking sound during an MRI scan. Gradient amplitude: 20–80 mT/m; slew rate: up to 200 T/m/s.
+
+				
+
+\section{RF Transmit System}
+
+				
+
+A high-power RF amplifier (typically 1–35 kW) drives the body or volume coil to produce the B1 excitation field at the Larmor frequency. The transmitter must deliver precise pulse shapes and calibrate the flip angle across the imaging volume. Frequency: 64 MHz (1.5 T), 128 MHz (3 T), 300 MHz (7 T).
+
+				
+
+\section{RF Receive System}
+
+				
+
+\rffig{wiki_mri_hardware_2.pdf}{MRI scanner block diagram showing magnet, gradient coils, RF transmit/receive chains, and image reconstruction.}
+
+				
+
+Receive coils (surface coils or phased arrays) detect the tiny precessing magnetisation signal. The signal is typically on the order of microvolts. It passes through a low-noise preamplifier (LNA), is downconverted to baseband, digitised, and reconstructed via Fourier transform into an image.
+
+				
+
+\section{Shielding}
+
+				
+
+The RF system operates inside an RF-shielded room (Faraday cage) to prevent external interference from contaminating the signal. The magnet's fringe field is contained by passive or active shielding to protect nearby equipment and comply with safety zones.

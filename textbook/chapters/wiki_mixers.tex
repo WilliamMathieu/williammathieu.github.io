@@ -1,0 +1,42 @@
+% chapter: wiki_mixers
+\chapter{Mixers and Frequency Conversion}\label{ch:wiki_mixers}
+
+A mixer multiplies two signals in the time domain, producing sum and difference frequency components. This allows frequency conversion — moving signals from one frequency band to another. Mixers are at the heart of every superheterodyne radio, radar, and wireless communication system.
+
+				
+
+\section{Basic Operation}
+
+				
+
+\rffig{wiki_mixers_1.pdf}{Mixer produces sum (fRF+fLO, orange) and difference (fRF−fLO, blue) frequency components.}
+
+				
+
+An ideal mixer with RF input at $f_{RF}$ and local oscillator (LO) at $f_{LO}$ produces output at $f_{IF} = f_{RF} \pm f_{LO}$. The desired sideband is selected by the IF filter; the unwanted image frequency falls at $f_{LO} - f_{IF}$ (for a low-side LO) and must be rejected.
+
+\rffig{wiki_mixers_2.pdf}{Mixing products: desired IF (green), input tones (blue/purple), and upper sideband (orange).}
+
+				
+
+\section{Conversion Loss and Noise Figure}
+
+				
+
+Passive mixers (using diodes or FETs) have conversion loss — the IF output is weaker than the RF input. Typical conversion loss: 5–8 dB for a diode ring mixer. The NF of a passive mixer equals approximately its conversion loss. Active mixers provide conversion gain (0–15 dB) at the cost of higher DC power and potentially more distortion.
+
+				
+
+\section{Image Rejection Mixer (IQ Mixer)}
+
+				
+
+An IQ (in-phase/quadrature) mixer uses two mixers with LO signals 90° apart, producing in-phase (I) and quadrature (Q) baseband outputs. When the outputs are combined correctly, the image frequency is cancelled. Image rejection of 30–40 dB is achievable in practice; better rejection requires careful amplitude and phase balance.
+
+				
+
+\section{Spurs and Isolation}
+
+				
+
+Real mixers generate mixing products at $mf_{LO} \pm nf_{RF}$ (spurious responses or "spurs"). Mixer datasheets specify LO-to-RF, LO-to-IF, and RF-to-IF isolation to characterise feedthrough. Double-balanced mixers provide better isolation and spur rejection than single-ended designs.

@@ -1,0 +1,133 @@
+% chapter: wiki_pcb_rf
+\chapter{RF PCB Design}\label{ch:wiki_pcb_rf}
+
+At RF frequencies, PCB traces behave as transmission lines. Their characteristic impedance must be controlled to prevent reflections, signal integrity problems, and radiation. The four standard controlled-impedance structures are microstrip, stripline, coplanar waveguide (CPW), and differential pairs. Each has different shielding characteristics, loss properties, and PCB layer requirements.
+
+      
+
+\section{Comparison of PCB Transmission Line Types}
+
+      
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}}
+\hline
+\textbf{Type} & \textbf{Layers needed} & \textbf{Shielding} & \textbf{Via needed for termination?} & \textbf{Best for} \\
+\hline
+Microstrip & 2 (trace + ground) & Partial (one side open) & No & General RF up to \textasciitilde{}10 GHz, antennas \\
+Stripline & 3+ (trace between 2 grounds) & Full TEM, no radiation & Yes (for shunt elements) & High isolation, sensitive circuits, digital backplanes \\
+CPW (coplanar waveguide) & 1 (trace + ground coplanar) & Partial to full (GCPW) & No — shunt connections on same layer & MMIC, mmWave, no-via shunt connections \\
+Differential pair & 2 & Partial (common-mode rejects noise) & No & USB, HDMI, LVDS, balanced RF \\
+\hline
+\end{longtable}}
+
+      
+
+\section{Coplanar Waveguide (CPW)}
+
+      
+
+CPW places the signal trace between two coplanar ground planes. No ground plane is needed below the substrate, making it ideal for flip-chip and MMIC die attachment where ground connections must be made on the surface. The characteristic impedance depends on the trace width \emph{w} and gap \emph{s} to the ground planes:
+
+\rffig{wiki_pcb_rf_1.pdf}{Cross-sections of the four standard PCB RF transmission line types.}
+
+      
+\[Z_0 = \dfrac{30\pi}{\sqrt{\varepsilon_{eff}}}\dfrac{K(k^\prime)}{K(k)}, \quad k = \dfrac{w}{w+2s}\]
+
+      
+
+where K(k) is the complete elliptic integral of the first kind. Grounded CPW (GCPW) adds a bottom ground plane, suppressing the parasitic microstrip mode and is preferred for multilayer PCBs.
+
+      
+
+\section{Differential Pair Impedance}
+
+      
+
+Edge-coupled microstrip differential pairs carry balanced signals. The key parameter is the differential impedance $Z_{diff} = 2 Z_{odd}$, where $Z_{odd}$ is the odd-mode impedance. Standard targets: 100 Ω differential for USB/HDMI/LVDS, 90 Ω for PCIe.
+
+      
+\[Z_{diff} = 2Z_{odd} \approx 2Z_0\left(1 - 0.347e^{-2.655 s/h}\right)\]
+
+      
+
+where \emph{s} is the edge-to-edge spacing and \emph{h} is the substrate height. The even-mode impedance $Z_{even} \approx 2Z_0/(1 + 0.347e^{-2.655 s/h})$ determines common-mode behaviour. Tight spacing reduces Z\_diff; looser spacing increases it toward 2×Z₀\_single.
+
+      
+
+\section{Stripline}
+
+      
+
+Stripline is a flat conductor centred symmetrically between two ground planes. It is a TEM mode structure with no dispersion and no radiation — unlike microstrip whose fields extend into air above the trace. The impedance:
+
+      
+\[Z_0 = \dfrac{60}{\sqrt{\varepsilon_r}}\ln\!\left(\dfrac{4b}{0.67\pi w_{eff}(0.8+t/w)}\right)\]
+
+      
+
+where \emph{b} is the ground-plane separation and $w_{eff}$ accounts for trace thickness. Because the medium is uniform, $v_p = c/\sqrt{\varepsilon_r}$ with no effective permittivity correction.
+
+      
+
+\section{Via Parasitics}
+
+      
+
+A PCB via connecting signal layers has inductance and capacitance:
+
+\rffig{wiki_pcb_rf_2.pdf}{Via cross-section showing inner conductor, antipad, and the parasitic inductance + capacitance equivalent circuit.}
+
+      
+\[L_{via} \approx 0.2h\ln\!\left(\dfrac{4h}{d}\right)\text{ nH}, \quad C_{via} \approx \dfrac{1.41\varepsilon_r h}{\ln(D/d)}\text{ pF}\]
+
+      
+
+where \emph{h} is the via height (mm), \emph{d} the drill diameter (mm), and \emph{D} the antipad diameter (mm). At 1 GHz, a standard FR4 via (0.3 mm drill, 1.6 mm deep) has about 0.5 nH inductance and 0.15 pF capacitance — enough to cause significant reflections at microwave frequencies. Via stubs (unused portions below the signal layer) are particularly problematic and are removed by backdrilling.
+
+      
+
+\section{Bond Wire Inductance}
+
+      
+
+Gold or aluminium bond wires connecting a die to a package or PCB have parasitic inductance (Grover formula):
+
+      
+\[L_{wire} = 0.2\ell\!\left[\ln\!\left(\dfrac{2\ell}{d}\right) - 0.75\right]\text{ nH}\]
+
+      
+
+where ℓ and d are in mm. A typical 1.5 mm gold bond wire (d = 25 µm) has about 1.2 nH inductance, giving 7.5 Ω reactance at 1 GHz — often requiring resonating capacitors in MMIC matching networks.
+
+      
+
+\section{Common Material Properties}
+
+      
+        
+        
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Substrate} & \textbf{εᵣ} & \textbf{tan δ} & \textbf{Typical use} \\
+\hline
+FR4 & 4.2–4.6 & 0.018–0.025 & General PCB, \textless{} 3 GHz \\
+Rogers 4003C & 3.55 & 0.0027 & RF PCB, antennas, up to 30 GHz \\
+Rogers 4350B & 3.66 & 0.0037 & Low-cost RF alternative \\
+PTFE (Teflon) & 2.1 & 0.001 & High-frequency, low-loss \\
+Alumina (Al₂O₃) & 9.8 & 0.0002 & MMICs, hybrid circuits \\
+GaAs & 12.9 & 0.0006 & MMIC substrates \\
+\hline
+\end{longtable}}
