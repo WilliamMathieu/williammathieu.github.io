@@ -1,0 +1,36 @@
+Every active RF function --- amplification, oscillation, mixing --- rests on a
+three-terminal transistor that turns a small control signal into a larger
+controlled current. Choosing the right device technology is the first design
+decision.
+
+\section{Device Families}
+\emph{Silicon BJT and SiGe HBT} devices offer low cost, low $1/f$ noise, and good
+linearity into the tens of GHz (SiGe). \emph{CMOS} enables single-chip integration
+of RF and digital, at the price of higher noise and lower breakdown. \emph{GaAs
+MESFET/pHEMT} give very low noise figures and reach millimetre waves; \emph{GaN
+HEMT} combines high breakdown voltage with high power density, dominating modern
+power amplifiers.
+
+\section{Figures of Merit}
+The transition frequency $f_T$ is where the short-circuit current gain falls to
+unity,
+\[ f_T = \frac{g_m}{2\pi(C_{gs}+C_{gd})}, \]
+where $g_m = \partial I_D/\partial V_{GS}$ is the transconductance. The maximum
+oscillation frequency $f_{max}$, where the unilateral power gain reaches unity, is
+the more relevant ceiling for amplifiers and typically exceeds $f_T$. A useful
+device runs well below both.
+
+\section{Biasing}
+The transistor must be held at a quiescent operating point (bias) that sets its
+$g_m$, linearity, and noise. Bias is delivered through RF chokes and bypass
+capacitors that feed DC while blocking RF, and the network must itself be stable
+and temperature-tolerant. Class-A bias (continuous conduction) gives the best
+linearity and noise; lower conduction angles trade linearity for efficiency
+(Part~V).
+
+\section{Small-Signal Model and Technology Choice}
+Near the operating point the device is described by a linear equivalent circuit
+(a transconductance $g_m$, input and feedback capacitances, output conductance),
+or equivalently by its measured S-parameters at that bias. Match the technology to
+the job: SiGe or GaAs pHEMT for a low-noise front end, GaN for a power stage, and
+CMOS when integration with baseband matters most.

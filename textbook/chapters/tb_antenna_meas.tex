@@ -1,0 +1,29 @@
+% chapter: tb_antenna_meas (native)
+\chapter{Antenna Measurement}\label{ch:tb_antenna_meas}
+
+\input{pedagogy/tb_antenna_meas_obj}
+
+An antenna's real performance is measured, not just simulated, and RF metrology
+has its own methods and pitfalls.
+
+\section{The Far-Field Condition}
+Pattern and gain are defined in the far field, beyond
+\[ R \ge \frac{2 D^2}{\lambda}, \]
+where $D$ is the largest aperture dimension. Measurements are made on outdoor
+ranges or in anechoic chambers whose absorber suppresses reflections.
+
+\section{Gain Measurement}
+Two standard methods: the \emph{gain-comparison} method references the antenna to
+a calibrated gain standard, and the \emph{three-antenna} method solves for three
+unknown gains from three pairwise transmission measurements --- needing no prior
+standard.
+
+\section{Pattern, Polarization, and Near-Field}
+Rotating the antenna traces its radiation pattern and, with a polarized source,
+its polarization and axial ratio. When a far-field range is impractical, a probe
+scans the near field over a plane, cylinder, or sphere and a mathematical
+transform computes the far-field pattern. Impedance and return loss are measured
+directly on a VNA, and radiation efficiency by methods such as the Wheeler cap.
+
+
+\input{pedagogy/tb_antenna_meas}

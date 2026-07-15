@@ -87,6 +87,32 @@ PARTS = [
    ("wiki_parallel_imaging","Parallel Imaging"),
    ("wiki_b1_mapping","B1 Field Mapping"),
    ("wiki_sar","SAR and RF Safety in MRI")]),
+ ("Active Devices and Circuit Design",
+  [("tb_transistors","RF Transistors"),
+   ("tb_diodes","RF Diodes and Varactors"),
+   ("tb_ssamp","Small-Signal Amplifier Design"),
+   ("tb_lna","Low-Noise Amplifier Design"),
+   ("tb_oscdesign","Oscillator Design"),
+   ("tb_synth","PLL and Synthesizer Design")]),
+ ("Receivers and Digital RF",
+  [("tb_rxarch","Receiver Architectures"),
+   ("tb_iq","I/Q Modulation and Impairments"),
+   ("tb_gainplan","Gain Planning and Dynamic Range"),
+   ("tb_sampling","Sampling and Data Conversion"),
+   ("tb_sdr","Software-Defined Radio")]),
+ ("Communication Systems",
+  [("tb_digital_comm","Digital Communication Fundamentals"),
+   ("tb_coding","Coding, Spread Spectrum and OFDM")]),
+ ("Advanced Antennas and Propagation",
+  [("tb_antenna_types","Antenna Types"),
+   ("tb_beamforming","Phased Arrays and Beamforming"),
+   ("tb_propagation","Radio Propagation and Fading"),
+   ("tb_antenna_meas","Antenna Measurement")]),
+ ("Filters, Control Components and Test",
+  [("tb_adv_filters","Advanced Filters"),
+   ("tb_control","Switches, Phase Shifters and Ferrite Devices"),
+   ("tb_measurement","RF Measurement and Instrumentation"),
+   ("tb_cad","RF Simulation and Design Flow")]),
 ]
 
 # ---------------------------------------------------------------- helpers
@@ -310,6 +336,17 @@ def convert(slug, title):
     open(os.path.join(CHDIR, slug + '.tex'), 'w', encoding='utf-8').write(tex)
     return len(figs), sum(1 for f in figs if not f[2])
 
+def convert_native(slug, title):
+    """Hand-authored chapter: body LaTeX lives in textbook/native/<slug>.tex."""
+    body = open(os.path.join(TB, 'native', slug + '.tex'), encoding='utf-8').read().strip()
+    ped = os.path.join(TB, 'pedagogy')
+    obj  = ('\\input{pedagogy/%s_obj}\n\n' % slug) if os.path.exists(os.path.join(ped, slug+'_obj.tex')) else ''
+    prac = ('\n\n\\input{pedagogy/%s}\n' % slug) if os.path.exists(os.path.join(ped, slug+'.tex')) else ''
+    tex = ('%% chapter: %s (native)\n\\chapter{%s}\\label{ch:%s}\n\n%s%s\n%s'
+           % (slug, title.replace('&','\\&'), slug, obj, body, prac))
+    open(os.path.join(CHDIR, slug + '.tex'), 'w', encoding='utf-8').write(tex)
+    return 0, 0
+
 # ---------------------------------------------------------------- drive
 def roman(n):
     vals=[(10,'X'),(9,'IX'),(5,'V'),(4,'IV'),(1,'I')]; r=''
@@ -321,7 +358,10 @@ body_lines = []; sol_lines = []; total_fig = 0; total_bad = 0; nch = 0; nsol = 0
 for pi,(ptitle, chs) in enumerate(PARTS, 1):
     body_lines.append('\n\\part{%s}\n' % ptitle.replace('&','\\&'))
     for slug, title in chs:
-        nf, bad = convert(slug, title)
+        if os.path.exists(os.path.join(ROOT, slug + '.html')):
+            nf, bad = convert(slug, title)
+        else:
+            nf, bad = convert_native(slug, title)
         total_fig += nf; total_bad += bad; nch += 1
         body_lines.append('\\include{chapters/%s}' % slug)
         if os.path.exists(os.path.join(TB, 'pedagogy', slug + '_sol.tex')):

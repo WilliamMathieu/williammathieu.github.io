@@ -1,0 +1,31 @@
+% chapter: tb_cad (native)
+\chapter{RF Simulation and Design Flow}\label{ch:tb_cad}
+
+\input{pedagogy/tb_cad_obj}
+
+No modern RF design reaches hardware without simulation. Knowing which tool models
+what --- and its limits --- is part of the craft.
+
+\section{Circuit Simulation}
+Linear (S-parameter) simulation gives frequency response instantly for matching
+and filters. Nonlinear behavior needs \emph{harmonic balance} (steady-state
+response to periodic drive --- ideal for amplifiers, mixers, and oscillators) or
+\emph{transient/envelope} methods; SPICE handles time-domain and start-up. Each
+answers a different question about the same circuit.
+
+\section{Electromagnetic Simulation}
+When layout parasitics or radiation matter, EM solvers compute the fields
+directly: method-of-moments (planar structures, e.g.\ microstrip), finite-element
+(arbitrary 3-D, e.g.\ connectors and packages), and FDTD (broadband, transient).
+They are accurate but slow, so they verify critical structures rather than whole
+boards.
+
+\section{The Design Flow}
+A typical flow: write the spec, design and simulate the schematic, lay it out, EM-
+verify the critical nets, fabricate, then measure and tune. Models are de-embedded
+against measurements, and Monte-Carlo/corner analysis checks yield against
+component and process tolerances (design for manufacture). A mesh cell of roughly
+$\lambda/10$ to $\lambda/20$ is the rule of thumb for EM accuracy.
+
+
+\input{pedagogy/tb_cad}

@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Maximum unilateral gain]
+A device has $|S_{21}| = 4$, $|S_{11}| = 0.5$, $|S_{22}| = 0.4$ (and
+$S_{12}\!\approx\!0$). Its maximum unilateral transducer gain is
+\[ G_{TU,\max} = \frac{|S_{21}|^2}{(1-|S_{11}|^2)(1-|S_{22}|^2)}
+   = \frac{16}{(1-0.25)(1-0.16)} = \frac{16}{0.63} = 25.4, \]
+i.e.\ $14.0\ \text{dB}$, obtained by conjugately matching both ports.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $G_{TU,\max}=|S_{21}|^2/[(1-|S_{11}|^2)(1-|S_{22}|^2)]$ with input/output conjugate match.
+\item Check stability ($K>1$, $|\Delta|<1$) before choosing terminations.
+\item Constant-gain circles trade gain for bandwidth, match, or noise.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item $|S_{21}| = 3$, $|S_{11}| = 0.4$, $|S_{22}| = 0.3$. Find $G_{TU,\max}$ in dB.
+\item Why can maximum available gain be undefined for a real device?
+\item What does a constant-gain circle represent?
+\end{exercises}
+
+\furtherreading{Gonzalez~\cite{gonzalez} (ch.~3); Pozar~\cite{pozar} (ch.~12).}

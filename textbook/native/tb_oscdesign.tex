@@ -1,0 +1,24 @@
+An oscillator turns DC into a periodic RF signal. Design means guaranteeing
+start-up, setting the frequency, and minimizing phase noise.
+
+\section{Two Views of the Same Thing}
+The \emph{feedback} view (Barkhausen): loop gain $\ge 1$ with $0^\circ$ (mod
+$360^\circ$) phase. The equivalent \emph{negative-resistance} view: the active
+device presents a negative resistance $-R_d$ that cancels the resonator loss
+$R_{res}$. Oscillation starts when $|R_d| > R_{res}$ and settles when, through
+nonlinear compression, $|R_d| = R_{res}$ at the resonant frequency.
+
+\section{Topologies}
+The Colpitts, Hartley, and Clapp oscillators differ only in how the tank taps
+feedback (a capacitive divider, an inductive divider, or a series-tuned
+variant). For the best stability, a \emph{crystal} replaces the LC tank: its
+enormous $Q$ ($10^4$--$10^6$) pins the frequency and slashes phase noise.
+Dielectric-resonator (DRO) and YIG oscillators serve the microwave range.
+
+\section{Design Flow}
+Choose a resonator with the highest practical loaded $Q$; bias the device for
+sufficient small-signal negative resistance (start-up margin $\sim$3$\times$);
+set the tank for the target frequency; and buffer the output so the load does not
+pull the frequency. Leeson's model (Chapter on Phase Noise) ties the achievable
+phase noise to $Q$ and the device's flicker noise --- high $Q$ and a low-$1/f$
+device win.

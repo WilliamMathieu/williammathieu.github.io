@@ -1,0 +1,26 @@
+\begin{workedexample}[Worked Example: Image rejection from I/Q imbalance]
+An image-reject mixer's rejection is limited by gain error $g$ (fractional)
+and phase error $\varphi$ (radians) between its I and Q paths:
+\[ \text{IRR} \approx 10\log_{10}\!\frac{4}{g^2 + \varphi^2}. \]
+For a $1\%$ gain error ($g = 0.01$) and $1^\circ$ phase error
+($\varphi = 0.0175\ \text{rad}$),
+\[ \text{IRR} \approx 10\log_{10}\frac{4}{(0.01)^2 + (0.0175)^2} = 10\log_{10}(9850) = 39.9\ \text{dB}. \]
+Practical analog balance thus caps image rejection near $40\ \text{dB}$, which is
+why calibration or an external filter is often still needed.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Superhet: fixed IF, easy filtering, but an image $2f_{IF}$ away to reject.
+\item Zero-IF: no image, fully integrated, but DC offset, $1/f$ noise, LO leakage, I/Q imbalance.
+\item Image-reject (Hartley/Weaver) cancellation is limited by I/Q balance: $\text{IRR}\approx 4/(g^2+\varphi^2)$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item How far from the wanted signal is a superhet's image?
+\item Name two impairments specific to a direct-conversion receiver.
+\item With $g = 0.02$ and $\varphi = 0.01\ \text{rad}$, estimate the image-reject ratio.
+\end{exercises}
+
+\furtherreading{Razavi~\cite{razavi} (ch.~4); Lee~\cite{lee}.}

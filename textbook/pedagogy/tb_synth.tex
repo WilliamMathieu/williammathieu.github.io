@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: DDS resolution]
+A direct digital synthesizer has an $n = 32$-bit phase accumulator clocked
+at $f_{clk} = 100\ \text{MHz}$. Its frequency resolution is
+\[ \Delta f = \frac{f_{clk}}{2^{\,32}} = \frac{10^{8}}{4.29\times10^{9}} = 0.023\ \text{Hz}, \]
+and a tuning word $M = 2^{30}$ produces
+$f_{out} = (2^{30}/2^{32})\,f_{clk} = 0.25\times100 = 25\ \text{MHz}$. DDS trades
+this fine, fast control against DAC spurs and a Nyquist limit of $f_{clk}/2$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Charge-pump type-II PLL; design around loop bandwidth $\omega_c$ and $45$--$60^\circ$ phase margin.
+\item Wide loop: fast, low VCO noise, more spur; narrow loop: clean but slow.
+\item Fractional-N decouples step from $f_{ref}$; DDS: $f_{out}=(M/2^n)f_{clk}$, resolution $f_{clk}/2^n$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A $24$-bit DDS clocked at $50\ \text{MHz}$: what is its frequency resolution?
+\item Which synthesizer type lets the channel step be far finer than the reference?
+\item Name one penalty of widening the PLL loop bandwidth.
+\end{exercises}
+
+\furtherreading{Rohde~\cite{rohde}; Razavi~\cite{razavi} (ch.~9).}

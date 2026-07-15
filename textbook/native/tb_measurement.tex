@@ -1,0 +1,21 @@
+RF engineering is empirical: designs are proven on the bench, and the instruments
+have characteristic strengths and traps.
+
+\section{Spectrum Analyzer}
+A spectrum analyzer shows power versus frequency. Its resolution bandwidth (RBW)
+sets both the frequency resolution and the displayed noise floor (narrower RBW
+lowers the floor); the video bandwidth (VBW) smooths the trace. Swept analyzers
+trade speed for span; FFT/real-time analyzers capture transients.
+
+\section{Sources, Power, and Noise}
+Signal and vector-signal generators provide clean or modulated stimuli; power
+meters (diode or thermal) measure absolute level. Noise figure is measured by the
+\emph{Y-factor} method: an excess-noise-ratio (ENR) source is switched on and off,
+and the hot/cold power ratio $Y$ gives
+\[ F = \frac{\text{ENR}}{Y - 1}. \]
+
+\section{Network Analysis and Time Domain}
+The VNA measures S-parameters after a SOLT or TRL calibration that moves the
+reference plane to the device and removes systematic error. Time-domain
+reflectometry (TDR) locates impedance discontinuities along a line by their echo
+delay, and oscilloscopes/logic analyzers handle the digital side of an SDR.

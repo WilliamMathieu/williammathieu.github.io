@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Steering phase and beamwidth]
+A uniform linear array with $d = \lambda/2$ is steered to $\theta_0 = 30^\circ$.
+The required progressive phase per element is
+\[ \beta = -k d \sin\theta_0 = -\frac{2\pi}{\lambda}\cdot\frac{\lambda}{2}\cdot\sin30^\circ = -\frac{\pi}{2} = -90^\circ. \]
+For $N = 8$ elements at $d=\lambda/2$, the broadside half-power beamwidth is about
+$0.886\,\lambda/(Nd) = 0.886/4 = 0.22\ \text{rad} = 12.7^\circ$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $\text{AF}(\theta) = \sum_n e^{jn(kd\cos\theta+\beta)}$; the array factor sets directivity.
+\item Steer with $\beta = -kd\sin\theta_0$ --- electronic, instantaneous.
+\item Beamwidth $\propto \lambda/(Nd)$; keep $d \le \lambda/2$ to avoid grating lobes; taper for low sidelobes.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Steering phase for $d = \lambda/2$ to $\theta_0 = 90^\circ$ (endfire)?
+\item Why keep element spacing $d \le \lambda/2$?
+\item What does amplitude tapering buy, and at what cost?
+\end{exercises}
+
+\furtherreading{Mailloux~\cite{mailloux}; Balanis~\cite{balanis} (ch.~6).}

@@ -1,0 +1,26 @@
+Getting close to the Shannon limit takes more than a good constellation: it takes
+coding, and often spread-spectrum or multicarrier techniques matched to the
+channel.
+
+\section{Forward Error Correction}
+FEC adds structured redundancy so the receiver can correct errors without
+retransmission. Block, convolutional, turbo, and LDPC codes each buy a
+\emph{coding gain} --- the reduction in required $E_b/N_0$ for a target BER ---
+at the cost of overhead and decoder complexity. Modern LDPC/turbo codes approach
+the Shannon limit within a fraction of a dB.
+
+\section{Spread Spectrum}
+Direct-sequence spread spectrum multiplies the data by a much faster pseudo-random
+chip sequence, spreading the signal over a wide band. The receiver despreads it,
+gaining a \emph{processing gain}
+\[ G_p = \frac{R_{chip}}{R_{data}}, \]
+which suppresses narrowband interference and enables code-division multiple
+access. Frequency hopping spreads by rapidly changing carrier instead.
+
+\section{OFDM}
+Orthogonal frequency-division multiplexing splits a high-rate stream across many
+narrow, orthogonal subcarriers, each seeing a nearly flat channel. A cyclic
+prefix longer than the channel delay spread eliminates inter-symbol interference,
+making equalization trivial --- the reason OFDM underlies Wi-Fi, LTE, and 5G. Its
+cost is a high peak-to-average power ratio (PAPR) that stresses the power
+amplifier.

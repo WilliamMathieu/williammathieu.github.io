@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Digital phase-shifter resolution]
+A $6$-bit digital phase shifter divides the full circle into
+\[ \text{LSB} = \frac{360^\circ}{2^{6}} = 5.625^\circ, \]
+so it can command any phase from $0^\circ$ to $354.375^\circ$ in $5.625^\circ$
+steps. Finer beam pointing in a phased array needs more bits; array calibration
+corrects the residual phase errors between elements.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Switches (PIN/FET/MEMS): trade insertion loss, isolation, IP3, and speed.
+\item An $n$-bit phase shifter has LSB $= 360^\circ/2^n$.
+\item Ferrites are nonreciprocal: circulators route one way; terminate a port for an isolator that protects the source.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Least-significant step of a $4$-bit phase shifter?
+\item What component protects a transmitter from power reflected by a bad antenna?
+\item Which switch technology offers the lowest insertion loss but the slowest switching?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~7, 10); Steer~\cite{steer}.}

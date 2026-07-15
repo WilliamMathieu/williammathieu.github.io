@@ -1,0 +1,30 @@
+% chapter: tb_sampling (native)
+\chapter{Sampling and Data Conversion}\label{ch:tb_sampling}
+
+\input{pedagogy/tb_sampling_obj}
+
+Between the analog RF world and the digital signal processor sit the
+data converters, and their sampling theory sets what the radio can do.
+
+\section{Nyquist, Aliasing, and Zones}
+Sampling at $f_s$ replicates the spectrum every $f_s$; any energy above $f_s/2$
+folds (aliases) into the first Nyquist zone. An anti-alias filter must remove
+out-of-band energy before the ADC.
+
+\section{Bandpass (Undersampling) Sampling}
+A band of width $B$ centered at a high frequency need not be sampled at twice its
+top frequency --- only at $f_s \ge 2B$, chosen so the band folds cleanly into a
+Nyquist zone without overlapping itself. This lets an ADC digitize an IF (or even
+RF) band directly, the enabling trick of software-defined radio.
+
+\section{Converter Metrics}
+An ideal $N$-bit ADC has quantization-limited SNR
+\[ \text{SNR} = 6.02\,N + 1.76\ \text{dB}. \]
+Real converters fall short (ENOB), limited by distortion (SFDR) and especially by
+aperture jitter: a clock jitter $\sigma_t$ caps the SNR at
+$-20\log_{10}(2\pi f_{in}\sigma_t)$, which dominates at high input frequencies.
+The DAC on the transmit side produces spectral images that a reconstruction
+filter must suppress.
+
+
+\input{pedagogy/tb_sampling}

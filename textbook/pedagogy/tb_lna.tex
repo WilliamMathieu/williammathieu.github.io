@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: Noise figure off the optimum]
+An LNA device has $F_{min} = 0.5\ \text{dB}$ ($=1.122$), $R_n = 20\ \Omega$
+in a $50\ \Omega$ system. If the source is placed so that
+$|\Gamma_s-\Gamma_{opt}|^2/[(1-|\Gamma_s|^2)|1+\Gamma_{opt}|^2] = 0.1$, the noise
+factor is
+\[ F = 1.122 + \frac{4(20)}{50}(0.1) = 1.122 + 0.16 = 1.282, \]
+i.e.\ $\text{NF} = 1.08\ \text{dB}$ --- only $0.58\ \text{dB}$ above the minimum, a
+typical compromise for a good input match.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Noise: $F = F_{min} + (4R_n/Z_0)\,|\Gamma_s-\Gamma_{opt}|^2/[(1-|\Gamma_s|^2)|1+\Gamma_{opt}|^2]$.
+\item The low-noise source match ($\Gamma_{opt}$) generally differs from the gain/input match.
+\item Inductive source degeneration creates a real input resistance ($\approx\omega_T L_s$) noiselessly.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item If $\Gamma_s = \Gamma_{opt}$, what is the noise figure?
+\item Why is $L_s$ degeneration preferred over a physical resistor for input matching?
+\item Which stage in a receiver most determines system NF?
+\end{exercises}
+
+\furtherreading{Razavi~\cite{razavi} (ch.~5); Gonzalez~\cite{gonzalez} (ch.~4).}

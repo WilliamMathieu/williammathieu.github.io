@@ -1,0 +1,30 @@
+% chapter: tb_digital_comm (native)
+\chapter{Digital Communication Fundamentals}\label{ch:tb_digital_comm}
+
+\input{pedagogy/tb_digital_comm_obj}
+
+Modern RF exists to move bits, so the RF engineer needs the information-theory
+vocabulary that sets how many bits a channel can carry and how reliably.
+
+\section{Energy per Bit and SNR}
+Digital links are compared not by raw SNR but by the energy-per-bit to
+noise-density ratio $E_b/N_0$, which normalizes out data rate and bandwidth:
+\[ \text{SNR} = \frac{E_b}{N_0}\cdot\frac{R_b}{B}. \]
+A scheme's bit-error rate is a function of $E_b/N_0$ alone; for BPSK/QPSK,
+$\text{BER} = Q\!\big(\sqrt{2E_b/N_0}\big)$.
+
+\section{The Shannon Limit}
+Shannon's capacity gives the ultimate error-free rate of a bandlimited channel:
+\[ C = B\,\log_2(1 + \text{SNR}). \]
+No modulation or code can exceed it; real systems operate some margin below it and
+spend coding and bandwidth to approach it.
+
+\section{Bandwidth, Pulse Shaping, and Efficiency}
+Sharp symbols would need infinite bandwidth, so transmitters shape pulses (e.g.\
+raised-cosine with roll-off $\beta$) to fit a spectral mask while limiting
+inter-symbol interference. \emph{Spectral efficiency} (bit/s/Hz) rises with
+constellation order but demands more SNR --- the same trade seen throughout digital
+RF.
+
+
+\input{pedagogy/tb_digital_comm}

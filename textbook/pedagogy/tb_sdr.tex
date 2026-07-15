@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Data rate and decimation]
+An SDR digitizes at $f_s = 100\ \text{Msps}$ with $16$-bit samples. Complex
+(I and Q) sampling produces a raw rate of
+\[ 100\times10^{6}\times16\times2 = 3.2\ \text{Gbit/s}, \]
+far too much to process directly. A digital downconverter selects the wanted
+channel and decimates by $50$, leaving $2\ \text{Msps}$ (a $2\ \text{MHz}$
+processing bandwidth) that a modest processor can demodulate in real time.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item SDR digitizes wide and does filtering/mixing/demod in software --- one radio, many waveforms.
+\item Front ends: direct RF sampling (fast ADC, bandpass sampling) or direct conversion (I/Q to baseband).
+\item A digital downconverter (NCO + mixer + decimating filter) selects and narrows the channel.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Raw data rate of a $61.44\ \text{Msps}$, $12$-bit, complex ADC stream?
+\item What decimation factor turns $100\ \text{Msps}$ into a $1\ \text{MHz}$ channel?
+\item Name one capability SDR gains from doing conversion digitally.
+\end{exercises}
+
+\furtherreading{Steer~\cite{steer}; Razavi~\cite{razavi} (ch.~4).}

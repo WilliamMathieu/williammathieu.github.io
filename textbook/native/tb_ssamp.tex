@@ -1,0 +1,29 @@
+Once a transistor is chosen and biased, small-signal amplifier design is the art
+of choosing the source and load terminations that deliver the wanted gain,
+stability, and match.
+
+\section{Power Gains}
+Three gains matter, all computable from the S-parameters and the terminations
+$\Gamma_s,\Gamma_L$: the \emph{transducer gain} $G_T$ (delivered/available from
+source), the \emph{available gain} $G_A$, and the \emph{operating gain} $G_P$.
+For a unilateral device ($S_{12}\!\approx\!0$) the maximum transducer gain
+factors cleanly:
+\[ G_{TU,\max} = \frac{|S_{21}|^2}{(1-|S_{11}|^2)(1-|S_{22}|^2)}, \]
+achieved by conjugately matching input and output.
+
+\section{Stability First}
+A design is only meaningful if it is stable (Chapter on Amplifier Stability):
+check $K>1$ and $|\Delta|<1$. If the device is only conditionally stable, restrict
+$\Gamma_s,\Gamma_L$ to the stable regions or add resistive loading.
+
+\section{Bilateral Design}
+When $S_{12}$ is not negligible, input and output interact. The simultaneous
+conjugate match $\Gamma_{MS},\Gamma_{ML}$ solves a coupled pair of equations and
+yields the maximum available gain $G_{MA}=|S_{21}/S_{12}|(K-\sqrt{K^2-1})$ ---
+defined only when the device is unconditionally stable.
+
+\section{Design for a Specified Gain}
+Rarely do we want maximum gain; more often a specific, flat gain across a band.
+Constant-gain circles on the Smith chart show the loci of $\Gamma_s$ (or
+$\Gamma_L$) that give a chosen gain, letting the designer trade gain for
+bandwidth, match, or noise.

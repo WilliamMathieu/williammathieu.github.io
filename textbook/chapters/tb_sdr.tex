@@ -1,0 +1,31 @@
+% chapter: tb_sdr (native)
+\chapter{Software-Defined Radio}\label{ch:tb_sdr}
+
+\input{pedagogy/tb_sdr_obj}
+
+Software-defined radio pushes the analog-to-digital boundary as close to the
+antenna as possible and does the rest --- filtering, mixing, demodulation --- in
+software.
+
+\section{The Idea}
+Instead of a fixed chain of analog filters and mixers, an SDR digitizes a wide
+band and reconfigures its behavior in DSP. The same hardware can be an FM
+receiver, a spectrum monitor, or a cellular base station, changed by loading new
+code.
+
+\section{Architectures}
+Two dominate: \emph{direct RF sampling}, where a fast ADC digitizes the RF band
+outright (using bandpass sampling); and \emph{direct-conversion}, where an
+analog I/Q front end brings the band to baseband for a slower ADC. A digital
+downconverter (a numerically controlled oscillator, digital mixer, and decimating
+CIC/FIR filters) then selects and narrows the channel.
+
+\section{Processing and Practicalities}
+The wideband data rate off the ADC is large, so decimation reduces it to the
+channel bandwidth before heavy processing on an FPGA or general-purpose
+processor. SDR also enables digital predistortion, digital I/Q-imbalance and
+DC-offset correction, and rapid retuning --- at the cost of ADC/DAC dynamic range
+and raw data throughput.
+
+
+\input{pedagogy/tb_sdr}

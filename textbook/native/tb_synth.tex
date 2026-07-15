@@ -1,0 +1,25 @@
+A frequency synthesizer produces a programmable, low-noise carrier locked to a
+stable reference. The PLL chapter introduced the loop; here we design it.
+
+\section{The Charge-Pump Loop}
+A modern synthesizer is a type-II charge-pump PLL: a phase-frequency detector
+drives a charge pump into a loop filter that tunes a VCO, whose output is divided
+by $N$ and compared back to the reference. The open-loop gain sets the loop
+bandwidth $\omega_c$ and the phase margin (typically $45$--$60^\circ$ for good
+settling without peaking).
+
+\section{Loop-Filter Trade-offs}
+The loop filter (second- or third-order) sets the bandwidth, which trades two
+things: a \emph{wide} loop settles fast and suppresses VCO phase noise inside the
+band, but passes more reference spur; a \emph{narrow} loop is cleaner but slow.
+The filter is designed around the chosen $\omega_c$ and phase margin.
+
+\section{Integer-N, Fractional-N, and DDS}
+Integer-N forces the channel step to equal $f_{ref}$. Fractional-N divides by a
+non-integer average using a delta-sigma modulator, decoupling step size from
+$f_{ref}$ and shaping the resulting quantization noise to high offsets. Direct
+digital synthesis (DDS) takes a different route entirely: a phase accumulator
+addresses a sine table feeding a DAC, giving very fine, fast-hopping frequency
+control,
+\[ f_{out} = \frac{M}{2^{\,n}}\,f_{clk}, \]
+for an $n$-bit accumulator and tuning word $M$.

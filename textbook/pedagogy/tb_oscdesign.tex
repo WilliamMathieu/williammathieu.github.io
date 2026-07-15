@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Colpitts frequency]
+A Colpitts oscillator uses a tank inductor $L = 10\ \text{nH}$ with a
+capacitive divider $C_1 = C_2 = 2\ \text{pF}$. The feedback capacitors appear in
+series, $C_s = C_1C_2/(C_1+C_2) = 1\ \text{pF}$, so
+\[ f_0 = \frac{1}{2\pi\sqrt{L\,C_s}} = \frac{1}{2\pi\sqrt{(10\times10^{-9})(1\times10^{-12})}} = 1.59\ \text{GHz}. \]
+The divider ratio sets the feedback needed to sustain oscillation.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Start-up: $|R_d| > R_{res}$; steady state: $|R_d| = R_{res}$ (nonlinear limiting).
+\item Colpitts: $f_0 = 1/(2\pi\sqrt{L C_s})$ with $C_s = C_1C_2/(C_1+C_2)$.
+\item Crystals give huge $Q$ --- best stability and lowest phase noise.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A Colpitts tank has $L = 5\ \text{nH}$, $C_1 = C_2 = 4\ \text{pF}$. Find $f_0$.
+\item Why buffer an oscillator's output?
+\item Why does a crystal oscillator have far lower phase noise than an LC one?
+\end{exercises}
+
+\furtherreading{Lee~\cite{lee} (ch.~14--15); Razavi~\cite{razavi} (ch.~8).}

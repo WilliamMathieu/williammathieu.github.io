@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: ADC SNR and the jitter limit]
+A $12$-bit ADC has an ideal, quantization-limited SNR of
+\[ \text{SNR} = 6.02(12) + 1.76 = 74\ \text{dB}. \]
+But sampling a $f_{in} = 100\ \text{MHz}$ input with $\sigma_t = 1\ \text{ps}$ of
+clock jitter caps the SNR at
+\[ -20\log_{10}(2\pi f_{in}\sigma_t) = -20\log_{10}(2\pi\cdot10^{8}\cdot10^{-12}) = 64\ \text{dB}. \]
+Here jitter, not quantization, limits performance --- a common situation for
+high-IF sampling.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Energy above $f_s/2$ aliases into the first Nyquist zone; filter before the ADC.
+\item Bandpass sampling needs only $f_s \ge 2B$, folding a high band into a Nyquist zone.
+\item ADC SNR $= 6.02N + 1.76\ \text{dB}$; jitter caps it at $-20\log_{10}(2\pi f_{in}\sigma_t)$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Ideal SNR of a $10$-bit ADC?
+\item Jitter-limited SNR for $f_{in} = 1\ \text{GHz}$, $\sigma_t = 0.5\ \text{ps}$?
+\item Minimum sample rate to bandpass-sample a $5\ \text{MHz}$-wide band?
+\end{exercises}
+
+\furtherreading{Razavi~\cite{razavi} (ch.~4); Steer~\cite{steer}.}

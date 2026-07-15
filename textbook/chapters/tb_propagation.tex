@@ -1,0 +1,32 @@
+% chapter: tb_propagation (native)
+\chapter{Radio Propagation and Fading}\label{ch:tb_propagation}
+
+\input{pedagogy/tb_propagation_obj}
+
+Between transmitter and receiver the channel adds far more than free-space loss:
+reflection, diffraction, and multipath shape every real link.
+
+\section{Beyond Free Space}
+Near the ground, a direct ray and a ground-reflected ray interfere; beyond a
+break point the received power falls as $1/d^4$ rather than $1/d^2$. Empirical
+models (Okumura--Hata, COST-231) fit measured path loss in urban and suburban
+environments where a full calculation is hopeless.
+
+\section{Diffraction and Fresnel Zones}
+Waves bend around obstacles (diffraction), so a link can close even without line
+of sight. The first Fresnel zone --- an ellipsoid around the direct path with
+radius
+\[ r_1 = \sqrt{\frac{\lambda\, d_1 d_2}{d_1 + d_2}} \]
+at the point between distances $d_1$ and $d_2$ --- should be kept mostly clear of
+obstructions to avoid diffraction loss.
+
+\section{Multipath and Fading}
+Many reflected paths arrive with different delays and phases, so the received
+amplitude \emph{fades}. With no dominant path the envelope is Rayleigh
+distributed; with a line-of-sight component it is Rician. The spread of path
+delays (delay spread) sets the \emph{coherence bandwidth} beyond which the channel
+is frequency-selective, and motion causes a Doppler spread that sets how fast the
+fading changes.
+
+
+\input{pedagogy/tb_propagation}

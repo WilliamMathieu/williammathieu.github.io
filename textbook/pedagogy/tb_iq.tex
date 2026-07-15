@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: EVM from SNR]
+For a link degraded only by additive noise, the error-vector magnitude is
+$\text{EVM}_{\text{rms}} \approx 10^{-\text{SNR}/20}$. At $\text{SNR} = 25\ \text{dB}$,
+\[ \text{EVM}_{\text{rms}} \approx 10^{-25/20} = 0.056 = 5.6\%. \]
+A $64$-QAM link typically needs EVM below about $2\%$ (SNR $>34\ \text{dB}$), so
+this $25\ \text{dB}$ link would support only a lower-order constellation.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item I/Q carries two independent streams: $s = I\cos\omega_c t - Q\sin\omega_c t$.
+\item Gain/phase imbalance $\to$ image; DC offset $\to$ carrier tone; LO leakage $\to$ carrier feedthrough.
+\item EVM ties quality to SNR: $\text{EVM}\approx 10^{-\text{SNR}/20}$; it captures all impairments together.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item What EVM corresponds to an SNR of $30\ \text{dB}$?
+\item What impairment produces a spectral image of the wanted signal?
+\item Why is EVM a more complete quality metric than SNR alone?
+\end{exercises}
+
+\furtherreading{Razavi~\cite{razavi} (ch.~4); Steer~\cite{steer}.}

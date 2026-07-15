@@ -1,0 +1,29 @@
+% chapter: tb_gainplan (native)
+\chapter{Gain Planning and Dynamic Range}\label{ch:tb_gainplan}
+
+\input{pedagogy/tb_gainplan_obj}
+
+Gain planning distributes gain, noise, and linearity along the receive chain so
+that the system meets both its sensitivity and its dynamic-range goals.
+
+\section{The Balancing Act}
+Put too little gain early and later stages' noise dominates (poor sensitivity);
+put too much and a strong signal compresses the front end (poor large-signal
+handling). The plan sets each stage's gain, NF, and IP3 so the cascaded noise
+figure and cascaded IP3 both land where they must.
+
+\section{Sensitivity}
+The minimum detectable signal is the noise floor plus the required SNR:
+\[ \text{MDS} = -174\ \text{dBm/Hz} + 10\log_{10}B + \text{NF} + \text{SNR}_{min}. \]
+Lowering NF (a good LNA first) or narrowing $B$ improves sensitivity.
+
+\section{Spurious-Free Dynamic Range}
+The top of the usable range is set by third-order intermodulation. The
+spurious-free dynamic range --- the span from the noise floor to where IM3
+products rise out of it --- is
+\[ \text{SFDR} = \tfrac{2}{3}\,(\text{IIP3} - \text{MDS}). \]
+Automatic gain control extends the \emph{instantaneous} range by backing off gain
+on strong signals, but SFDR is the fundamental figure.
+
+
+\input{pedagogy/tb_gainplan}

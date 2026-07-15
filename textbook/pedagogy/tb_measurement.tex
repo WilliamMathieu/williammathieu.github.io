@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Y-factor noise figure]
+A noise source with $\text{ENR} = 15\ \text{dB}$ ($=31.6$ linear) is
+switched on and off at a device's input, giving a hot/cold power ratio
+$Y = 8\ \text{dB}$ ($=6.31$). The noise factor is
+\[ F = \frac{\text{ENR}}{Y - 1} = \frac{31.6}{6.31 - 1} = 5.95, \]
+i.e.\ $\text{NF} = 7.75\ \text{dB}$. A larger $Y$ (from a lower-noise device)
+gives a lower, more accurate NF reading.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Narrower RBW lowers the analyzer noise floor and sharpens resolution but slows the sweep.
+\item Y-factor: $F = \text{ENR}/(Y-1)$ from the hot/cold power ratio.
+\item VNA needs SOLT/TRL calibration; TDR locates discontinuities by echo delay.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item With $\text{ENR} = 15\ \text{dB}$ and $Y = 10\ \text{dB}$, find the noise figure.
+\item What happens to a spectrum analyzer's noise floor when you narrow the RBW?
+\item What does a TDR measurement locate?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~4); Steer~\cite{steer}.}

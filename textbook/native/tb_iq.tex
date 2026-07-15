@@ -1,0 +1,24 @@
+Almost every modern radio represents its signal as a complex baseband envelope
+carried on quadrature (I and Q) mixers. Understanding the ideal operation and its
+impairments is central to receiver and transmitter design.
+
+\section{Quadrature Up/Down Conversion}
+An I/Q modulator forms $s(t) = I(t)\cos\omega_c t - Q(t)\sin\omega_c t$, placing
+independent information on the in-phase and quadrature carriers; the demodulator
+recovers $I$ and $Q$ by multiplying with $\cos$ and $\sin$ and low-pass
+filtering. This is what lets a single RF channel carry a two-dimensional
+constellation.
+
+\section{Impairments}
+Real quadrature paths are imperfect. \emph{Gain and phase imbalance} between I and
+Q create a spectral image of the signal; \emph{DC offset} adds a tone at the
+carrier; \emph{LO leakage} radiates carrier feedthrough. Each corrupts the
+constellation in a characteristic way and must be calibrated out.
+
+\section{Error Vector Magnitude}
+EVM is the RMS distance between received and ideal constellation points, expressed
+as a fraction (or dB) of the signal. For a link limited only by additive noise it
+ties directly to SNR:
+\[ \text{EVM}_{\text{rms}} \approx 10^{-\text{SNR}/20}. \]
+EVM is the single most useful bench metric of modulation quality, capturing noise,
+imbalance, distortion, and phase noise together.

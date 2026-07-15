@@ -1,0 +1,36 @@
+% chapter: tb_lna (native)
+\chapter{Low-Noise Amplifier Design}\label{ch:tb_lna}
+
+\input{pedagogy/tb_lna_obj}
+
+The low-noise amplifier sets the noise figure of the whole receiver (Friis), so
+its design optimizes noise before gain.
+
+\section{Noise Parameters}
+A two-port's noise is fully described by four numbers: the minimum noise figure
+$F_{min}$, the optimum source reflection $\Gamma_{opt}$ that achieves it, and the
+equivalent noise resistance $R_n$ that says how quickly noise degrades away from
+$\Gamma_{opt}$:
+\[ F = F_{min} + \frac{4 R_n}{Z_0}\,\frac{|\Gamma_s - \Gamma_{opt}|^2}
+       {(1-|\Gamma_s|^2)\,|1+\Gamma_{opt}|^2}. \]
+
+\section{The Noise--Gain Trade}
+In general the source impedance for minimum noise ($\Gamma_{opt}$) is \emph{not}
+the one for maximum gain or best input match. Noise circles and gain circles on
+the Smith chart make the compromise visible; a good LNA source match lands near
+$\Gamma_{opt}$ and accepts slightly less than maximum gain.
+
+\section{Inductive Source Degeneration}
+The elegant trick used in CMOS/SiGe LNAs is a small source inductor $L_s$. It
+generates a real input resistance $\approx \omega_T L_s$ \emph{without adding
+thermal noise} of its own, so the input can be matched to $50\,\Omega$ at the same
+time as the noise match --- the celebrated simultaneous noise-and-input match.
+
+\section{Output and Bias}
+With the source chosen for low noise, the output is conjugately matched for gain,
+and a clean bias network keeps the stage stable. The result is a stage with a
+noise figure within a few tenths of a dB of $F_{min}$ and enough gain to suppress
+the noise of everything after it.
+
+
+\input{pedagogy/tb_lna}

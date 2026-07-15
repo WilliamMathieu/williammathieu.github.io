@@ -1,0 +1,22 @@
+\begin{workedexample}[Worked Example: Transition frequency]
+A device has transconductance $g_m = 50\ \text{mS}$ and total input
+capacitance $C_{gs}+C_{gd} = 0.2\ \text{pF}$. Its transition frequency is
+\[ f_T = \frac{g_m}{2\pi(C_{gs}+C_{gd})} = \frac{0.05}{2\pi(0.2\times10^{-12})} = 39.8\ \text{GHz}. \]
+Useful gain is available well below $f_T$; $f_{max}$ sets the true upper limit.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $f_T = g_m/[2\pi(C_{gs}+C_{gd})]$; $f_{max}$ (unity power gain) is the practical ceiling.
+\item GaN for power, GaAs pHEMT / SiGe for low noise, CMOS for integration.
+\item Bias sets $g_m$, linearity, and noise; deliver it through chokes/bypass without spoiling stability.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A device has $g_m = 80\ \text{mS}$ and $C_{in} = 0.1\ \text{pF}$. Find $f_T$.
+\item Which technology would you pick for a high-power PA?
+\item Is $f_T$ or $f_{max}$ the better indicator of usable amplifier bandwidth?
+\end{exercises}
+
+\furtherreading{Razavi~\cite{razavi} (ch.~2, 5); Gonzalez~\cite{gonzalez} (ch.~2).}

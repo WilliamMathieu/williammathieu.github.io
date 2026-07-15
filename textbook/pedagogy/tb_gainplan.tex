@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Sensitivity and SFDR]
+A receiver has bandwidth $B = 1\ \text{MHz}$ and noise figure
+$\text{NF} = 5\ \text{dB}$. Its noise floor (with $\text{SNR}_{min}=0$) is
+\[ \text{MDS} = -174 + 10\log_{10}(10^6) + 5 = -174 + 60 + 5 = -109\ \text{dBm}. \]
+If its input third-order intercept is $\text{IIP3} = -10\ \text{dBm}$, then
+\[ \text{SFDR} = \tfrac{2}{3}(\text{IIP3} - \text{MDS}) = \tfrac{2}{3}(-10 - (-109)) = 66\ \text{dB}. \]
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $\text{MDS} = -174 + 10\log B + \text{NF} + \text{SNR}_{min}$.
+\item $\text{SFDR} = \tfrac{2}{3}(\text{IIP3} - \text{MDS})$.
+\item Too little early gain hurts NF; too much hurts large-signal handling; AGC extends the instantaneous range.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Noise floor for $B = 200\ \text{kHz}$, $\text{NF} = 8\ \text{dB}$ (SNR$_{min}=0$)?
+\item With $\text{IIP3} = 0\ \text{dBm}$ and $\text{MDS} = -110\ \text{dBm}$, find the SFDR.
+\item What does AGC improve, and what does it not change?
+\end{exercises}
+
+\furtherreading{Razavi~\cite{razavi} (ch.~2); Pozar~\cite{pozar} (ch.~10).}

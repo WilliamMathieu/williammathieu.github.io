@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: First Fresnel-zone radius]
+A $2.4\ \text{GHz}$ link ($\lambda = 0.125\ \text{m}$) spans $1\ \text{km}$
+with the obstacle at midpoint ($d_1 = d_2 = 500\ \text{m}$). The first Fresnel-zone
+radius there is
+\[ r_1 = \sqrt{\frac{\lambda d_1 d_2}{d_1+d_2}} = \sqrt{\frac{0.125\cdot500\cdot500}{1000}} = \sqrt{31.25} = 5.6\ \text{m}. \]
+Keeping about $60\%$ of this radius clear avoids significant diffraction loss.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Two-ray ground reflection gives $1/d^4$ far-field loss; Okumura--Hata/COST-231 fit real environments.
+\item First Fresnel radius $r_1 = \sqrt{\lambda d_1 d_2/(d_1+d_2)}$; keep it mostly clear.
+\item Multipath fades: Rayleigh (no LOS) or Rician (LOS); delay spread sets coherence bandwidth, Doppler sets fade rate.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item First Fresnel radius at the midpoint of a $2\ \text{km}$, $900\ \text{MHz}$ link?
+\item What fading distribution applies with a strong line-of-sight component?
+\item What channel parameter sets the coherence bandwidth?
+\end{exercises}
+
+\furtherreading{Rappaport~\cite{rappaport}; Goldsmith~\cite{goldsmith}.}

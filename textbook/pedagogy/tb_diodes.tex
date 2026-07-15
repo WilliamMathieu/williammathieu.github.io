@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Varactor tuning ratio]
+An abrupt-junction varactor ($n = 1/2$) has $C_0 = 10\ \text{pF}$ and
+$\phi = 0.7\ \text{V}$. At a reverse bias of $4\ \text{V}$,
+\[ C(4) = \frac{10}{(1 + 4/0.7)^{1/2}} = \frac{10}{\sqrt{6.71}} = 3.86\ \text{pF}. \]
+The tuning ratio from $0$ to $4\ \text{V}$ is $C(0)/C(4) = 10/3.86 = 2.6$, which
+sets the frequency tuning range of a VCO built with it.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Schottky: fast, low-drop --- detectors and passive mixers.
+\item Varactor $C(V)=C_0/(1+V/\phi)^n$ --- VCO/filter tuning; ratio sets range.
+\item PIN: charge-controlled RF resistor --- switches, attenuators, phase shifters.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item An abrupt varactor has $C_0 = 8\ \text{pF}$, $\phi = 0.7\ \text{V}$. Find $C$ at $3\ \text{V}$.
+\item Which diode would you use to build a broadband RF switch?
+\item Why does a PIN diode not demodulate the RF passing through it?
+\end{exercises}
+
+\furtherreading{Maas~\cite{maas}; Pozar~\cite{pozar} (ch.~10).}

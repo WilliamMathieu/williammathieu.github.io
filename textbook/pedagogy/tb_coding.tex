@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Spreading processing gain]
+A direct-sequence system spreads a $R_{data} = 10\ \text{kbit/s}$ stream
+with a $R_{chip} = 10\ \text{Mchip/s}$ code. The processing gain is
+\[ G_p = \frac{R_{chip}}{R_{data}} = \frac{10\times10^{6}}{10\times10^{3}} = 1000 = 30\ \text{dB}. \]
+Despreading concentrates the wanted signal while spreading interference, so a
+narrowband jammer is suppressed by $\sim30\ \text{dB}$ relative to the signal.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item FEC (block, convolutional, turbo, LDPC) buys coding gain; LDPC/turbo near the Shannon limit.
+\item DSSS processing gain $G_p = R_{chip}/R_{data}$ suppresses narrowband interference and enables CDMA.
+\item OFDM: orthogonal subcarriers + cyclic prefix beat delay spread, at the cost of high PAPR.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Processing gain for $R_{chip} = 1\ \text{Mchip/s}$, $R_{data} = 2\ \text{kbit/s}$?
+\item What must the OFDM cyclic prefix be longer than?
+\item Name the main power-amplifier drawback of OFDM.
+\end{exercises}
+
+\furtherreading{Sklar~\cite{sklar}; Goldsmith~\cite{goldsmith}.}

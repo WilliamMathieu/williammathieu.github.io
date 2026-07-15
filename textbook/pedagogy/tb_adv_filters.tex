@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Loaded Q for a channel filter]
+A bandpass filter at $f_0 = 2\ \text{GHz}$ must pass a $20\ \text{MHz}$
+channel. Its loaded quality factor is
+\[ Q_L = \frac{f_0}{\text{BW}} = \frac{2\times10^{9}}{20\times10^{6}} = 100. \]
+For low insertion loss the resonators' \emph{unloaded} $Q$ must far exceed this
+($Q_u \gg Q_L$). Microstrip ($Q_u\!\sim\!200$) would be lossy here; a cavity or
+BAW resonator ($Q_u$ in the thousands) is the right choice.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Distributed (coupled-line/combline/interdigital) filters print in microstrip; no lumped parts.
+\item Cavity/DR give $Q_u$ in the thousands (low loss, sharp); SAW/BAW pack steep filters into a chip.
+\item Insertion loss falls as $Q_u/Q_L$ rises; duplexers/diplexers share one antenna across TX/RX or bands.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Loaded $Q$ for a $1\%$ fractional-bandwidth filter?
+\item Which filter technology sits in a smartphone's RF front end for steep, tiny filters?
+\item Why does a base-station duplexer use cavity resonators rather than microstrip?
+\end{exercises}
+
+\furtherreading{Hong~\cite{hong}; Pozar~\cite{pozar} (ch.~8).}

@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Shannon capacity]
+A channel has bandwidth $B = 20\ \text{MHz}$ and $\text{SNR} = 100$
+($20\ \text{dB}$). Its capacity is
+\[ C = B\log_2(1+\text{SNR}) = 20\times10^{6}\,\log_2(101) = 20\times10^{6}\times6.66 = 133\ \text{Mbit/s}. \]
+A practical link runs a few dB below this, choosing a modulation and code whose
+required $E_b/N_0$ fits the available SNR.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $\text{SNR} = (E_b/N_0)(R_b/B)$; BER depends on $E_b/N_0$, e.g.\ QPSK $= Q(\sqrt{2E_b/N_0})$.
+\item Shannon capacity $C = B\log_2(1+\text{SNR})$ is the unbeatable ceiling.
+\item Pulse shaping fits the spectral mask; higher-order modulation trades SNR for spectral efficiency.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Shannon capacity of a $5\ \text{MHz}$ channel at $\text{SNR} = 31$ ($15\ \text{dB}$)?
+\item Does BER depend on absolute SNR or on $E_b/N_0$?
+\item Why can't symbols be made arbitrarily sharp in time?
+\end{exercises}
+
+\furtherreading{Proakis~\cite{proakis}; Sklar~\cite{sklar}.}

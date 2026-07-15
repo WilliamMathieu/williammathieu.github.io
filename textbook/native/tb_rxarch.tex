@@ -1,0 +1,21 @@
+The receiver architecture decides how the RF is brought down to where it can be
+digitized, and each choice trades image rejection, integration, and impairments.
+
+\section{Superheterodyne}
+The classic superhet converts the RF to a fixed intermediate frequency where
+high-$Q$ filtering and gain are cheap. Its weakness is the image, $2f_{IF}$ from
+the wanted signal, which a front-end filter must reject before the mixer.
+
+\section{Direct Conversion (Zero-IF)}
+Setting $f_{LO}=f_{RF}$ folds the signal straight to baseband ($f_{IF}=0$). There
+is no image, and the whole radio integrates on one chip --- but new problems
+appear: DC offset (from LO self-mixing), flicker ($1/f$) noise at baseband, LO
+leakage, and I/Q imbalance. Modern CMOS transceivers manage these with
+calibration.
+
+\section{Low-IF and Image-Reject Mixers}
+A low-IF receiver uses a small non-zero IF to escape the DC problems while
+keeping integration; the image, now close by, is removed by \emph{complex}
+(polyphase) filtering or by an image-reject mixer. The Hartley and Weaver
+architectures cancel the image by combining two quadrature mixing paths, so the
+achievable rejection is set by the I/Q amplitude and phase balance.

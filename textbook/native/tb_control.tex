@@ -1,0 +1,25 @@
+Control components route, attenuate, phase-shift, and protect RF signals --- the
+switches and dials of a radio front end.
+
+\section{Switches}
+RF switches (PIN-diode, FET, or MEMS) select paths, band-switch, and share an
+antenna between transmit and receive. They are judged on insertion loss,
+isolation, linearity (IP3), and switching speed; MEMS give the best loss and
+linearity but switch slowly.
+
+\section{Phase Shifters}
+Phase shifters set the progressive phase that steers a phased array. Switched-line,
+loaded-line, reflection-type, and vector-modulator designs provide either discrete
+bits or continuous control. A digital phase shifter of $n$ bits has a least
+significant step of $360^\circ/2^n$.
+
+\section{Ferrite Devices}
+Magnetized ferrites are \emph{nonreciprocal}: a circulator routes power
+port-to-port in one rotational direction, and terminating one port makes an
+isolator that passes forward power while absorbing reflections --- protecting a
+transmitter from a bad load. YIG spheres make electronically tunable filters and
+oscillators.
+
+\section{Attenuators and Limiters}
+Variable attenuators (PIN or FET) set gain in AGC loops; limiters (PIN-diode)
+protect sensitive receivers by clipping large input spikes.

@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: EM mesh cell size]
+An EM solver models a microstrip structure at $f = 10\ \text{GHz}$
+($\lambda_0 = 30\ \text{mm}$ in air). A common accuracy rule is a mesh cell no
+larger than about $\lambda/10$:
+\[ \Delta \le \frac{\lambda_0}{10} = 3\ \text{mm}, \]
+and finer ($\lambda/20 = 1.5\ \text{mm}$) where fields vary rapidly (edges, gaps).
+Too coarse a mesh mis-predicts resonances; too fine wastes hours of compute.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Linear S-param for response; harmonic balance for nonlinear steady state; SPICE/transient for time domain.
+\item EM solvers: MoM (planar), FEM (3-D), FDTD (broadband); slow, so they verify critical structures.
+\item Flow: spec $\to$ schematic sim $\to$ layout $\to$ EM verify $\to$ measure/tune; mesh $\sim\lambda/10$--$\lambda/20$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Which simulation type best analyzes a mixer's conversion loss and spurs?
+\item Recommended EM mesh cell at $5\ \text{GHz}$ in air (using $\lambda/10$)?
+\item Why EM-simulate only critical nets rather than the whole board?
+\end{exercises}
+
+\furtherreading{Steer~\cite{steer}; Pozar~\cite{pozar}.}

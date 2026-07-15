@@ -1,0 +1,28 @@
+Diodes are the workhorse two-terminal nonlinear elements of RF: they detect,
+mix, switch, tune, and generate harmonics.
+
+\section{Schottky Diodes}
+A Schottky (metal--semiconductor) diode has no minority-carrier storage, so it
+switches extremely fast and rectifies well into the millimetre-wave range. Its
+low, sharp turn-on makes it the standard device for power detectors and for
+diode (passive) mixers.
+
+\section{Varactors}
+A varactor is a reverse-biased junction used as a voltage-variable capacitor,
+\[ C(V) = \frac{C_0}{(1 + V/\phi)^{\,n}}, \]
+with built-in potential $\phi$ and grading coefficient $n$ ($n=1/2$ abrupt,
+$n\!\to\!1$ hyperabrupt). Varactors tune VCOs and filters; the useful metric is the
+capacitance (tuning) ratio over the control-voltage range.
+
+\section{PIN Diodes}
+A PIN diode has an intrinsic layer that, when forward biased, stores charge and
+behaves at RF as a \emph{current-controlled resistor} --- low resistance when on,
+high when off --- but it does not rectify the RF because the carriers cannot
+follow it. This makes the PIN diode the standard element for RF switches,
+variable attenuators, and phase shifters.
+
+\section{Other Devices}
+Step-recovery diodes snap off sharply to generate rich harmonic combs (comb
+generators). Tunnel and Gunn diodes exhibit negative differential resistance and
+can build simple oscillators. Each exploits a specific nonlinearity of the
+junction.
