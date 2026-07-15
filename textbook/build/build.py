@@ -255,6 +255,9 @@ class Conv(HTMLParser):
 
 # ---------------------------------------------------------------- per-file
 def render_svg(svg, path):
+    if os.path.exists(path):          # keep existing figures stable (rsvg embeds a
+        return True                   # timestamp, so re-rendering churns git). Delete
+                                      # figures/ to force a full re-render.
     try:
         with open('/tmp/_f.svg','w',encoding='utf-8') as fh:
             fh.write('<?xml version="1.0" encoding="UTF-8"?>\n'+svg)
