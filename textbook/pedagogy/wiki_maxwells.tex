@@ -1,0 +1,37 @@
+\begin{workedexample}[Worked Example: The speed of light from first principles]
+The Amp\`ere--Maxwell and Faraday laws combine into a wave equation whose
+propagation speed is set entirely by the two constants of free space,
+\[ c = \frac{1}{\sqrt{\mu_0 \varepsilon_0}} . \]
+With $\mu_0 = 4\pi\times10^{-7}\ \mathrm{H/m}$ and
+$\varepsilon_0 = 8.854\times10^{-12}\ \mathrm{F/m}$,
+\[ c = \frac{1}{\sqrt{(1.2566\times10^{-6})(8.854\times10^{-12})}}
+     = \frac{1}{\sqrt{1.1127\times10^{-17}}}
+     = 2.998\times10^{8}\ \mathrm{m/s}. \]
+The same two constants fix the wave impedance of free space,
+$\eta_0 = \sqrt{\mu_0/\varepsilon_0} = 376.7\ \Omega \approx 120\pi\ \Omega$.
+That electromagnetism alone predicts the speed of light was Maxwell's decisive
+insight.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item The four laws: Gauss (electric field diverges from charge), Gauss for
+magnetism (no monopoles), Faraday (a changing $\mathbf{B}$ induces $\mathbf{E}$),
+and Amp\`ere--Maxwell (current \emph{and} a changing $\mathbf{E}$ create $\mathbf{B}$).
+\item The displacement-current term $\varepsilon_0\,\partial\mathbf{E}/\partial t$ closes the
+loop between the two curl equations and yields travelling-wave solutions.
+\item $c = 1/\sqrt{\mu_0\varepsilon_0}$; in a medium the phase velocity is
+$v = c/\sqrt{\varepsilon_r\mu_r}$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Compute the intrinsic impedance of free space, $\eta_0 = \sqrt{\mu_0/\varepsilon_0}$.
+  \begin{answer}\textbf{Answer.} $\eta_0 = \sqrt{1.2566\times10^{-6}/8.854\times10^{-12}} = 376.7\ \Omega \approx 120\pi\ \Omega$.\end{answer}
+\item A plane wave travels in a lossless dielectric with $\varepsilon_r = 4$, $\mu_r = 1$.
+Find its phase velocity and its wavelength at $1\ \mathrm{GHz}$.
+  \begin{answer}\textbf{Answer.} $v = c/\sqrt{\varepsilon_r} = c/2 = 1.5\times10^{8}\ \mathrm{m/s}$;
+  $\lambda = v/f = 0.15\ \mathrm{m} = 15\ \mathrm{cm}$.\end{answer}
+\item Which of Maxwell's equations underlies the operation of a transformer, and why?
+  \begin{answer}\textbf{Answer.} Faraday's law: the changing magnetic flux from the primary induces an EMF in the secondary.\end{answer}
+\end{exercises}

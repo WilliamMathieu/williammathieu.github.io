@@ -1,0 +1,30 @@
+\begin{workedexample}[Worked Example: Skin depth in copper at 1\,GHz]
+The skin depth is
+\[ \delta = \frac{1}{\sqrt{\pi f \mu \sigma}}, \]
+with copper conductivity $\sigma = 5.8\times10^{7}\ \mathrm{S/m}$ and
+$\mu = \mu_0 = 4\pi\times10^{-7}\ \mathrm{H/m}$. At $f = 1\ \mathrm{GHz}$,
+\[ \pi f \mu \sigma = (\pi)(10^{9})(1.2566\times10^{-6})(5.8\times10^{7}) = 2.29\times10^{11}, \]
+\[ \delta = \frac{1}{\sqrt{2.29\times10^{11}}} = \frac{1}{4.78\times10^{5}} = 2.09\times10^{-6}\ \mathrm{m} \approx 2.1\ \mu\mathrm{m}. \]
+Almost all of the RF current is packed into the outer couple of microns of the
+conductor --- which is why plating quality and surface roughness dominate loss at
+microwave frequencies.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $\delta = 1/\sqrt{\pi f \mu \sigma}$; skin depth falls as $1/\sqrt{f}$.
+\item About $63\%$ ($1-e^{-1}$) of the current flows within one skin depth of the surface.
+\item AC resistance therefore rises as $\sqrt{f}$; this favours large-surface or
+silver-plated conductors and makes surface finish critical.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Copper's skin depth is $2.1\ \mu\mathrm{m}$ at $1\ \mathrm{GHz}$. What is it at $100\ \mathrm{MHz}$?
+  \begin{answer}\textbf{Answer.} $\delta \propto 1/\sqrt{f}$, so lowering $f$ by $10\times$ raises $\delta$ by $\sqrt{10}$: $2.1\times3.16 = 6.6\ \mu\mathrm{m}$.\end{answer}
+\item If the operating frequency increases by a factor of $100$, how does the skin depth change?
+  \begin{answer}\textbf{Answer.} It falls by $\sqrt{100} = 10\times$.\end{answer}
+\item Gold ($\sigma \approx 4.1\times10^{7}\ \mathrm{S/m}$) is plated over copper.
+Estimate gold's skin depth at $1\ \mathrm{GHz}$ relative to copper's $2.1\ \mu\mathrm{m}$.
+  \begin{answer}\textbf{Answer.} $\delta_{\text{Au}} = \delta_{\text{Cu}}\sqrt{\sigma_{\text{Cu}}/\sigma_{\text{Au}}} = 2.1\sqrt{5.8/4.1} = 2.5\ \mu\mathrm{m}$, so a plating a few skin depths thick ($\sim$5--8 $\mu$m) carries essentially all the current.\end{answer}
+\end{exercises}

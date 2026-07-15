@@ -1,0 +1,32 @@
+\begin{workedexample}[Worked Example: Wavelength and velocity in a substrate]
+A signal propagates through bulk PTFE, $\varepsilon_r = 2.1$ (a low-loss
+microwave dielectric). The wave slows by $\sqrt{\varepsilon_r}$, so the
+\emph{velocity factor} is
+\[ \mathrm{VF} = \frac{v}{c} = \frac{1}{\sqrt{\varepsilon_r}} = \frac{1}{\sqrt{2.1}} = 0.69, \]
+i.e.\ the wave travels at $69\%$ of the free-space speed. At $5\ \mathrm{GHz}$
+the wavelength inside the material is
+\[ \lambda = \frac{c}{f\sqrt{\varepsilon_r}} = \frac{3\times10^{8}}{(5\times10^{9})(1.449)} = 41.4\ \mathrm{mm}, \]
+versus $60\ \mathrm{mm}$ in free space. (On a real microstrip the relevant
+quantity is the \emph{effective} permittivity, treated in Part~III.)
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item A dielectric slows waves: $v = c/\sqrt{\varepsilon_r}$, so wavelength shrinks by $\sqrt{\varepsilon_r}$.
+\item The loss tangent $\tan\delta = \varepsilon''/\varepsilon'$ measures dielectric loss;
+smaller is better, and it matters more as frequency rises.
+\item Both $\varepsilon_r$ and $\tan\delta$ drift with frequency (dispersion), so
+substrates are specified at a stated test frequency.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A coaxial cable uses solid PTFE ($\varepsilon_r = 2.1$). What is its velocity factor?
+  \begin{answer}\textbf{Answer.} $\mathrm{VF} = 1/\sqrt{2.1} = 0.69$ (about $69\%$).\end{answer}
+\item Find the wavelength of a $5\ \mathrm{GHz}$ signal inside bulk Rogers RO4350
+($\varepsilon_r = 3.66$).
+  \begin{answer}\textbf{Answer.} $\lambda = c/(f\sqrt{\varepsilon_r}) = (3\times10^{8})/[(5\times10^{9})(1.913)] = 31.4\ \mathrm{mm}$.\end{answer}
+\item At $10\ \mathrm{GHz}$, which loses less energy per wavelength: FR-4
+($\tan\delta \approx 0.02$) or PTFE ($\tan\delta \approx 0.001$)?
+  \begin{answer}\textbf{Answer.} PTFE --- its loss tangent is about $20\times$ lower, so FR-4 is generally avoided above a few GHz.\end{answer}
+\end{exercises}

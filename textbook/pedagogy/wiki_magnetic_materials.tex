@@ -1,0 +1,34 @@
+\begin{workedexample}[Worked Example: Inductance of a ferrite toroid]
+A toroidal ferrite core has relative permeability $\mu_r = 125$, cross-sectional
+area $A = 0.10\ \mathrm{cm^{2}} = 1.0\times10^{-5}\ \mathrm{m^{2}}$, and mean
+magnetic path length $l = 3.0\ \mathrm{cm} = 0.030\ \mathrm{m}$. Wound with
+$N = 20$ turns, its inductance is
+\[ L = \frac{\mu_0\,\mu_r\,N^{2}A}{l}
+     = \frac{(4\pi\times10^{-7})(125)(20^{2})(1.0\times10^{-5})}{0.030}. \]
+Evaluating: $\mu_0\mu_r = 1.571\times10^{-4}$; times $N^2A = 4.0\times10^{-3}$
+gives $6.28\times10^{-7}$; divided by $l$ gives
+\[ L = 2.09\times10^{-5}\ \mathrm{H} = 20.9\ \mu\mathrm{H}. \]
+Without the core ($\mu_r = 1$) the same winding would give only $0.17\ \mu\mathrm{H}$
+--- the ferrite multiplies inductance by $\mu_r$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Permeability multiplies inductance ($L \propto \mu_r$) and, because
+$L \propto N^{2}$, inductance scales with the \emph{square} of the turns.
+\item Ferrites combine high $\mu_r$ with high resistivity, which suppresses the
+eddy-current losses that make laminated iron unusable at RF.
+\item Cores saturate: beyond the rated flux $\mu$ collapses. Ferrite beads
+deliberately add frequency-dependent \emph{loss} to damp common-mode RF.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item You double the number of turns on a fixed core. By what factor does the inductance change?
+  \begin{answer}\textbf{Answer.} $\times 4$, since $L \propto N^{2}$.\end{answer}
+\item Why is laminated silicon-steel unsuitable for an inductor at $100\ \mathrm{MHz}$?
+  \begin{answer}\textbf{Answer.} Eddy-current and hysteresis losses grow rapidly with frequency; a high-resistivity ferrite is used instead.\end{answer}
+\item A ferrite bead is rated to present about $100\ \Omega$ at $100\ \mathrm{MHz}$.
+At that frequency is the impedance mainly reactive or resistive, and why?
+  \begin{answer}\textbf{Answer.} Mainly resistive --- the bead is chosen to operate where the ferrite is lossy, so it \emph{absorbs} the unwanted RF rather than storing it.\end{answer}
+\end{exercises}

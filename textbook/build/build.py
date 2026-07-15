@@ -299,8 +299,11 @@ def convert(slug, title):
     body = re.sub(r'@@FIG(\d+)@@', tokrepl, body)
     # tidy blank lines
     body = re.sub(r'\n{3,}', '\n\n', body).strip()
-    tex = ('%% chapter: %s\n\\chapter{%s}\\label{ch:%s}\n\n%s\n'
-           % (slug, title.replace('&','\\&'), slug, body))
+    ped = os.path.join(TB, 'pedagogy')
+    obj  = ('\\input{pedagogy/%s_obj}\n\n' % slug) if os.path.exists(os.path.join(ped, slug+'_obj.tex')) else ''
+    prac = ('\n\n\\input{pedagogy/%s}\n' % slug) if os.path.exists(os.path.join(ped, slug+'.tex')) else ''
+    tex = ('%% chapter: %s\n\\chapter{%s}\\label{ch:%s}\n\n%s%s\n%s'
+           % (slug, title.replace('&','\\&'), slug, obj, body, prac))
     open(os.path.join(CHDIR, slug + '.tex'), 'w', encoding='utf-8').write(tex)
     return len(figs), sum(1 for f in figs if not f[2])
 
