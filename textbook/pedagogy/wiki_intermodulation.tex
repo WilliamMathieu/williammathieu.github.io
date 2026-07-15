@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: IMD from IIP3]
+Two equal tones at input power $P_{in}$ per tone drive a device with input
+third-order intercept $\text{IIP3}$. The third-order products fall below each tone
+by
+\[ \text{IMD} = 2(\text{IIP3} - P_{in}). \]
+For $\text{IIP3} = +20\ \text{dBm}$ and $P_{in} = -10\ \text{dBm}$ per tone,
+$\text{IMD} = 2(20 - (-10)) = 60\ \text{dBc}$. Every $1\ \text{dB}$ rise in tone
+power worsens IMD by $3\ \text{dB}$ (the products grow with slope 3).
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item IM3 products at $2f_1 - f_2$ and $2f_2 - f_1$ land in-band and cannot be filtered out.
+\item $\text{IMD (dBc)} = 2(\text{IIP3} - P_{in})$; IM3 grows $3\ \text{dB}$ per dB of input.
+\item In a cascade, late high-gain stages usually dominate the overall IP3.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item $\text{IIP3} = +10\ \text{dBm}$, $P_{in} = -20\ \text{dBm}$/tone. Find the IMD.
+\item Raise each tone by $3\ \text{dB}$. How much do the IM3 products rise?
+\item Which stage tends to dominate cascade IP3: early low-gain or late high-gain?
+\end{exercises}
+
+\furtherreading{Razavi~\cite{razavi} (ch.~2); Pozar~\cite{pozar} (ch.~10).}

@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Butterworth roll-off and order]
+A Butterworth low-pass rolls off at $20n\ \text{dB/decade}$ for order $n$.
+To get $60\ \text{dB}$ of rejection one decade above cutoff,
+$n = 60/20 = 3$. A 3rd-order LC ladder (L--C--L or C--L--C) realizes it. A
+Chebyshev design reaches the same rejection at lower order by allowing passband
+ripple, at the cost of group-delay flatness.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Butterworth is maximally flat; Chebyshev trades passband ripple for steeper roll-off.
+\item Roll-off $\approx 20n\ \text{dB/decade}$ ($6n\ \text{dB/octave}$).
+\item Ladder networks (series L, shunt C) implement LC filters; order $=$ number of reactive elements.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item What is the roll-off of a 5th-order Butterworth, in dB/decade?
+\item How many reactive elements are in a 3rd-order LC ladder?
+\item Which reaches $40\ \text{dB}$ of rejection at lower order: Butterworth or Chebyshev?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~8); Ludwig and Bogdanov~\cite{ludwig}.}

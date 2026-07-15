@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Via inductance]
+A plated through-via ($h = 1.6\ \text{mm}$, radius $r = 0.15\ \text{mm}$)
+has an approximate inductance
+\[ L \approx \frac{\mu_0 h}{2\pi}\!\left[\ln\!\frac{2h}{r} + 0.5\right]
+   = 3.20\times10^{-10}\,[\ln(21.3) + 0.5] = 1.14\ \text{nH}. \]
+At $5\ \text{GHz}$ that via presents $X_L = 2\pi f L = 36\ \Omega$ --- far from
+negligible, so RF vias are kept short and often paralleled.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Trace impedance is set by width, dielectric height, and $\varepsilon_r$; keep it controlled.
+\item Vias ($\sim$1 nH) and bond wires ($\sim$1 nH/mm) add series inductance that bites at GHz.
+\item Give the return current a continuous path directly under the signal trace.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A $2\ \text{mm}$ bond wire is $\sim2\ \text{nH}$. What is its reactance at $5\ \text{GHz}$?
+\item How does placing two identical vias in parallel change the inductance?
+\item Why route an RF trace over a solid ground plane rather than a slotted one?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~3); Ott~\cite{ott}.}

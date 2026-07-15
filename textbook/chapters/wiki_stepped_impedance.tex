@@ -1,6 +1,8 @@
 % chapter: wiki_stepped_impedance
 \chapter{Stepped-Impedance Low-Pass Filters}\label{ch:wiki_stepped_impedance}
 
+\input{pedagogy/wiki_stepped_impedance_obj}
+
 A stepped-impedance low-pass filter (SI-LPF) replaces the lumped inductors and capacitors of a conventional LC ladder with sections of high-impedance and low-impedance transmission line. This approach is practical on PCB microstrip where lumped components at GHz frequencies behave poorly, and no vias or discrete parts are needed.
 
 				
@@ -71,3 +73,6 @@ Use standard Butterworth or Chebyshev low-pass prototype tables. For a 3rd-order
 				
 
 The required trace width for a target impedance Z on a substrate of thickness h and permittivity εr is found by the inverse Hammerstad-Jensen formulas (implemented in the Microstrip Calculator). As a rough guide: for 50 Ω on FR4 (εr ≈ 4.4, h = 1.6 mm), w ≈ 3 mm; for 100 Ω, w ≈ 0.5 mm; for 25 Ω, w ≈ 10 mm.
+
+
+\input{pedagogy/wiki_stepped_impedance}

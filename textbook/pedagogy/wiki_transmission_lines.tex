@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Quarter-wave transformer]
+To match a $100\ \Omega$ load to a $50\ \Omega$ line, insert a
+quarter-wavelength section of impedance
+\[ Z_1 = \sqrt{Z_0 Z_L} = \sqrt{50\times100} = 70.7\ \Omega. \]
+At the design frequency the $\lambda/4$ line transforms the load to
+$Z_1^2/Z_L = 70.7^2/100 = 50\ \Omega$ --- a perfect match. The match degrades
+away from that frequency.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $Z_0 = \sqrt{L/C}$ from the per-unit-length $L$ and $C$.
+\item $\Gamma = (Z_L - Z_0)/(Z_L + Z_0)$; a matched load ($Z_L = Z_0$) gives $\Gamma = 0$.
+\item A $\lambda/4$ line inverts impedance: $Z_{in} = Z_0^2/Z_L$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Find the reflection coefficient of a $75\ \Omega$ load on a $50\ \Omega$ line.
+\item What $Z_0$ quarter-wave section matches $25\ \Omega$ to $50\ \Omega$?
+\item A $70.7\ \Omega$ quarter-wave line is terminated in $50\ \Omega$. Find its input impedance.
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~2); Collin~\cite{collin} (ch.~3).}

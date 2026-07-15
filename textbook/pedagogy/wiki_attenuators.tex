@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: 3~dB Pi attenuator in 50~$\Omega$]
+For attenuation $A$ (voltage ratio $K = 10^{A/20}$) in a $Z_0$ system, the
+Pi-pad resistors are
+\[ R_{\text{series}} = Z_0\frac{K^2-1}{2K}, \qquad
+   R_{\text{shunt}} = Z_0\frac{K+1}{K-1}. \]
+For $A = 3\ \text{dB}$, $K = 1.413$: $R_{\text{series}} = 17.6\ \Omega$ and
+$R_{\text{shunt}} = 292\ \Omega$. The pad attenuates $3\ \text{dB}$ while
+presenting $50\ \Omega$ at both ports.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Resistive Pi/T pads attenuate while keeping both ports matched to $Z_0$.
+\item Values follow from $K = 10^{A/20}$; symmetric pads are bidirectional.
+\item The pad dissipates the lost power --- size the resistors for it.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item What voltage ratio $K$ corresponds to a $6\ \text{dB}$ pad?
+\item What fraction of input power reaches the load through a $10\ \text{dB}$ pad?
+\item A $20\ \text{dB}$ pad passes $1\ \text{W}$ in. Roughly how much must it dissipate?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar}; Hayward~\cite{hayward}.}

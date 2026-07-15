@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: 1~dB compression]
+An amplifier has $20\ \text{dB}$ small-signal gain and an output 1~dB
+compression point $\text{OP1dB} = +18\ \text{dBm}$. Driven at
+$P_{in} = -5\ \text{dBm}$ the linear output would be $+15\ \text{dBm}$, below
+OP1dB, so it is still roughly linear. Push toward $P_{in} = -1\ \text{dBm}$
+(linear output $+19\ \text{dBm}$) and it compresses, clipping and generating
+distortion.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item LNAs optimize noise figure; PAs optimize output power and efficiency; both need stability.
+\item P1dB marks the onset of gain compression (the large-signal limit).
+\item Higher linearity (IP3, P1dB) usually costs DC power and/or gain.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Gain $= 12\ \text{dB}$, $P_{in} = -30\ \text{dBm}$. What is the small-signal output?
+\item Above P1dB, does the gain rise or fall?
+\item Which amplifier goes first in a receive chain, and why?
+\end{exercises}
+
+\furtherreading{Gonzalez~\cite{gonzalez}; Razavi~\cite{razavi} (ch.~5).}

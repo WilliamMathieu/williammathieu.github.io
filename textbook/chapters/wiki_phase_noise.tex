@@ -1,6 +1,8 @@
 % chapter: wiki_phase_noise
 \chapter{Phase Noise and Jitter}\label{ch:wiki_phase_noise}
 
+\input{pedagogy/wiki_phase_noise_obj}
+
 Phase noise and jitter are two equivalent descriptions of timing uncertainty in an oscillator or clock signal. Phase noise describes instability in the frequency domain — the spectral purity of an oscillator. Jitter describes it in the time domain — the variation of edge transitions from their ideal positions. They are related by an integral transformation.
 
       
@@ -126,3 +128,6 @@ For an ADC sampling at frequency $f_s$, phase noise causes an SNR limit called t
       
 
 At f\_in = 1 GHz with σ\_t = 100 fs, the jitter-limited SNR is only 24 dB — equivalent to a 4-bit ADC. This is why high-frequency ADC clock sources must have sub-100 fs jitter.
+
+
+\input{pedagogy/wiki_phase_noise}

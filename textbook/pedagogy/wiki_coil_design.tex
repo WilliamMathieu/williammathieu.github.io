@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Tuning a loop coil]
+A loop of inductance $L = 100\ \text{nH}$ resonates at $f_0$ when tuned with
+$C = 1/[(2\pi f_0)^2 L]$. At $1.5\ \text{T}$ ($f_0 = 63.9\ \text{MHz}$),
+\[ C = \frac{1}{(2\pi\cdot63.9\times10^6)^2(100\times10^{-9})} = 62\ \text{pF}. \]
+A second (matching) capacitor transforms the coil to $50\ \Omega$. A high
+unloaded-to-loaded Q ratio means the sample --- not the coil --- dominates the
+noise, which is the goal for good SNR.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Tune $C = 1/[(2\pi f_0)^2 L]$ to the Larmor frequency; add a matching capacitor for $50\ \Omega$.
+\item Sample-dominated noise (high $Q_{\text{unloaded}}/Q_{\text{loaded}}$) gives the best SNR.
+\item Active detuning (PIN diodes) protects the receive coil during transmit.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Tuning capacitor for $L = 200\ \text{nH}$ at $64\ \text{MHz}$?
+\item What does a high unloaded/loaded Q ratio indicate?
+\item Why detune a receive coil during transmit?
+\end{exercises}
+
+\furtherreading{Mispelter~\cite{mispelter}; Haacke~\cite{haacke} (ch.~27).}

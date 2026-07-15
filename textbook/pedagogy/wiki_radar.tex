@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Range from echo delay]
+Radar range follows from the round-trip time: $R = c\,\Delta t/2$. An echo
+returning $\Delta t = 20\ \mu\text{s}$ after transmission puts the target at
+\[ R = \frac{(3\times10^8)(20\times10^{-6})}{2} = 3000\ \text{m}. \]
+Received power falls as $1/R^4$ (two-way spreading times cross-section), so
+doubling range cuts echo power by $12\ \text{dB}$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $R = c\Delta t/2$ from the round-trip delay.
+\item The radar equation gives echo power $\propto 1/R^4$; doubling range loses $12\ \text{dB}$.
+\item Doppler shift $f_d = 2v/\lambda$ gives radial velocity.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Echo delay $60\ \mu\text{s}$: what is the range?
+\item Doubling target range changes echo power by how many dB?
+\item Doppler shift for $v = 30\ \text{m/s}$ at $\lambda = 3\ \text{cm}$?
+\end{exercises}
+
+\furtherreading{Skolnik~\cite{skolnik} (ch.~1--2).}

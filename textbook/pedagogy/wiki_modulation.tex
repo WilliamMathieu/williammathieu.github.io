@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Bits per symbol in QAM]
+A scheme with $M$ constellation points carries $\log_2 M$ bits per symbol.
+16-QAM ($M = 16$) carries $\log_2 16 = 4\ \text{bits/symbol}$; 64-QAM carries 6. At
+symbol rate $R_s$ the bit rate is $R_b = R_s\log_2 M$: a $1\ \text{Msym/s}$
+16-QAM link carries $4\ \text{Mbit/s}$ in about the same bandwidth as
+$1\ \text{Mbit/s}$ BPSK --- higher order buys spectral efficiency at the cost of
+SNR margin.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item AM varies amplitude; FM/PM vary frequency/phase; digital schemes map bits to constellation points.
+\item Bits per symbol $= \log_2 M$; higher-order QAM is more spectrally efficient but needs more SNR.
+\item OFDM spreads data across many orthogonal subcarriers for multipath robustness.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item How many bits per symbol does QPSK carry?
+\item What is the bit rate of 64-QAM at $2\ \text{Msym/s}$?
+\item Which needs higher SNR for the same BER: QPSK or 256-QAM?
+\end{exercises}
+
+\furtherreading{Razavi~\cite{razavi} (ch.~3); Steer~\cite{steer}.}

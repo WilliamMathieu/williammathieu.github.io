@@ -1,6 +1,8 @@
 % chapter: wiki_pa_design
 \chapter{Power Amplifier Design}\label{ch:wiki_pa_design}
 
+\input{pedagogy/wiki_pa_design_obj}
+
 Power amplifiers (PAs) are among the most challenging RF circuits to design because efficiency and linearity pull in opposite directions. A perfectly linear PA wastes most of its supply power as heat. A highly efficient PA distorts the signal. Modern PA design — especially for cellular and wireless standards — is the art of managing this tradeoff.
 
       
@@ -111,3 +113,6 @@ DPD applies an inverse of the PA's nonlinearity digitally, before the signal rea
       
 
 PA transistors are typically low-impedance devices that need an output matching network to present the optimal load impedance for maximum power and efficiency. The load line resistance $R_{opt} = V_{dd}^2 / (2 P_{out})$ sets the ideal load for a class A stage. For a 28 V, 10 W PA: $R_{opt} = 784/20 = 39.2$ Ω — conveniently near 50 Ω, which is why GaN on 28 V supply is so popular for base station PAs.
+
+
+\input{pedagogy/wiki_pa_design}

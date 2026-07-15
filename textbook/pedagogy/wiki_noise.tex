@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Thermal noise floor and NF]
+The available thermal-noise power in bandwidth $B$ is $P_n = kTB$. At
+$T = 290\ \text{K}$, $kT = -174\ \text{dBm/Hz}$. In $B = 1\ \text{MHz}$
+($60\ \text{dB-Hz}$),
+\[ P_n = -174 + 60 = -114\ \text{dBm}. \]
+An amplifier with $\text{NF} = 3\ \text{dB}$ raises the effective floor to
+$-111\ \text{dBm}$ and degrades SNR by $3\ \text{dB}$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Thermal noise is $-174\ \text{dBm/Hz}$ at 290 K; add $10\log_{10}B$ for the bandwidth.
+\item NF is the SNR degradation a stage adds; $F = \text{SNR}_{in}/\text{SNR}_{out}$.
+\item Friis: $F_{\text{tot}} = F_1 + (F_2-1)/G_1 + \dots$ --- the first stage dominates.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item What is the noise floor in a $10\ \text{MHz}$ bandwidth at 290 K?
+\item A chain has $\text{NF}_1 = 2\ \text{dB}$, $G_1 = 20\ \text{dB}$, $\text{NF}_2 = 10\ \text{dB}$. What dominates the cascade NF?
+\item An LNA (15 dB gain, 1 dB NF) precedes a mixer (10 dB NF). Which sets the system NF?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~10); Razavi~\cite{razavi} (ch.~2).}

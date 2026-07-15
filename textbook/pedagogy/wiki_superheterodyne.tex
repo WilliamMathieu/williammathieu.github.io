@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: IF and image placement]
+A superhet mixes RF down to a fixed IF for selectivity and gain. With
+$f_{RF} = 100\ \text{MHz}$ and high-side LO $f_{LO} = 110\ \text{MHz}$, the IF is
+$10\ \text{MHz}$ and the image sits at $f_{LO} + f_{IF} = 120\ \text{MHz}$ ---
+$2f_{IF} = 20\ \text{MHz}$ from the wanted signal. A higher IF pushes the image
+farther out (easier to filter) but complicates the IF stage --- the classic IF
+trade-off.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item The superhet converts RF to a fixed IF where filtering and gain are easier.
+\item The image lies $2f_{IF}$ from the RF; a higher IF eases image rejection.
+\item Front-end selectivity and gain distribution set sensitivity and dynamic range.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item $f_{RF} = 1000\ \text{MHz}$, $f_{LO} = 1090\ \text{MHz}$. Find the IF and image.
+\item Does a higher IF make image rejection easier or harder?
+\item How far in frequency is the image from the desired signal?
+\end{exercises}
+
+\furtherreading{Razavi~\cite{razavi} (ch.~4); Pozar~\cite{pozar}.}

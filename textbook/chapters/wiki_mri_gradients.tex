@@ -1,6 +1,8 @@
 % chapter: wiki_mri_gradients
 \chapter{MRI Gradient Coils}\label{ch:wiki_mri_gradients}
 
+\input{pedagogy/wiki_mri_gradients_obj}
+
 Gradient coils are the mechanism by which MRI encodes spatial information into the NMR signal. They produce linear spatial variations in the B₀ field (dB\_z/dx, dB\_z/dy, dB\_z/dz) that allow slice selection, frequency encoding, and phase encoding. Their performance — gradient strength and switching speed — directly determines image resolution, scan time, and what pulse sequences are possible.
 
       
@@ -93,3 +95,6 @@ Very fast gradient switching induces electric fields in the patient's body (by F
       
 
 Gradient coils experience Lorentz forces (F = IL × B₀) when current flows through them in the main field. Rapidly switching these forces at audio frequencies (typically 1–4 kHz for EPI) causes the coil former to vibrate, generating the characteristic loud banging noise of MRI. Modern scanners use acoustic dampening foam, vacuum-bonded coil formers, and specific pulse sequence designs to reduce peak sound pressure levels below the IEC limit of 140 dB(A) at the patient's ears.
+
+
+\input{pedagogy/wiki_mri_gradients}

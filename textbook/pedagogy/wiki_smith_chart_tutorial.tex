@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Normalized impedance and reflection]
+A load $Z_L = 75 + j50\ \Omega$ in a $50\ \Omega$ system normalizes to
+$z = Z_L/Z_0 = 1.5 + j1.0$. Its reflection coefficient is
+\[ \Gamma = \frac{z-1}{z+1} = \frac{0.5 + j1.0}{2.5 + j1.0} = 0.38\angle 39^{\circ}, \]
+so $|\Gamma| = 0.38$ (VSWR $\approx 2.2$). On the chart the point lies in the
+upper, inductive half, on the $r = 1.5$ resistance circle.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item The chart plots $\Gamma$; constant-$r$ circles and constant-$x$ arcs overlay it.
+\item A $\lambda/4$ line (a $180^{\circ}$ trip in $\Gamma$) turns $z$ into its admittance $y = 1/z$.
+\item Motion toward the generator is clockwise; one full revolution is $\lambda/2$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Normalize $Z_L = 25 - j50\ \Omega$ in a $50\ \Omega$ system.
+\item Where on the chart are a short circuit and an open circuit?
+\item A load lies on the $r = 1$ circle. What does that imply for matching with a series reactance?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~2); Steer~\cite{steer}.}

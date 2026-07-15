@@ -317,13 +317,19 @@ def roman(n):
         while n>=v: r+=sy; n-=v
     return r
 
-body_lines = []; total_fig = 0; total_bad = 0; nch = 0
+body_lines = []; sol_lines = []; total_fig = 0; total_bad = 0; nch = 0; nsol = 0
 for pi,(ptitle, chs) in enumerate(PARTS, 1):
     body_lines.append('\n\\part{%s}\n' % ptitle.replace('&','\\&'))
     for slug, title in chs:
         nf, bad = convert(slug, title)
         total_fig += nf; total_bad += bad; nch += 1
         body_lines.append('\\include{chapters/%s}' % slug)
+        if os.path.exists(os.path.join(TB, 'pedagogy', slug + '_sol.tex')):
+            sol_lines.append('\\needspace{4\\baselineskip}\\subsection*{Chapter~\\ref{ch:%s}: %s}'
+                             % (slug, title.replace('&','\\&')))
+            sol_lines.append('\\input{pedagogy/%s_sol}' % slug); nsol += 1
     print('Part %s — %s (%d chapters)' % (roman(pi), ptitle, len(chs)))
 open(os.path.join(TB, '_book_body.tex'), 'w').write('\n'.join(body_lines)+'\n')
-print('\n%d chapters, %d figures rendered (%d failed)' % (nch, total_fig, total_bad))
+open(os.path.join(TB, '_solutions.tex'), 'w').write('\n'.join(sol_lines)+'\n')
+print('\n%d chapters, %d figures rendered (%d failed), %d solution sets'
+      % (nch, total_fig, total_bad, nsol))

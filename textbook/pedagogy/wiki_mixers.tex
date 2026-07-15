@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Downconversion and the image]
+A mixer multiplies RF and LO, producing outputs at $f_{LO} \pm f_{RF}$. For
+$f_{RF} = 2000\ \text{MHz}$ and $f_{LO} = 1800\ \text{MHz}$, the IF is
+$|f_{RF} - f_{LO}| = 200\ \text{MHz}$. The \emph{image} at
+$f_{LO} - f_{IF} = 1600\ \text{MHz}$ also lands at that IF and must be rejected
+by filtering ahead of the mixer.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item A mixer produces $f_{LO} \pm f_{RF}$; the wanted IF is the sum or difference.
+\item The image ($f_{LO} \mp f_{IF}$) maps onto the same IF and must be filtered or rejected.
+\item Passive diode mixers have conversion loss; active mixers can have gain but add noise.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item $f_{RF} = 900\ \text{MHz}$, $f_{LO} = 800\ \text{MHz}$. What is the IF?
+\item For that low-side-LO case, where is the image?
+\item What blocks the image before it reaches the mixer?
+\end{exercises}
+
+\furtherreading{Maas~\cite{maas}; Razavi~\cite{razavi} (ch.~6).}

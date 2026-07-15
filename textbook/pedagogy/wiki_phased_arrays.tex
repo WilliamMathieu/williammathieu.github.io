@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Coverage and decoupling]
+An MRI phased array places many small coils to get surface-coil SNR over a
+large field of view; each element also provides a distinct spatial sensitivity
+used for parallel imaging. Elements must be decoupled: nearest neighbours by
+geometric overlap (mutual inductance $M \to 0$) and the rest by preamplifier
+decoupling. More elements raise SNR and the achievable acceleration, at the cost
+of more receive channels and reconstruction complexity.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Array coils combine small elements: high SNR over a large FOV plus distinct sensitivities for parallel imaging.
+\item Decoupling is essential: overlap for neighbours, preamp decoupling for the rest.
+\item More elements $\to$ more SNR and acceleration, but more channels and complexity.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item How are nearest-neighbour array elements typically decoupled?
+\item What do the distinct element sensitivities enable?
+\item More elements generally raise what two things?
+\end{exercises}
+
+\furtherreading{Roemer \emph{et al.}~\cite{roemer}; Mispelter~\cite{mispelter}.}

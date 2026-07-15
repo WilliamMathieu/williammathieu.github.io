@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: Barkhausen criterion]
+A feedback oscillator sustains oscillation when the loop gain magnitude
+is at least unity and the loop phase is a multiple of $360^{\circ}$:
+\[ |A\beta| \ge 1, \qquad \angle A\beta = 0^{\circ}\ (\mathrm{mod}\ 360^{\circ}). \]
+At start-up the small-signal loop gain must exceed 1 so noise builds up; amplitude
+then grows until nonlinearity trims the effective gain to exactly 1 in steady
+state. The frequency is set where the loop phase is zero --- usually a high-$Q$
+resonator.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Oscillation needs loop gain $\ge 1$ and $0^{\circ}$ (mod $360^{\circ}$) loop phase (Barkhausen).
+\item Start-up needs gain $>1$; steady state settles to unity via nonlinearity.
+\item A higher-$Q$ tank gives better frequency stability and lower phase noise.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item What loop phase shift sustains oscillation?
+\item Why must the start-up loop gain exceed 1?
+\item Does a higher-$Q$ tank help or hurt phase noise?
+\end{exercises}
+
+\furtherreading{Razavi~\cite{razavi} (ch.~8); Lee~\cite{lee} (ch.~14).}

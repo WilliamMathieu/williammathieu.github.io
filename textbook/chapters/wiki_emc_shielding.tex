@@ -1,6 +1,8 @@
 % chapter: wiki_emc_shielding
 \chapter{EMC Shielding Effectiveness}\label{ch:wiki_emc_shielding}
 
+\input{pedagogy/wiki_emc_shielding_obj}
+
 Shielding effectiveness (SE) quantifies how much an enclosure or barrier reduces the electromagnetic field at a point. It is expressed in dB as the ratio of the field without the shield to the field with it. Good shielding is essential for meeting regulatory limits (FCC Part 15, CE/ETSI), preventing interference between circuits, and protecting sensitive receivers from external interference.
 
       
@@ -149,3 +151,6 @@ Always connect cable shields at both ends for RF shielding. Single-end grounding
       
 
 Stamped metal shielding cans solder directly to a PCB ground pour to isolate sensitive circuits (RF front-ends, oscillators). Key design rules: no gaps \textgreater{} λ/20 at the highest frequency; soldered continuously or with fences of vias spaced \textless{} λ/20; include a test access point (small hole or removable lid) for production testing.
+
+
+\input{pedagogy/wiki_emc_shielding}

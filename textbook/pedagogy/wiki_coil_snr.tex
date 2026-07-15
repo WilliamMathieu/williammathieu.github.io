@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: When the sample dominates noise]
+A receive coil's noise is the sum of coil (conductor) and sample (body)
+losses. The ratio of unloaded to loaded quality factor reveals which dominates:
+\[ \frac{Q_{\text{unloaded}}}{Q_{\text{loaded}}} = 1 + \frac{R_{\text{sample}}}{R_{\text{coil}}}. \]
+A ratio of 5 means the sample resistance is $4\times$ the coil resistance --- the
+sample dominates, so polishing the conductor buys little. At low field or for
+small coils the coil can dominate, and conductor quality matters more.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Total noise $\propto R_{\text{coil}} + R_{\text{sample}}$; SNR is best when the sample dominates.
+\item $Q_{\text{unloaded}}/Q_{\text{loaded}} = 1 + R_{\text{sample}}/R_{\text{coil}}$ diagnoses the regime.
+\item Sample noise rises with field; small or low-field coils are more coil-noise-limited.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item If $Q_{\text{unloaded}}/Q_{\text{loaded}} = 3$, what is $R_{\text{sample}}/R_{\text{coil}}$?
+\item In the sample-dominated regime, does better conductor plating help much?
+\item Are small surface coils more coil- or sample-noise-limited?
+\end{exercises}
+
+\furtherreading{Mispelter~\cite{mispelter}; Roemer \emph{et al.}~\cite{roemer}.}

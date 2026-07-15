@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Rollett stability factor]
+Unconditional stability requires $K > 1$ and $|\Delta| < 1$, where
+$\Delta = S_{11}S_{22} - S_{12}S_{21}$ and
+\[ K = \frac{1 - |S_{11}|^2 - |S_{22}|^2 + |\Delta|^2}{2\,|S_{12}S_{21}|}. \]
+A device with $K = 0.8$ is \emph{potentially unstable} --- some source/load
+impedances will oscillate. A small series or shunt resistor (usually at the
+output) raises $K$ above 1, trading a little gain and noise for stability.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Unconditional stability: $K > 1$ \emph{and} $|\Delta| < 1$.
+\item $K < 1$ means some terminations cause oscillation (potentially unstable).
+\item Resistive loading or feedback stabilizes, trading gain/NF for stability.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A device has $K = 1.4$, $|\Delta| = 0.3$. Is it unconditionally stable?
+\item What does $K = 0.6$ indicate?
+\item Name one way to raise $K$.
+\end{exercises}
+
+\furtherreading{Gonzalez~\cite{gonzalez} (ch.~3); Pozar~\cite{pozar} (ch.~12).}

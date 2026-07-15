@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: SAR scaling with field]
+Specific absorption rate is the RF power deposited per unit mass. Because
+heating goes as the square of the RF field and frequency,
+\[ \text{SAR} \propto f^2 B_1^2 \propto B_0^2\,\alpha^2. \]
+Moving from $1.5\ \text{T}$ to $3\ \text{T}$ at the same flip angle raises SAR about
+fourfold ($f$ doubles). The IEC caps whole-body SAR (normal mode $2\ \text{W/kg}$),
+so high-field sequences must lengthen TR, lower flip angles, or use low-SAR
+refocusing to stay within limits.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $\text{SAR} \propto f^2 B_1^2$, so it scales as $B_0^2$ for a given flip angle.
+\item IEC normal-mode whole-body limit is $2\ \text{W/kg}$; first-level mode allows more under supervision.
+\item High field forces SAR management: longer TR, lower/variable flip angles, low-SAR refocusing.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item How does SAR change from $1.5\ \text{T}$ to $3\ \text{T}$ at fixed flip angle?
+\item Halving the flip angle changes SAR by what factor?
+\item What is the IEC normal-mode whole-body SAR limit?
+\end{exercises}
+
+\furtherreading{ICNIRP~\cite{icnirp}; IEC 60601-2-33~\cite{iec60601}.}

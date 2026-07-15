@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: Decoupling via a low-Z LNA]
+In a receive array, current in one element couples to its neighbours.
+Preamplifier decoupling uses a low-input-impedance LNA: a $\lambda/4$ network turns
+the LNA's near-short input into a high series impedance in the coil loop, choking
+the induced current. With line impedance $Z_0$ and preamp input $Z_{in}$, the
+transformed loop impedance is $Z_0^2/Z_{in}$ --- large when $Z_{in}$ is small --- so
+the loop current (and inter-element coupling) is suppressed while noise match is
+preserved.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Preamp decoupling suppresses induced loop current with a low-impedance LNA and a $\lambda/4$ transform.
+\item The $\lambda/4$ line turns the LNA's low input impedance into a high series impedance ($Z_0^2/Z_{in}$).
+\item It complements geometric (overlap) decoupling in phased arrays.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A $\lambda/4$ line transforms a $2\ \Omega$ preamp input into what loop impedance in $50\ \Omega$?
+\item Does a lower preamp input impedance give more or less decoupling?
+\item What other decoupling method does it complement?
+\end{exercises}
+
+\furtherreading{Roemer \emph{et al.}~\cite{roemer}; Mispelter~\cite{mispelter}.}

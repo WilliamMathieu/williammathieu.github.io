@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: L-network, 100~$\Omega$ to 50~$\Omega$]
+To match $R_L = 100\ \Omega$ down to $R_0 = 50\ \Omega$, the network
+quality factor is $Q = \sqrt{R_L/R_0 - 1} = \sqrt{2-1} = 1$. The series reactance
+is $X_s = Q R_0 = 50\ \Omega$ and the shunt reactance $X_p = R_L/Q = 100\ \Omega$
+(opposite signs). At $1\ \text{GHz}$ a series $50\ \Omega$ inductor is
+$L = X_s/\omega = 7.96\ \text{nH}$ and a shunt $100\ \Omega$ capacitor is
+$C = 1/(\omega X_p) = 1.59\ \text{pF}$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Matching delivers maximum power (conjugate match) and drives $\Gamma \to 0$.
+\item L-network $Q = \sqrt{R_{\text{high}}/R_{\text{low}} - 1}$ sets the two reactances.
+\item L-networks are narrowband; stubs and $\lambda/4$ transformers are distributed alternatives.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Find the L-network $Q$ to match $200\ \Omega$ to $50\ \Omega$.
+\item Which is inherently broader band: a single L-network or a multi-section transformer?
+\item Conjugate-matching a source $Z_s = 50 + j30\ \Omega$ needs what load impedance?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~5); Ludwig and Bogdanov~\cite{ludwig} (ch.~8).}

@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Flip angle from B1]
+The flip angle produced by an RF pulse is $\alpha = \gamma\int B_1(t)\,dt$
+--- proportional to the transmit field. Because $B_1$ is non-uniform (especially at
+high field), the actual flip angle varies across the image, altering contrast.
+$B_1$ mapping measures this: the double-angle method acquires images at nominal
+$\alpha$ and $2\alpha$ and uses the signal ratio $S_{2\alpha}/S_\alpha = 2\cos\alpha$
+to solve for the true local flip angle.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Flip angle $\alpha = \gamma\int B_1\,dt$; a non-uniform $B_1$ makes $\alpha$ vary spatially.
+\item $B_1$ inhomogeneity worsens at high field (shorter RF wavelength in tissue).
+\item Double-angle method: $S_{2\alpha}/S_\alpha = 2\cos\alpha$ recovers the true flip angle.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Flip angle is proportional to which field?
+\item What does $S_{2\alpha}/S_\alpha = 2\cos\alpha$ let you solve for?
+\item Does $B_1$ non-uniformity get worse at higher field?
+\end{exercises}
+
+\furtherreading{Haacke~\cite{haacke}; Nishimura~\cite{nishimura}.}

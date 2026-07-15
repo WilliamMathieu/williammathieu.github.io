@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Minimum safe distance]
+In the far field the power density from an EIRP source is
+$S = \text{EIRP}/(4\pi R^2)$. Setting $S$ to the limit $S_{lim}$ and solving,
+\[ R_{min} = \sqrt{\frac{\text{EIRP}}{4\pi S_{lim}}}. \]
+For $\text{EIRP} = 100\ \text{W}$ and the ICNIRP general-public limit at
+$900\ \text{MHz}$ ($f/200 = 4.5\ \text{W/m}^2$):
+$R_{min} = \sqrt{100/(4\pi\cdot4.5)} = 1.33\ \text{m}$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Far-field power density $S = \text{EIRP}/(4\pi R^2)$ falls as $1/R^2$.
+\item ICNIRP general-public limit is frequency-dependent (e.g.\ $f/200\ \text{W/m}^2$, 400 MHz--2 GHz).
+\item Minimum safe distance $R_{min} = \sqrt{\text{EIRP}/(4\pi S_{lim})}$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Power density from $100\ \text{W}$ EIRP at $5\ \text{m}$?
+\item ICNIRP general-public limit at $1800\ \text{MHz}$?
+\item Doubling distance changes power density by how many dB?
+\end{exercises}
+
+\furtherreading{ICNIRP~\cite{icnirp}; Balanis~\cite{balanis}.}

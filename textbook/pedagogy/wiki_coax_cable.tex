@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Characteristic impedance of coax]
+For coax, $Z_0 = (138/\sqrt{\varepsilon_r})\log_{10}(D/d)$. With PTFE
+($\varepsilon_r = 2.1$), inner conductor $d = 0.9\ \text{mm}$ and shield inner
+diameter $D = 2.95\ \text{mm}$,
+\[ Z_0 = \frac{138}{\sqrt{2.1}}\log_{10}\frac{2.95}{0.9}
+   = 95.2\times0.516 = 49\ \Omega, \]
+a $50\ \Omega$ cable. Its velocity factor is $1/\sqrt{2.1} = 0.69$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $Z_0 = (138/\sqrt{\varepsilon_r})\log_{10}(D/d)$; the diameter ratio sets impedance.
+\item Velocity factor $= 1/\sqrt{\varepsilon_r}$; foamed dielectrics raise it and cut loss.
+\item Attenuation rises with frequency; larger cable (e.g.\ LMR-400) is lower-loss but stiffer.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Velocity factor of solid-PE coax ($\varepsilon_r = 2.25$)?
+\item Does doubling $D/d$ (same dielectric) raise or lower $Z_0$?
+\item RG-58 loses $\sim0.5\ \text{dB/m}$ at $1\ \text{GHz}$. What is the loss over $6\ \text{m}$?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~2); Ludwig and Bogdanov~\cite{ludwig}.}

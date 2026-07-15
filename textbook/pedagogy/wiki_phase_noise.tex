@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Phase noise to RMS jitter]
+RMS timing jitter follows from integrated phase noise:
+\[ \sigma_t = \frac{1}{2\pi f_c}\sqrt{2\int \mathcal{L}(f)\,df}. \]
+Take $\mathcal{L} = -100\ \text{dBc/Hz}$ ($10^{-10}/\text{Hz}$) flat over a
+$1\ \text{MHz}$ band around a $1\ \text{GHz}$ carrier. The integrated phase
+variance is $2\times10^{-10}\times10^{6} = 2\times10^{-4}\ \text{rad}^2$, so
+$\sigma_\phi = 0.0141\ \text{rad}$ and $\sigma_t = \sigma_\phi/(2\pi f_c) = 2.25\ \text{ps}$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $\mathcal{L}(f)$ is SSB phase noise (dBc/Hz), decreasing with offset.
+\item Leeson: close-in $1/f^3$, then $1/f^2$, then a flat floor.
+\item RMS jitter $\sigma_t = \sigma_\phi/(2\pi f_c)$ from the integrated phase noise.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Does phase noise rise or fall with offset frequency?
+\item In the Leeson $1/f^2$ region, how many dB does $\mathcal{L}(f)$ drop per decade?
+\item For a fixed integrated phase error, does a higher carrier give more or less time jitter?
+\end{exercises}
+
+\furtherreading{Lee~\cite{lee} (ch.~17); Razavi~\cite{razavi} (ch.~8).}

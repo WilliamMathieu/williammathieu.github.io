@@ -1,6 +1,8 @@
 % chapter: wiki_eseries
 \chapter{E-Series Standard Component Values}\label{ch:wiki_eseries}
 
+\input{pedagogy/wiki_eseries_obj}
+
 Resistors, capacitors, and inductors are manufactured in standardised value sets called \textbf{E-series}, defined by IEC 60063. Rather than covering every decimal value, the series places values at logarithmically equal intervals so that any calculated value falls within a specified tolerance of the nearest standard value.
 
 				
@@ -98,3 +100,6 @@ Multiply any mantissa by a decade: a resistor marked \textbf{4.7 kΩ} uses manti
 				
 
 To find the nearest E-series value to a calculated target R\_target: (1) compute the decade exponent exp = floor(log₁₀(R\_target)), (2) extract the mantissa m = R\_target / 10\textasciicircum{}exp, (3) scan all N mantissas and pick the closest. The E-Series Finder calculator automates this for any R, C, or L target.
+
+
+\input{pedagogy/wiki_eseries}

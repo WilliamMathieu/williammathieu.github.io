@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: SNR scaling with field]
+MRI signal-to-noise rises steeply with static field. In the
+body-noise-dominated regime SNR grows roughly linearly with $B_0$, so moving from
+$1.5\ \text{T}$ to $3\ \text{T}$ roughly doubles SNR. That gain drives high-field
+imaging --- at the cost of higher RF frequency ($128$ vs.\ $64\ \text{MHz}$),
+stronger susceptibility artefacts, and higher SAR (which scales as $B_0^2$).
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item The magnet sets $B_0$ (and frequency); gradients encode space; the RF chain excites and receives.
+\item Higher $B_0$ improves SNR but raises frequency, SAR ($\propto B_0^2$), and susceptibility artefacts.
+\item Shimming homogenizes $B_0$; RF and gradient shielding contain stray fields.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Roughly how does SNR change from $1.5\ \text{T}$ to $3\ \text{T}$?
+\item How does whole-body SAR scale with $B_0$?
+\item Which improves with higher field: SNR or susceptibility artefacts?
+\end{exercises}
+
+\furtherreading{Nishimura~\cite{nishimura}; Haacke~\cite{haacke} (ch.~27).}

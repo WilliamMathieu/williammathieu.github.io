@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: Acceleration and its SNR penalty]
+Parallel imaging undersamples k-space by an acceleration factor $R$ and
+uses the coil sensitivities to unfold the aliasing. Scan time scales as $1/R$, but
+SNR drops:
+\[ \text{SNR}_{acc} = \frac{\text{SNR}_{full}}{g\sqrt{R}}, \]
+where the geometry factor $g \ge 1$ depends on the array. For $R = 2$ and
+$g = 1.2$, SNR falls to $\text{SNR}_{full}/(1.2\sqrt{2}) = 0.59\,\text{SNR}_{full}$
+--- a bit worse than the $1/\sqrt{2}$ from undersampling alone.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item SENSE unfolds in image space; GRAPPA fills missing k-space lines --- both use coil sensitivities.
+\item Acceleration $R$ cuts scan time by $1/R$ and SNR by $g\sqrt{R}$.
+\item The g-factor ($\ge 1$) penalizes SNR where element sensitivities overlap.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Scan-time factor for $R = 3$?
+\item Ideal SNR loss ($g = 1$) for $R = 4$?
+\item What array property keeps the g-factor near 1?
+\end{exercises}
+
+\furtherreading{Roemer \emph{et al.}~\cite{roemer}; Haacke~\cite{haacke}.}

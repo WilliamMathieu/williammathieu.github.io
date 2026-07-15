@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: Hi-Z / lo-Z sections]
+A stepped-impedance low-pass alternates short high-impedance lines (series
+inductors) and low-impedance lines (shunt capacitors). A short line of length
+$\ell$ contributes
+\[ L \approx \frac{Z_h\,\ell}{v_p}, \qquad C \approx \frac{\ell}{Z_l\,v_p}, \]
+so a higher $Z_h$ raises the equivalent series $L$ and a lower $Z_l$ raises the
+shunt $C$. The pattern approximates an LC ladder in microstrip with no lumped
+parts.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item High-$Z$ (narrow) lines emulate series inductors; low-$Z$ (wide) lines emulate shunt capacitors.
+\item It builds an LC low-pass from microstrip alone --- easy to fabricate.
+\item Accuracy falls near and above cutoff where the lumped approximation breaks down.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A narrow, high-$Z$ microstrip section behaves as which element?
+\item A wide, low-$Z$ section behaves as which element?
+\item To increase the emulated series inductance, raise or lower the section's $Z_0$?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~8).}

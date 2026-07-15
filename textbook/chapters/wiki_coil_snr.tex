@@ -1,6 +1,8 @@
 % chapter: wiki_coil_snr
 \chapter{SNR in MRI Receive Coils}\label{ch:wiki_coil_snr}
 
+\input{pedagogy/wiki_coil_snr_obj}
+
 Signal-to-noise ratio (SNR) is the fundamental figure of merit of any MRI coil. Understanding the sources of noise and the factors that affect SNR guides coil design decisions.
 
 \rffig{wiki_coil_snr_1.pdf}{Loaded vs unloaded Q for MRI receive coils. When Q\_loaded ≪ Q\_unloaded, sample noise dominates — the coil is in the "sample-noise dominated" regime where SNR ∝ ω₀ B₁/coil.}
@@ -56,3 +58,6 @@ A smaller coil placed close to the anatomy intercepts less noise (smaller sensit
 				
 
 The preamplifier (preamp) also contributes noise. For a sample-noise-dominated coil, preamp noise figure adds directly to system NF. Modern MRI preamps achieve NF of 0.3–0.7 dB. The preamp should be physically close to the coil (short coax) to minimise cable losses that degrade SNR.
+
+
+\input{pedagogy/wiki_coil_snr}

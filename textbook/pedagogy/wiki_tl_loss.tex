@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Cable loss budget]
+A $10\ \text{m}$ coax run is rated $0.2\ \text{dB/m}$ at $1\ \text{GHz}$,
+so the total attenuation is $0.2\times10 = 2\ \text{dB}$: a $+10\ \text{dBm}$
+signal arrives at $+8\ \text{dBm}$ ($6.3\ \text{mW}$ of the original $10\ \text{mW}$,
+about $63\%$). With velocity factor $0.66$, the one-way delay over the run is
+\[ t = \frac{\ell}{\text{VF}\cdot c} = \frac{10}{0.66\times3\times10^{8}} = 50.5\ \text{ns}. \]
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Total loss (dB) $=$ per-metre loss $\times$ length; dB losses add.
+\item Conductor loss grows as $\sqrt{f}$ (skin effect); dielectric loss grows roughly linearly with $f$.
+\item Delay $t = \ell/(\text{VF}\cdot c)$; a lower velocity factor means more delay.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A cable loses $0.15\ \text{dB/m}$. What is the total loss over $20\ \text{m}$?
+\item What fraction of the power survives $3\ \text{dB}$ of loss?
+\item What is the delay through $5\ \text{m}$ of coax with velocity factor $0.66$?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~2); Ludwig and Bogdanov~\cite{ludwig}.}

@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Integer-N frequency synthesis]
+An integer-N PLL locks its divided output to the reference:
+$f_{out} = N f_{ref}$. To synthesize $2.44\ \text{GHz}$ from a $1\ \text{MHz}$
+reference, $N = 2440$, and the channel step equals $f_{ref} = 1\ \text{MHz}$.
+Inside the loop bandwidth the output tracks the clean reference (multiplied by
+$N$); outside it, the VCO's own phase noise dominates. Reference spurs appear at
+multiples of $f_{ref}$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item PLL: phase detector, charge pump, loop filter, VCO, and $\div N$ feedback.
+\item Integer-N: $f_{out} = N f_{ref}$; channel spacing equals $f_{ref}$.
+\item Loop bandwidth trades spurs/settling against VCO-noise suppression; fractional-N decouples step size from $f_{ref}$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Output of an integer-N PLL with $N = 100$, $f_{ref} = 10\ \text{MHz}$?
+\item For $1\ \text{MHz}$ channel spacing in integer-N, what is $f_{ref}$?
+\item Widening the loop bandwidth suppresses which noise more: reference or VCO?
+\end{exercises}
+
+\furtherreading{Rohde~\cite{rohde}; Razavi~\cite{razavi} (ch.~9).}

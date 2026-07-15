@@ -1,6 +1,8 @@
 % chapter: wiki_cascade_analysis
 \chapter{Receiver Cascade Analysis}\label{ch:wiki_cascade_analysis}
 
+\input{pedagogy/wiki_cascade_analysis_obj}
+
 A receiver chain is a sequence of amplifiers, filters, and frequency converters from antenna to digital output. The system noise figure determines sensitivity, the gain distribution determines dynamic range, and the IP3 cascade determines linearity. These three analyses — Friis NF, gain chain, and cascaded IP3 — must be done together to optimise the receiver architecture.
 
       
@@ -115,3 +117,6 @@ With IIP3 = −6.3 dBm and MDS = −92.7 dBm: SFDR = 2/3 × 86.4 = 57.6 dB. This
       
 
 An AGC loop monitors the signal level (usually after the IF filter) and adjusts attenuators or VGAs to keep the ADC input at a constant level. Good AGC design requires: fast attack time (handles sudden strong signals before saturation), slow decay time (prevents noise pumping), and sufficient control range (\textgreater{} dynamic range of expected input signals).
+
+
+\input{pedagogy/wiki_cascade_analysis}

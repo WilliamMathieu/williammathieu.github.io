@@ -1,6 +1,8 @@
 % chapter: wiki_sparam
 \chapter{S-Parameters}\label{ch:wiki_sparam}
 
+\input{pedagogy/wiki_sparam_obj}
+
 S-parameters (scattering parameters) describe how RF signals are scattered by a network. Unlike Z or Y parameters, S-parameters are measured with all ports terminated in a reference impedance Z₀ (typically 50 Ω), making them practical to measure with a vector network analyser (VNA) at microwave frequencies.
 
 				
@@ -51,3 +53,6 @@ The Smith Chart maps the complex reflection coefficient Γ onto a plot of normal
 				
 
 Measured S-parameters are stored in Touchstone format (.s1p, .s2p, etc.). Each line contains a frequency point followed by pairs of values encoding each Sij in MA (magnitude-angle), RI (real-imaginary), or DB (dB-angle) format.
+
+
+\input{pedagogy/wiki_sparam}

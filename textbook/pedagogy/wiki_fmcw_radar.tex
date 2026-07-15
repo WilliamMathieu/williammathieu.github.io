@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Beat frequency and resolution]
+A linear chirp of slope $S = B/T$ produces a beat frequency proportional to
+range, $f_b = 2RS/c = 2RB/(cT)$. Range resolution depends only on sweep bandwidth:
+$\Delta R = c/(2B)$. For $B = 150\ \text{MHz}$,
+\[ \Delta R = \frac{3\times10^8}{2\times150\times10^6} = 1\ \text{m}. \]
+Wider sweeps give finer range resolution; the beat frequency is read off an FFT of
+the mixed signal.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item FMCW beat frequency $f_b = 2RS/c$ (slope $S = B/T$) encodes range.
+\item Range resolution $\Delta R = c/(2B)$ depends only on sweep bandwidth.
+\item A 2-D FFT over chirps yields the range-Doppler map (range and velocity).
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Range resolution for $B = 1\ \text{GHz}$?
+\item To halve $\Delta R$, how should $B$ change?
+\item Does the beat frequency increase or decrease with range?
+\end{exercises}
+
+\furtherreading{Skolnik~\cite{skolnik}; Pozar~\cite{pozar}.}

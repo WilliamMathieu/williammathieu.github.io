@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Nearest E12 value]
+The E12 series has 12 values per decade, spaced by $10^{1/12} = 1.21$
+($21\%$ steps, matching $\pm10\%$ parts). Suppose a design needs
+$R = 2.6\ \text{k}\Omega$. The E12 neighbours are $2.2$ and $2.7\ \text{k}\Omega$;
+$2.7\ \text{k}\Omega$ is closest ($3.8\%$ away, inside the $10\%$ band), so it is
+the value to fit.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item E$n$ has $n$ values per decade, spaced by $10^{1/n}$; larger $n$ means tighter steps.
+\item E6/E12/E24 pair with $20/10/5\%$ tolerances; E96 is the $1\%$ series.
+\item Round a computed value to the nearest series member within tolerance.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item What is the step ratio of the E24 series?
+\item What is the nearest E12 value to $4.5\ \text{k}\Omega$?
+\item Which series would you use for $1\%$ resistors?
+\end{exercises}
+
+\furtherreading{Ludwig and Bogdanov~\cite{ludwig}; IEC~60063 (preferred numbers).}

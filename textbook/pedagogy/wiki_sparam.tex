@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Reading a two-port]
+An amplifier in a $50\ \Omega$ system shows $S_{11} = 0.1$ and
+$S_{21} = 10$. The input return loss is $-20\log_{10}|S_{11}| = 20\ \text{dB}$
+(well matched) and the forward gain is $20\log_{10}|S_{21}| = 20\ \text{dB}$.
+Because $|S_{21}| > 1$ the device is active; a passive reciprocal network would
+have $S_{21} = S_{12}$ with $|S_{21}| \le 1$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $S_{11} = b_1/a_1$ (reflection); $S_{21} = b_2/a_1$ (transmission), other ports matched.
+\item RL $= -20\log|S_{11}|$; insertion loss/gain $= 20\log|S_{21}|$.
+\item Reciprocal networks satisfy $S_{ij} = S_{ji}$; S-parameters are defined against a reference impedance.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item $S_{11} = 0.316$. What is the return loss?
+\item A filter has $S_{21} = 0.5$. What is its insertion loss in dB?
+\item For a lossless two-port, what is $|S_{11}|^2 + |S_{21}|^2$?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~4); Gonzalez~\cite{gonzalez} (ch.~1).}

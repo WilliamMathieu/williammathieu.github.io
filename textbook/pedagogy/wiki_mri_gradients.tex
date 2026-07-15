@@ -1,0 +1,24 @@
+\begin{workedexample}[Worked Example: Gradient slew rate]
+A gradient must ramp quickly to keep echo times short. Slew rate is
+$\text{SR} = G_{max}/t_{rise}$. Ramping to $G_{max} = 40\ \text{mT/m}$ in
+$t_{rise} = 200\ \mu\text{s}$ gives
+\[ \text{SR} = \frac{0.04}{200\times10^{-6}} = 200\ \text{T/m/s}. \]
+Faster ramps shorten sequences but are capped by peripheral nerve stimulation
+(PNS), which responds to $dB/dt$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Gradients make resonance position-dependent: $f(z) = \gamma(B_0 + Gz)$.
+\item Slew rate $= G_{max}/t_{rise}$; higher slew shortens TE and TR.
+\item PNS (from $dB/dt$) and eddy currents cap how fast gradients can switch.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Slew rate to reach $30\ \text{mT/m}$ in $150\ \mu\text{s}$?
+\item What physiological effect limits maximum slew rate?
+\item Faster gradient switching allows shorter what?
+\end{exercises}
+
+\furtherreading{Nishimura~\cite{nishimura} (ch.~5); Haacke~\cite{haacke}.}

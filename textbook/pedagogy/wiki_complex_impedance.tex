@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Impedance of a series RL branch]
+A $50\ \Omega$ resistor is in series with a $10\ \text{nH}$ inductor at
+$1\ \text{GHz}$. The inductive reactance is
+\[ X_L = 2\pi f L = 2\pi(10^{9})(10\times10^{-9}) = 62.8\ \Omega, \]
+so $Z = 50 + j62.8\ \Omega$, with $|Z| = \sqrt{50^2 + 62.8^2} = 80.3\ \Omega$ and
+$\angle Z = \arctan(62.8/50) = 51.5^{\circ}$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $X_L = \omega L$ rises with frequency; $X_C = 1/(\omega C)$ falls with frequency.
+\item $Z = R + jX$: magnitude $\sqrt{R^2 + X^2}$, phase $\arctan(X/R)$.
+\item A reactive element's quality factor is $Q = |X|/R$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Find the reactance of a $2\ \text{pF}$ capacitor at $2.4\ \text{GHz}$.
+\item At what frequency does a $10\ \text{nH}$ inductor present $50\ \Omega$ of reactance?
+\item A branch has $Z = 30 - j40\ \Omega$. Give its magnitude and phase.
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~1); Ludwig and Bogdanov~\cite{ludwig} (ch.~1).}

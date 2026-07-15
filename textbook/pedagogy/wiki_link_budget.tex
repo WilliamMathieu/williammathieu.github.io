@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: Path loss and margin]
+Free-space path loss is
+$\text{FSPL} = 20\log_{10}d + 20\log_{10}f + 32.44$ ($d$ in km, $f$ in MHz). At
+$d = 10\ \text{km}$, $f = 2400\ \text{MHz}$:
+$\text{FSPL} = 20 + 67.6 + 32.44 = 120\ \text{dB}$. With EIRP $= +30\ \text{dBm}$
+and receive gain $+10\ \text{dBi}$, the received power is
+$30 + 10 - 120 = -80\ \text{dBm}$; against a $-95\ \text{dBm}$ sensitivity the
+margin is $15\ \text{dB}$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $\text{FSPL} = 20\log d + 20\log f + k$; loss grows $20\ \text{dB}$ per decade of $d$ or $f$.
+\item $P_{rx} = \text{EIRP} + G_{rx} - \text{FSPL} - \text{losses}$.
+\item Margin $= P_{rx} - \text{sensitivity}$; positive margin closes the link.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item By how many dB does FSPL grow when distance is $\times10$?
+\item EIRP $+20\ \text{dBm}$, path loss $100\ \text{dB}$, RX gain $+3\ \text{dBi}$. Received power?
+\item If sensitivity is $-90\ \text{dBm}$, what is the margin?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar}; Skolnik~\cite{skolnik}.}

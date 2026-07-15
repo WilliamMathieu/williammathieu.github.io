@@ -1,6 +1,8 @@
 % chapter: wiki_parallel_imaging
 \chapter{Parallel Imaging}\label{ch:wiki_parallel_imaging}
 
+\input{pedagogy/wiki_parallel_imaging_obj}
+
 Parallel imaging uses the spatial sensitivity profiles of multiple receive array elements to recover images from undersampled k-space data, allowing faster acquisition without image quality penalty (at the cost of some SNR).
 
 				
@@ -40,3 +42,6 @@ GeneRalised Autocalibrating Partial Parallel Acquisition (GRAPPA) operates in k-
 				
 
 Parallel imaging reduces scan time by factor R but always reduces SNR by at least $\sqrt{R}$ (less data = more noise). The g-factor (geometry factor) $\geq 1$ further penalises SNR due to the conditioning of the unaliasing matrix. $SNR_{PI} = SNR_{full} / (g\sqrt{R})$. High-field MRI (7 T) benefits most from parallel imaging because the SNR advantage at high field partially compensates for the $\sqrt{R}$ SNR loss.
+
+
+\input{pedagogy/wiki_parallel_imaging}

@@ -1,0 +1,23 @@
+\begin{workedexample}[Worked Example: Return loss to VSWR on a VNA]
+A VNA reads $S_{11} = -14\ \text{dB}$ at band center. That magnitude is
+$|\Gamma| = 10^{-14/20} = 0.20$, so
+\[ \text{VSWR} = \frac{1 + 0.20}{1 - 0.20} = 1.5. \]
+A short-open-load calibration first moves the reference plane to the probe tips,
+so the reading describes the device rather than the cables.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item SOL (short-open-load) calibration sets the reference plane and removes systematic cable error.
+\item $S_{11}$ in dB is return loss; convert to $|\Gamma|$ and VSWR as needed.
+\item Port extension shifts the reference plane; time-domain gating isolates a reflection in space.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item $S_{11} = -20\ \text{dB}$. What is the VSWR?
+\item Which three standards define a basic one-port calibration?
+\item Why calibrate at the probe tips rather than at the instrument port?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~4); Steer~\cite{steer}.}

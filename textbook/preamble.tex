@@ -13,6 +13,7 @@
 \usepackage{array}
 \usepackage{longtable}
 \usepackage{enumitem}
+\usepackage{needspace}
 \usepackage{xcolor}
 \usepackage[most]{tcolorbox}
 \usepackage{titlesec}
@@ -20,6 +21,7 @@
 \usepackage{newunicodechar}
 \usepackage{textcomp}
 \usepackage[hidelinks]{hyperref}
+\renewcommand{\bibname}{References}
 \hypersetup{colorlinks=true,linkcolor=rfpurple,urlcolor=rfaccent,citecolor=rfpurple,
   pdftitle={RF and Microwave Engineering — An Interactive Textbook},
   pdfauthor={RF Toolbox (rftoolbox.ca)}}
@@ -127,6 +129,9 @@
 \newtcolorbox{answer}{colback=rffill2,colframe=rfaccent,boxrule=0pt,leftrule=2.5pt,
   arc=1pt,left=8pt,right=8pt,top=3pt,bottom=3pt,before skip=3pt,after skip=6pt,
   fontupper=\small}
+
+% per-chapter "Further reading" line (citations into the References list)
+\newcommand{\furtherreading}[1]{\par\smallskip\noindent{\footnotesize\textbf{Further reading:}~#1}}
 
 % figure helper: keep figures within the text block, cap height
 \newcommand{\rffig}[2]{%

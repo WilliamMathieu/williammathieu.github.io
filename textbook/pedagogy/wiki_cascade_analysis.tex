@@ -1,0 +1,26 @@
+\begin{workedexample}[Worked Example: Cascaded noise figure]
+For stages in series,
+$F_{tot} = F_1 + (F_2-1)/G_1 + (F_3-1)/(G_1 G_2) + \dots$ Take an LNA
+($\text{NF}_1 = 2\ \text{dB}$, $G_1 = 15\ \text{dB}$) then a mixer
+($\text{NF}_2 = 10\ \text{dB}$). In linear terms $F_1 = 1.585$, $G_1 = 31.6$,
+$F_2 = 10$:
+\[ F_{tot} = 1.585 + \frac{10-1}{31.6} = 1.87, \]
+i.e.\ $\text{NF}_{tot} = 2.72\ \text{dB}$ --- only $0.7\ \text{dB}$ above the LNA
+alone, because its gain suppresses the mixer's noise.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Cascaded NF (Friis): later stages' noise is divided by all preceding gain.
+\item A high-gain, low-NF first stage sets the system NF.
+\item Cascaded IP3 is instead dominated by the last high-level stages.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Why does a high-gain LNA first improve system NF?
+\item LNA NF $= 1\ \text{dB}$, $G = 20\ \text{dB}$; second stage NF $= 10\ \text{dB}$. Approximate system NF?
+\item Does the first or last stage tend to dominate cascade IP3?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~10); Razavi~\cite{razavi} (ch.~2).}

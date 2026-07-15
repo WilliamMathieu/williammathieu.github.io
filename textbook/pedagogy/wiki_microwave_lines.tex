@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: Effective permittivity of microstrip]
+Microstrip fields are partly in air and partly in the substrate, so the
+effective permittivity lies between 1 and $\varepsilon_r$. A common estimate is
+\[ \varepsilon_{\text{eff}} \approx \frac{\varepsilon_r + 1}{2}
+   + \frac{\varepsilon_r - 1}{2}\,\frac{1}{\sqrt{1 + 12h/W}}. \]
+On FR-4 ($\varepsilon_r = 4.4$) with $W/h = 2$:
+$\varepsilon_{\text{eff}} = 2.7 + 1.7/\sqrt{7} = 3.34$. The guided wavelength is
+then $\lambda_g = \lambda_0/\sqrt{\varepsilon_{\text{eff}}}$.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Microstrip's mixed air/dielectric fields give an \emph{effective} permittivity between 1 and $\varepsilon_r$.
+\item Stripline is fully enclosed (TEM, non-dispersive); CPW has coplanar grounds; coax is shielded and broadband.
+\item Wider lines (larger $W/h$) give lower $Z_0$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A stripline sits in a uniform $\varepsilon_r = 4$ dielectric. What is its effective permittivity?
+\item Does widening a microstrip raise or lower $Z_0$?
+\item Find the guided wavelength at $2\ \text{GHz}$ for $\varepsilon_{\text{eff}} = 3.34$.
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~3); Steer~\cite{steer}.}
