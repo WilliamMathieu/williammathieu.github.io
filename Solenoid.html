@@ -94,34 +94,50 @@ function drawDiagram() {
   var N  = document.getElementById('N') ? (parseFloat(document.getElementById('N').value)||0) : 0;
   var D  = document.getElementById('D') ? (parseFloat(document.getElementById('D').value)||0) : 0;
   var Lc = document.getElementById('len') ? (parseFloat(document.getElementById('len').value)||0) : 0;
-  var W=560,H=190,cy=82,ry=44;
-  var x0=95,x1=465;
+  var W=560,H=190,cy=90,ry=44;
+  var x0=110,x1=450;
   var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
   s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
-  // leads
-  s+='<line x1="'+(x0-40)+'" y1="'+cy+'" x2="'+x0+'" y2="'+cy+'" stroke="#333" stroke-width="1.5"/>';
-  s+='<line x1="'+x1+'" y1="'+cy+'" x2="'+(x1+40)+'" y2="'+cy+'" stroke="#333" stroke-width="1.5"/>';
-  // winding as a series of ellipses
-  var nvis=Math.max(2,Math.min(16, Math.round(N)||6));
-  var step=(x1-x0)/nvis;
-  for(var i=0;i<=nvis;i++){
-    var xc=x0+i*step;
-    s+='<ellipse cx="'+xc+'" cy="'+cy+'" rx="'+(step*0.55)+'" ry="'+ry+'" fill="none" stroke="#5533aa" stroke-width="2.2"/>';
+  // Winding drawn as a true helix: one continuous wire wound on a cylinder
+  // whose axis lies along x. Depth (z) bleeds into the screen x-coordinate so
+  // each turn projects to a slanted ellipse — i.e. a 3-D coil, not flat loops.
+  var nturns=Math.max(2,Math.min(16, Math.round(N)||6));
+  var R=ry, tilt=0.42, th0=-Math.PI/2;
+  var coilPix=x1-x0, segPer=26, total=nturns*segPer;
+  var pts=[];
+  for(var k=0;k<=total;k++){
+    var th=th0+(k/segPer)*2*Math.PI;      // angle around the cylinder
+    var adv=x0+(k/total)*coilPix;         // advance along the axis
+    pts.push([adv+tilt*R*Math.sin(th), cy+R*Math.cos(th), Math.sin(th)>=0]);
   }
+  // Two passes: back half-turns (light) first, then front (bold) on top, so
+  // the near side of the wire correctly occludes the far side.
+  var back='', front='';
+  for(var j=0;j<pts.length-1;j++){
+    var a=pts[j], b=pts[j+1];
+    var seg='<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'" ';
+    if(a[2]) front+=seg+'stroke="#5533aa" stroke-width="2.4" stroke-linecap="round"/>';
+    else     back +=seg+'stroke="#c9b8ee" stroke-width="1.8" stroke-linecap="round"/>';
+  }
+  var leftX=pts[0][0], rightX=pts[pts.length-1][0];
+  // leads
+  s+='<line x1="'+(x0-46)+'" y1="'+cy+'" x2="'+leftX.toFixed(1)+'" y2="'+cy+'" stroke="#333" stroke-width="1.5"/>';
+  s+='<line x1="'+rightX.toFixed(1)+'" y1="'+cy+'" x2="'+(x1+46)+'" y2="'+cy+'" stroke="#333" stroke-width="1.5"/>';
+  s+=back+front;
   // diameter arrow (vertical, at left of coil)
-  var xd=x0-14;
-  s+='<line x1="'+xd+'" y1="'+(cy-ry)+'" x2="'+xd+'" y2="'+(cy+ry)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
-  s+='<polygon points="'+xd+','+(cy-ry)+' '+(xd-3)+','+(cy-ry+7)+' '+(xd+3)+','+(cy-ry+7)+'" fill="#888"/>';
-  s+='<polygon points="'+xd+','+(cy+ry)+' '+(xd-3)+','+(cy+ry-7)+' '+(xd+3)+','+(cy+ry-7)+'" fill="#888"/>';
-  s+='<text x="'+(xd-6)+'" y="'+(cy+4)+'" text-anchor="end" font-size="10.5" fill="#888">D'+(D?' = '+D+' mm':'')+'</text>';
+  var xd=leftX-14;
+  s+='<line x1="'+xd.toFixed(1)+'" y1="'+(cy-R)+'" x2="'+xd.toFixed(1)+'" y2="'+(cy+R)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<polygon points="'+xd.toFixed(1)+','+(cy-R)+' '+(xd-3).toFixed(1)+','+(cy-R+7)+' '+(xd+3).toFixed(1)+','+(cy-R+7)+'" fill="#888"/>';
+  s+='<polygon points="'+xd.toFixed(1)+','+(cy+R)+' '+(xd-3).toFixed(1)+','+(cy+R-7)+' '+(xd+3).toFixed(1)+','+(cy+R-7)+'" fill="#888"/>';
+  s+='<text x="'+(xd-6).toFixed(1)+'" y="'+(cy+4)+'" text-anchor="end" font-size="10.5" fill="#888">D'+(D?' = '+D+' mm':'')+'</text>';
   // length arrow (horizontal, below)
-  var yl=cy+ry+16;
-  s+='<line x1="'+x0+'" y1="'+yl+'" x2="'+x1+'" y2="'+yl+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
-  s+='<polygon points="'+x0+','+yl+' '+(x0+7)+','+(yl-3)+' '+(x0+7)+','+(yl+3)+'" fill="#888"/>';
-  s+='<polygon points="'+x1+','+yl+' '+(x1-7)+','+(yl-3)+' '+(x1-7)+','+(yl+3)+'" fill="#888"/>';
-  s+='<text x="'+((x0+x1)/2)+'" y="'+(yl+13)+'" text-anchor="middle" font-size="10.5" fill="#888">ℓ'+(Lc?' = '+Lc+' mm':'')+(N?'   ('+Math.round(N)+' turns)':'')+'</text>';
+  var yl=cy+R+18;
+  s+='<line x1="'+leftX.toFixed(1)+'" y1="'+yl+'" x2="'+rightX.toFixed(1)+'" y2="'+yl+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<polygon points="'+leftX.toFixed(1)+','+yl+' '+(leftX+7).toFixed(1)+','+(yl-3)+' '+(leftX+7).toFixed(1)+','+(yl+3)+'" fill="#888"/>';
+  s+='<polygon points="'+rightX.toFixed(1)+','+yl+' '+(rightX-7).toFixed(1)+','+(yl-3)+' '+(rightX-7).toFixed(1)+','+(yl+3)+'" fill="#888"/>';
+  s+='<text x="'+((leftX+rightX)/2).toFixed(1)+'" y="'+(yl+13)+'" text-anchor="middle" font-size="10.5" fill="#888">ℓ'+(Lc?' = '+Lc+' mm':'')+(N?'   ('+Math.round(N)+' turns)':'')+'</text>';
   // result
-  s+='<text x="'+((x0+x1)/2)+'" y="24" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">L = '+Lv+'</text>';
+  s+='<text x="'+((leftX+rightX)/2).toFixed(1)+'" y="22" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">L = '+Lv+'</text>';
   s+='</svg>';
   document.getElementById('tool-diagram').innerHTML=s;
 }
