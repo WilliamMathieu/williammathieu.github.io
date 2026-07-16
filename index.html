@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
-  <meta name="description" content="63 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
+  <meta name="description" content="66 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/">
   <meta property="og:title" content="RF Toolbox — Free Online RF & Microwave Engineering Calculators">
@@ -102,7 +102,7 @@
   <div class="hero-row">
     <div>
       <h1>RF &amp; Microwave Engineering Calculators</h1>
-      <p>63 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
+      <p>66 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
       <div class="hero-stats">
         <div class="hero-stat"><span class="num">55</span><span class="lbl">Calculators</span></div>
         <div class="hero-stat"><span class="num">2</span><span class="lbl">Simulators</span></div>
@@ -341,6 +341,12 @@
     <div class="tool-card-name">Yagi-Uda Antenna</div>
     <div class="tool-card-desc">Gain, element lengths, and boom size for 2–9 element Yagis (NBS/Viezbicke tables).</div>
   </div>
+</a><a class="tool-card" href="ApertureAntenna.html">
+  <div class="tool-card-fig"><img src="thumbnails/ApertureAntenna.svg" width="200" height="90" alt="ApertureAntenna"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Aperture Antenna Gain</div>
+    <div class="tool-card-desc">Dish/horn gain from area and efficiency, plus the far-field (Fraunhofer) distance.</div>
+  </div>
 </a>
 </div>
 <div class="cat-header">🔵 System & RF Analysis</div>
@@ -416,6 +422,18 @@
   <div class="tool-card-body">
     <div class="tool-card-name">Processing Gain &amp; Jamming Margin</div>
     <div class="tool-card-desc">Spread-spectrum processing gain from chip/data rate, plus jamming margin.</div>
+  </div>
+</a><a class="tool-card" href="FresnelZone.html">
+  <div class="tool-card-fig"><img src="thumbnails/FresnelZone.svg" width="200" height="90" alt="FresnelZone"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Fresnel Zone &amp; Clearance</div>
+    <div class="tool-card-desc">First-zone radius and the 60% clearance needed for a line-of-sight link.</div>
+  </div>
+</a><a class="tool-card" href="PathLoss.html">
+  <div class="tool-card-fig"><img src="thumbnails/PathLoss.svg" width="200" height="90" alt="PathLoss"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Path Loss Models</div>
+    <div class="tool-card-desc">Free-space, two-ray, Okumura-Hata and COST-231 propagation loss.</div>
   </div>
 </a>
 </div>
@@ -653,8 +671,8 @@ var CAT_MAP = {
   tlines:   ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html'],
   matching: ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','Wilkinson.html','LCBalun.html','CapacitorNetwork.html','ImpedanceMatchingNetwork.html','Coupler.html'],
   filters:  ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html'],
-  antennas: ['Dipole.html','PatchAntenna.html','ArrayFactor.html','HelicalAntenna.html','YagiAntenna.html'],
-  system:   ['Friis.html','NoiseFigure.html','LinkBudget.html','RadarRange.html','IP3Calc.html','PowerCombiner.html','AmpStability.html','PLLFilter.html','Sensitivity.html','ImageReject.html','LinkCapacity.html','ProcessingGain.html'],
+  antennas: ['Dipole.html','PatchAntenna.html','ArrayFactor.html','HelicalAntenna.html','YagiAntenna.html','ApertureAntenna.html'],
+  system:   ['Friis.html','NoiseFigure.html','LinkBudget.html','RadarRange.html','IP3Calc.html','PowerCombiner.html','AmpStability.html','PLLFilter.html','Sensitivity.html','ImageReject.html','LinkCapacity.html','ProcessingGain.html','FresnelZone.html','PathLoss.html'],
   utils:    ['dBmConverter.html','Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','PhaseNoiseJitter.html','TwoPortConverter.html','SParamPlotter.html','BondWire.html','PCBVia.html','ESeries.html','ADCNoise.html','EVMSNR.html'],
   mri:      ['CLI.html','CoilDesigner.html','SurfaceCoilDesigner.html','BirdcageCoil.html','SAREstimator.html','PhasedArrayDecoupling.html'],
   waveguide:['Waveguide.html','CircularWaveguide.html'],
