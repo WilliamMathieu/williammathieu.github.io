@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unilateral Transducer Gain Calculator — Max Gain from S-Parameters | RF Toolbox</title>
+  <meta name="description" content="Calculate the maximum unilateral transducer gain of an amplifier from its S-parameter magnitudes, with the source and load mismatch-gain contributions.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/TransducerGain.html">
+  <meta property="og:title" content="Unilateral Transducer Gain Calculator | RF Toolbox">
+  <meta property="og:description" content="Maximum unilateral transducer gain from S-parameter magnitudes, with source/load gain terms.">
+  <meta property="og:url" content="https://rftoolbox.ca/TransducerGain.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Unilateral Transducer Gain Calculator",
+    "description": "Calculate the maximum unilateral transducer gain of an amplifier from its S-parameter magnitudes, with source and load mismatch-gain contributions.",
+    "url": "https://rftoolbox.ca/TransducerGain.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Unilateral Transducer Gain</h3>
+<div class="tool-concept">
+  <p>When a transistor's reverse transmission S<sub>12</sub> is small enough to ignore (the unilateral approximation), the maximum transducer power gain is the intrinsic gain |S<sub>21</sub>|² boosted by conjugately matching the input and output. This tool splits the maximum gain into its source-match, device, and load-match contributions from the S-parameter magnitudes.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(G_{TU,\max} = \dfrac{|S_{21}|^2}{\left(1-|S_{11}|^2\right)\left(1-|S_{22}|^2\right)} = G_{S,\max}\cdot|S_{21}|^2\cdot G_{L,\max}\)<br>\(G_{S,\max} = \dfrac{1}{1-|S_{11}|^2}, \qquad G_{L,\max} = \dfrac{1}{1-|S_{22}|^2}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">S<sub>11</sub></td><td style="padding:3px 0;">Input reflection magnitude (dB, e.g. −6).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">S<sub>21</sub></td><td style="padding:3px 0;">Forward transmission (gain) magnitude (dB).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">S<sub>22</sub></td><td style="padding:3px 0;">Output reflection magnitude (dB).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">G<sub>S</sub>, G<sub>L</sub></td><td style="padding:3px 0;">Extra gain from conjugately matching the source and load.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">G<sub>TU,max</sub></td><td style="padding:3px 0;">Maximum unilateral transducer gain. Valid when |S<sub>12</sub>| is negligible.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., Wiley, 2012. · G. Gonzalez, <em>Microwave Transistor Amplifiers</em>, 2nd ed., Prentice Hall, 1997.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>|S<sub>11</sub>|</label><div class="inp-inline"><input type="text" id="s11" placeholder="e.g. -6" data-tip="Input reflection magnitude in dB (negative)."><span class="inp-units">dB</span></div><span class="inp-hint">Input match</span></div>
+  <div class="inp-row"><label>|S<sub>21</sub>|</label><div class="inp-inline"><input type="text" id="s21" placeholder="e.g. 12" data-tip="Forward gain magnitude in dB."><span class="inp-units">dB</span></div><span class="inp-hint">Forward gain</span></div>
+  <div class="inp-row"><label>|S<sub>22</sub>|</label><div class="inp-inline"><input type="text" id="s22" placeholder="e.g. -8" data-tip="Output reflection magnitude in dB (negative)."><span class="inp-units">dB</span></div><span class="inp-hint">Output match</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;s11&quot;:&quot;-6.02&quot;,&quot;s21&quot;:&quot;12.04&quot;,&quot;s22&quot;:&quot;-7.96&quot;})" title="|S11| -6 dB, |S21| 12 dB, |S22| -8 dB">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Maximum gain</h4>
+    <div class="res-row"><span class="res-lbl">G<sub>TU,max</sub></span><span class="res-val" id="gtu">—</span></div>
+  </div>
+  <div class="res-card"><h4>Contributions</h4>
+    <div class="res-row"><span class="res-lbl">Source match G<sub>S</sub></span><span class="res-val" id="gs">—</span></div>
+    <div class="res-row"><span class="res-lbl">Device |S21|²</span><span class="res-val" id="gd">—</span></div>
+    <div class="res-row"><span class="res-lbl">Load match G<sub>L</sub></span><span class="res-val" id="gl">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var gs=parseFloat((document.getElementById('gs').textContent||'').replace(/[^\-0-9.]/g,''));
+  var gd=parseFloat((document.getElementById('gd').textContent||'').replace(/[^\-0-9.]/g,''));
+  var gl=parseFloat((document.getElementById('gl').textContent||'').replace(/[^\-0-9.]/g,''));
+  var W=560,H=160;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(gd)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  // stacked horizontal bar: Gs + device + GL
+  var parts=[['G_S',gs,'#c9b8ee'],['|S21|²',gd,'#5533aa'],['G_L',gl,'#8877cc']];
+  var total=gs+gd+gl, x0=40, xw=W-80, y=60, h=32, x=x0;
+  for(var i=0;i<parts.length;i++){
+    var w=Math.max(1,parts[i][1]/total*xw);
+    s+='<rect x="'+x.toFixed(1)+'" y="'+y+'" width="'+w.toFixed(1)+'" height="'+h+'" fill="'+parts[i][2]+'"/>';
+    s+='<text x="'+(x+w/2).toFixed(1)+'" y="'+(y+h+16)+'" text-anchor="middle" font-size="10" fill="#555">'+parts[i][0]+'</text>';
+    s+='<text x="'+(x+w/2).toFixed(1)+'" y="'+(y+20)+'" text-anchor="middle" font-size="9.5" fill="#fff">'+parts[i][1].toFixed(1)+'</text>';
+    x+=w;
+  }
+  s+='<text x="'+(x0+xw/2)+'" y="40" text-anchor="middle" font-size="11" fill="#5533aa">G_TU,max = '+total.toFixed(2)+' dB</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_amplifiers.html">Learn the theory behind this tool →</a></div>
+<script src="TransducerGain.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
