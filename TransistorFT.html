@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transistor fT / fmax Calculator — Transit &amp; Max Oscillation Frequency | RF Toolbox</title>
+  <meta name="description" content="Calculate a transistor's transition frequency fT from transconductance and capacitances, and the maximum oscillation frequency fmax from the gate resistance.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/TransistorFT.html">
+  <meta property="og:title" content="Transistor fT / fmax Calculator | RF Toolbox">
+  <meta property="og:description" content="Transition frequency fT from gm and capacitances, plus fmax from gate resistance.">
+  <meta property="og:url" content="https://rftoolbox.ca/TransistorFT.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Transistor fT / fmax Calculator",
+    "description": "Calculate a transistor's transition frequency fT from transconductance and capacitances, and the maximum oscillation frequency fmax.",
+    "url": "https://rftoolbox.ca/TransistorFT.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Transistor f<sub>T</sub> / f<sub>max</sub></h3>
+<div class="tool-concept">
+  <p>The transition frequency f<sub>T</sub> — where the short-circuit current gain falls to unity — is the headline speed figure of an RF transistor. It is set by the transconductance and the input capacitances. The maximum oscillation frequency f<sub>max</sub>, where the power gain reaches unity, additionally depends on the parasitic gate resistance and feedback capacitance.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(f_T = \dfrac{g_m}{2\pi\,(C_{gs} + C_{gd})} \qquad f_{\max} \approx \sqrt{\dfrac{f_T}{8\pi\,R_g\,C_{gd}}}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">g<sub>m</sub></td><td style="padding:3px 0;">Transconductance (mS = mA/V).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C<sub>gs</sub></td><td style="padding:3px 0;">Gate–source (input) capacitance (pF).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C<sub>gd</sub></td><td style="padding:3px 0;">Gate–drain (feedback / Miller) capacitance (pF).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>g</sub></td><td style="padding:3px 0;">Effective gate resistance (Ω), optional — needed for f<sub>max</sub>.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>max</sub></td><td style="padding:3px 0;">Maximum oscillation frequency (unity power gain). The simplified form shown assumes gate-resistance-limited operation.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>T. H. Lee, <em>The Design of CMOS Radio-Frequency Integrated Circuits</em>, 2nd ed., Cambridge, 2004. · B. Razavi, <em>RF Microelectronics</em>, 2nd ed., Prentice Hall, 2012.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Transconductance, <span class="var">g<sub>m</sub></span></label><div class="inp-inline"><input type="text" id="gm" placeholder="e.g. 50" data-tip="Transconductance in millisiemens (mA/V)."><span class="inp-units">mS</span></div><span class="inp-hint">mA/V</span></div>
+  <div class="inp-row"><label>Gate–source C, <span class="var">C<sub>gs</sub></span></label><div class="inp-inline"><input type="text" id="Cgs" placeholder="e.g. 1" data-tip="Input capacitance (pF)."><span class="inp-units">pF</span></div><span class="inp-hint">Input cap</span></div>
+  <div class="inp-row"><label>Gate–drain C, <span class="var">C<sub>gd</sub></span></label><div class="inp-inline"><input type="text" id="Cgd" placeholder="e.g. 0.2" data-tip="Feedback (Miller) capacitance (pF)."><span class="inp-units">pF</span></div><span class="inp-hint">Feedback cap</span></div>
+  <div class="inp-row"><label>Gate resistance, <span class="var">R<sub>g</sub></span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="Rg" placeholder="e.g. 5" data-tip="Effective gate resistance (Ω), for fmax."><span class="inp-units">Ω</span></div><span class="inp-hint">For fmax</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;gm&quot;:&quot;50&quot;,&quot;Cgs&quot;:&quot;1&quot;,&quot;Cgd&quot;:&quot;0.2&quot;,&quot;Rg&quot;:&quot;5&quot;})" title="gm 50 mS, Cgs 1 pF, Cgd 0.2 pF, Rg 5 Ω">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Speed figures</h4>
+    <div class="res-row"><span class="res-lbl">Transition freq. f<sub>T</sub></span><span class="res-val" id="ft">—</span></div>
+    <div class="res-row"><span class="res-lbl">Max osc. freq. f<sub>max</sub></span><span class="res-val" id="fmax">—</span></div>
+  </div>
+  <div class="res-card"><h4>Detail</h4>
+    <div class="res-row"><span class="res-lbl">Total input C</span><span class="res-val" id="ctot">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var ft=parseFloat((document.getElementById('ft').textContent||'').replace(/[^0-9.]/g,''));
+  var ftU=(document.getElementById('ft').textContent||'').replace(/[0-9. ]/g,'');
+  var W=560,H=160;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(ft)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  // |h21| rolls off at -20 dB/dec crossing 0 dB at fT (log-log sketch)
+  var x0=50,x1=W-30,y0=H-30,y1=20;
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x1+'" y2="'+y0+'" stroke="#bbb" stroke-width="1"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x0+'" y2="'+y1+'" stroke="#bbb" stroke-width="1"/>';
+  s+='<line x1="'+x0+'" y1="'+y1+'" x2="'+(x1-40)+'" y2="'+y0+'" stroke="#5533aa" stroke-width="2.2"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x1+'" y2="'+y0+'" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<circle cx="'+(x1-40)+'" cy="'+y0+'" r="3.5" fill="#c0392b"/>';
+  s+='<text x="'+(x1-40)+'" y="'+(y0-8)+'" text-anchor="middle" font-size="10.5" fill="#c0392b">f_T = '+ft.toFixed(2)+' '+ftU+'</text>';
+  s+='<text x="'+(x0-6)+'" y="'+(y1+6)+'" text-anchor="end" font-size="9.5" fill="#888">|h21|</text>';
+  s+='<text x="'+(x1)+'" y="'+(y0+16)+'" text-anchor="end" font-size="9.5" fill="#888">log f →</text>';
+  s+='<text x="'+(x0+6)+'" y="'+(y0-4)+'" font-size="9" fill="#888">0 dB (unity gain)</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_amplifiers.html">Learn the theory behind this tool →</a></div>
+<script src="TransistorFT.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
