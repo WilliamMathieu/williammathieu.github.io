@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
-  <meta name="description" content="72 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
+  <meta name="description" content="76 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/">
   <meta property="og:title" content="RF Toolbox — Free Online RF & Microwave Engineering Calculators">
@@ -102,9 +102,9 @@
   <div class="hero-row">
     <div>
       <h1>RF &amp; Microwave Engineering Calculators</h1>
-      <p>72 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
+      <p>76 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
       <div class="hero-stats">
-        <div class="hero-stat"><span class="num">55</span><span class="lbl">Calculators</span></div>
+        <div class="hero-stat"><span class="num">74</span><span class="lbl">Calculators</span></div>
         <div class="hero-stat"><span class="num">2</span><span class="lbl">Simulators</span></div>
         <div class="hero-stat"><span class="num">64</span><span class="lbl">Wiki Articles</span></div>
         <div class="hero-stat"><span class="num">7</span><span class="lbl">Games</span></div>
@@ -471,6 +471,18 @@
     <div class="tool-card-name">Noise Figure (Y-Factor)</div>
     <div class="tool-card-desc">Noise figure and noise temperature from the Y-factor measurement and source ENR.</div>
   </div>
+</a><a class="tool-card" href="TransducerGain.html">
+  <div class="tool-card-fig"><img src="thumbnails/TransducerGain.svg" width="200" height="90" alt="TransducerGain"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Unilateral Transducer Gain</div>
+    <div class="tool-card-desc">Maximum gain from S-parameter magnitudes, with source and load match contributions.</div>
+  </div>
+</a><a class="tool-card" href="LNAMatch.html">
+  <div class="tool-card-fig"><img src="thumbnails/LNAMatch.svg" width="200" height="90" alt="LNAMatch"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">LNA Noise Match</div>
+    <div class="tool-card-desc">Noise figure for any source reflection from the noise parameters Fmin, Rn and Γopt.</div>
+  </div>
 </a>
 </div>
 <div class="cat-header">🟤 Utilities & Converters</div>
@@ -546,6 +558,18 @@
   <div class="tool-card-body">
     <div class="tool-card-name">EVM ↔ SNR Converter</div>
     <div class="tool-card-desc">Convert error vector magnitude to/from SNR/MER, with the densest supportable QAM order.</div>
+  </div>
+</a><a class="tool-card" href="BandpassSampling.html">
+  <div class="tool-card-fig"><img src="thumbnails/BandpassSampling.svg" width="200" height="90" alt="BandpassSampling"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Bandpass Sampling</div>
+    <div class="tool-card-desc">Nyquist zone, aliased IF, spectral inversion and minimum sample rate for undersampling.</div>
+  </div>
+</a><a class="tool-card" href="SpectrumDANL.html">
+  <div class="tool-card-fig"><img src="thumbnails/SpectrumDANL.svg" width="200" height="90" alt="SpectrumDANL"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Spectrum Analyzer DANL</div>
+    <div class="tool-card-desc">Displayed average noise level and sensitivity from RBW, noise figure and attenuation.</div>
   </div>
 </a>
 </div>
@@ -708,8 +732,8 @@ var CAT_MAP = {
   matching: ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','Wilkinson.html','LCBalun.html','CapacitorNetwork.html','ImpedanceMatchingNetwork.html','Coupler.html','PhaseShifter.html'],
   filters:  ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html'],
   antennas: ['Dipole.html','PatchAntenna.html','ArrayFactor.html','HelicalAntenna.html','YagiAntenna.html','ApertureAntenna.html'],
-  system:   ['Friis.html','NoiseFigure.html','LinkBudget.html','RadarRange.html','IP3Calc.html','PowerCombiner.html','AmpStability.html','PLLFilter.html','Sensitivity.html','ImageReject.html','LinkCapacity.html','ProcessingGain.html','FresnelZone.html','PathLoss.html','TransistorFT.html','DDS.html','NFYFactor.html'],
-  utils:    ['dBmConverter.html','Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','PhaseNoiseJitter.html','TwoPortConverter.html','SParamPlotter.html','BondWire.html','PCBVia.html','ESeries.html','ADCNoise.html','EVMSNR.html'],
+  system:   ['Friis.html','NoiseFigure.html','LinkBudget.html','RadarRange.html','IP3Calc.html','PowerCombiner.html','AmpStability.html','PLLFilter.html','Sensitivity.html','ImageReject.html','LinkCapacity.html','ProcessingGain.html','FresnelZone.html','PathLoss.html','TransistorFT.html','DDS.html','NFYFactor.html','TransducerGain.html','LNAMatch.html'],
+  utils:    ['dBmConverter.html','Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','PhaseNoiseJitter.html','TwoPortConverter.html','SParamPlotter.html','BondWire.html','PCBVia.html','ESeries.html','ADCNoise.html','EVMSNR.html','BandpassSampling.html','SpectrumDANL.html'],
   mri:      ['CLI.html','CoilDesigner.html','SurfaceCoilDesigner.html','BirdcageCoil.html','SAREstimator.html','PhasedArrayDecoupling.html'],
   waveguide:['Waveguide.html','CircularWaveguide.html'],
   sims:     ['SmithChart.html','RFSimulator.html','SpiceSim.html'],

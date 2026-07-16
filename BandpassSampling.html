@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bandpass (Undersampling) Nyquist-Zone Calculator | RF Toolbox</title>
+  <meta name="description" content="Plan bandpass sampling: find the Nyquist zone, aliased IF, spectral inversion and minimum sample rate for undersampling a bandpass signal.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/BandpassSampling.html">
+  <meta property="og:title" content="Bandpass (Undersampling) Nyquist-Zone Calculator | RF Toolbox">
+  <meta property="og:description" content="Nyquist zone, aliased IF, spectral inversion and minimum sample rate for bandpass sampling.">
+  <meta property="og:url" content="https://rftoolbox.ca/BandpassSampling.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Bandpass (Undersampling) Nyquist-Zone Calculator",
+    "description": "Plan bandpass sampling: find the Nyquist zone, aliased IF, spectral inversion and minimum sample rate for undersampling a bandpass signal.",
+    "url": "https://rftoolbox.ca/BandpassSampling.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Bandpass Sampling &amp; Nyquist Zones</h3>
+<div class="tool-concept">
+  <p>A bandpass signal can be digitized directly at a sample rate far below its carrier — undersampling — as long as the whole band lands inside a single Nyquist zone. This tool finds the zone the signal falls in, the aliased IF it appears at after sampling, whether the spectrum is inverted, whether folding corrupts the band, and the theoretical minimum sample rate.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.05;overflow-x:auto;">\(\text{zone } n = \left\lfloor \dfrac{f_c}{f_s/2}\right\rfloor + 1 \qquad f_{\text{IF}} = \left|\,f_c - f_s\cdot\text{round}(f_c/f_s)\,\right|\)<br>\(f_{s,\min} = 2B \qquad \text{no folding if } \left\lfloor\dfrac{f_L}{f_s/2}\right\rfloor = \left\lfloor\dfrac{f_H}{f_s/2}\right\rfloor\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>c</sub></td><td style="padding:3px 0;">Signal centre frequency (MHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B</td><td style="padding:3px 0;">Signal bandwidth (MHz). The band spans f<sub>c</sub> ± B/2.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>s</sub></td><td style="padding:3px 0;">Sample rate (MHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>IF</sub></td><td style="padding:3px 0;">Frequency the signal aliases to in the first Nyquist zone (0 … f<sub>s</sub>/2).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">inversion</td><td style="padding:3px 0;">Even Nyquist zones fold the spectrum, reversing the frequency axis.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>R. G. Vaughan, N. L. Scott &amp; D. R. White, "The theory of bandpass sampling," <em>IEEE Trans. Signal Process.</em>, 1991. · Analog Devices, MT-002, <em>What the Nyquist Criterion Means to Your Sampled Data System</em>.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Centre freq., <span class="var">f<sub>c</sub></span></label><div class="inp-inline"><input type="text" id="fc" placeholder="e.g. 70" data-tip="Signal centre frequency (MHz)."><span class="inp-units">MHz</span></div><span class="inp-hint">Carrier</span></div>
+  <div class="inp-row"><label>Bandwidth, <span class="var">B</span></label><div class="inp-inline"><input type="text" id="B" placeholder="e.g. 10" data-tip="Signal bandwidth (MHz)."><span class="inp-units">MHz</span></div><span class="inp-hint">Signal BW</span></div>
+  <div class="inp-row"><label>Sample rate, <span class="var">f<sub>s</sub></span></label><div class="inp-inline"><input type="text" id="fs" placeholder="e.g. 40" data-tip="ADC sample rate (MHz)."><span class="inp-units">MHz</span></div><span class="inp-hint">ADC clock</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fc&quot;:&quot;70&quot;,&quot;B&quot;:&quot;10&quot;,&quot;fs&quot;:&quot;40&quot;})" title="70 MHz centre, 10 MHz BW, 40 MHz sampling">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Sampled result</h4>
+    <div class="res-row"><span class="res-lbl">Nyquist zone</span><span class="res-val" id="zone">—</span></div>
+    <div class="res-row"><span class="res-lbl">Aliased IF</span><span class="res-val" id="if">—</span></div>
+    <div class="res-row"><span class="res-lbl">Spectral inversion</span><span class="res-val" id="inv">—</span></div>
+  </div>
+  <div class="res-card"><h4>Validity</h4>
+    <div class="res-row"><span class="res-lbl">Folding-free?</span><span class="res-val" id="valid">—</span></div>
+    <div class="res-row"><span class="res-lbl">Min. sample rate</span><span class="res-val" id="minfs">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var fc=parseFloat(document.getElementById('fc').value), B=parseFloat(document.getElementById('B').value), fs=parseFloat(document.getElementById('fs').value);
+  var W=560,H=160;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(fc)||isNaN(B)||isNaN(fs)||fs<=0) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  var fmax=Math.max(fc+B, 3*fs)*1.05, xa=30, xw=W-50, yb=110;
+  function X(f){ return xa + f/fmax*xw; }
+  s+='<line x1="'+xa+'" y1="'+yb+'" x2="'+(xa+xw)+'" y2="'+yb+'" stroke="#bbb" stroke-width="1"/>';
+  // Nyquist zone boundaries at k*fs/2
+  for(var k=1;k*fs/2<fmax;k++){ var x=X(k*fs/2); s+='<line x1="'+x.toFixed(1)+'" y1="'+(yb-50)+'" x2="'+x.toFixed(1)+'" y2="'+yb+'" stroke="#e0d8ff" stroke-width="1"/>'; }
+  // the signal band
+  var xL=X(fc-B/2), xH=X(fc+B/2);
+  s+='<rect x="'+xL.toFixed(1)+'" y="'+(yb-46)+'" width="'+(xH-xL).toFixed(1)+'" height="46" fill="#5533aa66" stroke="#5533aa" stroke-width="1.2"/>';
+  s+='<text x="'+((xL+xH)/2).toFixed(1)+'" y="'+(yb-52)+'" text-anchor="middle" font-size="10" fill="#5533aa">signal @ '+fc+' MHz</text>';
+  // aliased image in first zone
+  var IF=parseFloat((document.getElementById('if').textContent||'').replace(/[^0-9.]/g,''));
+  if(!isNaN(IF)){ var xi=X(IF); s+='<line x1="'+xi.toFixed(1)+'" y1="'+(yb-30)+'" x2="'+xi.toFixed(1)+'" y2="'+yb+'" stroke="#c0392b" stroke-width="2.4"/><text x="'+xi.toFixed(1)+'" y="'+(yb-34)+'" text-anchor="middle" font-size="10" fill="#c0392b">IF '+IF.toFixed(1)+'</text>'; }
+  s+='<text x="'+X(fs/2).toFixed(1)+'" y="'+(yb+14)+'" text-anchor="middle" font-size="9" fill="#888">fs/2</text>';
+  s+='<text x="'+(xa+xw)+'" y="'+(yb+26)+'" text-anchor="end" font-size="9.5" fill="#888">frequency →</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_superheterodyne.html">Learn the theory behind this tool →</a></div>
+<script src="BandpassSampling.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
