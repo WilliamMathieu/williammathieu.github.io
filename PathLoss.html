@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Path Loss Calculator — Free-Space, Two-Ray, Hata &amp; COST-231 | RF Toolbox</title>
+  <meta name="description" content="Estimate radio path loss with free-space, two-ray ground-reflection, Okumura-Hata and COST-231 models from frequency, distance and antenna heights.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/PathLoss.html">
+  <meta property="og:title" content="RF Path Loss Calculator | RF Toolbox">
+  <meta property="og:description" content="Free-space, two-ray, Okumura-Hata and COST-231 path-loss models.">
+  <meta property="og:url" content="https://rftoolbox.ca/PathLoss.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "RF Path Loss Calculator",
+    "description": "Estimate radio path loss with free-space, two-ray ground-reflection, Okumura-Hata and COST-231 models from frequency, distance and antenna heights.",
+    "url": "https://rftoolbox.ca/PathLoss.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>RF Path Loss Models</h3>
+<div class="tool-concept">
+  <p>Estimates radio propagation loss with the standard models: free-space (line of sight), two-ray ground reflection (with its break-point distance), and the empirical Okumura–Hata / COST-231 models for land-mobile links. Free-space loss is always shown for reference alongside the model you pick.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.05;overflow-x:auto;">\(L_{\text{FS}} = 20\log_{10}d_{\text{km}} + 20\log_{10}f_{\text{MHz}} + 32.44\)<br>\(d_{\text{break}} = \dfrac{4 h_t h_r}{\lambda},\qquad L_{\text{2ray}} = 40\log_{10}d - 20\log_{10}(h_t h_r)\ \ (d > d_{\text{break}})\)<br>\(L_{\text{Hata}} = 69.55 + 26.16\log_{10}f - 13.82\log_{10}h_b - a(h_m) + (44.9 - 6.55\log_{10}h_b)\log_{10}d\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Frequency (MHz). Hata is valid 150–1500 MHz; COST-231 extends it to 1500–2000 MHz.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Path length (km). Empirical models assume roughly 1–20 km.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">h<sub>t</sub>, h<sub>b</sub></td><td style="padding:3px 0;">Transmit / base-station antenna height (m), 30–200 m for Hata.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">h<sub>r</sub>, h<sub>m</sub></td><td style="padding:3px 0;">Receive / mobile antenna height (m), 1–10 m. Sets the a(h<sub>m</sub>) correction.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Environment</td><td style="padding:3px 0;">Selects the model: free-space, two-ray, or urban/suburban/rural (Hata or COST-231, medium-city correction).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>M. Hata, "Empirical formula for propagation loss in land mobile radio services," <em>IEEE Trans. Veh. Technol.</em>, 1980. · COST Action 231, <em>Digital Mobile Radio Towards Future Generation Systems</em>, final report, 1999. · T. S. Rappaport, <em>Wireless Communications</em>, 2nd ed., Prentice Hall, 2002.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="f" placeholder="e.g. 900" data-tip="Frequency in MHz."><span class="inp-units">MHz</span></div><span class="inp-hint">Carrier frequency</span></div>
+  <div class="inp-row"><label>Distance, <span class="var">d</span></label><div class="inp-inline"><input type="text" id="d" placeholder="e.g. 1" data-tip="Path length in km."><span class="inp-units">km</span></div><span class="inp-hint">Path length</span></div>
+  <div class="inp-row"><label>TX / base height, <span class="var">h<sub>t</sub></span></label><div class="inp-inline"><input type="text" id="ht" placeholder="e.g. 30" data-tip="Transmit / base-station antenna height (m)."><span class="inp-units">m</span></div><span class="inp-hint">Base height</span></div>
+  <div class="inp-row"><label>RX / mobile height, <span class="var">h<sub>r</sub></span></label><div class="inp-inline"><input type="text" id="hr" placeholder="e.g. 1.5" data-tip="Receive / mobile antenna height (m)."><span class="inp-units">m</span></div><span class="inp-hint">Mobile height</span></div>
+  <div class="inp-row"><label>Environment</label><div class="inp-inline"><select id="env" style="font-size:13px;padding:3px;"><option value="freespace">Free space</option><option value="tworay">Two-ray ground</option><option value="urban" selected>Urban</option><option value="suburban">Suburban</option><option value="rural">Rural / open</option></select></div><span class="inp-hint">Propagation model</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;f&quot;:&quot;900&quot;,&quot;d&quot;:&quot;1&quot;,&quot;ht&quot;:&quot;30&quot;,&quot;hr&quot;:&quot;1.5&quot;})" title="900 MHz, 1 km, base 30 m, mobile 1.5 m, urban">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Path loss</h4>
+    <div class="res-row"><span class="res-lbl">Free-space (ref.)</span><span class="res-val" id="fspl">—</span></div>
+    <div class="res-row"><span class="res-lbl">Selected model</span><span class="res-val" id="model">—</span></div>
+  </div>
+  <div class="res-card"><h4>Details</h4>
+    <div class="res-row"><span class="res-lbl">Model used</span><span class="res-val" id="mname">—</span></div>
+    <div class="res-row"><span class="res-lbl">Break-point dist.</span><span class="res-val" id="bp">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var fspl=parseFloat((document.getElementById('fspl').textContent||'').replace(/[^0-9.]/g,''));
+  var model=parseFloat((document.getElementById('model').textContent||'').replace(/[^0-9.]/g,''));
+  var W=560,H=170;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(fspl)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  var max=Math.max(fspl, isNaN(model)?fspl:model)*1.12, x0=140, xw=W-x0-70;
+  var rows=[['Free-space',fspl,'#c9b8ee']];
+  if(!isNaN(model)) rows.push(['Selected model',model,'#5533aa']);
+  for(var i=0;i<rows.length;i++){
+    var yy=40+i*52, bw=Math.max(2,(rows[i][1]/max)*xw);
+    s+='<text x="'+(x0-10)+'" y="'+(yy+14)+'" text-anchor="end" font-size="11" fill="#555">'+rows[i][0]+'</text>';
+    s+='<rect x="'+x0+'" y="'+yy+'" width="'+bw.toFixed(1)+'" height="22" fill="'+rows[i][2]+'" rx="2"/>';
+    s+='<text x="'+(x0+bw+6).toFixed(1)+'" y="'+(yy+16)+'" font-size="11" fill="#333">'+rows[i][1].toFixed(1)+' dB</text>';
+  }
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_link_budget.html">Learn the theory behind this tool →</a></div>
+<script src="PathLoss.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
