@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
-  <meta name="description" content="84 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
+  <meta name="description" content="86 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/">
   <meta property="og:title" content="RF Toolbox — Free Online RF & Microwave Engineering Calculators">
@@ -102,9 +102,9 @@
   <div class="hero-row">
     <div>
       <h1>RF &amp; Microwave Engineering Calculators</h1>
-      <p>84 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
+      <p>86 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
       <div class="hero-stats">
-        <div class="hero-stat"><span class="num">82</span><span class="lbl">Calculators</span></div>
+        <div class="hero-stat"><span class="num">84</span><span class="lbl">Calculators</span></div>
         <div class="hero-stat"><span class="num">2</span><span class="lbl">Simulators</span></div>
         <div class="hero-stat"><span class="num">64</span><span class="lbl">Wiki Articles</span></div>
         <div class="hero-stat"><span class="num">7</span><span class="lbl">Games</span></div>
@@ -254,6 +254,12 @@
     <div class="tool-card-name">Bond Wire Inductance</div>
     <div class="tool-card-desc">Parasitic inductance and reactance of a bond wire (Grover formula).</div>
   </div>
+</a><a class="tool-card" href="WireInductance.html">
+  <div class="tool-card-fig"><img src="thumbnails/WireInductance.svg" width="200" height="90" alt="WireInductance"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Wire Inductance</div>
+    <div class="tool-card-desc">Self-inductance of a straight wire, circular loop, or two-wire line.</div>
+  </div>
 </a>
 </div>
 <div class="cat-header">🟣 Transmission Lines</div>
@@ -387,6 +393,12 @@
   <div class="tool-card-body">
     <div class="tool-card-name">Digital Phase Shifter</div>
     <div class="tool-card-desc">LSB step, number of states, and RMS quantization error of an N-bit phase shifter.</div>
+  </div>
+</a><a class="tool-card" href="MismatchLoss.html">
+  <div class="tool-card-fig"><img src="thumbnails/MismatchLoss.svg" width="200" height="90" alt="MismatchLoss"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Mismatch Loss</div>
+    <div class="tool-card-desc">Mismatch loss, return loss, VSWR, |Γ| and reflected/transmitted power.</div>
   </div>
 </a>
 </div>
@@ -781,9 +793,9 @@
 // ── Category map for tab filtering ──────────────────────────────────────────
 var CAT_MAP = {
   fundamentals: ['Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','dBmConverter.html','PlaneWave.html','FieldStrength.html','DielectricBoundary.html','LossTangent.html','ThermalNoise.html'],
-  coils:        ['LC.html','CLC.html','CoupledResonators.html','BandpassCalc.html','Solenoid.html','Varactor.html','ParallelPlateCap.html','BondWire.html'],
+  coils:        ['LC.html','CLC.html','CoupledResonators.html','BandpassCalc.html','Solenoid.html','Varactor.html','ParallelPlateCap.html','BondWire.html','WireInductance.html'],
   tlines:       ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html','TDR.html','PCBVia.html'],
-  matching:     ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','ImpedanceMatchingNetwork.html','CapacitorNetwork.html','LCBalun.html','Wilkinson.html','Coupler.html','PowerCombiner.html','PhaseShifter.html'],
+  matching:     ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','ImpedanceMatchingNetwork.html','CapacitorNetwork.html','LCBalun.html','Wilkinson.html','Coupler.html','PowerCombiner.html','PhaseShifter.html','MismatchLoss.html'],
   filters:      ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html'],
   amps:         ['NoiseFigure.html','AmpStability.html','IP3Calc.html','TransistorFT.html','TransducerGain.html','LNAMatch.html','NFYFactor.html','PLLFilter.html','PhaseNoiseJitter.html','DDS.html'],
   rx:           ['Sensitivity.html','ImageReject.html','ADCNoise.html','EVMSNR.html','BandpassSampling.html','SpectrumDANL.html'],
