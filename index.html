@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
-  <meta name="description" content="77 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
+  <meta name="description" content="79 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/">
   <meta property="og:title" content="RF Toolbox — Free Online RF & Microwave Engineering Calculators">
@@ -102,9 +102,9 @@
   <div class="hero-row">
     <div>
       <h1>RF &amp; Microwave Engineering Calculators</h1>
-      <p>77 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
+      <p>79 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
       <div class="hero-stats">
-        <div class="hero-stat"><span class="num">75</span><span class="lbl">Calculators</span></div>
+        <div class="hero-stat"><span class="num">77</span><span class="lbl">Calculators</span></div>
         <div class="hero-stat"><span class="num">2</span><span class="lbl">Simulators</span></div>
         <div class="hero-stat"><span class="num">64</span><span class="lbl">Wiki Articles</span></div>
         <div class="hero-stat"><span class="num">7</span><span class="lbl">Games</span></div>
@@ -123,15 +123,18 @@
   <!-- Tab bar -->
   <div class="tab-bar" id="tab-bar">
     <button class="tab-btn active" data-cat="all" onclick="filterCat('all',this)">All Tools</button>
-    <button class="tab-btn" data-cat="coils" onclick="filterCat('coils',this)">Resonance & LC</button>
+    <button class="tab-btn" data-cat="fundamentals" onclick="filterCat('fundamentals',this)">Fundamentals & EM</button>
+    <button class="tab-btn" data-cat="coils" onclick="filterCat('coils',this)">Resonance & Passives</button>
     <button class="tab-btn" data-cat="tlines" onclick="filterCat('tlines',this)">Transmission Lines</button>
     <button class="tab-btn" data-cat="matching" onclick="filterCat('matching',this)">Matching</button>
     <button class="tab-btn" data-cat="filters" onclick="filterCat('filters',this)">Filters</button>
+    <button class="tab-btn" data-cat="amps" onclick="filterCat('amps',this)">Amplifiers & Devices</button>
+    <button class="tab-btn" data-cat="rx" onclick="filterCat('rx',this)">Receivers & DSP</button>
     <button class="tab-btn" data-cat="antennas" onclick="filterCat('antennas',this)">Antennas</button>
-    <button class="tab-btn" data-cat="system" onclick="filterCat('system',this)">System</button>
-    <button class="tab-btn" data-cat="utils" onclick="filterCat('utils',this)">Utilities</button>
-    <button class="tab-btn" data-cat="mri" onclick="filterCat('mri',this)">MRI</button>
+    <button class="tab-btn" data-cat="propagation" onclick="filterCat('propagation',this)">Propagation & Radar</button>
     <button class="tab-btn" data-cat="waveguide" onclick="filterCat('waveguide',this)">Waveguide</button>
+    <button class="tab-btn" data-cat="mri" onclick="filterCat('mri',this)">MRI</button>
+    <button class="tab-btn" data-cat="utils" onclick="filterCat('utils',this)">Converters</button>
     <button class="tab-btn" data-cat="sims" onclick="filterCat('sims',this)">Simulators</button>
   </div>
 
@@ -143,7 +146,35 @@
 
   <!-- Tool grid -->
   <div id="all-cards">
-<div class="cat-header">🔵 Resonance & LC</div>
+<div class="cat-header">🌐 Fundamentals & EM</div>
+<div class="tool-grid">
+<a class="tool-card" href="Wavelength.html">
+  <div class="tool-card-fig"><img src="thumbnails/Wavelength.svg" width="200" height="90" alt="Wavelength"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Wavelength</div>
+    <div class="tool-card-desc">Free-space λ from frequency and dielectric constant.</div>
+  </div>
+</a><a class="tool-card" href="FreqEnergyConverter.html">
+  <div class="tool-card-fig"><img src="thumbnails/FreqEnergyConverter.svg" width="200" height="90" alt="FreqEnergyConverter"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Freq / λ / Energy</div>
+    <div class="tool-card-desc">Live converter: frequency, wavelength, period, photon energy, B₀.</div>
+  </div>
+</a><a class="tool-card" href="SkinDepth.html">
+  <div class="tool-card-fig"><img src="thumbnails/SkinDepth.svg" width="200" height="90" alt="SkinDepth"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Skin Depth</div>
+    <div class="tool-card-desc">Conductor skin depth vs frequency and conductivity.</div>
+  </div>
+</a><a class="tool-card" href="dBmConverter.html">
+  <div class="tool-card-fig"><img src="thumbnails/dBmConverter.svg" width="200" height="90" alt="dBmConverter"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">dBm ↔ Watts</div>
+    <div class="tool-card-desc">Convert between dBm and watts in either direction.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">🔵 Resonance & Passives</div>
 <div class="tool-grid">
 <a class="tool-card" href="LC.html">
   <div class="tool-card-fig"><img src="thumbnails/LC.svg" width="200" height="90" alt="LC"></div>
@@ -151,17 +182,23 @@
     <div class="tool-card-name">LC Circuit Solver</div>
     <div class="tool-card-desc">Solve for L, C, or f₀ — fill any two, get the third.</div>
   </div>
-</a><a class="tool-card" href="BandpassCalc.html">
-  <div class="tool-card-fig"><img src="thumbnails/BandpassCalc.svg" width="200" height="90" alt="BandpassCalc"></div>
+</a><a class="tool-card" href="CLC.html">
+  <div class="tool-card-fig"><img src="thumbnails/CLC.svg" width="200" height="90" alt="CLC"></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">Bandpass Calculator</div>
-    <div class="tool-card-desc">f₀, Q, and bandwidth from R, L, C for series or parallel RLC.</div>
+    <div class="tool-card-name">LC Tuning Capacitor</div>
+    <div class="tool-card-desc">Capacitance needed to resonate a given inductor at a target frequency.</div>
   </div>
 </a><a class="tool-card" href="CoupledResonators.html">
   <div class="tool-card-fig"><img src="thumbnails/CoupledResonators.svg" width="200" height="90" alt="CoupledResonators"></div>
   <div class="tool-card-body">
     <div class="tool-card-name">Coupled Resonators</div>
     <div class="tool-card-desc">Mode splitting, bandwidth, and coupling regime for two magnetically coupled LC tanks.</div>
+  </div>
+</a><a class="tool-card" href="BandpassCalc.html">
+  <div class="tool-card-fig"><img src="thumbnails/BandpassCalc.svg" width="200" height="90" alt="BandpassCalc"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Bandpass Calculator</div>
+    <div class="tool-card-desc">f₀, Q, and bandwidth from R, L, C for series or parallel RLC.</div>
   </div>
 </a><a class="tool-card" href="Solenoid.html">
   <div class="tool-card-fig"><img src="thumbnails/Solenoid.svg" width="200" height="90" alt="Solenoid"></div>
@@ -180,6 +217,12 @@
   <div class="tool-card-body">
     <div class="tool-card-name">Parallel-Plate Capacitor</div>
     <div class="tool-card-desc">Capacitance from plate area, gap, dielectric and plate count, plus field and stored energy.</div>
+  </div>
+</a><a class="tool-card" href="BondWire.html">
+  <div class="tool-card-fig"><img src="thumbnails/BondWire.svg" width="200" height="90" alt="BondWire"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Bond Wire Inductance</div>
+    <div class="tool-card-desc">Parasitic inductance and reactance of a bond wire (Grover formula).</div>
   </div>
 </a>
 </div>
@@ -239,9 +282,15 @@
     <div class="tool-card-name">TDR Fault Distance</div>
     <div class="tool-card-desc">Locate a cable fault from the echo delay and velocity factor, plus the fault impedance.</div>
   </div>
+</a><a class="tool-card" href="PCBVia.html">
+  <div class="tool-card-fig"><img src="thumbnails/PCBVia.svg" width="200" height="90" alt="PCBVia"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">PCB Via Parasitics</div>
+    <div class="tool-card-desc">Via inductance, antipad capacitance, and self-resonant frequency.</div>
+  </div>
 </a>
 </div>
-<div class="cat-header">🔴 Impedance Matching</div>
+<div class="cat-header">🔴 Matching & Dividers</div>
 <div class="tool-grid">
 <a class="tool-card" href="SmithChart.html">
   <div class="tool-card-fig"><img src="thumbnails/SmithChart.svg" width="200" height="90" alt="SmithChart"></div>
@@ -267,17 +316,11 @@
     <div class="tool-card-name">Pi / T Network</div>
     <div class="tool-card-desc">Pi and T matching networks with free choice of loaded Q.</div>
   </div>
-</a><a class="tool-card" href="Wilkinson.html">
-  <div class="tool-card-fig"><img src="thumbnails/Wilkinson.svg" width="200" height="90" alt="Wilkinson"></div>
+</a><a class="tool-card" href="ImpedanceMatchingNetwork.html">
+  <div class="tool-card-fig"><img src="thumbnails/ImpedanceMatchingNetwork.svg" width="200" height="90" alt="ImpedanceMatchingNetwork"></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">Wilkinson Divider</div>
-    <div class="tool-card-desc">Equal and unequal power splits with isolation resistor.</div>
-  </div>
-</a><a class="tool-card" href="LCBalun.html">
-  <div class="tool-card-fig"><img src="thumbnails/LCBalun.svg" width="200" height="90" alt="LCBalun"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">LC BALUN</div>
-    <div class="tool-card-desc">Lattice and Pi BALUN design with impedance transformation.</div>
+    <div class="tool-card-name">Impedance Matching Network</div>
+    <div class="tool-card-desc">L-network for complex Z<sub>S</sub>→Z<sub>L</sub> with Smith Chart trajectories.</div>
   </div>
 </a><a class="tool-card" href="CapacitorNetwork.html">
   <div class="tool-card-fig"><img src="thumbnails/CapacitorNetwork.svg" width="200" height="90" alt="CapacitorNetwork"></div>
@@ -285,17 +328,29 @@
     <div class="tool-card-name">Capacitor Network</div>
     <div class="tool-card-desc">Total capacitance for series and parallel combinations.</div>
   </div>
-</a><a class="tool-card" href="ImpedanceMatchingNetwork.html">
-  <div class="tool-card-fig"><img src="thumbnails/ImpedanceMatchingNetwork.svg" width="200" height="90" alt="ImpedanceMatchingNetwork"></div>
+</a><a class="tool-card" href="LCBalun.html">
+  <div class="tool-card-fig"><img src="thumbnails/LCBalun.svg" width="200" height="90" alt="LCBalun"></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">Impedance Matching Network</div>
-    <div class="tool-card-desc">L-network for complex Z<sub>S</sub>→Z<sub>L</sub> with Smith Chart trajectories.</div>
+    <div class="tool-card-name">LC BALUN</div>
+    <div class="tool-card-desc">Lattice and Pi BALUN design with impedance transformation.</div>
+  </div>
+</a><a class="tool-card" href="Wilkinson.html">
+  <div class="tool-card-fig"><img src="thumbnails/Wilkinson.svg" width="200" height="90" alt="Wilkinson"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Wilkinson Divider</div>
+    <div class="tool-card-desc">Equal and unequal power splits with isolation resistor.</div>
   </div>
 </a><a class="tool-card" href="Coupler.html">
   <div class="tool-card-fig"><img src="thumbnails/Coupler.svg" width="200" height="90" alt="Coupler"></div>
   <div class="tool-card-body">
     <div class="tool-card-name">Coupler &amp; Hybrid</div>
     <div class="tool-card-desc">Coupled-line, branchline (90°), and rat-race (180°) hybrid design.</div>
+  </div>
+</a><a class="tool-card" href="PowerCombiner.html">
+  <div class="tool-card-fig"><img src="thumbnails/PowerCombiner.svg" width="200" height="90" alt="PowerCombiner"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Power Combining</div>
+    <div class="tool-card-desc">N-way combiner output power with efficiency and failure analysis.</div>
   </div>
 </a><a class="tool-card" href="PhaseShifter.html">
   <div class="tool-card-fig"><img src="thumbnails/PhaseShifter.svg" width="200" height="90" alt="PhaseShifter"></div>
@@ -330,6 +385,110 @@
   <div class="tool-card-body">
     <div class="tool-card-name">Stepped-Z LPF</div>
     <div class="tool-card-desc">Microstrip stepped-impedance LPF: Butterworth or Chebyshev, with trace dimensions.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">🟢 Amplifiers & Devices</div>
+<div class="tool-grid">
+<a class="tool-card" href="NoiseFigure.html">
+  <div class="tool-card-fig"><img src="thumbnails/NoiseFigure.svg" width="200" height="90" alt="NoiseFigure"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Cascaded Noise Figure</div>
+    <div class="tool-card-desc">System NF and gain for up to 8 cascaded stages (Friis).</div>
+  </div>
+</a><a class="tool-card" href="AmpStability.html">
+  <div class="tool-card-fig"><img src="thumbnails/AmpStability.svg" width="200" height="90" alt="AmpStability"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Amplifier Stability</div>
+    <div class="tool-card-desc">Rollett K-factor, µ-factor, MAG/MSG from S-parameters. Unconditional stability check.</div>
+  </div>
+</a><a class="tool-card" href="IP3Calc.html">
+  <div class="tool-card-fig"><img src="thumbnails/IP3Calc.svg" width="200" height="90" alt="IP3Calc"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">IP3 & Intermodulation</div>
+    <div class="tool-card-desc">OIP3, IM3 product power, and IMD ratio from IIP3 and gain.</div>
+  </div>
+</a><a class="tool-card" href="TransistorFT.html">
+  <div class="tool-card-fig"><img src="thumbnails/TransistorFT.svg" width="200" height="90" alt="TransistorFT"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Transistor fT / fmax</div>
+    <div class="tool-card-desc">Transition and maximum oscillation frequency from gm, capacitances and gate resistance.</div>
+  </div>
+</a><a class="tool-card" href="TransducerGain.html">
+  <div class="tool-card-fig"><img src="thumbnails/TransducerGain.svg" width="200" height="90" alt="TransducerGain"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Unilateral Transducer Gain</div>
+    <div class="tool-card-desc">Maximum gain from S-parameter magnitudes, with source and load match contributions.</div>
+  </div>
+</a><a class="tool-card" href="LNAMatch.html">
+  <div class="tool-card-fig"><img src="thumbnails/LNAMatch.svg" width="200" height="90" alt="LNAMatch"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">LNA Noise Match</div>
+    <div class="tool-card-desc">Noise figure for any source reflection from the noise parameters Fmin, Rn and Γopt.</div>
+  </div>
+</a><a class="tool-card" href="NFYFactor.html">
+  <div class="tool-card-fig"><img src="thumbnails/NFYFactor.svg" width="200" height="90" alt="NFYFactor"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Noise Figure (Y-Factor)</div>
+    <div class="tool-card-desc">Noise figure and noise temperature from the Y-factor measurement and source ENR.</div>
+  </div>
+</a><a class="tool-card" href="PLLFilter.html">
+  <div class="tool-card-fig"><img src="thumbnails/PLLFilter.svg" width="200" height="90" alt="PLLFilter"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">PLL Loop Filter</div>
+    <div class="tool-card-desc">Type-2 3rd-order passive loop filter component values from bandwidth and phase margin.</div>
+  </div>
+</a><a class="tool-card" href="PhaseNoiseJitter.html">
+  <div class="tool-card-fig"><img src="thumbnails/PhaseNoiseJitter.svg" width="200" height="90" alt="PhaseNoiseJitter"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Phase Noise → Jitter</div>
+    <div class="tool-card-desc">Integrate a piecewise phase noise profile to RMS jitter.</div>
+  </div>
+</a><a class="tool-card" href="DDS.html">
+  <div class="tool-card-fig"><img src="thumbnails/DDS.svg" width="200" height="90" alt="DDS"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">DDS Frequency</div>
+    <div class="tool-card-desc">Output frequency, tuning word and resolution of a direct digital synthesizer.</div>
+  </div>
+</a>
+</div>
+<div class="cat-header">📻 Receivers & DSP</div>
+<div class="tool-grid">
+<a class="tool-card" href="Sensitivity.html">
+  <div class="tool-card-fig"><img src="thumbnails/Sensitivity.svg" width="200" height="90" alt="Sensitivity"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Receiver Sensitivity / MDS</div>
+    <div class="tool-card-desc">Noise floor, minimum detectable signal, and spurious-free dynamic range from bandwidth, NF, SNR and IIP3.</div>
+  </div>
+</a><a class="tool-card" href="ImageReject.html">
+  <div class="tool-card-fig"><img src="thumbnails/ImageReject.svg" width="200" height="90" alt="ImageReject"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Image Frequency &amp; Rejection</div>
+    <div class="tool-card-desc">Image and LO frequencies plus image-rejection ratio from I/Q gain and phase imbalance.</div>
+  </div>
+</a><a class="tool-card" href="ADCNoise.html">
+  <div class="tool-card-fig"><img src="thumbnails/ADCNoise.svg" width="200" height="90" alt="ADCNoise"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">ADC SNR / ENOB</div>
+    <div class="tool-card-desc">Quantization SNR, aperture-jitter-limited SNR, combined SNR and effective number of bits.</div>
+  </div>
+</a><a class="tool-card" href="EVMSNR.html">
+  <div class="tool-card-fig"><img src="thumbnails/EVMSNR.svg" width="200" height="90" alt="EVMSNR"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">EVM ↔ SNR Converter</div>
+    <div class="tool-card-desc">Convert error vector magnitude to/from SNR/MER, with the densest supportable QAM order.</div>
+  </div>
+</a><a class="tool-card" href="BandpassSampling.html">
+  <div class="tool-card-fig"><img src="thumbnails/BandpassSampling.svg" width="200" height="90" alt="BandpassSampling"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Bandpass Sampling</div>
+    <div class="tool-card-desc">Nyquist zone, aliased IF, spectral inversion and minimum sample rate for undersampling.</div>
+  </div>
+</a><a class="tool-card" href="SpectrumDANL.html">
+  <div class="tool-card-fig"><img src="thumbnails/SpectrumDANL.svg" width="200" height="90" alt="SpectrumDANL"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Spectrum Analyzer DANL</div>
+    <div class="tool-card-desc">Displayed average noise level and sensitivity from RBW, noise figure and attenuation.</div>
   </div>
 </a>
 </div>
@@ -373,7 +532,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🔵 System & RF Analysis</div>
+<div class="cat-header">🛰 Propagation, Radar & Links</div>
 <div class="tool-grid">
 <a class="tool-card" href="Friis.html">
   <div class="tool-card-fig"><img src="thumbnails/Friis.svg" width="200" height="90" alt="Friis"></div>
@@ -381,71 +540,11 @@
     <div class="tool-card-name">Friis Equation</div>
     <div class="tool-card-desc">Received power from EIRP, path loss, and antenna gains.</div>
   </div>
-</a><a class="tool-card" href="NoiseFigure.html">
-  <div class="tool-card-fig"><img src="thumbnails/NoiseFigure.svg" width="200" height="90" alt="NoiseFigure"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Cascaded Noise Figure</div>
-    <div class="tool-card-desc">System NF and gain for up to 8 cascaded stages (Friis).</div>
-  </div>
 </a><a class="tool-card" href="LinkBudget.html">
   <div class="tool-card-fig"><img src="thumbnails/LinkBudget.svg" width="200" height="90" alt="LinkBudget"></div>
   <div class="tool-card-body">
     <div class="tool-card-name">Link Budget</div>
     <div class="tool-card-desc">End-to-end RF link: EIRP, path loss, noise floor, SNR margin.</div>
-  </div>
-</a><a class="tool-card" href="RadarRange.html">
-  <div class="tool-card-fig"><img src="thumbnails/RadarRange.svg" width="200" height="90" alt="RadarRange"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Radar Range Equation</div>
-    <div class="tool-card-desc">R_max and received power from transmit power, RCS, and gains.</div>
-  </div>
-</a><a class="tool-card" href="IP3Calc.html">
-  <div class="tool-card-fig"><img src="thumbnails/IP3Calc.svg" width="200" height="90" alt="IP3Calc"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">IP3 & Intermodulation</div>
-    <div class="tool-card-desc">OIP3, IM3 product power, and IMD ratio from IIP3 and gain.</div>
-  </div>
-</a><a class="tool-card" href="PowerCombiner.html">
-  <div class="tool-card-fig"><img src="thumbnails/PowerCombiner.svg" width="200" height="90" alt="PowerCombiner"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Power Combining</div>
-    <div class="tool-card-desc">N-way combiner output power with efficiency and failure analysis.</div>
-  </div>
-</a><a class="tool-card" href="AmpStability.html">
-  <div class="tool-card-fig"><img src="thumbnails/AmpStability.svg" width="200" height="90" alt="AmpStability"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Amplifier Stability</div>
-    <div class="tool-card-desc">Rollett K-factor, µ-factor, MAG/MSG from S-parameters. Unconditional stability check.</div>
-  </div>
-</a><a class="tool-card" href="PLLFilter.html">
-  <div class="tool-card-fig"><img src="thumbnails/PLLFilter.svg" width="200" height="90" alt="PLLFilter"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">PLL Loop Filter</div>
-    <div class="tool-card-desc">Type-2 3rd-order passive loop filter component values from bandwidth and phase margin.</div>
-  </div>
-</a><a class="tool-card" href="Sensitivity.html">
-  <div class="tool-card-fig"><img src="thumbnails/Sensitivity.svg" width="200" height="90" alt="Sensitivity"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Receiver Sensitivity / MDS</div>
-    <div class="tool-card-desc">Noise floor, minimum detectable signal, and spurious-free dynamic range from bandwidth, NF, SNR and IIP3.</div>
-  </div>
-</a><a class="tool-card" href="ImageReject.html">
-  <div class="tool-card-fig"><img src="thumbnails/ImageReject.svg" width="200" height="90" alt="ImageReject"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Image Frequency &amp; Rejection</div>
-    <div class="tool-card-desc">Image and LO frequencies plus image-rejection ratio from I/Q gain and phase imbalance.</div>
-  </div>
-</a><a class="tool-card" href="LinkCapacity.html">
-  <div class="tool-card-fig"><img src="thumbnails/LinkCapacity.svg" width="200" height="90" alt="LinkCapacity"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Shannon Capacity &amp; BER</div>
-    <div class="tool-card-desc">Channel capacity, spectral efficiency, Eb/N0↔SNR and BPSK/QPSK bit error rate.</div>
-  </div>
-</a><a class="tool-card" href="ProcessingGain.html">
-  <div class="tool-card-fig"><img src="thumbnails/ProcessingGain.svg" width="200" height="90" alt="ProcessingGain"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Processing Gain &amp; Jamming Margin</div>
-    <div class="tool-card-desc">Spread-spectrum processing gain from chip/data rate, plus jamming margin.</div>
   </div>
 </a><a class="tool-card" href="FresnelZone.html">
   <div class="tool-card-fig"><img src="thumbnails/FresnelZone.svg" width="200" height="90" alt="FresnelZone"></div>
@@ -459,127 +558,43 @@
     <div class="tool-card-name">Path Loss Models</div>
     <div class="tool-card-desc">Free-space, two-ray, Okumura-Hata and COST-231 propagation loss.</div>
   </div>
-</a><a class="tool-card" href="TransistorFT.html">
-  <div class="tool-card-fig"><img src="thumbnails/TransistorFT.svg" width="200" height="90" alt="TransistorFT"></div>
+</a><a class="tool-card" href="RadarRange.html">
+  <div class="tool-card-fig"><img src="thumbnails/RadarRange.svg" width="200" height="90" alt="RadarRange"></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">Transistor fT / fmax</div>
-    <div class="tool-card-desc">Transition and maximum oscillation frequency from gm, capacitances and gate resistance.</div>
+    <div class="tool-card-name">Radar Range Equation</div>
+    <div class="tool-card-desc">R_max and received power from transmit power, RCS, and gains.</div>
   </div>
-</a><a class="tool-card" href="DDS.html">
-  <div class="tool-card-fig"><img src="thumbnails/DDS.svg" width="200" height="90" alt="DDS"></div>
+</a><a class="tool-card" href="LinkCapacity.html">
+  <div class="tool-card-fig"><img src="thumbnails/LinkCapacity.svg" width="200" height="90" alt="LinkCapacity"></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">DDS Frequency</div>
-    <div class="tool-card-desc">Output frequency, tuning word and resolution of a direct digital synthesizer.</div>
+    <div class="tool-card-name">Shannon Capacity &amp; BER</div>
+    <div class="tool-card-desc">Channel capacity, spectral efficiency, Eb/N0↔SNR and BPSK/QPSK bit error rate.</div>
   </div>
-</a><a class="tool-card" href="NFYFactor.html">
-  <div class="tool-card-fig"><img src="thumbnails/NFYFactor.svg" width="200" height="90" alt="NFYFactor"></div>
+</a><a class="tool-card" href="ProcessingGain.html">
+  <div class="tool-card-fig"><img src="thumbnails/ProcessingGain.svg" width="200" height="90" alt="ProcessingGain"></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">Noise Figure (Y-Factor)</div>
-    <div class="tool-card-desc">Noise figure and noise temperature from the Y-factor measurement and source ENR.</div>
-  </div>
-</a><a class="tool-card" href="TransducerGain.html">
-  <div class="tool-card-fig"><img src="thumbnails/TransducerGain.svg" width="200" height="90" alt="TransducerGain"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Unilateral Transducer Gain</div>
-    <div class="tool-card-desc">Maximum gain from S-parameter magnitudes, with source and load match contributions.</div>
-  </div>
-</a><a class="tool-card" href="LNAMatch.html">
-  <div class="tool-card-fig"><img src="thumbnails/LNAMatch.svg" width="200" height="90" alt="LNAMatch"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">LNA Noise Match</div>
-    <div class="tool-card-desc">Noise figure for any source reflection from the noise parameters Fmin, Rn and Γopt.</div>
+    <div class="tool-card-name">Processing Gain &amp; Jamming Margin</div>
+    <div class="tool-card-desc">Spread-spectrum processing gain from chip/data rate, plus jamming margin.</div>
   </div>
 </a>
 </div>
-<div class="cat-header">🟤 Utilities & Converters</div>
+<div class="cat-header">📡 Waveguide</div>
 <div class="tool-grid">
-<a class="tool-card" href="dBmConverter.html">
-  <div class="tool-card-fig"><img src="thumbnails/dBmConverter.svg" width="200" height="90" alt="dBmConverter"></div>
+<a class="tool-card" href="Waveguide.html">
+  <div class="tool-card-fig"><img src="thumbnails/Waveguide.svg" width="200" height="90" alt="Waveguide"></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">dBm ↔ Watts</div>
-    <div class="tool-card-desc">Convert between dBm and watts in either direction.</div>
+    <div class="tool-card-name">Rectangular Waveguide</div>
+    <div class="tool-card-desc">TE/TM mode cutoffs, guide wavelength, wave impedance, and conductor loss.</div>
   </div>
-</a><a class="tool-card" href="Wavelength.html">
-  <div class="tool-card-fig"><img src="thumbnails/Wavelength.svg" width="200" height="90" alt="Wavelength"></div>
+</a><a class="tool-card" href="CircularWaveguide.html">
+  <div class="tool-card-fig"><img src="thumbnails/CircularWaveguide.svg" width="200" height="90" alt="CircularWaveguide"></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">Wavelength</div>
-    <div class="tool-card-desc">Free-space λ from frequency and dielectric constant.</div>
-  </div>
-</a><a class="tool-card" href="FreqEnergyConverter.html">
-  <div class="tool-card-fig"><img src="thumbnails/FreqEnergyConverter.svg" width="200" height="90" alt="FreqEnergyConverter"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Freq / λ / Energy</div>
-    <div class="tool-card-desc">Live converter: frequency, wavelength, period, photon energy, B₀.</div>
-  </div>
-</a><a class="tool-card" href="SkinDepth.html">
-  <div class="tool-card-fig"><img src="thumbnails/SkinDepth.svg" width="200" height="90" alt="SkinDepth"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Skin Depth</div>
-    <div class="tool-card-desc">Conductor skin depth vs frequency and conductivity.</div>
-  </div>
-</a><a class="tool-card" href="PhaseNoiseJitter.html">
-  <div class="tool-card-fig"><img src="thumbnails/PhaseNoiseJitter.svg" width="200" height="90" alt="PhaseNoiseJitter"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Phase Noise → Jitter</div>
-    <div class="tool-card-desc">Integrate a piecewise phase noise profile to RMS jitter.</div>
-  </div>
-</a><a class="tool-card" href="TwoPortConverter.html">
-  <div class="tool-card-fig"><img src="thumbnails/TwoPortConverter.svg" width="200" height="90" alt="TwoPortConverter"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">S/Z/Y/ABCD Converter</div>
-    <div class="tool-card-desc">Convert between all four 2-port parameter representations.</div>
-  </div>
-</a><a class="tool-card" href="SParamPlotter.html">
-  <div class="tool-card-fig"><img src="thumbnails/SParamPlotter.svg" width="200" height="90" alt="SParamPlotter"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">S-Parameter Plotter</div>
-    <div class="tool-card-desc">Plot Touchstone .s1p–.s4p files with Chart.js.</div>
-  </div>
-</a><a class="tool-card" href="BondWire.html">
-  <div class="tool-card-fig"><img src="thumbnails/BondWire.svg" width="200" height="90" alt="BondWire"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Bond Wire Inductance</div>
-    <div class="tool-card-desc">Parasitic inductance and reactance of a bond wire (Grover formula).</div>
-  </div>
-</a><a class="tool-card" href="PCBVia.html">
-  <div class="tool-card-fig"><img src="thumbnails/PCBVia.svg" width="200" height="90" alt="PCBVia"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">PCB Via Parasitics</div>
-    <div class="tool-card-desc">Via inductance, antipad capacitance, and self-resonant frequency.</div>
-  </div>
-</a><a class="tool-card" href="ESeries.html">
-  <div class="tool-card-fig"><img src="thumbnails/ESeries.svg" width="200" height="90" alt="ESeries"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">E-Series Finder</div>
-    <div class="tool-card-desc">Nearest standard R, C, or L value in E6–E192 with % error.</div>
-  </div>
-</a><a class="tool-card" href="ADCNoise.html">
-  <div class="tool-card-fig"><img src="thumbnails/ADCNoise.svg" width="200" height="90" alt="ADCNoise"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">ADC SNR / ENOB</div>
-    <div class="tool-card-desc">Quantization SNR, aperture-jitter-limited SNR, combined SNR and effective number of bits.</div>
-  </div>
-</a><a class="tool-card" href="EVMSNR.html">
-  <div class="tool-card-fig"><img src="thumbnails/EVMSNR.svg" width="200" height="90" alt="EVMSNR"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">EVM ↔ SNR Converter</div>
-    <div class="tool-card-desc">Convert error vector magnitude to/from SNR/MER, with the densest supportable QAM order.</div>
-  </div>
-</a><a class="tool-card" href="BandpassSampling.html">
-  <div class="tool-card-fig"><img src="thumbnails/BandpassSampling.svg" width="200" height="90" alt="BandpassSampling"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Bandpass Sampling</div>
-    <div class="tool-card-desc">Nyquist zone, aliased IF, spectral inversion and minimum sample rate for undersampling.</div>
-  </div>
-</a><a class="tool-card" href="SpectrumDANL.html">
-  <div class="tool-card-fig"><img src="thumbnails/SpectrumDANL.svg" width="200" height="90" alt="SpectrumDANL"></div>
-  <div class="tool-card-body">
-    <div class="tool-card-name">Spectrum Analyzer DANL</div>
-    <div class="tool-card-desc">Displayed average noise level and sensitivity from RBW, noise figure and attenuation.</div>
+    <div class="tool-card-name">Circular Waveguide</div>
+    <div class="tool-card-desc">TE/TM mode cutoffs using Bessel zeros, guide wavelength, wave impedance, and conductor loss.</div>
   </div>
 </a>
 </div>
-<div class="cat-header">🟣 MRI Coils & Tools</div>
+<div class="cat-header">🧲 MRI Coils & Tools</div>
 <div class="tool-grid">
 <a class="tool-card" href="CLI.html">
   <div class="tool-card-fig"><img src="thumbnails/CLI.svg" width="200" height="90" alt="CLI"></div>
@@ -619,19 +634,25 @@
   </div>
 </a>
 </div>
-<div class="cat-header">📡 Waveguide</div>
+<div class="cat-header">🟤 Converters</div>
 <div class="tool-grid">
-<a class="tool-card" href="Waveguide.html">
-  <div class="tool-card-fig"><img src="thumbnails/Waveguide.svg" width="200" height="90" alt="Waveguide"></div>
+<a class="tool-card" href="TwoPortConverter.html">
+  <div class="tool-card-fig"><img src="thumbnails/TwoPortConverter.svg" width="200" height="90" alt="TwoPortConverter"></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">Rectangular Waveguide</div>
-    <div class="tool-card-desc">TE/TM mode cutoffs, guide wavelength, wave impedance, and conductor loss.</div>
+    <div class="tool-card-name">S/Z/Y/ABCD Converter</div>
+    <div class="tool-card-desc">Convert between all four 2-port parameter representations.</div>
   </div>
-</a><a class="tool-card" href="CircularWaveguide.html">
-  <div class="tool-card-fig"><img src="thumbnails/CircularWaveguide.svg" width="200" height="90" alt="CircularWaveguide"></div>
+</a><a class="tool-card" href="SParamPlotter.html">
+  <div class="tool-card-fig"><img src="thumbnails/SParamPlotter.svg" width="200" height="90" alt="SParamPlotter"></div>
   <div class="tool-card-body">
-    <div class="tool-card-name">Circular Waveguide</div>
-    <div class="tool-card-desc">TE/TM mode cutoffs using Bessel zeros, guide wavelength, wave impedance, and conductor loss.</div>
+    <div class="tool-card-name">S-Parameter Plotter</div>
+    <div class="tool-card-desc">Plot Touchstone .s1p–.s4p files with Chart.js.</div>
+  </div>
+</a><a class="tool-card" href="ESeries.html">
+  <div class="tool-card-fig"><img src="thumbnails/ESeries.svg" width="200" height="90" alt="ESeries"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">E-Series Finder</div>
+    <div class="tool-card-desc">Nearest standard R, C, or L value in E6–E192 with % error.</div>
   </div>
 </a>
 </div>
@@ -651,12 +672,8 @@
   </div>
 </a>
 </div>
-
-  </div>
-
-  <!-- Wiki section -->
   <div class="wiki-row">
-    <div class="wiki-row-hdr">📖 Wiki — 57 Reference Articles</div>
+    <div class="wiki-row-hdr">📖 Wiki — 64 Reference Articles</div>
     <div class="wiki-pills">
       <a class="wiki-pill" href="wiki_db_dbm.html">dB & dBm</a>
       <a class="wiki-pill" href="wiki_complex_impedance.html">Complex Impedance</a>
@@ -733,16 +750,19 @@
 <script>
 // ── Category map for tab filtering ──────────────────────────────────────────
 var CAT_MAP = {
-  coils:    ['LC.html','BandpassCalc.html','CoupledResonators.html','Solenoid.html','Varactor.html','ParallelPlateCap.html'],
-  tlines:   ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html','TDR.html'],
-  matching: ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','Wilkinson.html','LCBalun.html','CapacitorNetwork.html','ImpedanceMatchingNetwork.html','Coupler.html','PhaseShifter.html'],
-  filters:  ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html'],
-  antennas: ['Dipole.html','PatchAntenna.html','ArrayFactor.html','HelicalAntenna.html','YagiAntenna.html','ApertureAntenna.html'],
-  system:   ['Friis.html','NoiseFigure.html','LinkBudget.html','RadarRange.html','IP3Calc.html','PowerCombiner.html','AmpStability.html','PLLFilter.html','Sensitivity.html','ImageReject.html','LinkCapacity.html','ProcessingGain.html','FresnelZone.html','PathLoss.html','TransistorFT.html','DDS.html','NFYFactor.html','TransducerGain.html','LNAMatch.html'],
-  utils:    ['dBmConverter.html','Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','PhaseNoiseJitter.html','TwoPortConverter.html','SParamPlotter.html','BondWire.html','PCBVia.html','ESeries.html','ADCNoise.html','EVMSNR.html','BandpassSampling.html','SpectrumDANL.html'],
-  mri:      ['CLI.html','CoilDesigner.html','SurfaceCoilDesigner.html','BirdcageCoil.html','SAREstimator.html','PhasedArrayDecoupling.html'],
-  waveguide:['Waveguide.html','CircularWaveguide.html'],
-  sims:     ['SmithChart.html','RFSimulator.html','SpiceSim.html'],
+  fundamentals: ['Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','dBmConverter.html'],
+  coils:        ['LC.html','CLC.html','CoupledResonators.html','BandpassCalc.html','Solenoid.html','Varactor.html','ParallelPlateCap.html','BondWire.html'],
+  tlines:       ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html','TDR.html','PCBVia.html'],
+  matching:     ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','ImpedanceMatchingNetwork.html','CapacitorNetwork.html','LCBalun.html','Wilkinson.html','Coupler.html','PowerCombiner.html','PhaseShifter.html'],
+  filters:      ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html'],
+  amps:         ['NoiseFigure.html','AmpStability.html','IP3Calc.html','TransistorFT.html','TransducerGain.html','LNAMatch.html','NFYFactor.html','PLLFilter.html','PhaseNoiseJitter.html','DDS.html'],
+  rx:           ['Sensitivity.html','ImageReject.html','ADCNoise.html','EVMSNR.html','BandpassSampling.html','SpectrumDANL.html'],
+  antennas:     ['Dipole.html','PatchAntenna.html','ArrayFactor.html','HelicalAntenna.html','YagiAntenna.html','ApertureAntenna.html'],
+  propagation:  ['Friis.html','LinkBudget.html','FresnelZone.html','PathLoss.html','RadarRange.html','LinkCapacity.html','ProcessingGain.html'],
+  waveguide:    ['Waveguide.html','CircularWaveguide.html'],
+  mri:          ['CLI.html','CoilDesigner.html','SurfaceCoilDesigner.html','BirdcageCoil.html','SAREstimator.html','PhasedArrayDecoupling.html'],
+  utils:        ['TwoPortConverter.html','SParamPlotter.html','ESeries.html'],
+  sims:         ['SmithChart.html','RFSimulator.html','SpiceSim.html'],
 };
 
 var allCards = document.querySelectorAll('.tool-card');
