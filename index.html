@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
-  <meta name="description" content="79 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
+  <meta name="description" content="84 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/">
   <meta property="og:title" content="RF Toolbox — Free Online RF & Microwave Engineering Calculators">
@@ -102,9 +102,9 @@
   <div class="hero-row">
     <div>
       <h1>RF &amp; Microwave Engineering Calculators</h1>
-      <p>79 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
+      <p>84 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
       <div class="hero-stats">
-        <div class="hero-stat"><span class="num">77</span><span class="lbl">Calculators</span></div>
+        <div class="hero-stat"><span class="num">82</span><span class="lbl">Calculators</span></div>
         <div class="hero-stat"><span class="num">2</span><span class="lbl">Simulators</span></div>
         <div class="hero-stat"><span class="num">64</span><span class="lbl">Wiki Articles</span></div>
         <div class="hero-stat"><span class="num">7</span><span class="lbl">Games</span></div>
@@ -171,6 +171,36 @@
   <div class="tool-card-body">
     <div class="tool-card-name">dBm ↔ Watts</div>
     <div class="tool-card-desc">Convert between dBm and watts in either direction.</div>
+  </div>
+</a><a class="tool-card" href="PlaneWave.html">
+  <div class="tool-card-fig"><img src="thumbnails/PlaneWave.svg" width="200" height="90" alt="PlaneWave"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Plane Wave / Power Density</div>
+    <div class="tool-card-desc">Wave impedance, E/H fields and power density (Poynting) for a plane wave.</div>
+  </div>
+</a><a class="tool-card" href="FieldStrength.html">
+  <div class="tool-card-fig"><img src="thumbnails/FieldStrength.svg" width="200" height="90" alt="FieldStrength"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Field Strength Converter</div>
+    <div class="tool-card-desc">V/m ↔ dBµV/m ↔ A/m ↔ W/m², or field from EIRP and distance.</div>
+  </div>
+</a><a class="tool-card" href="DielectricBoundary.html">
+  <div class="tool-card-fig"><img src="thumbnails/DielectricBoundary.svg" width="200" height="90" alt="DielectricBoundary"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Dielectric Boundary (Fresnel)</div>
+    <div class="tool-card-desc">Reflection/transmission vs angle, Brewster and critical angles at an interface.</div>
+  </div>
+</a><a class="tool-card" href="LossTangent.html">
+  <div class="tool-card-fig"><img src="thumbnails/LossTangent.svg" width="200" height="90" alt="LossTangent"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Dielectric Loss Tangent</div>
+    <div class="tool-card-desc">Complex permittivity, dielectric Q, attenuation and wavelength in a material.</div>
+  </div>
+</a><a class="tool-card" href="ThermalNoise.html">
+  <div class="tool-card-fig"><img src="thumbnails/ThermalNoise.svg" width="200" height="90" alt="ThermalNoise"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Thermal (kTB) Noise</div>
+    <div class="tool-card-desc">Johnson–Nyquist noise voltage/current and available noise power kTB.</div>
   </div>
 </a>
 </div>
@@ -750,7 +780,7 @@
 <script>
 // ── Category map for tab filtering ──────────────────────────────────────────
 var CAT_MAP = {
-  fundamentals: ['Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','dBmConverter.html'],
+  fundamentals: ['Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','dBmConverter.html','PlaneWave.html','FieldStrength.html','DielectricBoundary.html','LossTangent.html','ThermalNoise.html'],
   coils:        ['LC.html','CLC.html','CoupledResonators.html','BandpassCalc.html','Solenoid.html','Varactor.html','ParallelPlateCap.html','BondWire.html'],
   tlines:       ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html','TDR.html','PCBVia.html'],
   matching:     ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','ImpedanceMatchingNetwork.html','CapacitorNetwork.html','LCBalun.html','Wilkinson.html','Coupler.html','PowerCombiner.html','PhaseShifter.html'],

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thermal (Johnson–Nyquist) Noise Calculator — Noise Voltage &amp; kTB Power | RF Toolbox</title>
+  <meta name="description" content="Calculate Johnson–Nyquist thermal noise: RMS noise voltage and current across a resistor, and the available noise power kTB in watts and dBm.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/ThermalNoise.html">
+  <meta property="og:title" content="Thermal (Johnson–Nyquist) Noise Calculator | RF Toolbox">
+  <meta property="og:description" content="RMS noise voltage/current and available noise power kTB (W, dBm) from resistance, temperature and bandwidth.">
+  <meta property="og:url" content="https://rftoolbox.ca/ThermalNoise.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Thermal (Johnson–Nyquist) Noise Calculator",
+    "description": "Calculate Johnson–Nyquist thermal noise: RMS noise voltage and current across a resistor, and the available noise power kTB.",
+    "url": "https://rftoolbox.ca/ThermalNoise.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Thermal (Johnson–Nyquist) Noise</h3>
+<div class="tool-concept">
+  <p>Every resistor generates a random noise voltage from the thermal motion of its charge carriers. This tool gives the RMS noise voltage and current across a resistance over a bandwidth, and the available noise power delivered to a matched load — the famous <em>kTB</em>, which is −174 dBm/Hz at room temperature and sets the noise floor of every receiver.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(v_n = \sqrt{4 k T R B},\qquad i_n = \sqrt{\dfrac{4kTB}{R}}\)<br>\(P_{\text{avail}} = k T B \quad(\text{W}),\qquad \dfrac{P}{B} = kT = -174\ \text{dBm/Hz at }290\,\text{K}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R</td><td style="padding:3px 0;">Resistance (Ω).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T</td><td style="padding:3px 0;">Absolute temperature (K). 290 K is the standard reference (≈17 °C).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B</td><td style="padding:3px 0;">Noise bandwidth (Hz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">v<sub>n</sub></td><td style="padding:3px 0;">Open-circuit RMS noise voltage; the available power (to a matched load) is v<sub>n</sub>²/4R = kTB.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">k</td><td style="padding:3px 0;">Boltzmann constant = 1.381×10⁻²³ J/K.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>J. B. Johnson, <em>Phys. Rev.</em> 32, 1928; H. Nyquist, <em>Phys. Rev.</em> 32, 1928. · D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., Wiley, 2012.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Resistance, <span class="var">R</span></label><div class="inp-inline"><input type="text" id="R" placeholder="e.g. 50" data-tip="Resistance in ohms."><span class="inp-units">Ω</span></div><span class="inp-hint">Source resistance</span></div>
+  <div class="inp-row"><label>Temperature, <span class="var">T</span></label><div class="inp-inline"><input type="text" id="T" placeholder="290" data-tip="Absolute temperature in kelvin (290 K standard)."><span class="inp-units">K</span></div><span class="inp-hint">290 K ≈ 17 °C</span></div>
+  <div class="inp-row"><label>Bandwidth, <span class="var">B</span></label><div class="inp-inline"><input type="text" id="B" placeholder="e.g. 1e6" data-tip="Noise bandwidth in hertz."><span class="inp-units">Hz</span></div><span class="inp-hint">Noise bandwidth</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;R&quot;:&quot;50&quot;,&quot;T&quot;:&quot;290&quot;,&quot;B&quot;:&quot;1e6&quot;})" title="50 Ω, 290 K, 1 MHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Noise source</h4>
+    <div class="res-row"><span class="res-lbl">RMS noise voltage v<sub>n</sub></span><span class="res-val" id="vn">—</span></div>
+    <div class="res-row"><span class="res-lbl">RMS noise current i<sub>n</sub></span><span class="res-val" id="in">—</span></div>
+    <div class="res-row"><span class="res-lbl">Voltage density</span><span class="res-val" id="vd">—</span></div>
+  </div>
+  <div class="res-card"><h4>Available power</h4>
+    <div class="res-row"><span class="res-lbl">Noise power kTB</span><span class="res-val" id="pw">—</span></div>
+    <div class="res-row"><span class="res-lbl">Noise power (dBm)</span><span class="res-val" id="pdbm">—</span></div>
+    <div class="res-row"><span class="res-lbl">Density kT</span><span class="res-val" id="kt">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var vn=(document.getElementById('vn').textContent||'');
+  var W=560,H=150,cy=80;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (vn==='—'||vn==='') { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  var x0=30,x1=W-30;
+  s+='<line x1="'+x0+'" y1="'+cy+'" x2="'+x1+'" y2="'+cy+'" stroke="#ddd" stroke-width="1"/>';
+  var path='M'+x0+','+cy;
+  var seed=12345; function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff-0.5;}
+  for(var i=1;i<=200;i++){var x=x0+(x1-x0)*i/200;var y=cy+rnd()*44;path+=' L'+x.toFixed(1)+','+y.toFixed(1);}
+  s+='<path d="'+path+'" fill="none" stroke="#5533aa" stroke-width="1.1"/>';
+  s+='<text x="'+(W/2)+'" y="18" text-anchor="middle" font-size="11" fill="#5533aa">thermal noise — vₙ(rms) = '+vn+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_noise.html">Learn the theory behind this tool →</a></div>
+<script src="ThermalNoise.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
