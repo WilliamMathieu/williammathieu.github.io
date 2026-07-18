@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mismatch Loss Calculator — VSWR, Return Loss &amp; Reflected Power | RF Toolbox</title>
+  <meta name="description" content="Calculate mismatch loss, return loss, reflection coefficient, VSWR and reflected/transmitted power from any one of them.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/MismatchLoss.html">
+  <meta property="og:title" content="Mismatch Loss Calculator | RF Toolbox">
+  <meta property="og:description" content="Mismatch loss, return loss, VSWR, reflection coefficient and reflected power.">
+  <meta property="og:url" content="https://rftoolbox.ca/MismatchLoss.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Mismatch Loss Calculator",
+    "description": "Calculate mismatch loss, return loss, reflection coefficient, VSWR and reflected/transmitted power from any one of them.",
+    "url": "https://rftoolbox.ca/MismatchLoss.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Mismatch Loss</h3>
+<div class="tool-concept">
+  <p>An impedance mismatch reflects some of the incident power back toward the source, so less reaches the load. Mismatch loss is that lost fraction in dB — distinct from return loss, which measures the reflected signal itself. Enter any one of VSWR, reflection coefficient or return loss and get all of them plus the reflected and transmitted power.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(\Gamma = \dfrac{\text{VSWR}-1}{\text{VSWR}+1},\qquad \text{RL} = -20\log_{10}|\Gamma|\)<br>\(\text{ML} = -10\log_{10}\!\left(1 - |\Gamma|^2\right),\qquad P_{\text{refl}} = |\Gamma|^2\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">VSWR</td><td style="padding:3px 0;">Voltage standing-wave ratio (≥ 1).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">|Γ|</td><td style="padding:3px 0;">Magnitude of the reflection coefficient (0–1).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">RL</td><td style="padding:3px 0;">Return loss (dB) — how far the reflected signal is below the incident.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ML</td><td style="padding:3px 0;">Mismatch loss (dB) — the power <em>not</em> delivered to the load because of reflection.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., Wiley, 2012, §2.3. · Keysight, <em>Understanding VSWR and Return Loss</em>.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Known quantity</label><div class="inp-inline"><select id="known" style="font-size:13px;padding:3px;"><option value="vswr">VSWR</option><option value="gamma">|Γ| (0–1)</option><option value="rl">Return loss (dB)</option></select></div><span class="inp-hint">Pick one</span></div>
+  <div class="inp-row"><label>Value</label><div class="inp-inline"><input type="text" id="val" placeholder="e.g. 2" data-tip="Value of the selected quantity."></div><span class="inp-hint">VSWR / |Γ| / RL</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;known&quot;:&quot;vswr&quot;,&quot;val&quot;:&quot;2&quot;})" title="VSWR = 2">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Match</h4>
+    <div class="res-row"><span class="res-lbl">VSWR</span><span class="res-val" id="rVswr">—</span></div>
+    <div class="res-row"><span class="res-lbl">|Γ|</span><span class="res-val" id="rGam">—</span></div>
+    <div class="res-row"><span class="res-lbl">Return loss</span><span class="res-val" id="rRL">—</span></div>
+  </div>
+  <div class="res-card"><h4>Power</h4>
+    <div class="res-row"><span class="res-lbl">Mismatch loss</span><span class="res-val" id="rML">—</span></div>
+    <div class="res-row"><span class="res-lbl">Reflected power</span><span class="res-val" id="rRef">—</span></div>
+    <div class="res-row"><span class="res-lbl">Transmitted power</span><span class="res-val" id="rTx">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var ref=parseFloat((document.getElementById('rRef').textContent||'').replace(/[^0-9.]/g,''));
+  var W=560,H=140,cy=70;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(ref)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter a value and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  var tx=100-ref;
+  // incident bar splits into transmitted + reflected
+  var x0=60,bw=W-200,ty=cy;
+  s+='<rect x="'+x0+'" y="'+(ty-14)+'" width="'+bw+'" height="28" fill="#e8e2f7" stroke="#bbb"/>';
+  var twp=bw*tx/100;
+  s+='<rect x="'+x0+'" y="'+(ty-14)+'" width="'+twp.toFixed(1)+'" height="28" fill="#2e8b57"/>';
+  s+='<text x="'+(x0+bw+8)+'" y="'+(ty-2)+'" font-size="10.5" fill="#2e8b57">→ '+tx.toFixed(1)+'% to load</text>';
+  s+='<text x="'+(x0+bw+8)+'" y="'+(ty+14)+'" font-size="10.5" fill="#c0392b">↩ '+ref.toFixed(1)+'% reflected</text>';
+  s+='<text x="'+x0+'" y="'+(ty-22)+'" font-size="10" fill="#888">incident power</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_vswr.html">Learn the theory behind this tool →</a></div>
+<script src="MismatchLoss.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
