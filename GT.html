@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G/T Figure of Merit Calculator — System Noise Temperature | RF Toolbox</title>
+  <meta name="description" content="Calculate a receiving system's G/T figure of merit and system noise temperature from antenna gain, antenna noise temperature and receiver noise figure.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/GT.html">
+  <meta property="og:title" content="G/T Figure of Merit Calculator | RF Toolbox">
+  <meta property="og:description" content="G/T and system noise temperature from antenna gain, antenna temperature and receiver NF.">
+  <meta property="og:url" content="https://rftoolbox.ca/GT.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "G/T Figure of Merit Calculator",
+    "description": "Calculate a receiving system's G/T figure of merit and system noise temperature from antenna gain, antenna noise temperature and receiver noise figure.",
+    "url": "https://rftoolbox.ca/GT.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>G/T Figure of Merit</h3>
+<div class="tool-concept">
+  <p>G/T is the headline figure of merit of a receiving station — the antenna gain divided by the system noise temperature, in dB/K. A higher G/T means a more sensitive receive system and a better downlink. It combines the antenna gain, the noise the antenna picks up from the sky and ground, and the receiver's own noise (from its noise figure).</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(T_{\text{rx}} = T_0\,(F-1),\quad T_0 = 290\,\text{K}\)<br>\(T_{\text{sys}} = T_{\text{ant}} + T_{\text{rx}},\qquad G/T = G_{\text{dBi}} - 10\log_{10}T_{\text{sys}}\ \ (\text{dB/K})\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">G</td><td style="padding:3px 0;">Antenna gain (dBi), referred to the same reference plane as T<sub>sys</sub>.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T<sub>ant</sub></td><td style="padding:3px 0;">Antenna noise temperature (K) — sky + ground pickup.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">NF</td><td style="padding:3px 0;">Receiver noise figure (dB). Converted to a noise temperature T<sub>rx</sub>.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T<sub>sys</sub></td><td style="padding:3px 0;">System noise temperature = T<sub>ant</sub> + T<sub>rx</sub>.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">G/T</td><td style="padding:3px 0;">Figure of merit (dB/K). Higher is better.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>T. Pratt, C. Bostian &amp; J. Allnutt, <em>Satellite Communications</em>, 2nd ed., Wiley, 2003. · D. Roddy, <em>Satellite Communications</em>, 4th ed., McGraw-Hill, 2006.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Antenna gain, <span class="var">G</span></label><div class="inp-inline"><input type="text" id="G" placeholder="e.g. 30" data-tip="Antenna gain (dBi)."><span class="inp-units">dBi</span></div><span class="inp-hint">Receive gain</span></div>
+  <div class="inp-row"><label>Antenna temp, <span class="var">T<sub>ant</sub></span></label><div class="inp-inline"><input type="text" id="tant" placeholder="e.g. 50" data-tip="Antenna noise temperature (K)."><span class="inp-units">K</span></div><span class="inp-hint">Sky + ground</span></div>
+  <div class="inp-row"><label>Receiver NF</label><div class="inp-inline"><input type="text" id="nf" placeholder="e.g. 1" data-tip="Receiver noise figure (dB)."><span class="inp-units">dB</span></div><span class="inp-hint">or Trx below</span></div>
+  <div class="inp-row"><label>Receiver T<sub>rx</sub> <span style="color:#aaa;">(alt.)</span></label><div class="inp-inline"><input type="text" id="trx" placeholder="e.g. 75" data-tip="Receiver noise temperature (K), used if NF is blank."><span class="inp-units">K</span></div><span class="inp-hint">If NF blank</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;G&quot;:&quot;30&quot;,&quot;tant&quot;:&quot;50&quot;,&quot;nf&quot;:&quot;1&quot;,&quot;trx&quot;:&quot;&quot;})" title="30 dBi, Tant 50 K, NF 1 dB">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Figure of merit</h4>
+    <div class="res-row"><span class="res-lbl">G/T</span><span class="res-val" id="gt">—</span></div>
+  </div>
+  <div class="res-card"><h4>Noise temperature</h4>
+    <div class="res-row"><span class="res-lbl">Receiver T<sub>rx</sub></span><span class="res-val" id="rTrx">—</span></div>
+    <div class="res-row"><span class="res-lbl">System T<sub>sys</sub></span><span class="res-val" id="tsys">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var tant=parseFloat(document.getElementById('tant').value);
+  var trx=parseFloat((document.getElementById('rTrx').textContent||'').replace(/[^0-9.]/g,''));
+  var gt=(document.getElementById('gt').textContent||'');
+  var W=560,H=150;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(tant)||isNaN(trx)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  // stacked bar Tsys = Tant + Trx
+  var tot=tant+trx, x0=60, bw=W-260, y=56, h=30;
+  var wa=Math.max(1,tant/tot*bw), wr=Math.max(1,trx/tot*bw);
+  s+='<rect x="'+x0+'" y="'+y+'" width="'+wa.toFixed(1)+'" height="'+h+'" fill="#8fa8d8"/>';
+  s+='<rect x="'+(x0+wa).toFixed(1)+'" y="'+y+'" width="'+wr.toFixed(1)+'" height="'+h+'" fill="#c0392b"/>';
+  s+='<text x="'+(x0+wa/2).toFixed(1)+'" y="'+(y+h+16)+'" text-anchor="middle" font-size="10" fill="#4a6aa5">Tant '+tant.toFixed(0)+'K</text>';
+  s+='<text x="'+(x0+wa+wr/2).toFixed(1)+'" y="'+(y+h+16)+'" text-anchor="middle" font-size="10" fill="#c0392b">Trx '+trx.toFixed(0)+'K</text>';
+  s+='<text x="'+(x0+bw+12)+'" y="'+(y+20)+'" font-size="11" fill="#5533aa">Tsys = '+tot.toFixed(0)+' K</text>';
+  s+='<text x="'+(x0+bw+12)+'" y="'+(y-4)+'" font-size="11" fill="#5533aa">G/T = '+gt+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_noise.html">Learn the theory behind this tool →</a></div>
+<script src="GT.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

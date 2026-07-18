@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doppler Shift Calculator — Radar &amp; Communications | RF Toolbox</title>
+  <meta name="description" content="Calculate the Doppler frequency shift for a moving target or platform, for one-way communications links and two-way radar, from frequency, velocity and angle.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/Doppler.html">
+  <meta property="og:title" content="Doppler Shift Calculator | RF Toolbox">
+  <meta property="og:description" content="Doppler frequency shift for one-way links and two-way radar from frequency, velocity and angle.">
+  <meta property="og:url" content="https://rftoolbox.ca/Doppler.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Doppler Shift Calculator",
+    "description": "Calculate the Doppler frequency shift for a moving target or platform, for one-way links and two-way radar.",
+    "url": "https://rftoolbox.ca/Doppler.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Doppler Shift</h3>
+<div class="tool-concept">
+  <p>Relative motion between a transmitter and receiver shifts the observed frequency. For a one-way link the shift is set by the radial velocity; for radar the signal makes a round trip, so the echo is shifted twice as much. Enter the carrier frequency, the relative speed and the angle between the velocity and the line of sight.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">one-way: \(f_d = \dfrac{v\cos\theta}{c}\,f = \dfrac{v_r}{\lambda}\)<br>two-way (radar): \(f_d = \dfrac{2\,v\cos\theta}{c}\,f = \dfrac{2 v_r}{\lambda}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Carrier frequency (GHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">v</td><td style="padding:3px 0;">Relative speed (m/s). Positive = closing.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">θ</td><td style="padding:3px 0;">Angle between the velocity vector and the line of sight (degrees). 0° = directly toward.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">v<sub>r</sub></td><td style="padding:3px 0;">Radial (line-of-sight) velocity = v·cosθ.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">mode</td><td style="padding:3px 0;">One-way (comms) or two-way (radar round trip).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>M. I. Skolnik, <em>Introduction to Radar Systems</em>, 3rd ed., McGraw-Hill, 2001. · M. A. Richards, <em>Fundamentals of Radar Signal Processing</em>, 2nd ed., McGraw-Hill, 2014.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="f" placeholder="e.g. 10" data-tip="Carrier frequency (GHz)."><span class="inp-units">GHz</span></div><span class="inp-hint">Carrier</span></div>
+  <div class="inp-row"><label>Speed, <span class="var">v</span></label><div class="inp-inline"><input type="text" id="v" placeholder="e.g. 30" data-tip="Relative speed (m/s)."><span class="inp-units">m/s</span></div><span class="inp-hint">Relative speed</span></div>
+  <div class="inp-row"><label>Angle, <span class="var">θ</span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="th" placeholder="0" data-tip="Angle between velocity and line of sight (deg). 0 = directly toward."><span class="inp-units">deg</span></div><span class="inp-hint">0 = head-on</span></div>
+  <div class="inp-row"><label>Mode</label><div class="inp-inline"><select id="mode" style="font-size:13px;padding:3px;"><option value="one">One-way (comms)</option><option value="two">Two-way (radar)</option></select></div><span class="inp-hint">Round trip?</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;f&quot;:&quot;10&quot;,&quot;v&quot;:&quot;30&quot;,&quot;th&quot;:&quot;0&quot;,&quot;mode&quot;:&quot;two&quot;})" title="10 GHz, 30 m/s, head-on, radar">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Doppler</h4>
+    <div class="res-row"><span class="res-lbl">Doppler shift</span><span class="res-val" id="fd">—</span></div>
+    <div class="res-row"><span class="res-lbl">Fractional shift</span><span class="res-val" id="frac">—</span></div>
+  </div>
+  <div class="res-card"><h4>Geometry</h4>
+    <div class="res-row"><span class="res-lbl">Radial velocity</span><span class="res-val" id="vr">—</span></div>
+    <div class="res-row"><span class="res-lbl">Wavelength</span><span class="res-val" id="lam">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var th=parseFloat(document.getElementById('th').value); if(isNaN(th)) th=0;
+  var fd=(document.getElementById('fd').textContent||'');
+  var W=560,H=170,rx=110,ry=95;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (fd==='—'||fd==='') { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  // radar at left, target at right with velocity vector at angle theta to LOS
+  s+='<circle cx="'+rx+'" cy="'+ry+'" r="5" fill="#5533aa"/><text x="'+rx+'" y="'+(ry+20)+'" text-anchor="middle" font-size="10" fill="#5533aa">radar</text>';
+  var tx=420,ty=ry;
+  s+='<line x1="'+(rx+8)+'" y1="'+ry+'" x2="'+(tx-8)+'" y2="'+ty+'" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/><text x="'+((rx+tx)/2)+'" y="'+(ry-8)+'" text-anchor="middle" font-size="9.5" fill="#888">line of sight</text>';
+  s+='<rect x="'+(tx-6)+'" y="'+(ty-6)+'" width="12" height="12" fill="#c0392b"/><text x="'+tx+'" y="'+(ty+22)+'" text-anchor="middle" font-size="10" fill="#c0392b">target</text>';
+  // velocity vector (toward radar = angle theta from LOS, LOS points left from target)
+  var a=(180-th)*Math.PI/180; var L=54;
+  var vx=tx+L*Math.cos(a), vy=ty-L*Math.sin(a);
+  s+='<line x1="'+tx+'" y1="'+ty+'" x2="'+vx.toFixed(1)+'" y2="'+vy.toFixed(1)+'" stroke="#2e8b57" stroke-width="2.2"/><polygon points="'+vx.toFixed(1)+','+vy.toFixed(1)+' '+(vx-8*Math.cos(a)+4*Math.sin(a)).toFixed(1)+','+(vy+8*Math.sin(a)+4*Math.cos(a)).toFixed(1)+' '+(vx-8*Math.cos(a)-4*Math.sin(a)).toFixed(1)+','+(vy+8*Math.sin(a)-4*Math.cos(a)).toFixed(1)+'" fill="#2e8b57"/>';
+  s+='<text x="'+(vx+6).toFixed(1)+'" y="'+(vy).toFixed(1)+'" font-size="10" fill="#2e8b57">v (θ='+th+'°)</text>';
+  s+='<text x="'+(W/2)+'" y="20" text-anchor="middle" font-size="11" fill="#5533aa">Doppler shift = '+fd+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_radar.html">Learn the theory behind this tool →</a></div>
+<script src="Doppler.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
