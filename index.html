@@ -27,16 +27,16 @@
       position: relative; overflow: hidden;
     }
     .hero::before {
-      content:""; position:absolute; right:-40px; top:-40px; width:220px; height:220px;
-      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+      content:""; position:absolute; right:-30px; top:-30px; width:180px; height:180px;
+      background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 70%);
       border-radius: 50%;
     }
     .hero-row { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 16px; position: relative; }
-    .hero h1 { font-family: monospace; font-size: 26px; margin: 0 0 6px; font-weight: bold; }
-    .hero p  { font-family: monospace; font-size: 13px; opacity: 0.92; max-width: 560px; line-height: 1.65; margin: 0 0 14px; }
-    .hero-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 14px; }
-    .hero-stat .num { font-family: monospace; font-size: 20px; font-weight: bold; display: block; }
-    .hero-stat .lbl { font-family: monospace; font-size: 10px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.08em; }
+    .hero h1 { font-family: monospace; font-size: 24px; margin: 0 0 6px; font-weight: bold; position: relative; }
+    .hero p  { font-family: monospace; font-size: 13px; opacity: 0.9; max-width: 580px; line-height: 1.65; margin: 0 0 16px; position: relative; }
+    .hero-stats { display: flex; gap: 22px; flex-wrap: wrap; margin-bottom: 18px; position: relative; }
+    .hero-stat .num { font-family: monospace; font-size: 22px; font-weight: bold; display: block; }
+    .hero-stat .lbl { font-family: monospace; font-size: 10px; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.08em; }
     .hero-links { display: flex; gap: 8px; flex-wrap: wrap; }
     .hero-link {
       font-family: monospace; font-size: 12px; font-weight: bold;
@@ -92,7 +92,7 @@
     }
     .wiki-pill:hover { background: #AA77FF; color: #fff; border-color: #AA77FF; }
     .wiki-pill.all { background: #AA77FF; color: #fff; border-color: #AA77FF; }
-    @media(max-width:600px) { .hero h1{font-size:20px;} .hero-stats{gap:12px;} }
+    @media(max-width:600px) { .hero h1{font-size:19px;} .hero-stats{gap:14px;} }
   </style>
 </head>
 <body>
@@ -104,10 +104,10 @@
       <h1>RF &amp; Microwave Engineering Calculators</h1>
       <p>88 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
       <div class="hero-stats">
-        <div class="hero-stat"><span class="num">86</span><span class="lbl">Calculators</span></div>
-        <div class="hero-stat"><span class="num">2</span><span class="lbl">Simulators</span></div>
-        <div class="hero-stat"><span class="num">64</span><span class="lbl">Wiki Articles</span></div>
-        <div class="hero-stat"><span class="num">7</span><span class="lbl">Games</span></div>
+        <div class="hero-stat"><span class="num">86</span><span class="lbl">🧮 Calculators</span></div>
+        <div class="hero-stat"><span class="num">2</span><span class="lbl">🔬 Simulators</span></div>
+        <div class="hero-stat"><span class="num">64</span><span class="lbl">📖 Wiki Articles</span></div>
+        <div class="hero-stat"><span class="num">7</span><span class="lbl">🎮 Games</span></div>
       </div>
       <div class="hero-links">
         <a class="hero-link solid" href="start-here.html">🗺 Start Here</a>
