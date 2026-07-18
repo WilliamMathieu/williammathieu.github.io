@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dielectric Boundary / Fresnel Equations Calculator — Reflection, Brewster, Critical Angle | RF Toolbox</title>
+  <meta name="description" content="Calculate reflection and transmission at a dielectric boundary with the Fresnel equations: TE/TM reflectance vs angle, Brewster angle and critical angle.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/DielectricBoundary.html">
+  <meta property="og:title" content="Dielectric Boundary / Fresnel Equations Calculator | RF Toolbox">
+  <meta property="og:description" content="Fresnel reflection/transmission vs angle, Brewster angle and critical angle at a dielectric interface.">
+  <meta property="og:url" content="https://rftoolbox.ca/DielectricBoundary.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Dielectric Boundary / Fresnel Equations Calculator",
+    "description": "Calculate reflection and transmission at a dielectric boundary with the Fresnel equations, plus Brewster and critical angles.",
+    "url": "https://rftoolbox.ca/DielectricBoundary.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Dielectric Boundary — Fresnel Reflection</h3>
+<div class="tool-concept">
+  <p>When a wave crosses the boundary between two dielectrics it partly reflects and partly refracts. The Fresnel equations give the reflected fraction for the two polarisations (TE/s and TM/p) as a function of the incidence angle. This tool also finds the Brewster angle (zero TM reflection) and, for a wave entering a less-dense medium, the critical angle for total internal reflection.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.05;overflow-x:auto;">\(n_1\sin\theta_i = n_2\sin\theta_t,\quad n=\sqrt{\varepsilon_r}\)<br>\(r_{\text{TE}} = \dfrac{n_1\cos\theta_i - n_2\cos\theta_t}{n_1\cos\theta_i + n_2\cos\theta_t},\quad r_{\text{TM}} = \dfrac{n_2\cos\theta_i - n_1\cos\theta_t}{n_2\cos\theta_i + n_1\cos\theta_t}\)<br>\(\theta_B = \arctan\dfrac{n_2}{n_1},\qquad \theta_c = \arcsin\dfrac{n_2}{n_1}\ (n_1>n_2)\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ε<sub>r1</sub>, ε<sub>r2</sub></td><td style="padding:3px 0;">Relative permittivities of the incidence and transmission media (n = √ε<sub>r</sub>).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">θ<sub>i</sub></td><td style="padding:3px 0;">Angle of incidence from the surface normal (degrees).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>TE</sub>, R<sub>TM</sub></td><td style="padding:3px 0;">Power reflectance for the two polarisations = |r|². Transmittance = 1 − R.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">θ<sub>B</sub>, θ<sub>c</sub></td><td style="padding:3px 0;">Brewster angle (R<sub>TM</sub> = 0) and critical angle (total internal reflection).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>D. K. Cheng, <em>Field and Wave Electromagnetics</em>, 2nd ed., Addison-Wesley, 1989. · J. D. Kraus &amp; D. A. Fleisch, <em>Electromagnetics</em>, 5th ed., McGraw-Hill, 1999.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Medium 1, <span class="var">ε<sub>r1</sub></span></label><div class="inp-inline"><input type="text" id="er1" placeholder="e.g. 1" data-tip="Relative permittivity of the incidence medium (1 for air)."></div><span class="inp-hint">Incidence side</span></div>
+  <div class="inp-row"><label>Medium 2, <span class="var">ε<sub>r2</sub></span></label><div class="inp-inline"><input type="text" id="er2" placeholder="e.g. 2.25" data-tip="Relative permittivity of the transmission medium (e.g. 2.25 for glass)."></div><span class="inp-hint">Transmission side</span></div>
+  <div class="inp-row"><label>Incidence angle, <span class="var">θ<sub>i</sub></span></label><div class="inp-inline"><input type="text" id="ti" placeholder="e.g. 30" data-tip="Angle from the surface normal (degrees)."><span class="inp-units">deg</span></div><span class="inp-hint">From normal</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;er1&quot;:&quot;1&quot;,&quot;er2&quot;:&quot;2.25&quot;,&quot;ti&quot;:&quot;30&quot;})" title="Air → glass (εr 2.25), 30°">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Reflection &amp; refraction</h4>
+    <div class="res-row"><span class="res-lbl">Refraction angle θ<sub>t</sub></span><span class="res-val" id="tt">—</span></div>
+    <div class="res-row"><span class="res-lbl">R (TE / s-pol)</span><span class="res-val" id="rte">—</span></div>
+    <div class="res-row"><span class="res-lbl">R (TM / p-pol)</span><span class="res-val" id="rtm">—</span></div>
+  </div>
+  <div class="res-card"><h4>Special angles</h4>
+    <div class="res-row"><span class="res-lbl">Brewster angle</span><span class="res-val" id="brew">—</span></div>
+    <div class="res-row"><span class="res-lbl">Critical angle</span><span class="res-val" id="crit">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var er1=parseFloat(document.getElementById('er1').value), er2=parseFloat(document.getElementById('er2').value), ti=parseFloat(document.getElementById('ti').value);
+  var W=560,H=200,bx=280,by=100;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(er1)||isNaN(er2)||isNaN(ti)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  var n1=Math.sqrt(er1), n2=Math.sqrt(er2);
+  // boundary (horizontal), medium 1 above, medium 2 below
+  s+='<rect x="0" y="'+by+'" width="'+W+'" height="'+(H-by)+'" fill="#5533aa11"/>';
+  s+='<line x1="0" y1="'+by+'" x2="'+W+'" y2="'+by+'" stroke="#888" stroke-width="1.4"/>';
+  s+='<line x1="'+bx+'" y1="'+(by-70)+'" x2="'+bx+'" y2="'+(by+70)+'" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>';
+  s+='<text x="10" y="'+(by-8)+'" font-size="10" fill="#888">medium 1 (εr='+er1+')</text>';
+  s+='<text x="10" y="'+(by+16)+'" font-size="10" fill="#7a63c0">medium 2 (εr='+er2+')</text>';
+  var ai=ti*Math.PI/180, L=72;
+  // incident (from upper-left to origin)
+  var ix=bx-L*Math.sin(ai), iy=by-L*Math.cos(ai);
+  s+='<line x1="'+ix.toFixed(1)+'" y1="'+iy.toFixed(1)+'" x2="'+bx+'" y2="'+by+'" stroke="#c0392b" stroke-width="2"/><polygon points="'+bx+','+by+' '+(bx-8*Math.sin(ai)-4*Math.cos(ai)).toFixed(1)+','+(by-8*Math.cos(ai)+4*Math.sin(ai)).toFixed(1)+' '+(bx-8*Math.sin(ai)+4*Math.cos(ai)).toFixed(1)+','+(by-8*Math.cos(ai)-4*Math.sin(ai)).toFixed(1)+'" fill="#c0392b"/>';
+  s+='<text x="'+(ix-4).toFixed(1)+'" y="'+(iy-4).toFixed(1)+'" text-anchor="end" font-size="10" fill="#c0392b">incident</text>';
+  // reflected (upper-right)
+  var rx=bx+L*Math.sin(ai), ry=by-L*Math.cos(ai);
+  s+='<line x1="'+bx+'" y1="'+by+'" x2="'+rx.toFixed(1)+'" y2="'+ry.toFixed(1)+'" stroke="#e08a3a" stroke-width="1.8"/>';
+  s+='<text x="'+(rx+4).toFixed(1)+'" y="'+(ry-4).toFixed(1)+'" font-size="10" fill="#e08a3a">reflected</text>';
+  // refracted (lower), or TIR
+  var sinT=n1/n2*Math.sin(ai);
+  if (sinT<=1) { var at=Math.asin(sinT); var tx=bx+L*Math.sin(at), ty=by+L*Math.cos(at);
+    s+='<line x1="'+bx+'" y1="'+by+'" x2="'+tx.toFixed(1)+'" y2="'+ty.toFixed(1)+'" stroke="#2e8b57" stroke-width="2"/><text x="'+(tx+4).toFixed(1)+'" y="'+(ty+12).toFixed(1)+'" font-size="10" fill="#2e8b57">refracted</text>';
+  } else {
+    s+='<text x="'+bx+'" y="'+(by+40)+'" text-anchor="middle" font-size="11" fill="#c0392b">total internal reflection</text>';
+  }
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_dielectrics.html">Learn the theory behind this tool →</a></div>
+<script src="DielectricBoundary.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

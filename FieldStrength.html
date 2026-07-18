@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Strength Converter — V/m ↔ dBµV/m ↔ W/m² | RF Toolbox</title>
+  <meta name="description" content="Convert electric field strength between V/m, dBµV/m, magnetic field A/m and power density W/m² or dBm/m², or from EIRP and distance.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/FieldStrength.html">
+  <meta property="og:title" content="Field Strength Converter | RF Toolbox">
+  <meta property="og:description" content="V/m ↔ dBµV/m ↔ A/m ↔ W/m² ↔ dBm/m², plus EIRP + distance to field strength.">
+  <meta property="og:url" content="https://rftoolbox.ca/FieldStrength.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Field Strength Converter",
+    "description": "Convert electric field strength between V/m, dBµV/m, magnetic field A/m and power density W/m² or dBm/m², or from EIRP and distance.",
+    "url": "https://rftoolbox.ca/FieldStrength.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Field Strength Converter</h3>
+<div class="tool-concept">
+  <p>EMC and RF-exposure work quotes field strength in several units. This tool converts a far-field level between electric field (V/m and dBµV/m), magnetic field (A/m) and power density (W/m² and dBm/m²), all tied together by the free-space impedance of 377 Ω. You can also enter an EIRP and distance to get the field at that range.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(E_{\text{dBµV/m}} = 20\log_{10}\dfrac{E}{1\,\text{µV/m}} \qquad S = \dfrac{E^2}{\eta_0},\quad H = \dfrac{E}{\eta_0}\)<br>far field: \(S = \dfrac{P_{\text{EIRP}}}{4\pi d^2},\qquad E = \sqrt{S\,\eta_0}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">E</td><td style="padding:3px 0;">Electric field strength (V/m), or in dBµV/m (dB relative to 1 µV/m).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">S</td><td style="padding:3px 0;">Power density (W/m²), or in dBm/m².</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">EIRP, d</td><td style="padding:3px 0;">Equivalent isotropic radiated power (dBm) and distance (m), for the far-field level.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">η<sub>0</sub></td><td style="padding:3px 0;">Free-space impedance ≈ 376.73 Ω (used for all E↔H↔S conversions).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>H. Ott, <em>Electromagnetic Compatibility Engineering</em>, Wiley, 2009. · ICNIRP, <em>Guidelines for Limiting Exposure to Electromagnetic Fields</em>, 2020.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Known quantity</label><div class="inp-inline"><select id="known" style="font-size:13px;padding:3px;"><option value="Evm">E (V/m)</option><option value="Edbuv">E (dBµV/m)</option><option value="Swm">S (W/m²)</option><option value="Sdbm">S (dBm/m²)</option></select></div><span class="inp-hint">Pick one</span></div>
+  <div class="inp-row"><label>Value</label><div class="inp-inline"><input type="text" id="val" placeholder="e.g. 1" data-tip="Value of the selected quantity."></div><span class="inp-hint">Field / power level</span></div>
+  <div class="inp-row"><label>EIRP <span style="color:#aaa;">(alt.)</span></label><div class="inp-inline"><input type="text" id="eirp" placeholder="e.g. 30" data-tip="Equivalent isotropic radiated power (dBm). Overrides above if distance is set."><span class="inp-units">dBm</span></div><span class="inp-hint">Far-field source</span></div>
+  <div class="inp-row"><label>Distance, <span class="var">d</span> <span style="color:#aaa;">(alt.)</span></label><div class="inp-inline"><input type="text" id="d" placeholder="e.g. 10" data-tip="Distance from the source (m)."><span class="inp-units">m</span></div><span class="inp-hint">Range</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;known&quot;:&quot;Evm&quot;,&quot;val&quot;:&quot;1&quot;,&quot;eirp&quot;:&quot;&quot;,&quot;d&quot;:&quot;&quot;})" title="E = 1 V/m">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Electric &amp; magnetic</h4>
+    <div class="res-row"><span class="res-lbl">E-field</span><span class="res-val" id="Evm">—</span></div>
+    <div class="res-row"><span class="res-lbl">E-field (dBµV/m)</span><span class="res-val" id="Edbuv">—</span></div>
+    <div class="res-row"><span class="res-lbl">H-field</span><span class="res-val" id="Ham">—</span></div>
+  </div>
+  <div class="res-card"><h4>Power density</h4>
+    <div class="res-row"><span class="res-lbl">S (W/m²)</span><span class="res-val" id="Swm">—</span></div>
+    <div class="res-row"><span class="res-lbl">S (dBm/m²)</span><span class="res-val" id="Sdbm">—</span></div>
+    <div class="res-row"><span class="res-lbl">S (mW/cm²)</span><span class="res-val" id="Smwcm">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var e=parseFloat((document.getElementById('Edbuv').textContent||'').replace(/[^\-0-9.]/g,''));
+  var W=560,H=120;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(e)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter a value and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  // dBµV/m scale 0..160, mark current
+  var xa=40,xw=W-70,yb=70,lo=0,hi=160;
+  s+='<line x1="'+xa+'" y1="'+yb+'" x2="'+(xa+xw)+'" y2="'+yb+'" stroke="#bbb" stroke-width="1.4"/>';
+  for(var v=0;v<=160;v+=20){var x=xa+(v-lo)/(hi-lo)*xw;s+='<line x1="'+x.toFixed(1)+'" y1="'+yb+'" x2="'+x.toFixed(1)+'" y2="'+(yb+5)+'" stroke="#bbb" stroke-width="1"/><text x="'+x.toFixed(1)+'" y="'+(yb+18)+'" text-anchor="middle" font-size="9" fill="#888">'+v+'</text>';}
+  var ec=Math.max(lo,Math.min(hi,e));var xe=xa+(ec-lo)/(hi-lo)*xw;
+  s+='<line x1="'+xe.toFixed(1)+'" y1="'+(yb-34)+'" x2="'+xe.toFixed(1)+'" y2="'+yb+'" stroke="#5533aa" stroke-width="2.4"/>';
+  s+='<circle cx="'+xe.toFixed(1)+'" cy="'+(yb-34)+'" r="4" fill="#5533aa"/>';
+  s+='<text x="'+xe.toFixed(1)+'" y="'+(yb-40)+'" text-anchor="middle" font-size="10.5" fill="#5533aa">'+e.toFixed(1)+' dBµV/m</text>';
+  s+='<text x="'+(xa+xw)+'" y="'+(yb+30)+'" text-anchor="end" font-size="9.5" fill="#888">field strength (dBµV/m) →</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_em_waves.html">Learn the theory behind this tool →</a></div>
+<script src="FieldStrength.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
