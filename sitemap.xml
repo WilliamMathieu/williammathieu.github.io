@@ -441,6 +441,26 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://rftoolbox.ca/wiki_aperture_antennas.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/wiki_crystals.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/wiki_group_delay.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/wiki_thermal.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://rftoolbox.ca/wiki_link_budget.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
