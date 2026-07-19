@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radar PRF Calculator — Unambiguous Range &amp; Velocity, Blind Speeds | RF Toolbox</title>
+  <meta name="description" content="From pulse repetition frequency: unambiguous range, unambiguous (blind-speed) velocity, PRI, duty cycle and pulse range resolution for a pulsed-Doppler radar.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/RadarPRF.html">
+  <meta property="og:title" content="Radar PRF Calculator | RF Toolbox">
+  <meta property="og:description" content="Unambiguous range and velocity, blind speeds, PRI and duty cycle from the PRF.">
+  <meta property="og:url" content="https://rftoolbox.ca/RadarPRF.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Radar PRF Calculator",
+    "description": "From pulse repetition frequency: unambiguous range, unambiguous (blind-speed) velocity, PRI, duty cycle and pulse range resolution for a pulsed-Doppler radar.",
+    "url": "https://rftoolbox.ca/RadarPRF.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Radar PRF &amp; Ambiguity</h3>
+<div class="tool-concept">
+  <p>The pulse repetition frequency of a pulsed radar sets a fundamental trade: a low PRF gives long unambiguous range but a low blind speed, while a high PRF does the reverse. This tool returns the maximum unambiguous range and velocity, the first blind speed, the PRI and duty cycle, and the range resolution from the pulse width — the numbers behind choosing a low-, medium- or high-PRF waveform.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(\text{PRI}=\dfrac{1}{\text{PRF}} \qquad R_{ua}=\dfrac{c}{2\,\text{PRF}} \qquad v_{ua}=\pm\dfrac{\lambda\,\text{PRF}}{4}\)<br>\(v_{blind}=\dfrac{n\,\lambda\,\text{PRF}}{2} \qquad d=\dfrac{\tau}{\text{PRI}}=\tau\cdot\text{PRF} \qquad \Delta R=\dfrac{c\,\tau}{2}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">PRF</td><td style="padding:3px 0;">Pulse repetition frequency (kHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>0</sub></td><td style="padding:3px 0;">Carrier frequency (GHz), for the velocity ambiguity.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">τ</td><td style="padding:3px 0;">Pulse width (µs), optional — gives duty cycle and range resolution.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>ua</sub></td><td style="padding:3px 0;">Maximum unambiguous range — beyond it, echoes fold into the next PRI.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">v<sub>blind</sub></td><td style="padding:3px 0;">Blind speeds where the Doppler shift is a multiple of the PRF (n = 1, 2, …).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>M. I. Skolnik, <em>Introduction to Radar Systems</em>, 3rd ed., McGraw-Hill, 2001.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>PRF</label><div class="inp-inline"><input type="text" id="pr-prf" placeholder="e.g. 1" data-tip="Pulse repetition frequency in kHz."><span class="inp-units">kHz</span></div><span class="inp-hint">Pulse rate</span></div>
+  <div class="inp-row"><label>Carrier, <span class="var">f<sub>0</sub></span></label><div class="inp-inline"><input type="text" id="pr-f0" placeholder="e.g. 10" data-tip="Carrier frequency in GHz, for the velocity ambiguity."><span class="inp-units">GHz</span></div><span class="inp-hint">For velocity</span></div>
+  <div class="inp-row"><label>Pulse width, <span class="var">τ</span> <span style="color:#aaa;">(opt)</span></label><div class="inp-inline"><input type="text" id="pr-tau" placeholder="e.g. 1" data-tip="Transmit pulse width in µs, for duty cycle and range resolution."><span class="inp-units">µs</span></div><span class="inp-hint">Duty &amp; ΔR</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="prCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;pr-prf&quot;:&quot;1&quot;,&quot;pr-f0&quot;:&quot;10&quot;,&quot;pr-tau&quot;:&quot;1&quot;})" title="1 kHz PRF, 10 GHz, 1 µs">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Range</h4>
+    <div class="res-row"><span class="res-lbl">PRI</span><span class="res-val" id="pr-pri">—</span></div>
+    <div class="res-row"><span class="res-lbl">Unambiguous range R<sub>ua</sub></span><span class="res-val" id="pr-rua">—</span></div>
+    <div class="res-row"><span class="res-lbl">Duty cycle</span><span class="res-val" id="pr-duty">—</span></div>
+    <div class="res-row"><span class="res-lbl">Range resolution ΔR</span><span class="res-val" id="pr-dr">—</span></div>
+  </div>
+  <div class="res-card"><h4>Velocity</h4>
+    <div class="res-row"><span class="res-lbl">Wavelength λ</span><span class="res-val" id="pr-lam">—</span></div>
+    <div class="res-row"><span class="res-lbl">Unambiguous velocity v<sub>ua</sub></span><span class="res-val" id="pr-vua">—</span></div>
+    <div class="res-row"><span class="res-lbl">First blind speed</span><span class="res-val" id="pr-blind">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var rua = document.getElementById('pr-rua') ? document.getElementById('pr-rua').textContent : '—';
+  var W=560,H=150,y=70,x0=50;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<line x1="'+x0+'" y1="'+y+'" x2="520" y2="'+y+'" stroke="#333" stroke-width="1"/>';
+  // pulses
+  var pri=120, pw=10;
+  for(var i=0;i<4;i++){var x=x0+20+i*pri;
+    s+='<rect x="'+x+'" y="'+(y-40)+'" width="'+pw+'" height="40" fill="#5533aa"/>';
+    if(i<3){s+='<line x1="'+(x+pw)+'" y1="'+(y+14)+'" x2="'+(x+pri)+'" y2="'+(y+14)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+      s+='<text x="'+(x+pw+pri/2)+'" y="'+(y+11)+'" text-anchor="middle" font-size="9" fill="#888">PRI</text>';}
+  }
+  s+='<text x="'+((x0+520)/2)+'" y="140" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Pulse train — R_ua = '+rua+'</text>';
+  s+='<text x="'+((x0+520)/2)+'" y="24" text-anchor="middle" font-size="10" fill="#888">TX pulses at the PRF</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_radar.html">Learn about radar systems →</a></div>
+<script src="RadarPRF.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

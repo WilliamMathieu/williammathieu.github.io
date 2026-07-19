@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radar Cross Section (RCS) Calculator — Sphere, Plate, Cylinder, Corner | RF Toolbox</title>
+  <meta name="description" content="Canonical high-frequency radar cross section for a sphere, flat plate, cylinder and trihedral corner reflector, in m² and dBsm, at any frequency.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/RCS.html">
+  <meta property="og:title" content="Radar Cross Section (RCS) Calculator | RF Toolbox">
+  <meta property="og:description" content="RCS of canonical shapes — sphere, flat plate, cylinder, trihedral corner — in m² and dBsm.">
+  <meta property="og:url" content="https://rftoolbox.ca/RCS.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Radar Cross Section (RCS) Calculator",
+    "description": "Canonical high-frequency radar cross section for a sphere, flat plate, cylinder and trihedral corner reflector, in square metres and dBsm, at any frequency.",
+    "url": "https://rftoolbox.ca/RCS.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Radar Cross Section (RCS)</h3>
+<div class="tool-concept">
+  <p>Radar cross section is the effective area a target presents to a radar. In the optical (high-frequency) region — target much larger than a wavelength — a few canonical shapes have closed-form RCS. This tool gives the maximum (boresight) RCS of a sphere, flat plate, cylinder and trihedral corner reflector in both m² and dBsm, useful for calibration targets, link budgets and stealth intuition.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(\text{Sphere: } \sigma=\pi a^2 \qquad \text{Flat plate }(a\times b): \sigma=\dfrac{4\pi (ab)^2}{\lambda^2}\)<br>\(\text{Cylinder }(a,L): \sigma=\dfrac{2\pi a L^2}{\lambda} \qquad \text{Trihedral }(a): \sigma=\dfrac{4\pi a^4}{3\lambda^2}\)<br>\(\sigma_{dBsm}=10\log_{10}\sigma \qquad \lambda=\dfrac{c}{f_0}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Shape</td><td style="padding:3px 0;">Canonical scatterer. Results are the maximum (boresight) RCS in the optical region (dimensions ≫ λ).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">a</td><td style="padding:3px 0;">Primary dimension (m): sphere/cylinder radius, plate side, or corner edge length.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">b / L</td><td style="padding:3px 0;">Second dimension (m): plate's other side, or cylinder length. Ignored for sphere and corner.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>0</sub></td><td style="padding:3px 0;">Frequency (GHz). Sphere RCS is frequency-independent in the optical region.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>E. F. Knott, J. F. Shaeffer &amp; M. T. Tuley, <em>Radar Cross Section</em>, 2nd ed., 1993.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Shape</label><div class="inp-inline"><select id="rc-shape" style="font-size:12px;padding:3px;" onchange="rcHint()"><option value="sphere">Sphere</option><option value="plate" selected>Flat plate (a×b)</option><option value="cylinder">Cylinder (a, L)</option><option value="trihedral">Trihedral corner (a)</option></select></div><span class="inp-hint" id="rc-shapehint">rectangular plate</span></div>
+  <div class="inp-row"><label>Dimension, <span class="var">a</span></label><div class="inp-inline"><input type="text" id="rc-a" placeholder="e.g. 0.3" data-tip="Primary dimension in metres (radius, plate side, or corner edge)."><span class="inp-units">m</span></div><span class="inp-hint" id="rc-ahint">plate side</span></div>
+  <div class="inp-row"><label>Dimension, <span class="var">b / L</span></label><div class="inp-inline"><input type="text" id="rc-b" placeholder="e.g. 0.3" data-tip="Second dimension in metres (plate side or cylinder length)."><span class="inp-units">m</span></div><span class="inp-hint" id="rc-bhint">plate side</span></div>
+  <div class="inp-row"><label>Frequency, <span class="var">f<sub>0</sub></span></label><div class="inp-inline"><input type="text" id="rc-f0" placeholder="e.g. 10" data-tip="Radar frequency in GHz."><span class="inp-units">GHz</span></div><span class="inp-hint">Radar band</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="rcCalc()">Calculate</button> <button class="example-btn" onclick="rcLoadExample()" title="0.3×0.3 m plate at 10 GHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>RCS</h4>
+    <div class="res-row"><span class="res-lbl">σ (linear)</span><span class="res-val" id="rc-sig">—</span></div>
+    <div class="res-row"><span class="res-lbl">σ (dBsm)</span><span class="res-val" id="rc-dbsm">—</span></div>
+    <div class="res-row"><span class="res-lbl">Wavelength λ</span><span class="res-val" id="rc-lam">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var shape = document.getElementById('rc-shape') ? document.getElementById('rc-shape').value : 'plate';
+  var dbsm = document.getElementById('rc-dbsm') ? document.getElementById('rc-dbsm').textContent : '—';
+  var W=560,H=170,cx=280,cy=80;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // incoming radar arrows
+  for(var i=-1;i<=1;i++){var yy=cy+i*22;s+='<line x1="70" y1="'+yy+'" x2="180" y2="'+yy+'" stroke="#AA77FF" stroke-width="1.6"/><polygon points="180,'+yy+' 172,'+(yy-4)+' 172,'+(yy+4)+'" fill="#AA77FF"/>';}
+  if(shape==='sphere'){s+='<circle cx="'+cx+'" cy="'+cy+'" r="34" fill="#e9e2fb" stroke="#5533aa" stroke-width="2"/>';}
+  else if(shape==='plate'){s+='<rect x="'+(cx-10)+'" y="'+(cy-40)+'" width="20" height="80" fill="#e9e2fb" stroke="#5533aa" stroke-width="2"/>';}
+  else if(shape==='cylinder'){s+='<rect x="'+(cx-34)+'" y="'+(cy-26)+'" width="68" height="52" rx="24" fill="#e9e2fb" stroke="#5533aa" stroke-width="2"/>';}
+  else {s+='<path d="M'+(cx-30)+' '+(cy+30)+' L'+cx+' '+(cy-34)+' L'+(cx+30)+' '+(cy+30)+' Z" fill="#e9e2fb" stroke="#5533aa" stroke-width="2"/><line x1="'+cx+'" y1="'+(cy-34)+'" x2="'+cx+'" y2="'+(cy+30)+'" stroke="#5533aa" stroke-width="1"/>';}
+  s+='<text x="'+cx+'" y="150" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">σ = '+dbsm+'</text>';
+  s+='<text x="120" y="30" text-anchor="middle" font-size="10" fill="#AA77FF">incident wave</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_radar.html">Learn about radar systems →</a></div>
+<script src="RCS.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
