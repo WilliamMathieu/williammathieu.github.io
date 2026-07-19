@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coax Power Handling Calculator — Peak Voltage Breakdown &amp; Power | RF Toolbox</title>
+  <meta name="description" content="Peak voltage-breakdown power handling of a coaxial line from inner/outer conductor diameters, dielectric constant and dielectric strength, with the characteristic impedance.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/CoaxPowerHandling.html">
+  <meta property="og:title" content="Coax Power Handling Calculator | RF Toolbox">
+  <meta property="og:description" content="Peak (voltage-breakdown) power handling and Z0 of a coaxial line from geometry and dielectric.">
+  <meta property="og:url" content="https://rftoolbox.ca/CoaxPowerHandling.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Coax Power Handling Calculator",
+    "description": "Peak voltage-breakdown power handling of a coaxial line from inner/outer conductor diameters, dielectric constant and dielectric strength, with the characteristic impedance.",
+    "url": "https://rftoolbox.ca/CoaxPowerHandling.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Coax Power Handling</h3>
+<div class="tool-concept">
+  <p>The peak power a coaxial line can carry is limited by voltage breakdown of the dielectric, where the field is highest — at the surface of the inner conductor. From the conductor diameters, dielectric constant and dielectric strength, this tool gives the characteristic impedance, the breakdown voltage, and the matched-line peak power. (Average/CW power is set by conductor heating and is cable- and cooling-specific — treat the peak figure as an upper bound and derate generously.)</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(Z_0=\dfrac{60}{\sqrt{\varepsilon_r}}\ln\dfrac{b}{a} \qquad V_{max}=E_{bd}\,a\,\ln\dfrac{b}{a} \qquad P_{peak}=\dfrac{V_{max}^2}{2\,Z_0}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Inner conductor diameter (mm); a = d/2.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Dielectric (shield inner) diameter (mm); b = D/2.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ε<sub>r</sub></td><td style="padding:3px 0;">Dielectric constant (PTFE 2.1, PE 2.25, air 1).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">E<sub>bd</sub></td><td style="padding:3px 0;">Dielectric strength (kV/mm). PTFE ≈ 60–170, PE ≈ 20–28, dry air ≈ 3.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>Standard coaxial-line field analysis (Pozar, <em>Microwave Engineering</em>). Peak power assumes a matched line; derate for VSWR, altitude and surface finish.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Inner dia, <span class="var">d</span></label><div class="inp-inline"><input type="text" id="cp-d" placeholder="e.g. 1.0" data-tip="Inner conductor diameter in mm."><span class="inp-units">mm</span></div><span class="inp-hint">Centre conductor</span></div>
+  <div class="inp-row"><label>Dielectric dia, <span class="var">D</span></label><div class="inp-inline"><input type="text" id="cp-D" placeholder="e.g. 3.5" data-tip="Dielectric / shield inner diameter in mm."><span class="inp-units">mm</span></div><span class="inp-hint">Shield inner</span></div>
+  <div class="inp-row"><label>ε<sub>r</sub></label><div class="inp-inline"><input type="text" id="cp-er" placeholder="e.g. 2.1" data-tip="Dielectric constant."></div><span class="inp-hint">Dielectric</span></div>
+  <div class="inp-row"><label>Strength, <span class="var">E<sub>bd</sub></span></label><div class="inp-inline"><input type="text" id="cp-ebd" placeholder="e.g. 20" data-tip="Dielectric strength in kV/mm."><span class="inp-units">kV/mm</span></div><span class="inp-hint">Breakdown field</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="cpCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;cp-d&quot;:&quot;1.0&quot;,&quot;cp-D&quot;:&quot;3.5&quot;,&quot;cp-er&quot;:&quot;2.1&quot;,&quot;cp-ebd&quot;:&quot;20&quot;})" title="~50 Ω PE line">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Line</h4>
+    <div class="res-row"><span class="res-lbl">Characteristic impedance Z<sub>0</sub></span><span class="res-val" id="cp-z0">—</span></div>
+    <div class="res-row"><span class="res-lbl">Breakdown voltage V<sub>max</sub></span><span class="res-val" id="cp-vmax">—</span></div>
+  </div>
+  <div class="res-card"><h4>Power</h4>
+    <div class="res-row"><span class="res-lbl">Peak power (matched)</span><span class="res-val" id="cp-ppk">—</span></div>
+    <div class="res-row"><span class="res-lbl">Peak power (dBm)</span><span class="res-val" id="cp-pdbm">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var ppk = document.getElementById('cp-ppk') ? document.getElementById('cp-ppk').textContent : '—';
+  var W=560,H=160,cx=180,cy=80;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="52" fill="none" stroke="#5533aa" stroke-width="2.5"/>';
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="42" fill="#e9e2fb"/>';
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="12" fill="#8d6ad6" stroke="#5533aa" stroke-width="1.5"/>';
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+42)+'" y2="'+cy+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<text x="'+(cx+22)+'" y="'+(cy-4)+'" font-size="9" fill="#888">b</text>';
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+cx+'" y2="'+(cy-12)+'" stroke="#333" stroke-width="1"/>';
+  s+='<text x="'+cx+'" y="'+(cy+4)+'" text-anchor="middle" font-size="8" fill="#333">a</text>';
+  s+='<text x="400" y="80" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">P_peak</text>';
+  s+='<text x="400" y="100" text-anchor="middle" font-size="12" fill="#AA77FF" font-weight="bold">'+ppk+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_coax_cable.html">Learn about coaxial cable →</a></div>
+<script src="CoaxPowerHandling.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capacitor Self-Resonant Frequency Calculator — SRF, Q, ESR | RF Toolbox</title>
+  <meta name="description" content="Self-resonant frequency of a real capacitor from its capacitance and parasitic ESL, plus the reactance and Q at a chosen frequency and the inductive region above SRF.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/CapacitorSRF.html">
+  <meta property="og:title" content="Capacitor Self-Resonant Frequency Calculator | RF Toolbox">
+  <meta property="og:description" content="Capacitor SRF from C and parasitic ESL, plus Q and ESR at frequency.">
+  <meta property="og:url" content="https://rftoolbox.ca/CapacitorSRF.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Capacitor Self-Resonant Frequency Calculator",
+    "description": "Self-resonant frequency of a real capacitor from its capacitance and parasitic ESL, plus the reactance and Q at a chosen frequency and the inductive region above SRF.",
+    "url": "https://rftoolbox.ca/CapacitorSRF.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Capacitor Self-Resonant Frequency</h3>
+<div class="tool-concept">
+  <p>A real capacitor is a series LC: its capacitance in series with the equivalent series inductance (ESL) of its body and leads. At the self-resonant frequency the two reactances cancel and the part looks purely resistive (the ESR); above it, the capacitor behaves as an inductor. Enter C and ESL to find the SRF, and add ESR and a frequency to get the Q and reactance there.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(f_{SRF}=\dfrac{1}{2\pi\sqrt{L_{ESL}\,C}} \qquad X_C=\dfrac{1}{2\pi f C} \qquad Q=\dfrac{X_C}{\text{ESR}}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Capacitance (pF).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ESL</td><td style="padding:3px 0;">Equivalent series inductance (nH) — body + mounting. Sets the SRF.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ESR</td><td style="padding:3px 0;">Equivalent series resistance (Ω), optional — for the Q and the impedance minimum.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Frequency (MHz), optional — for the reactance and Q at that point.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>Standard series-RLC model of a real capacitor; component-vendor SRF/ESR application notes.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Capacitance, <span class="var">C</span></label><div class="inp-inline"><input type="text" id="cs-c" placeholder="e.g. 100" data-tip="Capacitance in picofarads."><span class="inp-units">pF</span></div><span class="inp-hint">Nominal</span></div>
+  <div class="inp-row"><label>ESL</label><div class="inp-inline"><input type="text" id="cs-esl" placeholder="e.g. 1" data-tip="Equivalent series inductance in nH."><span class="inp-units">nH</span></div><span class="inp-hint">Parasitic L</span></div>
+  <div class="inp-row"><label>ESR <span style="color:#aaa;">(opt)</span></label><div class="inp-inline"><input type="text" id="cs-esr" placeholder="e.g. 0.1" data-tip="Equivalent series resistance in ohms."><span class="inp-units">Ω</span></div><span class="inp-hint">For Q</span></div>
+  <div class="inp-row"><label>Frequency, <span class="var">f</span> <span style="color:#aaa;">(opt)</span></label><div class="inp-inline"><input type="text" id="cs-f" placeholder="e.g. 100" data-tip="Frequency in MHz, for reactance and Q."><span class="inp-units">MHz</span></div><span class="inp-hint">Operating pt</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="csCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;cs-c&quot;:&quot;100&quot;,&quot;cs-esl&quot;:&quot;1&quot;,&quot;cs-esr&quot;:&quot;0.1&quot;,&quot;cs-f&quot;:&quot;100&quot;})" title="100 pF, 1 nH ESL">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Resonance</h4>
+    <div class="res-row"><span class="res-lbl">Self-resonant frequency</span><span class="res-val" id="cs-srf">—</span></div>
+    <div class="res-row"><span class="res-lbl">Impedance min (= ESR)</span><span class="res-val" id="cs-zmin">—</span></div>
+  </div>
+  <div class="res-card"><h4>At frequency</h4>
+    <div class="res-row"><span class="res-lbl">Reactance |X|</span><span class="res-val" id="cs-x">—</span></div>
+    <div class="res-row"><span class="res-lbl">Behaviour</span><span class="res-val" id="cs-beh">—</span></div>
+    <div class="res-row"><span class="res-lbl">Q</span><span class="res-val" id="cs-q">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var srf = document.getElementById('cs-srf') ? document.getElementById('cs-srf').textContent : '—';
+  var W=560,H=170,x0=60,y0=120,x1=520;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x0+'" y2="24" stroke="#333" stroke-width="1"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x1+'" y2="'+y0+'" stroke="#333" stroke-width="1"/>';
+  s+='<text x="'+(x0-6)+'" y="30" text-anchor="end" font-size="9" fill="#888">|Z|</text>';
+  s+='<text x="'+x1+'" y="'+(y0+14)+'" text-anchor="end" font-size="9" fill="#888">f</text>';
+  // V-shaped impedance dip: capacitive falling then inductive rising
+  var xm=(x0+x1)/2;
+  s+='<path d="M'+x0+' 40 L'+xm+' 100 L'+x1+' 40" fill="none" stroke="#5533aa" stroke-width="2.2"/>';
+  s+='<line x1="'+xm+'" y1="100" x2="'+xm+'" y2="'+y0+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<circle cx="'+xm+'" cy="100" r="4" fill="#c0392b"/>';
+  s+='<text x="'+xm+'" y="'+(y0+14)+'" text-anchor="middle" font-size="9" fill="#c0392b">SRF</text>';
+  s+='<text x="'+((x0+xm)/2)+'" y="60" text-anchor="middle" font-size="9" fill="#5533aa">capacitive</text>';
+  s+='<text x="'+((xm+x1)/2)+'" y="60" text-anchor="middle" font-size="9" fill="#AA77FF">inductive</text>';
+  s+='<text x="'+xm+'" y="160" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">SRF = '+srf+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_microwave_components.html">Learn about microwave components →</a></div>
+<script src="CapacitorSRF.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

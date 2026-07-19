@@ -331,6 +331,41 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://rftoolbox.ca/ToroidInductor.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/CapacitorSRF.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/ResonatorQ.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/FerriteBead.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/CoaxPowerHandling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/ShieldingEffectiveness.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/GroupDelay.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://rftoolbox.ca/TransducerGain.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
