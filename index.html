@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
-  <meta name="description" content="105 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
+  <meta name="description" content="112 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/">
   <meta property="og:title" content="RF Toolbox — Free Online RF & Microwave Engineering Calculators">
@@ -112,9 +112,9 @@
     <div class="hero-row">
       <div>
         <h1>RF &amp; Microwave Engineering Calculators</h1>
-        <p>105 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
+        <p>112 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
         <div class="hero-stats">
-          <div class="hero-stat"><span class="num">103</span><span class="lbl">🧮 Calculators</span></div>
+          <div class="hero-stat"><span class="num">110</span><span class="lbl">🧮 Calculators</span></div>
           <div class="hero-stat"><span class="num">2</span><span class="lbl">🔬 Simulators</span></div>
           <div class="hero-stat"><span class="num">64</span><span class="lbl">📖 Wiki Articles</span></div>
           <div class="hero-stat"><span class="num">7</span><span class="lbl">🎮 Games</span></div>
@@ -154,7 +154,7 @@
 
   <!-- Tool grid -->
   <div id="all-cards">
-<div class="cat-header" style="background:#5e3399"><span class="ch-icon">🌐</span><span class="ch-label">Fundamentals & EM</span><span class="ch-count">9 tools</span></div>
+<div class="cat-header" style="background:#5e3399"><span class="ch-icon">🌐</span><span class="ch-label">Fundamentals & EM</span><span class="ch-count">10 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="Wavelength.html">
   <div class="tool-card-fig"><img src="thumbnails/Wavelength.svg" width="200" height="90" alt="Wavelength"></div>
@@ -210,9 +210,15 @@
     <div class="tool-card-name">Thermal (kTB) Noise</div>
     <div class="tool-card-desc">Johnson–Nyquist noise voltage/current and available noise power kTB.</div>
   </div>
+</a><a class="tool-card" href="ShieldingEffectiveness.html">
+  <div class="tool-card-fig"><img src="thumbnails/ShieldingEffectiveness.svg" width="200" height="90" alt="ShieldingEffectiveness"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Shielding Effectiveness</div>
+    <div class="tool-card-desc">Absorption + reflection loss and total SE of a metal barrier (far-field plane wave).</div>
+  </div>
 </a>
 </div>
-<div class="cat-header" style="background:#8d3399"><span class="ch-icon">🌀</span><span class="ch-label">Resonance & Passives</span><span class="ch-count">9 tools</span></div>
+<div class="cat-header" style="background:#8d3399"><span class="ch-icon">🌀</span><span class="ch-label">Resonance & Passives</span><span class="ch-count">13 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="LC.html">
   <div class="tool-card-fig"><img src="thumbnails/LC.svg" width="200" height="90" alt="LC"></div>
@@ -268,9 +274,33 @@
     <div class="tool-card-name">Wire Inductance</div>
     <div class="tool-card-desc">Self-inductance of a straight wire, circular loop, or two-wire line.</div>
   </div>
+</a><a class="tool-card" href="ToroidInductor.html">
+  <div class="tool-card-fig"><img src="thumbnails/ToroidInductor.svg" width="200" height="90" alt="ToroidInductor"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Toroid Inductor</div>
+    <div class="tool-card-desc">Turns from the core AL value and target inductance (L = AL·N²), plus a flux-density check.</div>
+  </div>
+</a><a class="tool-card" href="CapacitorSRF.html">
+  <div class="tool-card-fig"><img src="thumbnails/CapacitorSRF.svg" width="200" height="90" alt="CapacitorSRF"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Capacitor SRF</div>
+    <div class="tool-card-desc">Self-resonant frequency from C and parasitic ESL, plus Q and reactance at frequency.</div>
+  </div>
+</a><a class="tool-card" href="ResonatorQ.html">
+  <div class="tool-card-fig"><img src="thumbnails/ResonatorQ.svg" width="200" height="90" alt="ResonatorQ"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Resonator Q</div>
+    <div class="tool-card-desc">Loaded/unloaded/external Q, 3-dB bandwidth, coupling and insertion loss.</div>
+  </div>
+</a><a class="tool-card" href="FerriteBead.html">
+  <div class="tool-card-fig"><img src="thumbnails/FerriteBead.svg" width="200" height="90" alt="FerriteBead"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Ferrite Bead / Choke</div>
+    <div class="tool-card-desc">Approximate bead impedance from a series R–L model or a datasheet point.</div>
+  </div>
 </a>
 </div>
-<div class="cat-header" style="background:#993376"><span class="ch-icon">📏</span><span class="ch-label">Transmission Lines</span><span class="ch-count">10 tools</span></div>
+<div class="cat-header" style="background:#993376"><span class="ch-icon">📏</span><span class="ch-label">Transmission Lines</span><span class="ch-count">11 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="Microstrip.html">
   <div class="tool-card-fig"><img src="thumbnails/Microstrip.svg" width="200" height="90" alt="Microstrip"></div>
@@ -331,6 +361,12 @@
   <div class="tool-card-body">
     <div class="tool-card-name">PCB Via Parasitics</div>
     <div class="tool-card-desc">Via inductance, antipad capacitance, and self-resonant frequency.</div>
+  </div>
+</a><a class="tool-card" href="CoaxPowerHandling.html">
+  <div class="tool-card-fig"><img src="thumbnails/CoaxPowerHandling.svg" width="200" height="90" alt="CoaxPowerHandling"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Coax Power Handling</div>
+    <div class="tool-card-desc">Peak voltage-breakdown power and Z₀ of a coaxial line from geometry and dielectric.</div>
   </div>
 </a>
 </div>
@@ -410,7 +446,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header" style="background:#994e33"><span class="ch-icon">🎚️</span><span class="ch-label">Filters & Attenuators</span><span class="ch-count">4 tools</span></div>
+<div class="cat-header" style="background:#994e33"><span class="ch-icon">🎚️</span><span class="ch-label">Filters & Attenuators</span><span class="ch-count">5 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="RCFilter.html">
   <div class="tool-card-fig"><img src="thumbnails/RCFilter.svg" width="200" height="90" alt="RCFilter"></div>
@@ -435,6 +471,12 @@
   <div class="tool-card-body">
     <div class="tool-card-name">Stepped-Z LPF</div>
     <div class="tool-card-desc">Microstrip stepped-impedance LPF: Butterworth or Chebyshev, with trace dimensions.</div>
+  </div>
+</a><a class="tool-card" href="GroupDelay.html">
+  <div class="tool-card-fig"><img src="thumbnails/GroupDelay.svg" width="200" height="90" alt="GroupDelay"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Filter Group Delay</div>
+    <div class="tool-card-desc">Band-center group delay of a Butterworth or Chebyshev lowpass prototype from its poles.</div>
   </div>
 </a>
 </div>
@@ -915,11 +957,11 @@
 <script>
 // ── Category map for tab filtering ──────────────────────────────────────────
 var CAT_MAP = {
-  fundamentals: ['Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','dBmConverter.html','PlaneWave.html','FieldStrength.html','DielectricBoundary.html','LossTangent.html','ThermalNoise.html'],
-  coils:        ['LC.html','CLC.html','CoupledResonators.html','BandpassCalc.html','Solenoid.html','Varactor.html','ParallelPlateCap.html','BondWire.html','WireInductance.html'],
-  tlines:       ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html','TDR.html','PCBVia.html'],
+  fundamentals: ['Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','dBmConverter.html','PlaneWave.html','FieldStrength.html','DielectricBoundary.html','LossTangent.html','ThermalNoise.html','ShieldingEffectiveness.html'],
+  coils:        ['LC.html','CLC.html','CoupledResonators.html','BandpassCalc.html','Solenoid.html','Varactor.html','ParallelPlateCap.html','BondWire.html','WireInductance.html','ToroidInductor.html','CapacitorSRF.html','ResonatorQ.html','FerriteBead.html'],
+  tlines:       ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html','TDR.html','PCBVia.html','CoaxPowerHandling.html'],
   matching:     ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','ImpedanceMatchingNetwork.html','CapacitorNetwork.html','LCBalun.html','Wilkinson.html','Coupler.html','PowerCombiner.html','PhaseShifter.html','MismatchLoss.html'],
-  filters:      ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html'],
+  filters:      ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html','GroupDelay.html'],
   amps:         ['NoiseFigure.html','AmpStability.html','IP3Calc.html','TransistorFT.html','TransducerGain.html','LNAMatch.html','NFYFactor.html','PLLFilter.html','PhaseNoiseJitter.html','DDS.html','NoiseTempNF.html','LeesonPhaseNoise.html','PALoadLine.html','JunctionTemp.html','CrystalResonator.html'],
   rx:           ['Sensitivity.html','ImageReject.html','ADCNoise.html','EVMSNR.html','BandpassSampling.html','SpectrumDANL.html','RFCascadeAnalyzer.html','MixerSpurChart.html','ModulationBandwidth.html','BERvsEbN0.html','OFDMParameters.html'],
   antennas:     ['Dipole.html','PatchAntenna.html','ArrayFactor.html','HelicalAntenna.html','YagiAntenna.html','ApertureAntenna.html','ParabolicDish.html','HornAntenna.html','AntennaGainConverter.html','MonopoleLoop.html'],
