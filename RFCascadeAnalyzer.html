@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Cascade Analyzer — Gain, NF, IIP3, SFDR of a Receiver Chain | RF Toolbox</title>
+  <meta name="description" content="Analyze a multi-stage RF chain: cumulative gain, cascaded noise figure (Friis), input IIP3/IIP2, output OIP3, noise floor (MDS), spurious-free dynamic range (SFDR), and approximate P1dB.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/RFCascadeAnalyzer.html">
+  <meta property="og:title" content="RF Cascade Analyzer — Gain, NF, IIP3, SFDR | RF Toolbox">
+  <meta property="og:description" content="Cumulative gain, cascaded noise figure, IIP3/IIP2, MDS and SFDR for a multi-stage RF receiver chain.">
+  <meta property="og:url" content="https://rftoolbox.ca/RFCascadeAnalyzer.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "RF Cascade Analyzer",
+    "description": "Analyze a multi-stage RF chain: cumulative gain, cascaded noise figure (Friis), input IIP3/IIP2, output OIP3, noise floor (MDS), spurious-free dynamic range (SFDR), and approximate P1dB.",
+    "url": "https://rftoolbox.ca/RFCascadeAnalyzer.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>RF Cascade Analyzer</h3>
+<div class="tool-concept">
+  <p>Rolls up a whole receiver or transmitter chain into system-level specs. Enter each stage's gain, noise figure and input third-order intercept (IIP3), and the tool returns the cumulative gain, the cascaded noise figure (Friis), the input- and output-referred IIP3, the noise floor (MDS), and the spurious-free dynamic range (SFDR). The early stages set the noise figure; the later, high-signal stages dominate the linearity — this tool shows the trade-off at a glance.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(G_{tot}=\textstyle\sum G_k\ \text{(dB)} \qquad F_{tot}=F_1+\dfrac{F_2-1}{G_1}+\dfrac{F_3-1}{G_1G_2}+\cdots\)<br>\(\dfrac{1}{\text{IIP3}_{tot}}=\dfrac{1}{\text{IIP3}_1}+\dfrac{G_1}{\text{IIP3}_2}+\dfrac{G_1G_2}{\text{IIP3}_3}+\cdots\quad(\text{linear mW})\)<br>\(\text{MDS}=-174+NF+10\log_{10}B \qquad \text{SFDR}=\tfrac{2}{3}\big(\text{IIP3}-\text{MDS}\big)\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Gₖ</td><td style="padding:3px 0;">Gain of stage k (dB). A passive loss is a negative gain.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">NFₖ</td><td style="padding:3px 0;">Noise figure of stage k (dB).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">IIP3ₖ</td><td style="padding:3px 0;">Input-referred third-order intercept of stage k (dBm). For an amplifier specified by its output intercept, IIP3 = OIP3 − G.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">IIP2ₖ</td><td style="padding:3px 0;">Optional input second-order intercept (dBm). Combined with the same power-referred cascade; leave any blank to skip.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B</td><td style="padding:3px 0;">Noise/channel bandwidth (MHz) for the noise floor MDS and SFDR. Optional.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">SFDR</td><td style="padding:3px 0;">Two-tone spurious-free dynamic range, referred to a 0 dB output SNR (MDS at SNR = 0). Input P1dB is the ≈ IIP3 − 9.6 dB rule of thumb.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>H. Friis, "Noise figures of radio receivers," <em>Proc. IRE</em> 32, 419 (1944). · B. Razavi, <em>RF Microelectronics</em>, 2nd ed., Prentice Hall, 2011 (cascaded IP3). IIP2 combined with the power-referred convention.</div>
+</details>
+</div>
+<div class="sec-lbl">Chain Configuration</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
+  <div class="inp-row" style="flex-direction:row;align-items:center;gap:8px;">
+    <label>Number of stages</label>
+    <input type="number" id="rca-n" min="1" max="8" value="3" style="width:60px;" data-tip="Number of cascaded stages (1–8).">
+  </div>
+  <div class="inp-row" style="flex-direction:row;align-items:center;gap:8px;">
+    <label>Bandwidth, B <span style="color:#aaa;">(opt)</span></label>
+    <input type="text" id="rca-bw" placeholder="e.g. 1" style="width:70px;" data-tip="Noise/channel bandwidth in MHz, for the noise floor (MDS) and SFDR."> MHz
+  </div>
+  <button class="calc-btn" onclick="rcaBuild()" style="margin-top:0;">Set Stages</button>
+  <button class="example-btn" onclick="rcaLoadExample()" title="LNA → Mixer → IF amp">Load Example</button>
+</div>
+<div id="rca-stages"></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Gain &amp; Noise</h4>
+    <div class="res-row"><span class="res-lbl">Total gain</span><span class="res-val" id="rca-gain">—</span></div>
+    <div class="res-row"><span class="res-lbl">Cascaded noise figure</span><span class="res-val" id="rca-nf">—</span></div>
+    <div class="res-row"><span class="res-lbl">Noise floor (MDS)</span><span class="res-val" id="rca-mds">—</span></div>
+  </div>
+  <div class="res-card"><h4>Linearity &amp; Dynamic Range</h4>
+    <div class="res-row"><span class="res-lbl">Input IIP3</span><span class="res-val" id="rca-iip3">—</span></div>
+    <div class="res-row"><span class="res-lbl">Output OIP3</span><span class="res-val" id="rca-oip3">—</span></div>
+    <div class="res-row"><span class="res-lbl">Input IIP2</span><span class="res-val" id="rca-iip2">—</span></div>
+    <div class="res-row"><span class="res-lbl">SFDR</span><span class="res-val" id="rca-sfdr">—</span></div>
+    <div class="res-row"><span class="res-lbl">≈ Input P1dB (IIP3−9.6)</span><span class="res-val" id="rca-p1">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var n = parseInt(document.getElementById('rca-n')&&document.getElementById('rca-n').value)||3;
+  var nf = document.getElementById('rca-nf') ? document.getElementById('rca-nf').textContent : '—';
+  var gt = document.getElementById('rca-gain') ? document.getElementById('rca-gain').textContent : '—';
+  var i3 = document.getElementById('rca-iip3') ? document.getElementById('rca-iip3').textContent : '—';
+  var W=560, H=140, wy=60;
+  var bw=78, gap=28, totalW=n*(bw+gap)-gap;
+  var startX=(W-totalW)/2;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<line x1="20" y1="'+wy+'" x2="'+startX+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  for(var i=0;i<n;i++){
+    var bx=startX+i*(bw+gap);
+    var gEl=document.getElementById('rca-g'+(i+1)), fEl=document.getElementById('rca-f'+(i+1));
+    var gv=gEl?gEl.value:'?', fv=fEl?fEl.value:'?';
+    s+='<rect x="'+bx+'" y="'+(wy-22)+'" width="'+bw+'" height="44" fill="#f0eeff" stroke="#AA77FF" stroke-width="1.8" rx="4"/>';
+    s+='<text x="'+(bx+bw/2)+'" y="'+(wy-7)+'" text-anchor="middle" font-size="10" font-weight="bold" fill="#5533aa">Stage '+(i+1)+'</text>';
+    s+='<text x="'+(bx+bw/2)+'" y="'+(wy+7)+'" text-anchor="middle" font-size="9" fill="#AA77FF">G='+gv+' dB</text>';
+    s+='<text x="'+(bx+bw/2)+'" y="'+(wy+18)+'" text-anchor="middle" font-size="9" fill="#888">NF='+fv+'</text>';
+    if(i<n-1){
+      var ex=bx+bw, nx=bx+bw+gap;
+      s+='<line x1="'+ex+'" y1="'+wy+'" x2="'+nx+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+      s+='<polygon points="'+(ex+gap/2+2)+','+wy+' '+(ex+gap/2-5)+','+(wy-4)+' '+(ex+gap/2-5)+','+(wy+4)+'" fill="#5533aa"/>';
+    }
+  }
+  s+='<line x1="'+(startX+totalW)+'" y1="'+wy+'" x2="'+(W-20)+'" y2="'+wy+'" stroke="#5533aa" stroke-width="2" stroke-linecap="round"/>';
+  s+='<text x="'+W/2+'" y="112" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">G='+gt+'  ·  NF='+nf+'  ·  IIP3='+i3+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_cascade_analysis.html">Learn about RF cascade analysis →</a></div>
+<script src="RFCascadeAnalyzer.js"></script>
+<script>
+function rcaLoadExample() {
+  document.getElementById('rca-n').value = 3;
+  document.getElementById('rca-bw').value = '10';
+  rcaBuild();
+  setTimeout(function(){
+    var v = [['20','1','-5',''],['-8','8','2',''],['30','4','15','']]; // LNA, mixer, IF amp
+    for(var i=0;i<3;i++){
+      var g=document.getElementById('rca-g'+(i+1)), f=document.getElementById('rca-f'+(i+1)),
+          a=document.getElementById('rca-i3'+(i+1)), b=document.getElementById('rca-i2'+(i+1));
+      if(g)g.value=v[i][0]; if(f)f.value=v[i][1]; if(a)a.value=v[i][2]; if(b)b.value=v[i][3];
+    }
+    if(typeof rcaCalc==='function') rcaCalc();
+  }, 150);
+}
+</script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
