@@ -77,12 +77,16 @@
 
 				<p>Core loss (hysteresis + eddy current losses) is characterised by the complex permeability \(\mu = \mu' - j\mu''\). The loss factor \(\mu''/\mu'\) (analogous to \(\tan\delta\)) increases with frequency. Ferrite materials are categorised by their intended frequency range (e.g. MnZn ferrites for &lt;5 MHz, NiZn for 1–100 MHz).</p>
 
+				<h4>Toroidal Cores and the A<sub>L</sub> Method</h4>
+				<p>A toroid concentrates almost all of its flux inside the ring, so its inductance is set by the core's published inductance factor \(A_L\) (in nH per turn²) rather than by the coil geometry. The inductance is then simply \(L = A_L N^2\), and the turns needed for a target inductance are \(N = \sqrt{L/A_L}\). Because inductance scales with the <em>square</em> of the turns, a couple of extra turns move the value a lot. Powdered-iron cores have a low \(A_L\) and a high saturation flux for stable, high-Q RF inductors; ferrite cores offer a far higher \(A_L\) for compact chokes and wideband transformers but saturate sooner — so verify the peak flux density \(B_{peak}=V_{rms}\sqrt2/(2\pi f N A_e)\) against \(B_{sat}\) as above.</p>
+
 			</div>
 		
   <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
     <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
     <div style="display:flex;flex-wrap:wrap;gap:7px;">
       <a href="FerriteBead.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Ferrite Bead / Choke →</a>
+      <a href="ToroidInductor.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Toroid Inductor →</a>
       <a href="CLI.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Circular Loop Inductance →</a>
       <a href="LC.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">LC Resonance Calculator →</a>
     </div>
