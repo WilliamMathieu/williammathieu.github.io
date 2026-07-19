@@ -23,9 +23,10 @@
     /* ── Hero ── */
     .hero {
       background: linear-gradient(150deg, #2d1066 0%, #5533aa 55%, #7744cc 100%);
-      color: #fff; padding: 28px 28px 22px; margin-bottom: 6px;
+      color: #fff; padding: 28px 24px 22px; margin: 0 -20px 20px;
       position: relative; overflow: hidden;
     }
+    .hp-topgap { height: 26px; }
     .hero::before {
       content:""; position:absolute; right:-30px; top:-30px; width:180px; height:180px;
       background: radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 70%);
@@ -98,27 +99,28 @@
 <body>
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 
-<div class="hero">
-  <div class="hero-row">
-    <div>
-      <h1>RF &amp; Microwave Engineering Calculators</h1>
-      <p>88 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
-      <div class="hero-stats">
-        <div class="hero-stat"><span class="num">86</span><span class="lbl">🧮 Calculators</span></div>
-        <div class="hero-stat"><span class="num">2</span><span class="lbl">🔬 Simulators</span></div>
-        <div class="hero-stat"><span class="num">64</span><span class="lbl">📖 Wiki Articles</span></div>
-        <div class="hero-stat"><span class="num">7</span><span class="lbl">🎮 Games</span></div>
-      </div>
-      <div class="hero-links">
-        <a class="hero-link solid" href="start-here.html">🗺 Start Here</a>
-        <a class="hero-link outline" href="wiki.html">📖 Wiki</a>
-        <a class="hero-link outline" href="SmithChart.html">Smith Chart</a>
+<div class="hp-wrap">
+
+  <div class="hp-topgap"></div>
+  <div class="hero">
+    <div class="hero-row">
+      <div>
+        <h1>RF &amp; Microwave Engineering Calculators</h1>
+        <p>88 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 64 wiki articles. No install. Runs in your browser.</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="num">86</span><span class="lbl">🧮 Calculators</span></div>
+          <div class="hero-stat"><span class="num">2</span><span class="lbl">🔬 Simulators</span></div>
+          <div class="hero-stat"><span class="num">64</span><span class="lbl">📖 Wiki Articles</span></div>
+          <div class="hero-stat"><span class="num">7</span><span class="lbl">🎮 Games</span></div>
+        </div>
+        <div class="hero-links">
+          <a class="hero-link solid" href="start-here.html">🗺 Start Here</a>
+          <a class="hero-link outline" href="wiki.html">📖 Wiki</a>
+          <a class="hero-link outline" href="SmithChart.html">Smith Chart</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="hp-wrap">
 
   <!-- Tab bar -->
   <div class="tab-bar" id="tab-bar">
