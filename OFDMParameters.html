@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OFDM Parameters Calculator — Symbol Time, CP Overhead, Data Rate | RF Toolbox</title>
+  <meta name="description" content="Compute OFDM timing and throughput: useful symbol time, sample rate, cyclic-prefix duration and overhead, occupied bandwidth, PAPR bound and data rate from subcarrier spacing and FFT size.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/OFDMParameters.html">
+  <meta property="og:title" content="OFDM Parameters Calculator | RF Toolbox">
+  <meta property="og:description" content="OFDM symbol time, cyclic-prefix overhead, occupied bandwidth, PAPR bound and data rate.">
+  <meta property="og:url" content="https://rftoolbox.ca/OFDMParameters.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "OFDM Parameters Calculator",
+    "description": "Compute OFDM timing and throughput: useful symbol time, sample rate, cyclic-prefix duration and overhead, occupied bandwidth, PAPR bound and data rate from subcarrier spacing and FFT size.",
+    "url": "https://rftoolbox.ca/OFDMParameters.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>OFDM Parameters</h3>
+<div class="tool-concept">
+  <p>Works out the timing and throughput of an OFDM waveform (Wi-Fi, LTE, 5G-NR, DVB) from its subcarrier spacing, FFT size, and cyclic-prefix length. Returns the useful symbol time, the sample rate, the CP duration and overhead, the occupied bandwidth, the peak-to-average power bound, and the raw data rate. Handy for sizing an air interface or sanity-checking a standard's numerology.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(T_u=\dfrac{1}{\Delta f}\quad f_s=N_{FFT}\,\Delta f\quad T_{cp}=\dfrac{N_{cp}}{f_s}\quad T_{sym}=T_u+T_{cp}\)<br>\(BW\approx N_{used}\,\Delta f \quad \text{PAPR}_{max}=10\log_{10}N_{used}\ \text{dB}\)<br>\(R_b=\dfrac{N_{used}\,\log_2 M\,R_{code}}{T_{sym}}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Δf</td><td style="padding:3px 0;">Subcarrier spacing (kHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N<sub>FFT</sub></td><td style="padding:3px 0;">FFT/IFFT size (total subcarriers). Sets the sample rate.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N<sub>used</sub></td><td style="padding:3px 0;">Occupied (data + pilot) subcarriers.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N<sub>cp</sub></td><td style="padding:3px 0;">Cyclic-prefix length in samples.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">M, R<sub>code</sub></td><td style="padding:3px 0;">Modulation order and channel-code rate, for the data rate.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>3GPP TS 36.211 (LTE) &amp; 38.211 (NR) numerology; A. R. S. Bahai &amp; B. R. Saltzberg, <em>Multi-Carrier Digital Communications</em>, 2004.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Subcarrier spacing, <span class="var">Δf</span></label><div class="inp-inline"><input type="text" id="of-df" placeholder="e.g. 15" data-tip="Subcarrier spacing in kHz (e.g. 15 for LTE, 30/60 for NR)."><span class="inp-units">kHz</span></div><span class="inp-hint">Numerology</span></div>
+  <div class="inp-row"><label>FFT size, <span class="var">N<sub>FFT</sub></span></label><div class="inp-inline"><input type="text" id="of-nfft" placeholder="e.g. 2048" data-tip="FFT/IFFT length (total subcarriers)."></div><span class="inp-hint">Power of two</span></div>
+  <div class="inp-row"><label>Used subcarriers, <span class="var">N<sub>used</sub></span></label><div class="inp-inline"><input type="text" id="of-nused" placeholder="e.g. 1200" data-tip="Occupied (data + pilot) subcarriers."></div><span class="inp-hint">Occupied</span></div>
+  <div class="inp-row"><label>CP length, <span class="var">N<sub>cp</sub></span></label><div class="inp-inline"><input type="text" id="of-ncp" placeholder="e.g. 144" data-tip="Cyclic-prefix length in samples."><span class="inp-units">samp</span></div><span class="inp-hint">Guard interval</span></div>
+  <div class="inp-row"><label>Modulation, <span class="var">M</span></label><div class="inp-inline"><select id="of-m" style="font-size:12px;padding:3px;"><option value="2">BPSK (2)</option><option value="4">QPSK (4)</option><option value="16">16-QAM (16)</option><option value="64" selected>64-QAM (64)</option><option value="256">256-QAM (256)</option><option value="1024">1024-QAM (1024)</option></select></div><span class="inp-hint">For data rate</span></div>
+  <div class="inp-row"><label>Code rate, <span class="var">R<sub>code</sub></span></label><div class="inp-inline"><input type="text" id="of-rc" placeholder="e.g. 1" data-tip="Channel-code rate (0–1). Use 1 for raw/uncoded rate."></div><span class="inp-hint">0 – 1</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="ofCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;of-df&quot;:&quot;15&quot;,&quot;of-nfft&quot;:&quot;2048&quot;,&quot;of-nused&quot;:&quot;1200&quot;,&quot;of-ncp&quot;:&quot;144&quot;,&quot;of-m&quot;:&quot;64&quot;,&quot;of-rc&quot;:&quot;1&quot;})" title="LTE 20 MHz numerology">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Timing</h4>
+    <div class="res-row"><span class="res-lbl">Useful symbol time T<sub>u</sub></span><span class="res-val" id="of-tu">—</span></div>
+    <div class="res-row"><span class="res-lbl">Sample rate f<sub>s</sub></span><span class="res-val" id="of-fs">—</span></div>
+    <div class="res-row"><span class="res-lbl">CP duration T<sub>cp</sub></span><span class="res-val" id="of-tcp">—</span></div>
+    <div class="res-row"><span class="res-lbl">Symbol time T<sub>sym</sub></span><span class="res-val" id="of-tsym">—</span></div>
+  </div>
+  <div class="res-card"><h4>Spectrum &amp; rate</h4>
+    <div class="res-row"><span class="res-lbl">Occupied bandwidth</span><span class="res-val" id="of-bw">—</span></div>
+    <div class="res-row"><span class="res-lbl">CP overhead</span><span class="res-val" id="of-ov">—</span></div>
+    <div class="res-row"><span class="res-lbl">Max PAPR bound</span><span class="res-val" id="of-papr">—</span></div>
+    <div class="res-row"><span class="res-lbl">Data rate R<sub>b</sub></span><span class="res-val" id="of-rb">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var tu = document.getElementById('of-tu') ? document.getElementById('of-tu').textContent : '—';
+  var tcp = document.getElementById('of-tcp') ? document.getElementById('of-tcp').textContent : '—';
+  var df = parseFloat(document.getElementById('of-df').value)||15;
+  var ncp = parseFloat(document.getElementById('of-ncp').value)||144;
+  var nfft = parseFloat(document.getElementById('of-nfft').value)||2048;
+  var W=560,H=140,y=60,h=34;
+  var frac = ncp/(ncp+nfft); if(!isFinite(frac)||frac<0)frac=0.1;
+  var total=440, x0=70; var cpW=Math.max(18,total*frac), uW=total-cpW;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<rect x="'+x0+'" y="'+y+'" width="'+cpW+'" height="'+h+'" fill="#d9cff2" stroke="#5533aa" stroke-width="1.6"/>';
+  s+='<rect x="'+(x0+cpW)+'" y="'+y+'" width="'+uW+'" height="'+h+'" fill="#e9e2fb" stroke="#5533aa" stroke-width="1.6"/>';
+  s+='<text x="'+(x0+cpW/2)+'" y="'+(y+h+16)+'" text-anchor="middle" font-size="10" fill="#5533aa">CP</text>';
+  s+='<text x="'+(x0+cpW/2)+'" y="'+(y-6)+'" text-anchor="middle" font-size="9" fill="#888">'+tcp+'</text>';
+  s+='<text x="'+(x0+cpW+uW/2)+'" y="'+(y+h+16)+'" text-anchor="middle" font-size="10" fill="#5533aa">useful symbol ('+nfft+' pt)</text>';
+  s+='<text x="'+(x0+cpW+uW/2)+'" y="'+(y-6)+'" text-anchor="middle" font-size="9" fill="#888">Tu = '+tu+'</text>';
+  s+='<text x="'+(x0+total/2)+'" y="24" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">OFDM symbol  ·  Δf = '+df+' kHz</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_modulation.html">Learn about digital modulation →</a></div>
+<script src="OFDMParameters.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
