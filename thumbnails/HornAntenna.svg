@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="90" fill="#faf9ff" rx="3"/><rect x="24" y="34" width="34" height="20" fill="#e9e2fb" stroke="#5533aa" stroke-width="1.8"/><path d="M58 34 L118 14 L118 74 L58 54 Z" fill="#e9e2fb" stroke="#5533aa" stroke-width="1.8"/><path d="M118 14 L180 22 L180 66 L118 74 Z" fill="#d9cff2" opacity="0.6"/><text x="100" y="86" text-anchor="middle" font-family="monospace" font-size="9" fill="#5533aa">horn gain · aperture</text></svg>

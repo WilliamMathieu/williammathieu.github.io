@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horn Antenna Calculator — Pyramidal &amp; Conical Gain | RF Toolbox</title>
+  <meta name="description" content="Gain, effective aperture and beamwidth of pyramidal and conical horn antennas from aperture dimensions and frequency, using the optimum-horn aperture efficiency.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/HornAntenna.html">
+  <meta property="og:title" content="Horn Antenna Calculator | RF Toolbox">
+  <meta property="og:description" content="Pyramidal and conical horn gain, aperture and beamwidth from aperture size and frequency.">
+  <meta property="og:url" content="https://rftoolbox.ca/HornAntenna.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Horn Antenna Calculator",
+    "description": "Gain, effective aperture and beamwidth of pyramidal and conical horn antennas from aperture dimensions and frequency, using the optimum-horn aperture efficiency.",
+    "url": "https://rftoolbox.ca/HornAntenna.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Horn Antenna</h3>
+<div class="tool-concept">
+  <p>A horn antenna flares a waveguide out to a larger aperture to raise gain and form a clean beam — the workhorse feed and standard-gain reference of microwave measurement. This tool estimates the gain, effective aperture and approximate beamwidths of a pyramidal or conical horn from its aperture size and frequency, using the ≈0.51 aperture efficiency of an optimum-flare horn.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(G=\varepsilon_{ap}\,\dfrac{4\pi A}{\lambda^2},\quad \varepsilon_{ap}\approx0.51\)<br>\(\text{Pyramidal: }A=a\,b \qquad \text{Conical: }A=\dfrac{\pi D^2}{4}\)<br>\(\theta_E\approx\dfrac{56\lambda}{b}\ (^\circ),\quad \theta_H\approx\dfrac{67\lambda}{a}\ (^\circ)\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Type</td><td style="padding:3px 0;">Pyramidal (rectangular aperture a×b) or conical (circular aperture diameter D).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">a</td><td style="padding:3px 0;">Aperture width / H-plane dimension (m), or the conical diameter D.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">b</td><td style="padding:3px 0;">Aperture height / E-plane dimension (m). Ignored for a conical horn.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ε<sub>ap</sub></td><td style="padding:3px 0;">Aperture efficiency; ≈0.51 for an optimum-flare horn (default). Higher for corrugated/lens horns.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>C. A. Balanis, <em>Antenna Theory</em>, 4th ed., Wiley, 2016 (Ch. 13, horn antennas).</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Type</label><div class="inp-inline"><select id="hn-type" style="font-size:12px;padding:3px;" onchange="hnHint()"><option value="pyramidal" selected>Pyramidal (a×b)</option><option value="conical">Conical (D)</option></select></div><span class="inp-hint" id="hn-typehint">rectangular aperture</span></div>
+  <div class="inp-row"><label>Dimension, <span class="var">a</span></label><div class="inp-inline"><input type="text" id="hn-a" placeholder="e.g. 0.15" data-tip="Aperture width (m), or conical diameter D."><span class="inp-units">m</span></div><span class="inp-hint" id="hn-ahint">H-plane width</span></div>
+  <div class="inp-row"><label>Dimension, <span class="var">b</span></label><div class="inp-inline"><input type="text" id="hn-b" placeholder="e.g. 0.10" data-tip="Aperture height (m). Ignored for a conical horn."><span class="inp-units">m</span></div><span class="inp-hint" id="hn-bhint">E-plane height</span></div>
+  <div class="inp-row"><label>Frequency, <span class="var">f<sub>0</sub></span></label><div class="inp-inline"><input type="text" id="hn-f0" placeholder="e.g. 10" data-tip="Frequency in GHz."><span class="inp-units">GHz</span></div><span class="inp-hint">Band</span></div>
+  <div class="inp-row"><label>Efficiency, <span class="var">ε<sub>ap</sub></span></label><div class="inp-inline"><input type="text" id="hn-eff" placeholder="0.51" data-tip="Aperture efficiency (default 0.51 for an optimum horn)."></div><span class="inp-hint">Default 0.51</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="hnCalc()">Calculate</button> <button class="example-btn" onclick="hnLoadExample()" title="15×10 cm pyramidal horn at 10 GHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Gain</h4>
+    <div class="res-row"><span class="res-lbl">Gain</span><span class="res-val" id="hn-gain">—</span></div>
+    <div class="res-row"><span class="res-lbl">Effective aperture A<sub>e</sub></span><span class="res-val" id="hn-ae">—</span></div>
+    <div class="res-row"><span class="res-lbl">Wavelength λ</span><span class="res-val" id="hn-lam">—</span></div>
+  </div>
+  <div class="res-card"><h4>Beamwidth (approx.)</h4>
+    <div class="res-row"><span class="res-lbl">E-plane HPBW</span><span class="res-val" id="hn-e">—</span></div>
+    <div class="res-row"><span class="res-lbl">H-plane HPBW</span><span class="res-val" id="hn-h">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var g = document.getElementById('hn-gain') ? document.getElementById('hn-gain').textContent : '—';
+  var W=560,H=160,cy=80;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // horn: waveguide then flare
+  s+='<rect x="120" y="'+(cy-12)+'" width="60" height="24" fill="#e9e2fb" stroke="#5533aa" stroke-width="1.8"/>';
+  s+='<path d="M180 '+(cy-12)+' L300 '+(cy-46)+' L300 '+(cy+46)+' L180 '+(cy+12)+' Z" fill="#e9e2fb" stroke="#5533aa" stroke-width="1.8"/>';
+  // beam
+  s+='<path d="M300 '+(cy-46)+' L500 '+(cy-30)+' L500 '+(cy+30)+' L300 '+(cy+46)+' Z" fill="#d9cff2" opacity="0.6"/>';
+  s+='<text x="'+((120+500)/2)+'" y="150" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Horn antenna — G = '+g+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_antennas.html">Learn about antennas →</a></div>
+<script src="HornAntenna.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

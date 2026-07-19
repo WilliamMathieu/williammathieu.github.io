@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antenna Gain Converter — dBi/dBd, EIRP, Effective Aperture, Far Field | RF Toolbox</title>
+  <meta name="description" content="Convert antenna gain between dBi and dBd, compute EIRP, effective aperture (Gλ²/4π) and the far-field (Fraunhofer) distance 2D²/λ.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/AntennaGainConverter.html">
+  <meta property="og:title" content="Antenna Gain Converter | RF Toolbox">
+  <meta property="og:description" content="dBi ↔ dBd, EIRP, effective aperture and far-field distance for an antenna.">
+  <meta property="og:url" content="https://rftoolbox.ca/AntennaGainConverter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Antenna Gain Converter",
+    "description": "Convert antenna gain between dBi and dBd, compute EIRP, effective aperture and the far-field (Fraunhofer) distance.",
+    "url": "https://rftoolbox.ca/AntennaGainConverter.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Antenna Gain Converter</h3>
+<div class="tool-concept">
+  <p>The everyday antenna conversions in one place: gain between dBi and dBd, the equivalent isotropically radiated power (EIRP) from gain and transmit power, the effective aperture that gain corresponds to at a given frequency, and the far-field (Fraunhofer) distance beyond which the antenna's pattern is fully formed.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(G_{dBd}=G_{dBi}-2.15 \qquad \text{EIRP}=P_t+G_{dBi} \qquad A_e=\dfrac{G\,\lambda^2}{4\pi}\)<br>\(R_{ff}=\dfrac{2D^2}{\lambda} \qquad \lambda=\dfrac{c}{f_0}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">G</td><td style="padding:3px 0;">Antenna gain (dBi).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>0</sub></td><td style="padding:3px 0;">Frequency (GHz), for the effective aperture and far field.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">P<sub>t</sub></td><td style="padding:3px 0;">Transmit power (dBm), optional — gives EIRP.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Largest antenna dimension (m), optional — gives the far-field distance 2D²/λ.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>C. A. Balanis, <em>Antenna Theory</em>, 4th ed., 2016. dBd is referenced to a half-wave dipole (2.15 dBi).</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Gain, <span class="var">G</span></label><div class="inp-inline"><input type="text" id="ag-g" placeholder="e.g. 30" data-tip="Antenna gain in dBi."><span class="inp-units">dBi</span></div><span class="inp-hint">Isotropic ref.</span></div>
+  <div class="inp-row"><label>Frequency, <span class="var">f<sub>0</sub></span></label><div class="inp-inline"><input type="text" id="ag-f0" placeholder="e.g. 10" data-tip="Frequency in GHz."><span class="inp-units">GHz</span></div><span class="inp-hint">For Ae &amp; far field</span></div>
+  <div class="inp-row"><label>Tx power, <span class="var">P<sub>t</sub></span> <span style="color:#aaa;">(opt)</span></label><div class="inp-inline"><input type="text" id="ag-pt" placeholder="e.g. 40" data-tip="Transmit power in dBm, for EIRP."><span class="inp-units">dBm</span></div><span class="inp-hint">For EIRP</span></div>
+  <div class="inp-row"><label>Aperture size, <span class="var">D</span> <span style="color:#aaa;">(opt)</span></label><div class="inp-inline"><input type="text" id="ag-d" placeholder="e.g. 1" data-tip="Largest antenna dimension in metres, for the far-field distance."><span class="inp-units">m</span></div><span class="inp-hint">For far field</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="agCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;ag-g&quot;:&quot;30&quot;,&quot;ag-f0&quot;:&quot;10&quot;,&quot;ag-pt&quot;:&quot;40&quot;,&quot;ag-d&quot;:&quot;1&quot;})" title="30 dBi at 10 GHz, 40 dBm, 1 m">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Gain &amp; power</h4>
+    <div class="res-row"><span class="res-lbl">Gain (dBd)</span><span class="res-val" id="ag-dbd">—</span></div>
+    <div class="res-row"><span class="res-lbl">Gain (linear)</span><span class="res-val" id="ag-lin">—</span></div>
+    <div class="res-row"><span class="res-lbl">EIRP</span><span class="res-val" id="ag-eirp">—</span></div>
+    <div class="res-row"><span class="res-lbl">EIRP (W)</span><span class="res-val" id="ag-eirpw">—</span></div>
+  </div>
+  <div class="res-card"><h4>Aperture &amp; range</h4>
+    <div class="res-row"><span class="res-lbl">Wavelength λ</span><span class="res-val" id="ag-lam">—</span></div>
+    <div class="res-row"><span class="res-lbl">Effective aperture A<sub>e</sub></span><span class="res-val" id="ag-ae">—</span></div>
+    <div class="res-row"><span class="res-lbl">Far-field distance</span><span class="res-val" id="ag-ff">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var eirp = document.getElementById('ag-eirp') ? document.getElementById('ag-eirp').textContent : '—';
+  var g = document.getElementById('ag-g') ? document.getElementById('ag-g').value : '';
+  var W=560,H=120;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<text x="'+W/2+'" y="44" text-anchor="middle" font-size="13" fill="#5533aa" font-weight="bold">G = '+(g?g+' dBi':'—')+'</text>';
+  s+='<text x="'+W/2+'" y="78" text-anchor="middle" font-size="13" fill="#AA77FF" font-weight="bold">EIRP = '+eirp+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_antennas.html">Learn about antennas →</a></div>
+<script src="AntennaGainConverter.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
