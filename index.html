@@ -93,6 +93,12 @@
     }
     .wiki-pill:hover { background: #AA77FF; color: #fff; border-color: #AA77FF; }
     .wiki-pill.all { background: #AA77FF; color: #fff; border-color: #AA77FF; }
+    /* ── Section banners (wiki-style) ── */
+    .cat-header { display:flex; align-items:center; gap:8px; font-family:monospace; font-size:13px; font-weight:bold; color:#fff; background:#5533aa; border-radius:5px; padding:8px 12px; letter-spacing:0.04em; text-transform:none; border-bottom:none; margin:28px 0 12px; }
+    .cat-header:first-child { margin-top:0; }
+    .ch-icon { font-size:15px; flex-shrink:0; }
+    .ch-label { flex:1; }
+    .ch-count { font-size:10px; font-weight:normal; background:rgba(255,255,255,0.2); padding:2px 7px; border-radius:10px; white-space:nowrap; }
     @media(max-width:600px) { .hero h1{font-size:19px;} .hero-stats{gap:14px;} }
   </style>
 </head>
@@ -148,7 +154,7 @@
 
   <!-- Tool grid -->
   <div id="all-cards">
-<div class="cat-header">🌐 Fundamentals & EM</div>
+<div class="cat-header" style="background:#5e3399"><span class="ch-icon">🌐</span><span class="ch-label">Fundamentals & EM</span><span class="ch-count">9 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="Wavelength.html">
   <div class="tool-card-fig"><img src="thumbnails/Wavelength.svg" width="200" height="90" alt="Wavelength"></div>
@@ -206,7 +212,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🔵 Resonance & Passives</div>
+<div class="cat-header" style="background:#8d3399"><span class="ch-icon">🌀</span><span class="ch-label">Resonance & Passives</span><span class="ch-count">9 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="LC.html">
   <div class="tool-card-fig"><img src="thumbnails/LC.svg" width="200" height="90" alt="LC"></div>
@@ -264,7 +270,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🟣 Transmission Lines</div>
+<div class="cat-header" style="background:#993376"><span class="ch-icon">📏</span><span class="ch-label">Transmission Lines</span><span class="ch-count">10 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="Microstrip.html">
   <div class="tool-card-fig"><img src="thumbnails/Microstrip.svg" width="200" height="90" alt="Microstrip"></div>
@@ -328,7 +334,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🔴 Matching & Dividers</div>
+<div class="cat-header" style="background:#993347"><span class="ch-icon">🎯</span><span class="ch-label">Matching & Dividers</span><span class="ch-count">12 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="SmithChart.html">
   <div class="tool-card-fig"><img src="thumbnails/SmithChart.svg" width="200" height="90" alt="SmithChart"></div>
@@ -404,7 +410,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🟡 Filters & Attenuators</div>
+<div class="cat-header" style="background:#994e33"><span class="ch-icon">🎚️</span><span class="ch-label">Filters & Attenuators</span><span class="ch-count">4 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="RCFilter.html">
   <div class="tool-card-fig"><img src="thumbnails/RCFilter.svg" width="200" height="90" alt="RCFilter"></div>
@@ -432,7 +438,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🟢 Amplifiers & Devices</div>
+<div class="cat-header" style="background:#997d33"><span class="ch-icon">🔊</span><span class="ch-label">Amplifiers & Devices</span><span class="ch-count">10 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="NoiseFigure.html">
   <div class="tool-card-fig"><img src="thumbnails/NoiseFigure.svg" width="200" height="90" alt="NoiseFigure"></div>
@@ -496,7 +502,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">📻 Receivers & DSP</div>
+<div class="cat-header" style="background:#869933"><span class="ch-icon">📻</span><span class="ch-label">Receivers & DSP</span><span class="ch-count">6 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="Sensitivity.html">
   <div class="tool-card-fig"><img src="thumbnails/Sensitivity.svg" width="200" height="90" alt="Sensitivity"></div>
@@ -536,7 +542,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🟠 Antennas & Arrays</div>
+<div class="cat-header" style="background:#579933"><span class="ch-icon">📡</span><span class="ch-label">Antennas & Arrays</span><span class="ch-count">6 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="Dipole.html">
   <div class="tool-card-fig"><img src="thumbnails/Dipole.svg" width="200" height="90" alt="Dipole"></div>
@@ -576,7 +582,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🛰 Propagation, Radar & Links</div>
+<div class="cat-header" style="background:#33993e"><span class="ch-icon">🛰️</span><span class="ch-label">Propagation, Radar & Links</span><span class="ch-count">9 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="Friis.html">
   <div class="tool-card-fig"><img src="thumbnails/Friis.svg" width="200" height="90" alt="Friis"></div>
@@ -634,7 +640,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">📡 Waveguide</div>
+<div class="cat-header" style="background:#33996d"><span class="ch-icon">📶</span><span class="ch-label">Waveguide</span><span class="ch-count">2 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="Waveguide.html">
   <div class="tool-card-fig"><img src="thumbnails/Waveguide.svg" width="200" height="90" alt="Waveguide"></div>
@@ -650,7 +656,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🧲 MRI Coils & Tools</div>
+<div class="cat-header" style="background:#339699"><span class="ch-icon">🧲</span><span class="ch-label">MRI Coils & Tools</span><span class="ch-count">6 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="CLI.html">
   <div class="tool-card-fig"><img src="thumbnails/CLI.svg" width="200" height="90" alt="CLI"></div>
@@ -690,7 +696,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🟤 Converters</div>
+<div class="cat-header" style="background:#336799"><span class="ch-icon">🔧</span><span class="ch-label">Converters</span><span class="ch-count">3 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="TwoPortConverter.html">
   <div class="tool-card-fig"><img src="thumbnails/TwoPortConverter.svg" width="200" height="90" alt="TwoPortConverter"></div>
@@ -712,7 +718,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header">🔬 Simulators</div>
+<div class="cat-header" style="background:#333899"><span class="ch-icon">🔬</span><span class="ch-label">Simulators</span><span class="ch-count">2 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="RFSimulator.html">
   <div class="tool-card-fig"><img src="thumbnails/RFSimulator.svg" width="200" height="90" alt="RFSimulator"></div>
@@ -792,9 +798,10 @@
     </div>
   </div>
 
+  </div><!-- /all-cards -->
 </div><!-- /hp-wrap -->
 
-<footer style="text-align:center;padding:14px;font-family:monospace;font-size:11px;color:#fff;margin-top:10px;">
+<footer style="text-align:center;font-family:monospace;font-size:11px;">
   RF Toolbox &nbsp;·&nbsp; All tools run client-side &nbsp;·&nbsp;
   <a href="start-here.html" style="color:#fff;text-decoration:underline;">Start Here</a> &nbsp;·&nbsp;
   <a href="wiki.html" style="color:#fff;text-decoration:underline;">Wiki</a> &nbsp;·&nbsp;
