@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="90" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="90" fill="#faf9ff" rx="3"/><text x="100" y="32" text-anchor="middle" font-family="monospace" font-size="12" fill="#5533aa" font-weight="bold">dBi ⇄ dBd</text><text x="100" y="54" text-anchor="middle" font-family="monospace" font-size="11" fill="#AA77FF">EIRP · Aₑ</text><text x="100" y="74" text-anchor="middle" font-family="monospace" font-size="9" fill="#888">far field 2D²/λ</text></svg>
