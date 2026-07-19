@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leeson Phase Noise Calculator — Oscillator L(f) from Q, NF, Power | RF Toolbox</title>
+  <meta name="description" content="Predict oscillator phase noise L(fm) with Leeson's equation from loaded Q, device noise figure, output power and flicker corner, with the full phase-noise profile.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/LeesonPhaseNoise.html">
+  <meta property="og:title" content="Leeson Phase Noise Calculator | RF Toolbox">
+  <meta property="og:description" content="Predict oscillator phase noise L(fm) from loaded Q, noise figure, power and flicker corner (Leeson).">
+  <meta property="og:url" content="https://rftoolbox.ca/LeesonPhaseNoise.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Leeson Phase Noise Calculator",
+    "description": "Predict oscillator phase noise L(fm) with Leeson's equation from loaded Q, device noise figure, output power and flicker corner, with the full phase-noise profile.",
+    "url": "https://rftoolbox.ca/LeesonPhaseNoise.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Leeson Phase Noise</h3>
+<div class="tool-concept">
+  <p>Leeson's model predicts an oscillator's single-sideband phase noise L(f<sub>m</sub>) from four things: the resonator's loaded Q, the active device's noise figure, the power delivered to the resonator, and the flicker (1/f) corner. It captures the classic shape — a 1/f³ close-in region rolling into 1/f² and then a flat noise floor. Enter the parameters to get L at a chosen offset and the whole profile.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(\mathcal{L}(f_m)=10\log_{10}\!\left[\dfrac{2FkT}{P_{avs}}\left(1+\left(\dfrac{f_0}{2Q_L f_m}\right)^2\right)\left(1+\dfrac{f_c}{f_m}\right)\right]\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>0</sub></td><td style="padding:3px 0;">Oscillation (carrier) frequency (MHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Q<sub>L</sub></td><td style="padding:3px 0;">Loaded quality factor of the resonator. Higher Q → lower close-in phase noise.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">NF</td><td style="padding:3px 0;">Active-device noise figure (dB); F = 10^(NF/10).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">P<sub>avs</sub></td><td style="padding:3px 0;">Signal power delivered to the resonator/device (dBm).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>c</sub></td><td style="padding:3px 0;">Flicker (1/f) corner frequency (kHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>m</sub></td><td style="padding:3px 0;">Offset frequency from the carrier (kHz).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. B. Leeson, "A simple model of feedback oscillator noise spectrum," <em>Proc. IEEE</em> 54(2), 329 (1966). k = 1.380649×10⁻²³ J/K.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Carrier, <span class="var">f<sub>0</sub></span></label><div class="inp-inline"><input type="text" id="ls-f0" placeholder="e.g. 100" data-tip="Oscillation frequency in MHz."><span class="inp-units">MHz</span></div><span class="inp-hint">Carrier</span></div>
+  <div class="inp-row"><label>Loaded Q, <span class="var">Q<sub>L</sub></span></label><div class="inp-inline"><input type="text" id="ls-q" placeholder="e.g. 1000" data-tip="Loaded quality factor of the resonator."></div><span class="inp-hint">Resonator</span></div>
+  <div class="inp-row"><label>Noise figure, <span class="var">NF</span></label><div class="inp-inline"><input type="text" id="ls-nf" placeholder="e.g. 10" data-tip="Active-device noise figure in dB."><span class="inp-units">dB</span></div><span class="inp-hint">Device</span></div>
+  <div class="inp-row"><label>Power, <span class="var">P<sub>avs</sub></span></label><div class="inp-inline"><input type="text" id="ls-p" placeholder="e.g. 0" data-tip="Power delivered to the resonator/device in dBm."><span class="inp-units">dBm</span></div><span class="inp-hint">Drive level</span></div>
+  <div class="inp-row"><label>Flicker corner, <span class="var">f<sub>c</sub></span></label><div class="inp-inline"><input type="text" id="ls-fc" placeholder="e.g. 10" data-tip="Flicker (1/f) corner frequency in kHz."><span class="inp-units">kHz</span></div><span class="inp-hint">1/f corner</span></div>
+  <div class="inp-row"><label>Offset, <span class="var">f<sub>m</sub></span></label><div class="inp-inline"><input type="text" id="ls-fm" placeholder="e.g. 10" data-tip="Offset from the carrier in kHz."><span class="inp-units">kHz</span></div><span class="inp-hint">Read-out offset</span></div>
+  <div class="inp-row"><label>Temperature, <span class="var">T</span></label><div class="inp-inline"><input type="text" id="ls-t" placeholder="290" data-tip="Physical temperature in kelvin (default 290 K)."><span class="inp-units">K</span></div><span class="inp-hint">Default 290</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="lsCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;ls-f0&quot;:&quot;100&quot;,&quot;ls-q&quot;:&quot;1000&quot;,&quot;ls-nf&quot;:&quot;10&quot;,&quot;ls-p&quot;:&quot;0&quot;,&quot;ls-fc&quot;:&quot;10&quot;,&quot;ls-fm&quot;:&quot;10&quot;,&quot;ls-t&quot;:&quot;300&quot;})" title="100 MHz, Q=1000, NF=10 dB, 0 dBm">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Phase noise</h4>
+    <div class="res-row"><span class="res-lbl">L(f<sub>m</sub>) at offset</span><span class="res-val" id="ls-l">—</span></div>
+    <div class="res-row"><span class="res-lbl">Leeson corner f<sub>0</sub>/2Q<sub>L</sub></span><span class="res-val" id="ls-corner">—</span></div>
+    <div class="res-row"><span class="res-lbl">Noise floor (far offset)</span><span class="res-val" id="ls-floor">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  if (typeof lsPN !== 'function') return;
+  var p = lsParams(); if (!p) return;
+  var W=560,H=230,x0=58,x1=520,y0=24,y1=182;
+  // x: log10(fm Hz) from 2 (100 Hz) to 8 (100 MHz); y: dBc/Hz from 0 to -180
+  var xmin=2,xmax=8,ymin=-180,ymax=0;
+  function px(lx){return x0+(lx-xmin)/(xmax-xmin)*(x1-x0);}
+  function py(v){return y0+(ymax-v)/(ymax-ymin)*(y1-y0);}
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  for(var v=0;v>=-180;v-=30){var yy=py(v);s+='<line x1="'+x0+'" y1="'+yy+'" x2="'+x1+'" y2="'+yy+'" stroke="#eee"/>';s+='<text x="'+(x0-5)+'" y="'+(yy+3)+'" text-anchor="end" font-size="8" fill="#888">'+v+'</text>';}
+  for(var lx=2;lx<=8;lx++){var xx=px(lx);s+='<line x1="'+xx+'" y1="'+y0+'" x2="'+xx+'" y2="'+y1+'" stroke="#eee"/>';s+='<text x="'+xx+'" y="'+(y1+14)+'" text-anchor="middle" font-size="8" fill="#888">10^'+lx+'</text>';}
+  s+='<text x="'+((x0+x1)/2)+'" y="'+(y1+27)+'" text-anchor="middle" font-size="9" fill="#5533aa">offset fm (Hz)</text>';
+  var path='';
+  for(var e=2;e<=8;e+=0.1){var fm=Math.pow(10,e);var l=lsPN(p,fm);if(l>ymax)l=ymax;if(l<ymin)l=ymin;path+=(path?' L ':'M ')+px(e).toFixed(1)+' '+py(l).toFixed(1);}
+  s+='<path d="'+path+'" fill="none" stroke="#5533aa" stroke-width="2"/>';
+  var mark=Math.log10(p.fm);if(mark>=xmin&&mark<=xmax){var lv=lsPN(p,p.fm);s+='<circle cx="'+px(mark).toFixed(1)+'" cy="'+py(lv).toFixed(1)+'" r="4" fill="#c0392b"/>';}
+  s+='<text x="'+((x0+x1)/2)+'" y="16" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Phase-noise profile L(fm) [dBc/Hz]</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_phase_noise.html">Learn about oscillator phase noise →</a></div>
+<script src="LeesonPhaseNoise.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

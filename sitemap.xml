@@ -291,6 +291,26 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://rftoolbox.ca/LeesonPhaseNoise.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/PALoadLine.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/JunctionTemp.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/CrystalResonator.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://rftoolbox.ca/TransducerGain.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
