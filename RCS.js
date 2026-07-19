@@ -39,7 +39,7 @@ function rcCalc() {
     sig = 4 * Math.PI * Math.pow(a, 4) / (3 * lam * lam);
   }
 
-  document.getElementById('rc-sig').textContent = engFmt(sig, 'm²');
+  document.getElementById('rc-sig').textContent = fmtArea(sig);
   document.getElementById('rc-dbsm').textContent = (10 * Math.log10(sig)).toFixed(2) + ' dBsm';
   document.getElementById('rc-lam').textContent = engFmt(lam, 'm');
 
@@ -72,5 +72,12 @@ function rcLoadExample() {
   rcCalc();
 }
 
+function fmtArea(x) {
+  if (!isFinite(x)) return '∞';
+  var a = Math.abs(x);
+  if (a === 0) return '0 m²';
+  if (a >= 1e-4) return parseFloat(x.toPrecision(4)) + ' m²';
+  return x.toExponential(3) + ' m²';
+}
 function showError(msg) { var el = document.getElementById('error'); if (el) el.textContent = msg; }
 function clearError() { var el = document.getElementById('error'); if (el) el.textContent = ''; }
