@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PA Load-Line Calculator — Cripps Optimum Load, Pout, Efficiency | RF Toolbox</title>
+  <meta name="description" content="Cripps load-line design for an RF power amplifier: optimum load resistance, maximum output power, class-based drain efficiency and DC power from supply voltage, knee voltage and peak current.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/PALoadLine.html">
+  <meta property="og:title" content="PA Load-Line Calculator (Cripps) | RF Toolbox">
+  <meta property="og:description" content="Optimum load, max output power and drain efficiency for an RF power amplifier (Cripps load-line).">
+  <meta property="og:url" content="https://rftoolbox.ca/PALoadLine.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PA Load-Line Calculator (Cripps)",
+    "description": "Cripps load-line design for an RF power amplifier: optimum load resistance, maximum output power, class-based drain efficiency and DC power from supply voltage, knee voltage and peak current.",
+    "url": "https://rftoolbox.ca/PALoadLine.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>PA Load-Line (Cripps)</h3>
+<div class="tool-concept">
+  <p>The Cripps load-line method sizes the load a transistor must see to deliver its maximum power. From the supply voltage, the knee (saturation) voltage, and the peak current, it gives the optimum load resistance, the maximum output power, and — for the chosen conduction class — the theoretical drain efficiency and DC draw. This is the starting point for output-match and PA back-off design.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(R_{opt}=\dfrac{2\,(V_{DD}-V_{knee})}{I_{max}} \qquad P_{out}=\dfrac{(V_{DD}-V_{knee})\,I_{max}}{4}\)<br>\(\eta_{max}:\ \text{A}=50\%,\ \text{AB}\approx60\%,\ \text{B}=78.5\%,\ \text{F}\approx90\% \qquad P_{DC}=\dfrac{P_{out}}{\eta}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">V<sub>DD</sub></td><td style="padding:3px 0;">Supply (drain/collector) voltage (V).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">V<sub>knee</sub></td><td style="padding:3px 0;">Knee / saturation voltage (V) — the on-state voltage drop.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">I<sub>max</sub></td><td style="padding:3px 0;">Peak drain current (A).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Class</td><td style="padding:3px 0;">Conduction class, setting the theoretical maximum drain efficiency.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>opt</sub></td><td style="padding:3px 0;">Load line the device must see for maximum voltage/current swing.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>S. C. Cripps, <em>RF Power Amplifiers for Wireless Communications</em>, 2nd ed., Artech House, 2006.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Supply, <span class="var">V<sub>DD</sub></span></label><div class="inp-inline"><input type="text" id="pa-vdd" placeholder="e.g. 28" data-tip="Supply (drain) voltage in volts."><span class="inp-units">V</span></div><span class="inp-hint">Rail</span></div>
+  <div class="inp-row"><label>Knee, <span class="var">V<sub>knee</sub></span></label><div class="inp-inline"><input type="text" id="pa-vk" placeholder="e.g. 3" data-tip="Knee/saturation voltage in volts."><span class="inp-units">V</span></div><span class="inp-hint">On-state drop</span></div>
+  <div class="inp-row"><label>Peak current, <span class="var">I<sub>max</sub></span></label><div class="inp-inline"><input type="text" id="pa-imax" placeholder="e.g. 2" data-tip="Peak drain current in amperes."><span class="inp-units">A</span></div><span class="inp-hint">Max swing</span></div>
+  <div class="inp-row"><label>Class</label><div class="inp-inline"><select id="pa-class" style="font-size:12px;padding:3px;"><option value="50">Class A (50%)</option><option value="60">Class AB (~60%)</option><option value="78.5">Class B (78.5%)</option><option value="90">Class F (~90%)</option></select></div><span class="inp-hint">Max efficiency</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="paCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;pa-vdd&quot;:&quot;28&quot;,&quot;pa-vk&quot;:&quot;3&quot;,&quot;pa-imax&quot;:&quot;2&quot;,&quot;pa-class&quot;:&quot;78.5&quot;})" title="28 V, 3 V knee, 2 A">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Load line</h4>
+    <div class="res-row"><span class="res-lbl">Optimum load R<sub>opt</sub></span><span class="res-val" id="pa-ropt">—</span></div>
+    <div class="res-row"><span class="res-lbl">Max output power</span><span class="res-val" id="pa-pout">—</span></div>
+    <div class="res-row"><span class="res-lbl">Output power (dBm)</span><span class="res-val" id="pa-poutdbm">—</span></div>
+  </div>
+  <div class="res-card"><h4>Efficiency</h4>
+    <div class="res-row"><span class="res-lbl">Max drain efficiency</span><span class="res-val" id="pa-eff">—</span></div>
+    <div class="res-row"><span class="res-lbl">DC power at P<sub>max</sub></span><span class="res-val" id="pa-pdc">—</span></div>
+    <div class="res-row"><span class="res-lbl">Dissipation at P<sub>max</sub></span><span class="res-val" id="pa-pdiss">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var vdd = parseFloat(document.getElementById('pa-vdd').value)||28;
+  var vk = parseFloat(document.getElementById('pa-vk').value)||3;
+  var imax = parseFloat(document.getElementById('pa-imax').value)||2;
+  var ropt = document.getElementById('pa-ropt') ? document.getElementById('pa-ropt').textContent : '—';
+  var W=560,H=200,x0=70,y0=160,x1=500,yt=30;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x0+'" y2="'+yt+'" stroke="#333" stroke-width="1"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x1+'" y2="'+y0+'" stroke="#333" stroke-width="1"/>';
+  s+='<text x="'+(x0-6)+'" y="'+yt+'" text-anchor="end" font-size="9" fill="#888">I</text>';
+  s+='<text x="'+x1+'" y="'+(y0+14)+'" text-anchor="end" font-size="9" fill="#888">V</text>';
+  var vmax=2*vdd; var vxa=x1-x0, iya=y0-yt;
+  function vx(v){return x0+v/vmax*vxa;}
+  function iy(i){return y0-i/imax*iya;}
+  // knee vertical
+  s+='<line x1="'+vx(vk)+'" y1="'+y0+'" x2="'+vx(vk)+'" y2="'+yt+'" stroke="#ddd" stroke-width="1" stroke-dasharray="3,3"/>';
+  // load line from (Vknee, Imax) to (2Vdd-Vknee, 0), through bias (Vdd, Imax/2)
+  s+='<line x1="'+vx(vk)+'" y1="'+iy(imax)+'" x2="'+vx(2*vdd-vk)+'" y2="'+iy(0)+'" stroke="#5533aa" stroke-width="2.4"/>';
+  // bias point
+  s+='<circle cx="'+vx(vdd)+'" cy="'+iy(imax/2)+'" r="4" fill="#c0392b"/>';
+  s+='<text x="'+vx(vdd)+'" y="'+(iy(imax/2)-8)+'" text-anchor="middle" font-size="9" fill="#c0392b">bias (Vdd, Imax/2)</text>';
+  s+='<text x="'+vx(vdd)+'" y="'+(y0+14)+'" text-anchor="middle" font-size="8" fill="#888">Vdd</text>';
+  s+='<text x="'+((x0+x1)/2)+'" y="188" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Load line — Ropt = '+ropt+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_pa_design.html">Learn about power-amplifier design →</a></div>
+<script src="PALoadLine.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
