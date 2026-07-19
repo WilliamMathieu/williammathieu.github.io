@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modulation Bandwidth &amp; Eb/N0 Calculator — Symbol Rate, RRC BW, SNR | RF Toolbox</title>
+  <meta name="description" content="From bit rate and modulation order: symbol rate, raised-cosine occupied bandwidth, spectral efficiency, and the Eb/N0 ↔ Es/N0 ↔ SNR conversions for a digital link.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/ModulationBandwidth.html">
+  <meta property="og:title" content="Modulation Bandwidth &amp; Eb/N0 Calculator | RF Toolbox">
+  <meta property="og:description" content="Symbol rate, raised-cosine bandwidth, spectral efficiency and Eb/N0 ↔ SNR for a digital modulation.">
+  <meta property="og:url" content="https://rftoolbox.ca/ModulationBandwidth.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Modulation Bandwidth & Eb/N0 Calculator",
+    "description": "From bit rate and modulation order: symbol rate, raised-cosine occupied bandwidth, spectral efficiency, and the Eb/N0 to Es/N0 to SNR conversions for a digital link.",
+    "url": "https://rftoolbox.ca/ModulationBandwidth.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<article>
+<h3>Modulation Bandwidth &amp; Eb/N0</h3>
+<div class="tool-concept">
+  <p>Turns a data rate and a modulation scheme into the numbers you plan a link with: the symbol rate, the occupied bandwidth after raised-cosine (RRC) filtering, and the spectral efficiency in bits/s/Hz. Enter an Eb/N0 to also get the per-symbol Es/N0 and the SNR measured in the occupied bandwidth — the three ways the same link margin gets quoted.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(R_s=\dfrac{R_b}{\log_2 M} \qquad BW=R_s(1+\alpha) \qquad \eta=\dfrac{R_b}{BW}=\dfrac{\log_2 M}{1+\alpha}\)<br>\(\dfrac{E_s}{N_0}=\dfrac{E_b}{N_0}\log_2 M \qquad \text{SNR}=\dfrac{E_b}{N_0}\cdot\dfrac{\log_2 M}{1+\alpha}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>b</sub></td><td style="padding:3px 0;">Information bit rate (Mbps).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">M</td><td style="padding:3px 0;">Modulation order (points in the constellation). log₂M bits per symbol.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">α</td><td style="padding:3px 0;">Raised-cosine roll-off factor (0–1). Occupied BW = R<sub>s</sub>(1+α).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">E<sub>b</sub>/N<sub>0</sub></td><td style="padding:3px 0;">Energy per bit to noise density (dB), optional.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">η</td><td style="padding:3px 0;">Spectral efficiency (bits/s/Hz).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>J. G. Proakis &amp; M. Salehi, <em>Digital Communications</em>, 5th ed., McGraw-Hill, 2008.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Bit rate, <span class="var">R<sub>b</sub></span></label><div class="inp-inline"><input type="text" id="mb-rb" placeholder="e.g. 100" data-tip="Information bit rate in Mbps."><span class="inp-units">Mbps</span></div><span class="inp-hint">Data rate</span></div>
+  <div class="inp-row"><label>Modulation, <span class="var">M</span></label><div class="inp-inline"><select id="mb-m" style="font-size:12px;padding:3px;"><option value="2">BPSK (2)</option><option value="4">QPSK (4)</option><option value="8">8-PSK (8)</option><option value="16" selected>16-QAM (16)</option><option value="32">32-QAM (32)</option><option value="64">64-QAM (64)</option><option value="256">256-QAM (256)</option><option value="1024">1024-QAM (1024)</option></select></div><span class="inp-hint">Constellation order</span></div>
+  <div class="inp-row"><label>Roll-off, <span class="var">α</span></label><div class="inp-inline"><input type="text" id="mb-a" placeholder="e.g. 0.35" data-tip="Raised-cosine roll-off factor, 0 to 1."></div><span class="inp-hint">0 – 1</span></div>
+  <div class="inp-row"><label>E<sub>b</sub>/N<sub>0</sub> <span style="color:#aaa;">(opt)</span></label><div class="inp-inline"><input type="text" id="mb-ebn0" placeholder="e.g. 12" data-tip="Energy per bit to noise density in dB. Optional — gives Es/N0 and SNR."><span class="inp-units">dB</span></div><span class="inp-hint">For SNR</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="mbCalc()">Calculate</button> <button class="example-btn" onclick="mbLoadExample()" title="100 Mbps, 16-QAM, α=0.35">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Bandwidth</h4>
+    <div class="res-row"><span class="res-lbl">Bits per symbol</span><span class="res-val" id="mb-bps">—</span></div>
+    <div class="res-row"><span class="res-lbl">Symbol rate R<sub>s</sub></span><span class="res-val" id="mb-rs">—</span></div>
+    <div class="res-row"><span class="res-lbl">Occupied bandwidth</span><span class="res-val" id="mb-bw">—</span></div>
+    <div class="res-row"><span class="res-lbl">Spectral efficiency η</span><span class="res-val" id="mb-eta">—</span></div>
+  </div>
+  <div class="res-card"><h4>Link (from E<sub>b</sub>/N<sub>0</sub>)</h4>
+    <div class="res-row"><span class="res-lbl">E<sub>s</sub>/N<sub>0</sub></span><span class="res-val" id="mb-esn0">—</span></div>
+    <div class="res-row"><span class="res-lbl">SNR in occupied BW</span><span class="res-val" id="mb-snr">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var a = parseFloat(document.getElementById('mb-a').value); if(isNaN(a))a=0.35;
+  var bw = document.getElementById('mb-bw') ? document.getElementById('mb-bw').textContent : '—';
+  var W=560,H=170,cx=280,base=120,top=40,half=150;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // raised-cosine spectrum: flat top with cosine roll-off skirts
+  var flat=half*(1-a), roll=half*a;
+  var lx=cx-half, rx=cx+half;
+  var p='M '+lx+' '+base;
+  // left skirt (cosine rise)
+  for(var i=0;i<=20;i++){var t=i/20; var x=lx+t*roll; var y=base-(top-base)*(-(0.5-0.5*Math.cos(Math.PI*t))); y=base+(top-base)*(0.5-0.5*Math.cos(Math.PI*t)); p+=' L '+x.toFixed(1)+' '+y.toFixed(1);}
+  p+=' L '+(cx+flat)+' '+top;
+  for(var j=0;j<=20;j++){var u=j/20; var x2=cx+flat+u*roll; var y2=base+(top-base)*(0.5+0.5*Math.cos(Math.PI*u)); p+=' L '+x2.toFixed(1)+' '+y2.toFixed(1);}
+  p+=' Z';
+  s+='<path d="'+p+'" fill="#e9e2fb" stroke="#5533aa" stroke-width="2"/>';
+  s+='<line x1="40" y1="'+base+'" x2="520" y2="'+base+'" stroke="#333" stroke-width="1"/>';
+  // BW bracket
+  s+='<line x1="'+lx+'" y1="'+(base+16)+'" x2="'+rx+'" y2="'+(base+16)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<text x="'+cx+'" y="'+(base+30)+'" text-anchor="middle" font-size="10.5" fill="#888">occupied BW = '+bw+'</text>';
+  s+='<text x="'+cx+'" y="26" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Raised-cosine spectrum (α='+a+')</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_modulation.html">Learn about digital modulation →</a></div>
+<script src="ModulationBandwidth.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
