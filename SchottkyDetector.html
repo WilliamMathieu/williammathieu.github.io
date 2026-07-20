@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schottky Diode Detector — Responsivity, NEP &amp; TSS | RF Toolbox</title>
+  <meta name="description" content="Square-law Schottky detector figures of merit: video resistance, current and voltage responsivity, noise-equivalent power (NEP) and tangential signal sensitivity (TSS) from the diode parameters (Pozar §10.3).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/SchottkyDetector.html">
+  <meta property="og:title" content="Schottky Diode Detector | RF Toolbox">
+  <meta property="og:description" content="Detector responsivity, NEP and tangential signal sensitivity.">
+  <meta property="og:url" content="https://rftoolbox.ca/SchottkyDetector.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Schottky Diode Detector",
+    "description": "Square-law Schottky detector video resistance, responsivity, NEP and tangential signal sensitivity from the diode parameters.",
+    "url": "https://rftoolbox.ca/SchottkyDetector.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Schottky Diode Detector</h3>
+<div class="tool-concept">
+  <p>A small-signal Schottky diode rectifies RF power in its square-law region, producing a video (baseband) voltage proportional to the input power. Its usefulness as a detector is set by the current and voltage responsivity, the video (junction) resistance that sets the Johnson noise, and the resulting noise-equivalent power (NEP) and tangential signal sensitivity (TSS). This tool computes all of these from the diode's ideality factor, saturation current, series resistance and bias.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(V_T=\dfrac{kT}{q},\qquad R_v=\dfrac{nV_T}{I_s+I_b}\) (video resistance)<br>current resp. \(\beta_i=\dfrac{1}{2nV_T}\cdot\dfrac{R_v}{R_v+R_s}\) (A/W), voltage resp. \(\beta_v=\beta_i R_v\) (V/W)<br>\(NEP=\dfrac{\sqrt{4kTR_v}}{\beta_v},\quad MDS=NEP\sqrt{B},\quad TSS\approx 2.5\,MDS\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">n</td><td style="padding:3px 0;">Diode ideality factor (~1.05–1.2).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">I<sub>s</sub></td><td style="padding:3px 0;">Saturation current (µA); sets zero-bias video resistance.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>s</sub></td><td style="padding:3px 0;">Diode series resistance (Ω).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">I<sub>b</sub></td><td style="padding:3px 0;">DC bias current (µA); 0 for a zero-bias detector.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B, T</td><td style="padding:3px 0;">Video bandwidth (MHz) and temperature (K).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §10.3. TSS uses the conventional ≈2.5× (4&nbsp;dB) tangential factor.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Ideality n</label><div class="inp-inline"><input type="text" id="sd-n" placeholder="e.g. 1.06" data-tip="Diode ideality factor."></div><span class="inp-hint">~1.1</span></div>
+  <div class="inp-row"><label>I<sub>s</sub></label><div class="inp-inline"><input type="text" id="sd-is" placeholder="e.g. 3" data-tip="Saturation current (µA)."><span class="inp-units">µA</span></div><span class="inp-hint">Sat. current</span></div>
+  <div class="inp-row"><label>R<sub>s</sub></label><div class="inp-inline"><input type="text" id="sd-rs" placeholder="e.g. 25" data-tip="Series resistance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Series R</span></div>
+  <div class="inp-row"><label>Bias I<sub>b</sub></label><div class="inp-inline"><input type="text" id="sd-ib" placeholder="e.g. 0" data-tip="DC bias current (µA)."><span class="inp-units">µA</span></div><span class="inp-hint">0 = zero-bias</span></div>
+  <div class="inp-row"><label>Bandwidth B</label><div class="inp-inline"><input type="text" id="sd-b" placeholder="e.g. 2" data-tip="Video bandwidth (MHz)."><span class="inp-units">MHz</span></div><span class="inp-hint">Video</span></div>
+  <div class="inp-row"><label>Temp T</label><div class="inp-inline"><input type="text" id="sd-t" placeholder="e.g. 290" data-tip="Temperature (K)."><span class="inp-units">K</span></div><span class="inp-hint">Physical</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="sdCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;sd-n&quot;:&quot;1.06&quot;,&quot;sd-is&quot;:&quot;3&quot;,&quot;sd-rs&quot;:&quot;25&quot;,&quot;sd-ib&quot;:&quot;0&quot;,&quot;sd-b&quot;:&quot;2&quot;,&quot;sd-t&quot;:&quot;290&quot;})" title="Zero-bias detector diode">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Responsivity</h4>
+    <div class="res-row"><span class="res-lbl">Video resistance R<sub>v</sub></span><span class="res-val" id="sd-rv">—</span></div>
+    <div class="res-row"><span class="res-lbl">Current resp. β<sub>i</sub></span><span class="res-val" id="sd-bi">—</span></div>
+    <div class="res-row"><span class="res-lbl">Voltage resp. β<sub>v</sub></span><span class="res-val" id="sd-bv">—</span></div>
+  </div>
+  <div class="res-card"><h4>Sensitivity</h4>
+    <div class="res-row"><span class="res-lbl">Noise voltage</span><span class="res-val" id="sd-vn">—</span></div>
+    <div class="res-row"><span class="res-lbl">NEP</span><span class="res-val" id="sd-nep">—</span></div>
+    <div class="res-row"><span class="res-lbl">MDS in B</span><span class="res-val" id="sd-mds">—</span></div>
+    <div class="res-row"><span class="res-lbl">TSS</span><span class="res-val" id="sd-tss">—</span></div>
+  </div>
+</div>
+<div class="wiki-link-hint">📖 <a href="wiki_mixers.html">Learn about diode detectors →</a></div>
+<script src="SchottkyDetector.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

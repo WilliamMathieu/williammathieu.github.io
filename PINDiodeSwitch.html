@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIN Diode Switch — Insertion Loss &amp; Isolation | RF Toolbox</title>
+  <meta name="description" content="Insertion loss and isolation of a series- or shunt-mounted PIN diode SPST switch from the forward resistance and reverse junction capacitance (Pozar §10.4).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/PINDiodeSwitch.html">
+  <meta property="og:title" content="PIN Diode Switch | RF Toolbox">
+  <meta property="og:description" content="Series/shunt PIN diode switch insertion loss and isolation.">
+  <meta property="og:url" content="https://rftoolbox.ca/PINDiodeSwitch.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PIN Diode Switch",
+    "description": "Insertion loss and isolation of a series- or shunt-mounted PIN diode SPST switch from forward resistance and reverse junction capacitance.",
+    "url": "https://rftoolbox.ca/PINDiodeSwitch.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>PIN Diode Switch</h3>
+<div class="tool-concept">
+  <p>A PIN diode acts as a current-controlled RF resistor: forward-biased it is a small resistance R<sub>f</sub>, reverse-biased it is a small junction capacitance C<sub>j</sub>. Mounted in series with the line it passes the signal when forward-biased and blocks it when reverse-biased; mounted in shunt it does the opposite. This tool evaluates the two states of a single-diode SPST switch and reports the insertion loss and isolation for either topology.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">series diode \(Z_d\): \(A=20\log_{10}\Big|1+\dfrac{Z_d}{2Z_0}\Big|\) (dB)<br>shunt diode \(Z_d\): \(A=20\log_{10}\Big|1+\dfrac{Z_0}{2Z_d}\Big|\) (dB)<br>forward \(Z_d=R_f\); reverse \(Z_d=R_r-\dfrac{j}{\omega C_j}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Topology</td><td style="padding:3px 0;">Series or shunt mounting of the diode.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>f</sub></td><td style="padding:3px 0;">Forward (ON) series resistance (Ω).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C<sub>j</sub></td><td style="padding:3px 0;">Reverse junction capacitance (pF).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>r</sub></td><td style="padding:3px 0;">Reverse series resistance (Ω, often ~0).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z<sub>0</sub>, f</td><td style="padding:3px 0;">System impedance and frequency.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §10.4.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Topology</label><div class="inp-inline"><select id="pd-cfg" style="font-size:12px;padding:3px;"><option value="series" selected>Series</option><option value="shunt">Shunt</option></select></div><span class="inp-hint">Mounting</span></div>
+  <div class="inp-row"><label>R<sub>f</sub> (forward)</label><div class="inp-inline"><input type="text" id="pd-rf" placeholder="e.g. 1" data-tip="Forward ON resistance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">ON</span></div>
+  <div class="inp-row"><label>C<sub>j</sub> (reverse)</label><div class="inp-inline"><input type="text" id="pd-cj" placeholder="e.g. 0.1" data-tip="Reverse junction capacitance (pF)."><span class="inp-units">pF</span></div><span class="inp-hint">OFF</span></div>
+  <div class="inp-row"><label>R<sub>r</sub> (reverse)</label><div class="inp-inline"><input type="text" id="pd-rr" placeholder="e.g. 0" data-tip="Reverse series resistance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Optional</span></div>
+  <div class="inp-row"><label>Z<sub>0</sub></label><div class="inp-inline"><input type="text" id="pd-z0" placeholder="e.g. 50" data-tip="System impedance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">System</span></div>
+  <div class="inp-row"><label>Frequency f</label><div class="inp-inline"><input type="text" id="pd-f" placeholder="e.g. 5" data-tip="Frequency (GHz)."><span class="inp-units">GHz</span></div><span class="inp-hint">Operating</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="pdCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;pd-cfg&quot;:&quot;series&quot;,&quot;pd-rf&quot;:&quot;1&quot;,&quot;pd-cj&quot;:&quot;0.1&quot;,&quot;pd-rr&quot;:&quot;0&quot;,&quot;pd-z0&quot;:&quot;50&quot;,&quot;pd-f&quot;:&quot;5&quot;})" title="Series switch, 5 GHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Switch performance</h4>
+    <div class="res-row"><span class="res-lbl">Insertion loss (ON)</span><span class="res-val" id="pd-il">—</span></div>
+    <div class="res-row"><span class="res-lbl">Isolation (OFF)</span><span class="res-val" id="pd-iso">—</span></div>
+    <div class="res-row"><span class="res-lbl">On/off ratio</span><span class="res-val" id="pd-ratio">—</span></div>
+  </div>
+  <div class="res-card"><h4>Diode impedance</h4>
+    <div class="res-row"><span class="res-lbl">Forward Z<sub>d</sub></span><span class="res-val" id="pd-zf">—</span></div>
+    <div class="res-row"><span class="res-lbl">Reverse |X<sub>Cj</sub>|</span><span class="res-val" id="pd-xc">—</span></div>
+    <div class="res-row"><span class="res-lbl">Reverse Z<sub>d</sub></span><span class="res-val" id="pd-zr">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Switch topology</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var cfg = (typeof pdCfg !== 'undefined') ? pdCfg : 'series';
+  var W=520, H=120, y=55, x0=30;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (cfg === 'series') {
+    s+='<line x1="'+x0+'" y1="'+y+'" x2="220" y2="'+y+'" stroke="#5533aa" stroke-width="1.6"/>';
+    // diode symbol in-line
+    s+='<polygon points="220,'+(y-9)+' 220,'+(y+9)+' 240,'+y+'" fill="#AA77FF"/>';
+    s+='<line x1="240" y1="'+(y-9)+'" x2="240" y2="'+(y+9)+'" stroke="#AA77FF" stroke-width="2"/>';
+    s+='<line x1="240" y1="'+y+'" x2="'+(W-30)+'" y2="'+y+'" stroke="#5533aa" stroke-width="1.6"/>';
+    s+='<text x="230" y="'+(y-16)+'" text-anchor="middle" font-size="9" fill="#7a4fd0">series PIN</text>';
+  } else {
+    s+='<line x1="'+x0+'" y1="'+y+'" x2="'+(W-30)+'" y2="'+y+'" stroke="#5533aa" stroke-width="1.6"/>';
+    var xc = W/2;
+    s+='<line x1="'+xc+'" y1="'+y+'" x2="'+xc+'" y2="'+(y+18)+'" stroke="#AA77FF" stroke-width="1.6"/>';
+    s+='<polygon points="'+(xc-9)+','+(y+18)+' '+(xc+9)+','+(y+18)+' '+xc+','+(y+34)+'" fill="#AA77FF"/>';
+    s+='<line x1="'+(xc-9)+'" y1="'+(y+34)+'" x2="'+(xc+9)+'" y2="'+(y+34)+'" stroke="#AA77FF" stroke-width="2"/>';
+    s+='<line x1="'+(xc-8)+'" y1="'+(y+42)+'" x2="'+(xc+8)+'" y2="'+(y+42)+'" stroke="#5533aa" stroke-width="1.6"/>';
+    s+='<text x="'+(xc+16)+'" y="'+(y+26)+'" font-size="9" fill="#7a4fd0">shunt PIN</text>';
+  }
+  s+='<circle cx="'+x0+'" cy="'+y+'" r="3" fill="#5533aa"/><circle cx="'+(W-30)+'" cy="'+y+'" r="3" fill="#5533aa"/>';
+  s+='<text x="'+W/2+'" y="18" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">'+(cfg==='series'?'Series':'Shunt')+'-mounted PIN diode SPST</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_microwave_components.html">Learn about control components →</a></div>
+<script src="PINDiodeSwitch.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
