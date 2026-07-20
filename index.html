@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
-  <meta name="description" content="117 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
+  <meta name="description" content="119 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/">
   <meta property="og:title" content="RF Toolbox — Free Online RF & Microwave Engineering Calculators">
@@ -112,9 +112,9 @@
     <div class="hero-row">
       <div>
         <h1>RF &amp; Microwave Engineering Calculators</h1>
-        <p>117 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 68 wiki articles. No install. Runs in your browser.</p>
+        <p>119 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 68 wiki articles. No install. Runs in your browser.</p>
         <div class="hero-stats">
-          <div class="hero-stat"><span class="num">115</span><span class="lbl">🧮 Calculators</span></div>
+          <div class="hero-stat"><span class="num">117</span><span class="lbl">🧮 Calculators</span></div>
           <div class="hero-stat"><span class="num">2</span><span class="lbl">🔬 Simulators</span></div>
           <div class="hero-stat"><span class="num">64</span><span class="lbl">📖 Wiki Articles</span></div>
           <div class="hero-stat"><span class="num">7</span><span class="lbl">🎮 Games</span></div>
@@ -510,7 +510,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header" style="background:#997d33"><span class="ch-icon">🔊</span><span class="ch-label">Amplifiers & Devices</span><span class="ch-count">15 tools</span></div>
+<div class="cat-header" style="background:#997d33"><span class="ch-icon">🔊</span><span class="ch-label">Amplifiers & Devices</span><span class="ch-count">17 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="NoiseFigure.html">
   <div class="tool-card-fig"><img src="thumbnails/NoiseFigure.svg" width="200" height="90" alt="NoiseFigure"></div>
@@ -601,6 +601,18 @@
   <div class="tool-card-body">
     <div class="tool-card-name">Quartz Crystal Resonator</div>
     <div class="tool-card-desc">Series/parallel resonance, Q, capacitance ratio and pullability from motional L1/C1/R1/C0.</div>
+  </div>
+</a><a class="tool-card" href="AmpDesignCircles.html">
+  <div class="tool-card-fig"><img src="thumbnails/AmpDesignCircles.svg" width="200" height="90" alt="AmpDesignCircles"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Amplifier Design Circles</div>
+    <div class="tool-card-desc">Stability, available-gain and noise-figure circles on the source-plane Smith chart from S-parameters.</div>
+  </div>
+</a><a class="tool-card" href="ConjugateMatch.html">
+  <div class="tool-card-fig"><img src="thumbnails/ConjugateMatch.svg" width="200" height="90" alt="ConjugateMatch"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Simultaneous Conjugate Match</div>
+    <div class="tool-card-desc">Source/load reflections and maximum transducer gain for a bilateral amplifier.</div>
   </div>
 </a>
 </div>
@@ -996,7 +1008,7 @@ var CAT_MAP = {
   tlines:       ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html','TDR.html','PCBVia.html','CoaxPowerHandling.html'],
   matching:     ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','ImpedanceMatchingNetwork.html','CapacitorNetwork.html','LCBalun.html','Wilkinson.html','Coupler.html','PowerCombiner.html','PhaseShifter.html','MismatchLoss.html','SingleStubMatch.html','DoubleStubTuner.html','MultisectionTransformer.html','KlopfensteinTaper.html','BodeFano.html'],
   filters:      ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html','GroupDelay.html'],
-  amps:         ['NoiseFigure.html','AmpStability.html','IP3Calc.html','TransistorFT.html','TransducerGain.html','LNAMatch.html','NFYFactor.html','PLLFilter.html','PhaseNoiseJitter.html','DDS.html','NoiseTempNF.html','LeesonPhaseNoise.html','PALoadLine.html','JunctionTemp.html','CrystalResonator.html'],
+  amps:         ['NoiseFigure.html','AmpStability.html','IP3Calc.html','TransistorFT.html','TransducerGain.html','LNAMatch.html','NFYFactor.html','PLLFilter.html','PhaseNoiseJitter.html','DDS.html','NoiseTempNF.html','LeesonPhaseNoise.html','PALoadLine.html','JunctionTemp.html','CrystalResonator.html','AmpDesignCircles.html','ConjugateMatch.html'],
   rx:           ['Sensitivity.html','ImageReject.html','ADCNoise.html','EVMSNR.html','BandpassSampling.html','SpectrumDANL.html','RFCascadeAnalyzer.html','MixerSpurChart.html','ModulationBandwidth.html','BERvsEbN0.html','OFDMParameters.html'],
   antennas:     ['Dipole.html','PatchAntenna.html','ArrayFactor.html','HelicalAntenna.html','YagiAntenna.html','ApertureAntenna.html','ParabolicDish.html','HornAntenna.html','AntennaGainConverter.html','MonopoleLoop.html'],
   propagation:  ['Friis.html','LinkBudget.html','FresnelZone.html','PathLoss.html','RadarRange.html','LinkCapacity.html','ProcessingGain.html','Doppler.html','GT.html','FMCWRadar.html','RadarPRF.html','RCS.html'],

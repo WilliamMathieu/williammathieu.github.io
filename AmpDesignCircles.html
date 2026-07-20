@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amplifier Design Circles — Stability, Gain &amp; Noise-Figure Circles | RF Toolbox</title>
+  <meta name="description" content="Plot amplifier design circles on the source-plane Smith chart from the transistor S-parameters: input/output stability circles, constant available-gain circles, and constant noise-figure circles (Pozar Ch 12).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/AmpDesignCircles.html">
+  <meta property="og:title" content="Amplifier Design Circles | RF Toolbox">
+  <meta property="og:description" content="Stability, gain and noise-figure circles on the Smith chart from S-parameters.">
+  <meta property="og:url" content="https://rftoolbox.ca/AmpDesignCircles.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Amplifier Design Circles",
+    "description": "Plot amplifier design circles on the source-plane Smith chart from the transistor S-parameters: stability circles, constant available-gain circles, and constant noise-figure circles.",
+    "url": "https://rftoolbox.ca/AmpDesignCircles.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Amplifier Design Circles</h3>
+<div class="tool-concept">
+  <p>Small-signal amplifier design is done graphically on the Smith chart. From the transistor's S-parameters this tool draws, in the source (Γ<sub>S</sub>) plane: the input stability circle (which source impedances risk oscillation), constant available-gain circles (loci of equal gain), and constant noise-figure circles (loci of equal NF). Picking Γ<sub>S</sub> then trades gain against noise while staying in the stable region — the classic LNA design compromise. Rollett's K, the μ-factor, and MAG/MSG are reported too.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(\Delta=S_{11}S_{22}-S_{12}S_{21},\quad K=\dfrac{1-|S_{11}|^2-|S_{22}|^2+|\Delta|^2}{2|S_{12}S_{21}|}\)<br>input stability: \(C_S=\dfrac{(S_{11}-\Delta S_{22}^*)^*}{|S_{11}|^2-|\Delta|^2},\ R_S=\Big|\dfrac{S_{12}S_{21}}{|S_{11}|^2-|\Delta|^2}\Big|\)<br>avail. gain \(g_a=G_a/|S_{21}|^2\): \(C_a=\dfrac{g_a(S_{11}-\Delta S_{22}^*)^*}{1+g_a(|S_{11}|^2-|\Delta|^2)}\)<br>NF \(N=\dfrac{(F-F_{min})|1+\Gamma_{opt}|^2}{4r_n}\): \(C_F=\dfrac{\Gamma_{opt}}{1+N},\ R_F=\dfrac{\sqrt{N(N+1-|\Gamma_{opt}|^2)}}{1+N}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">S<sub>ij</sub></td><td style="padding:3px 0;">Transistor S-parameters as magnitude ∠ angle (degrees).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">G<sub>a</sub></td><td style="padding:3px 0;">Target available gain (dB) for the gain circle.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">F<sub>min</sub>, Γ<sub>opt</sub>, r<sub>n</sub></td><td style="padding:3px 0;">Minimum noise figure (dB), optimum source reflection, normalised noise resistance. Optional — for the NF circle.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">NF</td><td style="padding:3px 0;">Target noise figure (dB) for the NF circle.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., Ch. 12 (amplifier design, stability &amp; gain circles).</div>
+</details>
+</div>
+<div class="sec-lbl">S-parameters (mag ∠ deg)</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>S<sub>11</sub></label><div class="inp-inline"><input type="text" id="ac-s11m" placeholder="mag" style="width:64px" data-tip="|S11|"> ∠ <input type="text" id="ac-s11a" placeholder="deg" style="width:60px" data-tip="angle of S11 (deg)"></div><span class="inp-hint">Input</span></div>
+  <div class="inp-row"><label>S<sub>21</sub></label><div class="inp-inline"><input type="text" id="ac-s21m" placeholder="mag" style="width:64px"> ∠ <input type="text" id="ac-s21a" placeholder="deg" style="width:60px"></div><span class="inp-hint">Forward</span></div>
+  <div class="inp-row"><label>S<sub>12</sub></label><div class="inp-inline"><input type="text" id="ac-s12m" placeholder="mag" style="width:64px"> ∠ <input type="text" id="ac-s12a" placeholder="deg" style="width:60px"></div><span class="inp-hint">Reverse</span></div>
+  <div class="inp-row"><label>S<sub>22</sub></label><div class="inp-inline"><input type="text" id="ac-s22m" placeholder="mag" style="width:64px"> ∠ <input type="text" id="ac-s22a" placeholder="deg" style="width:60px"></div><span class="inp-hint">Output</span></div>
+</div>
+<div class="sec-lbl">Gain &amp; noise targets</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Target gain G<sub>a</sub></label><div class="inp-inline"><input type="text" id="ac-ga" placeholder="e.g. 12" data-tip="Target available gain (dB)."><span class="inp-units">dB</span></div><span class="inp-hint">Gain circle</span></div>
+  <div class="inp-row"><label>F<sub>min</sub> <span style="color:#aaa;">(opt)</span></label><div class="inp-inline"><input type="text" id="ac-fmin" placeholder="e.g. 1.6" data-tip="Minimum noise figure (dB)."><span class="inp-units">dB</span></div><span class="inp-hint">NF circle</span></div>
+  <div class="inp-row"><label>Γ<sub>opt</sub></label><div class="inp-inline"><input type="text" id="ac-goptm" placeholder="mag" style="width:64px"> ∠ <input type="text" id="ac-gopta" placeholder="deg" style="width:60px"></div><span class="inp-hint">Opt. source</span></div>
+  <div class="inp-row"><label>r<sub>n</sub>, NF target</label><div class="inp-inline"><input type="text" id="ac-rn" placeholder="rn" style="width:56px" data-tip="Normalised noise resistance."> <input type="text" id="ac-nf" placeholder="NF dB" style="width:56px" data-tip="Target NF (dB)"></div><span class="inp-hint">rn &amp; NF</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="acCalc()">Calculate</button> <button class="example-btn" onclick="acLoadExample()" title="A GaAs FET example">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Stability</h4>
+    <div class="res-row"><span class="res-lbl">Rollett K</span><span class="res-val" id="ac-k">—</span></div>
+    <div class="res-row"><span class="res-lbl">|Δ|</span><span class="res-val" id="ac-delta">—</span></div>
+    <div class="res-row"><span class="res-lbl">μ-factor</span><span class="res-val" id="ac-mu">—</span></div>
+    <div class="res-row"><span class="res-lbl">Verdict</span><span class="res-val" id="ac-verdict">—</span></div>
+    <div class="res-row"><span class="res-lbl">MAG / MSG</span><span class="res-val" id="ac-mag">—</span></div>
+  </div>
+  <div class="res-card"><h4>Circles (Γ<sub>S</sub> plane: centre ∠, radius)</h4>
+    <div class="res-row"><span class="res-lbl">Input stability</span><span class="res-val" id="ac-cin">—</span></div>
+    <div class="res-row"><span class="res-lbl">Output stability (Γ<sub>L</sub>)</span><span class="res-val" id="ac-cout">—</span></div>
+    <div class="res-row"><span class="res-lbl">Available gain</span><span class="res-val" id="ac-cga">—</span></div>
+    <div class="res-row"><span class="res-lbl">Noise figure</span><span class="res-val" id="ac-cnf">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Source-plane Smith chart</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  if (typeof acCircles === 'undefined' || !acCircles) return;
+  var W=380,H=380,cx=190,cy=190,R=160;
+  function px(re,im){return [cx+re*R, cy-im*R];}
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#fafaff" rx="6"/>';
+  // unit circle + axes
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="#fff" stroke="#888" stroke-width="1.4"/>';
+  s+='<line x1="'+(cx-R)+'" y1="'+cy+'" x2="'+(cx+R)+'" y2="'+cy+'" stroke="#ddd" stroke-width="1"/>';
+  s+='<line x1="'+cx+'" y1="'+(cy-R)+'" x2="'+cx+'" y2="'+(cy+R)+'" stroke="#ddd" stroke-width="1"/>';
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(R/2)+'" fill="none" stroke="#eee" stroke-width="1"/>';
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="3" fill="#333"/>';
+  // clip circles to the unit disc for readability
+  s+='<defs><clipPath id="uc"><circle cx="'+cx+'" cy="'+cy+'" r="'+R+'"/></clipPath></defs><g clip-path="url(#uc)">';
+  acCircles.forEach(function(c){
+    var p=px(c.cre,c.cim);
+    s+='<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(c.r*R).toFixed(1)+'" fill="none" stroke="'+c.color+'" stroke-width="2" '+(c.dash?'stroke-dasharray="5,3"':'')+'/>';
+  });
+  s+='</g>';
+  // legend
+  var ly=16;
+  acCircles.forEach(function(c){ s+='<text x="10" y="'+ly+'" font-size="10" fill="'+c.color+'">— '+c.name+'</text>'; ly+=14; });
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_amplifiers.html">Learn about amplifier design →</a></div>
+<script src="AmpDesignCircles.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
