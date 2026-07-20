@@ -881,6 +881,26 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://rftoolbox.ca/CircularWaveguide.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/CavityResonator.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/DielectricResonator.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rftoolbox.ca/TLResonator.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://rftoolbox.ca/Coupler.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
