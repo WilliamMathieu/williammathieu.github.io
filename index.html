@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
-  <meta name="description" content="112 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
+  <meta name="description" content="117 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/">
   <meta property="og:title" content="RF Toolbox — Free Online RF & Microwave Engineering Calculators">
@@ -112,9 +112,9 @@
     <div class="hero-row">
       <div>
         <h1>RF &amp; Microwave Engineering Calculators</h1>
-        <p>112 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 68 wiki articles. No install. Runs in your browser.</p>
+        <p>117 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 68 wiki articles. No install. Runs in your browser.</p>
         <div class="hero-stats">
-          <div class="hero-stat"><span class="num">110</span><span class="lbl">🧮 Calculators</span></div>
+          <div class="hero-stat"><span class="num">115</span><span class="lbl">🧮 Calculators</span></div>
           <div class="hero-stat"><span class="num">2</span><span class="lbl">🔬 Simulators</span></div>
           <div class="hero-stat"><span class="num">64</span><span class="lbl">📖 Wiki Articles</span></div>
           <div class="hero-stat"><span class="num">7</span><span class="lbl">🎮 Games</span></div>
@@ -370,7 +370,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header" style="background:#993347"><span class="ch-icon">🎯</span><span class="ch-label">Matching & Dividers</span><span class="ch-count">12 tools</span></div>
+<div class="cat-header" style="background:#993347"><span class="ch-icon">🎯</span><span class="ch-label">Matching & Dividers</span><span class="ch-count">17 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="SmithChart.html">
   <div class="tool-card-fig"><img src="thumbnails/SmithChart.svg" width="200" height="90" alt="SmithChart"></div>
@@ -443,6 +443,36 @@
   <div class="tool-card-body">
     <div class="tool-card-name">Mismatch Loss</div>
     <div class="tool-card-desc">Mismatch loss, return loss, VSWR, |Γ| and reflected/transmitted power.</div>
+  </div>
+</a><a class="tool-card" href="SingleStubMatch.html">
+  <div class="tool-card-fig"><img src="thumbnails/SingleStubMatch.svg" width="200" height="90" alt="SingleStubMatch"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Single-Stub Matching</div>
+    <div class="tool-card-desc">Shunt-stub position and open/short length to match a complex load (both solutions).</div>
+  </div>
+</a><a class="tool-card" href="DoubleStubTuner.html">
+  <div class="tool-card-fig"><img src="thumbnails/DoubleStubTuner.svg" width="200" height="90" alt="DoubleStubTuner"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Double-Stub Tuner</div>
+    <div class="tool-card-desc">Two-stub matching for a fixed spacing, both solutions, with the forbidden-region check.</div>
+  </div>
+</a><a class="tool-card" href="MultisectionTransformer.html">
+  <div class="tool-card-fig"><img src="thumbnails/MultisectionTransformer.svg" width="200" height="90" alt="MultisectionTransformer"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Multisection λ/4 Transformer</div>
+    <div class="tool-card-desc">Binomial or Chebyshev multisection transformer: section impedances and bandwidth.</div>
+  </div>
+</a><a class="tool-card" href="KlopfensteinTaper.html">
+  <div class="tool-card-fig"><img src="thumbnails/KlopfensteinTaper.svg" width="200" height="90" alt="KlopfensteinTaper"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Tapered-Line Matching</div>
+    <div class="tool-card-desc">Exponential, triangular and Klopfenstein taper reflection response and cutoff.</div>
+  </div>
+</a><a class="tool-card" href="BodeFano.html">
+  <div class="tool-card-fig"><img src="thumbnails/BodeFano.svg" width="200" height="90" alt="BodeFano"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Bode–Fano Limit</div>
+    <div class="tool-card-desc">Theoretical best matching bandwidth (or minimum reflection) for a reactive load.</div>
   </div>
 </a>
 </div>
@@ -964,7 +994,7 @@ var CAT_MAP = {
   fundamentals: ['Wavelength.html','FreqEnergyConverter.html','SkinDepth.html','dBmConverter.html','PlaneWave.html','FieldStrength.html','DielectricBoundary.html','LossTangent.html','ThermalNoise.html','ShieldingEffectiveness.html'],
   coils:        ['LC.html','CLC.html','CoupledResonators.html','BandpassCalc.html','Solenoid.html','Varactor.html','ParallelPlateCap.html','BondWire.html','WireInductance.html','ToroidInductor.html','CapacitorSRF.html','ResonatorQ.html','FerriteBead.html'],
   tlines:       ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html','TDR.html','PCBVia.html','CoaxPowerHandling.html'],
-  matching:     ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','ImpedanceMatchingNetwork.html','CapacitorNetwork.html','LCBalun.html','Wilkinson.html','Coupler.html','PowerCombiner.html','PhaseShifter.html','MismatchLoss.html'],
+  matching:     ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','ImpedanceMatchingNetwork.html','CapacitorNetwork.html','LCBalun.html','Wilkinson.html','Coupler.html','PowerCombiner.html','PhaseShifter.html','MismatchLoss.html','SingleStubMatch.html','DoubleStubTuner.html','MultisectionTransformer.html','KlopfensteinTaper.html','BodeFano.html'],
   filters:      ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html','GroupDelay.html'],
   amps:         ['NoiseFigure.html','AmpStability.html','IP3Calc.html','TransistorFT.html','TransducerGain.html','LNAMatch.html','NFYFactor.html','PLLFilter.html','PhaseNoiseJitter.html','DDS.html','NoiseTempNF.html','LeesonPhaseNoise.html','PALoadLine.html','JunctionTemp.html','CrystalResonator.html'],
   rx:           ['Sensitivity.html','ImageReject.html','ADCNoise.html','EVMSNR.html','BandpassSampling.html','SpectrumDANL.html','RFCascadeAnalyzer.html','MixerSpurChart.html','ModulationBandwidth.html','BERvsEbN0.html','OFDMParameters.html'],

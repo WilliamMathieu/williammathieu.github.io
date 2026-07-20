@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Single-Stub Matching Calculator — Shunt Stub Position &amp; Length | RF Toolbox</title>
+  <meta name="description" content="Match a complex load with a single shunt stub: both solutions for stub position d and open/short stub length l, following Pozar's single-stub tuning method, with a verified VSWR check.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/SingleStubMatch.html">
+  <meta property="og:title" content="Single-Stub Matching Calculator | RF Toolbox">
+  <meta property="og:description" content="Shunt single-stub tuner: position d and open/short stub length l for a complex load.">
+  <meta property="og:url" content="https://rftoolbox.ca/SingleStubMatch.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Single-Stub Matching Calculator",
+    "description": "Match a complex load with a single shunt stub: both solutions for stub position d and open/short stub length l, following Pozar's single-stub tuning method.",
+    "url": "https://rftoolbox.ca/SingleStubMatch.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Single-Stub Matching</h3>
+<div class="tool-concept">
+  <p>Matches a complex load to the line with one shunt stub — a length of open- or short-circuited line tapped across the main line a distance <em>d</em> from the load. There are always two solutions per period: the stub is placed where the line admittance has the right conductance (Y₀), and its length is chosen so its susceptance cancels the remaining ±jB. The result is checked by transforming the load through the network and confirming the input VSWR is 1.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(t=\tan\beta d=\dfrac{X_L\pm\sqrt{R_L\big[(Z_0-R_L)^2+X_L^2\big]/Z_0}}{R_L-Z_0}\quad(R_L\ne Z_0)\)<br>\(B=\dfrac{R_L^2\,t-(Z_0-X_L t)(X_L+Z_0 t)}{Z_0\big[R_L^2+(X_L+Z_0 t)^2\big]}\)<br>open stub: \(\ell/\lambda=\tfrac{1}{2\pi}\tan^{-1}(BZ_0)\); short stub: \(\ell/\lambda=-\tfrac{1}{2\pi}\tan^{-1}(Y_0/B)\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>L</sub>, X<sub>L</sub></td><td style="padding:3px 0;">Load resistance and reactance (Ω); Z<sub>L</sub> = R<sub>L</sub> + jX<sub>L</sub>.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z<sub>0</sub></td><td style="padding:3px 0;">Characteristic impedance of the line and stub (Ω).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Stub</td><td style="padding:3px 0;">Open- or short-circuited shunt stub.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d, ℓ</td><td style="padding:3px 0;">Stub distance from load and stub length, in wavelengths.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §5.2 (single-stub tuning).</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Load R<sub>L</sub></label><div class="inp-inline"><input type="text" id="ss-rl" placeholder="e.g. 60" data-tip="Load resistance in ohms."><span class="inp-units">Ω</span></div><span class="inp-hint">Real part</span></div>
+  <div class="inp-row"><label>Load X<sub>L</sub></label><div class="inp-inline"><input type="text" id="ss-xl" placeholder="e.g. -80" data-tip="Load reactance in ohms (negative = capacitive)."><span class="inp-units">Ω</span></div><span class="inp-hint">Imag part</span></div>
+  <div class="inp-row"><label>Line Z<sub>0</sub></label><div class="inp-inline"><input type="text" id="ss-z0" placeholder="e.g. 50" data-tip="Characteristic impedance in ohms."><span class="inp-units">Ω</span></div><span class="inp-hint">Reference</span></div>
+  <div class="inp-row"><label>Stub type</label><div class="inp-inline"><select id="ss-type" style="font-size:12px;padding:3px;"><option value="open" selected>Open-circuit</option><option value="short">Short-circuit</option></select></div><span class="inp-hint">Shunt stub</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="ssCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;ss-rl&quot;:&quot;60&quot;,&quot;ss-xl&quot;:&quot;-80&quot;,&quot;ss-z0&quot;:&quot;50&quot;})" title="Pozar Example 5.2: ZL = 60 − j80 Ω">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Solution 1</h4>
+    <div class="res-row"><span class="res-lbl">Stub distance d</span><span class="res-val" id="ss-d1">—</span></div>
+    <div class="res-row"><span class="res-lbl">Stub length ℓ</span><span class="res-val" id="ss-l1">—</span></div>
+    <div class="res-row"><span class="res-lbl">Resulting VSWR</span><span class="res-val" id="ss-v1">—</span></div>
+  </div>
+  <div class="res-card"><h4>Solution 2</h4>
+    <div class="res-row"><span class="res-lbl">Stub distance d</span><span class="res-val" id="ss-d2">—</span></div>
+    <div class="res-row"><span class="res-lbl">Stub length ℓ</span><span class="res-val" id="ss-l2">—</span></div>
+    <div class="res-row"><span class="res-lbl">Resulting VSWR</span><span class="res-val" id="ss-v2">—</span></div>
+  </div>
+</div>
+<div class="res-grid" style="margin-top:8px;">
+  <div class="res-card"><h4>Load</h4>
+    <div class="res-row"><span class="res-lbl">Reflection |Γ<sub>L</sub>|</span><span class="res-val" id="ss-gl">—</span></div>
+    <div class="res-row"><span class="res-lbl">Load VSWR (unmatched)</span><span class="res-val" id="ss-vl">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var d1 = document.getElementById('ss-d1') ? document.getElementById('ss-d1').textContent : '—';
+  var l1 = document.getElementById('ss-l1') ? document.getElementById('ss-l1').textContent : '—';
+  var type = document.getElementById('ss-type') ? document.getElementById('ss-type').value : 'open';
+  var W=560,H=180,y=70,x0=40,xL=470,xstub=300;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // main line
+  s+='<line x1="'+x0+'" y1="'+y+'" x2="'+xL+'" y2="'+y+'" stroke="#5533aa" stroke-width="2"/>';
+  // source terminal
+  s+='<circle cx="'+x0+'" cy="'+y+'" r="3" fill="#5533aa"/><text x="'+x0+'" y="'+(y-8)+'" text-anchor="middle" font-size="9" fill="#888">in</text>';
+  // load
+  s+='<rect x="'+xL+'" y="'+(y-16)+'" width="30" height="32" fill="#f0eeff" stroke="#5533aa" stroke-width="1.6" rx="3"/><text x="'+(xL+15)+'" y="'+(y+4)+'" text-anchor="middle" font-size="9" fill="#5533aa">Z_L</text>';
+  // stub tap
+  s+='<line x1="'+xstub+'" y1="'+y+'" x2="'+xstub+'" y2="'+(y+55)+'" stroke="#AA77FF" stroke-width="2"/>';
+  if(type==='open'){ s+='<circle cx="'+xstub+'" cy="'+(y+58)+'" r="3" fill="none" stroke="#AA77FF" stroke-width="1.6"/>'; }
+  else { s+='<line x1="'+(xstub-10)+'" y1="'+(y+55)+'" x2="'+(xstub+10)+'" y2="'+(y+55)+'" stroke="#AA77FF" stroke-width="2"/>'; for(var i=0;i<4;i++){s+='<line x1="'+(xstub-10+i*6)+'" y1="'+(y+55)+'" x2="'+(xstub-16+i*6)+'" y2="'+(y+61)+'" stroke="#AA77FF" stroke-width="1"/>';} }
+  s+='<text x="'+(xstub+8)+'" y="'+(y+40)+'" font-size="9" fill="#AA77FF">ℓ = '+l1+'</text>';
+  // distance d bracket
+  s+='<line x1="'+xstub+'" y1="'+(y-26)+'" x2="'+xL+'" y2="'+(y-26)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<text x="'+((xstub+xL)/2)+'" y="'+(y-30)+'" text-anchor="middle" font-size="9" fill="#888">d = '+d1+'</text>';
+  s+='<text x="'+W/2+'" y="165" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Shunt single-stub tuner (solution 1)</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn about impedance matching →</a></div>
+<script src="SingleStubMatch.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

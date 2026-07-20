@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bode–Fano Limit Calculator — Matching Bandwidth Bound | RF Toolbox</title>
+  <meta name="description" content="Bode–Fano criterion: the theoretical best matching bandwidth (or minimum reflection) for a parallel-RC or series-RL load — the fundamental limit no matching network can beat (Pozar §5.9).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/BodeFano.html">
+  <meta property="og:title" content="Bode–Fano Limit Calculator | RF Toolbox">
+  <meta property="og:description" content="Theoretical matching-bandwidth limit for a reactive load (Bode–Fano criterion).">
+  <meta property="og:url" content="https://rftoolbox.ca/BodeFano.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Bode–Fano Limit Calculator",
+    "description": "Bode–Fano criterion: the theoretical best matching bandwidth (or minimum reflection) for a parallel-RC or series-RL load.",
+    "url": "https://rftoolbox.ca/BodeFano.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Bode–Fano Matching Limit</h3>
+<div class="tool-concept">
+  <p>The Bode–Fano criterion sets a hard ceiling on how well a reactive load can ever be matched: no passive network, however complex, can beat it. For a parallel-RC or series-RL load it says the integrated match ∫ln(1/|Γ|)dω is bounded — so wider bandwidth forces higher reflection, and vice versa. Use it to see the <em>best possible</em> match over a band before you spend effort on a network that can't get there.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">parallel RC: \(\displaystyle\int_0^\infty\ln\dfrac{1}{|\Gamma|}\,d\omega\le\dfrac{\pi}{RC}\);&nbsp; series RL: \(\displaystyle\int_0^\infty\ln\dfrac{1}{|\Gamma|}\,d\omega\le\dfrac{\pi R}{L}\)<br>rectangular band: \(\Delta\omega\,\ln\dfrac{1}{\Gamma_m}\le K\;\Rightarrow\; \Delta\omega_{max}=\dfrac{K}{\ln(1/\Gamma_m)},\ \ \Gamma_{m,min}=e^{-K/\Delta\omega}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Load</td><td style="padding:3px 0;">Parallel RC or series RL — the two canonical single-reactance loads.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R, C / L</td><td style="padding:3px 0;">Load resistance and its reactive element.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>0</sub></td><td style="padding:3px 0;">Band center frequency, for the fractional bandwidth.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Γ<sub>m</sub>, BW</td><td style="padding:3px 0;">A target ripple gives the max bandwidth; a target bandwidth gives the best-possible ripple.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §5.9; H. W. Bode (1945) &amp; R. M. Fano, <em>J. Franklin Inst.</em> (1950).</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Load type</label><div class="inp-inline"><select id="bf-type" style="font-size:12px;padding:3px;" onchange="bfHint()"><option value="rc" selected>Parallel RC</option><option value="rl">Series RL</option></select></div><span class="inp-hint">Canonical</span></div>
+  <div class="inp-row"><label>Resistance R</label><div class="inp-inline"><input type="text" id="bf-r" placeholder="e.g. 50" data-tip="Load resistance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Load R</span></div>
+  <div class="inp-row"><label>Reactive <span id="bf-xlabel">C</span></label><div class="inp-inline"><input type="text" id="bf-x" placeholder="e.g. 10" data-tip="Load capacitance (pF) or inductance (nH)."><span class="inp-units" id="bf-xunit">pF</span></div><span class="inp-hint" id="bf-xhint">capacitance</span></div>
+  <div class="inp-row"><label>Center f<sub>0</sub></label><div class="inp-inline"><input type="text" id="bf-f0" placeholder="e.g. 1" data-tip="Band center frequency (GHz)."><span class="inp-units">GHz</span></div><span class="inp-hint">For %BW</span></div>
+  <div class="inp-row"><label>Target Γ<sub>m</sub></label><div class="inp-inline"><input type="text" id="bf-gm" placeholder="e.g. 0.2" data-tip="Target ripple, for the max bandwidth (0–1)."></div><span class="inp-hint">→ max BW</span></div>
+  <div class="inp-row"><label>Target BW</label><div class="inp-inline"><input type="text" id="bf-bw" placeholder="e.g. 50" data-tip="Target fractional bandwidth (%), for the best ripple."><span class="inp-units">%</span></div><span class="inp-hint">→ min Γm</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="bfCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;bf-type&quot;:&quot;rc&quot;,&quot;bf-r&quot;:&quot;50&quot;,&quot;bf-x&quot;:&quot;10&quot;,&quot;bf-f0&quot;:&quot;1&quot;,&quot;bf-gm&quot;:&quot;0.2&quot;,&quot;bf-bw&quot;:&quot;50&quot;})" title="50 Ω ∥ 10 pF at 1 GHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>For target ripple → bandwidth</h4>
+    <div class="res-row"><span class="res-lbl">Max fractional BW</span><span class="res-val" id="bf-maxbw">—</span></div>
+    <div class="res-row"><span class="res-lbl">Max BW (absolute)</span><span class="res-val" id="bf-maxbwa">—</span></div>
+  </div>
+  <div class="res-card"><h4>For target BW → best match</h4>
+    <div class="res-row"><span class="res-lbl">Min |Γ| (best)</span><span class="res-val" id="bf-mingm">—</span></div>
+    <div class="res-row"><span class="res-lbl">Best VSWR / return loss</span><span class="res-val" id="bf-bestvswr">—</span></div>
+  </div>
+</div>
+<div class="res-grid" style="margin-top:8px;">
+  <div class="res-card"><h4>Load</h4>
+    <div class="res-row"><span class="res-lbl">Bode–Fano constant K</span><span class="res-val" id="bf-k">—</span></div>
+    <div class="res-row"><span class="res-lbl">Load Q at f<sub>0</sub></span><span class="res-val" id="bf-q">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var type = document.getElementById('bf-type') ? document.getElementById('bf-type').value : 'rc';
+  var W=560,H=150,cy=70;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<text x="40" y="'+(cy-30)+'" font-size="10" fill="#888">matching</text><text x="40" y="'+(cy-18)+'" font-size="10" fill="#888">network</text>';
+  s+='<rect x="40" y="'+(cy-8)+'" width="70" height="30" fill="none" stroke="#AA77FF" stroke-width="1.5" stroke-dasharray="4,3"/><text x="75" y="'+(cy+11)+'" text-anchor="middle" font-size="9" fill="#AA77FF">[ ? ]</text>';
+  s+='<line x1="110" y1="'+(cy+7)+'" x2="170" y2="'+(cy+7)+'" stroke="#5533aa" stroke-width="2"/>';
+  if(type==='rc'){
+    // parallel R and C to ground
+    s+='<line x1="200" y1="'+(cy+7)+'" x2="260" y2="'+(cy+7)+'" stroke="#5533aa" stroke-width="2"/>';
+    s+='<rect x="200" y="'+(cy+18)+'" width="14" height="34" fill="none" stroke="#5533aa" stroke-width="1.6"/><text x="192" y="'+(cy+40)+'" text-anchor="end" font-size="9" fill="#5533aa">R</text>';
+    s+='<line x1="200" y1="'+(cy+7)+'" x2="200" y2="'+(cy+18)+'" stroke="#5533aa" stroke-width="1.5"/>';
+    s+='<line x1="252" y1="'+(cy+22)+'" x2="268" y2="'+(cy+22)+'" stroke="#00ccff" stroke-width="3"/><line x1="252" y1="'+(cy+27)+'" x2="268" y2="'+(cy+27)+'" stroke="#00ccff" stroke-width="3"/><text x="274" y="'+(cy+28)+'" font-size="9" fill="#00ccff">C</text>';
+    s+='<line x1="260" y1="'+(cy+7)+'" x2="260" y2="'+(cy+22)+'" stroke="#5533aa" stroke-width="1.5"/>';
+    s+='<line x1="200" y1="'+(cy+52)+'" x2="260" y2="'+(cy+52)+'" stroke="#333" stroke-width="1.5"/><line x1="207" y1="'+(cy+58)+'" x2="253" y2="'+(cy+58)+'" stroke="#333" stroke-width="1"/>';
+    s+='<line x1="207" y1="'+(cy+52)+'" x2="207" y2="'+(cy+52)+'" stroke="#333"/>';
+    s+='<line x1="200" y1="'+(cy+34)+'" x2="200" y2="'+(cy+52)+'" stroke="#5533aa" stroke-width="1.5"/><line x1="260" y1="'+(cy+27)+'" x2="260" y2="'+(cy+52)+'" stroke="#00ccff" stroke-width="1.5"/>';
+    s+='<text x="230" y="18" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">Parallel RC load</text>';
+  } else {
+    // series R then L
+    s+='<rect x="200" y="'+(cy)+'" width="34" height="14" fill="none" stroke="#5533aa" stroke-width="1.6"/><text x="217" y="'+(cy-6)+'" text-anchor="middle" font-size="9" fill="#5533aa">R</text>';
+    s+='<line x1="170" y1="'+(cy+7)+'" x2="200" y2="'+(cy+7)+'" stroke="#5533aa" stroke-width="2"/>';
+    s+='<path d="M234 '+(cy+7)+' q6 -9 12 0 q6 9 12 0 q6 -9 12 0" fill="none" stroke="#AA77FF" stroke-width="1.8"/><text x="264" y="'+(cy-4)+'" text-anchor="middle" font-size="9" fill="#AA77FF">L</text>';
+    s+='<line x1="270" y1="'+(cy+7)+'" x2="300" y2="'+(cy+7)+'" stroke="#5533aa" stroke-width="2"/><circle cx="300" cy="'+(cy+7)+'" r="3" fill="#5533aa"/>';
+    s+='<text x="235" y="18" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">Series RL load</text>';
+  }
+  s+='<text x="'+W/2+'" y="140" text-anchor="middle" font-size="10" fill="#888">the best network cannot beat the Bode–Fano bound</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn about impedance matching →</a></div>
+<script src="BodeFano.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
