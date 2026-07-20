@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABCD Matrix Cascade — Two-Port Network Multiplier | RF Toolbox</title>
+  <meta name="description" content="Cascade series impedances, shunt admittances, transmission lines and ideal transformers as ABCD (chain) matrices, then convert the total to S-parameters at a chosen reference impedance (Pozar §4.4).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/ABCDCascade.html">
+  <meta property="og:title" content="ABCD Matrix Cascade | RF Toolbox">
+  <meta property="og:description" content="Multiply two-port ABCD matrices and convert to S-parameters.">
+  <meta property="og:url" content="https://rftoolbox.ca/ABCDCascade.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ABCD Matrix Cascade",
+    "description": "Cascade series impedances, shunt admittances, transmission lines and transformers as ABCD matrices, then convert to S-parameters.",
+    "url": "https://rftoolbox.ca/ABCDCascade.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>ABCD Matrix Cascade</h3>
+<div class="tool-concept">
+  <p>The ABCD (chain) matrix makes cascaded two-ports trivial: the matrix of a chain is simply the product of the individual matrices, in order. This tool builds the ABCD matrix for each element you list — a series impedance, a shunt admittance, an ideal transmission line, or an ideal transformer — multiplies them, and converts the result to S-parameters at your reference impedance. It reports the reciprocity check (AD − BC = 1) as an internal consistency test.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Element syntax ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">series Z: \(\begin{bmatrix}1&amp;Z\\0&amp;1\end{bmatrix}\) &nbsp; shunt Y: \(\begin{bmatrix}1&amp;0\\Y&amp;1\end{bmatrix}\) &nbsp; line: \(\begin{bmatrix}\cos\theta&amp;jZ_0\sin\theta\\ j\sin\theta/Z_0&amp;\cos\theta\end{bmatrix}\) &nbsp; xfmr: \(\begin{bmatrix}n&amp;0\\0&amp;1/n\end{bmatrix}\)<br>\(S_{21}=\dfrac{2}{A+B/Z_0+CZ_0+D},\ S_{11}=\dfrac{A+B/Z_0-CZ_0-D}{A+B/Z_0+CZ_0+D}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;"><code>Zs R X</code></td><td style="padding:3px 0;">Series impedance Z = R + jX (Ω).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;"><code>Yp G B</code></td><td style="padding:3px 0;">Shunt admittance Y = G + jB (S).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;"><code>TL Zc deg</code></td><td style="padding:3px 0;">Ideal line: characteristic impedance Zc (Ω), electrical length (degrees).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;"><code>XFMR n</code></td><td style="padding:3px 0;">Ideal transformer, turns ratio n:1.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §4.4 (Tables 4.1, 4.2).</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Z<sub>0</sub> ref</label><div class="inp-inline"><input type="text" id="ab-z0" placeholder="e.g. 50" data-tip="Reference impedance for S-parameters (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">For S-par</span></div>
+</div>
+<div class="sec-lbl" style="margin-top:8px;">Elements (one per line, port 1 → port 2)</div>
+<textarea id="ab-net" rows="5" style="width:100%;box-sizing:border-box;font-family:monospace;font-size:13px;padding:8px;border:1px solid #d0c8f0;border-radius:4px;" placeholder="Zs 0 50&#10;Yp 0 0.02&#10;TL 70.7 90"></textarea>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="abCalc()">Calculate</button> <button class="example-btn" onclick="abExample()" title="Series L, shunt C, quarter-wave line">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Total ABCD matrix</div>
+<div id="ab-abcd" style="overflow-x:auto;"></div>
+<div class="sec-lbl">S-parameters</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Reflection / transmission</h4>
+    <div class="res-row"><span class="res-lbl">S<sub>11</sub></span><span class="res-val" id="ab-s11">—</span></div>
+    <div class="res-row"><span class="res-lbl">S<sub>21</sub></span><span class="res-val" id="ab-s21">—</span></div>
+    <div class="res-row"><span class="res-lbl">|S<sub>21</sub>| (insertion)</span><span class="res-val" id="ab-s21db">—</span></div>
+  </div>
+  <div class="res-card"><h4>Consistency</h4>
+    <div class="res-row"><span class="res-lbl">S<sub>22</sub></span><span class="res-val" id="ab-s22">—</span></div>
+    <div class="res-row"><span class="res-lbl">|S<sub>11</sub>| (return loss)</span><span class="res-val" id="ab-s11db">—</span></div>
+    <div class="res-row"><span class="res-lbl">det = AD − BC</span><span class="res-val" id="ab-det">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Cascade</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  if (typeof abStages === 'undefined' || !abStages) return;
+  var st = abStages, N = st.length, W=540, H=110, y=55, x0=40;
+  var seg = Math.min(110, (W - 80) / Math.max(N, 1));
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<line x1="'+x0+'" y1="'+y+'" x2="'+(x0 + N*seg)+'" y2="'+y+'" stroke="#5533aa" stroke-width="1.4"/>';
+  for (var i = 0; i < N; i++) {
+    var x = x0 + i * seg + seg/2;
+    s+='<rect x="'+(x-30)+'" y="'+(y-16)+'" width="60" height="32" rx="3" fill="#fff" stroke="#AA77FF" stroke-width="1.4"/>';
+    s+='<text x="'+x+'" y="'+(y+4)+'" text-anchor="middle" font-size="9" fill="#7a4fd0">'+st[i]+'</text>';
+  }
+  s+='<circle cx="'+x0+'" cy="'+y+'" r="3" fill="#5533aa"/><circle cx="'+(x0+N*seg)+'" cy="'+y+'" r="3" fill="#5533aa"/>';
+  s+='<text x="'+W/2+'" y="18" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">'+N+'-element ABCD cascade</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_sparam.html">Learn about network parameters →</a></div>
+<script src="ABCDCascade.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

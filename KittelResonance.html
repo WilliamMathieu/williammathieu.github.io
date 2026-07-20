@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ferrite Gyromagnetic Resonance — Kittel &amp; Polder Tensor | RF Toolbox</title>
+  <meta name="description" content="Ferrimagnetic resonance: Larmor frequency, the Kittel resonance for spheres and thin films, and the Polder permeability-tensor elements μ and κ from applied field and saturation magnetisation (Pozar §9.2).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/KittelResonance.html">
+  <meta property="og:title" content="Ferrite Gyromagnetic Resonance | RF Toolbox">
+  <meta property="og:description" content="Larmor / Kittel resonance and the Polder permeability tensor for ferrites.">
+  <meta property="og:url" content="https://rftoolbox.ca/KittelResonance.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Ferrite Gyromagnetic Resonance",
+    "description": "Larmor frequency, Kittel resonance for spheres and thin films, and Polder permeability-tensor elements from applied field and saturation magnetisation.",
+    "url": "https://rftoolbox.ca/KittelResonance.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Ferrite Gyromagnetic Resonance</h3>
+<div class="tool-concept">
+  <p>A biased ferrite has electron spins that precess about the DC field at the Larmor frequency f₀ = γH₀ (about 2.8&nbsp;MHz per oersted). Near this frequency the material's permeability becomes a tensor — the Polder tensor with diagonal element μ and off-diagonal element κ — which is what makes non-reciprocal devices (isolators, circulators, phase shifters) work. Sample shape shifts the resonance through demagnetisation (the Kittel equation). This tool computes f₀, the saturation frequency f<sub>m</sub>, the shape-dependent resonance, and μ, κ at your operating frequency.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(\gamma/2\pi = 2.80\,(g/2)\) MHz/Oe, \(f_0=\gamma H_0\), \(f_m=\gamma(4\pi M_s)\)<br>sphere \(f_{res}=f_0\); in-plane film \(f_{res}=\sqrt{f_0(f_0+f_m)}\); ⟂ film \(f_{res}=f_0-f_m\)<br>Polder tensor: \(\mu=1+\dfrac{f_0 f_m}{f_0^2-f^2},\quad \kappa=\dfrac{f\,f_m}{f_0^2-f^2}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">H<sub>0</sub></td><td style="padding:3px 0;">Internal DC bias field (Oe).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">4πM<sub>s</sub></td><td style="padding:3px 0;">Saturation magnetisation (Gauss); e.g. 1780 for YIG.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Operating frequency (GHz) for the tensor.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">g</td><td style="padding:3px 0;">Landé g-factor (≈2 for most ferrites).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Shape</td><td style="padding:3px 0;">Sphere, in-plane thin film, or perpendicular film.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §9.2.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Bias H<sub>0</sub></label><div class="inp-inline"><input type="text" id="kt-h0" placeholder="e.g. 1000" data-tip="Internal DC bias field (Oe)."><span class="inp-units">Oe</span></div><span class="inp-hint">DC field</span></div>
+  <div class="inp-row"><label>4πM<sub>s</sub></label><div class="inp-inline"><input type="text" id="kt-ms" placeholder="e.g. 1780" data-tip="Saturation magnetisation (Gauss)."><span class="inp-units">G</span></div><span class="inp-hint">Sat. mag.</span></div>
+  <div class="inp-row"><label>Frequency f</label><div class="inp-inline"><input type="text" id="kt-f" placeholder="e.g. 6" data-tip="Operating frequency (GHz)."><span class="inp-units">GHz</span></div><span class="inp-hint">For μ, κ</span></div>
+  <div class="inp-row"><label>g-factor</label><div class="inp-inline"><input type="text" id="kt-g" placeholder="e.g. 2" data-tip="Landé g-factor."></div><span class="inp-hint">≈ 2</span></div>
+  <div class="inp-row"><label>Shape</label><div class="inp-inline"><select id="kt-shape" style="font-size:12px;padding:3px;"><option value="sphere" selected>Sphere</option><option value="inplane">In-plane film</option><option value="perp">Perpendicular film</option></select></div><span class="inp-hint">Demag</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="ktCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;kt-h0&quot;:&quot;1000&quot;,&quot;kt-ms&quot;:&quot;1780&quot;,&quot;kt-f&quot;:&quot;6&quot;,&quot;kt-g&quot;:&quot;2&quot;,&quot;kt-shape&quot;:&quot;sphere&quot;})" title="YIG sphere, 1000 Oe bias">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Precession frequencies</h4>
+    <div class="res-row"><span class="res-lbl">γ/2π</span><span class="res-val" id="kt-gam">—</span></div>
+    <div class="res-row"><span class="res-lbl">Larmor f₀</span><span class="res-val" id="kt-f0">—</span></div>
+    <div class="res-row"><span class="res-lbl">f<sub>m</sub> (4πM<sub>s</sub>)</span><span class="res-val" id="kt-fm">—</span></div>
+    <div class="res-row"><span class="res-lbl">Kittel resonance</span><span class="res-val" id="kt-fr">—</span></div>
+  </div>
+  <div class="res-card"><h4>Polder tensor at f</h4>
+    <div class="res-row"><span class="res-lbl">μ</span><span class="res-val" id="kt-mu">—</span></div>
+    <div class="res-row"><span class="res-lbl">κ</span><span class="res-val" id="kt-kap">—</span></div>
+    <div class="res-row"><span class="res-lbl">μ<sub>±</sub> = μ ± κ</span><span class="res-val" id="kt-mpm">—</span></div>
+    <div class="res-row"><span class="res-lbl">Effective μ<sub>eff</sub></span><span class="res-val" id="kt-meff">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Spin precession</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var W=440, H=150, cx=150, cy=80;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // H0 field arrow (vertical)
+  s+='<line x1="'+cx+'" y1="130" x2="'+cx+'" y2="24" stroke="#5533aa" stroke-width="1.6"/>';
+  s+='<polygon points="'+cx+',18 '+(cx-5)+',30 '+(cx+5)+',30" fill="#5533aa"/>';
+  s+='<text x="'+(cx+10)+'" y="30" font-size="11" fill="#5533aa">H₀</text>';
+  // precession cone ellipse
+  s+='<ellipse cx="'+cx+'" cy="40" rx="46" ry="14" fill="none" stroke="#00ccff" stroke-width="1.4" stroke-dasharray="4,3"/>';
+  // magnetic moment vector precessing
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+42)+'" y2="34" stroke="#AA77FF" stroke-width="2.2"/>';
+  s+='<polygon points="'+(cx+42)+',34 '+(cx+30)+',34 '+(cx+40)+',44" fill="#AA77FF"/>';
+  s+='<text x="'+(cx+48)+'" y="34" font-size="11" fill="#7a4fd0">M</text>';
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="3" fill="#5533aa"/>';
+  // labels on right
+  s+='<text x="300" y="55" font-size="10" fill="#5533aa">ω₀ = γH₀</text>';
+  s+='<text x="300" y="75" font-size="10" fill="#5533aa">precession at f₀</text>';
+  s+='<text x="'+W/2+'" y="145" text-anchor="middle" font-size="9.5" fill="#5533aa" font-weight="bold">Larmor precession of the magnetisation</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_magnetic_materials.html">Learn about ferrite materials →</a></div>
+<script src="KittelResonance.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

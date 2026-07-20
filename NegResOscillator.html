@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Negative-Resistance Oscillator — One-Port Load Design | RF Toolbox</title>
+  <meta name="description" content="Design the terminating network for a one-port negative-resistance oscillator: reflection coefficients, the oscillation-sustaining load Z_L = −Z_in, and the start-up condition (Pozar §13.3).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/NegResOscillator.html">
+  <meta property="og:title" content="Negative-Resistance Oscillator | RF Toolbox">
+  <meta property="og:description" content="One-port oscillator load design: Z_L = −Z_in, reflection condition and start-up margin.">
+  <meta property="og:url" content="https://rftoolbox.ca/NegResOscillator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Negative-Resistance Oscillator",
+    "description": "One-port negative-resistance oscillator load design: reflection coefficients, oscillation-sustaining load and start-up condition.",
+    "url": "https://rftoolbox.ca/NegResOscillator.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Negative-Resistance Oscillator</h3>
+<div class="tool-concept">
+  <p>A one-port oscillator uses an active device that presents a negative resistance (R<sub>in</sub> &lt; 0, so |Γ<sub>in</sub>| &gt; 1) over the band of interest. Sustained oscillation requires the load to satisfy Γ<sub>in</sub>Γ<sub>L</sub> = 1, which is equivalent to Z<sub>L</sub> = −Z<sub>in</sub>: the load resistance cancels the device's negative resistance and the load reactance cancels its reactance. This tool computes the reflection coefficients, the sustaining load, and the small-signal start-up margin.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(\Gamma_{in}=\dfrac{Z_{in}-Z_0}{Z_{in}+Z_0},\quad |\Gamma_{in}|>1\) for a negative-resistance device.<br>Oscillation: \(\Gamma_{in}\Gamma_L=1\ \Longleftrightarrow\ Z_L=-Z_{in}\), i.e. \(R_L=-R_{in},\ X_L=-X_{in}\).<br>Start-up (small signal): \(R_L+R_{in}(0)<0\); a common design point is \(R_L=\tfrac{1}{3}|R_{in}(0)|\) so |R<sub>in</sub>| falls to R<sub>L</sub> as the amplitude grows.</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>in</sub></td><td style="padding:3px 0;">Device input resistance (Ω) — enter a negative value.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">X<sub>in</sub></td><td style="padding:3px 0;">Device input reactance (Ω) at the oscillation frequency.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z<sub>0</sub></td><td style="padding:3px 0;">Reference impedance for the reflection coefficients.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Oscillation frequency (GHz, informational).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §13.3.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>R<sub>in</sub></label><div class="inp-inline"><input type="text" id="no-rin" placeholder="e.g. -60" data-tip="Device input resistance (Ω), negative."><span class="inp-units">Ω</span></div><span class="inp-hint">&lt; 0</span></div>
+  <div class="inp-row"><label>X<sub>in</sub></label><div class="inp-inline"><input type="text" id="no-xin" placeholder="e.g. 40" data-tip="Device input reactance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Reactance</span></div>
+  <div class="inp-row"><label>Z<sub>0</sub></label><div class="inp-inline"><input type="text" id="no-z0" placeholder="e.g. 50" data-tip="Reference impedance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Reference</span></div>
+  <div class="inp-row"><label>f</label><div class="inp-inline"><input type="text" id="no-f" placeholder="e.g. 8" data-tip="Oscillation frequency (GHz)."><span class="inp-units">GHz</span></div><span class="inp-hint">Optional</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="noCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;no-rin&quot;:&quot;-60&quot;,&quot;no-xin&quot;:&quot;40&quot;,&quot;no-z0&quot;:&quot;50&quot;,&quot;no-f&quot;:&quot;8&quot;})" title="Negative-R device, 8 GHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Device (one-port)</h4>
+    <div class="res-row"><span class="res-lbl">Z<sub>in</sub></span><span class="res-val" id="no-zin">—</span></div>
+    <div class="res-row"><span class="res-lbl">Γ<sub>in</sub></span><span class="res-val" id="no-gin">—</span></div>
+    <div class="res-row"><span class="res-lbl">Negative-R present?</span><span class="res-val" id="no-neg">—</span></div>
+  </div>
+  <div class="res-card"><h4>Sustaining load</h4>
+    <div class="res-row"><span class="res-lbl">Z<sub>L</sub> = −Z<sub>in</sub></span><span class="res-val" id="no-zl">—</span></div>
+    <div class="res-row"><span class="res-lbl">Γ<sub>L</sub></span><span class="res-val" id="no-gl">—</span></div>
+    <div class="res-row"><span class="res-lbl">Check |Γ<sub>in</sub>Γ<sub>L</sub>|</span><span class="res-val" id="no-chk">—</span></div>
+  </div>
+</div>
+<div class="res-grid" style="margin-top:8px;">
+  <div class="res-card"><h4>Start-up guideline</h4>
+    <div class="res-row"><span class="res-lbl">R<sub>L</sub> for oscillation</span><span class="res-val" id="no-rl">—</span></div>
+    <div class="res-row"><span class="res-lbl">Design point R<sub>L</sub> ≈ |R<sub>in</sub>|/3</span><span class="res-val" id="no-rl3">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">One-port oscillator</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var W=520, H=120;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // device box (left) - negative resistance
+  s+='<rect x="40" y="40" width="120" height="44" rx="4" fill="#fff" stroke="#AA77FF" stroke-width="1.6"/>';
+  s+='<text x="100" y="58" text-anchor="middle" font-size="10" fill="#7a4fd0" font-weight="bold">Active device</text>';
+  s+='<text x="100" y="74" text-anchor="middle" font-size="10" fill="#7a4fd0">Z_in (R&lt;0)</text>';
+  // connection
+  s+='<line x1="160" y1="62" x2="360" y2="62" stroke="#5533aa" stroke-width="1.6"/>';
+  s+='<text x="260" y="52" text-anchor="middle" font-size="9" fill="#5533aa">Γ_in Γ_L = 1</text>';
+  // load box (right)
+  s+='<rect x="360" y="40" width="120" height="44" rx="4" fill="#fff" stroke="#00ccff" stroke-width="1.6"/>';
+  s+='<text x="420" y="58" text-anchor="middle" font-size="10" fill="#0090c0" font-weight="bold">Load network</text>';
+  s+='<text x="420" y="74" text-anchor="middle" font-size="10" fill="#0090c0">Z_L = −Z_in</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_phase_noise.html">Learn about oscillators →</a></div>
+<script src="NegResOscillator.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
