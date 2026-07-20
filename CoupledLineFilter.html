@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coupled-Line Bandpass Filter — Even/Odd Impedances | RF Toolbox</title>
+  <meta name="description" content="Design a parallel coupled-line bandpass filter: J-inverter admittances and the even- and odd-mode impedances Z0e, Z0o for each coupled section from a Butterworth or Chebyshev prototype (Pozar §8.7).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/CoupledLineFilter.html">
+  <meta property="og:title" content="Coupled-Line Bandpass Filter | RF Toolbox">
+  <meta property="og:description" content="J-inverters and even/odd-mode impedances for a parallel coupled-line bandpass filter.">
+  <meta property="og:url" content="https://rftoolbox.ca/CoupledLineFilter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Coupled-Line Bandpass Filter",
+    "description": "J-inverter admittances and even/odd-mode impedances for a parallel coupled-line bandpass filter from a Butterworth or Chebyshev prototype.",
+    "url": "https://rftoolbox.ca/CoupledLineFilter.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Coupled-Line Bandpass Filter</h3>
+<div class="tool-concept">
+  <p>A parallel coupled-line bandpass filter is a cascade of N+1 quarter-wave coupled sections. Each section acts as an admittance (J) inverter, and the design reduces to picking, for each section, an even-mode impedance Z<sub>0e</sub> and odd-mode impedance Z<sub>0o</sub> that realise the required J-inverter. This tool turns a lowpass prototype (order, response, ripple) plus a centre frequency and fractional bandwidth into the J/Y₀ ratios and the Z<sub>0e</sub>, Z<sub>0o</sub> pair for every section.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(\dfrac{J_1}{Y_0}=\sqrt{\dfrac{\pi\Delta}{2g_1}},\quad \dfrac{J_n}{Y_0}=\dfrac{\pi\Delta}{2\sqrt{g_{n-1}g_n}}\ (2\le n\le N),\quad \dfrac{J_{N+1}}{Y_0}=\sqrt{\dfrac{\pi\Delta}{2g_N g_{N+1}}}\)<br>\(Z_{0e}=Z_0\!\left[1+\dfrac{J}{Y_0}+\Big(\dfrac{J}{Y_0}\Big)^{2}\right],\quad Z_{0o}=Z_0\!\left[1-\dfrac{J}{Y_0}+\Big(\dfrac{J}{Y_0}\Big)^{2}\right]\)<br>\(\Delta=\dfrac{\omega_2-\omega_1}{\omega_0}\) is the fractional bandwidth; each section is \(\lambda/4\) long at \(f_0\).</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Filter order (1–9); gives N+1 coupled sections.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Response</td><td style="padding:3px 0;">Butterworth or Chebyshev prototype g-values.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L<sub>Ar</sub></td><td style="padding:3px 0;">Chebyshev passband ripple (dB).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>0</sub>, Δ</td><td style="padding:3px 0;">Centre frequency and fractional bandwidth (%).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z<sub>0</sub></td><td style="padding:3px 0;">System impedance.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §8.7.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Order N</label><div class="inp-inline"><input type="text" id="cl-n" placeholder="e.g. 3" data-tip="Filter order (1–9)."></div><span class="inp-hint">1 – 9</span></div>
+  <div class="inp-row"><label>Response</label><div class="inp-inline"><select id="cl-type" style="font-size:12px;padding:3px;"><option value="cheby" selected>Chebyshev</option><option value="butter">Butterworth</option></select></div><span class="inp-hint">Shape</span></div>
+  <div class="inp-row"><label>Ripple L<sub>Ar</sub></label><div class="inp-inline"><input type="text" id="cl-rip" placeholder="e.g. 0.5" data-tip="Chebyshev passband ripple (dB)."><span class="inp-units">dB</span></div><span class="inp-hint">Chebyshev</span></div>
+  <div class="inp-row"><label>Centre f<sub>0</sub></label><div class="inp-inline"><input type="text" id="cl-f0" placeholder="e.g. 2" data-tip="Centre frequency (GHz)."><span class="inp-units">GHz</span></div><span class="inp-hint">Passband centre</span></div>
+  <div class="inp-row"><label>Bandwidth Δ</label><div class="inp-inline"><input type="text" id="cl-bw" placeholder="e.g. 10" data-tip="Fractional bandwidth (percent)."><span class="inp-units">%</span></div><span class="inp-hint">Fractional</span></div>
+  <div class="inp-row"><label>Z<sub>0</sub></label><div class="inp-inline"><input type="text" id="cl-z0" placeholder="e.g. 50" data-tip="System impedance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">System</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="clCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;cl-n&quot;:&quot;3&quot;,&quot;cl-type&quot;:&quot;cheby&quot;,&quot;cl-rip&quot;:&quot;0.5&quot;,&quot;cl-f0&quot;:&quot;2&quot;,&quot;cl-bw&quot;:&quot;10&quot;,&quot;cl-z0&quot;:&quot;50&quot;})" title="Pozar Ex 8.7: 3rd-order 0.5 dB Chebyshev, 2 GHz, 10%">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Coupled-section impedances</div>
+<div id="cl-table" style="overflow-x:auto;"></div>
+
+<div class="sec-lbl">Coupled-line cascade</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  if (typeof clSections === 'undefined' || !clSections) return;
+  var sec = clSections, M = sec.length, W=560, H=140;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  var seg = Math.min(80, (W - 60) / M), x0 = 30;
+  for (var i = 0; i < M; i++) {
+    var x = x0 + i * seg, y = 46;
+    // two coupled bars
+    s+='<rect x="'+x+'" y="'+y+'" width="'+(seg-14)+'" height="7" rx="2" fill="#AA77FF"/>';
+    s+='<rect x="'+x+'" y="'+(y+18)+'" width="'+(seg-14)+'" height="7" rx="2" fill="#00ccff"/>';
+    s+='<text x="'+(x+(seg-14)/2)+'" y="'+(y-6)+'" text-anchor="middle" font-size="8" fill="#5533aa">#'+(i+1)+'</text>';
+    s+='<text x="'+(x+(seg-14)/2)+'" y="'+(y+44)+'" text-anchor="middle" font-size="7.5" fill="#888">Z0e '+sec[i].Z0e.toFixed(1)+'</text>';
+    s+='<text x="'+(x+(seg-14)/2)+'" y="'+(y+54)+'" text-anchor="middle" font-size="7.5" fill="#888">Z0o '+sec[i].Z0o.toFixed(1)+'</text>';
+  }
+  s+='<text x="'+W/2+'" y="18" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">'+M+' coupled-line sections (λ/4 each)</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_filters.html">Learn about filters →</a></div>
+<script src="CoupledLineFilter.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
