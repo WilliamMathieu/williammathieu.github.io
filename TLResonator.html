@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transmission-Line Resonator Calculator — λ/2, λ/4 Q &amp; Length | RF Toolbox</title>
+  <meta name="description" content="Open/short-circuited quarter- and half-wave transmission-line resonators: resonant length, unloaded Q from line attenuation (Q=β/2α), and equivalent RLC (Pozar §6.1).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/TLResonator.html">
+  <meta property="og:title" content="Transmission-Line Resonator Calculator | RF Toolbox">
+  <meta property="og:description" content="λ/2 and λ/4 line resonators: length, unloaded Q from attenuation, equivalent RLC.">
+  <meta property="og:url" content="https://rftoolbox.ca/TLResonator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Transmission-Line Resonator Calculator",
+    "description": "Open/short-circuited quarter- and half-wave transmission-line resonators: resonant length, unloaded Q from line attenuation, and equivalent RLC.",
+    "url": "https://rftoolbox.ca/TLResonator.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Transmission-Line Resonator</h3>
+<div class="tool-concept">
+  <p>A short piece of transmission line, open- or short-circuited at one end, resonates like a lumped RLC circuit — the basis of distributed filters and oscillator tanks. A half-wave line and a quarter-wave line each act as a series or parallel resonator depending on the termination. This tool gives the resonant length, the unloaded Q set by the line's loss (Q = β/2α), and the equivalent RLC near resonance.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(\beta=\dfrac{2\pi f_0\sqrt{\varepsilon_r}}{c},\quad Q_0=\dfrac{\beta}{2\alpha}=\dfrac{\pi}{\alpha\lambda_g}\)<br>short λ/2 &amp; open λ/4 → series RLC; open λ/2 &amp; short λ/4 → parallel RLC<br>series: \(R=Z_0\alpha\ell\); parallel: \(R=Z_0/(\alpha\ell)\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Type</td><td style="padding:3px 0;">Half-wave or quarter-wave, open- or short-circuited.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z<sub>0</sub>, f<sub>0</sub></td><td style="padding:3px 0;">Line impedance (Ω) and resonant frequency (GHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">α</td><td style="padding:3px 0;">Line attenuation (dB/m). Sets the unloaded Q.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ε<sub>r</sub></td><td style="padding:3px 0;">Effective dielectric constant, for the guide wavelength.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §6.1 (transmission-line resonators).</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Resonator type</label><div class="inp-inline"><select id="tr-type" style="font-size:12px;padding:3px;"><option value="s2" selected>λ/2 short (series)</option><option value="o2">λ/2 open (parallel)</option><option value="s4">λ/4 short (parallel)</option><option value="o4">λ/4 open (series)</option></select></div><span class="inp-hint">Termination</span></div>
+  <div class="inp-row"><label>Line Z<sub>0</sub></label><div class="inp-inline"><input type="text" id="tr-z0" placeholder="e.g. 50" data-tip="Characteristic impedance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Impedance</span></div>
+  <div class="inp-row"><label>Frequency f<sub>0</sub></label><div class="inp-inline"><input type="text" id="tr-f0" placeholder="e.g. 1" data-tip="Resonant frequency (GHz)."><span class="inp-units">GHz</span></div><span class="inp-hint">Resonance</span></div>
+  <div class="inp-row"><label>Attenuation α</label><div class="inp-inline"><input type="text" id="tr-a" placeholder="e.g. 0.1" data-tip="Line attenuation (dB/m)."><span class="inp-units">dB/m</span></div><span class="inp-hint">For Q</span></div>
+  <div class="inp-row"><label>ε<sub>r</sub> (eff)</label><div class="inp-inline"><input type="text" id="tr-er" placeholder="e.g. 1" data-tip="Effective dielectric constant."></div><span class="inp-hint">Guide λ</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="trCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;tr-type&quot;:&quot;s2&quot;,&quot;tr-z0&quot;:&quot;50&quot;,&quot;tr-f0&quot;:&quot;1&quot;,&quot;tr-a&quot;:&quot;0.1&quot;,&quot;tr-er&quot;:&quot;1&quot;})" title="50Ω λ/2 short, 1 GHz, 0.1 dB/m">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Resonator</h4>
+    <div class="res-row"><span class="res-lbl">Resonant length ℓ</span><span class="res-val" id="tr-len">—</span></div>
+    <div class="res-row"><span class="res-lbl">Guide wavelength λ<sub>g</sub></span><span class="res-val" id="tr-lam">—</span></div>
+    <div class="res-row"><span class="res-lbl">Behaviour</span><span class="res-val" id="tr-beh">—</span></div>
+  </div>
+  <div class="res-card"><h4>Quality &amp; equivalent RLC</h4>
+    <div class="res-row"><span class="res-lbl">Unloaded Q₀</span><span class="res-val" id="tr-q">—</span></div>
+    <div class="res-row"><span class="res-lbl">Equivalent R</span><span class="res-val" id="tr-r">—</span></div>
+    <div class="res-row"><span class="res-lbl">Equivalent L / C</span><span class="res-val" id="tr-lc">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var type = document.getElementById('tr-type') ? document.getElementById('tr-type').value : 's2';
+  var q = document.getElementById('tr-q') ? document.getElementById('tr-q').textContent : '—';
+  var qw = (type[1] === '4');
+  var openEnd = (type[0] === 'o');
+  var W=560,H=150,y=65,x0=70,x1=x0+ (qw?200:340);
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<line x1="'+x0+'" y1="'+y+'" x2="'+x1+'" y2="'+y+'" stroke="#5533aa" stroke-width="3"/>';
+  s+='<circle cx="'+x0+'" cy="'+y+'" r="3" fill="#5533aa"/>';
+  if(openEnd){ s+='<circle cx="'+(x1+4)+'" cy="'+y+'" r="3" fill="none" stroke="#5533aa" stroke-width="1.6"/>'; s+='<text x="'+x1+'" y="'+(y-8)+'" text-anchor="middle" font-size="9" fill="#888">open</text>'; }
+  else { s+='<line x1="'+x1+'" y1="'+(y-14)+'" x2="'+x1+'" y2="'+(y+14)+'" stroke="#333" stroke-width="2"/>'; for(var i=0;i<3;i++){s+='<line x1="'+x1+'" y1="'+(y-14+i*14)+'" x2="'+(x1+8)+'" y2="'+(y-20+i*14)+'" stroke="#333" stroke-width="1"/>';} s+='<text x="'+x1+'" y="'+(y-20)+'" text-anchor="middle" font-size="9" fill="#888">short</text>'; }
+  s+='<line x1="'+x0+'" y1="'+(y+18)+'" x2="'+x1+'" y2="'+(y+18)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<text x="'+((x0+x1)/2)+'" y="'+(y+30)+'" text-anchor="middle" font-size="9" fill="#888">ℓ = '+(qw?'λ/4':'λ/2')+'</text>';
+  s+='<text x="'+W/2+'" y="132" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Q₀ = '+q+'</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_coupled_resonators.html">Learn about resonators →</a></div>
+<script src="TLResonator.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
