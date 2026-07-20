@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Double-Stub Tuner Calculator — Two-Stub Matching &amp; Forbidden Region | RF Toolbox</title>
+  <meta name="description" content="Design a double-stub tuner: the two shunt-stub susceptances and lengths for a fixed stub spacing, both solutions, the forbidden-region check, and a verified input VSWR (Pozar §5.3).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/DoubleStubTuner.html">
+  <meta property="og:title" content="Double-Stub Tuner Calculator | RF Toolbox">
+  <meta property="og:description" content="Two shunt-stub matching: stub lengths for a fixed spacing, both solutions, forbidden-region check.">
+  <meta property="og:url" content="https://rftoolbox.ca/DoubleStubTuner.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Double-Stub Tuner Calculator",
+    "description": "Design a double-stub tuner: the two shunt-stub susceptances and lengths for a fixed stub spacing, both solutions, the forbidden-region check, and a verified input VSWR.",
+    "url": "https://rftoolbox.ca/DoubleStubTuner.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Double-Stub Tuner</h3>
+<div class="tool-concept">
+  <p>A double-stub tuner matches a load using two shunt stubs at a <em>fixed</em> spacing — the arrangement used in adjustable lab tuners, where the stub positions can't move but their lengths can. This tool finds both solutions for the two stub lengths, flags the "forbidden region" (loads whose conductance is too high to match at the chosen spacing), and confirms the design by transforming the load through the network to an input VSWR of 1. The first stub sits at the load; the second is one spacing away.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(t=\tan\beta d,\quad B_1=-B_L+\dfrac{Y_0\pm\sqrt{(1+t^2)G_L Y_0-G_L^2 t^2}}{t}\)<br>\(B_2=\dfrac{\pm Y_0\sqrt{(1+t^2)G_L Y_0-G_L^2 t^2}+G_L Y_0}{G_L\,t}\)<br>solutions exist only if \(G_L\le Y_0\,\dfrac{1+t^2}{t^2}=\dfrac{Y_0}{\sin^2\beta d}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>L</sub>, X<sub>L</sub></td><td style="padding:3px 0;">Load resistance and reactance (Ω).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z<sub>0</sub></td><td style="padding:3px 0;">Line / stub characteristic impedance (Ω).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td style="padding:3px 0;">Stub spacing (λ). Common values: 0.125 (λ/8) or 0.375 (3λ/8).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Stub</td><td style="padding:3px 0;">Open- or short-circuited shunt stubs.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §5.3 (double-stub tuning).</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Load R<sub>L</sub></label><div class="inp-inline"><input type="text" id="ds-rl" placeholder="e.g. 60" data-tip="Load resistance in ohms."><span class="inp-units">Ω</span></div><span class="inp-hint">Real part</span></div>
+  <div class="inp-row"><label>Load X<sub>L</sub></label><div class="inp-inline"><input type="text" id="ds-xl" placeholder="e.g. 80" data-tip="Load reactance in ohms."><span class="inp-units">Ω</span></div><span class="inp-hint">Imag part</span></div>
+  <div class="inp-row"><label>Line Z<sub>0</sub></label><div class="inp-inline"><input type="text" id="ds-z0" placeholder="e.g. 50" data-tip="Characteristic impedance in ohms."><span class="inp-units">Ω</span></div><span class="inp-hint">Reference</span></div>
+  <div class="inp-row"><label>Spacing d</label><div class="inp-inline"><input type="text" id="ds-d" placeholder="0.125" data-tip="Stub spacing in wavelengths (e.g. 0.125 = λ/8)."><span class="inp-units">λ</span></div><span class="inp-hint">Fixed</span></div>
+  <div class="inp-row"><label>Stub type</label><div class="inp-inline"><select id="ds-type" style="font-size:12px;padding:3px;"><option value="open" selected>Open-circuit</option><option value="short">Short-circuit</option></select></div><span class="inp-hint">Shunt stubs</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="dsCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;ds-rl&quot;:&quot;60&quot;,&quot;ds-xl&quot;:&quot;80&quot;,&quot;ds-z0&quot;:&quot;50&quot;,&quot;ds-d&quot;:&quot;0.125&quot;})" title="Pozar Example 5.4: ZL = 60 + j80 Ω, d = λ/8">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Solution 1</h4>
+    <div class="res-row"><span class="res-lbl">Stub 1 length ℓ₁</span><span class="res-val" id="ds-l1a">—</span></div>
+    <div class="res-row"><span class="res-lbl">Stub 2 length ℓ₂</span><span class="res-val" id="ds-l2a">—</span></div>
+    <div class="res-row"><span class="res-lbl">Resulting VSWR</span><span class="res-val" id="ds-v1">—</span></div>
+  </div>
+  <div class="res-card"><h4>Solution 2</h4>
+    <div class="res-row"><span class="res-lbl">Stub 1 length ℓ₁</span><span class="res-val" id="ds-l1b">—</span></div>
+    <div class="res-row"><span class="res-lbl">Stub 2 length ℓ₂</span><span class="res-val" id="ds-l2b">—</span></div>
+    <div class="res-row"><span class="res-lbl">Resulting VSWR</span><span class="res-val" id="ds-v2">—</span></div>
+  </div>
+</div>
+<div class="res-grid" style="margin-top:8px;">
+  <div class="res-card"><h4>Matchability</h4>
+    <div class="res-row"><span class="res-lbl">Load conductance G<sub>L</sub></span><span class="res-val" id="ds-gl">—</span></div>
+    <div class="res-row"><span class="res-lbl">Max G<sub>L</sub> at this spacing</span><span class="res-val" id="ds-gmax">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var type = document.getElementById('ds-type') ? document.getElementById('ds-type').value : 'open';
+  var W=560,H=180,y=70,x0=40,xL=500;
+  var s1=250, s2=380;   // stub tap x positions (stub2 nearer load on right)
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<line x1="'+x0+'" y1="'+y+'" x2="'+xL+'" y2="'+y+'" stroke="#5533aa" stroke-width="2"/>';
+  s+='<circle cx="'+x0+'" cy="'+y+'" r="3" fill="#5533aa"/><text x="'+x0+'" y="'+(y-8)+'" text-anchor="middle" font-size="9" fill="#888">in</text>';
+  s+='<rect x="'+xL+'" y="'+(y-16)+'" width="28" height="32" fill="#f0eeff" stroke="#5533aa" stroke-width="1.6" rx="3"/><text x="'+(xL+14)+'" y="'+(y+4)+'" text-anchor="middle" font-size="9" fill="#5533aa">Z_L</text>';
+  [[s1,'stub 1'],[s2,'stub 2']].forEach(function(p){
+    var x=p[0];
+    s+='<line x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+52)+'" stroke="#AA77FF" stroke-width="2"/>';
+    if(type==='open'){ s+='<circle cx="'+x+'" cy="'+(y+55)+'" r="3" fill="none" stroke="#AA77FF" stroke-width="1.5"/>'; }
+    else { s+='<line x1="'+(x-9)+'" y1="'+(y+52)+'" x2="'+(x+9)+'" y2="'+(y+52)+'" stroke="#AA77FF" stroke-width="2"/>'; }
+    s+='<text x="'+x+'" y="'+(y+72)+'" text-anchor="middle" font-size="8" fill="#888">'+p[1]+'</text>';
+  });
+  s+='<line x1="'+s1+'" y1="'+(y-24)+'" x2="'+s2+'" y2="'+(y-24)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<text x="'+((s1+s2)/2)+'" y="'+(y-28)+'" text-anchor="middle" font-size="9" fill="#888">d</text>';
+  s+='<text x="'+W/2+'" y="168" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Double-stub tuner (first stub at load)</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn about impedance matching →</a></div>
+<script src="DoubleStubTuner.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

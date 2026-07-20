@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multisection Quarter-Wave Transformer — Binomial &amp; Chebyshev | RF Toolbox</title>
+  <meta name="description" content="Design a multisection quarter-wave matching transformer: per-section impedances and fractional bandwidth for binomial (maximally flat) or Chebyshev (equiripple) response (Pozar §5.6–5.7).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/MultisectionTransformer.html">
+  <meta property="og:title" content="Multisection Quarter-Wave Transformer | RF Toolbox">
+  <meta property="og:description" content="Binomial and Chebyshev multisection transformer: section impedances and bandwidth.">
+  <meta property="og:url" content="https://rftoolbox.ca/MultisectionTransformer.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Multisection Quarter-Wave Transformer",
+    "description": "Design a multisection quarter-wave matching transformer: per-section impedances and fractional bandwidth for binomial (maximally flat) or Chebyshev (equiripple) response.",
+    "url": "https://rftoolbox.ca/MultisectionTransformer.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Multisection λ/4 Transformer</h3>
+<div class="tool-concept">
+  <p>Cascading several quarter-wave sections gives a far wider matching bandwidth than a single λ/4 transformer. A <em>binomial</em> design makes the response maximally flat; a <em>Chebyshev</em> design trades a small equal-ripple mismatch for even more bandwidth. This tool returns the impedance of each section, the fractional bandwidth for your ripple spec, and a frequency sweep of the actual cascade to confirm the passband reflection.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">binomial: \(\ln\dfrac{Z_{n+1}}{Z_n}=2^{-N}\binom{N}{n}\ln\dfrac{R_L}{Z_0}\)<br>Chebyshev: \(\Gamma(\theta)=A\,e^{-jN\theta}\,T_N(\sec\theta_m\cos\theta),\ \ A=\Gamma_m,\ \ \sec\theta_m=\cosh\!\big[\tfrac1N\cosh^{-1}\tfrac{\Gamma_0}{\Gamma_m}\big]\)<br>\(\dfrac{\Delta f}{f_0}=2-\dfrac{4}{\pi}\theta_m\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z<sub>0</sub>, R<sub>L</sub></td><td style="padding:3px 0;">Source impedance and (real) load resistance (Ω).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Number of quarter-wave sections (1–8).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Response</td><td style="padding:3px 0;">Binomial (maximally flat) or Chebyshev (equiripple).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Γ<sub>m</sub></td><td style="padding:3px 0;">Maximum passband reflection. For Chebyshev it is the design ripple; for binomial it is the bandwidth threshold.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §5.6 (binomial) &amp; §5.7 (Chebyshev).</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Source Z<sub>0</sub></label><div class="inp-inline"><input type="text" id="mt-z0" placeholder="e.g. 50" data-tip="Source characteristic impedance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Feed line</span></div>
+  <div class="inp-row"><label>Load R<sub>L</sub></label><div class="inp-inline"><input type="text" id="mt-rl" placeholder="e.g. 100" data-tip="Real load resistance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Resistive</span></div>
+  <div class="inp-row"><label>Sections N</label><div class="inp-inline"><input type="text" id="mt-n" placeholder="e.g. 3" data-tip="Number of λ/4 sections (1–8)."></div><span class="inp-hint">1 – 8</span></div>
+  <div class="inp-row"><label>Response</label><div class="inp-inline"><select id="mt-type" style="font-size:12px;padding:3px;"><option value="binomial" selected>Binomial (flat)</option><option value="chebyshev">Chebyshev (ripple)</option></select></div><span class="inp-hint">Shape</span></div>
+  <div class="inp-row"><label>Max ripple Γ<sub>m</sub></label><div class="inp-inline"><input type="text" id="mt-gm" placeholder="e.g. 0.05" data-tip="Maximum passband reflection coefficient (0–1)."></div><span class="inp-hint">e.g. 0.05</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="mtCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;mt-z0&quot;:&quot;50&quot;,&quot;mt-rl&quot;:&quot;100&quot;,&quot;mt-n&quot;:&quot;3&quot;,&quot;mt-type&quot;:&quot;chebyshev&quot;,&quot;mt-gm&quot;:&quot;0.05&quot;})" title="Pozar Example 5.7: 50→100 Ω, N=3, Chebyshev">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Bandwidth</h4>
+    <div class="res-row"><span class="res-lbl">Fractional bandwidth</span><span class="res-val" id="mt-bw">—</span></div>
+    <div class="res-row"><span class="res-lbl">Design max VSWR</span><span class="res-val" id="mt-vswr">—</span></div>
+    <div class="res-row"><span class="res-lbl">Swept passband max |Γ|</span><span class="res-val" id="mt-check">—</span></div>
+  </div>
+</div>
+<div id="mt-sections" style="margin-top:10px;"></div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  if (typeof mtLastZ === 'undefined' || !mtLastZ) return;
+  var Z = mtLastZ, Z0 = mtLastZ0, RL = mtLastRL;
+  var n = Z.length, W=560, H=140, y=70, x0=30, seg=Math.min(70,(W-90)/(n+1));
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  var x=x0;
+  s+='<line x1="'+x+'" y1="'+y+'" x2="'+(x+30)+'" y2="'+y+'" stroke="#333" stroke-width="2"/>';
+  s+='<text x="'+(x+15)+'" y="'+(y-8)+'" text-anchor="middle" font-size="8" fill="#888">Z0='+Z0.toFixed(0)+'</text>';
+  x+=30;
+  for(var i=0;i<n;i++){
+    var h=10+ (i%2)*6;
+    s+='<rect x="'+x+'" y="'+(y-11)+'" width="'+seg+'" height="22" fill="#e9e2fb" stroke="#5533aa" stroke-width="1.4"/>';
+    s+='<text x="'+(x+seg/2)+'" y="'+(y+4)+'" text-anchor="middle" font-size="8.5" fill="#5533aa">'+Z[i].toFixed(1)+'</text>';
+    s+='<text x="'+(x+seg/2)+'" y="'+(y-15)+'" text-anchor="middle" font-size="7.5" fill="#888">λ/4</text>';
+    x+=seg;
+  }
+  s+='<rect x="'+x+'" y="'+(y-16)+'" width="26" height="32" fill="#f0eeff" stroke="#5533aa" stroke-width="1.6" rx="3"/>';
+  s+='<text x="'+(x+13)+'" y="'+(y+4)+'" text-anchor="middle" font-size="8" fill="#5533aa">'+RL.toFixed(0)+'Ω</text>';
+  s+='<text x="'+W/2+'" y="128" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">'+n+'-section transformer</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_impedance_matching.html">Learn about impedance matching →</a></div>
+<script src="MultisectionTransformer.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
