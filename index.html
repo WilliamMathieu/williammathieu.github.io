@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RF Toolbox — Free Online RF & Microwave Engineering Calculators</title>
-  <meta name="description" content="122 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
+  <meta name="description" content="125 free online RF engineering calculators and simulators: Smith Chart, impedance matching, microstrip, filter design, antenna design, amplifier stability, waveguide, and MRI coil tools. No install, runs in your browser.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://rftoolbox.ca/">
   <meta property="og:title" content="RF Toolbox — Free Online RF & Microwave Engineering Calculators">
@@ -112,9 +112,9 @@
     <div class="hero-row">
       <div>
         <h1>RF &amp; Microwave Engineering Calculators</h1>
-        <p>122 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 68 wiki articles. No install. Runs in your browser.</p>
+        <p>125 free calculators and simulators covering impedance matching, transmission lines, filters, antennas, amplifiers, waveguides, and MRI coils — plus 68 wiki articles. No install. Runs in your browser.</p>
         <div class="hero-stats">
-          <div class="hero-stat"><span class="num">120</span><span class="lbl">🧮 Calculators</span></div>
+          <div class="hero-stat"><span class="num">123</span><span class="lbl">🧮 Calculators</span></div>
           <div class="hero-stat"><span class="num">2</span><span class="lbl">🔬 Simulators</span></div>
           <div class="hero-stat"><span class="num">64</span><span class="lbl">📖 Wiki Articles</span></div>
           <div class="hero-stat"><span class="num">7</span><span class="lbl">🎮 Games</span></div>
@@ -482,7 +482,7 @@
   </div>
 </a>
 </div>
-<div class="cat-header" style="background:#994e33"><span class="ch-icon">🎚️</span><span class="ch-label">Filters & Attenuators</span><span class="ch-count">5 tools</span></div>
+<div class="cat-header" style="background:#994e33"><span class="ch-icon">🎚️</span><span class="ch-label">Filters & Attenuators</span><span class="ch-count">8 tools</span></div>
 <div class="tool-grid">
 <a class="tool-card" href="RCFilter.html">
   <div class="tool-card-fig"><img src="thumbnails/RCFilter.svg" width="200" height="90" alt="RCFilter"></div>
@@ -513,6 +513,24 @@
   <div class="tool-card-body">
     <div class="tool-card-name">Filter Group Delay</div>
     <div class="tool-card-desc">Band-center group delay of a Butterworth or Chebyshev lowpass prototype from its poles.</div>
+  </div>
+</a><a class="tool-card" href="FilterPrototype.html">
+  <div class="tool-card-fig"><img src="thumbnails/FilterPrototype.svg" width="200" height="90" alt="FilterPrototype"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Filter Prototype g-Values</div>
+    <div class="tool-card-desc">Butterworth &amp; Chebyshev lowpass g-values of any order, plus denormalised L/C.</div>
+  </div>
+</a><a class="tool-card" href="CoupledLineFilter.html">
+  <div class="tool-card-fig"><img src="thumbnails/CoupledLineFilter.svg" width="200" height="90" alt="CoupledLineFilter"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Coupled-Line Filter</div>
+    <div class="tool-card-desc">Parallel coupled-line bandpass: J-inverters and even/odd-mode impedances per section.</div>
+  </div>
+</a><a class="tool-card" href="StubFilter.html">
+  <div class="tool-card-fig"><img src="thumbnails/StubFilter.svg" width="200" height="90" alt="StubFilter"></div>
+  <div class="tool-card-body">
+    <div class="tool-card-name">Stub Filter (Richards)</div>
+    <div class="tool-card-desc">λ/8 short- and open-circuit stub impedances from a lumped lowpass prototype.</div>
   </div>
 </a>
 </div>
@@ -1025,7 +1043,7 @@ var CAT_MAP = {
   coils:        ['LC.html','CLC.html','CoupledResonators.html','BandpassCalc.html','Solenoid.html','Varactor.html','ParallelPlateCap.html','BondWire.html','WireInductance.html','ToroidInductor.html','CapacitorSRF.html','ResonatorQ.html','FerriteBead.html'],
   tlines:       ['Microstrip.html','Coaxial.html','Stripline.html','CPW.html','DiffPair.html','StubCalc.html','QuarterWave.html','TLLoss.html','TDR.html','PCBVia.html','CoaxPowerHandling.html','TLResonator.html'],
   matching:     ['SmithChart.html','VSWRConverter.html','LNetwork.html','PiTNetwork.html','ImpedanceMatchingNetwork.html','CapacitorNetwork.html','LCBalun.html','Wilkinson.html','Coupler.html','PowerCombiner.html','PhaseShifter.html','MismatchLoss.html','SingleStubMatch.html','DoubleStubTuner.html','MultisectionTransformer.html','KlopfensteinTaper.html','BodeFano.html'],
-  filters:      ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html','GroupDelay.html'],
+  filters:      ['RCFilter.html','FilterDesign.html','BandpassCalc.html','AttenuatorDesign.html','SteppedImpedanceLPF.html','GroupDelay.html','FilterPrototype.html','CoupledLineFilter.html','StubFilter.html'],
   amps:         ['NoiseFigure.html','AmpStability.html','IP3Calc.html','TransistorFT.html','TransducerGain.html','LNAMatch.html','NFYFactor.html','PLLFilter.html','PhaseNoiseJitter.html','DDS.html','NoiseTempNF.html','LeesonPhaseNoise.html','PALoadLine.html','JunctionTemp.html','CrystalResonator.html','AmpDesignCircles.html','ConjugateMatch.html'],
   rx:           ['Sensitivity.html','ImageReject.html','ADCNoise.html','EVMSNR.html','BandpassSampling.html','SpectrumDANL.html','RFCascadeAnalyzer.html','MixerSpurChart.html','ModulationBandwidth.html','BERvsEbN0.html','OFDMParameters.html'],
   antennas:     ['Dipole.html','PatchAntenna.html','ArrayFactor.html','HelicalAntenna.html','YagiAntenna.html','ApertureAntenna.html','ParabolicDish.html','HornAntenna.html','AntennaGainConverter.html','MonopoleLoop.html'],
