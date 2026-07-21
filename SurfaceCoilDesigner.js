@@ -248,7 +248,7 @@ function calculate() {
   });
 
   document.getElementById('results').style.display='block';
-  if(window.MathJax) MathJax.typeset();
+  if(window.MathJax && MathJax.typeset) MathJax.typeset();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

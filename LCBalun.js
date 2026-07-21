@@ -35,7 +35,7 @@ function topoChange() {
     var topo = document.getElementById('bl-topo').value;
     document.getElementById('bl-note').textContent = TOPO_NOTES[topo];
     document.getElementById('bl-eq').innerHTML = TOPO_EQ[topo];
-    if (window.MathJax) MathJax.typesetPromise();
+    if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
     // Show/hide extra result rows
     var hasFour = (topo === 'lattice');
     document.getElementById('bl-r3-p').style.display = hasFour ? '' : 'none';

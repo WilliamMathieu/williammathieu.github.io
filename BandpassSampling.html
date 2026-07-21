@@ -94,7 +94,7 @@ function drawDiagram() {
   function X(f){ return xa + f/fmax*xw; }
   s+='<line x1="'+xa+'" y1="'+yb+'" x2="'+(xa+xw)+'" y2="'+yb+'" stroke="#bbb" stroke-width="1"/>';
   // Nyquist zone boundaries at k*fs/2
-  for(var k=1;k*fs/2<fmax;k++){ var x=X(k*fs/2); s+='<line x1="'+x.toFixed(1)+'" y1="'+(yb-50)+'" x2="'+x.toFixed(1)+'" y2="'+yb+'" stroke="#e0d8ff" stroke-width="1"/>'; }
+  for(var k=1;k*fs/2<fmax && k<=200;k++){ var x=X(k*fs/2); s+='<line x1="'+x.toFixed(1)+'" y1="'+(yb-50)+'" x2="'+x.toFixed(1)+'" y2="'+yb+'" stroke="#e0d8ff" stroke-width="1"/>'; }
   // the signal band
   var xL=X(fc-B/2), xH=X(fc+B/2);
   s+='<rect x="'+xL.toFixed(1)+'" y="'+(yb-46)+'" width="'+(xH-xL).toFixed(1)+'" height="46" fill="#5533aa66" stroke="#5533aa" stroke-width="1.2"/>';

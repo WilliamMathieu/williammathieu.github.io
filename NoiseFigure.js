@@ -11,6 +11,7 @@ var nfCount=3;
 // eslint-disable-next-line no-redeclare
 function nfBuild(){
     nfCount=parseInt(document.getElementById('nf-n').value)||3;
+    if(nfCount<1)nfCount=1; if(nfCount>20)nfCount=20;
     var h='';
     for(var i=1;i<=nfCount;i++){
         h+='Stage '+i+': &nbsp;Gain G<sub>'+i+'</sub>: <input type="text" id="nf-g'+i+'" style="width:60px"> dB &nbsp;NF F<sub>'+i+'</sub>: <input type="text" id="nf-f'+i+'" style="width:60px"> dB<br>';
