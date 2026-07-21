@@ -49,6 +49,42 @@ function loadExample(idValueMap) {
   }, 80);
 }
 
+// ── Result safety net ─────────────────────────────────────────────────────
+// No calculator should ever display a raw NaN / Infinity / undefined. When a
+// result field ends up with one (an unguarded divide-by-zero, a blank field,
+// an overflow), replace just that token with the site's "—" placeholder. This
+// only ever touches already-broken output — a valid numeric result never
+// contains these tokens — so it cannot change a correct answer.
+(function () {
+  var RESULT_SEL = '.res-val,.res-row,.res-card,[id$="-out"],[id$="_out"],[id$="-res"],' +
+                   '[id$="-table"],[id$="-tbl"],[id$="-abcd"],#C_out,#result,#output,#results';
+  var TEST = /(?:NaN|Infinity|undefined)/;
+  var REPL = /(?:NaN|Infinity|undefined)/g;
+  var busy = false;
+  function sanitize() {
+    if (busy) return;
+    busy = true;
+    try {
+      document.querySelectorAll(RESULT_SEL).forEach(function (root) {
+        var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+        var n, hits = [];
+        while ((n = w.nextNode())) { if (TEST.test(n.nodeValue)) hits.push(n); }
+        hits.forEach(function (t) { t.nodeValue = t.nodeValue.replace(REPL, '—'); });
+      });
+    } finally { busy = false; }
+  }
+  function setup() {
+    sanitize();
+    try {
+      new MutationObserver(sanitize).observe(document.body,
+        { subtree: true, childList: true, characterData: true });
+    } catch (e) { /* MutationObserver unavailable — safe to skip */ }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setup);
+  } else { setup(); }
+})();
+
 // ── DOMContentLoaded: tooltips + auto-draw ────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
 
