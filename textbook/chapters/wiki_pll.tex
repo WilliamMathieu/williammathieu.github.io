@@ -1,5 +1,5 @@
-% chapter: wiki_pll
-\chapter{Phase-Locked Loops and Frequency Synthesis}\label{ch:wiki_pll}
+% section: wiki_pll
+\section{Phase-Locked Loops and Frequency Synthesis}\label{sec:wiki_pll}
 
 \input{pedagogy/wiki_pll_obj}
 
@@ -7,7 +7,7 @@ A phase-locked loop (PLL) is a feedback system that synchronises an oscillator t
 
       
 
-\section{PLL Building Blocks}
+\subsection{PLL Building Blocks}
 
       
         
@@ -32,7 +32,7 @@ Divider ÷N & Divides VCO frequency by N to match reference. N sets output frequ
 
       
 
-\section{How It Works}
+\subsection{How It Works}
 
       
 
@@ -42,7 +42,7 @@ The PFD compares the phase of the reference (f\_ref) to the divided VCO output (
 
       
 
-\section{Open-Loop Transfer Function}
+\subsection{Open-Loop Transfer Function}
 
       
 \[G(s) = \dfrac{K_\phi I_{CP}}{2\pi}\cdot F(s)\cdot\dfrac{K_{VCO}}{s}\cdot\dfrac{1}{N}\]
@@ -53,7 +53,7 @@ where F(s) is the loop filter transfer function. The loop bandwidth f\_n is appr
 
       
 
-\section{Lock Time and Bandwidth Tradeoff}
+\subsection{Lock Time and Bandwidth Tradeoff}
 
       
 
@@ -75,7 +75,7 @@ Typical loop bandwidths: 1–100 kHz for frequency synthesisers, 1–10 MHz for 
 
       
 
-\section{Phase Noise in a PLL}
+\subsection{Phase Noise in a PLL}
 
       
 
@@ -88,7 +88,7 @@ Inside the loop bandwidth, the PLL output tracks the reference and the output ph
 
       
 
-\section{Integer-N vs Fractional-N}
+\subsection{Integer-N vs Fractional-N}
 
       
         
@@ -111,7 +111,7 @@ Integer-N synthesis requires f\_ref = channel spacing. For a 200 kHz GSM channel
 
       
 
-\section{Reference Spurs}
+\subsection{Reference Spurs}
 
       
 
@@ -119,7 +119,7 @@ Reference spurs are discrete spectral lines in the VCO output at offsets of ±f\
 
       
 
-\section{Practical PLL Design Steps}
+\subsection{Practical PLL Design Steps}
 
       
 \begin{enumerate}

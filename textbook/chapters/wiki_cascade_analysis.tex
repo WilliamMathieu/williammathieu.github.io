@@ -1,5 +1,5 @@
-% chapter: wiki_cascade_analysis
-\chapter{Receiver Cascade Analysis}\label{ch:wiki_cascade_analysis}
+% section: wiki_cascade_analysis
+\section{Receiver Cascade Analysis}\label{sec:wiki_cascade_analysis}
 
 \input{pedagogy/wiki_cascade_analysis_obj}
 
@@ -7,7 +7,7 @@ A receiver chain is a sequence of amplifiers, filters, and frequency converters 
 
       
 
-\section{The Three-Parameter Cascade}
+\subsection{The Three-Parameter Cascade}
 
       
 
@@ -17,7 +17,7 @@ For each stage, you need three numbers: gain G (dB), noise figure NF (dB), and i
 
       
 
-\section{Friis Formula for Cascaded Noise Figure}
+\subsection{Friis Formula for Cascaded Noise Figure}
 
       
 \[F_{sys} = F_1 + \dfrac{F_2-1}{G_1} + \dfrac{F_3-1}{G_1 G_2} + \cdots\]
@@ -28,7 +28,7 @@ where F = 10\textasciicircum{}(NF/10) (linear). The first stage dominates if G�
 
       
 
-\section{Cascaded IIP3}
+\subsection{Cascaded IIP3}
 
       
 \[\dfrac{1}{IIP3_{sys}} = \dfrac{1}{IIP3_1} + \dfrac{G_1}{IIP3_2} + \dfrac{G_1 G_2}{IIP3_3} + \cdots\]
@@ -39,7 +39,7 @@ where F = 10\textasciicircum{}(NF/10) (linear). The first stage dominates if G�
 
       
 
-\section{Worked Example: 2.4 GHz Receiver}
+\subsection{Worked Example: 2.4 GHz Receiver}
 
       
         
@@ -68,7 +68,7 @@ The cumulative noise figure stabilises at 4.3 dB after the LNA — the LNA gain 
 
       
 
-\section{Minimum Detectable Signal}
+\subsection{Minimum Detectable Signal}
 
       
 \[MDS = -174 + NF_{sys} + 10\log_{10}(BW) + SNR_{min}\quad[\text{dBm}]\]
@@ -81,7 +81,7 @@ For the example above with 5 MHz bandwidth and 10 dB minimum SNR: MDS = −174 +
 
       
 
-\section{Spurious-Free Dynamic Range}
+\subsection{Spurious-Free Dynamic Range}
 
       
 \[SFDR = \tfrac{2}{3}(IIP3_{sys} - MDS)\]
@@ -92,7 +92,7 @@ With IIP3 = −6.3 dBm and MDS = −92.7 dBm: SFDR = 2/3 × 86.4 = 57.6 dB. This
 
       
 
-\section{Gain Distribution Rules of Thumb}
+\subsection{Gain Distribution Rules of Thumb}
 
       
 \begin{itemize}
@@ -112,7 +112,7 @@ With IIP3 = −6.3 dBm and MDS = −92.7 dBm: SFDR = 2/3 × 86.4 = 57.6 dB. This
 
       
 
-\section{AGC and Automatic Gain Control}
+\subsection{AGC and Automatic Gain Control}
 
       
 

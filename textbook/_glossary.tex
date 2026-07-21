@@ -1,0 +1,66 @@
+\chapter{Glossary}\label{ch:glossary}
+
+Concise definitions of the terms used throughout this book. Symbols and their
+units are collected separately in the \emph{Notation} section at the front.
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.26\linewidth}>{\raggedright\arraybackslash}p{0.66\linewidth}}
+\hline
+\textbf{ABCD parameters} & Chain (cascade) matrix of a two-port; the matrix of cascaded networks is the product of the individual matrices. \\
+\textbf{Admittance ($Y$)} & Reciprocal of impedance, $Y=1/Z=G+jB$, with conductance $G$ and susceptance $B$. \\
+\textbf{Aperture efficiency} & Ratio of an antenna's effective area to its physical area; sets the realised gain of a dish or horn. \\
+\textbf{Attenuation constant ($\alpha$)} & Real part of the propagation constant; the rate (Np/m or dB/m) at which a wave loses amplitude. \\
+\textbf{Balun} & Balanced-to-unbalanced transformer that couples a balanced load (e.g.\ a dipole) to an unbalanced line (e.g.\ coax). \\
+\textbf{Butterworth filter} & Maximally-flat amplitude response; no passband ripple, gentle roll-off. \\
+\textbf{Chebyshev filter} & Equal-ripple passband giving a steeper roll-off than Butterworth for the same order. \\
+\textbf{Circulator} & Non-reciprocal three-port ferrite device that routes power from each port to the next in one direction only. \\
+\textbf{Conversion loss} & Ratio of available RF input power to available IF output power in a mixer (dB). \\
+\textbf{Coupling factor} & Fraction of forward power a directional coupler taps to its coupled port (dB). \\
+\textbf{Cutoff frequency} & Frequency at which a filter response falls to $-3$~dB, or below which a waveguide mode does not propagate. \\
+\textbf{dB / dBm / dBc / dBi} & Decibel ratio; power referenced to 1~mW; level relative to a carrier; antenna gain relative to an isotropic radiator. \\
+\textbf{Dielectric constant ($\varepsilon_r$)} & Relative permittivity; how much a material slows and stores an electric field versus vacuum. \\
+\textbf{Directivity} & Ratio of an antenna's peak radiation intensity to its average; gain is directivity times efficiency. \\
+\textbf{Dispersion} & Frequency dependence of phase velocity or group delay, which spreads a pulse or symbol in time. \\
+\textbf{Effective aperture ($A_e$)} & Equivalent capture area of a receiving antenna, $A_e=G\lambda^2/4\pi$. \\
+\textbf{EIRP} & Effective isotropic radiated power: transmit power plus antenna gain (dBm~$+$~dBi). \\
+\textbf{Ferrite} & Ceramic ferrimagnetic material whose biased permeability is a tensor, enabling isolators, circulators and phase shifters. \\
+\textbf{Group delay ($\tau_g$)} & Negative slope of phase versus frequency, $\tau_g=-d\phi/d\omega$; constant group delay means distortionless transmission. \\
+\textbf{Gyromagnetic ratio ($\gamma$)} & Proportionality between magnetic field and precession frequency; $\approx 2.8$~MHz/Oe for electrons, $42.58$~MHz/T for protons. \\
+\textbf{Characteristic impedance ($Z_0$)} & Ratio of voltage to current of a single travelling wave on a line; commonly 50 or 75~$\Omega$. \\
+\textbf{Insertion loss} & Signal power lost by inserting a component into a matched line (dB). \\
+\textbf{Intermodulation / IP3} & Mixing products from non-linearity; the third-order intercept (IP3) is the extrapolated level where third-order products equal the fundamentals. \\
+\textbf{Isolation} & Attenuation between two nominally decoupled ports (e.g.\ an off switch, or a coupler's isolated port). \\
+\textbf{Isolator} & Non-reciprocal two-port that passes power one way and absorbs the reverse wave; protects sources from reflections. \\
+\textbf{Kittel resonance} & Ferromagnetic (gyromagnetic) resonance frequency of a biased magnetic sample, shifted by its shape (demagnetisation). \\
+\textbf{Larmor frequency} & Precession frequency of magnetic moments in a field, $f_0=\gamma B_0$; the resonant frequency in NMR/MRI. \\
+\textbf{Load line} & Locus of instantaneous voltage and current at a device's output; sets the achievable power and efficiency of an amplifier. \\
+\textbf{Loss tangent ($\tan\delta$)} & Ratio of a dielectric's loss to its storage; quantifies dielectric heating and attenuation. \\
+\textbf{Matching network} & Lossless network that transforms a load to a source impedance for maximum power transfer / minimum reflection. \\
+\textbf{Mixer} & Non-linear/switching device that multiplies two signals to translate frequency ($f_{RF}\pm f_{LO}$). \\
+\textbf{Noise figure (NF)} & Degradation of signal-to-noise ratio through a component (dB); the linear form is the noise factor $F$. \\
+\textbf{Noise temperature ($T_e$)} & Equivalent input noise of a device expressed as a temperature, $T_e=(F-1)T_0$. \\
+\textbf{Permeability ($\mu$)} & Magnetic constitutive parameter relating $B$ and $H$; a tensor in biased ferrites. \\
+\textbf{Phase constant ($\beta$)} & Imaginary part of the propagation constant, $\beta=2\pi/\lambda$; radians of phase per metre. \\
+\textbf{Phase noise} & Short-term random phase fluctuation of an oscillator, quoted as dBc/Hz at an offset from the carrier. \\
+\textbf{PIN diode} & Current-controlled RF resistor used as a switch or attenuator: low resistance when forward-biased, small capacitance when reverse-biased. \\
+\textbf{Polarisation} & Orientation of an antenna's electric field (linear, circular, elliptical); mismatch between link ends causes loss. \\
+\textbf{$Q$ factor} & Quality factor; ratio of energy stored to energy dissipated per cycle, $Q=f_0/\Delta f$ for a resonator. \\
+\textbf{Quarter-wave transformer} & A $\lambda/4$ line of impedance $\sqrt{Z_0 Z_L}$ that matches two real impedances at one frequency. \\
+\textbf{Radar cross section (RCS)} & Effective area ($\text{m}^2$) that characterises how strongly a target scatters radar energy back to the receiver. \\
+\textbf{Reflection coefficient ($\Gamma$)} & Ratio of reflected to incident wave, $\Gamma=(Z_L-Z_0)/(Z_L+Z_0)$. \\
+\textbf{Resonator} & Structure storing energy at a resonant frequency (LC tank, cavity, dielectric puck, crystal); characterised by $f_0$ and $Q$. \\
+\textbf{Return loss} & Reflected power relative to incident, $-20\log_{10}|\Gamma|$ (dB); larger is better. \\
+\textbf{S-parameters} & Scattering parameters relating incident and reflected wave amplitudes at a network's ports, referenced to $Z_0$. \\
+\textbf{SAR} & Specific absorption rate (W/kg); RF power deposited per unit mass of tissue, the limit on MRI transmit power. \\
+\textbf{Schottky diode} & Metal--semiconductor diode with fast response and low forward drop, used in detectors and mixers. \\
+\textbf{Skin depth ($\delta$)} & Depth at which current density falls to $1/e$ in a conductor; shrinks as $1/\sqrt{f}$. \\
+\textbf{Smith chart} & Polar chart of the reflection coefficient overlaid with impedance/admittance circles; a graphical matching tool. \\
+\textbf{Stub} & Short length of open- or short-circuited line used as a reactance for matching or filtering. \\
+\textbf{Superheterodyne} & Receiver architecture that mixes the RF signal to a fixed intermediate frequency for selectivity and gain. \\
+\textbf{TSS} & Tangential signal sensitivity; the input level at which a detector's output is just discernible above noise. \\
+\textbf{VNA} & Vector network analyser; instrument that measures magnitude and phase of S-parameters after calibration. \\
+\textbf{VSWR} & Voltage standing-wave ratio, $(1+|\Gamma|)/(1-|\Gamma|)$; the ratio of standing-wave maxima to minima on a mismatched line. \\
+\textbf{Waveguide} & Hollow metal (or dielectric) structure guiding waves above a cutoff frequency with very low loss. \\
+\textbf{Wavelength ($\lambda$)} & Spatial period of a wave, $\lambda=v_p/f$; the natural length scale of every RF structure. \\
+\textbf{YIG} & Yttrium iron garnet; a low-loss ferrite used for tunable filters and oscillators ($4\pi M_s\approx1780$~G). \\
+\hline
+\end{longtable}

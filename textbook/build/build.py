@@ -187,8 +187,8 @@ class Conv(HTMLParser):
             if 'eq' in cls.split(): self.in_eq += 1; self.push()
             return
         if tag in ('p',): self.emit('\n\n'); return
-        if tag == 'h4': self.emit('\n\n\\section{'); self.push(); return
-        if tag in ('h5','h6'): self.emit('\n\n\\subsection{'); self.push(); return
+        if tag == 'h4': self.emit('\n\n\\subsection{'); self.push(); return
+        if tag in ('h5','h6'): self.emit('\n\n\\subsubsection{'); self.push(); return
         if tag == 'ul': self.emit('\n\\begin{itemize}\n'); return
         if tag == 'ol': self.emit('\n\\begin{enumerate}\n'); return
         if tag == 'li': self.emit('\\item '); return
@@ -330,7 +330,7 @@ def convert(slug, title):
     ped = os.path.join(TB, 'pedagogy')
     obj  = ('\\input{pedagogy/%s_obj}\n\n' % slug) if os.path.exists(os.path.join(ped, slug+'_obj.tex')) else ''
     prac = ('\n\n\\input{pedagogy/%s}\n' % slug) if os.path.exists(os.path.join(ped, slug+'.tex')) else ''
-    tex = ('%% chapter: %s\n\\chapter{%s}\\label{ch:%s}\n\n%s%s\n%s'
+    tex = ('%% section: %s\n\\section{%s}\\label{sec:%s}\n\n%s%s\n%s'
            % (slug, title.replace('&','\\&'), slug, obj, body, prac))
     open(os.path.join(CHDIR, slug + '.tex'), 'w', encoding='utf-8').write(tex)
     return len(figs), sum(1 for f in figs if not f[2])
@@ -341,7 +341,7 @@ def convert_native(slug, title):
     ped = os.path.join(TB, 'pedagogy')
     obj  = ('\\input{pedagogy/%s_obj}\n\n' % slug) if os.path.exists(os.path.join(ped, slug+'_obj.tex')) else ''
     prac = ('\n\n\\input{pedagogy/%s}\n' % slug) if os.path.exists(os.path.join(ped, slug+'.tex')) else ''
-    tex = ('%% chapter: %s (native)\n\\chapter{%s}\\label{ch:%s}\n\n%s%s\n%s'
+    tex = ('%% section: %s (native)\n\\section{%s}\\label{sec:%s}\n\n%s%s\n%s'
            % (slug, title.replace('&','\\&'), slug, obj, body, prac))
     open(os.path.join(CHDIR, slug + '.tex'), 'w', encoding='utf-8').write(tex)
     return 0, 0
@@ -355,20 +355,20 @@ def roman(n):
 
 body_lines = []; sol_lines = []; total_fig = 0; total_bad = 0; nch = 0; nsol = 0
 for pi,(ptitle, chs) in enumerate(PARTS, 1):
-    body_lines.append('\n\\part{%s}\n' % ptitle.replace('&','\\&'))
+    body_lines.append('\n\\chapter{%s}\n' % ptitle.replace('&','\\&'))
     for slug, title in chs:
         if os.path.exists(os.path.join(ROOT, slug + '.html')):
             nf, bad = convert(slug, title)
         else:
             nf, bad = convert_native(slug, title)
         total_fig += nf; total_bad += bad; nch += 1
-        body_lines.append('\\include{chapters/%s}' % slug)
+        body_lines.append('\\input{chapters/%s}' % slug)
         if os.path.exists(os.path.join(TB, 'pedagogy', slug + '_sol.tex')):
-            sol_lines.append('\\needspace{4\\baselineskip}\\subsection*{Chapter~\\ref{ch:%s}: %s}'
+            sol_lines.append('\\needspace{4\\baselineskip}\\subsection*{Section~\\ref{sec:%s}: %s}'
                              % (slug, title.replace('&','\\&')))
             sol_lines.append('\\input{pedagogy/%s_sol}' % slug); nsol += 1
-    print('Part %s — %s (%d chapters)' % (roman(pi), ptitle, len(chs)))
+    print('Chapter %d — %s (%d sections)' % (pi, ptitle, len(chs)))
 open(os.path.join(TB, '_book_body.tex'), 'w').write('\n'.join(body_lines)+'\n')
 open(os.path.join(TB, '_solutions.tex'), 'w').write('\n'.join(sol_lines)+'\n')
-print('\n%d chapters, %d figures rendered (%d failed), %d solution sets'
-      % (nch, total_fig, total_bad, nsol))
+print('\n%d sections in %d chapters, %d figures rendered (%d failed), %d solution sets'
+      % (nch, len(PARTS), total_fig, total_bad, nsol))

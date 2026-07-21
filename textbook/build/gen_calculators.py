@@ -8,21 +8,21 @@ import os, re, html, sys
 
 TB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# display category (ch-label)  ->  book Part it maps to
+# display category (ch-label)  ->  book chapter it maps to
 SECTION_PART = {
- 'Fundamentals & EM'          : 'Part~I (Electromagnetic Foundations)',
- 'Resonance & Passives'       : 'Part~IV (Passive Components, Resonators and Filters)',
- 'Transmission Lines'         : 'Parts~II--III (Transmission Lines; Guided-Wave Structures)',
- 'Matching & Dividers'        : 'Part~II (Transmission Lines and Impedance)',
- 'Filters & Attenuators'      : 'Part~IV (Passive Components, Resonators and Filters)',
- 'Amplifiers & Devices'       : 'Parts~V--VI (Active Devices; Signal Generation)',
- 'Receivers & DSP'            : 'Part~VIII (RF Systems, Receivers and Communications)',
- 'Antennas & Arrays'          : 'Part~VII (Antennas and Propagation)',
- 'Propagation, Radar & Links' : 'Part~VIII (RF Systems, Receivers and Communications)',
- 'Waveguide'                  : 'Part~III (Guided-Wave Structures and Interconnect)',
- 'MRI Coils & Tools'          : 'Part~X (MRI Physics and Coil Engineering)',
- 'Converters'                 : 'Parts~II and~IX (Impedance; Measurement)',
- 'Simulators'                 : 'Parts~II--IV (Impedance; Components)',
+ 'Fundamentals & EM'          : 'Chapter~1 (Electromagnetic Foundations)',
+ 'Resonance & Passives'       : 'Chapter~4 (Passive Components, Resonators and Filters)',
+ 'Transmission Lines'         : 'Chapters~2--3 (Transmission Lines; Guided-Wave Structures)',
+ 'Matching & Dividers'        : 'Chapter~2 (Transmission Lines and Impedance)',
+ 'Filters & Attenuators'      : 'Chapter~4 (Passive Components, Resonators and Filters)',
+ 'Amplifiers & Devices'       : 'Chapters~5--6 (Active Devices; Signal Generation)',
+ 'Receivers & DSP'            : 'Chapter~8 (RF Systems, Receivers and Communications)',
+ 'Antennas & Arrays'          : 'Chapter~7 (Antennas and Propagation)',
+ 'Propagation, Radar & Links' : 'Chapter~8 (RF Systems, Receivers and Communications)',
+ 'Waveguide'                  : 'Chapter~3 (Guided-Wave Structures and Interconnect)',
+ 'MRI Coils & Tools'          : 'Chapter~10 (MRI Physics and Coil Engineering)',
+ 'Converters'                 : 'Chapters~2 and~9 (Impedance; Measurement)',
+ 'Simulators'                 : 'Chapters~2--4 (Impedance; Components)',
 }
 
 SPECIAL = {'\\':r'\textbackslash{}','&':r'\&','%':r'\%','$':r'\$','#':r'\#',
@@ -61,7 +61,7 @@ def emit(sections):
     out.append(r'''Every formula in this book has a companion interactive calculator at
 \href{https://rftoolbox.ca}{rftoolbox.ca} --- enter your own numbers and read the
 answer, with the same diagrams used here. The tools are listed below by category,
-each cross-referenced to the Part of this book that develops its theory. All are
+each cross-referenced to the chapter of this book that develops its theory. All are
 free and run in the browser.''')
     out.append('')
     for label, cards in sections:
