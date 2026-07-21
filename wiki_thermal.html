@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thermal Management &amp; Junction Temperature in RF Power Devices | RF Toolbox Wiki</title>
+  <meta name="description" content="RF power device thermal design: the junction-to-ambient thermal resistance chain, junction temperature, derating, heat sinks, and the reliability impact of temperature.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_thermal.html">
+  <meta property="og:title" content="Thermal Management &amp; Junction Temperature | RF Toolbox Wiki">
+  <meta property="og:description" content="The θjc/θcs/θsa thermal chain, junction temperature, derating, heat sinks and reliability.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_thermal.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+    .wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+    .wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+    .wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+    .wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+    .wa table{font-size:12px;border-collapse:collapse;margin:8px 0 12px;width:100%;}
+    .wa th{font-family:monospace;font-size:11px;color:#5533aa;text-transform:uppercase;letter-spacing:0.05em;padding:5px 12px;border-bottom:2px solid #d0c8f0;background:#f0eeff;text-align:left;}
+    .wa td{padding:5px 12px;border-bottom:1px solid #eee;}
+    .wa tr:last-child td{border-bottom:none;}
+    .wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+    .wiki-back a{display:inline-block;font-weight:bold;color:#5533aa;background:#f0eeff;border:1px solid #cdbff2;border-radius:6px;padding:6px 13px;text-decoration:none;transition:background 0.12s,border-color 0.12s,color 0.12s;}.wiki-back a:hover{background:#AA77FF;border-color:#AA77FF;color:#fff;}
+  </style>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+  <article>
+    <div class="wiki-back"><a href="index.html">⌂ Home</a> <a href="wiki.html">&#8592; Wiki</a></div>
+    <div class="wa">
+      <h3>Thermal Management &amp; Junction Temperature</h3>
+
+      <p>An RF power amplifier turns much of its DC power into heat, and that heat has to escape from a tiny transistor die to the outside world. The temperature the die actually reaches — the <em>junction temperature</em> \(T_j\) — governs both performance (gain, efficiency and output power all fade as the device heats) and reliability (failure rate rises steeply with temperature). Thermal design is therefore inseparable from PA design.</p>
+
+      <h4>The Thermal-Resistance Chain</h4>
+      <p>Heat flows from junction to ambient through a series of thermal resistances, exactly like current through series electrical resistors, with power as the "current" and temperature rise as the "voltage":</p>
+<figure><svg viewBox="0 0 420 130" width="420" height="130" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="420" height="130" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><g font-family="monospace"><circle cx="45" cy="60" r="16" fill="#f0eeff" stroke="#5533aa" stroke-width="1.6"/><text x="45" y="64" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">J</text><text x="45" y="90" text-anchor="middle" font-size="8" fill="#888">junction</text><line x1="61" y1="60" x2="130" y2="60" stroke="#AA77FF" stroke-width="2"/><text x="95" y="52" text-anchor="middle" font-size="9" fill="#888">θjc</text><circle cx="146" cy="60" r="16" fill="#f0eeff" stroke="#5533aa" stroke-width="1.6"/><text x="146" y="64" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">C</text><text x="146" y="90" text-anchor="middle" font-size="8" fill="#888">case</text><line x1="162" y1="60" x2="231" y2="60" stroke="#AA77FF" stroke-width="2"/><text x="196" y="52" text-anchor="middle" font-size="9" fill="#888">θcs</text><circle cx="247" cy="60" r="16" fill="#f0eeff" stroke="#5533aa" stroke-width="1.6"/><text x="247" y="64" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">S</text><text x="247" y="90" text-anchor="middle" font-size="8" fill="#888">sink</text><line x1="263" y1="60" x2="332" y2="60" stroke="#AA77FF" stroke-width="2"/><text x="297" y="52" text-anchor="middle" font-size="9" fill="#888">θsa</text><circle cx="348" cy="60" r="16" fill="#f0eeff" stroke="#5533aa" stroke-width="1.6"/><text x="348" y="64" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">A</text><text x="348" y="90" text-anchor="middle" font-size="8" fill="#888">ambient</text></g><text x="210" y="118" text-anchor="middle" font-size="9" fill="#5533aa">Tj = Ta + P·(θjc + θcs + θsa)</text></svg>
+<figcaption>The junction-to-ambient thermal chain: die → case → heat sink → air, each stage a thermal resistance in °C/W.</figcaption></figure>
+      <div class="eq">\(\theta_{ja} = \theta_{jc} + \theta_{cs} + \theta_{sa},\qquad T_j = T_a + P_{diss}\,\theta_{ja}\)</div>
+      <p>Here \(\theta_{jc}\) (junction-to-case) is fixed by the device and package, \(\theta_{cs}\) (case-to-sink) is the interface — thermal grease, a pad, or solder — and \(\theta_{sa}\) (sink-to-ambient) is the heat sink and airflow, the part the designer most controls. The dissipated power \(P_{diss}\) is the DC input minus the RF output: a 40 % efficient 10 W PA dissipates 15 W.</p>
+
+      <h4>Maximum Power and Margin</h4>
+      <p>Every device has a maximum rated \(T_{j,max}\) (often 150–200 °C for silicon, higher for GaN). Turning the equation around gives the most power the thermal path can carry, and the margin at a given operating point:</p>
+      <div class="eq">\(P_{max} = \dfrac{T_{j,max}-T_a}{\theta_{ja}},\qquad \text{margin} = T_{j,max}-T_j\)</div>
+      <p>Good practice is to <span class="key">derate</span> — design for a junction well below the rating (e.g. \(T_j\le\) 125 °C) to buy reliability and headroom for a hot ambient. Note the strong lever of ambient temperature: the same amplifier that is fine on the bench at 25 °C can exceed its rating in a sealed enclosure at 70 °C.</p>
+
+      <h4>Temperature and Reliability</h4>
+      <p>Semiconductor failure mechanisms (electromigration, diffusion) accelerate roughly with an Arrhenius law — a common rule of thumb is that failure rate doubles for every ~10 °C rise in junction temperature. Keeping \(T_j\) down is therefore the single biggest lever on the mean-time-between-failures of a power stage. High temperature also shifts bias points and lowers gain and P1dB, so thermal and electrical performance must be co-designed.</p>
+
+      <h4>Practical Techniques</h4>
+      <ul>
+        <li><strong>Minimise interface resistance</strong>: thin, high-conductivity thermal interface material, flat mating surfaces, adequate mounting pressure.</li>
+        <li><strong>Spread the heat</strong>: thermal vias under the die pad, copper coins or heat spreaders, direct die-attach to the flange.</li>
+        <li><strong>Size the sink</strong>: choose \(\theta_{sa}\) (finned extrusion + airflow) for the required \(P_{max}\); forced air or liquid cooling for high power.</li>
+        <li><strong>Watch duty cycle</strong>: pulsed operation uses <em>transient</em> thermal impedance, which is lower than the steady-state value for short pulses — a pulsed PA can run higher peak power than its CW rating.</li>
+      </ul>
+    </div>
+    <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+      <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <a href="JunctionTemp.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Junction Temperature →</a>
+        <a href="PALoadLine.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">PA Load-Line (Cripps) →</a>
+        <a href="NoiseFigure.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Cascaded Noise Figure →</a>
+      </div>
+    </div>
+  </article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+</body>
+</html>

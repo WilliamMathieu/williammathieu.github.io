@@ -1,0 +1,29 @@
+\begin{workedexample}[Worked Example: Junction temperature of a 5~W device]
+Junction temperature follows $T_j = T_a + P\,\theta_{ja}$, where the
+junction-to-ambient resistance is the series sum
+$\theta_{ja} = \theta_{jc} + \theta_{cs} + \theta_{sa}$ of the junction-to-case,
+case-to-sink and sink-to-ambient resistances. A device dissipating $5\ \text{W}$
+with $\theta_{jc}=2$, $\theta_{cs}=0.5$ and $\theta_{sa}=3\ ^\circ\text{C/W}$ in
+$25\ ^\circ\text{C}$ air reaches
+\[ T_j = 25 + 5\,(2+0.5+3) = 52.5\ ^\circ\text{C}. \]
+Thermal resistance is the direct analogue of electrical resistance --- power is the
+``current'' and temperature the ``voltage.'' Because lifetime falls roughly
+exponentially with $T_j$, lowering $\theta_{sa}$ with a bigger heatsink buys
+reliability directly.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $T_j = T_a + P\,\theta_{ja}$ with $\theta_{ja} = \theta_{jc} + \theta_{cs} + \theta_{sa}$ (series thermal resistances, $^\circ$C/W).
+\item Thermal resistance is the electrical analogue of resistance: power is the ``current,'' temperature the ``voltage.''
+\item Reliability falls roughly exponentially with $T_j$ (Arrhenius); derating keeps $T_j$ well below the rated maximum.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A device dissipates $8\ \text{W}$ with a total $\theta_{ja}$ of $6\ ^\circ\text{C/W}$ in $30\ ^\circ\text{C}$ ambient. Find $T_j$.
+\item Which term of $\theta_{ja}$ do you reduce by bolting on a bigger heatsink?
+\item Why derate a device below its maximum rated junction temperature?
+\end{exercises}
+
+\furtherreading{Cripps~\cite{cripps}; Gonzalez~\cite{gonzalez}.}

@@ -32,7 +32,7 @@
 		.wa .infobox b{display:block;color:#5533aa;margin-bottom:6px;font-size:13px;}
 		.wa .infobox tr td:first-child{color:#5533aa;padding-right:8px;white-space:nowrap;vertical-align:top;}
 		.wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
-		.wiki-back a{color:#AA77FF;}
+		.wiki-back a{display:inline-block;font-weight:bold;color:#5533aa;background:#f0eeff;border:1px solid #cdbff2;border-radius:6px;padding:6px 13px;text-decoration:none;transition:background 0.12s,border-color 0.12s,color 0.12s;}.wiki-back a:hover{background:#AA77FF;border-color:#AA77FF;color:#fff;}
 		.toc{background:#f8f6ff;border:1px solid #d0c8f0;border-radius:4px;padding:10px 14px;display:inline-block;min-width:180px;margin-bottom:16px;font-size:12px;font-family:monospace;}
 		.toc b{display:block;color:#5533aa;margin-bottom:6px;}
 		.toc ol{margin:0;padding-left:18px;}
@@ -51,9 +51,8 @@
 <body class="no-nav">
 	<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 	<section>
-		<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
 		<article>
-			<div class="wiki-back">&#8592; <a href="wiki.html">Wiki</a></div>
+			<div class="wiki-back"><a href="index.html">⌂ Home</a> <a href="wiki.html">&#8592; Wiki</a></div>
 			<h3>Microwave Passive Components</h3>
 			<div class="wa">
 
@@ -77,13 +76,18 @@ Through</text><text x="214" y="24" text-anchor="end" font-size="8" fill="#1a8a1a
 				<h4>PIN Diode Switches</h4>
 				<p>PIN diodes operate as variable resistors at RF: forward biased → low resistance (ON); reverse biased → high resistance (OFF). Used for fast antenna switching, T/R switching in radar, and variable attenuators. Switching speed: nanoseconds to microseconds depending on carrier lifetime.</p>
 
+				<h4>Self-Resonant Frequency (SRF)</h4>
+				<p>No real component is purely one thing. Every capacitor has a parasitic series inductance (its ESL, from the body and mounting), and every inductor has a parasitic parallel capacitance — so each behaves as a series or parallel LC that resonates at its <em>self-resonant frequency</em>, \(f_{SRF}=1/(2\pi\sqrt{LC})\). Below its SRF a capacitor is capacitive; at the SRF its reactances cancel and it looks purely resistive (just the ESR, the impedance minimum); above the SRF it turns <em>inductive</em> and stops decoupling. The practical rule is to operate components well below their SRF, and to parallel capacitors of different values so their SRFs stagger and keep the impedance low across a wide band. Smaller packages push the SRF higher, which is why RF bypass capacitors use tiny 0201/0402 parts.</p>
+
 			</div>
 		
   <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
     <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
     <div style="display:flex;flex-wrap:wrap;gap:7px;">
+      <a href="CapacitorSRF.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Capacitor SRF →</a>
       <a href="SParamPlotter.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">S-Parameter Plotter →</a>
       <a href="RFSimulator.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">RF Circuit Simulator →</a>
+      <a href="PINDiodeSwitch.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">PIN Diode Switch →</a>
     </div>
   </div>
 		</article>

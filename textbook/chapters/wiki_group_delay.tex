@@ -1,0 +1,92 @@
+% chapter: wiki_group_delay
+\chapter{Group Delay and Phase Linearity}\label{ch:wiki_group_delay}
+
+\input{pedagogy/wiki_group_delay_obj}
+
+A filter's magnitude response tells you which frequencies get through; its \emph{phase} response tells you \emph{when} they get through. Group delay is the practical measure of that timing — the delay a filter imposes on a signal's envelope or modulation. A filter with flat magnitude but wildly varying group delay will still smear a pulse or corrupt a data eye, which is why group delay is a first-class specification for anything carrying wideband or pulsed signals.
+
+      
+
+\section{Definition}
+
+      
+
+Group delay is the negative slope of the phase response with respect to angular frequency:
+
+      
+\[\tau_g(\omega) = -\dfrac{d\phi(\omega)}{d\omega}\]
+
+      
+
+If the phase is perfectly linear ($\phi=-\omega t_0$), the group delay is a constant $t_0$ at every frequency — every spectral component is held up by the same time, so the waveform passes through undistorted, just delayed. Where the phase curves, different frequencies leave at different times and the waveform spreads. This frequency-dependent delay is called dispersion.
+
+\rffig{wiki_group_delay_1.pdf}{Group delay vs frequency: a Bessel/flat-delay response (green) stays constant across the passband, while a sharp Chebyshev (red) peaks strongly near the band edge.}
+
+      
+
+\section{Why It Matters}
+
+      
+\begin{itemize}
+
+        \item \textbf{Pulses \& radar}: unequal delay across the pulse spectrum broadens and distorts the pulse, degrading range resolution.
+
+        \item \textbf{Digital data}: group-delay ripple causes inter-symbol interference (ISI) and closes the eye diagram, raising BER.
+
+        \item \textbf{Video \& analog}: differential delay shifts colour/luma or produces ringing and overshoot on edges.
+
+      
+\end{itemize}
+
+      
+
+A useful rule of thumb: keep the peak-to-peak group-delay variation across the signal band to a small fraction of the symbol period (or pulse width).
+
+      
+
+\section{The Filter-Family Trade-off}
+
+      
+
+Selectivity and flat delay pull in opposite directions. The sharper a filter cuts off, the more its poles cluster near the band edge and the more its group delay peaks there:
+
+      
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}>{\raggedright\arraybackslash}p{0.230\linewidth}}
+\hline
+\textbf{Response} & \textbf{Magnitude} & \textbf{Group delay} & \textbf{Step response} \\
+\hline
+Bessel / Thomson & Gentle rolloff & Maximally flat (best) & No overshoot \\
+Butterworth & Maximally flat & Moderate rise at edge & Slight overshoot \\
+Chebyshev & Steep, equiripple & Strong peak at edge & Ringing \\
+Elliptic (Cauer) & Steepest & Worst delay ripple & Heavy ringing \\
+\hline
+\end{longtable}}
+
+      
+
+Bessel filters are designed for maximally flat delay and are the default when waveform fidelity matters more than a sharp skirt. When a sharp filter is unavoidable, a \emph{group-delay equaliser} (an all-pass network) can be cascaded to flatten the composite delay at the cost of added absolute delay.
+
+      
+
+\section{Delay at Band Center}
+
+      
+
+For an all-pole lowpass prototype, the band-center (DC) group delay follows from the pole locations $p_k=\sigma_k+j\omega_k$:
+
+      
+\[\tau_g(0) = \dfrac{1}{\omega_c}\sum_k \dfrac{-\sigma_k}{\sigma_k^2+\omega_k^2}\]
+
+      
+
+Higher order and more ripple both increase this delay. A 3rd-order Butterworth, for example, has a normalized DC delay of 2 (i.e. $2/\omega_c$); a Chebyshev of the same order delays more. Group delay scales inversely with cutoff — a wider filter delays less.
+
+
+\input{pedagogy/wiki_group_delay}

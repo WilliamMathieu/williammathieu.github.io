@@ -51,5 +51,13 @@ Fixed attenuators (pads) reduce signal power by a known amount while maintaining
 
 PIN diodes operate as variable resistors at RF: forward biased → low resistance (ON); reverse biased → high resistance (OFF). Used for fast antenna switching, T/R switching in radar, and variable attenuators. Switching speed: nanoseconds to microseconds depending on carrier lifetime.
 
+				
+
+\section{Self-Resonant Frequency (SRF)}
+
+				
+
+No real component is purely one thing. Every capacitor has a parasitic series inductance (its ESL, from the body and mounting), and every inductor has a parasitic parallel capacitance — so each behaves as a series or parallel LC that resonates at its \emph{self-resonant frequency}, $f_{SRF}=1/(2\pi\sqrt{LC})$. Below its SRF a capacitor is capacitive; at the SRF its reactances cancel and it looks purely resistive (just the ESR, the impedance minimum); above the SRF it turns \emph{inductive} and stops decoupling. The practical rule is to operate components well below their SRF, and to parallel capacitors of different values so their SRFs stagger and keep the impedance low across a wide band. Smaller packages push the SRF higher, which is why RF bypass capacitors use tiny 0201/0402 parts.
+
 
 \input{pedagogy/wiki_microwave_components}

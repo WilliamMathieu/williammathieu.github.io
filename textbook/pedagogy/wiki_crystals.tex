@@ -1,0 +1,26 @@
+\begin{workedexample}[Worked Example: The two resonances of a crystal]
+The Butterworth--Van Dyke model puts a motional arm $L_1$, $C_1$, $R_1$ in series,
+shunted by the electrode capacitance $C_0$. The series resonance
+$f_s = 1/(2\pi\sqrt{L_1 C_1})$ is where the motional arm is purely resistive; the
+parallel resonance $f_p$ sits slightly above, where the motional arm resonates
+against $C_0$. Because the ratio $C_1/C_0$ is tiny (often $\sim 1/300$), $f_p$ is
+only a few hundred parts-per-million above $f_s$. The mechanical (acoustic)
+resonance has extraordinarily low loss, giving quartz a $Q$ of $10^4$ to $10^6$ ---
+orders of magnitude beyond any LC tank --- and hence its excellent frequency stability.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Butterworth--Van Dyke model: motional $L_1$, $C_1$, $R_1$ in series with a shunt $C_0$.
+\item Series resonance $f_s = 1/(2\pi\sqrt{L_1 C_1})$; parallel resonance $f_p > f_s$ set by $C_0$.
+\item $Q$ is enormous ($10^4$--$10^6$); a specified load capacitance pulls the operating frequency between $f_s$ and $f_p$.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item Which is higher in frequency, series or parallel resonance?
+\item Why does a crystal have far higher $Q$ than an LC tank of the same frequency?
+\item What does increasing the load capacitance do to a parallel-mode crystal's frequency?
+\end{exercises}
+
+\furtherreading{Razavi~\cite{razavi}; Rohde~\cite{rohde}.}

@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: Gain and beamwidth of a 1~m dish]
+A $1\ \text{m}$ parabolic dish operates at $10\ \text{GHz}$ ($\lambda = 30\ \text{mm}$).
+The gain of a circular aperture is $G = \eta(\pi D/\lambda)^2$. With an aperture
+efficiency $\eta = 0.6$,
+\[ G = 0.6\left(\frac{\pi \cdot 1}{0.03}\right)^{2} = 0.6\,(104.7)^2 \approx 6580, \]
+i.e.\ $38.2\ \text{dBi}$. The half-power beamwidth is $\text{HPBW}\approx 70\lambda/D
+= 70\cdot0.03/1 = 2.1^\circ$. Gain and beamwidth are set almost entirely by the
+size of the aperture in wavelengths.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item Aperture gain $G = \eta\,4\pi A/\lambda^2$; for a circular dish $G = \eta(\pi D/\lambda)^2$.
+\item $\text{HPBW}\approx 70\lambda/D$ degrees --- gain and beamwidth trade directly against size in wavelengths.
+\item Horn feeds reach roughly $50\%$ aperture efficiency; illumination taper trades efficiency for lower sidelobes.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item A $0.6\ \text{m}$ dish at $12\ \text{GHz}$ with $55\%$ efficiency --- find the gain in dBi.
+\item Estimate the half-power beamwidth of a $2\ \text{m}$ dish at $6\ \text{GHz}$.
+\item Name three reasons aperture efficiency is typically below $100\%$.
+\end{exercises}
+
+\furtherreading{Balanis~\cite{balanis}; Kraus~\cite{kraus}.}

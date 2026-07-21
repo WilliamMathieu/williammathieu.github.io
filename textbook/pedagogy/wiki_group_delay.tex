@@ -1,0 +1,25 @@
+\begin{workedexample}[Worked Example: Why linear phase preserves a pulse]
+Group delay is $\tau_g = -\,d\phi/d\omega$. A network with linear phase
+$\phi = -\omega\tau$ has constant $\tau_g = \tau$, so every frequency component is
+delayed by the same amount and the waveform passes through undistorted. Near a
+filter's band edge the phase bends sharply and $\tau_g$ peaks, delaying some
+components more than others and smearing the signal in time. Bessel filters
+maximise delay flatness (at the cost of roll-off); Chebyshev and elliptic filters
+give the steepest roll-off but the worst delay ripple.
+\end{workedexample}
+
+\begin{keytakeaways}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item $\tau_g = -\,d\phi/d\omega$; constant group delay means distortionless (linear-phase) transmission.
+\item Group delay peaks near band edges and near high-$Q$ resonances.
+\item Bessel $\rightarrow$ flat delay; Butterworth $\rightarrow$ moderate; Chebyshev/elliptic $\rightarrow$ steep roll-off but large delay ripple.
+\end{itemize}
+\end{keytakeaways}
+
+\begin{exercises}
+\item What is the group delay of a network whose phase is $\phi = -\omega\tau$?
+\item Which filter family gives the flattest group delay?
+\item Why does group-delay variation degrade a digital data signal?
+\end{exercises}
+
+\furtherreading{Pozar~\cite{pozar} (ch.~8); Hong~\cite{hong}.}

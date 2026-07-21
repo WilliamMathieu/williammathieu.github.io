@@ -1,0 +1,96 @@
+% chapter: wiki_aperture_antennas
+\chapter{Aperture Antennas: Reflectors and Horns}\label{ch:wiki_aperture_antennas}
+
+\input{pedagogy/wiki_aperture_antennas_obj}
+
+An aperture antenna radiates through a physical opening much larger than a wavelength — a dish's projected disc or a horn's flared mouth. Because the whole aperture radiates in phase, the gain grows with the aperture area measured in square wavelengths, and the beam narrows in proportion to the aperture width. Dishes and horns dominate microwave point-to-point links, satellite ground stations, radar, and radio astronomy, and horns serve as the standard-gain references of antenna measurement.
+
+      
+
+\section{Gain from Effective Aperture}
+
+      
+
+Any antenna's gain is tied to its \emph{effective aperture} $A_e$ — the area from which it collects (or radiates) power — through the universal relation:
+
+      
+\[G = \dfrac{4\pi A_e}{\lambda^2},\qquad A_e = \eta_{ap}\,A_{phys}\]
+
+      
+
+where $A_{phys}$ is the physical aperture area and $\eta_{ap}$ is the aperture efficiency (0–1) that lumps illumination taper, spillover, blockage, and surface error. Rearranging gives the effective aperture that a stated gain corresponds to, $A_e = G\lambda^2/4\pi$ — the same quantity used in the Friis link equation.
+
+      
+
+\section{Parabolic Reflectors}
+
+      
+
+A parabola reflects rays from a feed at its focus into a collimated plane wave. For a circular dish of diameter $D$:
+
+\rffig{wiki_aperture_antennas_1.pdf}{A parabolic reflector converts the spherical wave from a focal feed into a plane wave across the aperture, forming a narrow pencil beam.}
+
+      
+\[G = \eta_{ap}\left(\dfrac{\pi D}{\lambda}\right)^2,\qquad \theta_{HPBW}\approx\dfrac{70\lambda}{D}\ (^\circ),\qquad \theta_{FNBW}\approx\dfrac{2.44\lambda}{D}\ \text{rad}\]
+
+      
+
+Gain rises 6 dB per doubling of diameter (or of frequency), while the half-power beamwidth halves. Typical dish aperture efficiency is 0.55–0.70; the illumination is a compromise — a strongly tapered feed reduces sidelobes and spillover but under-uses the rim, lowering efficiency. The focal-length-to-diameter ratio $f/D$ (typically 0.3–0.5) sets how much of the sphere the feed must illuminate.
+
+      
+
+\section{Horn Antennas}
+
+      
+
+A horn flares a waveguide out to a larger mouth, tapering the impedance to free space and forming a clean, low-sidelobe beam. Its gain follows the same aperture law with an efficiency near 0.51 for an \emph{optimum} horn (the flare length that keeps the aperture phase error to a quarter wavelength):
+
+\rffig{wiki_aperture_antennas_2.pdf}{A pyramidal horn tapers the guide to a rectangular aperture a×b; a conical horn flares a circular guide to a diameter D.}
+
+      
+\[G \approx \eta_{ap}\,\dfrac{4\pi A}{\lambda^2},\quad \eta_{ap}\approx0.51;\qquad A = a\,b\ (\text{pyramidal}),\quad A=\dfrac{\pi D^2}{4}\ (\text{conical})\]
+
+      
+
+Pyramidal horns have unequal E- and H-plane beamwidths, roughly $\theta_E\approx56\lambda/b$ and $\theta_H\approx67\lambda/a$ degrees. Corrugated and dielectric-loaded horns raise efficiency and symmetry and are common as reflector feeds. A calibrated "standard-gain horn" is the reference against which other antennas are measured.
+
+      
+
+\section{EIRP and the Link}
+
+      
+
+Once the gain is known, the effective isotropic radiated power combines it with the transmit power, and the effective aperture feeds the receive side of the link:
+
+      
+\[\text{EIRP} = P_t + G\ [\text{dBm/dBi}];\qquad A_e = \dfrac{G\lambda^2}{4\pi};\qquad R_{ff} = \dfrac{2D^2}{\lambda}\ (\text{far-field distance})\]
+
+      
+
+The far-field (Fraunhofer) distance $2D^2/\lambda$ marks where the beam is fully formed — for large apertures this can be hundreds of metres, which matters when range-testing or siting antennas.
+
+      
+
+\section{Typical Numbers}
+
+      
+        
+        
+        
+        
+        
+      
+
+{\small\begin{longtable}{>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}>{\raggedright\arraybackslash}p{0.184\linewidth}}
+\hline
+\textbf{Antenna} & \textbf{Size} & \textbf{Freq} & \textbf{Gain} & \textbf{HPBW} \\
+\hline
+Parabolic dish (η=0.6) & 1 m & 10 GHz & ≈38 dBi & ≈2.1° \\
+Parabolic dish (η=0.6) & 3 m & 6 GHz & ≈43 dBi & ≈1.2° \\
+Standard-gain horn & 15×11 cm & 10 GHz & ≈20 dBi & ≈15° \\
+Conical horn feed & 5 cm dia & 12 GHz & ≈13 dBi & ≈35° \\
+\hline
+\end{longtable}}
+
+
+\input{pedagogy/wiki_aperture_antennas}

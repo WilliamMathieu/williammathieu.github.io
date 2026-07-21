@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quartz Crystal Resonators — Butterworth–Van Dyke Model | RF Toolbox Wiki</title>
+  <meta name="description" content="Quartz crystal resonators: the Butterworth–Van Dyke model, motional L1/C1/R1 and shunt C0, series and parallel resonance, Q, capacitance ratio, and load pullability.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/wiki_crystals.html">
+  <meta property="og:title" content="Quartz Crystal Resonators — Butterworth–Van Dyke Model | RF Toolbox Wiki">
+  <meta property="og:description" content="Motional model, series vs parallel resonance, crystal Q, capacitance ratio and load pullability.">
+  <meta property="og:url" content="https://rftoolbox.ca/wiki_crystals.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wa h4{font-family:monospace;color:#5533aa;margin:16px 0 6px;font-size:14px;border-bottom:1px solid #e8e0ff;padding-bottom:3px;}
+    .wa p{font-size:13px;line-height:1.75;margin-bottom:10px;}
+    .wa ul,.wa ol{font-size:13px;line-height:1.8;padding-left:22px;margin-bottom:10px;}
+    .wa .eq{background:#f8f6ff;border-left:3px solid #AA77FF;padding:8px 14px;border-radius:0 4px 4px 0;margin:10px 0;font-size:13px;}
+    .wa .key{font-family:monospace;font-size:11px;background:#f0eeff;padding:2px 6px;border-radius:3px;color:#5533aa;}
+    .wa table{font-size:12px;border-collapse:collapse;margin:8px 0 12px;width:100%;}
+    .wa th{font-family:monospace;font-size:11px;color:#5533aa;text-transform:uppercase;letter-spacing:0.05em;padding:5px 12px;border-bottom:2px solid #d0c8f0;background:#f0eeff;text-align:left;}
+    .wa td{padding:5px 12px;border-bottom:1px solid #eee;}
+    .wa tr:last-child td{border-bottom:none;}
+    .wiki-back{font-family:monospace;font-size:12px;margin-bottom:12px;}
+    .wiki-back a{display:inline-block;font-weight:bold;color:#5533aa;background:#f0eeff;border:1px solid #cdbff2;border-radius:6px;padding:6px 13px;text-decoration:none;transition:background 0.12s,border-color 0.12s,color 0.12s;}.wiki-back a:hover{background:#AA77FF;border-color:#AA77FF;color:#fff;}
+  </style>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+  <article>
+    <div class="wiki-back"><a href="index.html">⌂ Home</a> <a href="wiki.html">&#8592; Wiki</a></div>
+    <div class="wa">
+      <h3>Quartz Crystal Resonators</h3>
+
+      <p>A quartz crystal is a piezoelectric plate whose mechanical resonance is extraordinarily stable and high-Q — the reason it sets the frequency of nearly every clock, radio, and microprocessor. Electrically it behaves as a very sharp resonant circuit, and to the surrounding oscillator it looks like the lumped model below. Understanding that model is the key to choosing a crystal, hitting a target frequency, and trimming it with a load capacitor.</p>
+
+      <h4>The Butterworth–Van Dyke Model</h4>
+      <p>The crystal is modelled by a <em>motional</em> branch — the electrical image of the mechanical resonance — in parallel with the static <em>shunt</em> capacitance \(C_0\) of the electrodes and holder:</p>
+<figure><svg viewBox="0 0 420 160" width="420" height="160" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;"><rect width="420" height="160" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="4"/><line x1="40" y1="80" x2="90" y2="80" stroke="#333" stroke-width="1.5"/><line x1="330" y1="80" x2="380" y2="80" stroke="#333" stroke-width="1.5"/><line x1="90" y1="80" x2="90" y2="45" stroke="#5533aa" stroke-width="1.5"/><line x1="90" y1="45" x2="120" y2="45" stroke="#5533aa" stroke-width="1.5"/><path d="M120 45 q7 -11 14 0 q7 -11 14 0 q7 -11 14 0" fill="none" stroke="#5533aa" stroke-width="1.8"/><text x="141" y="32" text-anchor="middle" font-size="9" fill="#5533aa">L₁</text><line x1="162" y1="45" x2="192" y2="45" stroke="#5533aa" stroke-width="1.5"/><line x1="200" y1="34" x2="200" y2="56" stroke="#5533aa" stroke-width="2"/><line x1="207" y1="34" x2="207" y2="56" stroke="#5533aa" stroke-width="2"/><text x="203" y="30" text-anchor="middle" font-size="9" fill="#5533aa">C₁</text><line x1="207" y1="45" x2="235" y2="45" stroke="#5533aa" stroke-width="1.5"/><rect x="235" y="39" width="34" height="12" fill="none" stroke="#5533aa" stroke-width="1.6"/><text x="252" y="32" text-anchor="middle" font-size="9" fill="#5533aa">R₁</text><line x1="269" y1="45" x2="330" y2="45" stroke="#5533aa" stroke-width="1.5"/><line x1="330" y1="45" x2="330" y2="80" stroke="#5533aa" stroke-width="1.5"/><line x1="90" y1="80" x2="90" y2="80" stroke="#5533aa" stroke-width="1.5"/><line x1="90" y1="80" x2="200" y2="80" stroke="#AA77FF" stroke-width="1.4"/><line x1="186" y1="103" x2="214" y2="103" stroke="#AA77FF" stroke-width="2"/><line x1="186" y1="110" x2="214" y2="110" stroke="#AA77FF" stroke-width="2"/><line x1="200" y1="80" x2="200" y2="103" stroke="#AA77FF" stroke-width="1.4"/><line x1="200" y1="110" x2="200" y2="118" stroke="#AA77FF" stroke-width="0"/><line x1="200" y1="80" x2="330" y2="80" stroke="#AA77FF" stroke-width="1.4"/><text x="224" y="110" text-anchor="start" font-size="9" fill="#AA77FF">C₀</text><text x="152" y="70" text-anchor="middle" font-size="8" fill="#888">motional branch</text></svg>
+<figcaption>Butterworth–Van Dyke model: motional L₁–C₁–R₁ (the mechanical resonance) shunted by the static holder capacitance C₀.</figcaption></figure>
+      <p>The motional inductance \(L_1\) is huge (henries) and the motional capacitance \(C_1\) tiny (femtofarads) — impossible with real coils and capacitors, which is exactly why the mechanical resonance is so much sharper than an LC tank.</p>
+
+      <h4>Series and Parallel Resonance</h4>
+      <p>The motional branch alone resonates at the <em>series</em> frequency \(f_s\). Adding \(C_0\) creates a second, slightly higher <em>parallel</em> (anti-resonant) frequency \(f_p\); the crystal is inductive only in the narrow window between them, where oscillators operate:</p>
+      <div class="eq">\(f_s = \dfrac{1}{2\pi\sqrt{L_1 C_1}},\qquad f_p = f_s\sqrt{1+\dfrac{C_1}{C_0}}\)</div>
+      <p>The fractional split \(f_p-f_s\) is only a few hundred ppm because \(C_1\ll C_0\). The <span class="key">capacitance ratio</span> \(r=C_0/C_1\) (typically 200–1000) sets how far the crystal can be pulled.</p>
+
+      <h4>Quality Factor</h4>
+      <p>The motional resistance \(R_1\) (the mechanical loss) sets a Q that dwarfs any LC circuit:</p>
+      <div class="eq">\(Q = \dfrac{2\pi f_s L_1}{R_1} = \dfrac{1}{2\pi f_s C_1 R_1}\)</div>
+      <p>Fundamental-mode crystals reach Q of 10⁴–10⁶; precision SC-cut resonators exceed 10⁶. This enormous Q is what gives quartz oscillators their part-per-million (or better) stability.</p>
+
+      <h4>Pulling with a Load Capacitor</h4>
+      <p>A "parallel-resonant" crystal is specified with a nominal load capacitance \(C_L\); the oscillator's external capacitance shifts the operating frequency by:</p>
+      <div class="eq">\(\dfrac{\Delta f}{f_s}\approx\dfrac{C_1}{2\,(C_0+C_L)}\)</div>
+      <p>Increasing \(C_L\) lowers the frequency toward \(f_s\); decreasing it raises the frequency toward \(f_p\). This is how a trimmer or varactor tunes a crystal oscillator (a VCXO), and why using the wrong load capacitance leaves a crystal off-frequency.</p>
+
+      <h4>Typical Parameters</h4>
+      <table>
+        <tr><th>Type</th><th>Frequency</th><th>C₀</th><th>R₁ (ESR)</th><th>Q</th></tr>
+        <tr><td>Watch tuning fork</td><td>32.768 kHz</td><td>1–2 pF</td><td>30–50 kΩ</td><td>10⁴–10⁵</td></tr>
+        <tr><td>AT-cut fundamental</td><td>1–30 MHz</td><td>3–7 pF</td><td>10–100 Ω</td><td>10⁴–10⁵</td></tr>
+        <tr><td>AT-cut overtone</td><td>30–200 MHz</td><td>3–6 pF</td><td>20–80 Ω</td><td>10⁴–10⁵</td></tr>
+        <tr><td>SC-cut (OCXO)</td><td>5–10 MHz</td><td>2–5 pF</td><td>50–150 Ω</td><td>&gt;10⁶</td></tr>
+      </table>
+      <p>Beyond about 30–40 MHz, fundamental plates become too thin, so crystals run on the 3rd, 5th, or 7th overtone. Frequency also drifts slightly with temperature (set by the crystal cut) and ages over time — the reasons TCXOs and OCXOs add temperature compensation or an oven.</p>
+    </div>
+    <div style="background:#f0eeff;border:1px solid #d0c8f0;border-radius:6px;padding:14px 16px;margin-top:24px;">
+      <div style="font-family:monospace;font-size:10px;font-weight:bold;color:#5533aa;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">🔧 Related Calculators</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;">
+        <a href="CrystalResonator.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Quartz Crystal Resonator →</a>
+        <a href="Varactor.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">Varactor C–V Tuning →</a>
+        <a href="LC.html" style="font-family:monospace;font-size:12px;padding:5px 11px;background:white;border:1px solid #d0c8f0;border-radius:3px;color:#5533aa;text-decoration:none;">LC Resonance Calculator →</a>
+      </div>
+    </div>
+  </article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+</body>
+</html>

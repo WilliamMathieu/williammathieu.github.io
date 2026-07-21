@@ -1,0 +1,67 @@
+% chapter: wiki_thermal
+\chapter{Thermal Management and Junction Temperature}\label{ch:wiki_thermal}
+
+\input{pedagogy/wiki_thermal_obj}
+
+An RF power amplifier turns much of its DC power into heat, and that heat has to escape from a tiny transistor die to the outside world. The temperature the die actually reaches — the \emph{junction temperature} $T_j$ — governs both performance (gain, efficiency and output power all fade as the device heats) and reliability (failure rate rises steeply with temperature). Thermal design is therefore inseparable from PA design.
+
+      
+
+\section{The Thermal-Resistance Chain}
+
+      
+
+Heat flows from junction to ambient through a series of thermal resistances, exactly like current through series electrical resistors, with power as the "current" and temperature rise as the "voltage":
+
+\rffig{wiki_thermal_1.pdf}{The junction-to-ambient thermal chain: die → case → heat sink → air, each stage a thermal resistance in °C/W.}
+
+      
+\[\theta_{ja} = \theta_{jc} + \theta_{cs} + \theta_{sa},\qquad T_j = T_a + P_{diss}\,\theta_{ja}\]
+
+      
+
+Here $\theta_{jc}$ (junction-to-case) is fixed by the device and package, $\theta_{cs}$ (case-to-sink) is the interface — thermal grease, a pad, or solder — and $\theta_{sa}$ (sink-to-ambient) is the heat sink and airflow, the part the designer most controls. The dissipated power $P_{diss}$ is the DC input minus the RF output: a 40 \% efficient 10 W PA dissipates 15 W.
+
+      
+
+\section{Maximum Power and Margin}
+
+      
+
+Every device has a maximum rated $T_{j,max}$ (often 150–200 °C for silicon, higher for GaN). Turning the equation around gives the most power the thermal path can carry, and the margin at a given operating point:
+
+      
+\[P_{max} = \dfrac{T_{j,max}-T_a}{\theta_{ja}},\qquad \text{margin} = T_{j,max}-T_j\]
+
+      
+
+Good practice is to derate — design for a junction well below the rating (e.g. $T_j\le$ 125 °C) to buy reliability and headroom for a hot ambient. Note the strong lever of ambient temperature: the same amplifier that is fine on the bench at 25 °C can exceed its rating in a sealed enclosure at 70 °C.
+
+      
+
+\section{Temperature and Reliability}
+
+      
+
+Semiconductor failure mechanisms (electromigration, diffusion) accelerate roughly with an Arrhenius law — a common rule of thumb is that failure rate doubles for every \textasciitilde{}10 °C rise in junction temperature. Keeping $T_j$ down is therefore the single biggest lever on the mean-time-between-failures of a power stage. High temperature also shifts bias points and lowers gain and P1dB, so thermal and electrical performance must be co-designed.
+
+      
+
+\section{Practical Techniques}
+
+      
+\begin{itemize}
+
+        \item \textbf{Minimise interface resistance}: thin, high-conductivity thermal interface material, flat mating surfaces, adequate mounting pressure.
+
+        \item \textbf{Spread the heat}: thermal vias under the die pad, copper coins or heat spreaders, direct die-attach to the flange.
+
+        \item \textbf{Size the sink}: choose $\theta_{sa}$ (finned extrusion + airflow) for the required $P_{max}$; forced air or liquid cooling for high power.
+
+        \item \textbf{Watch duty cycle}: pulsed operation uses \emph{transient} thermal impedance, which is lower than the steady-state value for short pulses — a pulsed PA can run higher peak power than its CW rating.
+
+      
+\end{itemize}
+
+
+\input{pedagogy/wiki_thermal}
