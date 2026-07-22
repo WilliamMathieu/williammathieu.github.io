@@ -47,7 +47,7 @@
   <details style="margin-top:8px;">
   <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
 
-<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(L_{via}=0.2\,h\ln\!\left(\tfrac{4h}{d}\right)\text{nH}\quad C_{via}=\tfrac{1.41\,\varepsilon_r\,h}{\ln(D/d)}\text{pF}\quad f_{SRF}=\tfrac{1}{2\pi\sqrt{LC}}\)</div>
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(L_{via}=0.2\,h\left[\ln\!\left(\tfrac{4h}{d}\right)+1\right]\text{nH}\quad C_{via}=\tfrac{1.41\,\varepsilon_r\,h}{\ln(D/d)}\text{pF}\quad f_{SRF}=\tfrac{1}{2\pi\sqrt{LC}}\)</div>
 <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
       <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">h</td><td>Via height (mm) = substrate thickness the via passes through.</td></tr>
       <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td>Via (drill / barrel) diameter (mm).</td></tr>
@@ -80,7 +80,7 @@ function drawDiagram(){
   var d=parseFloat(document.getElementById('via-d').value)||0;
   var D=parseFloat(document.getElementById('via-D').value)||0;
   var er=parseFloat(document.getElementById('via-er').value)||4.4;
-  var L=(h>0&&d>0)?0.2*h*Math.log(4*h/d):0;
+  var L=(h>0&&d>0)?0.2*h*(Math.log(4*h/d)+1):0;
   var C=(h>0&&D>d&&d>0)?1.41*er*h/Math.log(D/d):0;
   var W=520,H=164,cx=W/2,topY=38,botY=120,hp=botY-topY;
   var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
