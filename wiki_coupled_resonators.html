@@ -96,28 +96,37 @@
 						<figcaption>Transfer response shapes for three coupling regimes.</figcaption>
 					</figure>
 					<figure>
-						<svg viewBox="0 0 200 120" width="200" height="120" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;">
-							<rect width="200" height="120" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="3"/>
-							<!-- Two tank circuits schematic -->
-							<!-- Tank 1 -->
-							<path d="M40,70 A7,7 0 0,1 54,70 A7,7 0 0,1 68,70 A7,7 0 0,1 82,70" fill="none" stroke="#5533aa" stroke-width="2"/>
-							<line x1="61" y1="40" x2="61" y2="70" stroke="#5533aa" stroke-width="1.5"/>
-							<line x1="48" y1="40" x2="74" y2="40" stroke="#5533aa" stroke-width="2.5"/>
-							<line x1="48" y1="48" x2="74" y2="48" stroke="#5533aa" stroke-width="2.5"/>
-							<line x1="61" y1="48" x2="61" y2="58" stroke="#5533aa" stroke-width="1.5"/>
-							<line x1="61" y1="80" x2="61" y2="90" stroke="#5533aa" stroke-width="1.5"/>
-							<!-- M arrow -->
-							<text x="100" y="60" text-anchor="middle" font-size="12" fill="#AA77FF" font-weight="bold">M</text>
-							<line x1="85" y1="65" x2="115" y2="65" stroke="#AA77FF" stroke-width="1.5" stroke-dasharray="3,2"/>
-							<!-- Tank 2 -->
-							<path d="M118,70 A7,7 0 0,1 132,70 A7,7 0 0,1 146,70 A7,7 0 0,1 160,70" fill="none" stroke="#5533aa" stroke-width="2"/>
-							<line x1="139" y1="40" x2="139" y2="70" stroke="#5533aa" stroke-width="1.5"/>
-							<line x1="126" y1="40" x2="152" y2="40" stroke="#5533aa" stroke-width="2.5"/>
-							<line x1="126" y1="48" x2="152" y2="48" stroke="#5533aa" stroke-width="2.5"/>
-							<line x1="139" y1="48" x2="139" y2="58" stroke="#5533aa" stroke-width="1.5"/>
-							<line x1="139" y1="80" x2="139" y2="90" stroke="#5533aa" stroke-width="1.5"/>
-							<text x="100" y="108" text-anchor="middle" font-size="8" fill="#5533aa">k = M/L</text>
-							<text x="100" y="118" text-anchor="middle" font-size="7" fill="#888">f₀ common to both</text>
+						<svg viewBox="0 0 220 120" width="220" height="120" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:monospace;">
+							<rect width="220" height="120" fill="#fafaff" stroke="#ddd" stroke-width="1" rx="3"/>
+							<!-- ===== Tank 1 (cap on left, coil on right) ===== -->
+							<line x1="35" y1="35" x2="80" y2="35" stroke="#5533aa" stroke-width="1.5"/>
+							<line x1="35" y1="88" x2="80" y2="88" stroke="#5533aa" stroke-width="1.5"/>
+							<line x1="35" y1="35" x2="35" y2="53" stroke="#5533aa" stroke-width="1.5"/>
+							<line x1="24" y1="53" x2="46" y2="53" stroke="#5533aa" stroke-width="2.5"/>
+							<line x1="24" y1="60" x2="46" y2="60" stroke="#5533aa" stroke-width="2.5"/>
+							<line x1="35" y1="60" x2="35" y2="88" stroke="#5533aa" stroke-width="1.5"/>
+							<text x="18" y="60" text-anchor="middle" font-size="9" fill="#5533aa">C</text>
+							<line x1="80" y1="35" x2="80" y2="44" stroke="#5533aa" stroke-width="1.5"/>
+							<path d="M80,44 q-8,4.5 0,9 q8,4.5 0,9 q-8,4.5 0,9 q8,4.5 0,9" fill="none" stroke="#5533aa" stroke-width="2"/>
+							<line x1="80" y1="80" x2="80" y2="88" stroke="#5533aa" stroke-width="1.5"/>
+							<text x="70" y="64" text-anchor="middle" font-size="9" fill="#5533aa">L₁</text>
+							<!-- ===== Mutual coupling M ===== -->
+							<text x="110" y="58" text-anchor="middle" font-size="12" fill="#AA77FF" font-weight="bold">M</text>
+							<line x1="86" y1="62" x2="134" y2="62" stroke="#AA77FF" stroke-width="1.5" stroke-dasharray="3,2"/>
+							<!-- ===== Tank 2 (coil on left, cap on right) ===== -->
+							<line x1="140" y1="35" x2="185" y2="35" stroke="#5533aa" stroke-width="1.5"/>
+							<line x1="140" y1="88" x2="185" y2="88" stroke="#5533aa" stroke-width="1.5"/>
+							<line x1="140" y1="35" x2="140" y2="44" stroke="#5533aa" stroke-width="1.5"/>
+							<path d="M140,44 q-8,4.5 0,9 q8,4.5 0,9 q-8,4.5 0,9 q8,4.5 0,9" fill="none" stroke="#5533aa" stroke-width="2"/>
+							<line x1="140" y1="80" x2="140" y2="88" stroke="#5533aa" stroke-width="1.5"/>
+							<text x="150" y="64" text-anchor="middle" font-size="9" fill="#5533aa">L₂</text>
+							<line x1="185" y1="35" x2="185" y2="53" stroke="#5533aa" stroke-width="1.5"/>
+							<line x1="174" y1="53" x2="196" y2="53" stroke="#5533aa" stroke-width="2.5"/>
+							<line x1="174" y1="60" x2="196" y2="60" stroke="#5533aa" stroke-width="2.5"/>
+							<line x1="185" y1="60" x2="185" y2="88" stroke="#5533aa" stroke-width="1.5"/>
+							<text x="202" y="60" text-anchor="middle" font-size="9" fill="#5533aa">C</text>
+							<text x="110" y="104" text-anchor="middle" font-size="8" fill="#5533aa">k = M/&#8730;(L&#8321;L&#8322;)</text>
+							<text x="110" y="115" text-anchor="middle" font-size="7" fill="#888">f₀ common to both</text>
 						</svg>
 						<figcaption>Two magnetically coupled LC tanks with mutual inductance M.</figcaption>
 					</figure>
