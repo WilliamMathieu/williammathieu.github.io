@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RLC Circuit Solver — Resonance, Q, Bandwidth &amp; Damping | RF Toolbox</title>
+  <meta name="description" content="Analyse a series or parallel RLC circuit: resonant frequency, quality factor Q, −3 dB bandwidth, damping factor and regime (under/critical/over-damped), and the damped natural frequency, from R, L and C.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/RLCCircuit.html">
+  <meta property="og:title" content="RLC Circuit Solver | RF Toolbox">
+  <meta property="og:description" content="Series/parallel RLC: resonance, Q, bandwidth, damping and the damped natural frequency.">
+  <meta property="og:url" content="https://rftoolbox.ca/RLCCircuit.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "RLC Circuit Solver",
+    "description": "Analyse a series or parallel RLC circuit: resonant frequency, quality factor, bandwidth, damping and the damped natural frequency.",
+    "url": "https://rftoolbox.ca/RLCCircuit.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>RLC Circuit Solver</h3>
+<div class="tool-concept">
+  <p>Add a resistor to an LC tank and you get the full second-order resonator: it still resonates at f₀ = 1/(2π√(LC)), but now the resistance sets the quality factor Q, the −3 dB bandwidth, and how the circuit rings when disturbed. This tool takes R, L and C for either a series or a parallel RLC circuit and returns the resonance, Q, bandwidth, characteristic impedance, damping factor, damping regime, and the damped natural frequency.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(\omega_0=\dfrac{1}{\sqrt{LC}},\quad Z_0=\sqrt{\dfrac{L}{C}},\quad BW=\dfrac{f_0}{Q}\)<br>series: \(Q=\dfrac{\omega_0 L}{R}=\dfrac{Z_0}{R},\ \alpha=\dfrac{R}{2L}\);&nbsp; parallel: \(Q=\dfrac{R}{\omega_0 L}=\dfrac{R}{Z_0},\ \alpha=\dfrac{1}{2RC}\)<br>\(\zeta=\dfrac{\alpha}{\omega_0}=\dfrac{1}{2Q},\qquad \omega_d=\sqrt{\omega_0^2-\alpha^2}\ \ (\zeta<1)\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Topology</td><td style="padding:3px 0;">Series (R, L, C in a loop) or parallel (R, L, C across a node).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R</td><td style="padding:3px 0;">Resistance (Ω). For parallel, this is the shunt/loss resistance.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L, C</td><td style="padding:3px 0;">Inductance and capacitance.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>Standard circuit theory; see Hayt &amp; Kemmerly, <em>Engineering Circuit Analysis</em>, ch. 9.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Topology</label><div class="inp-inline"><select id="rlc-topo" style="font-size:12px;padding:3px;"><option value="series" selected>Series</option><option value="parallel">Parallel</option></select></div><span class="inp-hint">RLC form</span></div>
+  <div class="inp-row"><label>Resistance, R</label><div class="inp-inline"><input type="text" id="rlc-r" placeholder="e.g. 5" data-tip="Resistance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Loss/damping</span></div>
+  <div class="inp-row"><label>Inductance, L</label><div class="inp-inline"><input type="text" id="rlc-l" placeholder="e.g. 100" data-tip="Inductance."><select id="rlc-lu" style="font-size:12px;padding:3px;"><option value="1e-6">µH</option><option value="1e-9" selected>nH</option><option value="1e-12">pH</option></select></div><span class="inp-hint">Coil</span></div>
+  <div class="inp-row"><label>Capacitance, C</label><div class="inp-inline"><input type="text" id="rlc-c" placeholder="e.g. 100" data-tip="Capacitance."><select id="rlc-cu" style="font-size:12px;padding:3px;"><option value="1e-6">µF</option><option value="1e-9">nF</option><option value="1e-12" selected>pF</option></select></div><span class="inp-hint">Cap</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="rlcCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;rlc-topo&quot;:&quot;series&quot;,&quot;rlc-r&quot;:&quot;5&quot;,&quot;rlc-l&quot;:&quot;100&quot;,&quot;rlc-lu&quot;:&quot;1e-9&quot;,&quot;rlc-c&quot;:&quot;100&quot;,&quot;rlc-cu&quot;:&quot;1e-12&quot;})" title="Series RLC: 5 Ω, 100 nH, 100 pF">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Resonance</h4>
+    <div class="res-row"><span class="res-lbl">Resonant f₀</span><span class="res-val" id="rlc-f0">—</span></div>
+    <div class="res-row"><span class="res-lbl">Angular ω₀</span><span class="res-val" id="rlc-w0">—</span></div>
+    <div class="res-row"><span class="res-lbl">Characteristic Z₀ = √(L/C)</span><span class="res-val" id="rlc-z0">—</span></div>
+  </div>
+  <div class="res-card"><h4>Selectivity</h4>
+    <div class="res-row"><span class="res-lbl">Quality factor Q</span><span class="res-val" id="rlc-q">—</span></div>
+    <div class="res-row"><span class="res-lbl">Bandwidth (−3 dB)</span><span class="res-val" id="rlc-bw">—</span></div>
+    <div class="res-row"><span class="res-lbl">Half-power f₁ / f₂</span><span class="res-val" id="rlc-f12">—</span></div>
+  </div>
+</div>
+<div class="res-grid" style="margin-top:8px;">
+  <div class="res-card"><h4>Damping / transient</h4>
+    <div class="res-row"><span class="res-lbl">Damping factor ζ</span><span class="res-val" id="rlc-zeta">—</span></div>
+    <div class="res-row"><span class="res-lbl">Attenuation α</span><span class="res-val" id="rlc-alpha">—</span></div>
+    <div class="res-row"><span class="res-lbl">Regime</span><span class="res-val" id="rlc-regime">—</span></div>
+    <div class="res-row"><span class="res-lbl">Damped f_d</span><span class="res-val" id="rlc-fd">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Circuit</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var topo = (typeof rlcTopo !== 'undefined') ? rlcTopo : 'series';
+  var W=520, H=150;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  function resistor(x,y){ return '<path d="M'+x+' '+y+' l6 -7 l6 14 l6 -14 l6 14 l6 -14 l6 7" fill="none" stroke="#c0392b" stroke-width="1.8"/>'; }
+  function cap(x,y,v){ if(v){return '<line x1="'+(x-9)+'" y1="'+y+'" x2="'+(x+9)+'" y2="'+y+'" stroke="#00ccff" stroke-width="2.6"/><line x1="'+(x-9)+'" y1="'+(y+6)+'" x2="'+(x+9)+'" y2="'+(y+6)+'" stroke="#00ccff" stroke-width="2.6"/>';} return '<line x1="'+x+'" y1="'+(y-9)+'" x2="'+x+'" y2="'+(y+9)+'" stroke="#00ccff" stroke-width="2.6"/><line x1="'+(x+6)+'" y1="'+(y-9)+'" x2="'+(x+6)+'" y2="'+(y+9)+'" stroke="#00ccff" stroke-width="2.6"/>'; }
+  function coil(x,y){ return '<path d="M'+x+' '+y+' q5 -10 10 0 q5 -10 10 0 q5 -10 10 0 q5 -10 10 0" fill="none" stroke="#AA77FF" stroke-width="1.8"/>'; }
+  if (topo === 'series') {
+    var y=55, x0=40;
+    s+='<line x1="'+x0+'" y1="'+y+'" x2="'+(x0+40)+'" y2="'+y+'" stroke="#5533aa" stroke-width="1.6"/>';
+    s+=resistor(x0+40,y); s+='<text x="'+(x0+58)+'" y="'+(y-14)+'" text-anchor="middle" font-size="9" fill="#c0392b">R</text>';
+    s+='<line x1="'+(x0+82)+'" y1="'+y+'" x2="'+(x0+120)+'" y2="'+y+'" stroke="#5533aa" stroke-width="1.6"/>';
+    s+=coil(x0+120,y); s+='<text x="'+(x0+140)+'" y="'+(y-14)+'" text-anchor="middle" font-size="9" fill="#7a4fd0">L</text>';
+    s+='<line x1="'+(x0+160)+'" y1="'+y+'" x2="'+(x0+210)+'" y2="'+y+'" stroke="#5533aa" stroke-width="1.6"/>';
+    s+=cap(x0+215,y,false); s+='<text x="'+(x0+218)+'" y="'+(y-14)+'" text-anchor="middle" font-size="9" fill="#0090c0">C</text>';
+    // close the loop
+    s+='<line x1="'+(x0+221)+'" y1="'+y+'" x2="'+(x0+280)+'" y2="'+y+'" stroke="#5533aa" stroke-width="1.6"/>';
+    s+='<line x1="'+(x0+280)+'" y1="'+y+'" x2="'+(x0+280)+'" y2="'+(y+50)+'" stroke="#5533aa" stroke-width="1.6"/>';
+    s+='<line x1="'+(x0+280)+'" y1="'+(y+50)+'" x2="'+x0+'" y2="'+(y+50)+'" stroke="#5533aa" stroke-width="1.6"/>';
+    s+='<line x1="'+x0+'" y1="'+(y+50)+'" x2="'+x0+'" y2="'+y+'" stroke="#5533aa" stroke-width="1.6"/>';
+    s+='<text x="'+W/2+'" y="18" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">Series RLC</text>';
+  } else {
+    var yy=40, bx=80, tx=W-90;
+    s+='<line x1="'+bx+'" y1="'+yy+'" x2="'+tx+'" y2="'+yy+'" stroke="#5533aa" stroke-width="1.6"/>';
+    s+='<line x1="'+bx+'" y1="'+(yy+80)+'" x2="'+tx+'" y2="'+(yy+80)+'" stroke="#5533aa" stroke-width="1.6"/>';
+    var xs=[bx+60, (bx+tx)/2, tx-60], labels=['R','L','C'], cols=['#c0392b','#7a4fd0','#0090c0'];
+    for (var i=0;i<3;i++){ var x=xs[i];
+      s+='<line x1="'+x+'" y1="'+yy+'" x2="'+x+'" y2="'+(yy+26)+'" stroke="#5533aa" stroke-width="1.4"/>';
+      if(i===0) s+=resistor(x-18,yy+30).replace('M'+(x-18),'M'+(x-18)); // reuse horiz resistor rotated-ish (simple)
+      if(i===0){ s+='<rect x="'+(x-8)+'" y="'+(yy+28)+'" width="16" height="24" fill="none" stroke="#c0392b" stroke-width="1.6"/>'; }
+      if(i===1){ s+='<path d="M'+(x)+' '+(yy+28)+' q-10 5 0 10 q-10 5 0 10 q-10 5 0 10" fill="none" stroke="#7a4fd0" stroke-width="1.8"/>'; }
+      if(i===2){ s+='<line x1="'+(x-9)+'" y1="'+(yy+40)+'" x2="'+(x+9)+'" y2="'+(yy+40)+'" stroke="#00ccff" stroke-width="2.6"/><line x1="'+(x-9)+'" y1="'+(yy+46)+'" x2="'+(x+9)+'" y2="'+(yy+46)+'" stroke="#00ccff" stroke-width="2.6"/>'; }
+      s+='<line x1="'+x+'" y1="'+(yy+54)+'" x2="'+x+'" y2="'+(yy+80)+'" stroke="#5533aa" stroke-width="1.4"/>';
+      s+='<text x="'+(x+14)+'" y="'+(yy+44)+'" font-size="9" fill="'+cols[i]+'">'+labels[i]+'</text>';
+    }
+    s+='<text x="'+W/2+'" y="18" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">Parallel RLC</text>';
+  }
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_coupled_resonators.html">Learn about resonators →</a></div>
+<script src="RLCCircuit.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

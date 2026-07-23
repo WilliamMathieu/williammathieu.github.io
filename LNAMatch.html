@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LNA Noise Figure vs Source Match Calculator (Noise Parameters) | RF Toolbox</title>
+  <meta name="description" content="Calculate an amplifier's noise figure for any source reflection coefficient from the four noise parameters (Fmin, Rn, Gamma_opt), showing the mismatch penalty.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/LNAMatch.html">
+  <meta property="og:title" content="LNA Noise Figure vs Source Match Calculator | RF Toolbox">
+  <meta property="og:description" content="Noise figure for any source reflection from the noise parameters Fmin, Rn and Gamma_opt.">
+  <meta property="og:url" content="https://rftoolbox.ca/LNAMatch.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "LNA Noise Figure vs Source Match Calculator",
+    "description": "Calculate an amplifier's noise figure for any source reflection coefficient from the four noise parameters (Fmin, Rn, Gamma_opt).",
+    "url": "https://rftoolbox.ca/LNAMatch.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>LNA Noise Figure vs Source Match</h3>
+<div class="tool-concept">
+  <p>An amplifier's noise figure is lowest only at one specific source reflection — the optimum Γ<sub>opt</sub> — and rises with the mismatch from it, at a rate set by the equivalent noise resistance R<sub>n</sub>. Given the four noise parameters and your presented source reflection Γ<sub>S</sub>, this computes the actual noise figure and the penalty above F<sub>min</sub>. This is the noise-match trade-off behind LNA design.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(F = F_{\min} + \dfrac{4\,R_n/Z_0\,\left|\Gamma_S - \Gamma_{\text{opt}}\right|^2}{\left(1-|\Gamma_S|^2\right)\left|1+\Gamma_{\text{opt}}\right|^2}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">F<sub>min</sub></td><td style="padding:3px 0;">Minimum noise figure of the device (dB), achieved at Γ<sub>opt</sub>.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>n</sub></td><td style="padding:3px 0;">Equivalent noise resistance (Ω) — how fast NF rises with mismatch.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Γ<sub>opt</sub></td><td style="padding:3px 0;">Optimum source reflection (magnitude and angle in degrees).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Γ<sub>S</sub></td><td style="padding:3px 0;">Source reflection actually presented (magnitude and angle).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z<sub>0</sub></td><td style="padding:3px 0;">Reference impedance (Ω), default 50.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., Wiley, 2012. · G. Gonzalez, <em>Microwave Transistor Amplifiers</em>, 2nd ed., Prentice Hall, 1997.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>F<sub>min</sub></label><div class="inp-inline"><input type="text" id="fmin" placeholder="e.g. 0.5" data-tip="Minimum noise figure in dB."><span class="inp-units">dB</span></div><span class="inp-hint">Best-case NF</span></div>
+  <div class="inp-row"><label>Noise resistance, <span class="var">R<sub>n</sub></span></label><div class="inp-inline"><input type="text" id="rn" placeholder="e.g. 20" data-tip="Equivalent noise resistance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Mismatch slope</span></div>
+  <div class="inp-row"><label>|Γ<sub>opt</sub>|, ∠</label><div class="inp-inline"><input type="text" id="gom" placeholder="0.5" style="max-width:70px;" data-tip="Optimum reflection magnitude (0–1)."><input type="text" id="goa" placeholder="45°" style="max-width:70px;margin-left:5px;" data-tip="Optimum reflection angle (degrees)."></div><span class="inp-hint">mag, angle°</span></div>
+  <div class="inp-row"><label>|Γ<sub>S</sub>|, ∠</label><div class="inp-inline"><input type="text" id="gsm" placeholder="0.3" style="max-width:70px;" data-tip="Source reflection magnitude (0–1)."><input type="text" id="gsa" placeholder="30°" style="max-width:70px;margin-left:5px;" data-tip="Source reflection angle (degrees)."></div><span class="inp-hint">mag, angle°</span></div>
+  <div class="inp-row"><label>Reference, <span class="var">Z<sub>0</sub></span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="z0" placeholder="50" data-tip="Reference impedance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Default 50</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fmin&quot;:&quot;0.5&quot;,&quot;rn&quot;:&quot;20&quot;,&quot;gom&quot;:&quot;0.5&quot;,&quot;goa&quot;:&quot;45&quot;,&quot;gsm&quot;:&quot;0.3&quot;,&quot;gsa&quot;:&quot;30&quot;,&quot;z0&quot;:&quot;50&quot;})" title="Fmin 0.5 dB, Rn 20 Ω, Γopt 0.5∠45°, Γs 0.3∠30°">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Noise figure</h4>
+    <div class="res-row"><span class="res-lbl">NF at Γ<sub>S</sub></span><span class="res-val" id="nf">—</span></div>
+    <div class="res-row"><span class="res-lbl">Noise factor F</span><span class="res-val" id="f">—</span></div>
+  </div>
+  <div class="res-card"><h4>Mismatch</h4>
+    <div class="res-row"><span class="res-lbl">Penalty above F<sub>min</sub></span><span class="res-val" id="pen">—</span></div>
+    <div class="res-row"><span class="res-lbl">|Γ<sub>S</sub> − Γ<sub>opt</sub>|</span><span class="res-val" id="dist">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var gom=parseFloat(document.getElementById('gom').value), goa=parseFloat(document.getElementById('goa').value);
+  var gsm=parseFloat(document.getElementById('gsm').value), gsa=parseFloat(document.getElementById('gsa').value);
+  var W=560,H=210,cx=280,cy=100,R=82;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(gom)||isNaN(goa)||isNaN(gsm)||isNaN(gsa)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  // reflection-plane unit circle (Smith-chart outline)
+  s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+R+'" fill="none" stroke="#bbb" stroke-width="1.2"/>';
+  s+='<line x1="'+(cx-R)+'" y1="'+cy+'" x2="'+(cx+R)+'" y2="'+cy+'" stroke="#eee" stroke-width="1"/>';
+  s+='<line x1="'+cx+'" y1="'+(cy-R)+'" x2="'+cx+'" y2="'+(cy+R)+'" stroke="#eee" stroke-width="1"/>';
+  function pt(m,ang,col,label){
+    var x=cx+m*R*Math.cos(ang*Math.PI/180), y=cy-m*R*Math.sin(ang*Math.PI/180);
+    s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="4" fill="'+col+'"/>';
+    s+='<text x="'+(x+6).toFixed(1)+'" y="'+(y-6).toFixed(1)+'" font-size="10.5" fill="'+col+'">'+label+'</text>';
+    return [x,y];
+  }
+  var po=pt(gom,goa,'#2e8b57','Γopt');
+  var ps=pt(gsm,gsa,'#c0392b','Γs');
+  s+='<line x1="'+po[0].toFixed(1)+'" y1="'+po[1].toFixed(1)+'" x2="'+ps[0].toFixed(1)+'" y2="'+ps[1].toFixed(1)+'" stroke="#888" stroke-width="1.2" stroke-dasharray="3,2"/>';
+  var nf=(document.getElementById('nf').textContent||'');
+  s+='<text x="'+cx+'" y="18" text-anchor="middle" font-size="10.5" fill="#5533aa">source reflection plane — NF = '+nf+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_noise.html">Learn the theory behind this tool →</a></div>
+<script src="LNAMatch.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

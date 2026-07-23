@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receiver Sensitivity / MDS Calculator — Noise Floor & SFDR | RF Toolbox</title>
+  <meta name="description" content="Calculate receiver sensitivity (minimum detectable signal), thermal noise floor, and spurious-free dynamic range (SFDR) from bandwidth, noise figure, required SNR and input IP3.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/Sensitivity.html">
+  <meta property="og:title" content="Receiver Sensitivity / MDS Calculator | RF Toolbox">
+  <meta property="og:description" content="Sensitivity/MDS, noise floor and SFDR from bandwidth, noise figure, required SNR and IIP3.">
+  <meta property="og:url" content="https://rftoolbox.ca/Sensitivity.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Receiver Sensitivity / MDS Calculator",
+    "description": "Calculate receiver sensitivity (minimum detectable signal), thermal noise floor, and spurious-free dynamic range from bandwidth, noise figure, required SNR and input IP3.",
+    "url": "https://rftoolbox.ca/Sensitivity.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Receiver Sensitivity / MDS &amp; SFDR</h3>
+<div class="tool-concept">
+  <p>Finds a receiver's <strong>sensitivity</strong> — the minimum detectable signal (MDS) — from its noise bandwidth, noise figure, and the SNR your demodulator needs. It first computes the thermal noise floor referred to the input, adds the noise figure and the required SNR, and (optionally) uses the input third-order intercept to give the spurious-free dynamic range (SFDR).</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(P_{\text{floor}} = -174\ \text{dBm/Hz} + 10\log_{10}B + NF \qquad \text{MDS} = P_{\text{floor}} + \text{SNR}_{\min}\)<br>\(\text{SFDR} = \tfrac{2}{3}\big(\text{IIP3} - P_{\text{floor}}\big)\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B</td><td style="padding:3px 0;">Noise bandwidth (Hz). The −174 dBm/Hz term is kT₀ at T₀ = 290 K.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">NF</td><td style="padding:3px 0;">Cascaded noise figure of the receiver (dB).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">SNR<sub>min</sub></td><td style="padding:3px 0;">Signal-to-noise ratio the demodulator needs for the target BER/quality (dB).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">IIP3</td><td style="padding:3px 0;">Input third-order intercept point (dBm), optional. Sets the top of the spurious-free range.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">SFDR</td><td style="padding:3px 0;">Spurious-free dynamic range: the input range over which third-order intermodulation products stay below the noise floor.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>B. Razavi, <em>RF Microelectronics</em>, 2nd ed., Prentice Hall, 2012. · U. L. Rohde &amp; M. Rudolph, <em>RF/Microwave Circuit Design for Wireless Applications</em>, 2nd ed., Wiley, 2013.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Noise bandwidth, <span class="var">B</span></label><div class="inp-inline"><input type="text" id="B" placeholder="e.g. 1e6" data-tip="Receiver noise bandwidth in hertz. Enter 1e6 for 1 MHz."><span class="inp-units">Hz</span></div><span class="inp-hint">Channel/IF bandwidth</span></div>
+  <div class="inp-row"><label>Noise figure, <span class="var">NF</span></label><div class="inp-inline"><input type="text" id="NF" placeholder="e.g. 3" data-tip="Cascaded noise figure of the receive chain."><span class="inp-units">dB</span></div><span class="inp-hint">Receiver NF</span></div>
+  <div class="inp-row"><label>Required SNR, <span class="var">SNR<sub>min</sub></span></label><div class="inp-inline"><input type="text" id="SNR" placeholder="e.g. 10" data-tip="SNR needed by the demodulator for the target BER."><span class="inp-units">dB</span></div><span class="inp-hint">Demod threshold</span></div>
+  <div class="inp-row"><label>Input IP3, <span class="var">IIP3</span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="IIP3" placeholder="e.g. -10" data-tip="Input third-order intercept point, for the SFDR calculation."><span class="inp-units">dBm</span></div><span class="inp-hint">For SFDR</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;B&quot;:&quot;1e6&quot;,&quot;NF&quot;:&quot;3&quot;,&quot;SNR&quot;:&quot;10&quot;,&quot;IIP3&quot;:&quot;-10&quot;})" title="1 MHz bandwidth, 3 dB NF, 10 dB required SNR, -10 dBm IIP3">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Sensitivity</h4>
+    <div class="res-row"><span class="res-lbl">Noise floor</span><span class="res-val" id="floor">—</span></div>
+    <div class="res-row"><span class="res-lbl">Sensitivity / MDS</span><span class="res-val" id="mds">—</span></div>
+  </div>
+  <div class="res-card"><h4>Dynamic range</h4>
+    <div class="res-row"><span class="res-lbl">SFDR</span><span class="res-val" id="sfdr">—</span></div>
+    <div class="res-row"><span class="res-lbl">kT₀B in band</span><span class="res-val" id="ktb">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var floor = parseFloat((document.getElementById('floor').textContent||'').replace(/[^\-0-9.]/g,''));
+  var mds   = parseFloat((document.getElementById('mds').textContent||'').replace(/[^\-0-9.]/g,''));
+  var iip3v = parseFloat(document.getElementById('IIP3') ? document.getElementById('IIP3').value : '');
+  var W=560,H=200,x=150;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(floor)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  // level axis: map dBm to y. top = max(iip3, mds+80), bottom = floor-10
+  var top = !isNaN(iip3v) ? Math.max(iip3v+8, mds+20) : mds+40;
+  var bot = floor - 12;
+  function y(p){ return 20 + (top - p)/(top - bot)*(H-50); }
+  // axis
+  s+='<line x1="'+x+'" y1="10" x2="'+x+'" y2="'+(H-20)+'" stroke="#bbb" stroke-width="1"/>';
+  function level(p,label,col,dash){
+    var yy=y(p).toFixed(1);
+    s+='<line x1="'+x+'" y1="'+yy+'" x2="'+(W-20)+'" y2="'+yy+'" stroke="'+col+'" stroke-width="1.6"'+(dash?' stroke-dasharray="4,3"':'')+'/>';
+    s+='<text x="'+(x-8)+'" y="'+(parseFloat(yy)+4)+'" text-anchor="end" font-size="10.5" fill="'+col+'">'+label+'</text>';
+    s+='<text x="'+(W-22)+'" y="'+(parseFloat(yy)-4)+'" text-anchor="end" font-size="10" fill="#888">'+p.toFixed(1)+' dBm</text>';
+  }
+  if (!isNaN(iip3v)) level(iip3v,'IIP3','#c0392b',false);
+  level(mds,'MDS','#5533aa',false);
+  level(floor,'noise floor','#888',true);
+  // SFDR span arrow between floor and (2/3 up to iip3) — draw between mds and iip3 region
+  if (!isNaN(iip3v)) {
+    var pSpur = floor + (2/3)*(iip3v-floor); // top of SFDR referred to input
+    var yTop=y(pSpur), yBot=y(floor), xa=x+50;
+    s+='<line x1="'+xa+'" y1="'+yTop.toFixed(1)+'" x2="'+xa+'" y2="'+yBot.toFixed(1)+'" stroke="#2e8b57" stroke-width="1.4"/>';
+    s+='<polygon points="'+xa+','+yTop.toFixed(1)+' '+(xa-3)+','+(yTop+7).toFixed(1)+' '+(xa+3)+','+(yTop+7).toFixed(1)+'" fill="#2e8b57"/>';
+    s+='<polygon points="'+xa+','+yBot.toFixed(1)+' '+(xa-3)+','+(yBot-7).toFixed(1)+' '+(xa+3)+','+(yBot-7).toFixed(1)+'" fill="#2e8b57"/>';
+    s+='<text x="'+(xa+6)+'" y="'+((yTop+yBot)/2).toFixed(1)+'" font-size="10.5" fill="#2e8b57">SFDR</text>';
+  }
+  s+='<text x="'+x+'" y="'+(H-6)+'" text-anchor="middle" font-size="10" fill="#888">input power →</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_noise.html">Learn the theory behind this tool →</a></div>
+<script src="Sensitivity.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

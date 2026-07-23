@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDR Fault Distance Calculator — Cable Fault Location | RF Toolbox</title>
+  <meta name="description" content="Locate a cable fault or discontinuity from a time-domain reflectometry (TDR) echo delay, velocity factor, and reflection coefficient.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/TDR.html">
+  <meta property="og:title" content="TDR Fault Distance Calculator | RF Toolbox">
+  <meta property="og:description" content="Cable fault distance from TDR echo delay and velocity factor, plus fault impedance.">
+  <meta property="og:url" content="https://rftoolbox.ca/TDR.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TDR Fault Distance Calculator",
+    "description": "Locate a cable fault or discontinuity from a time-domain reflectometry echo delay, velocity factor, and reflection coefficient.",
+    "url": "https://rftoolbox.ca/TDR.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>TDR Fault Distance</h3>
+<div class="tool-concept">
+  <p>Time-domain reflectometry sends a fast step into a cable and times the echo from any impedance discontinuity. Because the pulse travels to the fault and back, the distance is half the round-trip delay times the propagation velocity (the velocity factor of the cable). The reflection sign and size also reveal whether the fault is an open, short, or partial mismatch.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(d = \dfrac{\text{VF}\cdot c\cdot t}{2} \qquad \text{VF} = \dfrac{1}{\sqrt{\varepsilon_r}} \qquad Z_{\text{fault}} = Z_0\dfrac{1+\rho}{1-\rho}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">t</td><td style="padding:3px 0;">Round-trip echo delay (ns) — time from the launched step to the reflected step.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">VF</td><td style="padding:3px 0;">Cable velocity factor (0–1). Enter this or the dielectric constant.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ε<sub>r</sub></td><td style="padding:3px 0;">Dielectric constant; used to derive VF = 1/√ε<sub>r</sub> if VF is blank.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ρ, Z<sub>0</sub></td><td style="padding:3px 0;">Reflection coefficient and line impedance (Ω), optional — give the fault impedance.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>Tektronix, <em>TDR Impedance Measurements: A Foundation for Signal Integrity</em>. · D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., Wiley, 2012.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Echo delay, <span class="var">t</span></label><div class="inp-inline"><input type="text" id="t" placeholder="e.g. 10" data-tip="Round-trip echo delay in nanoseconds."><span class="inp-units">ns</span></div><span class="inp-hint">Round trip</span></div>
+  <div class="inp-row"><label>Velocity factor, <span class="var">VF</span></label><div class="inp-inline"><input type="text" id="vf" placeholder="e.g. 0.66" data-tip="Cable velocity factor, 0–1. Enter this or εr."></div><span class="inp-hint">or εr below</span></div>
+  <div class="inp-row"><label>Dielectric, <span class="var">ε<sub>r</sub></span> <span style="color:#aaa;">(alt.)</span></label><div class="inp-inline"><input type="text" id="er" placeholder="e.g. 2.3" data-tip="Dielectric constant, used if VF is blank."></div><span class="inp-hint">VF = 1/√εr</span></div>
+  <div class="inp-row"><label>Reflection, <span class="var">ρ</span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="rho" placeholder="e.g. 0.2" data-tip="Reflection coefficient at the fault (-1 to 1)."></div><span class="inp-hint">For fault Z</span></div>
+  <div class="inp-row"><label>Line impedance, <span class="var">Z<sub>0</sub></span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="z0" placeholder="50" data-tip="Characteristic impedance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Default 50</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;t&quot;:&quot;10&quot;,&quot;vf&quot;:&quot;0.66&quot;,&quot;er&quot;:&quot;&quot;,&quot;rho&quot;:&quot;0.2&quot;,&quot;z0&quot;:&quot;50&quot;})" title="10 ns round trip, VF 0.66, ρ 0.2, 50 Ω">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Location</h4>
+    <div class="res-row"><span class="res-lbl">Fault distance</span><span class="res-val" id="dist">—</span></div>
+    <div class="res-row"><span class="res-lbl">Velocity factor used</span><span class="res-val" id="vfu">—</span></div>
+  </div>
+  <div class="res-card"><h4>Fault</h4>
+    <div class="res-row"><span class="res-lbl">Fault impedance</span><span class="res-val" id="zf">—</span></div>
+    <div class="res-row"><span class="res-lbl">Type</span><span class="res-val" id="type">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var dist=(document.getElementById('dist').textContent||'');
+  var rho=parseFloat(document.getElementById('rho').value);
+  var W=560,H=160;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (dist==='—'||dist==='') { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  // TDR trace: incident step, flat, then a bump/dip at the fault time
+  var base=95, xa=40, xf=340, xe=W-30;
+  s+='<line x1="'+xa+'" y1="'+(base+22)+'" x2="'+xa+'" y2="'+base+'" stroke="#5533aa" stroke-width="2"/>';
+  s+='<line x1="'+xa+'" y1="'+base+'" x2="'+xf+'" y2="'+base+'" stroke="#5533aa" stroke-width="2"/>';
+  var bump = (isNaN(rho)?0.2:rho)*40;
+  s+='<line x1="'+xf+'" y1="'+base+'" x2="'+xf+'" y2="'+(base-bump)+'" stroke="#c0392b" stroke-width="2"/>';
+  s+='<line x1="'+xf+'" y1="'+(base-bump)+'" x2="'+xe+'" y2="'+(base-bump)+'" stroke="#c0392b" stroke-width="2"/>';
+  s+='<line x1="'+xf+'" y1="20" x2="'+xf+'" y2="'+(base+18)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+  s+='<text x="'+xf+'" y="16" text-anchor="middle" font-size="10.5" fill="#c0392b">fault @ '+dist+'</text>';
+  s+='<text x="'+xa+'" y="'+(base+34)+'" font-size="9.5" fill="#888">launch step</text>';
+  s+='<text x="'+(W-30)+'" y="'+(base+34)+'" text-anchor="end" font-size="9.5" fill="#888">distance / time →</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_vna.html">Learn the theory behind this tool →</a></div>
+<script src="TDR.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

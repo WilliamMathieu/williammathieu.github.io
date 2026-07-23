@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spectrum Analyzer DANL &amp; Noise Floor Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate a spectrum analyzer's displayed average noise level (DANL) and sensitivity from resolution bandwidth, noise figure and input attenuation.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/SpectrumDANL.html">
+  <meta property="og:title" content="Spectrum Analyzer DANL & Noise Floor Calculator | RF Toolbox">
+  <meta property="og:description" content="Displayed average noise level and sensitivity from RBW, noise figure and attenuation.">
+  <meta property="og:url" content="https://rftoolbox.ca/SpectrumDANL.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Spectrum Analyzer DANL & Noise Floor Calculator",
+    "description": "Calculate a spectrum analyzer's displayed average noise level (DANL) and sensitivity from resolution bandwidth, noise figure and input attenuation.",
+    "url": "https://rftoolbox.ca/SpectrumDANL.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Spectrum Analyzer DANL &amp; Sensitivity</h3>
+<div class="tool-concept">
+  <p>The displayed average noise level (DANL) is a spectrum analyzer's own noise floor — the lowest signal it can show. It is the thermal noise in the resolution bandwidth plus the instrument's noise figure (which input attenuation adds to directly). Narrowing the RBW lowers the floor by 10 dB per decade; the smallest signal you can actually measure sits your required SNR above it.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(\text{DANL} = -174\ \text{dBm/Hz} + NF + L_{\text{att}} + 10\log_{10}\text{RBW}\)<br>\(\text{sensitivity} = \text{DANL} + \text{SNR}_{\min}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">RBW</td><td style="padding:3px 0;">Resolution bandwidth (Hz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">NF</td><td style="padding:3px 0;">Analyzer noise figure (dB) at 0 dB input attenuation.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L<sub>att</sub></td><td style="padding:3px 0;">Input attenuation (dB), optional — adds one-for-one to the noise floor.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">SNR<sub>min</sub></td><td style="padding:3px 0;">SNR you need above the noise floor to measure a signal (dB), optional.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">DANL</td><td style="padding:3px 0;">Displayed average noise level (dBm) in the chosen RBW.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>Keysight, App. Note 150, <em>Spectrum Analysis Basics</em>. · Rohde &amp; Schwarz, <em>Fundamentals of Spectrum Analysis</em>.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Resolution BW, <span class="var">RBW</span></label><div class="inp-inline"><input type="text" id="rbw" placeholder="e.g. 1000" data-tip="Resolution bandwidth in hertz (1000 = 1 kHz)."><span class="inp-units">Hz</span></div><span class="inp-hint">e.g. 1e3</span></div>
+  <div class="inp-row"><label>Noise figure, <span class="var">NF</span></label><div class="inp-inline"><input type="text" id="nf" placeholder="e.g. 20" data-tip="Analyzer noise figure (dB)."><span class="inp-units">dB</span></div><span class="inp-hint">Analyzer NF</span></div>
+  <div class="inp-row"><label>Input atten., <span class="var">L<sub>att</sub></span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="att" placeholder="0" data-tip="Input attenuator setting (dB)."><span class="inp-units">dB</span></div><span class="inp-hint">Default 0</span></div>
+  <div class="inp-row"><label>Required SNR <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="snr" placeholder="e.g. 10" data-tip="SNR needed above the floor (dB), for sensitivity."><span class="inp-units">dB</span></div><span class="inp-hint">For sensitivity</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;rbw&quot;:&quot;1000&quot;,&quot;nf&quot;:&quot;20&quot;,&quot;att&quot;:&quot;0&quot;,&quot;snr&quot;:&quot;10&quot;})" title="1 kHz RBW, 20 dB NF, 0 dB atten, 10 dB SNR">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Noise floor</h4>
+    <div class="res-row"><span class="res-lbl">DANL</span><span class="res-val" id="danl">—</span></div>
+    <div class="res-row"><span class="res-lbl">Noise density</span><span class="res-val" id="dens">—</span></div>
+  </div>
+  <div class="res-card"><h4>Sensitivity</h4>
+    <div class="res-row"><span class="res-lbl">Min. signal</span><span class="res-val" id="sens">—</span></div>
+    <div class="res-row"><span class="res-lbl">DANL @ 1 Hz</span><span class="res-val" id="d1">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var danl=parseFloat((document.getElementById('danl').textContent||'').replace(/[^\-0-9.]/g,''));
+  var sens=parseFloat((document.getElementById('sens').textContent||'').replace(/[^\-0-9.]/g,''));
+  var W=560,H=170;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(danl)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  var xa=40,xw=W-70,yb=130;
+  s+='<line x1="'+xa+'" y1="'+yb+'" x2="'+(xa+xw)+'" y2="'+yb+'" stroke="#bbb" stroke-width="1"/>';
+  // jagged noise floor near bottom
+  var yFloor=yb-24, path='M'+xa+','+yFloor;
+  for(var i=1;i<=40;i++){ var x=xa+i/40*xw; var jitter=(i%2?3:-3)+(i%3?1:-1); path+=' L'+x.toFixed(1)+','+(yFloor+jitter).toFixed(1); }
+  s+='<path d="'+path+'" fill="none" stroke="#8877cc" stroke-width="1.2"/>';
+  s+='<text x="'+(xa+xw)+'" y="'+(yFloor-4)+'" text-anchor="end" font-size="10" fill="#8877cc">DANL '+danl.toFixed(1)+' dBm</text>';
+  // a signal peak sitting at sensitivity above the floor
+  if(!isNaN(sens)){
+    var yPk=yb-70, xp=xa+xw*0.5;
+    s+='<path d="M'+(xp-16)+','+yFloor+' Q'+xp+','+(yPk-14)+' '+(xp)+','+yPk+' Q'+xp+','+(yPk-14)+' '+(xp+16)+','+yFloor+'" fill="#5533aa33" stroke="#5533aa" stroke-width="1.6"/>';
+    s+='<text x="'+xp+'" y="'+(yPk-4)+'" text-anchor="middle" font-size="10" fill="#5533aa">min signal '+sens.toFixed(1)+' dBm</text>';
+  }
+  s+='<text x="'+(xa+xw)+'" y="'+(yb+22)+'" text-anchor="end" font-size="9.5" fill="#888">frequency →</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_noise.html">Learn the theory behind this tool →</a></div>
+<script src="SpectrumDANL.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

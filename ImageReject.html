@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Frequency &amp; I/Q Image Rejection Calculator | RF Toolbox</title>
+  <meta name="description" content="Find the image frequency and LO frequency of a superheterodyne mixer, and the image-rejection ratio from I/Q amplitude and phase imbalance.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/ImageReject.html">
+  <meta property="og:title" content="Image Frequency & I/Q Image Rejection Calculator | RF Toolbox">
+  <meta property="og:description" content="Image frequency, LO frequency, and image-rejection ratio from I/Q gain and phase imbalance.">
+  <meta property="og:url" content="https://rftoolbox.ca/ImageReject.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image Frequency & I/Q Image Rejection Calculator",
+    "description": "Find the image frequency and LO frequency of a superheterodyne mixer, and the image-rejection ratio from I/Q amplitude and phase imbalance.",
+    "url": "https://rftoolbox.ca/ImageReject.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Image Frequency &amp; I/Q Image Rejection</h3>
+<div class="tool-concept">
+  <p>For a superheterodyne downconverter, the signal at the image frequency mixes to the same IF as the wanted signal. This tool gives the LO and image frequencies for high- or low-side injection, and the image-rejection ratio (IRR) achievable in an I/Q (Hartley/Weaver) receiver limited by gain and phase imbalance between the I and Q paths.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(f_{\text{LO}} = f_{\text{RF}} \pm f_{\text{IF}} \qquad f_{\text{image}} = f_{\text{RF}} \pm 2 f_{\text{IF}}\)<br>\(\text{IRR} = 10\log_{10}\dfrac{1 + A^2 + 2A\cos\theta}{1 + A^2 - 2A\cos\theta},\quad A = 10^{\,\Delta g/20}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>RF</sub></td><td style="padding:3px 0;">Wanted RF (signal) frequency (MHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>IF</sub></td><td style="padding:3px 0;">Intermediate frequency (MHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">LO side</td><td style="padding:3px 0;">High-side (LO above RF) or low-side (LO below RF) injection.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Δg</td><td style="padding:3px 0;">I/Q amplitude (gain) imbalance (dB).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">θ</td><td style="padding:3px 0;">I/Q phase imbalance — deviation from 90° (degrees).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">IRR</td><td style="padding:3px 0;">Image-rejection ratio: how far the image is suppressed below the wanted signal.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>B. Razavi, <em>RF Microelectronics</em>, 2nd ed., Prentice Hall, 2012. · R. C. Sanderson &amp; J. Hong; ADI MT-088, <em>Analog Devices Mixer Tutorial</em>.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>RF frequency, <span class="var">f<sub>RF</sub></span></label><div class="inp-inline"><input type="text" id="fRF" placeholder="e.g. 1000" data-tip="Wanted signal (RF) frequency."><span class="inp-units">MHz</span></div><span class="inp-hint">Wanted signal</span></div>
+  <div class="inp-row"><label>IF frequency, <span class="var">f<sub>IF</sub></span></label><div class="inp-inline"><input type="text" id="fIF" placeholder="e.g. 70" data-tip="Intermediate frequency."><span class="inp-units">MHz</span></div><span class="inp-hint">Intermediate freq</span></div>
+  <div class="inp-row"><label>LO side</label><div class="inp-inline"><select id="side" style="font-size:13px;padding:3px;"><option value="high">High-side (LO &gt; RF)</option><option value="low">Low-side (LO &lt; RF)</option></select></div><span class="inp-hint">Injection</span></div>
+  <div class="inp-row"><label>Amplitude imbalance, <span class="var">Δg</span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="amp" placeholder="e.g. 0.2" data-tip="I/Q gain imbalance in dB."><span class="inp-units">dB</span></div><span class="inp-hint">I/Q gain error</span></div>
+  <div class="inp-row"><label>Phase imbalance, <span class="var">θ</span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="ph" placeholder="e.g. 2" data-tip="I/Q phase error away from 90°, in degrees."><span class="inp-units">deg</span></div><span class="inp-hint">I/Q phase error</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fRF&quot;:&quot;1000&quot;,&quot;fIF&quot;:&quot;70&quot;,&quot;amp&quot;:&quot;0.2&quot;,&quot;ph&quot;:&quot;2&quot;})" title="1000 MHz RF, 70 MHz IF, 0.2 dB & 2° imbalance">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Frequencies</h4>
+    <div class="res-row"><span class="res-lbl">LO frequency</span><span class="res-val" id="fLO">—</span></div>
+    <div class="res-row"><span class="res-lbl">Image frequency</span><span class="res-val" id="fImg">—</span></div>
+  </div>
+  <div class="res-card"><h4>Image rejection</h4>
+    <div class="res-row"><span class="res-lbl">IRR</span><span class="res-val" id="irr">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var fRF=parseFloat(document.getElementById('fRF').value);
+  var fLO=parseFloat((document.getElementById('fLO').textContent||'').replace(/[^0-9.]/g,''));
+  var fImg=parseFloat((document.getElementById('fImg').textContent||'').replace(/[^0-9.]/g,''));
+  var W=560,H=160;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(fRF)||isNaN(fLO)||isNaN(fImg)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  var lo=Math.min(fRF,fImg,fLO), hi=Math.max(fRF,fImg,fLO);
+  var pad=(hi-lo)*0.15||10; lo-=pad; hi+=pad;
+  var xa=40, xw=W-80, yb=H-34;
+  function X(f){ return xa + (f-lo)/(hi-lo)*xw; }
+  s+='<line x1="'+xa+'" y1="'+yb+'" x2="'+(xa+xw)+'" y2="'+yb+'" stroke="#bbb" stroke-width="1"/>';
+  function tone(f,label,col,h){
+    var x=X(f).toFixed(1);
+    s+='<line x1="'+x+'" y1="'+(yb-h)+'" x2="'+x+'" y2="'+yb+'" stroke="'+col+'" stroke-width="2.4"/>';
+    s+='<text x="'+x+'" y="'+(yb-h-5)+'" text-anchor="middle" font-size="10.5" fill="'+col+'">'+label+'</text>';
+    s+='<text x="'+x+'" y="'+(yb+14)+'" text-anchor="middle" font-size="9.5" fill="#888">'+f.toFixed(0)+'</text>';
+  }
+  tone(fImg,'image','#c0392b',66);
+  tone(fRF,'RF (wanted)','#5533aa',92);
+  tone(fLO,'LO','#2e8b57',78);
+  s+='<text x="'+(W-8)+'" y="'+(yb+28)+'" text-anchor="end" font-size="10" fill="#888">frequency (MHz) →</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_superheterodyne.html">Learn the theory behind this tool →</a></div>
+<script src="ImageReject.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

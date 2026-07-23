@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Varactor Diode C–V Tuning Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate varactor (varicap) capacitance versus reverse bias, the capacitance tuning ratio, and the resonant-frequency tuning range with an inductor.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/Varactor.html">
+  <meta property="og:title" content="Varactor Diode C–V Tuning Calculator | RF Toolbox">
+  <meta property="og:description" content="Varactor capacitance vs reverse bias, tuning ratio, and resonant-frequency tuning range.">
+  <meta property="og:url" content="https://rftoolbox.ca/Varactor.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Varactor Diode C–V Tuning Calculator",
+    "description": "Calculate varactor capacitance versus reverse bias, the capacitance tuning ratio, and the resonant-frequency tuning range with an inductor.",
+    "url": "https://rftoolbox.ca/Varactor.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Varactor C–V Tuning</h3>
+<div class="tool-concept">
+  <p>A varactor (varicap) diode is a voltage-controlled capacitor: reverse bias widens the junction depletion layer and lowers the capacitance. This tool computes the capacitance at the low and high bias limits, the capacitance tuning ratio, and — with a resonator inductance — the resulting frequency tuning range for a VCO or tuned circuit.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(C(V) = \dfrac{C_0}{\left(1 + V/\varphi\right)^{n}} \qquad \dfrac{C_{\max}}{C_{\min}} = \left(\dfrac{1+V_{\max}/\varphi}{1+V_{\min}/\varphi}\right)^{n}\)<br>\(f(V) = \dfrac{1}{2\pi\sqrt{L\,C(V)}}, \qquad \dfrac{f_{\max}}{f_{\min}} = \sqrt{\dfrac{C_{\max}}{C_{\min}}}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C<sub>0</sub></td><td style="padding:3px 0;">Zero-bias junction capacitance (pF).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">φ</td><td style="padding:3px 0;">Built-in (junction) potential, typically 0.6–0.8 V for silicon.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">n</td><td style="padding:3px 0;">Grading coefficient: 0.5 for an abrupt junction, up to ~1–2 for hyperabrupt.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">V<sub>min</sub>, V<sub>max</sub></td><td style="padding:3px 0;">Reverse-bias control range (V). Low bias → high C; high bias → low C.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Resonator inductance (nH), optional — gives the frequency tuning range.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>B. Razavi, <em>RF Microelectronics</em>, 2nd ed., Prentice Hall, 2012. · S. M. Sze &amp; K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley, 2007.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Zero-bias C, <span class="var">C<sub>0</sub></span></label><div class="inp-inline"><input type="text" id="C0" placeholder="e.g. 10" data-tip="Junction capacitance at zero bias (pF)."><span class="inp-units">pF</span></div><span class="inp-hint">At 0 V</span></div>
+  <div class="inp-row"><label>Built-in potential, <span class="var">φ</span></label><div class="inp-inline"><input type="text" id="phi" placeholder="e.g. 0.7" data-tip="Junction built-in potential (V)."><span class="inp-units">V</span></div><span class="inp-hint">~0.7 for Si</span></div>
+  <div class="inp-row"><label>Grading coeff., <span class="var">n</span></label><div class="inp-inline"><input type="text" id="n" placeholder="e.g. 0.5" data-tip="0.5 abrupt, up to ~2 hyperabrupt."></div><span class="inp-hint">0.5–2</span></div>
+  <div class="inp-row"><label>Min. bias, <span class="var">V<sub>min</sub></span></label><div class="inp-inline"><input type="text" id="Vmin" placeholder="e.g. 0" data-tip="Low end of the reverse-bias range (V)."><span class="inp-units">V</span></div><span class="inp-hint">High C end</span></div>
+  <div class="inp-row"><label>Max. bias, <span class="var">V<sub>max</sub></span></label><div class="inp-inline"><input type="text" id="Vmax" placeholder="e.g. 10" data-tip="High end of the reverse-bias range (V)."><span class="inp-units">V</span></div><span class="inp-hint">Low C end</span></div>
+  <div class="inp-row"><label>Inductance, <span class="var">L</span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="L" placeholder="e.g. 100" data-tip="Resonator inductance (nH), for the frequency tuning range."><span class="inp-units">nH</span></div><span class="inp-hint">For f range</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;C0&quot;:&quot;10&quot;,&quot;phi&quot;:&quot;0.7&quot;,&quot;n&quot;:&quot;0.5&quot;,&quot;Vmin&quot;:&quot;0&quot;,&quot;Vmax&quot;:&quot;10&quot;,&quot;L&quot;:&quot;100&quot;})" title="10 pF, φ 0.7 V, n 0.5, 0–10 V, 100 nH">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Capacitance</h4>
+    <div class="res-row"><span class="res-lbl">C at V<sub>min</sub> (max)</span><span class="res-val" id="cmax">—</span></div>
+    <div class="res-row"><span class="res-lbl">C at V<sub>max</sub> (min)</span><span class="res-val" id="cmin">—</span></div>
+    <div class="res-row"><span class="res-lbl">C tuning ratio</span><span class="res-val" id="cratio">—</span></div>
+  </div>
+  <div class="res-card"><h4>Frequency tuning</h4>
+    <div class="res-row"><span class="res-lbl">f range</span><span class="res-val" id="frange">—</span></div>
+    <div class="res-row"><span class="res-lbl">f tuning ratio</span><span class="res-val" id="fratio">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var C0=parseFloat(document.getElementById('C0').value), phi=parseFloat(document.getElementById('phi').value);
+  var n=parseFloat(document.getElementById('n').value), Vmin=parseFloat(document.getElementById('Vmin').value), Vmax=parseFloat(document.getElementById('Vmax').value);
+  var W=560,H=190;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(C0)||isNaN(phi)||isNaN(n)||isNaN(Vmin)||isNaN(Vmax)||Vmax<=Vmin) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  var x0=55,x1=W-30,y0=H-30,y1=20;
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x1+'" y2="'+y0+'" stroke="#bbb" stroke-width="1"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x0+'" y2="'+y1+'" stroke="#bbb" stroke-width="1"/>';
+  s+='<text x="'+(x0-6)+'" y="'+(y1+4)+'" text-anchor="end" font-size="9.5" fill="#888">C</text>';
+  s+='<text x="'+x1+'" y="'+(y0+16)+'" text-anchor="end" font-size="9.5" fill="#888">V (reverse) →</text>';
+  var cAt0=C0/Math.pow(1+Vmin/phi,n), pmax=cAt0;
+  var path='';
+  for(var i=0;i<=60;i++){
+    var V=Vmin+(Vmax-Vmin)*i/60;
+    var Cc=C0/Math.pow(1+V/phi,n);
+    var x=x0+(x1-x0)*i/60;
+    var y=y0-(Cc/pmax)*(y0-y1);
+    path+=(i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1)+' ';
+  }
+  s+='<path d="'+path+'" fill="none" stroke="#5533aa" stroke-width="2.2"/>';
+  s+='<text x="'+((x0+x1)/2)+'" y="'+(y1+2)+'" text-anchor="middle" font-size="10.5" fill="#5533aa">C(V) = C₀ / (1 + V/φ)ⁿ</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_complex_impedance.html">Learn the theory behind this tool →</a></div>
+<script src="Varactor.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

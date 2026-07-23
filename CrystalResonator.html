@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quartz Crystal Resonator Calculator — Series/Parallel Resonance, Q, Pullability | RF Toolbox</title>
+  <meta name="description" content="From a quartz crystal's motional parameters L1, C1, R1 and shunt C0: series and parallel resonant frequencies, Q, capacitance ratio and load pullability.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/CrystalResonator.html">
+  <meta property="og:title" content="Quartz Crystal Resonator Calculator | RF Toolbox">
+  <meta property="og:description" content="Series/parallel resonance, Q, capacitance ratio and pullability from a crystal's motional parameters.">
+  <meta property="og:url" content="https://rftoolbox.ca/CrystalResonator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Quartz Crystal Resonator Calculator",
+    "description": "From a quartz crystal's motional parameters L1, C1, R1 and shunt C0: series and parallel resonant frequencies, Q, capacitance ratio and load pullability.",
+    "url": "https://rftoolbox.ca/CrystalResonator.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Quartz Crystal Resonator</h3>
+<div class="tool-concept">
+  <p>A quartz crystal behaves as a very high-Q resonator modelled by a motional branch (L₁, C₁, R₁) in parallel with a shunt capacitance C₀. This tool computes the series and parallel resonant frequencies that bracket the crystal's usable range, the motional Q, the capacitance ratio, and how far a load capacitor pulls the frequency — the numbers behind oscillator design and trimming.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(f_s=\dfrac{1}{2\pi\sqrt{L_1 C_1}} \qquad f_p=f_s\sqrt{1+\dfrac{C_1}{C_0}} \qquad Q=\dfrac{2\pi f_s L_1}{R_1}\)<br>\(r=\dfrac{C_0}{C_1} \qquad \dfrac{\Delta f}{f}\approx\dfrac{C_1}{2\,(C_0+C_L)}\ \text{(pull to load }C_L)\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L<sub>1</sub></td><td style="padding:3px 0;">Motional inductance (H) — large for a crystal (henries).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C<sub>1</sub></td><td style="padding:3px 0;">Motional capacitance (fF), very small.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>1</sub></td><td style="padding:3px 0;">Motional (series) resistance / ESR (Ω), sets the Q.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C<sub>0</sub></td><td style="padding:3px 0;">Shunt (holder + electrode) capacitance (pF).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C<sub>L</sub></td><td style="padding:3px 0;">Load capacitance (pF), optional — gives the pulled frequency.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>Butterworth–Van Dyke crystal model; W. L. Smith &amp; standard quartz-crystal application notes.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Motional L<sub>1</sub></label><div class="inp-inline"><input type="text" id="cr-l1" placeholder="e.g. 0.1" data-tip="Motional inductance in henries."><span class="inp-units">H</span></div><span class="inp-hint">Henries</span></div>
+  <div class="inp-row"><label>Motional C<sub>1</sub></label><div class="inp-inline"><input type="text" id="cr-c1" placeholder="e.g. 20" data-tip="Motional capacitance in femtofarads (fF). 20 fF = 0.02 pF."><span class="inp-units">fF</span></div><span class="inp-hint">Femtofarads</span></div>
+  <div class="inp-row"><label>ESR, <span class="var">R<sub>1</sub></span></label><div class="inp-inline"><input type="text" id="cr-r1" placeholder="e.g. 30" data-tip="Motional series resistance in ohms."><span class="inp-units">Ω</span></div><span class="inp-hint">For Q</span></div>
+  <div class="inp-row"><label>Shunt C<sub>0</sub></label><div class="inp-inline"><input type="text" id="cr-c0" placeholder="e.g. 5" data-tip="Shunt (holder) capacitance in picofarads."><span class="inp-units">pF</span></div><span class="inp-hint">Holder cap</span></div>
+  <div class="inp-row"><label>Load C<sub>L</sub> <span style="color:#aaa;">(opt)</span></label><div class="inp-inline"><input type="text" id="cr-cl" placeholder="e.g. 18" data-tip="Load capacitance in picofarads, for the pulled frequency."><span class="inp-units">pF</span></div><span class="inp-hint">For pulling</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="crCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;cr-l1&quot;:&quot;0.1&quot;,&quot;cr-c1&quot;:&quot;20&quot;,&quot;cr-r1&quot;:&quot;30&quot;,&quot;cr-c0&quot;:&quot;5&quot;,&quot;cr-cl&quot;:&quot;18&quot;})" title="≈3.56 MHz crystal">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Resonance</h4>
+    <div class="res-row"><span class="res-lbl">Series resonance f<sub>s</sub></span><span class="res-val" id="cr-fs">—</span></div>
+    <div class="res-row"><span class="res-lbl">Parallel resonance f<sub>p</sub></span><span class="res-val" id="cr-fp">—</span></div>
+    <div class="res-row"><span class="res-lbl">f<sub>p</sub> − f<sub>s</sub> spacing</span><span class="res-val" id="cr-df">—</span></div>
+  </div>
+  <div class="res-card"><h4>Figures</h4>
+    <div class="res-row"><span class="res-lbl">Quality factor Q</span><span class="res-val" id="cr-q">—</span></div>
+    <div class="res-row"><span class="res-lbl">Capacitance ratio C<sub>0</sub>/C<sub>1</sub></span><span class="res-val" id="cr-r">—</span></div>
+    <div class="res-row"><span class="res-lbl">Pulled frequency (at C<sub>L</sub>)</span><span class="res-val" id="cr-fl">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var fs = document.getElementById('cr-fs') ? document.getElementById('cr-fs').textContent : '—';
+  var W=560,H=170,y=70;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // Butterworth-Van Dyke: motional L1-C1-R1 branch, shunt C0
+  var xL=110,xR=450;
+  s+='<line x1="60" y1="'+y+'" x2="'+xL+'" y2="'+y+'" stroke="#333" stroke-width="1.5"/>';
+  s+='<line x1="'+xR+'" y1="'+y+'" x2="500" y2="'+y+'" stroke="#333" stroke-width="1.5"/>';
+  // motional branch (top path)
+  var yt=y-34;
+  s+='<line x1="'+xL+'" y1="'+y+'" x2="'+xL+'" y2="'+yt+'" stroke="#5533aa" stroke-width="1.6"/>';
+  s+='<line x1="'+xL+'" y1="'+yt+'" x2="180" y2="'+yt+'" stroke="#5533aa" stroke-width="1.6"/>';
+  // L1 (coil hint)
+  s+='<path d="M180 '+yt+' q6 -10 12 0 q6 -10 12 0 q6 -10 12 0" fill="none" stroke="#5533aa" stroke-width="1.8"/>';
+  s+='<text x="198" y="'+(yt-12)+'" text-anchor="middle" font-size="9" fill="#5533aa">L₁</text>';
+  // C1
+  s+='<line x1="216" y1="'+yt+'" x2="248" y2="'+yt+'" stroke="#5533aa" stroke-width="1.6"/>';
+  s+='<line x1="256" y1="'+(yt-9)+'" x2="256" y2="'+(yt+9)+'" stroke="#5533aa" stroke-width="2"/>';
+  s+='<line x1="262" y1="'+(yt-9)+'" x2="262" y2="'+(yt+9)+'" stroke="#5533aa" stroke-width="2"/>';
+  s+='<text x="259" y="'+(yt-12)+'" text-anchor="middle" font-size="9" fill="#5533aa">C₁</text>';
+  // R1
+  s+='<rect x="270" y="'+(yt-6)+'" width="34" height="12" fill="none" stroke="#5533aa" stroke-width="1.6"/>';
+  s+='<text x="287" y="'+(yt-12)+'" text-anchor="middle" font-size="9" fill="#5533aa">R₁</text>';
+  s+='<line x1="304" y1="'+yt+'" x2="'+xR+'" y2="'+yt+'" stroke="#5533aa" stroke-width="1.6"/>';
+  s+='<line x1="'+xR+'" y1="'+yt+'" x2="'+xR+'" y2="'+y+'" stroke="#5533aa" stroke-width="1.6"/>';
+  // shunt C0
+  var xc=280;
+  s+='<line x1="'+xL+'" y1="'+y+'" x2="'+xc+'" y2="'+y+'" stroke="#AA77FF" stroke-width="1.4"/>';
+  s+='<line x1="'+xc+'" y1="'+y+'" x2="'+xc+'" y2="'+(y+18)+'" stroke="#AA77FF" stroke-width="1.4"/>';
+  s+='<line x1="'+(xc-12)+'" y1="'+(y+18)+'" x2="'+(xc+12)+'" y2="'+(y+18)+'" stroke="#AA77FF" stroke-width="2"/>';
+  s+='<line x1="'+(xc-12)+'" y1="'+(y+24)+'" x2="'+(xc+12)+'" y2="'+(y+24)+'" stroke="#AA77FF" stroke-width="2"/>';
+  s+='<line x1="'+xc+'" y1="'+(y+24)+'" x2="'+xc+'" y2="'+y+'" stroke="#AA77FF" stroke-width="0"/>';
+  s+='<line x1="'+xc+'" y1="'+y+'" x2="'+xR+'" y2="'+y+'" stroke="#AA77FF" stroke-width="1.4"/>';
+  s+='<text x="'+(xc+20)+'" y="'+(y+22)+'" font-size="9" fill="#AA77FF">C₀</text>';
+  s+='<text x="'+((60+500)/2)+'" y="150" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Butterworth–Van Dyke — fs = '+fs+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_crystals.html">Learn about quartz crystal resonators →</a></div>
+<script src="CrystalResonator.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

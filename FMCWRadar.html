@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FMCW Radar Calculator — Range/Velocity Resolution &amp; Beat Frequency | RF Toolbox</title>
+  <meta name="description" content="FMCW radar design: range resolution from chirp bandwidth, beat frequency vs range, chirp slope, maximum unambiguous velocity and velocity resolution from the chirp frame.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/FMCWRadar.html">
+  <meta property="og:title" content="FMCW Radar Calculator | RF Toolbox">
+  <meta property="og:description" content="Range/velocity resolution, beat frequency and chirp slope for an FMCW radar.">
+  <meta property="og:url" content="https://rftoolbox.ca/FMCWRadar.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "FMCW Radar Calculator",
+    "description": "FMCW radar design: range resolution from chirp bandwidth, beat frequency vs range, chirp slope, maximum unambiguous velocity and velocity resolution from the chirp frame.",
+    "url": "https://rftoolbox.ca/FMCWRadar.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>FMCW Radar</h3>
+<div class="tool-concept">
+  <p>A frequency-modulated continuous-wave radar measures range from the beat frequency between the transmitted chirp and its echo, and velocity from the phase change across a frame of chirps. This tool gives the range resolution set by the sweep bandwidth, the chirp slope and beat frequency for a target, and the maximum unambiguous velocity and velocity resolution set by the chirp timing — the core numbers for automotive and short-range radar.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(S=\dfrac{B}{T_{chirp}} \qquad \Delta R=\dfrac{c}{2B} \qquad f_{beat}=\dfrac{2R\,S}{c}\)<br>\(v_{max}=\dfrac{\lambda}{4\,T_{chirp}} \qquad \Delta v=\dfrac{\lambda}{2\,N\,T_{chirp}} \qquad \lambda=\dfrac{c}{f_0}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B</td><td style="padding:3px 0;">Chirp sweep bandwidth (GHz). Sets the range resolution.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T<sub>chirp</sub></td><td style="padding:3px 0;">Single-chirp duration (µs).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>0</sub></td><td style="padding:3px 0;">Carrier frequency (GHz), for the wavelength.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Number of chirps per frame. More chirps → finer velocity resolution.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R</td><td style="padding:3px 0;">Target range (m), optional — gives the beat frequency.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>M. A. Richards, <em>Fundamentals of Radar Signal Processing</em>, 2nd ed., 2014; Texas Instruments, "The fundamentals of millimetre-wave radar sensors," 2020.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Sweep bandwidth, <span class="var">B</span></label><div class="inp-inline"><input type="text" id="fm-b" placeholder="e.g. 1" data-tip="Chirp sweep bandwidth in GHz."><span class="inp-units">GHz</span></div><span class="inp-hint">Range resolution</span></div>
+  <div class="inp-row"><label>Chirp time, <span class="var">T<sub>chirp</sub></span></label><div class="inp-inline"><input type="text" id="fm-t" placeholder="e.g. 50" data-tip="Duration of one chirp in microseconds."><span class="inp-units">µs</span></div><span class="inp-hint">Per chirp</span></div>
+  <div class="inp-row"><label>Carrier, <span class="var">f<sub>0</sub></span></label><div class="inp-inline"><input type="text" id="fm-f0" placeholder="e.g. 77" data-tip="Carrier frequency in GHz."><span class="inp-units">GHz</span></div><span class="inp-hint">For λ &amp; velocity</span></div>
+  <div class="inp-row"><label>Chirps/frame, <span class="var">N</span></label><div class="inp-inline"><input type="text" id="fm-n" placeholder="e.g. 128" data-tip="Number of chirps per frame (Doppler FFT length)."></div><span class="inp-hint">Velocity resolution</span></div>
+  <div class="inp-row"><label>Target range, <span class="var">R</span> <span style="color:#aaa;">(opt)</span></label><div class="inp-inline"><input type="text" id="fm-r" placeholder="e.g. 50" data-tip="Target range in metres, for the beat frequency."><span class="inp-units">m</span></div><span class="inp-hint">For beat freq</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="fmCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fm-b&quot;:&quot;1&quot;,&quot;fm-t&quot;:&quot;50&quot;,&quot;fm-f0&quot;:&quot;77&quot;,&quot;fm-n&quot;:&quot;128&quot;,&quot;fm-r&quot;:&quot;50&quot;})" title="77 GHz automotive chirp">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Range</h4>
+    <div class="res-row"><span class="res-lbl">Range resolution ΔR</span><span class="res-val" id="fm-dr">—</span></div>
+    <div class="res-row"><span class="res-lbl">Chirp slope S</span><span class="res-val" id="fm-s">—</span></div>
+    <div class="res-row"><span class="res-lbl">Beat frequency</span><span class="res-val" id="fm-beat">—</span></div>
+  </div>
+  <div class="res-card"><h4>Velocity</h4>
+    <div class="res-row"><span class="res-lbl">Wavelength λ</span><span class="res-val" id="fm-lam">—</span></div>
+    <div class="res-row"><span class="res-lbl">Max unambiguous v</span><span class="res-val" id="fm-vmax">—</span></div>
+    <div class="res-row"><span class="res-lbl">Velocity resolution Δv</span><span class="res-val" id="fm-dv">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var dr = document.getElementById('fm-dr') ? document.getElementById('fm-dr').textContent : '—';
+  var W=560,H=180,x0=60,x1=500,y0=140,y1=40;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x0+'" y2="20" stroke="#333" stroke-width="1"/>';
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="520" y2="'+y0+'" stroke="#333" stroke-width="1"/>';
+  s+='<text x="'+(x0-6)+'" y="30" text-anchor="end" font-size="9" fill="#888">f</text>';
+  s+='<text x="512" y="'+(y0+13)+'" text-anchor="end" font-size="9" fill="#888">t</text>';
+  // TX chirp (sawtooth ramp) and RX echo (delayed)
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x1+'" y2="'+y1+'" stroke="#5533aa" stroke-width="2.2"/>';
+  var dx=34;
+  s+='<line x1="'+(x0+dx)+'" y1="'+y0+'" x2="'+(x1)+'" y2="'+(y1+ (y0-y1)*dx/(x1-x0))+'" stroke="#AA77FF" stroke-width="2" stroke-dasharray="5,3"/>';
+  s+='<text x="'+(x0+120)+'" y="'+(y1+40)+'" font-size="10" fill="#5533aa">TX chirp</text>';
+  s+='<text x="'+(x0+120)+'" y="'+(y1+54)+'" font-size="10" fill="#AA77FF">RX echo (delayed)</text>';
+  s+='<text x="'+((x0+x1)/2)+'" y="170" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">FMCW chirp — ΔR = '+dr+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_fmcw_radar.html">Learn about FMCW radar →</a></div>
+<script src="FMCWRadar.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

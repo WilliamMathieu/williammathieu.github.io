@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wire Inductance Calculator — Straight Wire, Loop &amp; Two-Wire Line | RF Toolbox</title>
+  <meta name="description" content="Calculate the self-inductance of a straight round wire, a single circular loop, or a two-wire transmission line from the conductor and geometry dimensions.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/WireInductance.html">
+  <meta property="og:title" content="Wire Inductance Calculator | RF Toolbox">
+  <meta property="og:description" content="Self-inductance of a straight wire, circular loop or two-wire line.">
+  <meta property="og:url" content="https://rftoolbox.ca/WireInductance.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Wire Inductance Calculator",
+    "description": "Calculate the self-inductance of a straight round wire, a single circular loop, or a two-wire transmission line.",
+    "url": "https://rftoolbox.ca/WireInductance.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Wire Inductance</h3>
+<div class="tool-concept">
+  <p>Any conductor has inductance. This tool gives the low-frequency self-inductance of the three common geometries: a straight round wire, a single circular loop, and a two-wire line (the loop inductance of the pair). Enter the wire diameter and the relevant dimension; add a frequency for the reactance.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.05;overflow-x:auto;">straight wire: \(L = \dfrac{\mu_0 \ell}{2\pi}\left(\ln\dfrac{2\ell}{r} - \tfrac{3}{4}\right)\)<br>circular loop: \(L = \mu_0 R\left(\ln\dfrac{8R}{r} - 2\right)\)<br>two-wire line: \(L = \dfrac{\mu_0}{\pi}\ln\dfrac{s}{r}\,\ell\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d, r</td><td style="padding:3px 0;">Wire diameter and radius (r = d/2), mm.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ℓ</td><td style="padding:3px 0;">Wire / line length (mm), for the straight-wire and two-wire cases.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Loop diameter (mm) for the circular loop (R = D/2).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">s</td><td style="padding:3px 0;">Centre-to-centre conductor spacing (mm) for the two-wire line.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Self-inductance (external, low-frequency; skin effect removes the internal part at RF).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>F. W. Grover, <em>Inductance Calculations</em>, Dover, 2004. · C. R. Paul, <em>Inductance: Loop and Partial</em>, Wiley, 2010.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Geometry</label><div class="inp-inline"><select id="shape" style="font-size:13px;padding:3px;"><option value="wire">Straight wire</option><option value="loop">Circular loop</option><option value="twowire">Two-wire line</option></select></div><span class="inp-hint">Conductor shape</span></div>
+  <div class="inp-row"><label>Wire diameter, <span class="var">d</span></label><div class="inp-inline"><input type="text" id="dw" placeholder="e.g. 1" data-tip="Conductor diameter (mm)."><span class="inp-units">mm</span></div><span class="inp-hint">Conductor Ø</span></div>
+  <div class="inp-row"><label>Length, <span class="var">ℓ</span></label><div class="inp-inline"><input type="text" id="len" placeholder="e.g. 10" data-tip="Wire or line length (mm). Straight wire / two-wire."><span class="inp-units">mm</span></div><span class="inp-hint">Wire / line</span></div>
+  <div class="inp-row"><label>Loop diameter, <span class="var">D</span></label><div class="inp-inline"><input type="text" id="D" placeholder="e.g. 20" data-tip="Loop diameter (mm). Circular loop only."><span class="inp-units">mm</span></div><span class="inp-hint">Loop only</span></div>
+  <div class="inp-row"><label>Spacing, <span class="var">s</span></label><div class="inp-inline"><input type="text" id="s" placeholder="e.g. 2" data-tip="Centre-to-centre spacing (mm). Two-wire only."><span class="inp-units">mm</span></div><span class="inp-hint">Two-wire only</span></div>
+  <div class="inp-row"><label>Frequency, <span class="var">f</span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="f" placeholder="e.g. 100" data-tip="Frequency (MHz), for reactance."><span class="inp-units">MHz</span></div><span class="inp-hint">For Xₗ</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;shape&quot;:&quot;wire&quot;,&quot;dw&quot;:&quot;1&quot;,&quot;len&quot;:&quot;10&quot;,&quot;D&quot;:&quot;20&quot;,&quot;s&quot;:&quot;2&quot;,&quot;f&quot;:&quot;100&quot;})" title="Straight wire, d 1 mm, 10 mm long, 100 MHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Inductance</h4>
+    <div class="res-row"><span class="res-lbl">Inductance L</span><span class="res-val" id="L">—</span></div>
+    <div class="res-row"><span class="res-lbl">Per unit length</span><span class="res-val" id="Lpm">—</span></div>
+  </div>
+  <div class="res-card"><h4>At frequency</h4>
+    <div class="res-row"><span class="res-lbl">Reactance X<sub>L</sub></span><span class="res-val" id="XL">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var shape=document.getElementById('shape').value;
+  var Lv=document.getElementById('L') ? document.getElementById('L').textContent : '—';
+  var W=560,H=170,cy=90;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (Lv==='—'||Lv==='') { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  if (shape==='wire') {
+    s+='<line x1="120" y1="'+cy+'" x2="440" y2="'+cy+'" stroke="#5533aa" stroke-width="5"/>';
+    s+='<line x1="120" y1="'+(cy+22)+'" x2="440" y2="'+(cy+22)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>';
+    s+='<text x="280" y="'+(cy+36)+'" text-anchor="middle" font-size="10" fill="#888">ℓ</text>';
+  } else if (shape==='loop') {
+    s+='<circle cx="280" cy="'+cy+'" r="52" fill="none" stroke="#5533aa" stroke-width="4"/>';
+    s+='<line x1="228" y1="'+cy+'" x2="332" y2="'+cy+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/><text x="280" y="'+(cy-6)+'" text-anchor="middle" font-size="10" fill="#888">D</text>';
+  } else {
+    s+='<line x1="120" y1="'+(cy-16)+'" x2="440" y2="'+(cy-16)+'" stroke="#5533aa" stroke-width="4"/>';
+    s+='<line x1="120" y1="'+(cy+16)+'" x2="440" y2="'+(cy+16)+'" stroke="#5533aa" stroke-width="4"/>';
+    s+='<line x1="150" y1="'+(cy-16)+'" x2="150" y2="'+(cy+16)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/><text x="162" y="'+(cy+4)+'" font-size="10" fill="#888">s</text>';
+  }
+  s+='<text x="280" y="24" text-anchor="middle" font-size="12" fill="#5533aa" font-weight="bold">L = '+Lv+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_coil_design.html">Learn the theory behind this tool →</a></div>
+<script src="WireInductance.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

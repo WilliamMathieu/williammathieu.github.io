@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cavity Resonator Calculator — Rectangular &amp; Circular Modes, Q | RF Toolbox</title>
+  <meta name="description" content="Resonant frequencies of rectangular and circular waveguide cavity resonators (TE/TM modes) and the unloaded Q of the rectangular TE10ℓ mode from the conductor (Pozar §6.3).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/CavityResonator.html">
+  <meta property="og:title" content="Cavity Resonator Calculator | RF Toolbox">
+  <meta property="og:description" content="Rectangular and circular cavity resonant frequencies and unloaded Q.">
+  <meta property="og:url" content="https://rftoolbox.ca/CavityResonator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Cavity Resonator Calculator",
+    "description": "Resonant frequencies of rectangular and circular waveguide cavity resonators and the unloaded Q of the rectangular TE10ℓ mode.",
+    "url": "https://rftoolbox.ca/CavityResonator.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Cavity Resonator</h3>
+<div class="tool-concept">
+  <p>A closed metal box supports a discrete set of resonant modes with very high Q — the basis of cavity filters, oscillator tanks and wavemeters. This tool gives the resonant frequency of a rectangular or circular cavity for a chosen TE/TM mode, and the unloaded (conductor-limited) Q of the dominant rectangular TE₁₀ℓ mode. Copper cavities routinely reach Q in the tens of thousands.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">rect: \(f_{mn\ell}=\dfrac{c}{2}\sqrt{(m/a)^2+(n/b)^2+(\ell/d)^2}\)<br>circ: \(f=\dfrac{c}{2\pi}\sqrt{(p/a)^2+(\ell\pi/d)^2}\) (p = J-zero for TM, J′-zero for TE)<br>\(Q_{c}=\dfrac{(kad)^3 b\,\eta}{2\pi^2 R_s\,(2\ell^2a^3b+2bd^3+\ell^2a^3d+ad^3)}\) (TE₁₀ℓ)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">a, b, d</td><td style="padding:3px 0;">Rectangular cavity width, height, length (mm). Circular: a = radius, d = length.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Mode</td><td style="padding:3px 0;">Mode indices m,n,ℓ (rectangular) or a named circular mode.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">σ</td><td style="padding:3px 0;">Wall conductivity (S/m) for the unloaded Q. Copper 5.8×10⁷.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Q</td><td style="padding:3px 0;">Conductor-limited unloaded Q (dielectric assumed lossless).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §6.3 (rectangular &amp; circular cavity resonators).</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Shape</label><div class="inp-inline"><select id="cv-shape" style="font-size:12px;padding:3px;" onchange="cvHint()"><option value="rect" selected>Rectangular</option><option value="circ">Circular</option></select></div><span class="inp-hint" id="cv-shint">a×b×d box</span></div>
+  <div class="inp-row"><label><span id="cv-alabel">Width a</span></label><div class="inp-inline"><input type="text" id="cv-a" placeholder="e.g. 30" data-tip="Rectangular width, or circular radius (mm)."><span class="inp-units">mm</span></div><span class="inp-hint" id="cv-ahint">width</span></div>
+  <div class="inp-row"><label>Height b</label><div class="inp-inline"><input type="text" id="cv-b" placeholder="e.g. 15" data-tip="Rectangular height (mm). Ignored for circular."><span class="inp-units">mm</span></div><span class="inp-hint" id="cv-bhint">rect only</span></div>
+  <div class="inp-row"><label>Length d</label><div class="inp-inline"><input type="text" id="cv-d" placeholder="e.g. 30" data-tip="Cavity length (mm)."><span class="inp-units">mm</span></div><span class="inp-hint">axial</span></div>
+  <div class="inp-row" id="cv-rectmode"><label>Mode m,n,ℓ</label><div class="inp-inline"><input type="text" id="cv-m" placeholder="1" style="width:36px"><input type="text" id="cv-n" placeholder="0" style="width:36px"><input type="text" id="cv-l" placeholder="1" style="width:36px"></div><span class="inp-hint">TE₁₀₁ dominant</span></div>
+  <div class="inp-row" id="cv-circmode" style="display:none;"><label>Mode</label><div class="inp-inline"><select id="cv-cmode" style="font-size:12px;padding:3px;"><option value="TM010">TM₀₁₀</option><option value="TE111" selected>TE₁₁₁</option><option value="TM110">TM₁₁₀</option><option value="TE011">TE₀₁₁</option><option value="TM011">TM₀₁₁</option></select></div><span class="inp-hint">circular</span></div>
+  <div class="inp-row"><label>Conductivity σ</label><div class="inp-inline"><input type="text" id="cv-sig" placeholder="5.8e7" data-tip="Wall conductivity (S/m)."><span class="inp-units">S/m</span></div><span class="inp-hint">For Q</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="cvCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;cv-shape&quot;:&quot;rect&quot;,&quot;cv-a&quot;:&quot;30&quot;,&quot;cv-b&quot;:&quot;15&quot;,&quot;cv-d&quot;:&quot;30&quot;,&quot;cv-m&quot;:&quot;1&quot;,&quot;cv-n&quot;:&quot;0&quot;,&quot;cv-l&quot;:&quot;1&quot;,&quot;cv-sig&quot;:&quot;5.8e7&quot;})" title="30×15×30 mm copper, TE101">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Resonance</h4>
+    <div class="res-row"><span class="res-lbl">Resonant frequency</span><span class="res-val" id="cv-f">—</span></div>
+    <div class="res-row"><span class="res-lbl">Free-space wavelength</span><span class="res-val" id="cv-lam">—</span></div>
+    <div class="res-row"><span class="res-lbl">Mode</span><span class="res-val" id="cv-mode">—</span></div>
+  </div>
+  <div class="res-card"><h4>Quality factor</h4>
+    <div class="res-row"><span class="res-lbl">Surface resistance R<sub>s</sub></span><span class="res-val" id="cv-rs">—</span></div>
+    <div class="res-row"><span class="res-lbl">Unloaded Q (TE₁₀ℓ)</span><span class="res-val" id="cv-q">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var shape = document.getElementById('cv-shape') ? document.getElementById('cv-shape').value : 'rect';
+  var f = document.getElementById('cv-f') ? document.getElementById('cv-f').textContent : '—';
+  var W=560,H=170,cx=200,cy=85;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if(shape==='rect'){
+    s+='<rect x="120" y="45" width="130" height="70" fill="#e9e2fb" stroke="#5533aa" stroke-width="2"/>';
+    s+='<path d="M120 45 L150 25 L280 25 L250 45" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5"/>';
+    s+='<path d="M250 45 L280 25 L280 95 L250 115" fill="#dcd0f5" stroke="#5533aa" stroke-width="1.5"/>';
+    s+='<text x="185" y="85" text-anchor="middle" font-size="9" fill="#5533aa">a×b×d</text>';
+  } else {
+    s+='<ellipse cx="200" cy="55" rx="70" ry="18" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5"/>';
+    s+='<line x1="130" y1="55" x2="130" y2="115" stroke="#5533aa" stroke-width="2"/><line x1="270" y1="55" x2="270" y2="115" stroke="#5533aa" stroke-width="2"/>';
+    s+='<ellipse cx="200" cy="115" rx="70" ry="18" fill="#e9e2fb" stroke="#5533aa" stroke-width="2"/>';
+    s+='<text x="200" y="90" text-anchor="middle" font-size="9" fill="#5533aa">radius a, length d</text>';
+  }
+  s+='<text x="420" y="85" text-anchor="middle" font-size="13" fill="#5533aa" font-weight="bold">f₀ = '+f+'</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_coupled_resonators.html">Learn about resonators →</a></div>
+<script src="CavityResonator.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

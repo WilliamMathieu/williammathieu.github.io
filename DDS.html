@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DDS Frequency Calculator — Tuning Word &amp; Resolution | RF Toolbox</title>
+  <meta name="description" content="Calculate the output frequency, tuning word and frequency resolution of a direct digital synthesizer (DDS) from clock, accumulator bits and target frequency.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/DDS.html">
+  <meta property="og:title" content="DDS Frequency Calculator | RF Toolbox">
+  <meta property="og:description" content="DDS output frequency, tuning word and resolution from clock and accumulator size.">
+  <meta property="og:url" content="https://rftoolbox.ca/DDS.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "DDS Frequency Calculator",
+    "description": "Calculate the output frequency, tuning word and frequency resolution of a direct digital synthesizer from clock, accumulator bits and target frequency.",
+    "url": "https://rftoolbox.ca/DDS.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>DDS Output Frequency &amp; Tuning Word</h3>
+<div class="tool-concept">
+  <p>A direct digital synthesizer builds a waveform by stepping an <em>N</em>-bit phase accumulator by a tuning word M every clock cycle. The output frequency is a precise fraction of the clock set by M, with a resolution equal to the clock divided by 2<sup>N</sup>. Enter a target frequency to get the nearest tuning word and the exact frequency it produces.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(f_{\text{out}} = \dfrac{M}{2^{N}}\,f_{\text{clk}} \qquad \Delta f = \dfrac{f_{\text{clk}}}{2^{N}} \qquad M = \text{round}\!\left(\dfrac{f_{\text{target}}}{f_{\text{clk}}}\,2^{N}\right)\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>clk</sub></td><td style="padding:3px 0;">Reference clock frequency (MHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Phase-accumulator width (bits), e.g. 24, 32, 48.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>target</sub></td><td style="padding:3px 0;">Desired output frequency (MHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">M</td><td style="padding:3px 0;">Frequency tuning word (integer, 0 … 2<sup>N</sup>−1).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Δf</td><td style="padding:3px 0;">Frequency resolution — the smallest output step.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>Analog Devices, MT-085, <em>Fundamentals of Direct Digital Synthesis</em>. · J. Vankka &amp; K. Halonen, <em>Direct Digital Synthesizers</em>, Kluwer, 2001.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Clock, <span class="var">f<sub>clk</sub></span></label><div class="inp-inline"><input type="text" id="fclk" placeholder="e.g. 100" data-tip="Reference clock frequency (MHz)."><span class="inp-units">MHz</span></div><span class="inp-hint">Reference clock</span></div>
+  <div class="inp-row"><label>Accumulator bits, <span class="var">N</span></label><div class="inp-inline"><input type="text" id="bits" placeholder="e.g. 32" data-tip="Phase accumulator width in bits."><span class="inp-units">bits</span></div><span class="inp-hint">e.g. 24/32/48</span></div>
+  <div class="inp-row"><label>Target output, <span class="var">f<sub>target</sub></span></label><div class="inp-inline"><input type="text" id="ftar" placeholder="e.g. 10" data-tip="Desired output frequency (MHz)."><span class="inp-units">MHz</span></div><span class="inp-hint">Desired freq</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fclk&quot;:&quot;100&quot;,&quot;bits&quot;:&quot;32&quot;,&quot;ftar&quot;:&quot;10&quot;})" title="100 MHz clock, 32-bit accumulator, 10 MHz target">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Tuning</h4>
+    <div class="res-row"><span class="res-lbl">Tuning word M</span><span class="res-val" id="M">—</span></div>
+    <div class="res-row"><span class="res-lbl">Actual f<sub>out</sub></span><span class="res-val" id="fout">—</span></div>
+    <div class="res-row"><span class="res-lbl">Error vs target</span><span class="res-val" id="ferr">—</span></div>
+  </div>
+  <div class="res-card"><h4>Limits</h4>
+    <div class="res-row"><span class="res-lbl">Resolution Δf</span><span class="res-val" id="res">—</span></div>
+    <div class="res-row"><span class="res-lbl">Max usable (~40%)</span><span class="res-val" id="max">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var fclk=parseFloat(document.getElementById('fclk').value);
+  var fout=parseFloat((document.getElementById('fout').textContent||'').replace(/[^0-9.]/g,''));
+  var W=560,H=150;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(fclk)||isNaN(fout)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  var xa=40,xw=W-70,yb=90;
+  s+='<line x1="'+xa+'" y1="'+yb+'" x2="'+(xa+xw)+'" y2="'+yb+'" stroke="#bbb" stroke-width="1"/>';
+  function X(f){ return xa + (f/fclk)*xw; }
+  // Nyquist and 40% region
+  s+='<rect x="'+xa+'" y="'+(yb-40)+'" width="'+(X(0.4*fclk)-xa)+'" height="40" fill="#2e8b5711"/>';
+  s+='<line x1="'+X(fclk/2)+'" y1="'+(yb-46)+'" x2="'+X(fclk/2)+'" y2="'+yb+'" stroke="#c0392b" stroke-width="1.2" stroke-dasharray="4,3"/>';
+  s+='<text x="'+X(fclk/2)+'" y="'+(yb-50)+'" text-anchor="middle" font-size="9.5" fill="#c0392b">Nyquist f_clk/2</text>';
+  s+='<text x="'+X(0.2*fclk)+'" y="'+(yb-16)+'" text-anchor="middle" font-size="9" fill="#2e8b57">usable</text>';
+  // output tone
+  s+='<line x1="'+X(fout)+'" y1="'+(yb-34)+'" x2="'+X(fout)+'" y2="'+yb+'" stroke="#5533aa" stroke-width="2.6"/>';
+  s+='<text x="'+X(fout)+'" y="'+(yb-38)+'" text-anchor="middle" font-size="10.5" fill="#5533aa">f_out = '+fout.toFixed(3)+' MHz</text>';
+  s+='<text x="'+xa+'" y="'+(yb+16)+'" font-size="9.5" fill="#888">0</text>';
+  s+='<text x="'+(xa+xw)+'" y="'+(yb+16)+'" text-anchor="end" font-size="9.5" fill="#888">f_clk = '+fclk+' MHz</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_oscillators.html">Learn the theory behind this tool →</a></div>
+<script src="DDS.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

@@ -59,7 +59,7 @@ function es_calc() {
   var unitKey = document.getElementById('es-unit').value;
   var series  = document.getElementById('es-series').value;
 
-  if (!(raw > 0)) { showError('Enter a valid positive value.'); return; }
+  if (!(raw > 0) || !isFinite(raw)) { showError('Enter a valid positive value.'); return; }
 
   var info   = UNIT_INFO[unitKey];
   var target = raw * info.mul;   // in base units (Ω / F / H)

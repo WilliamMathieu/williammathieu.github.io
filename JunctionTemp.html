@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Junction Temperature Calculator — Thermal Resistance Chain (θjc/θcs/θsa) | RF Toolbox</title>
+  <meta name="description" content="Compute device junction temperature from dissipated power and the thermal-resistance chain (junction-case, case-sink, sink-ambient), with the margin to a maximum Tj.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/JunctionTemp.html">
+  <meta property="og:title" content="Junction Temperature Calculator | RF Toolbox">
+  <meta property="og:description" content="Junction temperature from dissipated power and the θjc/θcs/θsa thermal chain, with margin.">
+  <meta property="og:url" content="https://rftoolbox.ca/JunctionTemp.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Junction Temperature Calculator",
+    "description": "Compute device junction temperature from dissipated power and the thermal-resistance chain (junction-case, case-sink, sink-ambient), with the margin to a maximum Tj.",
+    "url": "https://rftoolbox.ca/JunctionTemp.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Junction Temperature</h3>
+<div class="tool-concept">
+  <p>Heat flows from a transistor's junction to ambient through a chain of thermal resistances — junction-to-case, case-to-sink (interface), and sink-to-ambient. This tool adds the chain, multiplies by the dissipated power, and gives the junction temperature rise and absolute Tj, plus the margin to a maximum rating and the maximum power the chain can handle. Essential for reliable PA and high-power RF design.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(\theta_{ja}=\theta_{jc}+\theta_{cs}+\theta_{sa} \qquad T_j=T_a+P_{diss}\,\theta_{ja}\)<br>\(P_{max}=\dfrac{T_{j,max}-T_a}{\theta_{ja}} \qquad \text{margin}=T_{j,max}-T_j\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">P<sub>diss</sub></td><td style="padding:3px 0;">Power dissipated in the device (W).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T<sub>a</sub></td><td style="padding:3px 0;">Ambient (or reference) temperature (°C).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">θ<sub>jc</sub></td><td style="padding:3px 0;">Junction-to-case thermal resistance (°C/W).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">θ<sub>cs</sub>, θ<sub>sa</sub></td><td style="padding:3px 0;">Case-to-sink (interface) and sink-to-ambient resistances (°C/W). Set θ<sub>cs</sub>, θ<sub>sa</sub> = 0 to use a junction-to-ambient figure alone via θ<sub>jc</sub>.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">T<sub>j,max</sub></td><td style="padding:3px 0;">Maximum rated junction temperature (°C), optional — gives the margin and max power.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>Standard steady-state thermal-resistance network; JEDEC JESD51 thermal-characterization terminology.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Dissipated power, <span class="var">P<sub>diss</sub></span></label><div class="inp-inline"><input type="text" id="jt-p" placeholder="e.g. 5" data-tip="Power dissipated in the device, in watts."><span class="inp-units">W</span></div><span class="inp-hint">Heat load</span></div>
+  <div class="inp-row"><label>Ambient, <span class="var">T<sub>a</sub></span></label><div class="inp-inline"><input type="text" id="jt-ta" placeholder="e.g. 25" data-tip="Ambient/reference temperature in °C."><span class="inp-units">°C</span></div><span class="inp-hint">Reference</span></div>
+  <div class="inp-row"><label>θ<sub>jc</sub></label><div class="inp-inline"><input type="text" id="jt-jc" placeholder="e.g. 2" data-tip="Junction-to-case thermal resistance in °C/W."><span class="inp-units">°C/W</span></div><span class="inp-hint">Junction–case</span></div>
+  <div class="inp-row"><label>θ<sub>cs</sub></label><div class="inp-inline"><input type="text" id="jt-cs" placeholder="e.g. 0.5" data-tip="Case-to-sink (interface) thermal resistance in °C/W."><span class="inp-units">°C/W</span></div><span class="inp-hint">Interface</span></div>
+  <div class="inp-row"><label>θ<sub>sa</sub></label><div class="inp-inline"><input type="text" id="jt-sa" placeholder="e.g. 3" data-tip="Sink-to-ambient thermal resistance in °C/W."><span class="inp-units">°C/W</span></div><span class="inp-hint">Heatsink</span></div>
+  <div class="inp-row"><label>T<sub>j,max</sub> <span style="color:#aaa;">(opt)</span></label><div class="inp-inline"><input type="text" id="jt-tjmax" placeholder="e.g. 150" data-tip="Maximum rated junction temperature in °C."><span class="inp-units">°C</span></div><span class="inp-hint">For margin</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="jtCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;jt-p&quot;:&quot;5&quot;,&quot;jt-ta&quot;:&quot;25&quot;,&quot;jt-jc&quot;:&quot;2&quot;,&quot;jt-cs&quot;:&quot;0.5&quot;,&quot;jt-sa&quot;:&quot;3&quot;,&quot;jt-tjmax&quot;:&quot;150&quot;})" title="5 W, 25 °C ambient">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Temperature</h4>
+    <div class="res-row"><span class="res-lbl">Total θ<sub>ja</sub></span><span class="res-val" id="jt-theta">—</span></div>
+    <div class="res-row"><span class="res-lbl">Temperature rise</span><span class="res-val" id="jt-rise">—</span></div>
+    <div class="res-row"><span class="res-lbl">Junction temperature T<sub>j</sub></span><span class="res-val" id="jt-tj">—</span></div>
+  </div>
+  <div class="res-card"><h4>Margin</h4>
+    <div class="res-row"><span class="res-lbl">Margin to T<sub>j,max</sub></span><span class="res-val" id="jt-margin">—</span></div>
+    <div class="res-row"><span class="res-lbl">Max dissipation</span><span class="res-val" id="jt-pmax">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var tj = document.getElementById('jt-tj') ? document.getElementById('jt-tj').textContent : '—';
+  var W=560,H=150,y=64,x0=40;
+  var nodes=[['J',document.getElementById('jt-jc').value,'θjc'],['C',document.getElementById('jt-cs').value,'θcs'],['S',document.getElementById('jt-sa').value,'θsa'],['A','','']];
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  var gap=150;
+  for(var i=0;i<4;i++){var x=x0+i*gap;
+    s+='<circle cx="'+x+'" cy="'+y+'" r="16" fill="#f0eeff" stroke="#5533aa" stroke-width="1.8"/>';
+    s+='<text x="'+x+'" y="'+(y+4)+'" text-anchor="middle" font-size="11" font-weight="bold" fill="#5533aa">'+nodes[i][0]+'</text>';
+    if(i<3){s+='<line x1="'+(x+16)+'" y1="'+y+'" x2="'+(x+gap-16)+'" y2="'+y+'" stroke="#AA77FF" stroke-width="2"/>';
+      s+='<text x="'+(x+gap/2)+'" y="'+(y-8)+'" text-anchor="middle" font-size="9" fill="#888">'+nodes[i][2]+'='+(nodes[i][1]||'?')+'</text>';}
+  }
+  s+='<text x="'+(x0)+'" y="'+(y+34)+'" text-anchor="middle" font-size="8" fill="#888">junction</text>';
+  s+='<text x="'+(x0+3*gap)+'" y="'+(y+34)+'" text-anchor="middle" font-size="8" fill="#888">ambient</text>';
+  s+='<text x="'+((x0+3*gap)/2+20)+'" y="130" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Tj = '+tj+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_thermal.html">Learn about thermal management →</a></div>
+<script src="JunctionTemp.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

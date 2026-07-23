@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stub Filter (Richards' Transformation) — Stub Impedances | RF Toolbox</title>
+  <meta name="description" content="Convert a lumped Butterworth or Chebyshev lowpass prototype into λ/8 short- and open-circuited transmission-line stubs via Richards' transformation, giving each stub's characteristic impedance (Pozar §8.4).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/StubFilter.html">
+  <meta property="og:title" content="Stub Filter (Richards' Transformation) | RF Toolbox">
+  <meta property="og:description" content="λ/8 stub characteristic impedances from a lumped lowpass prototype.">
+  <meta property="og:url" content="https://rftoolbox.ca/StubFilter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Stub Filter (Richards' Transformation)",
+    "description": "Convert a lumped lowpass prototype into lambda/8 short- and open-circuited transmission-line stubs, giving each stub's characteristic impedance.",
+    "url": "https://rftoolbox.ca/StubFilter.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Stub Filter (Richards' Transformation)</h3>
+<div class="tool-concept">
+  <p>Richards' transformation Ω = tan(βℓ) maps a lumped lowpass prototype onto commensurate transmission-line stubs. Choosing each stub to be λ/8 long at the cutoff frequency makes tan(βℓ)=1 there, so a prototype inductor becomes a short-circuited (series) stub and a prototype capacitor becomes an open-circuited (shunt) stub. This tool gives the characteristic impedance of each stub directly from the g-values — the starting point before applying Kuroda's identities to make everything shunt and physically separated.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">Richards: \(\Omega=\tan\beta\ell\), stubs \(\ell=\lambda/8\) at \(f_c\) so \(\tan\beta\ell=1\).<br>series inductor \(g_k\to\) short-circuit series stub, \(Z_0^{stub}=g_k Z_0\)<br>shunt capacitor \(g_k\to\) open-circuit shunt stub, \(Z_0^{stub}=Z_0/g_k\)<br>stub physical length \(\ell=\dfrac{v_p}{8f_c}=\dfrac{\lambda_g}{8}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Filter order (1–10).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Response</td><td style="padding:3px 0;">Butterworth or Chebyshev prototype g-values.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L<sub>Ar</sub></td><td style="padding:3px 0;">Chebyshev passband ripple (dB).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z<sub>0</sub>, f<sub>c</sub></td><td style="padding:3px 0;">System impedance and cutoff; f_c and ε_eff set the λ/8 stub length.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ε<sub>eff</sub></td><td style="padding:3px 0;">Effective permittivity of the line (1 for air).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §8.4.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Order N</label><div class="inp-inline"><input type="text" id="sf-n" placeholder="e.g. 3" data-tip="Filter order (1–10)."></div><span class="inp-hint">1 – 10</span></div>
+  <div class="inp-row"><label>Response</label><div class="inp-inline"><select id="sf-type" style="font-size:12px;padding:3px;"><option value="cheby" selected>Chebyshev</option><option value="butter">Butterworth</option></select></div><span class="inp-hint">Shape</span></div>
+  <div class="inp-row"><label>Ripple L<sub>Ar</sub></label><div class="inp-inline"><input type="text" id="sf-rip" placeholder="e.g. 3" data-tip="Chebyshev passband ripple (dB)."><span class="inp-units">dB</span></div><span class="inp-hint">Chebyshev</span></div>
+  <div class="inp-row"><label>Z<sub>0</sub></label><div class="inp-inline"><input type="text" id="sf-z0" placeholder="e.g. 50" data-tip="System impedance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">System</span></div>
+  <div class="inp-row"><label>Cutoff f<sub>c</sub></label><div class="inp-inline"><input type="text" id="sf-fc" placeholder="e.g. 3" data-tip="Cutoff frequency (GHz)."><span class="inp-units">GHz</span></div><span class="inp-hint">λ/8 length</span></div>
+  <div class="inp-row"><label>ε<sub>eff</sub></label><div class="inp-inline"><input type="text" id="sf-eps" placeholder="e.g. 1" data-tip="Effective permittivity (1 = air)."></div><span class="inp-hint">Line ε_eff</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="sfCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;sf-n&quot;:&quot;3&quot;,&quot;sf-type&quot;:&quot;cheby&quot;,&quot;sf-rip&quot;:&quot;3&quot;,&quot;sf-z0&quot;:&quot;50&quot;,&quot;sf-fc&quot;:&quot;3&quot;,&quot;sf-eps&quot;:&quot;1&quot;})" title="3rd-order 3 dB Chebyshev, 50 Ω, 3 GHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Stub impedances (λ/8)</div>
+<div id="sf-table" style="overflow-x:auto;"></div>
+
+<div class="sec-lbl">Stub realisation</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  if (typeof sfStubs === 'undefined' || !sfStubs) return;
+  var st = sfStubs, N = st.length, W=560, H=150, y=52, x0=40;
+  var seg = Math.min(90, (W - 80) / N);
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<line x1="'+x0+'" y1="'+y+'" x2="'+(x0 + N*seg)+'" y2="'+y+'" stroke="#5533aa" stroke-width="1.5"/>';
+  for (var k = 0; k < N; k++) {
+    var x = x0 + seg/2 + k * seg;
+    if (st[k].shunt) { // open shunt stub, downward
+      s+='<line x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+34)+'" stroke="#00ccff" stroke-width="2.4"/>';
+      s+='<line x1="'+(x-7)+'" y1="'+(y+34)+'" x2="'+(x+7)+'" y2="'+(y+34)+'" stroke="#00ccff" stroke-width="2.4"/>';
+      s+='<text x="'+x+'" y="'+(y+48)+'" text-anchor="middle" font-size="7.5" fill="#0090c0">open</text>';
+      s+='<text x="'+x+'" y="'+(y+58)+'" text-anchor="middle" font-size="8" fill="#0090c0">'+st[k].Z.toFixed(1)+'Ω</text>';
+    } else { // series short stub, drawn upward with ground
+      s+='<line x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y-34)+'" stroke="#AA77FF" stroke-width="2.4"/>';
+      s+='<line x1="'+(x-8)+'" y1="'+(y-34)+'" x2="'+(x+8)+'" y2="'+(y-34)+'" stroke="#AA77FF" stroke-width="2.4"/>';
+      s+='<line x1="'+(x-5)+'" y1="'+(y-38)+'" x2="'+(x+5)+'" y2="'+(y-38)+'" stroke="#AA77FF" stroke-width="1.6"/>';
+      s+='<text x="'+x+'" y="'+(y-42)+'" text-anchor="middle" font-size="7.5" fill="#7a4fd0">short</text>';
+      s+='<text x="'+x+'" y="'+(y-50)+'" text-anchor="middle" font-size="8" fill="#7a4fd0">'+st[k].Z.toFixed(1)+'Ω</text>';
+    }
+  }
+  s+='<circle cx="'+x0+'" cy="'+y+'" r="3" fill="#5533aa"/><circle cx="'+(x0+N*seg)+'" cy="'+y+'" r="3" fill="#5533aa"/>';
+  s+='<text x="'+W/2+'" y="'+(H-6)+'" text-anchor="middle" font-size="9.5" fill="#5533aa" font-weight="bold">'+N+' commensurate λ/8 stubs</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_filters.html">Learn about filters →</a></div>
+<script src="StubFilter.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

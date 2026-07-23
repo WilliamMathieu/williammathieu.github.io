@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plane Wave Calculator — Wave Impedance, E/H Fields &amp; Power Density | RF Toolbox</title>
+  <meta name="description" content="Calculate the intrinsic wave impedance of a medium, and convert between electric field, magnetic field and power density for a plane wave.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/PlaneWave.html">
+  <meta property="og:title" content="Plane Wave Calculator | RF Toolbox">
+  <meta property="og:description" content="Wave impedance, E/H fields and power density for a plane wave in any medium.">
+  <meta property="og:url" content="https://rftoolbox.ca/PlaneWave.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Plane Wave Calculator",
+    "description": "Calculate the intrinsic wave impedance of a medium, and convert between electric field, magnetic field and power density for a plane wave.",
+    "url": "https://rftoolbox.ca/PlaneWave.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Plane Wave — Impedance, Fields &amp; Power</h3>
+<div class="tool-concept">
+  <p>For a uniform plane wave, the electric and magnetic fields are locked together by the intrinsic impedance of the medium (377 Ω in free space). This tool gives that wave impedance and converts between the E-field, the H-field and the power density (Poynting vector). Enter the medium (relative permittivity and permeability) and any one field quantity.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(\eta = \sqrt{\dfrac{\mu_0\mu_r}{\varepsilon_0\varepsilon_r}} = \eta_0\sqrt{\dfrac{\mu_r}{\varepsilon_r}},\quad \eta_0\approx 376.73\ \Omega\)<br>\(S = \dfrac{E^2}{\eta} = H^2\eta = E\,H,\qquad H = \dfrac{E}{\eta},\qquad v_p = \dfrac{c}{\sqrt{\varepsilon_r\mu_r}}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ε<sub>r</sub>, µ<sub>r</sub></td><td style="padding:3px 0;">Relative permittivity and permeability of the medium (1 for free space).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">η</td><td style="padding:3px 0;">Intrinsic (wave) impedance, ratio of E to H.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">E, H</td><td style="padding:3px 0;">Electric field (V/m) and magnetic field (A/m), RMS.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">S</td><td style="padding:3px 0;">Power density / time-averaged Poynting vector (W/m²).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Frequency (optional), for phase velocity and wavelength in the medium.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>D. K. Cheng, <em>Field and Wave Electromagnetics</em>, 2nd ed., Addison-Wesley, 1989. · C. A. Balanis, <em>Advanced Engineering Electromagnetics</em>, 2nd ed., Wiley, 2012.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Permittivity, <span class="var">ε<sub>r</sub></span></label><div class="inp-inline"><input type="text" id="er" placeholder="1" data-tip="Relative permittivity (1 for free space/air)."></div><span class="inp-hint">1 = free space</span></div>
+  <div class="inp-row"><label>Permeability, <span class="var">µ<sub>r</sub></span></label><div class="inp-inline"><input type="text" id="mur" placeholder="1" data-tip="Relative permeability (1 for non-magnetic)."></div><span class="inp-hint">1 = non-magnetic</span></div>
+  <div class="inp-row"><label>Known quantity</label><div class="inp-inline"><select id="known" style="font-size:13px;padding:3px;"><option value="E">E-field (V/m)</option><option value="H">H-field (A/m)</option><option value="S">Power density (W/m²)</option></select></div><span class="inp-hint">Pick one to enter</span></div>
+  <div class="inp-row"><label>Value</label><div class="inp-inline"><input type="text" id="val" placeholder="e.g. 1" data-tip="Value of the selected quantity (RMS)."></div><span class="inp-hint">RMS</span></div>
+  <div class="inp-row"><label>Frequency, <span class="var">f</span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="f" placeholder="e.g. 100" data-tip="Frequency (MHz), for wavelength & velocity."><span class="inp-units">MHz</span></div><span class="inp-hint">For λ, vₚ</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;er&quot;:&quot;1&quot;,&quot;mur&quot;:&quot;1&quot;,&quot;known&quot;:&quot;E&quot;,&quot;val&quot;:&quot;1&quot;,&quot;f&quot;:&quot;100&quot;})" title="Free space, E = 1 V/m, 100 MHz">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Wave &amp; fields</h4>
+    <div class="res-row"><span class="res-lbl">Wave impedance η</span><span class="res-val" id="eta">—</span></div>
+    <div class="res-row"><span class="res-lbl">E-field</span><span class="res-val" id="E">—</span></div>
+    <div class="res-row"><span class="res-lbl">H-field</span><span class="res-val" id="H">—</span></div>
+    <div class="res-row"><span class="res-lbl">Power density S</span><span class="res-val" id="S">—</span></div>
+  </div>
+  <div class="res-card"><h4>Propagation</h4>
+    <div class="res-row"><span class="res-lbl">Phase velocity</span><span class="res-val" id="vp">—</span></div>
+    <div class="res-row"><span class="res-lbl">Wavelength</span><span class="res-val" id="lam">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var eta=(document.getElementById('eta').textContent||'');
+  var W=560,H=180,cy=95;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (eta==='—'||eta==='') { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  // propagation axis with E (vertical) and H (into page, shown as horizontal) sine waves
+  var x0=40,x1=W-40;
+  s+='<line x1="'+x0+'" y1="'+cy+'" x2="'+x1+'" y2="'+cy+'" stroke="#bbb" stroke-width="1"/>';
+  var eE='M',eH='M';
+  for(var i=0;i<=120;i++){var x=x0+(x1-x0)*i/120;var ph=i/120*4*Math.PI;
+    eE+=(i?' L':'')+x.toFixed(1)+','+(cy-40*Math.sin(ph)).toFixed(1);
+    eH+=(i?' L':'')+x.toFixed(1)+','+(cy-18*Math.sin(ph)).toFixed(1);
+  }
+  s+='<path d="'+eH+'" fill="none" stroke="#2e8b57" stroke-width="1.4" opacity="0.7"/>';
+  s+='<path d="'+eE+'" fill="none" stroke="#c0392b" stroke-width="2"/>';
+  s+='<text x="'+(x0+10)+'" y="'+(cy-46)+'" font-size="11" fill="#c0392b">E</text>';
+  s+='<text x="'+(x0+10)+'" y="'+(cy+30)+'" font-size="11" fill="#2e8b57">H</text>';
+  s+='<polygon points="'+(x1)+','+cy+' '+(x1-10)+','+(cy-4)+' '+(x1-10)+','+(cy+4)+'" fill="#888"/>';
+  s+='<text x="'+(x1)+'" y="'+(cy+18)+'" text-anchor="end" font-size="10" fill="#888">propagation →</text>';
+  s+='<text x="'+(W/2)+'" y="18" text-anchor="middle" font-size="11" fill="#5533aa">η = '+eta+'  (E ⟂ H ⟂ k)</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_em_waves.html">Learn the theory behind this tool →</a></div>
+<script src="PlaneWave.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aperture Antenna Gain &amp; Far-Field Distance Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate the gain of an aperture antenna (dish, horn) from area and efficiency, plus the far-field (Fraunhofer) distance 2D²/λ.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/ApertureAntenna.html">
+  <meta property="og:title" content="Aperture Antenna Gain & Far-Field Distance | RF Toolbox">
+  <meta property="og:description" content="Aperture gain from area and efficiency, plus far-field distance 2D²/λ.">
+  <meta property="og:url" content="https://rftoolbox.ca/ApertureAntenna.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Aperture Antenna Gain & Far-Field Distance Calculator",
+    "description": "Calculate the gain of an aperture antenna from area and efficiency, plus the far-field (Fraunhofer) distance.",
+    "url": "https://rftoolbox.ca/ApertureAntenna.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Aperture Antenna Gain &amp; Far-Field Distance</h3>
+<div class="tool-concept">
+  <p>For an aperture antenna — a parabolic dish, horn, or array face — the gain grows with the physical area in wavelengths, scaled by the aperture efficiency. This tool gives the gain in dBi and the far-field (Fraunhofer) distance beyond which the radiation pattern is fully formed, which sets the minimum range for gain measurements.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(G = \eta_a\dfrac{4\pi A}{\lambda^2} \qquad A_e = \eta_a A \qquad R_{\text{ff}} = \dfrac{2 D^2}{\lambda}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">A</td><td style="padding:3px 0;">Physical aperture area (m²).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">η<sub>a</sub></td><td style="padding:3px 0;">Aperture efficiency (0–1). Typical dishes 0.5–0.7; horns 0.5–0.8.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Operating frequency (GHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">D</td><td style="padding:3px 0;">Largest aperture dimension (m), for the far-field distance. If blank, a circular aperture of area A is assumed.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">A<sub>e</sub></td><td style="padding:3px 0;">Effective aperture — the area an ideal antenna would need for the same gain.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>C. A. Balanis, <em>Antenna Theory: Analysis and Design</em>, 4th ed., Wiley, 2016. · J. D. Kraus &amp; R. J. Marhefka, <em>Antennas for All Applications</em>, 3rd ed., McGraw-Hill, 2002.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Aperture area, <span class="var">A</span></label><div class="inp-inline"><input type="text" id="A" placeholder="e.g. 1" data-tip="Physical aperture area in square metres."><span class="inp-units">m²</span></div><span class="inp-hint">Physical area</span></div>
+  <div class="inp-row"><label>Efficiency, <span class="var">η<sub>a</sub></span></label><div class="inp-inline"><input type="text" id="eta" placeholder="e.g. 0.6" data-tip="Aperture efficiency, 0 to 1."></div><span class="inp-hint">0–1</span></div>
+  <div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="f" placeholder="e.g. 10" data-tip="Operating frequency in GHz."><span class="inp-units">GHz</span></div><span class="inp-hint">Frequency</span></div>
+  <div class="inp-row"><label>Max dimension, <span class="var">D</span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="D" placeholder="auto" data-tip="Largest aperture dimension (m), for the far-field distance."><span class="inp-units">m</span></div><span class="inp-hint">For far-field</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;A&quot;:&quot;1&quot;,&quot;eta&quot;:&quot;0.6&quot;,&quot;f&quot;:&quot;10&quot;,&quot;D&quot;:&quot;1.128&quot;})" title="1 m² aperture, 60% efficiency, 10 GHz, 1.128 m dish">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Gain</h4>
+    <div class="res-row"><span class="res-lbl">Gain</span><span class="res-val" id="gain">—</span></div>
+    <div class="res-row"><span class="res-lbl">Effective aperture</span><span class="res-val" id="ae">—</span></div>
+    <div class="res-row"><span class="res-lbl">Max (η=1)</span><span class="res-val" id="gmax">—</span></div>
+  </div>
+  <div class="res-card"><h4>Range</h4>
+    <div class="res-row"><span class="res-lbl">Far-field distance</span><span class="res-val" id="ff">—</span></div>
+    <div class="res-row"><span class="res-lbl">Wavelength</span><span class="res-val" id="lam">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var g=parseFloat((document.getElementById('gain').textContent||'').replace(/[^0-9.]/g,''));
+  var ff=(document.getElementById('ff').textContent||'');
+  var W=560,H=170,cx=110,cy=90;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(g)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  // parabolic dish
+  s+='<path d="M '+cx+' '+(cy-42)+' Q '+(cx-34)+' '+cy+' '+cx+' '+(cy+42)+'" fill="none" stroke="#5533aa" stroke-width="3"/>';
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx-20)+'" y2="'+cy+'" stroke="#888" stroke-width="1"/><circle cx="'+(cx-20)+'" cy="'+cy+'" r="3" fill="#888"/>';
+  // beam
+  s+='<line x1="'+cx+'" y1="'+(cy-42)+'" x2="'+(W-40)+'" y2="'+(cy-16)+'" stroke="#c9b8ee" stroke-width="1.4"/>';
+  s+='<line x1="'+cx+'" y1="'+(cy+42)+'" x2="'+(W-40)+'" y2="'+(cy+16)+'" stroke="#c9b8ee" stroke-width="1.4"/>';
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(W-40)+'" y2="'+cy+'" stroke="#5533aa" stroke-width="1.6" stroke-dasharray="5,3"/>';
+  s+='<text x="'+(W/2+40)+'" y="'+(cy-24)+'" text-anchor="middle" font-size="11" fill="#5533aa">Gain = '+g.toFixed(2)+' dBi</text>';
+  s+='<text x="'+(W/2+40)+'" y="'+(cy+34)+'" text-anchor="middle" font-size="10.5" fill="#888">far-field ≥ '+ff+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_antennas.html">Learn the theory behind this tool →</a></div>
+<script src="ApertureAntenna.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

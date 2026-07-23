@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADC SNR, ENOB &amp; Jitter Calculator | RF Toolbox</title>
+  <meta name="description" content="Calculate ADC signal-to-noise ratio (6.02N+1.76), aperture-jitter-limited SNR, combined SNR and effective number of bits (ENOB) from resolution, input frequency and clock jitter.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/ADCNoise.html">
+  <meta property="og:title" content="ADC SNR, ENOB & Jitter Calculator | RF Toolbox">
+  <meta property="og:description" content="Quantization SNR, jitter-limited SNR, combined SNR and ENOB for a data converter.">
+  <meta property="og:url" content="https://rftoolbox.ca/ADCNoise.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ADC SNR, ENOB & Jitter Calculator",
+    "description": "Calculate ADC quantization SNR, aperture-jitter-limited SNR, combined SNR and effective number of bits from resolution, input frequency and clock jitter.",
+    "url": "https://rftoolbox.ca/ADCNoise.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>ADC SNR, ENOB &amp; Jitter</h3>
+<div class="tool-concept">
+  <p>Estimates the dynamic performance of an analog-to-digital converter. The ideal quantization SNR sets the ceiling for an <em>N</em>-bit converter; sampling-clock aperture jitter adds a noise floor that grows with input frequency. The two combine to a realistic SNR, from which the effective number of bits (ENOB) follows. Enter a measured SINAD to get ENOB directly.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(\text{SNR}_{\text{q}} = 6.02\,N + 1.76\ \text{dB} \qquad \text{SNR}_{\text{jitter}} = -20\log_{10}\!\big(2\pi f_{\text{in}}\,\sigma_t\big)\)<br>\(\text{SNR}_{\text{total}} = -10\log_{10}\!\big(10^{-\text{SNR}_q/10} + 10^{-\text{SNR}_{\text{jitter}}/10}\big) \qquad \text{ENOB} = \dfrac{\text{SINAD} - 1.76}{6.02}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Converter resolution (bits).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f<sub>in</sub></td><td style="padding:3px 0;">Analog input (signal) frequency (MHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">σ<sub>t</sub></td><td style="padding:3px 0;">RMS aperture (sample-clock) jitter, in picoseconds.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">SINAD</td><td style="padding:3px 0;">Measured signal-to-noise-and-distortion (dB), optional. If given, ENOB is taken from it.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ENOB</td><td style="padding:3px 0;">Effective number of bits — the resolution of an ideal converter with the same SNR.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>W. Kester (ed.), <em>Data Conversion Handbook</em>, Analog Devices/Newnes, 2005. · IEEE Std 1241-2010, <em>Terminology and Test Methods for Analog-to-Digital Converters</em>.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Resolution, <span class="var">N</span></label><div class="inp-inline"><input type="text" id="N" placeholder="e.g. 12" data-tip="Number of ADC bits."><span class="inp-units">bits</span></div><span class="inp-hint">Converter bits</span></div>
+  <div class="inp-row"><label>Input frequency, <span class="var">f<sub>in</sub></span></label><div class="inp-inline"><input type="text" id="fin" placeholder="e.g. 100" data-tip="Analog input frequency (the signal being sampled)."><span class="inp-units">MHz</span></div><span class="inp-hint">Signal frequency</span></div>
+  <div class="inp-row"><label>Aperture jitter, <span class="var">σ<sub>t</sub></span></label><div class="inp-inline"><input type="text" id="jit" placeholder="e.g. 1" data-tip="RMS sample-clock (aperture) jitter in picoseconds."><span class="inp-units">ps</span></div><span class="inp-hint">RMS clock jitter</span></div>
+  <div class="inp-row"><label>Measured SINAD <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="sinad" placeholder="e.g. 65" data-tip="Measured SINAD; if entered, ENOB is computed from it."><span class="inp-units">dB</span></div><span class="inp-hint">For measured ENOB</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;N&quot;:&quot;12&quot;,&quot;fin&quot;:&quot;100&quot;,&quot;jit&quot;:&quot;1&quot;})" title="12-bit ADC, 100 MHz input, 1 ps jitter">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>SNR contributions</h4>
+    <div class="res-row"><span class="res-lbl">Quantization SNR</span><span class="res-val" id="snrq">—</span></div>
+    <div class="res-row"><span class="res-lbl">Jitter-limited SNR</span><span class="res-val" id="snrj">—</span></div>
+    <div class="res-row"><span class="res-lbl">Combined SNR</span><span class="res-val" id="snrt">—</span></div>
+  </div>
+  <div class="res-card"><h4>Effective resolution</h4>
+    <div class="res-row"><span class="res-lbl">ENOB</span><span class="res-val" id="enob">—</span></div>
+    <div class="res-row"><span class="res-lbl">Limited by</span><span class="res-val" id="limit">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var q = parseFloat((document.getElementById('snrq').textContent||'').replace(/[^\-0-9.]/g,''));
+  var j = parseFloat((document.getElementById('snrj').textContent||'').replace(/[^\-0-9.]/g,''));
+  var t = parseFloat((document.getElementById('snrt').textContent||'').replace(/[^\-0-9.]/g,''));
+  var W=560,H=180;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(q)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  var vals=[['Quantization',q,'#8877cc'],['Jitter-limited',j,'#c0392b'],['Combined',t,'#5533aa']];
+  var max=Math.max(q,j,t)*1.15, x0=140, xw=W-x0-70;
+  for(var i=0;i<vals.length;i++){
+    var yy=28+i*46;
+    var bw=Math.max(2,(vals[i][1]/max)*xw);
+    s+='<text x="'+(x0-10)+'" y="'+(yy+13)+'" text-anchor="end" font-size="11" fill="#555">'+vals[i][0]+'</text>';
+    s+='<rect x="'+x0+'" y="'+yy+'" width="'+bw.toFixed(1)+'" height="20" fill="'+vals[i][2]+'" rx="2"/>';
+    s+='<text x="'+(x0+bw+6).toFixed(1)+'" y="'+(yy+15)+'" font-size="11" fill="#333">'+vals[i][1].toFixed(1)+' dB</text>';
+  }
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_noise.html">Learn the theory behind this tool →</a></div>
+<script src="ADCNoise.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

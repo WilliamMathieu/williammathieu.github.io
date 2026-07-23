@@ -39,15 +39,15 @@
 <body class="no-nav">
 <header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
 <section>
-<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
 <article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
 <h3>Bond Wire Inductance Calculator</h3>
 <div class="tool-concept">
   <p>Bond wires connecting a die to its package are an unavoidable series parasitic inductance — roughly 1 nH/mm. At GHz frequencies even a short wire has significant reactance, causing impedance transformation and gain roll-off. Estimate it before committing to a layout. For plated-through-hole parasitics, see the <a href="PCBVia.html">PCB Via calculator</a>.</p>
   <details style="margin-top:8px;">
   <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
 
-<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(L_{wire}=0.2\,\ell\left[\ln\!\left(\tfrac{2\ell}{d}\right)-0.75\right]\ \text{nH}\qquad X=2\pi f L\)</div>
+<div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.0;overflow-x:auto;">\(L_{wire}=0.2\,\ell\left[\ln\!\left(\tfrac{4\ell}{d}\right)-0.75\right]\ \text{nH}\qquad X=2\pi f L\)</div>
 <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
       <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ℓ</td><td>Wire length (mm) — centre-to-centre arc length between bond pads.</td></tr>
       <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">d</td><td>Wire diameter (mm). Gold: 0.018–0.033 mm, aluminium: 0.025–0.125 mm.</td></tr>

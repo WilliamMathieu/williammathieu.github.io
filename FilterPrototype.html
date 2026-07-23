@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filter Prototype g-Values — Butterworth &amp; Chebyshev Element Table | RF Toolbox</title>
+  <meta name="description" content="Lowpass filter prototype element g-values for Butterworth (maximally flat) and Chebyshev (equal-ripple) responses of any order, plus the denormalised L and C for a real cutoff (Pozar §8.3).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/FilterPrototype.html">
+  <meta property="og:title" content="Filter Prototype g-Values | RF Toolbox">
+  <meta property="og:description" content="Butterworth and Chebyshev lowpass prototype g-values and denormalised L/C.">
+  <meta property="og:url" content="https://rftoolbox.ca/FilterPrototype.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Filter Prototype g-Values",
+    "description": "Lowpass filter prototype element g-values for Butterworth and Chebyshev responses of any order, plus the denormalised L and C for a real cutoff.",
+    "url": "https://rftoolbox.ca/FilterPrototype.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Filter Prototype g-Values</h3>
+<div class="tool-concept">
+  <p>Every filter design begins with the lowpass prototype: a normalised ladder of element values g₀…g_{N+1} that set the shape (Butterworth or Chebyshev) and order. Impedance and frequency scaling then turn them into real inductors and capacitors, and the same g-values feed distributed designs (stubs, coupled lines, stepped-impedance). This tool computes the g-values and the denormalised L/C for a chosen cutoff and impedance.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">Butterworth: \(g_k=2\sin\dfrac{(2k-1)\pi}{2N}\)<br>Chebyshev: \(\beta=\ln\!\big[\coth\tfrac{L_{Ar}}{17.37}\big],\ \gamma=\sinh\tfrac{\beta}{2N}\)<br>\(g_1=\dfrac{2a_1}{\gamma},\ g_k=\dfrac{4a_{k-1}a_k}{b_{k-1}g_{k-1}},\ a_k=\sin\tfrac{(2k-1)\pi}{2N},\ b_k=\gamma^2+\sin^2\tfrac{k\pi}{N}\)<br>scaled: series \(L=\dfrac{g Z_0}{\omega_c}\), shunt \(C=\dfrac{g}{Z_0\omega_c}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">N</td><td style="padding:3px 0;">Filter order (1–10).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Response</td><td style="padding:3px 0;">Butterworth (maximally flat) or Chebyshev (equal-ripple).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L<sub>Ar</sub></td><td style="padding:3px 0;">Chebyshev passband ripple (dB).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z<sub>0</sub>, f<sub>c</sub></td><td style="padding:3px 0;">Impedance and cutoff frequency for the denormalised L/C.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §8.3 (Tables 8.3, 8.4).</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Order N</label><div class="inp-inline"><input type="text" id="fp-n" placeholder="e.g. 3" data-tip="Filter order (1–10)."></div><span class="inp-hint">1 – 10</span></div>
+  <div class="inp-row"><label>Response</label><div class="inp-inline"><select id="fp-type" style="font-size:12px;padding:3px;"><option value="butter" selected>Butterworth</option><option value="cheby">Chebyshev</option></select></div><span class="inp-hint">Shape</span></div>
+  <div class="inp-row"><label>Ripple L<sub>Ar</sub></label><div class="inp-inline"><input type="text" id="fp-rip" placeholder="e.g. 0.5" data-tip="Chebyshev passband ripple (dB)."><span class="inp-units">dB</span></div><span class="inp-hint">Chebyshev</span></div>
+  <div class="inp-row"><label>Z<sub>0</sub></label><div class="inp-inline"><input type="text" id="fp-z0" placeholder="e.g. 50" data-tip="System impedance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">For L/C</span></div>
+  <div class="inp-row"><label>Cutoff f<sub>c</sub></label><div class="inp-inline"><input type="text" id="fp-fc" placeholder="e.g. 1" data-tip="Cutoff frequency (GHz)."><span class="inp-units">GHz</span></div><span class="inp-hint">For L/C</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="fpCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;fp-n&quot;:&quot;3&quot;,&quot;fp-type&quot;:&quot;cheby&quot;,&quot;fp-rip&quot;:&quot;0.5&quot;,&quot;fp-z0&quot;:&quot;50&quot;,&quot;fp-fc&quot;:&quot;1&quot;})" title="3rd-order 0.5 dB Chebyshev">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Prototype g-values &amp; denormalised elements</div>
+<div id="fp-table" style="overflow-x:auto;"></div>
+
+<div class="sec-lbl">Ladder</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  if (typeof fpG === 'undefined' || !fpG) return;
+  var g = fpG, N = g.length - 2, W=560, H=130, y=60, x0=30;
+  var seg = Math.min(70, (W - 60) / (N + 1));
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<line x1="'+x0+'" y1="'+y+'" x2="'+(W-30)+'" y2="'+y+'" stroke="#5533aa" stroke-width="1.5"/>';
+  var x = x0 + 30;
+  for (var k = 1; k <= N; k++) {
+    if (k % 2 === 1) { // shunt C
+      s+='<line x1="'+x+'" y1="'+y+'" x2="'+x+'" y2="'+(y+16)+'" stroke="#5533aa" stroke-width="1.4"/>';
+      s+='<line x1="'+(x-9)+'" y1="'+(y+16)+'" x2="'+(x+9)+'" y2="'+(y+16)+'" stroke="#00ccff" stroke-width="2.5"/><line x1="'+(x-9)+'" y1="'+(y+21)+'" x2="'+(x+9)+'" y2="'+(y+21)+'" stroke="#00ccff" stroke-width="2.5"/>';
+      s+='<text x="'+(x+12)+'" y="'+(y+22)+'" font-size="8" fill="#00ccff">g'+k+'</text>';
+    } else { // series L
+      s+='<path d="M'+(x-18)+' '+y+' q4 -8 8 0 q4 8 8 0 q4 -8 8 0 q4 8 8 0" fill="none" stroke="#AA77FF" stroke-width="1.8"/>';
+      s+='<text x="'+x+'" y="'+(y-10)+'" text-anchor="middle" font-size="8" fill="#AA77FF">g'+k+'</text>';
+    }
+    x += seg;
+  }
+  s+='<circle cx="'+x0+'" cy="'+y+'" r="3" fill="#5533aa"/><circle cx="'+(W-30)+'" cy="'+y+'" r="3" fill="#5533aa"/>';
+  s+='<text x="'+W/2+'" y="118" text-anchor="middle" font-size="10" fill="#5533aa" font-weight="bold">'+N+'-element lowpass prototype ladder</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_filters.html">Learn about filters →</a></div>
+<script src="FilterPrototype.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

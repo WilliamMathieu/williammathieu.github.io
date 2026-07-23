@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shannon Capacity, Eb/N0 &amp; BER Calculator | RF Toolbox</title>
+  <meta name="description" content="Compute Shannon channel capacity, spectral efficiency, Eb/N0 from SNR, and BPSK/QPSK bit error rate for a digital radio link.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/LinkCapacity.html">
+  <meta property="og:title" content="Shannon Capacity, Eb/N0 & BER Calculator | RF Toolbox">
+  <meta property="og:description" content="Shannon capacity, spectral efficiency, Eb/N0<->SNR and BPSK/QPSK BER for a digital link.">
+  <meta property="og:url" content="https://rftoolbox.ca/LinkCapacity.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Shannon Capacity, Eb/N0 & BER Calculator",
+    "description": "Compute Shannon channel capacity, spectral efficiency, Eb/N0 from SNR, and BPSK/QPSK bit error rate for a digital radio link.",
+    "url": "https://rftoolbox.ca/LinkCapacity.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Shannon Capacity, Eb/N0 &amp; BER</h3>
+<div class="tool-concept">
+  <p>Ties together the fundamentals of a digital link. From the bandwidth and SNR it gives the Shannon capacity — the theoretical maximum error-free bit rate — and the spectral efficiency. It converts between SNR and the per-bit energy ratio Eb/N0 using your bit rate, and computes the bit error rate for coherent BPSK/QPSK. Enter <em>either</em> SNR or Eb/N0.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(C = B\log_2(1+\text{SNR}) \qquad \dfrac{E_b}{N_0} = \text{SNR}\cdot\dfrac{B}{R_b}\)<br>\(\text{BER}_{\text{BPSK/QPSK}} = Q\!\left(\sqrt{2E_b/N_0}\right),\quad Q(x)=\tfrac{1}{2}\operatorname{erfc}\!\left(\tfrac{x}{\sqrt2}\right)\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">B</td><td style="padding:3px 0;">Channel bandwidth (Hz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">R<sub>b</sub></td><td style="padding:3px 0;">Information bit rate (bit/s).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">SNR</td><td style="padding:3px 0;">Signal-to-noise ratio in the bandwidth B (dB). Enter this or Eb/N0.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">E<sub>b</sub>/N<sub>0</sub></td><td style="padding:3px 0;">Energy per bit to noise power spectral density (dB). Enter this or SNR.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">C</td><td style="padding:3px 0;">Shannon capacity — the maximum error-free rate. A link is feasible only if R<sub>b</sub> &lt; C.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>C. E. Shannon, "A mathematical theory of communication," <em>Bell Syst. Tech. J.</em>, 1948. · J. G. Proakis &amp; M. Salehi, <em>Digital Communications</em>, 5th ed., McGraw-Hill, 2008.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Bandwidth, <span class="var">B</span></label><div class="inp-inline"><input type="text" id="B" placeholder="e.g. 1e6" data-tip="Channel bandwidth in hertz."><span class="inp-units">Hz</span></div><span class="inp-hint">Channel BW</span></div>
+  <div class="inp-row"><label>Bit rate, <span class="var">R<sub>b</sub></span></label><div class="inp-inline"><input type="text" id="Rb" placeholder="e.g. 1e6" data-tip="Information bit rate in bit/s."><span class="inp-units">bit/s</span></div><span class="inp-hint">Data rate</span></div>
+  <div class="inp-row"><label>SNR <span style="color:#aaa;">(or Eb/N0)</span></label><div class="inp-inline"><input type="text" id="snr" placeholder="e.g. 10" data-tip="SNR in the bandwidth B (dB). Fill this OR Eb/N0."><span class="inp-units">dB</span></div><span class="inp-hint">In bandwidth B</span></div>
+  <div class="inp-row"><label>E<sub>b</sub>/N<sub>0</sub> <span style="color:#aaa;">(or SNR)</span></label><div class="inp-inline"><input type="text" id="ebn0" placeholder="e.g. 10" data-tip="Energy per bit to noise density (dB). Fill this OR SNR."><span class="inp-units">dB</span></div><span class="inp-hint">Per-bit ratio</span></div>
+  <div class="inp-row"><label>Modulation</label><div class="inp-inline"><select id="mod" style="font-size:13px;padding:3px;"><option value="bpsk">BPSK (1 bit/sym)</option><option value="qpsk">QPSK (2 bit/sym)</option></select></div><span class="inp-hint">For BER</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;B&quot;:&quot;1e6&quot;,&quot;Rb&quot;:&quot;1e6&quot;,&quot;snr&quot;:&quot;10&quot;,&quot;ebn0&quot;:&quot;&quot;})" title="1 MHz BW, 1 Mbit/s, 10 dB SNR, BPSK">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Capacity</h4>
+    <div class="res-row"><span class="res-lbl">Shannon capacity</span><span class="res-val" id="cap">—</span></div>
+    <div class="res-row"><span class="res-lbl">Spectral eff. (C/B)</span><span class="res-val" id="specC">—</span></div>
+    <div class="res-row"><span class="res-lbl">Link eff. (Rb/B)</span><span class="res-val" id="specL">—</span></div>
+  </div>
+  <div class="res-card"><h4>Link quality</h4>
+    <div class="res-row"><span class="res-lbl">SNR</span><span class="res-val" id="rSnr">—</span></div>
+    <div class="res-row"><span class="res-lbl">Eb/N0</span><span class="res-val" id="rEb">—</span></div>
+    <div class="res-row"><span class="res-lbl">BER</span><span class="res-val" id="rBer">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var cap=parseFloat((document.getElementById('cap').textContent||'').replace(/[^0-9.eE+-]/g,''));
+  var specC=parseFloat((document.getElementById('specC').textContent||'').replace(/[^0-9.]/g,''));
+  var specL=parseFloat((document.getElementById('specL').textContent||'').replace(/[^0-9.]/g,''));
+  var W=560,H=170;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(specC)||isNaN(specL)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  var max=Math.max(specC,specL)*1.15, x0=150, xw=W-x0-90;
+  var rows=[['Capacity C/B',specC,'#5533aa'],['Your link Rb/B',specL, specL<=specC?'#2e8b57':'#c0392b']];
+  for(var i=0;i<rows.length;i++){
+    var yy=42+i*52, bw=Math.max(2,(rows[i][1]/max)*xw);
+    s+='<text x="'+(x0-10)+'" y="'+(yy+13)+'" text-anchor="end" font-size="11" fill="#555">'+rows[i][0]+'</text>';
+    s+='<rect x="'+x0+'" y="'+yy+'" width="'+bw.toFixed(1)+'" height="22" fill="'+rows[i][2]+'" rx="2"/>';
+    s+='<text x="'+(x0+bw+6).toFixed(1)+'" y="'+(yy+16)+'" font-size="11" fill="#333">'+rows[i][1].toFixed(2)+' b/s/Hz</text>';
+  }
+  s+='<text x="'+((x0+xw/2))+'" y="'+(H-10)+'" text-anchor="middle" font-size="10.5" fill="'+(specL<=specC?'#2e8b57':'#c0392b')+'">'+(specL<=specC?'below the Shannon limit ✓':'exceeds Shannon limit — not achievable')+'</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_link_budget.html">Learn the theory behind this tool →</a></div>
+<script src="LinkCapacity.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

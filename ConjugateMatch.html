@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simultaneous Conjugate Match Calculator — ΓS, ΓL &amp; Max Gain | RF Toolbox</title>
+  <meta name="description" content="Bilateral amplifier design: the source and load reflection coefficients for a simultaneous conjugate match and the maximum transducer gain, from the transistor S-parameters (Pozar §12.3).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/ConjugateMatch.html">
+  <meta property="og:title" content="Simultaneous Conjugate Match Calculator | RF Toolbox">
+  <meta property="og:description" content="ΓS, ΓL and maximum transducer gain for a bilateral amplifier from S-parameters.">
+  <meta property="og:url" content="https://rftoolbox.ca/ConjugateMatch.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Simultaneous Conjugate Match Calculator",
+    "description": "Bilateral amplifier design: the source and load reflection coefficients for a simultaneous conjugate match and the maximum transducer gain, from the transistor S-parameters.",
+    "url": "https://rftoolbox.ca/ConjugateMatch.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Simultaneous Conjugate Match</h3>
+<div class="tool-concept">
+  <p>For maximum gain from a <em>bilateral</em> transistor (S₁₂ ≠ 0), the source and load must be conjugately matched to the device's input and output at the same time — but each depends on the other through S₁₂. This tool solves the coupled equations for Γ<sub>S</sub> and Γ<sub>L</sub>, gives the resulting source/load impedances and the maximum transducer gain, and checks the solution by confirming Γ<sub>in</sub> = Γ<sub>S</sub>*. It requires an unconditionally stable device (K &gt; 1).</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(B_1=1+|S_{11}|^2-|S_{22}|^2-|\Delta|^2,\quad C_1=S_{11}-\Delta S_{22}^*\)<br>\(\Gamma_S=\dfrac{B_1\pm\sqrt{B_1^2-4|C_1|^2}}{2C_1}\quad(\text{and similarly }\Gamma_L\text{ with }B_2,C_2)\)<br>\(G_{T,max}=\dfrac{|S_{21}|}{|S_{12}|}\big(K-\sqrt{K^2-1}\big)\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">S<sub>ij</sub></td><td style="padding:3px 0;">Transistor S-parameters as magnitude ∠ angle (degrees).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Z<sub>0</sub></td><td style="padding:3px 0;">Reference impedance for the source/load impedances (Ω).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">Γ<sub>S</sub>, Γ<sub>L</sub></td><td style="padding:3px 0;">Source and load reflection coefficients for the simultaneous conjugate match.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">G<sub>T,max</sub></td><td style="padding:3px 0;">Maximum transducer gain (= MAG). Exists only when K &gt; 1.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §12.3 (conjugate matching &amp; maximum gain).</div>
+</details>
+</div>
+<div class="sec-lbl">S-parameters (mag ∠ deg)</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>S<sub>11</sub></label><div class="inp-inline"><input type="text" id="cm-s11m" placeholder="mag" style="width:64px"> ∠ <input type="text" id="cm-s11a" placeholder="deg" style="width:60px"></div><span class="inp-hint">Input</span></div>
+  <div class="inp-row"><label>S<sub>21</sub></label><div class="inp-inline"><input type="text" id="cm-s21m" placeholder="mag" style="width:64px"> ∠ <input type="text" id="cm-s21a" placeholder="deg" style="width:60px"></div><span class="inp-hint">Forward</span></div>
+  <div class="inp-row"><label>S<sub>12</sub></label><div class="inp-inline"><input type="text" id="cm-s12m" placeholder="mag" style="width:64px"> ∠ <input type="text" id="cm-s12a" placeholder="deg" style="width:60px"></div><span class="inp-hint">Reverse</span></div>
+  <div class="inp-row"><label>S<sub>22</sub></label><div class="inp-inline"><input type="text" id="cm-s22m" placeholder="mag" style="width:64px"> ∠ <input type="text" id="cm-s22a" placeholder="deg" style="width:60px"></div><span class="inp-hint">Output</span></div>
+  <div class="inp-row"><label>Z<sub>0</sub></label><div class="inp-inline"><input type="text" id="cm-z0" placeholder="50" data-tip="Reference impedance (Ω)."><span class="inp-units">Ω</span></div><span class="inp-hint">Reference</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="cmCalc()">Calculate</button> <button class="example-btn" onclick="cmLoadExample()" title="Stable transistor example">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Source side</h4>
+    <div class="res-row"><span class="res-lbl">Γ<sub>S</sub></span><span class="res-val" id="cm-gs">—</span></div>
+    <div class="res-row"><span class="res-lbl">Source impedance Z<sub>S</sub></span><span class="res-val" id="cm-zs">—</span></div>
+    <div class="res-row"><span class="res-lbl">Check Γ<sub>in</sub> vs Γ<sub>S</sub>*</span><span class="res-val" id="cm-chk">—</span></div>
+  </div>
+  <div class="res-card"><h4>Load side</h4>
+    <div class="res-row"><span class="res-lbl">Γ<sub>L</sub></span><span class="res-val" id="cm-gl">—</span></div>
+    <div class="res-row"><span class="res-lbl">Load impedance Z<sub>L</sub></span><span class="res-val" id="cm-zl">—</span></div>
+    <div class="res-row"><span class="res-lbl">Max transducer gain</span><span class="res-val" id="cm-gain">—</span></div>
+  </div>
+</div>
+<div class="res-grid" style="margin-top:8px;">
+  <div class="res-card"><h4>Stability</h4>
+    <div class="res-row"><span class="res-lbl">Rollett K</span><span class="res-val" id="cm-k">—</span></div>
+    <div class="res-row"><span class="res-lbl">|Δ|</span><span class="res-val" id="cm-d">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var gs = document.getElementById('cm-gs') ? document.getElementById('cm-gs').textContent : '—';
+  var gl = document.getElementById('cm-gl') ? document.getElementById('cm-gl').textContent : '—';
+  var g = document.getElementById('cm-gain') ? document.getElementById('cm-gain').textContent : '—';
+  var W=560,H=150,y=65;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  s+='<rect x="60" y="'+(y-16)+'" width="70" height="32" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5" rx="3"/><text x="95" y="'+(y+4)+'" text-anchor="middle" font-size="9" fill="#5533aa">source</text>';
+  s+='<rect x="240" y="'+(y-20)+'" width="80" height="40" fill="#e9e2fb" stroke="#5533aa" stroke-width="1.8" rx="3"/><text x="280" y="'+(y-2)+'" text-anchor="middle" font-size="9" fill="#5533aa">transistor</text><text x="280" y="'+(y+10)+'" text-anchor="middle" font-size="8" fill="#888">[S]</text>';
+  s+='<rect x="430" y="'+(y-16)+'" width="70" height="32" fill="#f0eeff" stroke="#5533aa" stroke-width="1.5" rx="3"/><text x="465" y="'+(y+4)+'" text-anchor="middle" font-size="9" fill="#5533aa">load</text>';
+  s+='<line x1="130" y1="'+y+'" x2="240" y2="'+y+'" stroke="#5533aa" stroke-width="2"/><line x1="320" y1="'+y+'" x2="430" y2="'+y+'" stroke="#5533aa" stroke-width="2"/>';
+  s+='<text x="185" y="'+(y-8)+'" text-anchor="middle" font-size="9" fill="#AA77FF">Γ_S = '+gs+'</text>';
+  s+='<text x="375" y="'+(y-8)+'" text-anchor="middle" font-size="9" fill="#AA77FF">Γ_L = '+gl+'</text>';
+  s+='<text x="'+W/2+'" y="130" text-anchor="middle" font-size="11" fill="#5533aa" font-weight="bold">Simultaneous conjugate match — G = '+g+'</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_amplifiers.html">Learn about amplifier design →</a></div>
+<script src="ConjugateMatch.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

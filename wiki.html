@@ -8,8 +8,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>RF Toolbox Wiki — 64 RF &amp; Microwave Reference Articles</title>
-	<meta name="description" content="64 reference articles on RF engineering, microwave design, and MRI physics — with equations, SVG diagrams, and links to related calculators.">
+	<title>RF Toolbox Wiki — 68 RF &amp; Microwave Reference Articles</title>
+	<meta name="description" content="68 reference articles on RF engineering, microwave design, and MRI physics — with equations, SVG diagrams, and links to related calculators.">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://rftoolbox.ca/wiki.html">
 	<link rel="stylesheet" href="style.css">
@@ -17,8 +17,8 @@
 		body { background:#fff; margin:0; }
 		.wiki-wrap { max-width:1000px; margin:0 auto; padding:0 20px 50px; }
 		.wiki-back { font-family:monospace; font-size:12px; color:#888; padding:12px 0 0; }
-		.wiki-back a { color:#AA77FF; text-decoration:none; }
-		.wiki-back a:hover { text-decoration:underline; }
+		.wiki-back a { display:inline-block; font-weight:bold; color:#5533aa; background:#f0eeff; border:1px solid #cdbff2; border-radius:6px; padding:6px 13px; text-decoration:none; transition:background 0.12s,border-color 0.12s,color 0.12s; }
+		.wiki-back a:hover { background:#AA77FF; border-color:#AA77FF; color:#fff; }
 
 		/* ── Hero ── */
 		.wiki-hero {
@@ -84,16 +84,15 @@
 
 	<div class="wiki-hero">
 		<h1>📖 RF Toolbox Wiki</h1>
-		<p class="wh-desc">64 illustrated reference articles on RF engineering, microwave design, and MRI physics — each with equations, diagrams, and links to the related calculators.</p>
-		<p style="position:relative;margin:-6px 0 14px;font-family:monospace;font-size:12.5px;"><a href="textbook.html" style="color:#fff;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.5);border-radius:5px;padding:6px 12px;text-decoration:none;">📕 Get the whole wiki as a free PDF textbook →</a></p>
+		<p class="wh-desc">68 illustrated reference articles on RF engineering, microwave design, and MRI physics — each with equations, diagrams, and links to the related calculators.</p>
 		<div class="wiki-hero-stats">
 			<div class="wiki-hero-stat"><span class="num">7</span><span class="lbl">⚡ Electromagnetics</span></div>
-			<div class="wiki-hero-stat"><span class="num">27</span><span class="lbl">📻 RF Engineering</span></div>
-			<div class="wiki-hero-stat"><span class="num">16</span><span class="lbl">🔌 Microwave</span></div>
+			<div class="wiki-hero-stat"><span class="num">30</span><span class="lbl">📻 RF Engineering</span></div>
+			<div class="wiki-hero-stat"><span class="num">17</span><span class="lbl">🔌 Microwave</span></div>
 			<div class="wiki-hero-stat"><span class="num">14</span><span class="lbl">🧲 MRI Physics</span></div>
 		</div>
 		<div class="wiki-search">
-			<input type="text" id="wiki-search" placeholder="Search 64 articles…" oninput="filterWiki()">
+			<input type="text" id="wiki-search" placeholder="Search 68 articles…" oninput="filterWiki()">
 		</div>
 		<div id="wiki-no-results">No articles match your search.</div>
 	</div>
@@ -121,7 +120,7 @@
 		<div class="wiki-cat-title">
 			<span class="wct-icon">📻</span>
 			<span class="wct-label">RF Engineering</span>
-			<span class="wct-count">27 articles</span>
+			<span class="wct-count">30 articles</span>
 		</div>
 		<div class="wiki-list">
 			<a class="wiki-card" href="wiki_db_dbm.html"><div class="wc-title">dB, dBm &amp; Power Units</div><div class="wc-desc">Decibel scale, dBm reference, dBc/dBi/dBW, and cascade arithmetic.</div></a>
@@ -133,6 +132,7 @@
 			<a class="wiki-card" href="wiki_impedance_matching.html"><div class="wc-title">Impedance Matching</div><div class="wc-desc">Why matching matters and the main techniques.</div></a>
 			<a class="wiki-card" href="wiki_attenuators.html"><div class="wc-title">RF Attenuators</div><div class="wc-desc">Pi, T, L-pad, and Bridged-T attenuator design equations.</div></a>
 			<a class="wiki-card" href="wiki_filters.html"><div class="wc-title">RF Filters</div><div class="wc-desc">Butterworth, Chebyshev, and LC ladder filter design.</div></a>
+			<a class="wiki-card" href="wiki_group_delay.html"><div class="wc-title">Group Delay &amp; Phase Linearity</div><div class="wc-desc">Phase slope, dispersion, and the Bessel/Butterworth/Chebyshev trade-off.</div></a>
 			<a class="wiki-card" href="wiki_stepped_impedance.html"><div class="wc-title">Stepped-Impedance LPF</div><div class="wc-desc">Distributed low-pass filter using alternating high-Z and low-Z microstrip sections.</div></a>
 			<a class="wiki-card" href="wiki_coupled_resonators.html"><div class="wc-title">Coupled Resonators</div><div class="wc-desc">Mode splitting, BW = k·f₀, and critical coupling for LC tank pairs.</div></a>
 			<a class="wiki-card" href="wiki_eseries.html"><div class="wc-title">E-Series Component Values</div><div class="wc-desc">Standard resistor and capacitor values: E6 through E192.</div></a>
@@ -140,11 +140,13 @@
 			<a class="wiki-card" href="wiki_amplifiers.html"><div class="wc-title">RF Amplifiers</div><div class="wc-desc">LNAs, PAs, gain, stability, and linearity (P1dB, IP3).</div></a>
 			<a class="wiki-card" href="wiki_amp_stability.html"><div class="wc-title">Amplifier Stability (K &amp; µ)</div><div class="wc-desc">Rollett K-factor, µ-factor, MAG/MSG from S-parameters.</div></a>
 			<a class="wiki-card" href="wiki_pa_design.html"><div class="wc-title">Power Amplifier Design</div><div class="wc-desc">PA classes A–F, efficiency, back-off, Doherty, and DPD.</div></a>
+			<a class="wiki-card" href="wiki_thermal.html"><div class="wc-title">Thermal Management</div><div class="wc-desc">Junction temperature, the θjc/θcs/θsa chain, derating, and reliability.</div></a>
 			<a class="wiki-card" href="wiki_intermodulation.html"><div class="wc-title">Intermodulation &amp; IP3</div><div class="wc-desc">IM3 products, IIP3/OIP3, IMD ratio, and cascaded IP3.</div></a>
 			<a class="wiki-card" href="wiki_power_dividers.html"><div class="wc-title">Power Dividers &amp; Combiners</div><div class="wc-desc">Wilkinson divider, hybrid couplers, and N-way combining.</div></a>
 			<a class="wiki-card" href="wiki_mixers.html"><div class="wc-title">Mixers and Frequency Conversion</div><div class="wc-desc">Upconversion, downconversion, IQ mixers, and spurs.</div></a>
 			<a class="wiki-card" href="wiki_modulation.html"><div class="wc-title">Modulation Schemes</div><div class="wc-desc">AM, FM, PSK, QAM, and OFDM basics.</div></a>
 			<a class="wiki-card" href="wiki_oscillators.html"><div class="wc-title">Oscillators</div><div class="wc-desc">Phase noise, VCOs, and oscillator design.</div></a>
+			<a class="wiki-card" href="wiki_crystals.html"><div class="wc-title">Quartz Crystal Resonators</div><div class="wc-desc">Butterworth–Van Dyke model, series/parallel resonance, Q, and pullability.</div></a>
 			<a class="wiki-card" href="wiki_pll.html"><div class="wc-title">PLL &amp; Frequency Synthesis</div><div class="wc-desc">PFD, loop filter, VCO, integer-N vs fractional-N, reference spurs.</div></a>
 			<a class="wiki-card" href="wiki_phase_noise.html"><div class="wc-title">Phase Noise &amp; Jitter</div><div class="wc-desc">L(f) definition, Leeson model, 1/f² region, jitter integration.</div></a>
 			<a class="wiki-card" href="wiki_link_budget.html"><div class="wc-title">Link Budgets</div><div class="wc-desc">Systematic end-to-end RF link analysis.</div></a>
@@ -158,7 +160,7 @@
 		<div class="wiki-cat-title">
 			<span class="wct-icon">🔌</span>
 			<span class="wct-label">Microwave Engineering</span>
-			<span class="wct-count">16 articles</span>
+			<span class="wct-count">17 articles</span>
 		</div>
 		<div class="wiki-list">
 			<a class="wiki-card" href="wiki_microwave_lines.html"><div class="wc-title">Microwave Transmission Lines</div><div class="wc-desc">Microstrip, CPW, stripline, and coax at microwave frequencies.</div></a>
@@ -166,6 +168,7 @@
 			<a class="wiki-card" href="wiki_coax_cable.html"><div class="wc-title">Coaxial Cable Reference</div><div class="wc-desc">RG-58, LMR-400, semi-rigid — attenuation, velocity factor, power ratings.</div></a>
 			<a class="wiki-card" href="wiki_connectors.html"><div class="wc-title">RF Connectors Reference</div><div class="wc-desc">SMA, N-type, BNC, 2.92 mm, 1.85 mm — frequency limits and torque specs.</div></a>
 			<a class="wiki-card" href="wiki_antennas.html"><div class="wc-title">Antenna Fundamentals</div><div class="wc-desc">Gain, directivity, polarisation, and radiation patterns.</div></a>
+			<a class="wiki-card" href="wiki_aperture_antennas.html"><div class="wc-title">Aperture Antennas: Reflectors &amp; Horns</div><div class="wc-desc">Parabolic dish gain and beamwidth, horns, aperture efficiency, and EIRP.</div></a>
 			<a class="wiki-card" href="wiki_helical.html"><div class="wc-title">Helical Antenna</div><div class="wc-desc">Axial-mode helix: Kraus gain, HPBW, circular polarisation, and design.</div></a>
 			<a class="wiki-card" href="wiki_yagi.html"><div class="wc-title">Yagi-Uda Antenna</div><div class="wc-desc">Element roles, gain tables, feed impedance, and matching.</div></a>
 			<a class="wiki-card" href="wiki_polarisation.html"><div class="wc-title">Antenna Polarisation</div><div class="wc-desc">Linear, CP, axial ratio, mismatch loss, and reading radiation patterns.</div></a>
@@ -205,7 +208,7 @@
 	</div>
 
 	</div>
-	<p class="wiki-stats">64 articles &nbsp;·&nbsp; All articles include original SVG diagrams and links to related calculators</p>
+	<p class="wiki-stats">68 articles &nbsp;·&nbsp; All articles include original SVG diagrams and links to related calculators</p>
 </div>
 
 <footer>

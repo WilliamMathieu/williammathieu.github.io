@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dielectric Resonator Calculator — TE01δ Resonant Frequency | RF Toolbox</title>
+  <meta name="description" content="Approximate resonant frequency of a cylindrical dielectric resonator in the TE01δ mode from radius, length and dielectric constant (Cohn/Kajfez model, Pozar §6.5).">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/DielectricResonator.html">
+  <meta property="og:title" content="Dielectric Resonator Calculator | RF Toolbox">
+  <meta property="og:description" content="TE01δ resonant frequency of a cylindrical dielectric resonator (Cohn/Kajfez).">
+  <meta property="og:url" content="https://rftoolbox.ca/DielectricResonator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Dielectric Resonator Calculator",
+    "description": "Approximate resonant frequency of a cylindrical dielectric resonator in the TE01δ mode from radius, length and dielectric constant.",
+    "url": "https://rftoolbox.ca/DielectricResonator.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Dielectric Resonator</h3>
+<div class="tool-concept">
+  <p>A puck of high-permittivity, low-loss ceramic acts as a compact, very high-Q resonator — the frequency-setting element in dielectric-resonator oscillators (DROs) and cavity filters. Most energy is stored inside the puck, so its size and dielectric constant set the frequency. This tool uses the Cohn/Kajfez closed-form approximation for the dominant TE01δ mode. It's a ±2 % estimate for an isolated puck; shielding and a substrate shift it.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.2;overflow-x:auto;">\(f_{GHz}=\dfrac{34}{a\sqrt{\varepsilon_r}}\left(\dfrac{a}{L}+3.45\right)\quad(a,L\text{ in mm})\)<br>valid for \(0.5<a/L<2\) and \(30<\varepsilon_r<50\), TE01δ mode.</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">a</td><td style="padding:3px 0;">Puck radius (mm).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">L</td><td style="padding:3px 0;">Puck length / height (mm).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ε<sub>r</sub></td><td style="padding:3px 0;">Relative permittivity of the ceramic (typically 30–50).</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">Reference: </span>D. Kajfez &amp; P. Guillon, <em>Dielectric Resonators</em>, 1986; D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., §6.5.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Radius a</label><div class="inp-inline"><input type="text" id="dr-a" placeholder="e.g. 5.25" data-tip="Puck radius in mm."><span class="inp-units">mm</span></div><span class="inp-hint">Puck radius</span></div>
+  <div class="inp-row"><label>Length L</label><div class="inp-inline"><input type="text" id="dr-l" placeholder="e.g. 4.6" data-tip="Puck length/height in mm."><span class="inp-units">mm</span></div><span class="inp-hint">Puck height</span></div>
+  <div class="inp-row"><label>ε<sub>r</sub></label><div class="inp-inline"><input type="text" id="dr-er" placeholder="e.g. 38" data-tip="Relative permittivity (30–50)."></div><span class="inp-hint">Ceramic</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn" onclick="drCalc()">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;dr-a&quot;:&quot;5.25&quot;,&quot;dr-l&quot;:&quot;4.6&quot;,&quot;dr-er&quot;:&quot;38&quot;})" title="5.25 mm radius, 4.6 mm long, εr=38">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Resonance (TE01δ)</h4>
+    <div class="res-row"><span class="res-lbl">Resonant frequency</span><span class="res-val" id="dr-f">—</span></div>
+    <div class="res-row"><span class="res-lbl">Free-space wavelength</span><span class="res-val" id="dr-lam">—</span></div>
+    <div class="res-row"><span class="res-lbl">Aspect ratio a/L</span><span class="res-val" id="dr-ar">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var f = document.getElementById('dr-f') ? document.getElementById('dr-f').textContent : '—';
+  var W=560,H=160,cx=200,cy=80;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  // puck
+  s+='<ellipse cx="'+cx+'" cy="'+(cy-25)+'" rx="70" ry="18" fill="#dcd0f5" stroke="#5533aa" stroke-width="1.8"/>';
+  s+='<line x1="130" y1="'+(cy-25)+'" x2="130" y2="'+(cy+25)+'" stroke="#5533aa" stroke-width="1.8"/><line x1="270" y1="'+(cy-25)+'" x2="270" y2="'+(cy+25)+'" stroke="#5533aa" stroke-width="1.8"/>';
+  s+='<path d="M130 '+(cy+25)+' A70 18 0 0 0 270 '+(cy+25)+'" fill="#e9e2fb" stroke="#5533aa" stroke-width="1.8"/>';
+  s+='<text x="'+cx+'" y="'+(cy+2)+'" text-anchor="middle" font-size="9" fill="#5533aa">εr puck</text>';
+  s+='<line x1="130" y1="'+(cy+40)+'" x2="270" y2="'+(cy+40)+'" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/><text x="'+cx+'" y="'+(cy+52)+'" text-anchor="middle" font-size="9" fill="#888">2a</text>';
+  s+='<text x="420" y="'+cy+'" text-anchor="middle" font-size="13" fill="#5533aa" font-weight="bold">f₀ = '+f+'</text>';
+  document.getElementById('tool-diagram').innerHTML=s+'</svg>';
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_coupled_resonators.html">Learn about resonators →</a></div>
+<script src="DielectricResonator.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>

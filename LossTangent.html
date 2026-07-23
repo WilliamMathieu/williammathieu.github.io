@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4211938844076974"
+     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R4JGG0586"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-6R4JGG0586');</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dielectric Loss Tangent Calculator — Attenuation, Q &amp; Wavelength | RF Toolbox</title>
+  <meta name="description" content="Calculate dielectric loss: complex permittivity, dielectric Q, attenuation (dB/m), and wavelength/velocity in a material from its relative permittivity and loss tangent.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://rftoolbox.ca/LossTangent.html">
+  <meta property="og:title" content="Dielectric Loss Tangent Calculator | RF Toolbox">
+  <meta property="og:description" content="Complex permittivity, dielectric Q, attenuation and wavelength in a lossy dielectric.">
+  <meta property="og:url" content="https://rftoolbox.ca/LossTangent.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RF Toolbox">
+
+  <script src="MathJax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.3.2/math.js" integrity="sha512-L6TOvunyzSyFBxlyKEYgAmofV+iAI+J9t3M9lc4smm/FbV8HlzKD+vflXUGjx8puTKzH7o4PCWsR4jDwlHXAHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Dielectric Loss Tangent Calculator",
+    "description": "Calculate dielectric loss: complex permittivity, dielectric Q, attenuation and wavelength in a material from its permittivity and loss tangent.",
+    "url": "https://rftoolbox.ca/LossTangent.html",
+    "applicationCategory": "EngineeringApplication",
+    "operatingSystem": "Web",
+    "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+    "publisher": {"@type": "Organization", "name": "RF Toolbox", "url": "https://rftoolbox.ca"}
+  }
+  </script>
+</head>
+<body class="no-nav">
+<header><h2><a href="index.html" style="color:white;text-decoration:none;">RF Toolbox</a></h2></header>
+<section>
+<article>
+<div class="breadcrumb"><a href="index.html">⌂ Home</a></div>
+<h3>Dielectric Loss Tangent</h3>
+<div class="tool-concept">
+  <p>The loss tangent measures how lossy a dielectric is — the ratio of its imaginary to real permittivity. From it you get the dielectric Q, the attenuation a wave suffers travelling through the material, and the wavelength and velocity inside it. Enter the relative permittivity, loss tangent and frequency; add a length to get the total dielectric loss.</p>
+  <details style="margin-top:8px;">
+  <summary style="cursor:pointer;font-size:11px;color:#AA77FF;font-weight:bold;letter-spacing:0.05em;text-transform:uppercase;user-select:none;">Equations &amp; Parameters ▸</summary>
+  <div style="background:#f0eeff;border-left:3px solid #AA77FF;padding:8px 12px 6px;border-radius:0 4px 4px 0;margin:6px 0 10px;font-size:12.5px;line-height:2.1;overflow-x:auto;">\(\varepsilon'' = \varepsilon'\tan\delta,\qquad Q_d = \dfrac{1}{\tan\delta}\)<br>\(\alpha \approx 27.3\,\dfrac{\sqrt{\varepsilon'}\,\tan\delta}{\lambda_0}\ \text{dB/m},\qquad \lambda = \dfrac{\lambda_0}{\sqrt{\varepsilon'}},\quad v_p = \dfrac{c}{\sqrt{\varepsilon'}}\)</div>
+  <table style="font-size:12px;border-collapse:collapse;margin-top:6px;">
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ε′</td><td style="padding:3px 0;">Real relative permittivity (dielectric constant).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">tanδ</td><td style="padding:3px 0;">Loss tangent = ε″/ε′. FR-4 ≈ 0.02, PTFE ≈ 0.0002, alumina ≈ 0.0001.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">f</td><td style="padding:3px 0;">Frequency (GHz).</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">ℓ</td><td style="padding:3px 0;">Path length in the material (mm), optional — gives the total dielectric loss.</td></tr>
+    <tr><td style="padding:3px 14px 3px 0;font-weight:bold;color:#5533aa;white-space:nowrap;vertical-align:top;">α, Q<sub>d</sub></td><td style="padding:3px 0;">Attenuation (low-loss approximation) and dielectric quality factor.</td></tr>
+  </table>
+  <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e0d8ff;font-size:11.5px;color:#666;"><span style="font-weight:bold;color:#AA77FF;">References: </span>D. M. Pozar, <em>Microwave Engineering</em>, 4th ed., Wiley, 2012, §1.6. · R. E. Collin, <em>Foundations for Microwave Engineering</em>, 2nd ed., Wiley, 2001.</div>
+</details>
+</div>
+<div class="sec-lbl">Inputs</div>
+<div class="inp-grid">
+  <div class="inp-row"><label>Permittivity, <span class="var">ε′</span></label><div class="inp-inline"><input type="text" id="er" placeholder="e.g. 4.4" data-tip="Real relative permittivity."></div><span class="inp-hint">Dielectric constant</span></div>
+  <div class="inp-row"><label>Loss tangent, <span class="var">tanδ</span></label><div class="inp-inline"><input type="text" id="td" placeholder="e.g. 0.02" data-tip="Loss tangent ε″/ε′."></div><span class="inp-hint">ε″/ε′</span></div>
+  <div class="inp-row"><label>Frequency, <span class="var">f</span></label><div class="inp-inline"><input type="text" id="f" placeholder="e.g. 1" data-tip="Frequency (GHz)."><span class="inp-units">GHz</span></div><span class="inp-hint">Operating freq</span></div>
+  <div class="inp-row"><label>Length, <span class="var">ℓ</span> <span style="color:#aaa;">(optional)</span></label><div class="inp-inline"><input type="text" id="len" placeholder="e.g. 100" data-tip="Path length in the material (mm)."><span class="inp-units">mm</span></div><span class="inp-hint">For total loss</span></div>
+</div>
+<div style="display:flex;gap:8px;align-items:center;margin:12px 0 6px;"><button class="calc-btn" id="btn">Calculate</button> <button class="example-btn" onclick="loadExample({&quot;er&quot;:&quot;4.4&quot;,&quot;td&quot;:&quot;0.02&quot;,&quot;f&quot;:&quot;1&quot;,&quot;len&quot;:&quot;100&quot;})" title="FR-4: εr 4.4, tanδ 0.02, 1 GHz, 100 mm">Load Example</button></div>
+<div id="error" class="err-msg" style="color:#c0392b;font-size:12px;margin-bottom:6px;min-height:16px;"></div>
+<div class="sec-lbl">Results</div>
+<div class="res-grid">
+  <div class="res-card"><h4>Material</h4>
+    <div class="res-row"><span class="res-lbl">Imag. permittivity ε″</span><span class="res-val" id="eim">—</span></div>
+    <div class="res-row"><span class="res-lbl">Dielectric Q</span><span class="res-val" id="qd">—</span></div>
+    <div class="res-row"><span class="res-lbl">Wavelength in material</span><span class="res-val" id="lam">—</span></div>
+  </div>
+  <div class="res-card"><h4>Loss</h4>
+    <div class="res-row"><span class="res-lbl">Attenuation</span><span class="res-val" id="att">—</span></div>
+    <div class="res-row"><span class="res-lbl">Loss over ℓ</span><span class="res-val" id="tot">—</span></div>
+    <div class="res-row"><span class="res-lbl">Velocity</span><span class="res-val" id="vp">—</span></div>
+  </div>
+</div>
+
+<div class="sec-lbl">Diagram</div>
+<div class="schematic-box"><div id="tool-diagram"></div></div>
+<script>
+function drawDiagram() {
+  var td=parseFloat(document.getElementById('td').value), er=parseFloat(document.getElementById('er').value);
+  var W=560,H=170,cx=150,cy=95,R=64;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg" style="font-family:monospace;max-width:100%;">';
+  s+='<rect width="'+W+'" height="'+H+'" fill="#faf9ff" rx="4"/>';
+  if (isNaN(td)||isNaN(er)) { s+='<text x="'+(W/2)+'" y="'+(H/2)+'" text-anchor="middle" font-size="12" fill="#999">Enter values and press Calculate</text></svg>'; document.getElementById('tool-diagram').innerHTML=s; return; }
+  // loss-tangent phasor: real axis ε', imaginary ε''=ε'·tanδ, angle δ
+  var delta=Math.atan(td);
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R)+'" y2="'+cy+'" stroke="#bbb" stroke-width="1"/>';
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+cx+'" y2="'+(cy-R)+'" stroke="#bbb" stroke-width="1"/>';
+  var ex=cx+R*Math.cos(delta), ey=cy-R*Math.sin(delta);
+  s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+ex.toFixed(1)+'" y2="'+ey.toFixed(1)+'" stroke="#5533aa" stroke-width="2.2"/>';
+  s+='<path d="M'+(cx+26)+','+cy+' A26,26 0 0 0 '+(cx+26*Math.cos(delta)).toFixed(1)+','+(cy-26*Math.sin(delta)).toFixed(1)+'" fill="none" stroke="#c0392b" stroke-width="1.4"/>';
+  s+='<text x="'+(cx+34)+'" y="'+(cy-6)+'" font-size="10.5" fill="#c0392b">δ</text>';
+  s+='<text x="'+(cx+R+4)+'" y="'+(cy+4)+'" font-size="10" fill="#888">ε′</text>';
+  s+='<text x="'+(cx-4)+'" y="'+(cy-R-2)+'" text-anchor="end" font-size="10" fill="#888">ε″</text>';
+  s+='<text x="'+(cx+R+30)+'" y="'+(cy-30)+'" font-size="11" fill="#5533aa">tanδ = '+td+'</text>';
+  s+='<text x="'+(cx+R+30)+'" y="'+(cy-12)+'" font-size="11" fill="#5533aa">δ = '+(delta*180/Math.PI).toFixed(2)+'°</text>';
+  s+='</svg>';
+  document.getElementById('tool-diagram').innerHTML=s;
+}
+</script>
+<div class="wiki-link-hint">📖 <a href="wiki_dielectrics.html">Learn the theory behind this tool →</a></div>
+<script src="LossTangent.js"></script>
+</article>
+</section>
+<footer><p><a href="index.html">Home</a> · <a href="wiki.html">📖 Wiki</a> · <a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p></footer>
+
+<script src="tool-enhancements.js"></script>
+
+</body>
+</html>
